@@ -1,0 +1,108 @@
+@import "colours";
+@import "typography";
+@import "buttons";
+@import "common";
+@import "forms";
+
+.mat_card_ss {
+  //background-color: black;
+  width: auto;
+}
+
+.confirmUnlink {
+  .modal-content {
+    // width: 350px;
+  }
+}
+
+.successUnlink {
+  .modal-content {
+    // width: 343px;
+  }
+}
+
+.mat_menu_style {
+  .mat-menu-content {
+    padding: 10px 20px 20px 20px;
+  }
+}
+
+.overview_mat_menu {
+  min-width: 300px!important;
+  max-width: 375px!important;
+  //min-height: 250px!important;
+  .mat-menu-content {
+    padding: 10px 20px 10px 20px;
+
+    border-radius: 8px;
+    box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      $font-family: 'Open Sans';
+      li {
+        height: 60px;
+        //display: inline-block;
+        .left_c {
+          display: grid;
+          .sp_1 {
+            height: 23px;
+            font-size: 16px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.5;
+            letter-spacing: normal;
+            color: #221f1f;
+          }
+          .sp_2 {
+            height: 23px;
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.43;
+            letter-spacing: normal;
+            color: #929497;
+          }
+        }
+        .right_c {
+          text-align: right;
+          input[type=radio] {
+            height: 20px;
+            width: 20px;
+          }
+        }
+      }
+    }
+
+  }
+}
+
+.chevron{
+  width: 32px;
+  height: 32px;
+}
+
+.red-label {
+  color: var(--red);
+ }
+
+.complete--actions{
+  @media (max-width: 470px) {
+    display: flex;
+    flex-direction: column !important;
+    justify-content: center;
+    align-items: center;
+    row-gap: 15px;
+  }
+}
+
+.image--container--complete {
+  @media (max-width: 991px) {
+      margin: 0 0 50px !important;
+  }
+}

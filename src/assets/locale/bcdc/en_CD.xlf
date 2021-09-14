@@ -1,0 +1,4108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Loco xml export: XLIFF for Symfony
+ Project: Equity online
+ Release: Working copy
+ Locale: en-CD, en-BCDC
+ Exported by: Ibraheem Bello
+ Exported at: Wed, 21 Jul 2021 18:57:08 +0300
+-->
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file original="file.ext" source-language="en-KE" target-language="en" datatype="plaintext" tool-id="loco">
+    <header>
+      <tool tool-id="loco" tool-name="Loco for Symfony" tool-version="1.0.25 20210614-1" tool-company="Loco"/>
+    </header>
+    <body>
+      <trans-unit id="loco:5e7257a0c38e0f5b456bae94">
+        <source>Login</source>
+        <target>Sign in</target>
+        <note>Login Header</note>
+      </trans-unit>
+      <trans-unit id="loco:5e7258e5c38e0f5bee5b1752">
+        <source>Label-Enter-email-or-mobile-number</source>
+        <target>Enter email or mobile number</target>
+      </trans-unit>
+      <trans-unit id="loco:5e725946c38e0f5bc02d1c32">
+        <source>Placeholder-Enter-email-or-mobile-number</source>
+        <target>Enter email or mobile number</target>
+      </trans-unit>
+      <trans-unit id="loco:5e725bd7ed0cfa09fb165632">
+        <source>Hyperlink-Text-Forgot-Password</source>
+        <target>Forgot password?</target>
+      </trans-unit>
+      <trans-unit id="loco:5e725c26ed0cfa09ff1b6f32">
+        <source>Button-Text-Continue</source>
+        <target>Continue</target>
+      </trans-unit>
+      <trans-unit id="loco:5e725c64ed0cfa0a16796882">
+        <source>Hyperlink-Text-Sign-up</source>
+        <target>Sign up</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7302764d3dd76a672e7702">
+        <source>Label-Enter-Password</source>
+        <target>Enter password</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7302b54d3dd76a1b5bf112">
+        <source>Placeholder-Enter-Password</source>
+        <target>Enter password</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7302f94d3dd76a1b5bf114">
+        <source>Button-Text-Login</source>
+        <target>Sign in</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7303454d3dd76a9a581772">
+        <source>Header-Sign-up</source>
+        <target>Sign up</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7303844d3dd76a1c39f1a2">
+        <source>Label-Full-Names</source>
+        <target>Full name</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7303a24d3dd76a5275d172">
+        <source>Placeholder-First-Name</source>
+        <target>First name</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7303be4d3dd76a44582f92">
+        <source>Placeholder-Last-Name</source>
+        <target>Last name</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7305dfc38e0f05461b0072">
+        <source>Label-Mobile-Number</source>
+        <target>Mobile number</target>
+      </trans-unit>
+      <trans-unit id="loco:5e730600c38e0f0581517d32">
+        <source>Placeholder-Mobile-Number</source>
+        <target>Mobile number</target>
+      </trans-unit>
+      <trans-unit id="loco:5e73067bc38e0f058f291212">
+        <source>label-Email-Address</source>
+        <target>Email address</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7306c4c38e0f057c510432">
+        <source>Placeholder-another@user-com</source>
+        <target>another@user.com</target>
+        <note>doesnt have to be translated; it merely shows the acceptable format</note>
+      </trans-unit>
+      <trans-unit id="loco:5e73071ac38e0f058f291214">
+        <source>Label-Date-of-Birth</source>
+        <target>Date of birth</target>
+      </trans-unit>
+      <trans-unit id="loco:5e730788c38e0f058f291216">
+        <source>Placeholder-D-O-B--dd-mm-yyyy</source>
+        <target>D.O.B- dd/mm/yyyy</target>
+        <note>This placeholder is also meant to show the acceptable format</note>
+      </trans-unit>
+      <trans-unit id="loco:5e7307aac38e0f065f277df2">
+        <source>Button-text-Continue</source>
+        <target>Continue</target>
+      </trans-unit>
+      <trans-unit id="loco:5e730831c38e0f06577f08c2">
+        <source>Hyperlink-Text-I-already-have-an-account-log-in</source>
+        <target>I already have an account - sign in</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7308b0c38e0f06586f27e2">
+        <source>Button-text-Get-Help</source>
+        <target>Get help</target>
+      </trans-unit>
+      <trans-unit id="loco:5e730925c38e0f067a66bd32">
+        <source>Header-Privacy-Policy</source>
+        <target>Privacy policy</target>
+      </trans-unit>
+      <trans-unit id="loco:5e73095cc38e0f06a65d0192">
+        <source>Label-Accept-privacy-policy</source>
+        <target>Accept privacy policy</target>
+      </trans-unit>
+      <trans-unit id="loco:5e730980c38e0f06a83bc3f2">
+        <source>Label-Accept-terms-of-service</source>
+        <target>I accept the terms and privacy policy</target>
+      </trans-unit>
+      <trans-unit id="loco:5e730998c38e0f06586f27e4">
+        <source>Button-Text-I-accept</source>
+        <target>I accept</target>
+      </trans-unit>
+      <trans-unit id="loco:5e730a0fc38e0f06b9026c13">
+        <source>Header-Verify-SMS-OTP</source>
+        <target>Verify SMS OTP</target>
+      </trans-unit>
+      <trans-unit id="loco:5e730ac2c38e0f067d4ca0a4">
+        <source>OTP-instruction-text-We-have-sent-a-confirmation-c</source>
+        <target>We have sent a verification code to <x id="INTERPOLATION" equiv-text="{{ maskedPhoneNumber }}" /></target>
+      </trans-unit>
+      <trans-unit id="loco:5e730afac38e0f06f5076ab2">
+        <source>Placeholder-Enter-code</source>
+        <target>Enter code</target>
+      </trans-unit>
+      <trans-unit id="loco:5e730b37c38e0f07350e4b96" extradata="loco:format=icu">
+        <source>Hyperlink-Text-Resend-code-in-59s</source>
+        <target>Resend in</target>
+      </trans-unit>
+      <trans-unit id="loco:5e730b8ac38e0f0789366132">
+        <source>Button-Text-Verify</source>
+        <target>Verify</target>
+      </trans-unit>
+      <trans-unit id="loco:5e730bbec38e0f078a5c8962">
+        <source>Hyperlink-Text-I-dont-have-my-phone</source>
+        <target>I don't have my phone</target>
+      </trans-unit>
+      <trans-unit id="loco:5e730c36c38e0f06f5076ab4">
+        <source>Header-Create-password</source>
+        <target>Create password</target>
+      </trans-unit>
+      <trans-unit id="loco:5e730c54c38e0f07850ebbb3">
+        <source>Placeholder-Enter-password</source>
+        <target>Enter password</target>
+      </trans-unit>
+      <trans-unit id="loco:5e730c83c38e0f07450639e3">
+        <source>Placeholder-Confirm-password</source>
+        <target>Confirm password</target>
+      </trans-unit>
+      <trans-unit id="loco:5e730ca7c38e0f073454d314">
+        <source>Button-text-Let-me-in</source>
+        <target>Let me in</target>
+      </trans-unit>
+      <trans-unit id="loco:5e730d62c38e0f073454d316">
+        <source>Hyperlink-Text-Dashboard</source>
+        <target>Dashboard</target>
+      </trans-unit>
+      <trans-unit id="loco:5e730d94c38e0f07450639e5">
+        <source>Hyperlink-Text-Banking-Services</source>
+        <target>Banking services</target>
+      </trans-unit>
+      <trans-unit id="loco:5e730e06c38e0f078a5c8965">
+        <source>Hyperlink-Text-Insurance</source>
+        <target>Insurance</target>
+      </trans-unit>
+      <trans-unit id="loco:5e730e19c38e0f07fe080492">
+        <source>Hyperlink-Text-Settings</source>
+        <target>Settings</target>
+      </trans-unit>
+      <trans-unit id="loco:5e730e37c38e0f078616d882">
+        <source>Button-Text-Logout</source>
+        <target>Log out</target>
+      </trans-unit>
+      <trans-unit id="loco:5e730e8ac38e0f0814368782">
+        <source>Header-welcome-message-Karibu-Member</source>
+        <target>Karibu, member!</target>
+      </trans-unit>
+      <trans-unit id="loco:5e730f5dc38e0f083c21a872">
+        <source>Header-Banking-Services</source>
+        <target>Banking services</target>
+      </trans-unit>
+      <trans-unit id="loco:5e730fd4c38e0f08001f5e82">
+        <source>paragraph-text-Link-an-existing-or-open-an-Equit</source>
+        <target>Add an existing or open an Equity BCDC account</target>
+      </trans-unit>
+      <trans-unit id="loco:5e731210c38e0f0844123eb2">
+        <source>Link-label-text-Link-Equity-Bank-account</source>
+        <target>Add an Equity BCDC bank account</target>
+      </trans-unit>
+      <trans-unit id="loco:5e73158fc38e0f08f91eebf2">
+        <source>Paragraph-Link-your-existing-Equity-bank-account-t</source>
+        <target>Add your existing Equity BCDC bank account to this profile</target>
+      </trans-unit>
+      <trans-unit id="loco:5e731643c38e0f08e80eed42">
+        <source>Paragraph-Open-an-Equity-Bank-Account</source>
+        <target>Open an Equity BCDC bank account</target>
+      </trans-unit>
+      <trans-unit id="loco:5e731719c38e0f09c6652e72">
+        <source>Paragraph-Choose-this-option-to-open-a-new-Equity</source>
+        <target>Choose this option to open a new Equity BCDC bank account</target>
+      </trans-unit>
+      <trans-unit id="loco:5e731765c38e0f09f6239512">
+        <source>Header-Messages</source>
+        <target>Messages</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7317a8c38e0f09c6652e74">
+        <source>Placeholder-Search-accounts-transactions-knowledge</source>
+        <target>Search accounts, transactions, knowledge base</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7318c5c38e0f09bf03cb92">
+        <source>Header-Link-your-bank-account</source>
+        <target>Add your bank account</target>
+        <note>this page comes on when the user clicks on link account</note>
+      </trans-unit>
+      <trans-unit id="loco:5e7318eac38e0f09c6652e76">
+        <source>Label-Country</source>
+        <target>Country</target>
+      </trans-unit>
+      <trans-unit id="loco:5e731953c38e0f0a795c4be2" extradata="loco:format=icu">
+        <source>Select-country</source>
+        <target>{{ country }}</target>
+      </trans-unit>
+      <trans-unit id="loco:5e73199ec38e0f0aa442bc42">
+        <source>Label-Account-Number</source>
+        <target>Account number</target>
+      </trans-unit>
+      <trans-unit id="loco:5e731a07c38e0f0ac16b5f22">
+        <source>Placeholder-Account-number</source>
+        <target>{{ Account number }}</target>
+      </trans-unit>
+      <trans-unit id="loco:5e731a4ec38e0f0abf5f4662">
+        <source>Label-ID-Passport-Number</source>
+        <target>ID / passport number</target>
+      </trans-unit>
+      <trans-unit id="loco:5e731a8dc38e0f0ac16b5f24">
+        <source>Button-Text-Verify-2</source>
+        <target>Verify</target>
+      </trans-unit>
+      <trans-unit id="loco:5e731addc38e0f0ac16b5f26">
+        <source>Hyperlink-Text-Dont-have-an-account</source>
+        <target>Don't have an account?</target>
+      </trans-unit>
+      <trans-unit id="loco:5e731b08c38e0f0aa84a0152">
+        <source>Button-Text-Back</source>
+        <target>Back</target>
+      </trans-unit>
+      <trans-unit id="loco:5e731c6bc38e0f0b57052212">
+        <source>Placeholder-IDNumber</source>
+        <target>ID number</target>
+      </trans-unit>
+      <trans-unit id="loco:5e731ce6c38e0f0b196b65f5">
+        <source>Label-Enter-code</source>
+        <target>Enter code</target>
+      </trans-unit>
+      <trans-unit id="loco:5e731e1ec38e0f0b2005acc2">
+        <source>Button-Text-Link</source>
+        <target>Add</target>
+      </trans-unit>
+      <trans-unit id="loco:5e731f3bc38e0f0bd2001c32">
+        <source>Paragraph-Nice-Youre-in</source>
+        <target>Nice! You're in.
+We found other accounts tied to your profile. Would you like to add them now?
+You can do this later by going into your profile settings.</target>
+      </trans-unit>
+      <trans-unit id="loco:5e731ff5c38e0f0bea4e7763">
+        <source>Button-Text-Skip</source>
+        <target>Skip</target>
+      </trans-unit>
+      <trans-unit id="loco:5e732086c38e0f0c155f22d3">
+        <source>Hyper-Account-Management</source>
+        <target>Account management</target>
+      </trans-unit>
+      <trans-unit id="loco:5e732111c38e0f0c8305ffa2">
+        <source>Hyperlink-Text-Funds-Transfer</source>
+        <target>Funds transfer</target>
+      </trans-unit>
+      <trans-unit id="loco:5e73216ec38e0f0c8a705b42">
+        <source>Hyperlink-Text-Make-Payments</source>
+        <target>Transact</target>
+      </trans-unit>
+      <trans-unit id="loco:5e732185c38e0f0c8305ffa8">
+        <source>Hyperlink-Text-Cards</source>
+        <target>Cards</target>
+      </trans-unit>
+      <trans-unit id="loco:5e73221fc38e0f0d003a1662">
+        <source>Hyperlink-Text-Loans</source>
+        <target>Loans</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7322b7c38e0f0cf744ae52">
+        <source>Header-Welcome-back-user-firstName</source>
+        <target>Welcome back {{user.firstName}}</target>
+      </trans-unit>
+      <trans-unit id="loco:5e732315c38e0f0ce12ccad3">
+        <source>Header-Accounts</source>
+        <target>Accounts</target>
+      </trans-unit>
+      <trans-unit id="loco:5e732332c38e0f0cd76c94b2">
+        <source>Header-Notifications</source>
+        <target>Notifications</target>
+      </trans-unit>
+      <trans-unit id="loco:5e73236ec38e0f0d060ba4ea">
+        <source>Header-Today</source>
+        <target>Today</target>
+      </trans-unit>
+      <trans-unit id="loco:5e732389c38e0f0d01020fcc">
+        <source>Header-Yesterday</source>
+        <target>Yesterday</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7323d6c38e0f0cf6547203">
+        <source>Button-Text-Send-Money</source>
+        <target>Send money</target>
+      </trans-unit>
+      <trans-unit id="loco:5e732407c38e0f0cd76c94b4">
+        <source>Button-Text-Standing-Orders</source>
+        <target>Standing orders</target>
+      </trans-unit>
+      <trans-unit id="loco:5e73242fc38e0f0d022d8356">
+        <source>Button-Text-Buy-Airtime</source>
+        <target>Buy airtime</target>
+      </trans-unit>
+      <trans-unit id="loco:5e73246bc38e0f0d01020fce">
+        <source>Button-Text-Pay-bills</source>
+        <target>Pay a bill</target>
+      </trans-unit>
+      <trans-unit id="loco:5e732492c38e0f0d060ba4ec">
+        <source>Button-Text-Download-Transactions</source>
+        <target>Download transactions</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7324e4c38e0f0da36edff2">
+        <source>Paragraph-See-all-notifications</source>
+        <target>See all notifications</target>
+      </trans-unit>
+      <trans-unit id="loco:5e732518c38e0f0d2c31ce13">
+        <source>Paragraph-See-all-transactions</source>
+        <target>See all transactions</target>
+      </trans-unit>
+      <trans-unit id="loco:5e732589c38e0f0d39288396">
+        <source>Hyperlink-Text-Add-Account</source>
+        <target>Add account</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7325d2c38e0f0d2c31ce16">
+        <source>Header-My-Cards</source>
+        <target>My cards</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7326a1c38e0f0db83d7182">
+        <source>Paragraph-Check-your-phone</source>
+        <target>Check your phone
+We have sent a notification to your phone.
+Open the Equity BCDC app, select Yes when prompted and enter the code below.</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7327dfc38e0f0e8357cd32">
+        <source>Header-Answer-your-security-questions</source>
+        <target>Answer your security questions</target>
+      </trans-unit>
+      <trans-unit id="loco:5e732807c38e0f0e485edf26" extradata="loco:format=icu">
+        <source>Label-securityQuestion</source>
+        <target>{{ securityQuestion }}</target>
+      </trans-unit>
+      <trans-unit id="loco:5e73283ec38e0f0e52626f02" extradata="loco:format=icu">
+        <source>Placeholder-Correct-answer-1</source>
+        <target>Correct answer</target>
+      </trans-unit>
+      <trans-unit id="loco:5e732898c38e0f0e4710f283">
+        <source>Header-Reset-Password</source>
+        <target>Reset password</target>
+      </trans-unit>
+      <trans-unit id="loco:5e732c154d3dd7716655ae32">
+        <source>Hyperlink-Text-Who-you-are</source>
+        <target>Who you are</target>
+      </trans-unit>
+      <trans-unit id="loco:5e732c394d3dd77124387f93">
+        <source>Hyperlink-Text-Service-Requested</source>
+        <target>Service Requested</target>
+      </trans-unit>
+      <trans-unit id="loco:5e732c544d3dd7716655ae35">
+        <source>Hyperlink-Text-Personal-Details</source>
+        <target>Personal details</target>
+      </trans-unit>
+      <trans-unit id="loco:5e732c6c4d3dd7716b063b42">
+        <source>Hyperlink-Text-Upload-Documents</source>
+        <target>Upload documents</target>
+      </trans-unit>
+      <trans-unit id="loco:5e732c8b4d3dd7713c00f1d4">
+        <source>Hyperlink-Text-Complete-Application</source>
+        <target>Complete application</target>
+      </trans-unit>
+      <trans-unit id="loco:5e732caf4d3dd771414e8854">
+        <source>Header-Who-you-are</source>
+        <target>Who you are</target>
+      </trans-unit>
+      <trans-unit id="loco:5e732d064d3dd77165797ae4">
+        <source>Paragraph-Our-services-are-tailored-to-suit-your-l</source>
+        <target>Our services are tailored to suit your lifestyle, whether it's banking, insurance, or investments.
+Select the option below that best applies to you.</target>
+      </trans-unit>
+      <trans-unit id="loco:5e732d344d3dd7719d44b902">
+        <source>Paragraph-Individual</source>
+        <target>Choose this option to open an account for yourself, a joint account or for a minor</target>
+      </trans-unit>
+      <trans-unit id="loco:5e732d6b4d3dd7719d44b904">
+        <source>Paragraph-Company</source>
+        <target>You are a duly registered company/entity that deposits and facilitates business transactions</target>
+      </trans-unit>
+      <trans-unit id="loco:5e732ddf4d3dd771842a0623">
+        <source>Button-Text-Next</source>
+        <target>Next</target>
+      </trans-unit>
+      <trans-unit id="loco:5e732e3b4d3dd7718743ccd4">
+        <source>Paragraph-What-would-you-like-to-do</source>
+        <target>What would you like to do?</target>
+      </trans-unit>
+      <trans-unit id="loco:5e732e684d3dd771a0782564">
+        <source>Header-Create-an-account-or-review-details</source>
+        <target>Create an account or review details</target>
+      </trans-unit>
+      <trans-unit id="loco:5e732ed74d3dd7719d44b906">
+        <source>Header-Get-product-or-add-on</source>
+        <target>Get product or add-on</target>
+      </trans-unit>
+      <trans-unit id="loco:5e732f8a4d3dd771c94870a2">
+        <source>Paragraph-Personal-Details</source>
+        <target>Personal details</target>
+      </trans-unit>
+      <trans-unit id="loco:5e732fb84d3dd7721c2adef2">
+        <source>Label-Nationality</source>
+        <target>Nationality</target>
+      </trans-unit>
+      <trans-unit id="loco:5e732fd44d3dd771ff3776b4">
+        <source>Label-Country-of-Residence</source>
+        <target>Country of residence</target>
+      </trans-unit>
+      <trans-unit id="loco:5e732ff44d3dd771fe639543">
+        <source>Label-ID-Type</source>
+        <target>ID type</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7330094d3dd771ee53a6b2">
+        <source>Label-ID-Number</source>
+        <target>ID number</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7330384d3dd7721d490bc2">
+        <source>Label-ID-Serial-Number</source>
+        <target>ID serial number</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7330574d3dd77204648913">
+        <source>Label-First-Name</source>
+        <target>First name</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7330694d3dd771f077b014">
+        <source>Label-Middle-Name</source>
+        <target>Middle name</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7330724d3dd771fe639545">
+        <source>Label-Last-Name</source>
+        <target>Last name</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7330904d3dd7721d490bc4">
+        <source>Label-Date-of-Birth-2</source>
+        <target>Date of birth</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7330b04d3dd7721d490bc6">
+        <source>Label-KRA-PIN-Number</source>
+        <target>KRA PIN number</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7330c44d3dd7721d490bc8">
+        <source>Label-Marital-Status</source>
+        <target>Marital status</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7330ec4d3dd7721d490bca">
+        <source>Label-Religion</source>
+        <target>Religion</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7331134d3dd77233119852">
+        <source>Header-Contact-Details</source>
+        <target>Contact details</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7331334d3dd772002be9d4">
+        <source>Label-Primary-Phone-Number</source>
+        <target>Primary mobile number</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7331424d3dd77201246145">
+        <source>Label-Alternative-Phone-Number</source>
+        <target>Alternative mobile number</target>
+      </trans-unit>
+      <trans-unit id="loco:5e73316e4d3dd7721d490bcd">
+        <source>Label-Primary-Email-Address</source>
+        <target>Primary email address</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7331924d3dd7721d490bcf">
+        <source>Label-Alternative-Email-Address</source>
+        <target>Alternative email address</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7331b34d3dd77233119854">
+        <source>Label-County</source>
+        <target>County</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7331c74d3dd77258259282">
+        <source>Label-Constituency</source>
+        <target>Constituency</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7331e04d3dd7726e0563a2">
+        <source>Label-Division</source>
+        <target>Division</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7331fa4d3dd7726e0563a4">
+        <source>Label-Village</source>
+        <target>Village</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7332234d3dd772853be852">
+        <source>Label-Location</source>
+        <target>Location</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7332314d3dd7728447ce73">
+        <source>Label-Sub-location</source>
+        <target>Sub-location</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7332514d3dd7726f3009d2">
+        <source>Label-Estate</source>
+        <target>Estate</target>
+      </trans-unit>
+      <trans-unit id="loco:5e73326a4d3dd7727015e422">
+        <source>Label-P-O-Box</source>
+        <target>P.O. box</target>
+      </trans-unit>
+      <trans-unit id="loco:5e73327d4d3dd7729a132673">
+        <source>Header-Next-of-Kin</source>
+        <target>Next of kin</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7332974d3dd77259311183">
+        <source>Label-Name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7332b54d3dd7727015e424">
+        <source>Label-Relation</source>
+        <target>Relation</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7332de4d3dd772876463a4">
+        <source>Label-Phone-no</source>
+        <target>Phone no.</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7333034d3dd77272549502">
+        <source>Header-Source-of-Income</source>
+        <target>Source of income</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7333144d3dd77258259286">
+        <source>Label-Employed</source>
+        <target>Employed</target>
+      </trans-unit>
+      <trans-unit id="loco:5e73332d4d3dd77258259288">
+        <source>Label-Self-employed</source>
+        <target>Self-employed</target>
+      </trans-unit>
+      <trans-unit id="loco:5e73334c4d3dd7729a132675">
+        <source>Label-Unemployed</source>
+        <target>Unemployed</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7333674d3dd772c60d7512">
+        <source>Label-Industry</source>
+        <target>Industry</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7333784d3dd772b2169093">
+        <source>Label-Sector</source>
+        <target>Sector</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7333b44d3dd7729a132679">
+        <source>Label-Nature-of-Business-Employer</source>
+        <target>Nature of business/employer</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7333e14d3dd772b2169096">
+        <source>Label-Occupation</source>
+        <target>Occupation</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7453a7c38e0f60067e35f2" extradata="loco:format=icu">
+        <source>Header-Monthly-Income-currency</source>
+        <target>Monthly income {{ currency }}</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7453cac38e0f612f352fb2">
+        <source>Header-Additional-Information</source>
+        <target>Additional information</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7453eac38e0f60180f5812">
+        <source>La-Politically-Exposed-PersonsPEP</source>
+        <target>Politically Exposed Persons(PEP)</target>
+      </trans-unit>
+      <trans-unit id="loco:5e745424c38e0f61361e82e2">
+        <source>Label-Staff-Member</source>
+        <target>Staff member</target>
+      </trans-unit>
+      <trans-unit id="loco:5e74545fc38e0f61477d2682">
+        <source>Label-Minor</source>
+        <target>Minor</target>
+      </trans-unit>
+      <trans-unit id="loco:5e74547dc38e0f61477d2684">
+        <source>Label-Joint-Account</source>
+        <target>Joint account</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7454cdc38e0f61477d2686">
+        <source>Header-Upload-Documents</source>
+        <target>Upload documents</target>
+      </trans-unit>
+      <trans-unit id="loco:5e745506c38e0f61282e5a22">
+        <source>Paragraph-Requirements-National-ID-KRA-PIN-and-Pas</source>
+        <target>Requirements: National ID, KRA PIN &amp; passport photo</target>
+      </trans-unit>
+      <trans-unit id="loco:5e745521c38e0f611b0ec682">
+        <source>Label-Choose-File</source>
+        <target>Choose file</target>
+      </trans-unit>
+      <trans-unit id="loco:5e74553ac38e0f612f352fb4">
+        <source>Placeholder-Upload-National-ID</source>
+        <target>Upload national ID</target>
+      </trans-unit>
+      <trans-unit id="loco:5e745556c38e0f6135366fa2">
+        <source>Placeholder-Upload-KRA-PIN-Certificate</source>
+        <target>Upload KRA PIN certificate</target>
+      </trans-unit>
+      <trans-unit id="loco:5e745586c38e0f61462569b2">
+        <source>Placeholder-Upload-Passport-Photo</source>
+        <target>Upload passport photo</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7455bac38e0f612f352fb6">
+        <source>Hyperlink-Text-Add-Additional-Documents</source>
+        <target>Add additional documents</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7455e2c38e0f61457324b2">
+        <source>Label-I-would-prefer-to-visit-the-branch-to-upload</source>
+        <target>I would prefer to visit the branch to upload these documents</target>
+      </trans-unit>
+      <trans-unit id="loco:5e745621c38e0f61591409a2">
+        <source>Header-Almost-there</source>
+        <target>Almost there</target>
+      </trans-unit>
+      <trans-unit id="loco:5e74564bc38e0f61482c8812">
+        <source>Header-Visit-your-nearest-Equity-Branch-to-complet</source>
+        <target>Visit your nearest Equity BCDC bank branch to complete your application</target>
+      </trans-unit>
+      <trans-unit id="loco:5e74565dc38e0f61440114d2">
+        <source>Header-Next-Steps</source>
+        <target>Next steps</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7456b0c38e0f6149075462">
+        <source>Paragraph-Visit-any-Equity-Bank-branch-to-complete</source>
+        <target>Visit your nearest Equity BCDC Bank branch to complete your application. Please bring:</target>
+      </trans-unit>
+      <trans-unit id="loco:5e7456dbc38e0f61591409a4">
+        <source>List-Items-Original-ID</source>
+        <target>Original ID</target>
+      </trans-unit>
+      <trans-unit id="loco:5e745747c38e0f61482c8814">
+        <source>Paragraph-Your-details-have-been-successfully-subm</source>
+        <target>Done! Your details have been successfully submitted.</target>
+      </trans-unit>
+      <trans-unit id="loco:5e745767c38e0f61477d2688">
+        <source>Button-Text-Done</source>
+        <target>Done</target>
+      </trans-unit>
+      <trans-unit id="loco:5e8c5b05ed0cfa62336c4c32">
+        <source>Back-to-login</source>
+        <target>Take me back to login</target>
+      </trans-unit>
+      <trans-unit id="loco:5e8c6cc34d3dd72d803749d5">
+        <source>email-required</source>
+        <target>Your username is required</target>
+      </trans-unit>
+      <trans-unit id="loco:5e8c6d8a4d3dd72d9671beb3">
+        <source>FirstName-error</source>
+        <target>Your first name is required</target>
+      </trans-unit>
+      <trans-unit id="loco:5e8c6da94d3dd72d97720467">
+        <source>LastName-Error</source>
+        <target>Your last name is required</target>
+      </trans-unit>
+      <trans-unit id="loco:5e8c6e154d3dd72dc7504222">
+        <source>Mobile-number-required</source>
+        <target>Your mobile number is required</target>
+      </trans-unit>
+      <trans-unit id="loco:5e8c6e4c4d3dd72dc7504226">
+        <source>Email-address-required</source>
+        <target>Your email address is required</target>
+      </trans-unit>
+      <trans-unit id="loco:5e8c6e694d3dd72da9275445">
+        <source>Error-message-Date-of-Birth-Required</source>
+        <target>Your date of birth is required</target>
+      </trans-unit>
+      <trans-unit id="loco:5e8c6ea04d3dd72dc147e364">
+        <source>Error-message-Format-dd-mm-yyyy</source>
+        <target>Format dd/mm/yyyy</target>
+      </trans-unit>
+      <trans-unit id="loco:5e8c6ee34d3dd72dc750422c">
+        <source>Error-message-Please-agree-to-the-privacy-policy</source>
+        <target>Please agree to the privacy policy</target>
+      </trans-unit>
+      <trans-unit id="loco:5e8c6f024d3dd72dc750422e">
+        <source>Error-message-Please-agree-to-the-terms-of-service</source>
+        <target>Please agree to the terms of service</target>
+      </trans-unit>
+      <trans-unit id="loco:5e8c70064d3dd72e4818f832">
+        <source>Error-message-The-OTP-is-required</source>
+        <target>The OTP is required</target>
+      </trans-unit>
+      <trans-unit id="loco:5e8c70354d3dd72e514325b5">
+        <source>Error-message-Code-incorrect-or-has-expired-Please</source>
+        <target>The code you entered is incorrect or has expired. Would you like to receive a new one?</target>
+      </trans-unit>
+      <trans-unit id="loco:5e8c71564d3dd72e52451bc4">
+        <source>Error-message-Passwords-do-not-match</source>
+        <target>Please ensure that your passwords match</target>
+      </trans-unit>
+      <trans-unit id="loco:5e8c76c3c38e0f21d128e932">
+        <source>paragraph-Code-Resent</source>
+        <target>Another code has been sent to you</target>
+      </trans-unit>
+      <trans-unit id="loco:5e8c770dc38e0f21cf29b694">
+        <source>Paragraph-Enter-it-below-to-continue</source>
+        <target>Please enter the code below</target>
+      </trans-unit>
+      <trans-unit id="loco:5e8c775bc38e0f2242068ff2">
+        <source>Error-message-Please-enter-the-confirmation-code</source>
+        <target>Please enter the verification code</target>
+      </trans-unit>
+      <trans-unit id="loco:5e8c77c9c38e0f224842d624">
+        <source>Error-message-Please-confirm-the-password</source>
+        <target>Please confirm the password</target>
+      </trans-unit>
+      <trans-unit id="loco:5e8c77f5c38e0f222558b9f4">
+        <source>Error-message-Please-Enter-a-Password</source>
+        <target>Please enter a password</target>
+      </trans-unit>
+      <trans-unit id="loco:5e8c79c3c38e0f22b459d4b3">
+        <source>Hyperlink-Text-Take-me-back-to-login</source>
+        <target>Take me back to login</target>
+      </trans-unit>
+      <trans-unit id="loco:5e8c7a29c38e0f2300708d02">
+        <source>Error-message-First-Name-must-be-2-characters-or-m</source>
+        <target>First name must be 2 characters or more</target>
+      </trans-unit>
+      <trans-unit id="loco:5e8c7a42c38e0f2300708d04">
+        <source>Error-message-Last-Name-must-be-2-characters-or-mo</source>
+        <target>Last name must be 2 characters or more</target>
+      </trans-unit>
+      <trans-unit id="loco:5e8c7a6ec38e0f22be70d656">
+        <source>Error-message-Mobile-number-must-be-9-characters-o</source>
+        <target>The mobile number must be 9 characters or more</target>
+      </trans-unit>
+      <trans-unit id="loco:5e8c7a9ac38e0f23057b5d72">
+        <source>Error-message-You-must-be-over-18-to-create-a-prof</source>
+        <target>You must be over 18 to create a profile</target>
+      </trans-unit>
+      <trans-unit id="loco:5e8c7aedc38e0f23057b5d77">
+        <source>Error-message-Minimum-of-6-characters</source>
+        <target>Must be at least 8 characters long</target>
+      </trans-unit>
+      <trans-unit id="loco:5e8c7b21c38e0f2300708d08">
+        <source>Error-message-Password-Required</source>
+        <target>Enter a password</target>
+      </trans-unit>
+      <trans-unit id="loco:5ea6fa08c38e0f5a155a4405">
+        <source>Header-Individual</source>
+        <target>Individual</target>
+      </trans-unit>
+      <trans-unit id="loco:5ea6fa19c38e0f5a065069b4">
+        <source>Header-Company</source>
+        <target>Company</target>
+      </trans-unit>
+      <trans-unit id="loco:5ea8408ec38e0f5db66bc664">
+        <source>Header-Onboarding</source>
+        <target>Onboarding</target>
+      </trans-unit>
+      <trans-unit id="loco:5ea840a7c38e0f5d88742312">
+        <source>Head-Self-Service</source>
+        <target>Self-service</target>
+      </trans-unit>
+      <trans-unit id="loco:5ea840bcc38e0f5db5503e61">
+        <source>Header-Assisted</source>
+        <target>Assisted</target>
+      </trans-unit>
+      <trans-unit id="loco:5ea9622e4d3dd769c5250123">
+        <source>Paragraph-Create-an-account-or-review-details</source>
+        <target>With several transactional accounts to choose from, we have an option that works just the way you need it to. Manage your account and access your money anywhere and anytime</target>
+      </trans-unit>
+      <trans-unit id="loco:5ea962704d3dd769c85ead68">
+        <source>Paragraph-Get-product-or-add-on</source>
+        <target>Our full range of corporate banking solutions is tailored to meet your financial needs - from loan and deposit products to cash management, international services, and more.</target>
+      </trans-unit>
+      <trans-unit id="loco:5eafebea4d3dd752147e2432">
+        <source>Validation-File-required</source>
+        <target>File required</target>
+      </trans-unit>
+      <trans-unit id="loco:5eb13911ed0cfa676f5b90a4">
+        <source>list-item-Any-useful-documents</source>
+        <target>Any useful documents</target>
+      </trans-unit>
+      <trans-unit id="loco:5eb1456cc38e0f5c402da772">
+        <source>Next-move-please-visit-the-Equity-branch-you-selec</source>
+        <target>Next move: please visit the Equity BCDC branch you selected or any Equity BCDC branch near you to wrap up the process.</target>
+      </trans-unit>
+      <trans-unit id="loco:5ec636744d3dd7517501cc32">
+        <source>header-Staff-Login</source>
+        <target>Staff Login</target>
+      </trans-unit>
+      <trans-unit id="loco:5ec637344d3dd751bf071312">
+        <source>anchor-tag-Login-as-a-customer</source>
+        <target>Sign in as a customer</target>
+      </trans-unit>
+      <trans-unit id="loco:5ec637874d3dd751d321db82">
+        <source>Button-text-Login</source>
+        <target>Sign in</target>
+      </trans-unit>
+      <trans-unit id="loco:5f070c553df3825f244b93f2">
+        <source>Transaction-successful</source>
+        <target>Transaction successful</target>
+      </trans-unit>
+      <trans-unit id="loco:5f07101708f0be7aac0df372">
+        <source>please-select-an-account-type</source>
+        <target>Please select an account type</target>
+      </trans-unit>
+      <trans-unit id="loco:5f07107ddda6c933eb0b7163">
+        <source>please-select-an-action</source>
+        <target>Please select an action</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0710ba0504810ae11683e2">
+        <source>add-3-files-or-select-the-checkbox</source>
+        <target>Add 3 files or select the checkbox</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0711247df8633a6f337499">
+        <source>please-add-documents-or-check-visit-a-branch</source>
+        <target>Please add documents or check visit a branch</target>
+      </trans-unit>
+      <trans-unit id="loco:5f07124647ae09268c3c7e38">
+        <source>Send-to-Equity</source>
+        <target>Send to an Equity BCDC account</target>
+      </trans-unit>
+      <trans-unit id="loco:5f07130761bc203a9f3cf295">
+        <source>Add-to-Favourites</source>
+        <target>Add to favourites</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0713558260755c6d678d92">
+        <source>pay-from</source>
+        <target>Pay from</target>
+      </trans-unit>
+      <trans-unit id="loco:5f071392ab84a31a084bc432">
+        <source>Choose-an-account</source>
+        <target>Choose an account</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0714017799f92299271aa4">
+        <source>Available-balance</source>
+        <target>Available balance</target>
+      </trans-unit>
+      <trans-unit id="loco:5f071446bc0c350bd207a212">
+        <source>Pay-to</source>
+        <target>Pay to</target>
+      </trans-unit>
+      <trans-unit id="loco:5f07147fd730162531791f42">
+        <source>Choose-or-enter-your-contact</source>
+        <target>Select or enter your contact</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0714e7bc0c350bd207a215">
+        <source>amount</source>
+        <target>Amount</target>
+      </trans-unit>
+      <trans-unit id="loco:5f071527c99a9b4571605fc2">
+        <source>Payment-reason</source>
+        <target>Payment reason</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0715555f80a366b869e072">
+        <source>Optional</source>
+        <target>Optional</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0715ac3d95761f113b8de2">
+        <source>Send-to</source>
+        <target>Send to</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0715d1c99a9b4571605fc4">
+        <source>Enter-Detail</source>
+        <target>Please enter the payment details</target>
+      </trans-unit>
+      <trans-unit id="loco:5f071601d27eb611a031e383">
+        <source>Phone-Number</source>
+        <target>Mobile number</target>
+      </trans-unit>
+      <trans-unit id="loco:5f07162d3d95761f113b8de4">
+        <source>add</source>
+        <target>Add</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0716635649b0060d2e1322">
+        <source>Select-Operator</source>
+        <target>Select the operator</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0719801843aa18694cea32">
+        <source>translation-pending</source>
+        <target>Translation pending</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0719ae494526666454f6c2">
+        <source>code</source>
+        <target>CODE:</target>
+      </trans-unit>
+      <trans-unit id="loco:5f071afe0bc75c312b3566a4">
+        <source>Close</source>
+        <target>Close</target>
+      </trans-unit>
+      <trans-unit id="loco:5f072184cd5b8b2c890a4252">
+        <source>Link-an-account</source>
+        <target>Add an Equity BCDC bank account</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0721ecd8ffc60a3d74ac32">
+        <source>Open-an-account</source>
+        <target>Open an account</target>
+      </trans-unit>
+      <trans-unit id="loco:5f07237606455b635664fe94">
+        <source>transfer</source>
+        <target>Transact</target>
+      </trans-unit>
+      <trans-unit id="loco:5f07239bf446e75a01243803">
+        <source>Hide-Account</source>
+        <target>Hide account</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0723b3252e02490e43a474">
+        <source>Hide-Balance</source>
+        <target>Hide balance</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0723ce06455b635664fe96">
+        <source>Show-Balance</source>
+        <target>Show balance</target>
+      </trans-unit>
+      <trans-unit id="loco:5f07241c75f9bc76f653e564">
+        <source>Important-Message</source>
+        <target>Important message</target>
+      </trans-unit>
+      <trans-unit id="loco:5f07244ad3cbd9123b0aad0b">
+        <source>You-have</source>
+        <target>You have</target>
+      </trans-unit>
+      <trans-unit id="loco:5f07245e14139355e744bf0f">
+        <source>You-owe</source>
+        <target>You owe</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0724a875f9bc76f653e575">
+        <source>Account-Balance</source>
+        <target>Account balance</target>
+      </trans-unit>
+      <trans-unit id="loco:5f07251f4020a60f3926c9d2">
+        <source>Card-Name</source>
+        <target>Card name</target>
+      </trans-unit>
+      <trans-unit id="loco:5f072539d07a0e6a1b289a12">
+        <source>Card-number</source>
+        <target>Card number</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0725f26e3a005a42063ab3">
+        <source>Goal</source>
+        <target>Goal</target>
+      </trans-unit>
+      <trans-unit id="loco:5f07261803d6b0626b47b585">
+        <source>Add-a-Goal</source>
+        <target>Add a goal</target>
+      </trans-unit>
+      <trans-unit id="loco:5f07265de94df81e08794832">
+        <source>What-else-we-offer</source>
+        <target>What else we offer</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0726a5ab7db05ddd36e105">
+        <source>Item</source>
+        <target>Item</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0726cf68c092531f6f6e4a">
+        <source>Offer</source>
+        <target>Offer</target>
+      </trans-unit>
+      <trans-unit id="loco:5f072710283c771c046131b6">
+        <source>Recommended-for-you</source>
+        <target>Recommended for you</target>
+      </trans-unit>
+      <trans-unit id="loco:5f07272ca967d201e915bad3">
+        <source>Product</source>
+        <target>Product</target>
+      </trans-unit>
+      <trans-unit id="loco:5f07276352e37a4c610e4354">
+        <source>Apply-now</source>
+        <target>Apply now</target>
+      </trans-unit>
+      <trans-unit id="loco:5f07277469c3d6585c048b55">
+        <source>Learn-more</source>
+        <target>Learn more</target>
+      </trans-unit>
+      <trans-unit id="loco:5f072c432387fe1b922a4435">
+        <source>To-link-your-bank-account</source>
+        <target>To add your bank account, we’d first need some information about you</target>
+      </trans-unit>
+      <trans-unit id="loco:5f072cdcab038e2c27593932">
+        <source>Country-is-required</source>
+        <target>Select country</target>
+      </trans-unit>
+      <trans-unit id="loco:5f072d1966e989428a723c04">
+        <source>ID-Type-is-required</source>
+        <target>Select an ID type</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0821ba38fa9870016e3705">
+        <source>ID-Number-Required</source>
+        <target>Enter an ID number</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0824147f2b4b1062124182">
+        <source>Loading-Text</source>
+        <target>Loading</target>
+      </trans-unit>
+      <trans-unit id="loco:5f08256eb65d6078865a3e42">
+        <source>We-need-to-verify-you</source>
+        <target>How would you like to receive verification messages?</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0826faca5c3a457b1fd112">
+        <source>Via-Text</source>
+        <target>By</target>
+      </trans-unit>
+      <trans-unit id="loco:5f082729ca5c3a457b1fd114">
+        <source>Select-one-verification-source</source>
+        <target>Please select a verification method</target>
+      </trans-unit>
+      <trans-unit id="loco:5f08276dbb6b4c646c6989e2">
+        <source>Ive-changed-my-contact-detail</source>
+        <target>I’ve changed my contact details</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0827f267c1ef00ce5a23c2">
+        <source>We-have-sent-a-verification-code-to</source>
+        <target>We have sent a verification code to</target>
+      </trans-unit>
+      <trans-unit id="loco:5f08281aac978d6cf540d3e4">
+        <source>Please-enter-the-code-below</source>
+        <target>Please enter the code below</target>
+      </trans-unit>
+      <trans-unit id="loco:5f082876bb6b4c646c6989e4">
+        <source> Verification-code-required</source>
+        <target>Verification code required</target>
+      </trans-unit>
+      <trans-unit id="loco:5f08291a74a71a145d70e8e6">
+        <source>A-new-code-has-been-sent-to-you</source>
+        <target>A new code has been sent to you</target>
+      </trans-unit>
+      <trans-unit id="loco:5f08298f77dc29480c00cdb4">
+        <source>Resend-the-code</source>
+        <target>Resend the code</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0829ca97bdd006697ed834">
+        <source>Send-via-email</source>
+        <target>By email</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0829de510f59148667fb23">
+        <source>Send-via-SMS</source>
+        <target>By SMS</target>
+      </trans-unit>
+      <trans-unit id="loco:5f082a2077dc29480c00cdb6">
+        <source>Dont-have-access-to-my-email</source>
+        <target>I don’t have access to my email or mobile number</target>
+      </trans-unit>
+      <trans-unit id="loco:5f082a5d973315122e073142">
+        <source>Select-the-account-you-wish-to-link</source>
+        <target>Please select the account you want to add</target>
+      </trans-unit>
+      <trans-unit id="loco:5f082b0c3317fa11f6126c92">
+        <source>Link-account-Text</source>
+        <target>Add</target>
+      </trans-unit>
+      <trans-unit id="loco:5f083240440ab063b3578742">
+        <source>Confirm-Hide-account</source>
+        <target>Confirm hide account</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0832db465ced50786812e2">
+        <source>Hiding-an-account-will-remove-this-from-your-account-listings</source>
+        <target>Hiding an account will remove this from your account listings.  To see this data again, you will need to link the account again.</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0832ff3674367828469a82">
+        <source>Are-yo-sure-you-wish-to-proceed</source>
+        <target>Are you sure you would like to continue?</target>
+      </trans-unit>
+      <trans-unit id="loco:5f08333554d56a2c7602e244">
+        <source>Cancel-button-text</source>
+        <target>Cancel</target>
+      </trans-unit>
+      <trans-unit id="loco:5f08336bfdeb7153905ee042">
+        <source>Proceed-button-text</source>
+        <target>Continue</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0833e392e0cb1e3f442b34">
+        <source>Secondary-account-information</source>
+        <target>Secondary account information</target>
+      </trans-unit>
+      <trans-unit id="loco:5f08340d9d234c5d8e43bef4">
+        <source>Account-detail</source>
+        <target>Account details</target>
+      </trans-unit>
+      <trans-unit id="loco:5f08344926685654ba17c4d4">
+        <source>Pay-and-Transfer</source>
+        <target>Transact</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0834cce479e8326d233192">
+        <source>View-statement</source>
+        <target>View statement</target>
+      </trans-unit>
+      <trans-unit id="loco:5f08353871eb8064da000082">
+        <source>Request-cheque-book</source>
+        <target>Request cheque book</target>
+      </trans-unit>
+      <trans-unit id="loco:5f08359d4a08612d3c3b2513">
+        <source>Expires-text</source>
+        <target>Expires</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0835c938ac7339162ad312">
+        <source>Manage-cards</source>
+        <target>Manage cards</target>
+      </trans-unit>
+      <trans-unit id="loco:5f08363ae0d9c42329655f02">
+        <source>Please-enter-a-new-nickname-below</source>
+        <target>Enter an account nickname</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0836784a08612d3c3b2517">
+        <source>Nickname-required</source>
+        <target>Enter an account nickname</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0837085760b600102c1753">
+        <source>Account-Information</source>
+        <target>Account information</target>
+      </trans-unit>
+      <trans-unit id="loco:5f08376f9d642414ad6191c2">
+        <source>Account-Nickname</source>
+        <target>Account nickname</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0837fb87ebda40f0689782">
+        <source>Account-Status</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="loco:5f08382f90c2441ff00fb3a4">
+        <source>Account-Type</source>
+        <target>Type</target>
+      </trans-unit>
+      <trans-unit id="loco:5f08386287ebda40f0689784">
+        <source>Account-Currency</source>
+        <target>Currency</target>
+      </trans-unit>
+      <trans-unit id="loco:5f08388c87ebda40f0689786">
+        <source>Account-Open-Date</source>
+        <target>Open date</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0838d973bd495a54694783">
+        <source>Transactions-Text</source>
+        <target>Transactions</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0839436684cd4a745b4593">
+        <source>Notes-text</source>
+        <target>Notes</target>
+      </trans-unit>
+      <trans-unit id="loco:5f08397ad10b50143f29e042">
+        <source>Save-text</source>
+        <target>Save</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0839eda778d7405736a2e2">
+        <source>Add-Photo-text</source>
+        <target>Add photo</target>
+      </trans-unit>
+      <trans-unit id="loco:5f083a1d5294c921e559e202">
+        <source>Upload-text</source>
+        <target>Upload</target>
+      </trans-unit>
+      <trans-unit id="loco:5f083a5ac6b73e3f31685873">
+        <source>Communications-Trail</source>
+        <target>Communications trail</target>
+      </trans-unit>
+      <trans-unit id="loco:5f083ab25294c921e559e205">
+        <source>You-text</source>
+        <target>You:</target>
+      </trans-unit>
+      <trans-unit id="loco:5f083b0d068e7616377fe542">
+        <source>Dispute-Details</source>
+        <target>Dispute details</target>
+      </trans-unit>
+      <trans-unit id="loco:5f083b366669872a3c18a822">
+        <source>Date-of-dispute</source>
+        <target>Date of dispute</target>
+      </trans-unit>
+      <trans-unit id="loco:5f083b524b23b504c35c7f52">
+        <source>Dispute-Status</source>
+        <target>Dispute status</target>
+      </trans-unit>
+      <trans-unit id="loco:5f083b8235620852842c8d72">
+        <source>Dispute-Case-Number</source>
+        <target>Dispute case number</target>
+      </trans-unit>
+      <trans-unit id="loco:5f083b9fe721a534877435b4">
+        <source>Dispute-Information</source>
+        <target>Dispute information</target>
+      </trans-unit>
+      <trans-unit id="loco:5f083bcc658f574e1d4c6c03">
+        <source>Dispute-Conclusion</source>
+        <target>Dispute conclusion</target>
+      </trans-unit>
+      <trans-unit id="loco:5f083c0401749e26b62beed3">
+        <source>Withdraw-dispute-request</source>
+        <target>Withdraw dispute request</target>
+      </trans-unit>
+      <trans-unit id="loco:5f083c251a71e469f27c4894">
+        <source>Send-Feedback</source>
+        <target>Send feedback</target>
+      </trans-unit>
+      <trans-unit id="loco:5f083ca33abfbf1f2b48ae82">
+        <source>Leave-Feedback</source>
+        <target>Leave feedback</target>
+      </trans-unit>
+      <trans-unit id="loco:5f083cc7bb714e3f5404f775">
+        <source>Are-you-satisfied-text</source>
+        <target>Are you satisfied with the resolution?</target>
+      </trans-unit>
+      <trans-unit id="loco:5f083ce956089117c657d345">
+        <source>Yes-text</source>
+        <target>Yes</target>
+      </trans-unit>
+      <trans-unit id="loco:5f083d29b1162d24f0789cf4">
+        <source>How-well-did-we-do-in-resolving-your-issue</source>
+        <target>How well did we do in resolving your issue?</target>
+      </trans-unit>
+      <trans-unit id="loco:5f083d5022eb79624b253d52">
+        <source>No-text</source>
+        <target>No</target>
+      </trans-unit>
+      <trans-unit id="loco:5f083d72d512c34fc53a84d2">
+        <source>Please-tell-us-what-went-wrong</source>
+        <target>Please tell us what went wrong</target>
+      </trans-unit>
+      <trans-unit id="loco:5f083de88419ce14f755dcd2">
+        <source>Why-you-arent-satisfied-with-the-resolution</source>
+        <target>Kindly give a reason as to why you aren't satisfied with the resolution</target>
+      </trans-unit>
+      <trans-unit id="loco:5f083e266151d27ded26fff4">
+        <source>Submit-text</source>
+        <target>Submit</target>
+      </trans-unit>
+      <trans-unit id="loco:5f083f9383941552d422df63">
+        <source>Thank-you-for-your-feedback</source>
+        <target>Thank you for your feedback</target>
+      </trans-unit>
+      <trans-unit id="loco:5f083fcf02b25d18135954c2">
+        <source>Back-to-Transactions-text</source>
+        <target>Back to transactions</target>
+      </trans-unit>
+      <trans-unit id="loco:5f084028849de379b6235633">
+        <source>Report-a-problem-text</source>
+        <target>Report a problem</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0840499944de0d187f7b93">
+        <source>View-Receipt-text</source>
+        <target>View receipt</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0840c178645a09ca4eadb2">
+        <source>Buy-Goods-text</source>
+        <target>Buy goods</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0841174d19a271a862092c">
+        <source>In-dispute-text</source>
+        <target>In dispute</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0841526f11d67d8f163542">
+        <source>Reference-Number-text</source>
+        <target>Reference number</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0841d364075a3aa77bc3b3">
+        <source>Beneficiary-Name-text</source>
+        <target>Recipient name</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0841f853662c2c2041f042">
+        <source>Till-Number-text</source>
+        <target>Till number</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0842843d7ce535344eba22">
+        <source>Charges-and-fees-text</source>
+        <target>Charges</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0843666f415d394f01c442">
+        <source>Add-notes-text</source>
+        <target>Add notes</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0843ab84979275345c04c2">
+        <source>Report-an-issue-text</source>
+        <target>Report an issue</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0843d3c27ff47b49381df2">
+        <source>What-best-describes-your-issue-text</source>
+        <target>What best describes your issue?</target>
+      </trans-unit>
+      <trans-unit id="loco:5f084407e4d59e75fc07df82">
+        <source>Transaction-was-not-successful-text</source>
+        <target>Transaction was not successful</target>
+      </trans-unit>
+      <trans-unit id="loco:5f084443cb7537761f42e582">
+        <source>Settled-my-bill-by-other-means-text</source>
+        <target>I settled my bill by other means (i.e. cash, other card or cheque)</target>
+      </trans-unit>
+      <trans-unit id="loco:5f08446153563376cb2fc952">
+        <source>Transaction-was-duplicated-text</source>
+        <target>Transaction was duplicated</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0844e3cc2ac766d2699dd2">
+        <source>Did-not-participate-nor-authorize-the-transction-text</source>
+        <target>I did not participate, nor authorize the transaction</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0844ffa2dc585639346bc2">
+        <source>Cash-was-not-dispensed-at-the-ATM</source>
+        <target>Cash was not dispensed at the ATM</target>
+      </trans-unit>
+      <trans-unit id="loco:5f08451b8749190d3318d212">
+        <source>Goods-services-were-not-supplied</source>
+        <target>Goods/services were not supplied</target>
+      </trans-unit>
+      <trans-unit id="loco:5f084544b89311613b7cb173">
+        <source>Do-not-recognise-this-transaction-text</source>
+        <target>I do not recognise this transaction</target>
+      </trans-unit>
+      <trans-unit id="loco:5f084564ce158c14f7184312">
+        <source>Other-text</source>
+        <target>Other</target>
+      </trans-unit>
+      <trans-unit id="loco:5f08459e84cdbd1e19512182">
+        <source>Select-one-of-the-above-options</source>
+        <target>Kindly select one of the above options</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0845bc9cf2764f65458002">
+        <source>Description-text</source>
+        <target>Description</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0845f5acbfe217e1613302">
+        <source>Since-you-selected-Other-valid-description-message-required-text</source>
+        <target>Since you selected 'Other' a valid description message is required</target>
+      </trans-unit>
+      <trans-unit id="loco:5f08466141f6212cfd6f51e2">
+        <source>Transaction-is-a-credit-text</source>
+        <target>If the transaction is a credit, we will lien your account with the amount sent</target>
+      </trans-unit>
+      <trans-unit id="loco:5f08467d7e7a3252ef220cc2">
+        <source>Thank-you-reporting-issue-text</source>
+        <target>Thank you for reporting this issue</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0846acecdfad6b745ec2c3">
+        <source>What-to-expect-next-text</source>
+        <target>What to expect next:</target>
+      </trans-unit>
+      <trans-unit id="loco:5f08470d5fbe563f7a0e3642">
+        <source>Search-text</source>
+        <target>Search</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0847251186ff2e7d2b6022">
+        <source>Date-Range-text</source>
+        <target>Date range</target>
+      </trans-unit>
+      <trans-unit id="loco:5f084757e9eae23b027dc413">
+        <source>Money-In-text</source>
+        <target>Money in</target>
+      </trans-unit>
+      <trans-unit id="loco:5f084773e2bc1c4a1b48b564">
+        <source>Money-out-text</source>
+        <target>Money out</target>
+      </trans-unit>
+      <trans-unit id="loco:5f08478eeea3791a1d140d94">
+        <source>Bill-payment-text</source>
+        <target>Bill payment</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0847a9e2bc1c4a1b48b566">
+        <source>Has-attachment-text</source>
+        <target>Has attachment</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0847be3b181f68de651c22">
+        <source>Airtime-text</source>
+        <target>Airtime</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0847dee8e62d5b8f2d14f2">
+        <source>Amount-range-text</source>
+        <target>Amount range</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0848915fccb17ee378f342">
+        <source>Above-text</source>
+        <target>Above</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0848cfd178fa4dc961e3f3">
+        <source>Clear-filters-text</source>
+        <target>Clear filter</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0848fccd475103242c46c5">
+        <source>result-text</source>
+        <target>result</target>
+      </trans-unit>
+      <trans-unit id="loco:5f08492005bfc561b1047402">
+        <source>Results-text</source>
+        <target>results</target>
+      </trans-unit>
+      <trans-unit id="loco:5f084d1680585c424c2fc759">
+        <source>Share-text</source>
+        <target>Share</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0bff890c91252ba87af3b2">
+        <source>Pay-bill-text</source>
+        <target>Pay a bill</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c00f28ce43e1927168482">
+        <source>Full-amount-text</source>
+        <target>Full amount</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c011871cda30aeb3128b2">
+        <source>Other-amount-text</source>
+        <target>Other amount</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c014cdf2005547203f702">
+        <source>Schedule-payment-text</source>
+        <target>Schedule payment</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c0166df2005547203f704">
+        <source>Reminder-text</source>
+        <target>Reminder</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c01b70a15f62d5a1e6012">
+        <source>Pay-now-and-schedule-payment-text</source>
+        <target>Pay now and schedule payment</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c02b1bc9015161c225ee2">
+        <source>Please-enter-account-number-text</source>
+        <target>Please enter the account number</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c039befab2f7ccf486582">
+        <source>Favorites-text</source>
+        <target>Favourites</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c03af4848d671a431aae2">
+        <source>Manage-text</source>
+        <target>Manage</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c03d615c9364ef34836f2">
+        <source>Recent-Billers-text</source>
+        <target>Recents</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c03f6bc9015161c225ee4">
+        <source>Browse-Billers-text</source>
+        <target>Browse billers</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c04902e50994db721d003">
+        <source>Frequency-text</source>
+        <target>Frequency</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c04c55085201be8116202">
+        <source>Once-off-text</source>
+        <target>One-off</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c04e85085201be8116204">
+        <source>Daily-text</source>
+        <target>Daily</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c050b3f067d59314fe492">
+        <source>Weekly-text</source>
+        <target>Weekly</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c05280b3caf1177080a22">
+        <source>Monthly-text</source>
+        <target>Monthly</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c0549caaa5c2a7e75b5c2">
+        <source>First-payment-date-text</source>
+        <target>First payment date</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c05610b3caf1177080a24">
+        <source>Until-text</source>
+        <target>Until</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c0586f134e279da0ed2a2">
+        <source>Remind-me-text</source>
+        <target>Remind me</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c05a715c9364ef34836f5">
+        <source>One-day-before-text</source>
+        <target>One day before</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c06f37ecdc710042fe1c2">
+        <source>Review-text</source>
+        <target>Payment confirmation</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c07af988e394d9a2e6d42">
+        <source>You-are-paying-text</source>
+        <target>You are paying</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c07c7a7408a34932d8572">
+        <source>To-text</source>
+        <target>To</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c080f988e394d9a2e6d44">
+        <source>From-text</source>
+        <target>From</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c087b7ecdc710042fe1c4">
+        <source>Conversion-rate-text</source>
+        <target>Conversion rate</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c08b662c1cc2d301debe2">
+        <source>New-balance-text</source>
+        <target>New balance</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c0906bdfe904e331e3412">
+        <source>Pay-text</source>
+        <target>Pay</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c09faf152a2766041fb32">
+        <source>Confirm-text</source>
+        <target>Confirm</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c0a2a22819e63266b8093">
+        <source>How-much-do-you-want-to-pay-text</source>
+        <target>How much do you want to pay?</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c0ad4d28c733d12462752">
+        <source>Scheduled-payment-has-been-set-up-text</source>
+        <target>Scheduled payment has been set up</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c0ddaa27c04642d3d8e32">
+        <source>There-was-an-error-adding-this-beneficiary-to-your-favourites</source>
+        <target>We are unable to add this contact as a favourite. Please try again later.</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c0e060f51a633f1284ac2">
+        <source>You-have-successfully-added</source>
+        <target>You have successfully added</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c0e2d13072f15660504f2">
+        <source>To-your-favourites-click-next-to-continue-text</source>
+        <target>to your favourites, click next to continue</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c0f7f9a6321448753deb2">
+        <source>Enter-Beneficiary-Details-text</source>
+        <target>Please enter the recipient's details</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c0face682605fc213f0d6">
+        <source>Select-country-text</source>
+        <target>Select country</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c0fdee682605fc213f0d8">
+        <source>Kindly-select-the-beneficiary-country-digits-text</source>
+        <target>Kindly select the beneficiary's country digits</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c1021e7e8d229cc7399c2">
+        <source>Kindly-enter-account-number-phone-number-text</source>
+        <target>Enter an account or mobile number</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c108e46be2736561161a9">
+        <source>Account-phone-number-must-be-between-9-13-digits-text</source>
+        <target>Account or mobile number must be between 9 and 13 digits</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c11d8a9b4e96d8d206b72">
+        <source>Send-money-to-Equity-text</source>
+        <target>Send money to Equity BCDC</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c132dd117802adb63b532">
+        <source>Kindly-enter-the-amount-as-it-is-required-text</source>
+        <target>Please enter an amount</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c136029896224374de933">
+        <source>The-amount-to-send-cannot-be-less-than-or-equal-to-zero-text</source>
+        <target>The amount to send cannot be less than or equal to '0'</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c17a23ffdc4012e20f222">
+        <source>Send-the-money-to-text</source>
+        <target>Where are you sending the money to?</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c17bbb4d18435b9136462">
+        <source>Mobile-text</source>
+        <target>Mobile</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c17d7ddb6c06f087c3953">
+        <source>Mobile-Wallet-text</source>
+        <target>Mobile money</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c17fc9e7276418d0bd8e2">
+        <source>Bank-Account-text</source>
+        <target>Bank account</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c182242a2055e49602bf2">
+        <source>Equity-text</source>
+        <target>Another Equity BCDC account</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c18682b90117ce7168c25">
+        <source>Other-bank-to-account-text</source>
+        <target>Another bank account</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c18ad42a2055e49602bf4">
+        <source>Other-bank-to-phone-text</source>
+        <target>Phone-linked account</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c18c4a210147cdd35e3f6">
+        <source>PayPal-text</source>
+        <target>PayPal</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c18dc3ffdc4012e20f225">
+        <source>Cash-code-text</source>
+        <target>Cash code</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c19d8cb04d14e97000fe4">
+        <source>Payments-and-Transfers-text</source>
+        <target>Transact</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c1a00905f4e7f4e0b7a03">
+        <source>Send-Money-to-someone-text</source>
+        <target>Send money to someone</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c1a22fefaa138eb7462a4">
+        <source>Send-money-to-own-accounts</source>
+        <target>Own Equity BCDC account</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c1a995208dc71eb3d7f43">
+        <source>Withdraw-text</source>
+        <target>Withdraw</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c1b57c3dfe960405eca35">
+        <source>Receive-money-text</source>
+        <target>Receive money</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c1c9490de7b498b3b0ba2">
+        <source>Transaction-PIN-text</source>
+        <target>Transaction PIN</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c1cbec974b45416326608">
+        <source>Please-enter-your-transaction-PIN-text</source>
+        <target>Please enter your transaction PIN</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c1cd8165c12571769df82">
+        <source>Forgot-your-PIN-text</source>
+        <target>Forgot your PIN?</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c1cf22706081581335c62">
+        <source>Enter-pin-text</source>
+        <target>Enter PIN</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c1dc734561c59c02cc785">
+        <source>Select-country-code-text</source>
+        <target>Select a country code</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c1e9af2d20d64b50b0232">
+        <source>Someone-new-text</source>
+        <target>Someone new</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c1f6f15eb110a2f316222">
+        <source>No-verification-code-received-text</source>
+        <target>No verification code received?</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c20e18741ce6e7a281fb2">
+        <source>Maximum-transfer-amount-is-text</source>
+        <target>Maximum transfer amount is</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c21318f5f742e3f67a313">
+        <source>Minimum-transfer-amount-is-text</source>
+        <target>Minimum transfer amount is</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c21544d533a2394611352">
+        <source>Please-select-a-source-account-text</source>
+        <target>Please select a source account</target>
+      </trans-unit>
+      <trans-unit id="loco:5f0c2176cb88477ba27f19a2">
+        <source>Please-select-a-destination-account-text</source>
+        <target>Please select a destination account</target>
+      </trans-unit>
+      <trans-unit id="loco:5f117aedab798a5a082136c2">
+        <source>Header-Review_your-details</source>
+        <target>Review your details</target>
+      </trans-unit>
+      <trans-unit id="loco:5f117b71c4b35c2d735274e2">
+        <source>Review-you-details-content</source>
+        <target>These are the details we already have about you. Make sure that they match what is on your ID.
+
+If you already have a bank account with us, provide the details that you used to open the account. Make sure that your details for One Equity are valid.</target>
+      </trans-unit>
+      <trans-unit id="loco:5f15cd1499a5c029494db622">
+        <source>link-additional-account</source>
+        <target>Add additional account</target>
+      </trans-unit>
+      <trans-unit id="loco:5f182cd7a3266943381fe2a2">
+        <source>Open-an-account-in-minutes</source>
+        <target>Open an account in minutes</target>
+      </trans-unit>
+      <trans-unit id="loco:5f1864e7f71fe516f70648f2">
+        <source>Country-of-Residence-required</source>
+        <target>Please select your country of residence</target>
+      </trans-unit>
+      <trans-unit id="loco:5f1864fcbfbada7a37002b34">
+        <source>Nationality-required</source>
+        <target>Please select your nationality</target>
+      </trans-unit>
+      <trans-unit id="loco:5f1974554ee10d62e67ba1a2">
+        <source>Already-an-Equity-bank-customer</source>
+        <target>Already an Equity BCDC bank member?</target>
+      </trans-unit>
+      <trans-unit id="loco:5f19a25d18a3e004ad752ac3">
+        <source>Terms-and-Privacy-Policy</source>
+        <target>Terms and privacy policy</target>
+      </trans-unit>
+      <trans-unit id="loco:5f19a277461d4a43d0646f22">
+        <source>Header-Terms-of-Service</source>
+        <target>Terms</target>
+      </trans-unit>
+      <trans-unit id="loco:5f19a2a1b619184de3146862">
+        <source>terms-of-service-content</source>
+        <target>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</target>
+      </trans-unit>
+      <trans-unit id="loco:5f19a2d9e4eac207577ae592">
+        <source>related-terms</source>
+        <target>Related terms</target>
+      </trans-unit>
+      <trans-unit id="loco:5f19a2f3660e4a2a526cc872">
+        <source>related-terms-content</source>
+        <target>This is the balance that can be used from your account and you’re free to spend.</target>
+      </trans-unit>
+      <trans-unit id="loco:5f1aa7ad30e53c20df605ee3">
+        <source>How-would-you-like-to-get-verified</source>
+        <target>How would you like to get verified?</target>
+      </trans-unit>
+      <trans-unit id="loco:5f1abc0eb983ac58487f64f2">
+        <source>Please-select-an-OTP-method</source>
+        <target>Please select a verification method</target>
+      </trans-unit>
+      <trans-unit id="loco:5f2ab7bedf1e5a21656273a2">
+        <source>Error-message-Passwords-pattern</source>
+        <target>Password must contain a number, lower case letter, upper case letter and a special character</target>
+      </trans-unit>
+      <trans-unit id="loco:5f2d4afdf409886d9e139b94">
+        <source>SubHeader-Enter-the-details-that-you-used-to-open</source>
+        <target>Enter the details that you used to open your Equity BCDC bank account</target>
+      </trans-unit>
+      <trans-unit id="loco:5f2d660214bfff44b33087a3">
+        <source>updated-details-title</source>
+        <target>Visit your nearest branch to update your contact details</target>
+      </trans-unit>
+      <trans-unit id="loco:5f2d663514bfff44b33087a5">
+        <source>updated-details-subtitle</source>
+        <target>Make sure to bring some form of identification and our talented team will gladly assist you</target>
+      </trans-unit>
+      <trans-unit id="loco:5f2d67a5105e3944e71ba1e4">
+        <source>Button-text-Find-a-branch</source>
+        <target>Find a branch</target>
+      </trans-unit>
+      <trans-unit id="loco:5f2d6d94ed9a3b0d76774512">
+        <source>Head-We-have-sent-a-magic-link-to-to-v-i@-co-ke</source>
+        <target>We have sent a magic link to</target>
+      </trans-unit>
+      <trans-unit id="loco:5f2d6dae5d4ec732b26dd814">
+        <source>Header-Click-on-that-link-to-continue-your-passwor</source>
+        <target>Click on that link to continue your password reset</target>
+      </trans-unit>
+      <trans-unit id="loco:5f2d7eb9a159f578e900a602">
+        <source>Header-We-are-unable-to-link-your-account</source>
+        <target>We are unable to link your account</target>
+      </trans-unit>
+      <trans-unit id="loco:5f2d7ec79de333652c1e5874">
+        <source>Header-Looks-like-your-details-did-not-match-what</source>
+        <target>Sorry, we can't seem to find your account. Please relook the details you entered and try again.</target>
+      </trans-unit>
+      <trans-unit id="loco:5f2d8e56464f79103b2421f2">
+        <source>button-text-I-dont-have-access-to-email-or-mobile</source>
+        <target>I don't have access to email or mobile</target>
+      </trans-unit>
+      <trans-unit id="loco:5f2d8e63464f79103b2421f9">
+        <source>button-text-Try-another-method</source>
+        <target>Try another method</target>
+      </trans-unit>
+      <trans-unit id="loco:5f2d98925cc2f432f4079bb2">
+        <source>Acc-number</source>
+        <target>Account number</target>
+      </trans-unit>
+      <trans-unit id="loco:5f32cf4d642ab01ece559e13">
+        <source>label-Enter-nickname</source>
+        <target>Enter an account nickname</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4d0d50d8ce101c4715bfb3">
+        <source>Heading-Create-your-One-Equity-profile</source>
+        <target>Create your Equity BCDC profile</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4e10fb927f81137c22fd23">
+        <source>Header-Discover</source>
+        <target>Discover</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4e115aad5ba32669209442">
+        <source>text-We-have-a-world-of-services-to-make-your-life</source>
+        <target>We have a world of services to make your life blend seamlessly with your finances and lifestyle.</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4e229c97efc72f18208462">
+        <source>text-Please-Select-a-language</source>
+        <target>Please select a language</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4e2bbdd941a14c484b2fe4">
+        <source>Sidebar-item-Home</source>
+        <target>Home</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4e2c80f481f82a62140882">
+        <source>Hyperlink-Text-Transact</source>
+        <target>Transact</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4e2ca984806604947589f2">
+        <source>Hyperlink-Text-Lifestyle</source>
+        <target>Lifestyle</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4e2cef38a4f7431b164405">
+        <source>Hyperlink-Text-Invest</source>
+        <target>Invest</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4e2d1236d5dd2df417d522">
+        <source>Hyperlink-Text-More</source>
+        <target>More</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4e2d44f481f82a62140885">
+        <source>Hyperlink-Text-Lights-on</source>
+        <target>Lights on</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4e2d81b69f8d4b54523f34">
+        <source>Hyperlink-Text-Logout</source>
+        <target>Sign out</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4e3dcca6818106413fab62">
+        <source>Text-Enter-your-account-details-to-begin</source>
+        <target>Enter your account details to begin</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4e49f51efb7c43a3788074">
+        <source>Text-Please</source>
+        <target>Please</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4e4a0e7a0ebc5f53645da2">
+        <source>Text-to-use-the-new-account</source>
+        <target>to use the new account!</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4e4af87016fb467232e742">
+        <source>Text-Place-your-index-finger-on-the-fingerprint-se</source>
+        <target>Place your index finger on the fingerprint sensor to authenticate</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4e4eb6d8d22a538b7e2ff5">
+        <source>Label-Document-type</source>
+        <target>Document type</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4e4f8e55319d634a6c9a52">
+        <source>Label-Enter-selectedIdType-Number</source>
+        <target>Enter {{ selectedIdType }} number</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4e51fcf410dc696f22cdb5">
+        <source>Text-Log-in-or-sign-up-to-perform-a-transaction-or</source>
+        <target>Sign in or sign up to perform a transaction or explore our wide range of products, tailored to suit your needs.</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4e52e833ddea0d3c6fd622">
+        <source>Text-Login-or-sign-up-to-continue</source>
+        <target>Sign in to continue</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4ebdc42af1310eec312772">
+        <source>Hyperlink-text-login</source>
+        <target>login</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4ebde76b16006d3d02c542">
+        <source>Text-to-use-the-new-account-2</source>
+        <target>to use the new account!</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4ebe2bab777b7e872215e2">
+        <source>Text-The-harder-the-password-the-better-and-safer</source>
+        <target>The harder the password, the better and safer</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4ec071e3b32965582c2392">
+        <source>Text-Valid-Email-Address-Required</source>
+        <target>Enter a valid email address</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4ec23b8cb19e595f3f11d2">
+        <source>Hyperlink-Text-Resend-Code</source>
+        <target>Resend code</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4ec2852e996771a9152932">
+        <source>Hyperlink-Text-Change-the-mobile-number</source>
+        <target>Change the mobile number</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4ec6074379b86c7a6ff382">
+        <source>Header-Buy-airtime</source>
+        <target>Buy airtime</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4ec6eb3679bf569d2760d2">
+        <source>Header-Great</source>
+        <target>Great!</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4ec77073e8dc5a0f2036a2">
+        <source>Subtitle-Your-airtime-purchase-was-successful</source>
+        <target>Your airtime purchase was successful</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4ec7f995e24a77a320e2e2">
+        <source>Subtitle-Airtime-amount</source>
+        <target>Airtime amount</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4ec8443a5d5b708675b502">
+        <source>Subheading-Charges-and-fees</source>
+        <target>Charges</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4ec890d0735857ae677de2">
+        <source>Subheading-Airtime-to</source>
+        <target>Airtime to</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4ec8f773b1623a05207b82">
+        <source>Subheading-Transaction-reference</source>
+        <target>Transaction reference</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4ed07d23545d5f2f3a1c02">
+        <source>Header-Send-money-to-mobile-wallet</source>
+        <target>Send money to mobile wallet</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4f3eb048032e043610f074">
+        <source>Header-Send-to-other-bank</source>
+        <target>Send to another bank</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4f465bdec31b54a03f54a2">
+        <source>Header-Please-tell-us-this-payees-bank-details</source>
+        <target>Please enter the recipient's details</target>
+      </trans-unit>
+      <trans-unit id="loco:5f4f529b3c57025e3b308fe2">
+        <source>Label-Full-name</source>
+        <target>Full name</target>
+      </trans-unit>
+      <trans-unit id="loco:5f500ab1c210a862a9575872">
+        <source>Header-Apply-for-a-loan</source>
+        <target>Apply for a loan</target>
+      </trans-unit>
+      <trans-unit id="loco:5f500b1d441d1c16583ed0d2">
+        <source>Text-Equity-Bank-offers-a-variety-of-loans-to-help</source>
+        <target>Equity BCDC offers a variety of loans to help you meet your goals.
+Look through our loan products to find one that is suited to your needs.</target>
+      </trans-unit>
+      <trans-unit id="loco:5f500b61b202475ae357e722">
+        <source>Text-Filter-by</source>
+        <target>Filter by</target>
+      </trans-unit>
+      <trans-unit id="loco:5f500bb49579ac4a183e68e2">
+        <source>Header-Personal</source>
+        <target>Personal</target>
+      </trans-unit>
+      <trans-unit id="loco:5f500bde37bcf7452723fb42">
+        <source>Header-Business</source>
+        <target>Business</target>
+      </trans-unit>
+      <trans-unit id="loco:5f500c5177f48c6cd4431532">
+        <source>Header-Mobile</source>
+        <target>Mobile</target>
+      </trans-unit>
+      <trans-unit id="loco:5f500effe642c95aba26a482">
+        <source>Text-Enter-recipient-details</source>
+        <target>Please enter the recipient's details</target>
+      </trans-unit>
+      <trans-unit id="loco:5f500fafbf1f050480032eb3">
+        <source>Text-Enter-account-phone-number</source>
+        <target>Enter their account or mobile number</target>
+      </trans-unit>
+      <trans-unit id="loco:5f501024e642c95aba26a484">
+        <source>Subtitle-Your-transaction-was-successful</source>
+        <target>Your transaction was successful</target>
+      </trans-unit>
+      <trans-unit id="loco:5f5010e7e642c95aba26a488">
+        <source>Subtitle-Paid-to</source>
+        <target>Paid to</target>
+      </trans-unit>
+      <trans-unit id="loco:5f5011257aa77136147bd8b2">
+        <source>Subheading-Sent-from</source>
+        <target>Paid from</target>
+      </trans-unit>
+      <trans-unit id="loco:5f5011668f6d6a398e047c62">
+        <source>Subheading-Save-as-favourite</source>
+        <target>Save as favourite</target>
+      </trans-unit>
+      <trans-unit id="loco:5f50119583052d55210959a2">
+        <source>Button-Text-Download-receipt</source>
+        <target>Download receipt</target>
+      </trans-unit>
+      <trans-unit id="loco:5f5012e1437ecb4f1744bcb2">
+        <source>Header-Success</source>
+        <target>Success</target>
+      </trans-unit>
+      <trans-unit id="loco:5f501309ae3819295833ebc2">
+        <source>Subheading-Your-bill-payment-was-successful</source>
+        <target>Your bill payment was successful</target>
+      </trans-unit>
+      <trans-unit id="loco:5f501389ae3819295833ebc4">
+        <source>Header-Confirm-details-for-your-payment</source>
+        <target>To continue, please confirm your transaction</target>
+      </trans-unit>
+      <trans-unit id="loco:5f501468193c1344e80986a2">
+        <source>Select-Option-One-off</source>
+        <target>One-off</target>
+      </trans-unit>
+      <trans-unit id="loco:5f5015026ed0903f2462fe32">
+        <source>Option-1-day-before</source>
+        <target>1 day before</target>
+      </trans-unit>
+      <trans-unit id="loco:5f5015c2f0dcb74e4764d2b2">
+        <source>Header-Favourites</source>
+        <target>Favourites</target>
+      </trans-unit>
+      <trans-unit id="loco:5f5015f2dbea835725243c32">
+        <source>Header-Browse-Biller-Categories</source>
+        <target>Browse billers</target>
+      </trans-unit>
+      <trans-unit id="loco:5f501670fd9c800e6e2f5bd2">
+        <source>Header-Send-money-to-own-account</source>
+        <target>Send money to own account</target>
+      </trans-unit>
+      <trans-unit id="loco:5f50181073daea2c0a59ed62">
+        <source>Hyperlink-Text-Service-Required</source>
+        <target>Service required</target>
+      </trans-unit>
+      <trans-unit id="loco:5f501991d5cab70ee15879d2">
+        <source>Hyperlink-Text-Open-GMail</source>
+        <target>Open GMail</target>
+      </trans-unit>
+      <trans-unit id="loco:5f501a27d53303330f2a5162">
+        <source>Hyperlink-Text-Open-Outlook</source>
+        <target>Open Outlook</target>
+      </trans-unit>
+      <trans-unit id="loco:5f501c65ef13ff15463d15e2">
+        <source>Hyperlink-Text-Resend-email</source>
+        <target>Resend email</target>
+      </trans-unit>
+      <trans-unit id="loco:5f501c94c5ee262dcb192542">
+        <source>Hyperlink-Text-I-dont-have-access-to-email</source>
+        <target>I don't have access to email</target>
+      </trans-unit>
+      <trans-unit id="loco:5f501d328b618303de0ef472">
+        <source>Text-Unlink-account</source>
+        <target>Remove account</target>
+      </trans-unit>
+      <trans-unit id="loco:5f501dabb7ec4157bb5b9252">
+        <source>Next repayment due in {{ nextPayDate }} days</source>
+        <target>The next repayment is due in <x id="INTERPOLATION" equiv-text="{{ acc.nextPaymentDueInNumOfDays }}"/> days</target>
+      </trans-unit>
+      <trans-unit id="loco:5f501de966e59e4bc14ab022">
+        <source>Text-Monthly-instalment</source>
+        <target>Your monthly instalment is <x id="PH" equiv-text="{{ acc.instalmentAmount }}" /> <x id="PH_1" equiv-text="{{ acc.accountCurrency }}" /></target>
+      </trans-unit>
+      <trans-unit id="loco:5f501f0c9bd5f909042929e2" extradata="loco:format=php">
+        <source>Text-repaymentProgress-%-completed</source>
+        <target>completed</target>
+      </trans-unit>
+      <trans-unit id="loco:5f501f7ef003980f77536f02">
+        <source>Text-installmentsRemaining-installments-to-go</source>
+        <target><x id="INTERPOLATION" equiv-text="{{ acc.remainingNumberOfInstalments }}"/>
+          instalments to go</target>
+      </trans-unit>
+      <trans-unit id="loco:5f501fda9bd5f909042929e4">
+        <source>Disable-alerts</source>
+        <target>Disable alerts</target>
+      </trans-unit>
+      <trans-unit id="loco:5f502017f003980f77536f04">
+        <source>Text-Goal-balance</source>
+        <target>Goal balance</target>
+      </trans-unit>
+      <trans-unit id="loco:5f5020749213bb1ecc58c7d2">
+        <source>Text-We-thought-this-might-interest-you</source>
+        <target>We thought this might interest you</target>
+      </trans-unit>
+      <trans-unit id="loco:5f5020c123d9f22bee3b50a2">
+        <source>Button-text-Select-Today</source>
+        <target>Select today</target>
+      </trans-unit>
+      <trans-unit id="loco:5f5020da23d9f22bee3b50a5">
+        <source>To-current-month</source>
+        <target>To current month</target>
+      </trans-unit>
+      <trans-unit id="loco:5f50221c3cf0ba22696140a2">
+        <source>Button-Text-Reorder</source>
+        <target>Reorder</target>
+      </trans-unit>
+      <trans-unit id="loco:5f50225c548414676d40b342">
+        <source>Text-An-account-card-or-mobile-wallet</source>
+        <target>An Equity BCDC account</target>
+      </trans-unit>
+      <trans-unit id="loco:5f5022880bcc0644200a4932">
+        <source>Save-transact-borrow-and-more</source>
+        <target>Save, transact, borrow and more</target>
+      </trans-unit>
+      <trans-unit id="loco:5f50231d017aa44d39071b02">
+        <source>Header-Coming-Soon</source>
+        <target>Coming soon</target>
+      </trans-unit>
+      <trans-unit id="loco:5f5023659c2dcb64ee333f32">
+        <source>Text-Unlink-this-account</source>
+        <target>Remove this account?</target>
+      </trans-unit>
+      <trans-unit id="loco:5f502386ac9e0b750617d352">
+        <source>Text-It-looks-like-you-would-like-to-unlink-this-a</source>
+        <target>It looks like you would like to remove this account from your Equity BCDC profile</target>
+      </trans-unit>
+      <trans-unit id="loco:5f5023afd694877560103542">
+        <source>Hyperlink-Text-No-keep-account</source>
+        <target>No, keep account</target>
+      </trans-unit>
+      <trans-unit id="loco:5f502446a7aa0a1e007113a2">
+        <source>Hyperlink-Text-Yes-unlink-account</source>
+        <target>Yes, remove account</target>
+      </trans-unit>
+      <trans-unit id="loco:5f50249e7fd38821b57348d2">
+        <source>Button-Text-Ok</source>
+        <target>Ok</target>
+      </trans-unit>
+      <trans-unit id="loco:5f502521e838170fec4dc2c2">
+        <source>Header-Language-Selection</source>
+        <target>Choose your language</target>
+      </trans-unit>
+      <trans-unit id="loco:5f5025b614d8cb4ad90a07a2">
+        <source>Logout Warning</source>
+        <target>Are you still there?</target>
+      </trans-unit>
+      <trans-unit id="loco:5f50260f14d8cb4ad90a07a5" extradata="loco:format=icu">
+        <source>Subheading-You-will-be-logged-out-in-timeTillLogou</source>
+        <target>You’ve been quiet. To keep your details safe, you will be automatically logged out in
+
+          seconds.</target>
+      </trans-unit>
+      <trans-unit id="loco:5f502633d69bdc46b33de022">
+        <source>Button-text-Logout-Now</source>
+        <target>Log me out</target>
+      </trans-unit>
+      <trans-unit id="loco:5f5026e594c0976491453fb2">
+        <source>Header-Profile</source>
+        <target>Profile</target>
+      </trans-unit>
+      <trans-unit id="loco:5f502719e624fb7f8b0427e2">
+        <source>Text-Great-its-unlinked</source>
+        <target>Great, it's removed!</target>
+      </trans-unit>
+      <trans-unit id="loco:5f5027479b4eab37645bfac2">
+        <source>Text-You-can-always-link-it-again-if-you-wish</source>
+        <target>You can always link it again</target>
+      </trans-unit>
+      <trans-unit id="loco:5f5027983ea43d29ec1c40c2">
+        <source>Hyperlink-Text-Dismiss</source>
+        <target>Dismiss</target>
+      </trans-unit>
+      <trans-unit id="loco:5f502919333b88581a0065d2">
+        <source>Text-Available-Balance</source>
+        <target>Available balance</target>
+      </trans-unit>
+      <trans-unit id="loco:5f5029f549e8834e6c1a3eb2">
+        <source>Text-Your-browser-does-not-support-the-video-tag</source>
+        <target>Your browser does not support the video tag.</target>
+      </trans-unit>
+      <trans-unit id="loco:5f53af5e0165db4a1d14e322">
+        <source>Button-text-Scan</source>
+        <target>Scan</target>
+      </trans-unit>
+      <trans-unit id="loco:5f53af8854b947521a624442">
+        <source>Button-Text-Resend-Code</source>
+        <target>Resend code</target>
+      </trans-unit>
+      <trans-unit id="loco:5f53b17b075ae31fe04a2b42">
+        <source>Text-Lets-fix-that-for-you</source>
+        <target>Let’s fix that for you.</target>
+      </trans-unit>
+      <trans-unit id="loco:5f53b224f4357e338f3dfe02">
+        <source>Text-Minimum-6-characters</source>
+        <target>Must be at least 8 characters long</target>
+      </trans-unit>
+      <trans-unit id="loco:5f53b2a8b38149690e2c6962">
+        <source>Text-Use-email-instead</source>
+        <target>Use email instead</target>
+      </trans-unit>
+      <trans-unit id="loco:5f53de7745c2387f83638542">
+        <source>Text-You-will-be-notified-on-the-date-that-your-pa</source>
+        <target>You will be notified on the date that your payment is scheduled to take place</target>
+      </trans-unit>
+      <trans-unit id="loco:5f53e757bc53d17c6b771e42">
+        <source>Header-Balance-information</source>
+        <target>Balance information</target>
+      </trans-unit>
+      <trans-unit id="loco:5f53ebb95b948764d55c8ae2">
+        <source>Header-History</source>
+        <target>Transaction history</target>
+      </trans-unit>
+      <trans-unit id="loco:5f53f1b1563b3009fe2891a2">
+        <source>Hyperlink-Text-Who-You-Are</source>
+        <target>Who you are</target>
+      </trans-unit>
+      <trans-unit id="loco:5f5421af4e652c1f5f17bfe2">
+        <source>Header-To-someone-new</source>
+        <target>To someone new</target>
+      </trans-unit>
+      <trans-unit id="loco:5f55ede346b3295bb7730572">
+        <source>Header-Welcome-to-One-Equity</source>
+        <target>Welcome to Equity BCDC</target>
+      </trans-unit>
+      <trans-unit id="loco:5f5732e9cdfca91cf1371fa2">
+        <source>Text-The-loan-has-been-deposited-into-your-account</source>
+        <target>The loan has been deposited into your account</target>
+      </trans-unit>
+      <trans-unit id="loco:5f57332f6260bb28ab0afee2">
+        <source>Text-Installment-date</source>
+        <target>Installment date</target>
+      </trans-unit>
+      <trans-unit id="loco:5f57337f44964b3006662dd2">
+        <source>Text-Installment-amount</source>
+        <target>Installment amount</target>
+      </trans-unit>
+      <trans-unit id="loco:5f5733a9691be93cc2521602">
+        <source>Text-Last-repayment-date</source>
+        <target>Last repayment date</target>
+      </trans-unit>
+      <trans-unit id="loco:5f573425af801142a2699d63">
+        <source>Text-We-have-received-your-loan-application</source>
+        <target>We have received your loan application</target>
+      </trans-unit>
+      <trans-unit id="loco:5f57344e44964b3006662dd5">
+        <source>Text-Its-in-review</source>
+        <target>It's in review</target>
+      </trans-unit>
+      <trans-unit id="loco:5f573484a638111d1734fbf5">
+        <source>Text-Thank-you-for-applying-for-an-Equity-loan-You</source>
+        <target>Thank you for applying for an Equity BCDC loan. Your application is being reviewed. In 20 minutes, you will receive a notification regarding the status of your application.</target>
+      </trans-unit>
+      <trans-unit id="loco:5f5734d5dcd2f4101c55e092">
+        <source>Text-Add-payment-date-to-calendar</source>
+        <target>Add payment date to calendar</target>
+      </trans-unit>
+      <trans-unit id="loco:5f57353d8c245c6af91dd4b4">
+        <source>Header-Please-enter-loan-details</source>
+        <target>Please enter the loan details</target>
+      </trans-unit>
+      <trans-unit id="loco:5f5736e1dcd2f4101c55e094">
+        <source>Header-We-need-some-more-information-about-you</source>
+        <target>We need some more information about you</target>
+      </trans-unit>
+      <trans-unit id="loco:5f57375a9e9b5639da5c2092">
+        <source>Header-Upload-documents</source>
+        <target>Upload documents</target>
+      </trans-unit>
+      <trans-unit id="loco:5f5737742caef155fc0b4e13">
+        <source>Text-To-process-your-application-we-need-the-docum</source>
+        <target>To process your application, we need the documents below</target>
+      </trans-unit>
+      <trans-unit id="loco:5f5739c756bea30ac42b90c2">
+        <source>Button-Text-Apply-for-loan</source>
+        <target>Apply for loan</target>
+      </trans-unit>
+      <trans-unit id="loco:5f573b15b7168c1c0958a8e2">
+        <source>I-accept-the</source>
+        <target>I accept the</target>
+        <note>Accept terms and conditions</note>
+      </trans-unit>
+      <trans-unit id="loco:5f573b7e00231d027f4bb5a2">
+        <source>Text-terms</source>
+        <target>Terms</target>
+      </trans-unit>
+      <trans-unit id="loco:5f573bb270dcc3542c3e2c12">
+        <source>Text-Total-loan-to-be-paid-off</source>
+        <target>Total loan to be paid off</target>
+      </trans-unit>
+      <trans-unit id="loco:5f573bf154d7b11bba1cf6a2">
+        <source>Text-Charges-fees-and-insurance</source>
+        <target>Charges explained</target>
+      </trans-unit>
+      <trans-unit id="loco:5f573c586b84d1701a07cfb3">
+        <source>Text-per-annum</source>
+        <target>per annum</target>
+      </trans-unit>
+      <trans-unit id="loco:5f573c80d13c305fa9350b92">
+        <source>Text-Loan-interest</source>
+        <target>Loan interest</target>
+      </trans-unit>
+      <trans-unit id="loco:5f573ca755ab823c0a3320a2">
+        <source>Repayment-period</source>
+        <target>Repayment period</target>
+      </trans-unit>
+      <trans-unit id="loco:5f573cfbe596ed7ed00aeea2">
+        <source>Text-Amount-to-borrow</source>
+        <target>Amount to borrow</target>
+      </trans-unit>
+      <trans-unit id="loco:5f573d43f4b8e231f149aea3">
+        <source>Text-Current-balance</source>
+        <target>Current balance</target>
+      </trans-unit>
+      <trans-unit id="loco:5f573d6f7e2766711f637765">
+        <source>Text-Deposit-to</source>
+        <target>Deposit to</target>
+      </trans-unit>
+      <trans-unit id="loco:5f573de25b379c42b16c50d2">
+        <source>Text-Loan-type</source>
+        <target>Loan type</target>
+      </trans-unit>
+      <trans-unit id="loco:5f573e028470ef2efb3aad14">
+        <source>Text-Please-confirm-your-request</source>
+        <target>Please confirm your loan request</target>
+      </trans-unit>
+      <trans-unit id="loco:5f7c3d12b7a15900ac3d4a42">
+        <source>title-forgot-password-We-have-sent-a-link-to-your</source>
+        <target>We have sent a link to your email</target>
+      </trans-unit>
+      <trans-unit id="loco:5f7c3d4b30ca6224ad3441a2">
+        <source>subtitle-forgot-password-Click-on-that-link-to-con</source>
+        <target>Click on that link to continue your password reset</target>
+      </trans-unit>
+      <trans-unit id="loco:5f7c3f9bdbe05847f97da899">
+        <source>title-create-password-requirements-What-is-require</source>
+        <target>What is required?</target>
+      </trans-unit>
+      <trans-unit id="loco:5f818ce86c8d9b46437f6202">
+        <source>label-Enter-selectedIdType-number</source>
+        <target>Enter {{ selectedIdType }} number</target>
+      </trans-unit>
+      <trans-unit id="loco:5f818d3ae738c922e9257842">
+        <source>Header-access-Welcome-to</source>
+        <target>Welcome to</target>
+      </trans-unit>
+      <trans-unit id="loco:5f818dd7aaebc67511358612">
+        <source>Header-magic-link-We-have-sent-a-link-to-your-emai</source>
+        <target>We have sent a link to your email</target>
+      </trans-unit>
+      <trans-unit id="loco:5f818e859cb2c423834ddff2">
+        <source>Header-Forgot-password-Lets-try-this-again</source>
+        <target>Let's try this again.</target>
+      </trans-unit>
+      <trans-unit id="loco:5f818f40fedc93605b1c0aa2">
+        <source>Magic-link-error-The-verification-link-sent-has-ei</source>
+        <target>The verification link sent has either expired or been used more than once.</target>
+      </trans-unit>
+      <trans-unit id="loco:5f818f7bbbae71177a7045b2">
+        <source>Button-text-Resend-link</source>
+        <target>Resend link</target>
+      </trans-unit>
+      <trans-unit id="loco:5f818fd759889f03f75eb852">
+        <source>Hyperlink-text-Forgot-your-password</source>
+        <target>Forgot your password?</target>
+      </trans-unit>
+      <trans-unit id="loco:5f8190659cb2c423834ddff4">
+        <source>paragraph-text-Well-email-or-text-you-a-link-to-he</source>
+        <target>We'll email or text you a link to help you reset your password</target>
+      </trans-unit>
+      <trans-unit id="loco:5f8190d23979eb5c05509432">
+        <source>Label-login-page-One-Equity-email-OR-phone-number</source>
+        <target>Username</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81916e3979eb5c05509434">
+        <source>OTP-header-We-have-sent-a-verification-code-to-you</source>
+        <target>We have sent a verification code to your mobile number</target>
+      </trans-unit>
+      <trans-unit id="loco:5f8191f88fffd5478e4281d2">
+        <source>label-login-Password</source>
+        <target>Password</target>
+      </trans-unit>
+      <trans-unit id="loco:5f8192728fffd5478e4281d4">
+        <source>Validation-error-login-Password-is-required</source>
+        <target>Please enter your password</target>
+      </trans-unit>
+      <trans-unit id="loco:5f8192d8f459284eeb6072b2">
+        <source>OTP-method-label-Via-mobile</source>
+        <target>Via mobile</target>
+      </trans-unit>
+      <trans-unit id="loco:5f8193358fffd5478e4281d6">
+        <source>OTP-method-email-label-Via-email</source>
+        <target>Via email</target>
+      </trans-unit>
+      <trans-unit id="loco:5f8193ec95998064af41dd02">
+        <source>Header-access-Account-created-Account-created</source>
+        <target>Account created!</target>
+      </trans-unit>
+      <trans-unit id="loco:5f819511fee1b449c15f74c2">
+        <source>Header-create-password-Create-a-strong-password-fo</source>
+        <target>Create a strong password for Equity BCDC</target>
+      </trans-unit>
+      <trans-unit id="loco:5f8195798a92d551c21c15f2">
+        <source>create-passeword-requirement-Must-contain-both-num</source>
+        <target>Must contain numbers, uppercase and lowercase letters</target>
+      </trans-unit>
+      <trans-unit id="loco:5f8195cda532ae0f8f660552">
+        <source>create-password-requirement-2-Must-be-at-least-8-c</source>
+        <target>Must be at least 8 characters long</target>
+      </trans-unit>
+      <trans-unit id="loco:5f8196292f331e538c1efc12">
+        <source>create-password-requirement-3-Must-contain-a-speci</source>
+        <target>Must contain a special character (e.g. !@#$&amp;)</target>
+      </trans-unit>
+      <trans-unit id="loco:5f8196ddadd2720d0a58b622">
+        <source>Header-access-sign-up-Create-your-One-Equity-profi</source>
+        <target>Create your Equity BCDC profile</target>
+      </trans-unit>
+      <trans-unit id="loco:5f819741a532ae0f8f660558">
+        <source>Validation-error-country-signup-Country-of-residen</source>
+        <target>Your country of residence is required</target>
+      </trans-unit>
+      <trans-unit id="loco:5f8197da9645310194564282">
+        <source>Validation-error-signup-email-Looks-like-the-email</source>
+        <target>Looks like the email address is incorrect, try again.</target>
+      </trans-unit>
+      <trans-unit id="loco:5f8198242f331e538c1efc14">
+        <source>Validation-error-nationality-signup-Nationality-re</source>
+        <target>Nationality required</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81987cefec287dda41f952">
+        <source>Signup-button-text-Create-profile</source>
+        <target>Create profile</target>
+      </trans-unit>
+      <trans-unit id="loco:5f8198fe5e814735630bbcf2">
+        <source>Header-text-Buy-airtime</source>
+        <target>Buy airtime</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81999a57755768c27c1642">
+        <source>Airtime-success-message-Your-airtime-purchase-was</source>
+        <target>Your airtime purchase was successful</target>
+      </trans-unit>
+      <trans-unit id="loco:5f8199dbd739b0146a134da2">
+        <source>subtitle-sent-from-Sent-from</source>
+        <target>Sent from</target>
+      </trans-unit>
+      <trans-unit id="loco:5f819a1dc192d604d649c752">
+        <source>subtitle-completed-on-Completed-on</source>
+        <target>Completed on</target>
+      </trans-unit>
+      <trans-unit id="loco:5f819ac88eb113051d663712">
+        <source>header-beneficiary-details-request-Please-enter-th</source>
+        <target>Please enter the recipient’s details</target>
+      </trans-unit>
+      <trans-unit id="loco:5f819b2e48dad800a9769742">
+        <source>header-selector-operator-Please-select-the-operato</source>
+        <target>Please select the operator</target>
+      </trans-unit>
+      <trans-unit id="loco:5f819ba65e814735630bbcf4">
+        <source>Header-loans-page-Apply-for-a-loan</source>
+        <target>Apply for a loan</target>
+      </trans-unit>
+      <trans-unit id="loco:5f819beb60b4ea24171f9c12">
+        <source>paragraph-loans-intro-Equity-Bank-offers-a-variety</source>
+        <target>Equity BCDC offers a variety of loans to help you meet your goals. Look through our loan products to find one that is suited to your needs.</target>
+      </trans-unit>
+      <trans-unit id="loco:5f819c64c3dc54128d7b47f2">
+        <source>Header-send-from-Send-from</source>
+        <target>Send from</target>
+      </trans-unit>
+      <trans-unit id="loco:5f819ce732f0e47361359562">
+        <source>Validation-error-account-required-The-account-numb</source>
+        <target>The account number or phone number is required</target>
+      </trans-unit>
+      <trans-unit id="loco:5f819d739da91c1cbf1d7362">
+        <source>mobile-wallet-success-screen-Your-money-was-sent-s</source>
+        <target>Your money was sent successfully</target>
+      </trans-unit>
+      <trans-unit id="loco:5f819df39968615582425df2">
+        <source>Success-sent-to-Sent-to</source>
+        <target>Sent to</target>
+      </trans-unit>
+      <trans-unit id="loco:5f819ed4c4b47354046fc742">
+        <source>Success-installment-loan-The-instalment-loan-has-b</source>
+        <target>The instalment loan has been deposited into your account</target>
+      </trans-unit>
+      <trans-unit id="loco:5f819f0cc0e87b2dbd56b082">
+        <source>Success-installment-loan-amount-Amount-disbursed</source>
+        <target>Amount disbursed</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81a05de19e1c6471057522">
+        <source>One-month-success-message-The-one-month-loan-has-b</source>
+        <target>The one month loan has been deposited into your account</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81a0910210254fa514a122">
+        <source>One-month-success-amount-Amount-disbursed</source>
+        <target>Amount disbursed</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81a147922acc480507de22">
+        <source>Header-pay-loan-Payment-details</source>
+        <target>Payment details</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81a1b07583124f77445442">
+        <source>Page-pay-loan-Pay-loan</source>
+        <target>Pay a loan</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81a20fd33fe67cfc1a3152">
+        <source>pay-loan-request-How-much-do-you-want-to-pay</source>
+        <target>How much do you want to pay?</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81a251d33fe67cfc1a3154">
+        <source>label-pay-loan-full-amount-Full-amount</source>
+        <target>Full amount</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81a280f916ae001974dc42">
+        <source>label-pay-loan-another-amount-Another-amount</source>
+        <target>Another amount</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81a3725c76c865aa2bad32">
+        <source>Success-pay-loan-message-You-have-paid-your-loan-s</source>
+        <target>You have paid your loan successfully</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81a3ce3a309b42a5371ae2">
+        <source>Success-pay-loan-amount-Amount-paid</source>
+        <target>Amount paid</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81a47b2efc832a8b16b1e2">
+        <source>Header-send-to-mobile-wallet-Send-to-mobile-wallet</source>
+        <target>Send to mobile wallet</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81a50c3a309b42a5371ae4">
+        <source>Success-mobile-wallet-amount-Sent-amount</source>
+        <target>Sent amount</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81a540f916ae001974dc44">
+        <source>Success-mobile-wallet-to-Sent-money-to</source>
+        <target>Sent money to</target>
+        <note>Used in place of "Sent money to"</note>
+      </trans-unit>
+      <trans-unit id="loco:5f81a5b75b54d43a9d27a422">
+        <source>Send-to-another-bank-header-Send-to-another-bank</source>
+        <target>Send to another bank</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81a62affcffe07233fbbd2">
+        <source>other-bank-select-contact-Select-contact</source>
+        <target>Select contact</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81a6943a309b42a5371ae6">
+        <source>Success-pay-bill-message-Your-bill-was-paid-succes</source>
+        <target>Your bill was paid successfully</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81a6fd2efc832a8b16b1e4">
+        <source>Header-review-modal-Transaction</source>
+        <target>Transaction</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81a7d3db1d0f0ac70c01e2">
+        <source>Send-to-yourself-header-Send-to-yourself</source>
+        <target>Send to your own Equity BCDC account</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81a875b6be6306c2737ac2">
+        <source>Header-label-account-info-Account-type</source>
+        <target>Account type</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81a8d4e937883251082472">
+        <source>Text-Account-currency</source>
+        <target>Account currency</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81a8f5b6be6306c2737ac4">
+        <source>Text-Account-name</source>
+        <target>Account name</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81a924fade6b78745b6e62">
+        <source>Text-Account-status</source>
+        <target>Account status</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81a9d152be935a084ff332">
+        <source>Header-Please-select-the-account-you-want-to-link</source>
+        <target>Please select the account you want to add to Equity BCDC</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81aa38de63c24a990fa7a5">
+        <source>Text-If-you-already-bank-with-us-please-use-the-sa</source>
+        <target>If you already bank with us, please use the same details you used to open your account</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81aa5daf5c087b73637cf2">
+        <source>Header-Your-accounts</source>
+        <target>Your accounts</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81aa9f57e12f57ab77aea2">
+        <source>Text-An-account-card-or-mobile-wallet-2</source>
+        <target>Link a Equity BCDC account</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81ab3e07a65013ea2edef2">
+        <source>Header-Incorrect-verification-code</source>
+        <target>Incorrect verification code</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81ab5c600bb213d771f732">
+        <source>Text-The-code-you-entered-did-not-match-what-we-se</source>
+        <target>The code you entered did not match what we sent to you. Give it another look.</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81ab835943773adf320bf2">
+        <source>Button-text-Try-again</source>
+        <target>Try again</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81abc207a65013ea2edef4">
+        <source>Header-Are-you-still-there</source>
+        <target>Are you still there?</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81abf84af7147cd45aeed2">
+        <source>Text-Youve-been-quiet-To-keep-your-details-safe-yo</source>
+        <target>You’ve been quiet. To keep your details safe, you will be automatically signed out in
+<x id="PH" equiv-text= "{{ timeTillLogout }}" /> seconds.</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81ac24600bb213d771f734">
+        <source>Button-text-Keep-me-in</source>
+        <target>Keep me in</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81ac4307a65013ea2edef6">
+        <source>Button-text-Log-me-out</source>
+        <target>Sign me out</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81acc34af7147cd45aeed4">
+        <source>Header-Please-select-a-bank-account</source>
+        <target>Please select an account</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81acf54f210a503101eca5">
+        <source>Hyperlink-text-Manage</source>
+        <target>Manage</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81ad114f210a503101eca7">
+        <source>Hyperlink-text-Clear-search</source>
+        <target>Clear search</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81ad424af7147cd45aeed6">
+        <source>Text-Available-balance</source>
+        <target>Available balance</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81ad7257e12f57ab77aea4">
+        <source>Button-text-Buy</source>
+        <target>Buy</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81c01638b3514d97744ec2">
+        <source>Button-text-Browse-other-loans</source>
+        <target>Browse other loans</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81c0601dc3b1666112d6e2">
+        <source>Please-select-the-recipients-bank</source>
+        <target>Please select the recipient’s bank</target>
+      </trans-unit>
+      <trans-unit id="loco:5f81c0c238b3514d97744ec4">
+        <source>Text-Sent-money-to</source>
+        <target>Sent money to</target>
+        <note>Used in place of "Sent money to"</note>
+      </trans-unit>
+      <trans-unit id="loco:5f8806822d84c4327a5e7b72">
+        <source>Text-transaction-status-Completed</source>
+        <target>Completed</target>
+      </trans-unit>
+      <trans-unit id="loco:5f8806f7ebb6d9075f32f693">
+        <source>Text-transaction-status-Incomplete</source>
+        <target>Incomplete</target>
+      </trans-unit>
+      <trans-unit id="loco:5f880a072b1eeb28250c74d6">
+        <source>Button-text-Edit-note</source>
+        <target>Edit note</target>
+      </trans-unit>
+      <trans-unit id="loco:5f880a586b78715bed764266">
+        <source>Button-text-Change-photo</source>
+        <target>Change photo</target>
+      </trans-unit>
+      <trans-unit id="loco:5f880b95665e3e69387d4bf3">
+        <source>Header-Related-Transactions</source>
+        <target>Related Transactions</target>
+      </trans-unit>
+      <trans-unit id="loco:5f880e95477caa4f7574b742">
+        <source>Subheader-transaction-details-Additional-details</source>
+        <target>Additional details</target>
+      </trans-unit>
+      <trans-unit id="loco:5fa10a5d133ffc11cb646142">
+        <source>Header-send</source>
+        <target>Send money</target>
+      </trans-unit>
+      <trans-unit id="loco:5fa10a8164c4dd5b7c1874e3">
+        <source>Header-pay-or-buy</source>
+        <target>Pay with Equity BCDC</target>
+      </trans-unit>
+      <trans-unit id="loco:5fa10aa006cc620f903159c2">
+        <source>Header-receive</source>
+        <target>Receive</target>
+      </trans-unit>
+      <trans-unit id="loco:5fa10b79dc35b17f4d6e8652">
+        <source>Button-text-mobile-wallet</source>
+        <target>Mobile wallet</target>
+      </trans-unit>
+      <trans-unit id="loco:5fa10baedc35b17f4d6e8654">
+        <source>Button-subtext-mobile-wallet</source>
+        <target>Send mobile money</target>
+      </trans-unit>
+      <trans-unit id="loco:5fa10e3fe58fcf67d52789d2">
+        <source>Button-subtext-phonelinked-account</source>
+        <target>Send to another bank account</target>
+      </trans-unit>
+      <trans-unit id="loco:5fa1116702cf1807427b3db2">
+        <source>Stocks-button-text</source>
+        <target>Stocks</target>
+      </trans-unit>
+      <trans-unit id="loco:5fa111bf97b76a1939671332">
+        <source>Loyalty-button-text</source>
+        <target>Loyalty Rewards</target>
+      </trans-unit>
+      <trans-unit id="loco:5fa112063df345252c0e4f52">
+        <source>Book-appointment-button-text</source>
+        <target>Book an appointment</target>
+      </trans-unit>
+      <trans-unit id="loco:5fa11742b6cf816412320493">
+        <source>Placeholder-country-of-residence</source>
+        <target>Country of residence</target>
+      </trans-unit>
+      <trans-unit id="loco:5fa13d393567a75972042065">
+        <source>Link-account-text-step-1</source>
+        <target>These are the details we have about you, please make sure they match what is on your ID</target>
+      </trans-unit>
+      <trans-unit id="loco:5fa13d7c162037456b36f1b2">
+        <source>Link-account-text2-step-1</source>
+        <target>If you already bank with us, please use the same details you used to open your account</target>
+      </trans-unit>
+      <trans-unit id="loco:5fa18f580a9bbd3e7866d813">
+        <source>Password-requirement-field</source>
+        <target>Passwords must match</target>
+      </trans-unit>
+      <trans-unit id="loco:5fa1929094a5e9304b0b6923">
+        <source>search-result-header</source>
+        <target>Search results</target>
+      </trans-unit>
+      <trans-unit id="loco:5fa192d20c2a1452c82613c8">
+        <source>Paybill-popular-billers-header</source>
+        <target>Popular billers</target>
+      </trans-unit>
+      <trans-unit id="loco:5fa1931dde930d2bfe7cc692">
+        <source>Header-transaction-note-details</source>
+        <target>Transaction note</target>
+      </trans-unit>
+      <trans-unit id="loco:5fa19384b652740fc2424145">
+        <source>Link-account-no-records-found</source>
+        <target>Looks like your details did not match what we have on record. Become an Equity BCDC member and you can add the account.</target>
+      </trans-unit>
+      <trans-unit id="loco:5fa1945094a5e9304b0b692d">
+        <source>Favourite-details-header</source>
+        <target>Favourite details</target>
+      </trans-unit>
+      <trans-unit id="loco:5fa194809d61446bdf534842">
+        <source>Favourite-details-label</source>
+        <target>Who would you like to add?</target>
+      </trans-unit>
+      <trans-unit id="loco:5fa194a660865f751f678fa2">
+        <source>Favourite-details-placeholder</source>
+        <target>Enter name</target>
+      </trans-unit>
+      <trans-unit id="loco:5fa194e362c32b70ec56b242">
+        <source>Favourite-success-header</source>
+        <target>Favourite added successfully</target>
+      </trans-unit>
+      <trans-unit id="loco:5fa195104effa1788072aa92">
+        <source>Favourite-success-text</source>
+        <target>A new contact has been added to your favourites list.</target>
+      </trans-unit>
+      <trans-unit id="loco:5fa245c32b4b44344a1a5292">
+        <source>Button-text-get-loan</source>
+        <target>Get a loan</target>
+      </trans-unit>
+      <trans-unit id="loco:5faa9286a105bb2a9a2bf5f3">
+        <source>exchange-rate-text</source>
+        <target>Exchange rate</target>
+      </trans-unit>
+      <trans-unit id="loco:5faa92a0a612204e1333da25">
+        <source>converted-amount-text</source>
+        <target>Converted amount</target>
+      </trans-unit>
+      <trans-unit id="loco:5faa932aa612204e1333da28">
+        <source>transaction-minimum-limits-validation-message</source>
+        <target>The amount cannot be less than
+          <x id="PH" equiv-text="{{ transactionLimit.minAmount }}"/>
+          <x id="PH_1" equiv-text="{{accountCurrency}}"/></target>
+        <note>this is a validation error</note>
+      </trans-unit>
+      <trans-unit id="loco:5faa935dac52de2a21233354">
+        <source>transaction-maximum-limits-validation-message</source>
+        <target>The amount cannot be more than
+          <x id="PH" equiv-text="{{ transactionLimit.maxAmount }}"/>
+          <x id="PH_1" equiv-text="{{accountCurrency}}"/></target>
+        <note>This is a validation error message</note>
+      </trans-unit>
+      <trans-unit id="loco:5fbfa28ff91ddd210023fe12">
+        <source>validation-error-Please-enter-an-account-number</source>
+        <target>Please enter an account number</target>
+        <note>This is a validation error message</note>
+      </trans-unit>
+      <trans-unit id="loco:5fc68ebdbfa0f60d9b48f678">
+        <source>logout-header-Are-you-sure-you-want-to-log-out</source>
+        <target>Are you sure you want to sign out?</target>
+      </trans-unit>
+      <trans-unit id="loco:5fc7f142f5b25845304df922">
+        <source>forgot-password-heading-Have-you-forgotten-your-pa</source>
+        <target>Have you forgotten your password?</target>
+      </trans-unit>
+      <trans-unit id="loco:5fc7f54846b8df7608527252">
+        <source>breadcrumb-text-Forgot-password</source>
+        <target>Forgot password</target>
+      </trans-unit>
+      <trans-unit id="loco:5fc9f6e3ab210117cf4955e2">
+        <source>Header-Send-to-a-phone-linked-account</source>
+        <target>Send to a phone-linked account</target>
+      </trans-unit>
+      <trans-unit id="loco:5fccee9f8e28e353dd0d9de2">
+        <source>breadcrumb-text-Send-to-your-own-Equity-account</source>
+        <target>Send money to your own Equity BCDC account</target>
+      </trans-unit>
+      <trans-unit id="loco:5fcd03494a942b26182131d2">
+        <source>Button-text-Use-mobile-instead</source>
+        <target>Use mobile instead</target>
+      </trans-unit>
+      <trans-unit id="loco:5fcd06f50a89b43b510f1f92">
+        <source>Hyperlink-Set-as-primary-account</source>
+        <target>Set as primary account</target>
+      </trans-unit>
+      <trans-unit id="loco:5fce97aeee9c65200b0a3762">
+        <source>placeholder-text-Choose-an-amount-to-pay</source>
+        <target>Choose an amount to pay</target>
+        <note>The user selects a loan repayment amount</note>
+      </trans-unit>
+      <trans-unit id="loco:5fd0940b2ef35b4e0a7d0392">
+        <source>Header-Transaction-photo</source>
+        <target>Transaction photo</target>
+      </trans-unit>
+      <trans-unit id="loco:5fd4f7a3666d5e5b98799042">
+        <source>greetings</source>
+        <target>Hello there,</target>
+        <note>greetings</note>
+      </trans-unit>
+      <trans-unit id="loco:5fd51ca85be439330e088442">
+        <source>placeholder-transaction-amount</source>
+        <target>Enter amount</target>
+      </trans-unit>
+      <trans-unit id="loco:5fd528f6213c0d58260a38c2">
+        <source>digipass-password</source>
+        <target>Enter Digipass personal code</target>
+        <note>when the api requires digipass tokens rather than password</note>
+      </trans-unit>
+      <trans-unit id="loco:5fd52ca199ba920ee112a832">
+        <source>digipass-password-validation</source>
+        <target>Digipass personal code is required</target>
+      </trans-unit>
+      <trans-unit id="loco:5fd8ec8e6428602c7b6af022">
+        <source>Forgot-password-modal-bcdc</source>
+        <target>Please contact your Relationship Manager or our Contact Center on 41909 or +243996018000</target>
+      </trans-unit>
+      <trans-unit id="loco:5fd8fc5fbfe44436ae541f62">
+        <source>Forgot-password-header</source>
+        <target>Have you forgotten your password?</target>
+      </trans-unit>
+      <trans-unit id="loco:5fd8fcb776589a209a486bd2">
+        <source>Forgot-password-text</source>
+        <target>Not to worry, we all forget sometimes</target>
+      </trans-unit>
+      <trans-unit id="loco:5fdb330766c06458e2596ca4">
+        <source>Header-Transaction-History</source>
+        <target>Transaction History</target>
+      </trans-unit>
+      <trans-unit id="loco:5fdb7965db771f3e954b0f76">
+        <source>conversion-rate-disclaimer</source>
+        <target>This is an indicative rate and is subject to change</target>
+      </trans-unit>
+      <trans-unit id="loco:5fdb882733bc360dce59b502">
+        <source>Button-text-Add-a-note</source>
+        <target>Add a note</target>
+      </trans-unit>
+      <trans-unit id="loco:5fdb884f33bc360dce59b504">
+        <source>Button-text-Add-a-photo</source>
+        <target>Add a photo</target>
+        <note>Add a transaction photo</note>
+      </trans-unit>
+      <trans-unit id="loco:5fdb8890a45d05381f4c27e2">
+        <source>Button-text-view-or-share-receipt</source>
+        <target>View or share receipt</target>
+      </trans-unit>
+      <trans-unit id="loco:5fdba69b3d70f142992a96b2">
+        <source>Header-Related</source>
+        <target>Related</target>
+        <note>Related transactions</note>
+      </trans-unit>
+      <trans-unit id="loco:60036077b0340a4283026c12">
+        <source>SUb-heading-Select-one-of-the-options-below</source>
+        <target>Select one of the options below</target>
+      </trans-unit>
+      <trans-unit id="loco:600360ba2d108708a0274852">
+        <source>Text-By-sms</source>
+        <target>By sms</target>
+      </trans-unit>
+      <trans-unit id="loco:600360dd3fcfae5ff15119d2">
+        <source>Text-By-email</source>
+        <target>By email</target>
+      </trans-unit>
+      <trans-unit id="loco:6003614a2d108708a0274854">
+        <source>Modal-Header-Add-your-account-to-continue</source>
+        <target>Add your account to continue</target>
+      </trans-unit>
+      <trans-unit id="loco:6003617980bad50d95675e52">
+        <source>Text-By-adding-your-account-you-will-be-able-to-ma</source>
+        <target>By adding your account, you will be able to make payments and manage your money with ease</target>
+      </trans-unit>
+      <trans-unit id="loco:600361c82d108708a0274856">
+        <source>Button-text-Maybe-later</source>
+        <target>Maybe later</target>
+        <note>Used to dismiss the 'Add account' modal</note>
+      </trans-unit>
+      <trans-unit id="loco:600361f480bad50d95675e54">
+        <source>Button-text-Yes-add-my-account</source>
+        <target>Yes, add my account</target>
+      </trans-unit>
+      <trans-unit id="loco:6005b54cb3b2ea172f3eb462">
+        <source>Text-Transaction-details</source>
+        <target>Transaction details</target>
+      </trans-unit>
+      <trans-unit id="loco:600f9ba02fe1051faf4861c2">
+        <source>Button-text-Register</source>
+        <target>Register</target>
+      </trans-unit>
+      <trans-unit id="loco:600f9c1c28faaf15bb7c0362">
+        <source>Text-Sign-in-or-register-to-perform-a-transaction</source>
+        <target>Sign in or register to perform a transaction or explore our wide range of products, tailored to suit your needs.</target>
+      </trans-unit>
+      <trans-unit id="loco:602104b04a67620a25415743">
+        <source>Text-Sign-in-or-register-to-continue</source>
+        <target>Equity BCDC online is the one-stop shop for all your banking needs</target>
+      </trans-unit>
+      <trans-unit id="loco:6023fa7857cbd15b0f0354a2">
+        <source>buy-from</source>
+        <target>Buy from</target>
+      </trans-unit>
+      <trans-unit id="loco:6023fa9c57cbd15b0f0354a4">
+        <source>buy-for</source>
+        <target>Buy for</target>
+      </trans-unit>
+      <trans-unit id="loco:6023fad2d8aa4a51de01bf72">
+        <source>for</source>
+        <target>For</target>
+      </trans-unit>
+      <trans-unit id="loco:602e8204cb85d71eff67d593">
+        <source>Heading-Merchant-details</source>
+        <target>Merchant details</target>
+      </trans-unit>
+      <trans-unit id="loco:602e823c592c33350c1851f2">
+        <source>Sub-heading-Enter-the-merchants-information</source>
+        <target>Enter the merchant’s information</target>
+      </trans-unit>
+      <trans-unit id="loco:602e826ccb85d71eff67d596">
+        <source>Buy-goods-till-provider-Provider</source>
+        <target>Provider</target>
+      </trans-unit>
+      <trans-unit id="loco:602e82d7cdbf104f713a3ce2">
+        <source>Error-modal-title-Error</source>
+        <target>Error</target>
+      </trans-unit>
+      <trans-unit id="loco:602e831398c6185186723802">
+        <source>Merchant-not-found-Error-message-We-couldnt-find-a</source>
+        <target>We couldn’t find a merchant with this code. Please give it another try.</target>
+      </trans-unit>
+      <trans-unit id="loco:602e834898c6185186723804">
+        <source>button-text-Search-for-merchant</source>
+        <target>Search for merchant</target>
+      </trans-unit>
+      <trans-unit id="loco:602f5c540dc29640e40bb0e3">
+        <source>pay_or_top_up_card</source>
+        <target>Pay to a card</target>
+      </trans-unit>
+      <trans-unit id="loco:602f5cc8d601ab4b2a269dd4">
+        <source>credit_card_and_prepaids</source>
+        <target>Credit and prepaid cards</target>
+      </trans-unit>
+      <trans-unit id="loco:602f5fe0fde3a64b1d158f14">
+        <source>select_a_card</source>
+        <target>Select a card</target>
+      </trans-unit>
+      <trans-unit id="loco:602f6427976635511629db42">
+        <source>another_amount</source>
+        <target>Another amount</target>
+      </trans-unit>
+      <trans-unit id="loco:602f656cf83fbf58030fbaf5">
+        <source>success-card-subtitle</source>
+        <target>Your card payment was made successfully</target>
+      </trans-unit>
+      <trans-unit id="loco:602f78e522917963ed188432">
+        <source>payment_amount</source>
+        <target>Payment amount</target>
+      </trans-unit>
+      <trans-unit id="loco:602f8fd220dae9047f3bef22">
+        <source>due-amount</source>
+        <target>Due amount</target>
+      </trans-unit>
+      <trans-unit id="loco:6034b816376b241c4c14f704">
+        <source>Transaction-details-view-statement</source>
+        <target>View your statement</target>
+        <note>View your statement header</note>
+      </trans-unit>
+      <trans-unit id="loco:6034b89734124e3ba876c72a">
+        <source>statement-download-api</source>
+        <target>Download PDF</target>
+        <note>Download PDF button</note>
+      </trans-unit>
+      <trans-unit id="loco:6034b93129d72827ad3b7433">
+        <source>download-statement-excel</source>
+        <target>Download Excel</target>
+        <note>Download Excel button</note>
+      </trans-unit>
+      <trans-unit id="loco:6034b986155ee7452634a254">
+        <source>statement-send-to-email</source>
+        <target>Send to an email address</target>
+        <note>Send to an email address button</note>
+      </trans-unit>
+      <trans-unit id="loco:6034c276ee30e9065f33ed42">
+        <source>Repayment-reminder</source>
+        <target>Repayment reminder</target>
+        <note>Repayment reminder button</note>
+      </trans-unit>
+      <trans-unit id="loco:6034c964cb138e5ccb33b5c3">
+        <source>Make-payment-button</source>
+        <target>Make payment</target>
+        <note>Make payment button on loan details screen</note>
+      </trans-unit>
+      <trans-unit id="loco:6034e24fda21fc1d7f1a90c2">
+        <source>till-number-search</source>
+        <target>Enter the till number</target>
+        <note>Place holder for Enter till number</note>
+      </trans-unit>
+      <trans-unit id="loco:6034e33f9455a301b9266772">
+        <source>verify-transaction-header</source>
+        <target>Verify transaction</target>
+      </trans-unit>
+      <trans-unit id="loco:6034e386339a06585f4a52e3">
+        <source>changed-details-paragraph</source>
+        <target>Come say hello, we’d love to meet you. Bring your ID and our team will gladly assist you.</target>
+        <note>text on the changed details screen</note>
+      </trans-unit>
+      <trans-unit id="loco:6034e3ca7bb4b30e3c328ff3">
+        <source>payment-category-field</source>
+        <target>Payment category</target>
+        <note>Payment category on swift transactions</note>
+      </trans-unit>
+      <trans-unit id="loco:6034e3fc7ba8764a88663a42">
+        <source>Foreign-bank-charges-field</source>
+        <target>Foreign bank charges</target>
+        <note>Foreign bank charges field on swift transactions</note>
+      </trans-unit>
+      <trans-unit id="loco:6034e4cd9992c856f62ea222">
+        <source>Header-Send-to-someone-new</source>
+        <target>Send to someone new</target>
+        <note>Send to someone new modal for interbank transfer</note>
+      </trans-unit>
+      <trans-unit id="loco:6034e4f38a34ab0ed063e112">
+        <source>Header-Please-enter-the-recipients-details</source>
+        <target>Please enter the recipient’s details</target>
+        <note>Please enter the recipient’s details header on bank transfers</note>
+      </trans-unit>
+      <trans-unit id="loco:6034e56f9d90f260351fe242">
+        <source>Label-Account-or-IBAN-number</source>
+        <target>Account or IBAN number</target>
+        <note>Swift transaction, recipient detail modal</note>
+      </trans-unit>
+      <trans-unit id="loco:6034e58f31c64270fd0b8ea3">
+        <source>Label-Physical-address</source>
+        <target>Physical address</target>
+        <note>Swift transaction, recipient modal</note>
+      </trans-unit>
+      <trans-unit id="loco:6034e5bba9740d4e5166c554">
+        <source>Label-Fed-wire-or-routing-number</source>
+        <target>Fed wire or routing number</target>
+        <note>Swift transactions, send to USA recipient modal</note>
+      </trans-unit>
+      <trans-unit id="loco:6034e5e01ace2a78f943ef44">
+        <source>Label-Sort-code</source>
+        <target>Sort code</target>
+        <note>Swift transaction, send to UK, recipients modal</note>
+      </trans-unit>
+      <trans-unit id="loco:6034e686292c045adf43c672">
+        <source>Header-Select-bank</source>
+        <target>Select bank</target>
+        <note>Interbank transfers</note>
+      </trans-unit>
+      <trans-unit id="loco:6034e6c1ab89a96cd2536072">
+        <source>Header-Sent-amount</source>
+        <target>Sent amount</target>
+        <note>Success screen</note>
+      </trans-unit>
+      <trans-unit id="loco:6034e6eee746c42a245888e2">
+        <source>Header-1-month</source>
+        <target>1 month</target>
+        <note>filter on transaction ministatement</note>
+      </trans-unit>
+      <trans-unit id="loco:6034e70d45b9096cde1240a2">
+        <source>Header-3-months</source>
+        <target>3 months</target>
+        <note>Filter on transaction ministatement</note>
+      </trans-unit>
+      <trans-unit id="loco:6034e7284cf4672dd07db292">
+        <source>Header-6-months</source>
+        <target>6 months</target>
+        <note>Filter on transaction ministatement</note>
+      </trans-unit>
+      <trans-unit id="loco:6034e74bec23a5004a1e13d2">
+        <source>Header-1-year</source>
+        <target>1 year</target>
+        <note>Filter on transaction ministatement</note>
+      </trans-unit>
+      <trans-unit id="loco:6034e8751293f265f844a653">
+        <source>Button-View</source>
+        <target>View</target>
+        <note>View statement button on filter modal</note>
+      </trans-unit>
+      <trans-unit id="loco:6034e8a1e041e104e76a5f72">
+        <source>Header-Actions</source>
+        <target>Actions</target>
+        <note>Statement view actions</note>
+      </trans-unit>
+      <trans-unit id="loco:6034e90c4a43b45d1005fa12">
+        <source>Temporarily-block-card</source>
+        <target>Block your card temporarily</target>
+        <note>Action to block card</note>
+      </trans-unit>
+      <trans-unit id="loco:6034e99d221c3f2599698722">
+        <source>unblock-card</source>
+        <target>Unblock your card</target>
+        <note>Action to unblock a card</note>
+      </trans-unit>
+      <trans-unit id="loco:6034e9f2221c3f2599698724">
+        <source>Paragraph-We-have-sent-a-verification-code-to-unbl</source>
+        <target>We have sent a verification code to unblock your card</target>
+        <note>Message on otp screen for unblock card</note>
+      </trans-unit>
+      <trans-unit id="loco:6034ea26fc0692580e760432">
+        <source>Paragraph-Your-card-has-been-unblocked</source>
+        <target>Your card has been unblocked</target>
+        <note>Successful message on unblock card</note>
+      </trans-unit>
+      <trans-unit id="loco:6034ea5a5e26b33b9722eb02">
+        <source>Paragraph-You-can-now-use-your-card-at-any-ATM-POS</source>
+        <target>You can now use your card at any ATM, POS or to make online payments.</target>
+      </trans-unit>
+      <trans-unit id="loco:6034ea7370cab0259b27f472">
+        <source>Paragraph-Remember-your-card-details-are-yours-Do</source>
+        <target>Remember, your card details are yours. Do not share them with anyone.</target>
+      </trans-unit>
+      <trans-unit id="loco:6034eadddde2c26674206ef2">
+        <source>Button-Transaction-receipt</source>
+        <target>Transaction receipt</target>
+        <note>Action for getting transaction receipt</note>
+      </trans-unit>
+      <trans-unit id="loco:6034eb467f8511217e410e42">
+        <source>Button-Top-up-card</source>
+        <target>Top up your card</target>
+        <note>Card details, top up card action</note>
+      </trans-unit>
+      <trans-unit id="loco:6034eb875062b625c8283882">
+        <source>Header-Block-card-temporarily</source>
+        <target>Block your card temporarily</target>
+      </trans-unit>
+      <trans-unit id="loco:6034ebb3a8fc9f5ecd03c822">
+        <source>Paragraph-Prevent-your-card-from-being-accepted-fo</source>
+        <target>Prevent your card from being accepted for purchases. You can choose to unblock this card anytime if you change your mind.</target>
+      </trans-unit>
+      <trans-unit id="loco:6034ebccbcadeb76b12742f2">
+        <source>Paragraph-If-your-card-was-stolen-or-you-suspect-f</source>
+        <target>If your card was stolen, or you suspect fraudulent activity, block your card and contact us immediately or visit your nearest branch.</target>
+      </trans-unit>
+      <trans-unit id="loco:6034ec5e8bec482cea459ef2">
+        <source>Header-Language</source>
+        <target>Language</target>
+        <note>Language select modal header</note>
+      </trans-unit>
+      <trans-unit id="loco:6034ed1fcfaa1d4294237663">
+        <source>Header-Time-range</source>
+        <target>Time range</target>
+        <note>Get statement form</note>
+      </trans-unit>
+      <trans-unit id="loco:6034ed44e612d40dc259f442">
+        <source>Header-Please-select-time-range</source>
+        <target>Please select time range</target>
+        <note>Get statement form</note>
+      </trans-unit>
+      <trans-unit id="loco:6034ede60741845a1a735b52">
+        <source>Button-Apply-filter</source>
+        <target>Apply filter</target>
+        <note>Ministatement filter button</note>
+      </trans-unit>
+      <trans-unit id="loco:6034ee74c523472df042e282">
+        <source>Button-Transaction-type</source>
+        <target>Transaction type</target>
+        <note>Ministatement filters</note>
+      </trans-unit>
+      <trans-unit id="loco:6034ee986cb3a5232c160242">
+        <source>Header-Please-select-transaction-type</source>
+        <target>Please select the transaction type</target>
+        <note>Ministatement filter</note>
+      </trans-unit>
+      <trans-unit id="loco:6034eeb7af9038153032d8d2">
+        <source>Button-Money-in</source>
+        <target>Money in</target>
+      </trans-unit>
+      <trans-unit id="loco:6034eecc06b688711e686082">
+        <source>Button-Money-out</source>
+        <target>Money out</target>
+      </trans-unit>
+      <trans-unit id="loco:6034f216aae3e1480e1b68d2">
+        <source>Header-Please-select-payment-category</source>
+        <target>Please select a payment category</target>
+        <note>Payment category modal for swift transactions</note>
+      </trans-unit>
+      <trans-unit id="loco:6034f239e267c42b266bc973">
+        <source>Paragraph-These-payment-reasons-are-for-CBK-report</source>
+        <target>The payment categories are for reporting purposes for buying and importing goods</target>
+        <note>Payment category modal</note>
+      </trans-unit>
+      <trans-unit id="loco:6034f393bbb7184dab3db7ec">
+        <source>Header-Select-foreign-bank-charges</source>
+        <target>Select an option</target>
+        <note>Foreign bank charges - swift</note>
+      </trans-unit>
+      <trans-unit id="loco:6034f3b2b71b5605b40171c2">
+        <source>Paragraph-via-SWIFT</source>
+        <target>via SWIFT</target>
+      </trans-unit>
+      <trans-unit id="loco:6034f5158956d83614769322">
+        <source>Paragraph-Converted-amount</source>
+        <target>Converted amount <x id="PH" equiv-text="{{ convertedAmount }}"/> <x id="PH_1" equiv-text="{{ paymentData.sourceCurrency }}"/></target>
+        <note>This is interpolated string, kindly translate everything outside the x tags and retain this format</note>
+      </trans-unit>
+      <trans-unit id="loco:6034fccc8e5d4b67c55252b3">
+        <source>Paragraph-Optional-you-can-only-use-this-number-if</source>
+        <target>Optional, you can only use this number if you send this transaction in USD</target>
+        <note>field hint for fed wire or routing number</note>
+      </trans-unit>
+      <trans-unit id="loco:6034fcf20f56407a503eaf03">
+        <source>Paragraph-Optional-you-can-only-use-this-number-if-2</source>
+        <target>Optional, you can only use this number if you send this transaction in GBP</target>
+        <note>field hint for sort code</note>
+      </trans-unit>
+      <trans-unit id="loco:60350535ed5b3718097a0982">
+        <source>placeholder-type-amount</source>
+        <target>Enter an amount</target>
+        <note>ministatement filter placeholder</note>
+      </trans-unit>
+      <trans-unit id="loco:6035055b971da034213e5474">
+        <source>placeholder-Search-by-bank-name-or-SWIFT-code</source>
+        <target>Search by bank name or SWIFT code</target>
+        <note>Swift bank search</note>
+      </trans-unit>
+      <trans-unit id="loco:60350571f47b1a56e73f46b2">
+        <source>placeholder-Select-merchant</source>
+        <target>Select the recipient</target>
+      </trans-unit>
+      <trans-unit id="loco:6035058625a54f106641d012">
+        <source>placeholder-Choose-or-enter-your-contact</source>
+        <target>Select the recipient</target>
+      </trans-unit>
+      <trans-unit id="loco:6035059a70a6d057a4694f22">
+        <source>placeholder-Required</source>
+        <target>Required</target>
+      </trans-unit>
+      <trans-unit id="loco:603505b4713080108d2241e2">
+        <source>placeholder-Select-till-provider</source>
+        <target>Select the till provider</target>
+      </trans-unit>
+      <trans-unit id="loco:603505cacd7ce039374a0782">
+        <source>placeholder-Enter-number</source>
+        <target>Enter the number</target>
+      </trans-unit>
+      <trans-unit id="loco:603605575fe1523dbb352022">
+        <source>Button-Minimum-amount</source>
+        <target>Minimum amount</target>
+        <note>ministatement filter</note>
+      </trans-unit>
+      <trans-unit id="loco:60360571ec1e816d1b7c6f42">
+        <source>Button-Maximum-amount</source>
+        <target>Maximum amount</target>
+        <note>Ministatement filter</note>
+      </trans-unit>
+      <trans-unit id="loco:603746ad48fd344b16348a95">
+        <source>Label-Withdraw-from</source>
+        <target>Withdraw from</target>
+      </trans-unit>
+      <trans-unit id="loco:603747058fda7579f635c8c4">
+        <source>Label-Withdraw-at</source>
+        <target>Withdraw at</target>
+      </trans-unit>
+      <trans-unit id="loco:6037477bb6e159369f570ac2">
+        <source>Title-Where-would-you-like-to-withdraw-from</source>
+        <target>Where would you like to withdraw from?</target>
+      </trans-unit>
+      <trans-unit id="loco:603747bc1c09de569f3fb632">
+        <source>Title-Withdraw-from-agent</source>
+        <target>Withdraw from an agent</target>
+      </trans-unit>
+      <trans-unit id="loco:603747da0ba0de05dd74234a">
+        <source>Text-Please-enter-the-withdrawal-details</source>
+        <target>Please enter the withdrawal details</target>
+      </trans-unit>
+      <trans-unit id="loco:6037481ae00f6c751d324e33">
+        <source>Error-message-We-couldnt-find-an-agent-with-this-c</source>
+        <target>We couldn’t find an agent with this code. Please give it another try.</target>
+      </trans-unit>
+      <trans-unit id="loco:603749d599e72763ad1755d2">
+        <source>Title-Great-Your-transaction-was-successful</source>
+        <target>Great! Your transaction was successful</target>
+      </trans-unit>
+      <trans-unit id="loco:60374a275b3b2b16291cd972">
+        <source>Label-Enter-agent-number</source>
+        <target>Enter agent number</target>
+      </trans-unit>
+      <trans-unit id="loco:60374b0cb76b0872ec074c12">
+        <source>Title-Please-enter-the-agents-number</source>
+        <target>Please enter the agent’s number</target>
+      </trans-unit>
+      <trans-unit id="loco:60374b61574cc60a9557d222">
+        <source>Text-At</source>
+        <target>Withdraw at</target>
+        <note>Withdraw from agent</note>
+      </trans-unit>
+      <trans-unit id="loco:60379ad875eab463a434d163">
+        <source>whole_number</source>
+        <target>Must be whole number without decimals</target>
+      </trans-unit>
+      <trans-unit id="loco:6037c6fcbc67187b486d4213">
+        <source>Button-Minimum-amount-2</source>
+        <target>Minimum amount</target>
+        <note>ministatement filter</note>
+      </trans-unit>
+      <trans-unit id="loco:6037c7164cdc097e034e1f74">
+        <source>Button-Maximum-amount-2</source>
+        <target>Maximum amount</target>
+        <note>Ministatement filter</note>
+      </trans-unit>
+      <trans-unit id="loco:603b95f9112f457a692a0c04">
+        <source>Header-Send-money-locally-or-internationally</source>
+        <target>A local or international bank</target>
+        <note>Send to other bank subtext</note>
+      </trans-unit>
+      <trans-unit id="loco:603b98321963db168c260637">
+        <source>Header-Pay-full-charges</source>
+        <target>Pay full charges</target>
+      </trans-unit>
+      <trans-unit id="loco:603b98441963db168c260639">
+        <source>Header-Share-charges</source>
+        <target>Share charges</target>
+      </trans-unit>
+      <trans-unit id="loco:603b98884ec3923cf049d7a2">
+        <source>Paragraph-You-will-pay-the-full-amount-of-the-fore</source>
+        <target>You will pay the full amount of the foreign bank charges</target>
+      </trans-unit>
+      <trans-unit id="loco:603b98a107da811d393b1622">
+        <source>Paragraph-We-will-deduct-the-foreign-bank-charges</source>
+        <target>We will deduct the foreign bank charges from what your recipient receives</target>
+      </trans-unit>
+      <trans-unit id="loco:603f7ee4a553ae004e44e373">
+        <source>notification-header-great-news</source>
+        <target>Great news!</target>
+      </trans-unit>
+      <trans-unit id="loco:603f8ba8d2e932789055b092">
+        <source>notification-body-linked-account</source>
+        <target>The account you selected has been successfully added to your profile</target>
+      </trans-unit>
+      <trans-unit id="loco:6043617fc279c5381d671002">
+        <source>review-statement-success-screen</source>
+        <target>Your transaction is being reviewed. You will receive an email confirmation when your transaction has been processed successfully.</target>
+        <note>For the success screen where the transaction is in review</note>
+      </trans-unit>
+      <trans-unit id="loco:604361c65ebf1e04597d3cd2">
+        <source>success-screen-review-header</source>
+        <target>It’s in review</target>
+      </trans-unit>
+      <trans-unit id="loco:60439c78e399401d1d712012">
+        <source>pending-transaction-screen-subheader</source>
+        <target>We have received your request</target>
+      </trans-unit>
+      <trans-unit id="loco:6043c37126d0e40d8e5cd1f2">
+        <source>bcdc-account-number-validation-message</source>
+        <target>The account number you entered is incorrect. Give it another look and try again.</target>
+        <note>Validation message for bcdc account numbers; there will be more of these since multiple validations are being made here</note>
+      </trans-unit>
+      <trans-unit id="loco:6049cb03efc6ce6a370cc712">
+        <source>placeholder-enter-an-amount</source>
+        <target>Enter an amount</target>
+      </trans-unit>
+      <trans-unit id="loco:604b68b8af84fa20eb19abd5">
+        <source>home_skeleton_error_title</source>
+        <target>Please refresh your page</target>
+      </trans-unit>
+      <trans-unit id="loco:604b699f9643a04b42028bd2">
+        <source>home_skeleton_error_paragraph</source>
+        <target>We couldn’t load your accounts and cards to your profile. Please refresh this page to try again.</target>
+      </trans-unit>
+      <trans-unit id="loco:604b69e8e880714734312112">
+        <source>home_skeleton_error_button</source>
+        <target>Load accounts and cards</target>
+      </trans-unit>
+      <trans-unit id="loco:604b6a2e3a15e6035e0134f2">
+        <source>home_skeleton_modal_text</source>
+        <target>Sorry, we couldn’t load your accounts and cards. Give it another try.</target>
+      </trans-unit>
+      <trans-unit id="loco:605062dc0d6b486f1c0c53c2">
+        <source>favourite_label</source>
+        <target>Please enter your contact’s details</target>
+      </trans-unit>
+      <trans-unit id="loco:605063efdce8224fa100a4c3">
+        <source>facourite_success_text</source>
+        <target>Your contact has been added</target>
+      </trans-unit>
+      <trans-unit id="loco:605206b5aab353486607dc32">
+        <source>source-account-modal-label-alternative</source>
+        <target>Please select an account</target>
+      </trans-unit>
+      <trans-unit id="loco:6052c45701c52445a56fa7a2">
+        <source>Placeholder-Enter-the-merchants-name-or-till-numbe</source>
+        <target>Enter the merchant’s name or till number</target>
+      </trans-unit>
+      <trans-unit id="loco:60531aa3387bac6f40721ec2">
+        <source>text-Log-me-out-warning</source>
+        <target>Sign me out</target>
+        <note>logout warning modal new asset; we need to have a different asset since the copy might be confusing in other logout modals</note>
+      </trans-unit>
+      <trans-unit id="loco:60531bcf193c295c6e724872">
+        <source>logout-warning-keep-me-in</source>
+        <target>Keep me in</target>
+        <note>This is also on the logout warning modal; separating this asset since it might cause confusion with other logout texts</note>
+      </trans-unit>
+      <trans-unit id="loco:60531cfbfede6d3a48592603">
+        <source>paragraph-deposited-to</source>
+        <target>Deposited to</target>
+        <note>Success screen for loans</note>
+      </trans-unit>
+      <trans-unit id="loco:60531d3314d1ed585a56aaf2">
+        <source>paragraph-helper-text-send-to-other</source>
+        <target>Select the country where the account is held and we’ll pull up a list of national banks</target>
+      </trans-unit>
+      <trans-unit id="loco:60531d5db19229310d218ac2">
+        <source>withdraw-get-directions</source>
+        <target>Get directions to an agent</target>
+      </trans-unit>
+      <trans-unit id="loco:60531d940950f32a437bb6b2">
+        <source>success-screen-pending-transaction</source>
+        <target>We have received your request</target>
+        <note>When the transaction is not completed immediately and is pending review</note>
+      </trans-unit>
+      <trans-unit id="loco:60531db424055f709f182262">
+        <source>Paragraph-Its-in-review</source>
+        <target>It's in review</target>
+      </trans-unit>
+      <trans-unit id="loco:60531dd324055f709f182264">
+        <source>Paragraph-Your-transaction-is-being-reviewed-You-w</source>
+        <target>Your transaction is being reviewed. You will receive an email confirmation when your transaction has been processed successfully.</target>
+      </trans-unit>
+      <trans-unit id="loco:60531e0ec32e1f028123d072">
+        <source>signout-snackbar-message</source>
+        <target>You have been signed out successfully</target>
+      </trans-unit>
+      <trans-unit id="loco:60531e31f1dba373713becc2">
+        <source>password-reset-snackbar-message</source>
+        <target>Your password was reset successfully</target>
+      </trans-unit>
+      <trans-unit id="loco:60531fc41f819c7af2681d68">
+        <source>resend-code-snackbar-message</source>
+        <target>We’ve sent you another code</target>
+      </trans-unit>
+      <trans-unit id="loco:6054556a7fa2ac668972e382">
+        <source>notification-resend-otp-code</source>
+        <target>We have sent another verification code</target>
+      </trans-unit>
+      <trans-unit id="loco:605849bb1937b60f67363632">
+        <source>select-currency-modal-header</source>
+        <target>Select the currency</target>
+      </trans-unit>
+      <trans-unit id="loco:60585f52ca0c230bd32e0032">
+        <source>buy-for-someone-new</source>
+        <target>Buy for someone new</target>
+      </trans-unit>
+      <trans-unit id="loco:60599a44f31a2c3abb724c62">
+        <source>header-balance-breakdown-balances-explained</source>
+        <target>Account balances explained</target>
+      </trans-unit>
+      <trans-unit id="loco:60599aa7a7f95e00761b8772">
+        <source>description-balance-breakdown-balances-explained</source>
+        <target>Your account balance is the amount of money left in your account after you have made a transaction such as sending money.</target>
+      </trans-unit>
+      <trans-unit id="loco:60599b3aa410d06ffc0eebf3">
+        <source>description-balance-breakdown-available-balance</source>
+        <target>This is the amount of money that is available in your account, which you are free to spend any time.</target>
+      </trans-unit>
+      <trans-unit id="loco:60599b77d81a45259837e8c6">
+        <source>header-balance-breakdown-total-balance</source>
+        <target>Total balance</target>
+      </trans-unit>
+      <trans-unit id="loco:60599b8bf0628460f57e7965">
+        <source>description-balance-breakdown-total-balance</source>
+        <target>This is the total amount of money you have in your account. This includes funds that are available to use and funds that can’t be used. </target>
+      </trans-unit>
+      <trans-unit id="loco:60599bbd8723a46d164d35e4">
+        <source>header-balance-breakdown-lien-balance</source>
+        <target>Lien balance</target>
+      </trans-unit>
+      <trans-unit id="loco:60599bd185dfca1a5f2c7a42">
+        <source>description-balance-breakdown-lien-balance</source>
+        <target>This is the amount you can’t access because it has been held by the bank. The bank will hold the funds for a specific time, for reasons such as an unpaid loan.</target>
+      </trans-unit>
+      <trans-unit id="loco:60599c0a8723a46d164d35e9">
+        <source>header-balance-breakdown-uncleared-balance</source>
+        <target>Uncleared balance</target>
+      </trans-unit>
+      <trans-unit id="loco:60599c1d61dde961417560c5">
+        <source>description-balance-breakdown-uncleared-balance</source>
+        <target>This is the amount that has not yet been deposited or taken from your account, it’s still being processed by the bank.</target>
+      </trans-unit>
+      <trans-unit id="loco:6059cd1f95bfee77121ce0c7">
+        <source>your-accounts-and-cards</source>
+        <target>Your accounts and cards</target>
+      </trans-unit>
+      <trans-unit id="loco:6059da1c4d71474d0725aa52">
+        <source>add-an-equity-account</source>
+        <target>Add an Equity BCDC account</target>
+      </trans-unit>
+      <trans-unit id="loco:605b387fe11acd679d5b4d82">
+        <source>useraccounts-failed-to-load</source>
+        <target>Refresh the page</target>
+      </trans-unit>
+      <trans-unit id="loco:606317bde7043948960d9543">
+        <source>more_security_title</source>
+        <target>Security</target>
+      </trans-unit>
+      <trans-unit id="loco:606317e2297754434154ba62">
+        <source>more_security_subtitle</source>
+        <target>Manage your password and security questions</target>
+      </trans-unit>
+      <trans-unit id="loco:606318036abcf820640bd642">
+        <source>more_support_title</source>
+        <target>Support</target>
+      </trans-unit>
+      <trans-unit id="loco:60631820c0e2cd7b4928e072">
+        <source>more_support_subtitle</source>
+        <target>Email, call or find us on social media</target>
+      </trans-unit>
+      <trans-unit id="loco:6063187c98c41c57275a1412">
+        <source>more_locator_title</source>
+        <target>Branch locator</target>
+      </trans-unit>
+      <trans-unit id="loco:6063189998c41c57275a1414">
+        <source>more_locator_subtitle</source>
+        <target>Find your nearest branch, agent and ATM</target>
+      </trans-unit>
+      <trans-unit id="loco:606318e196ba2c21240e3ca5">
+        <source>more_language_title</source>
+        <target>Change the language</target>
+      </trans-unit>
+      <trans-unit id="loco:6063190375abbe51436b8692">
+        <source>more_terms_and_privacy_title</source>
+        <target>Terms &amp; privacy policy</target>
+      </trans-unit>
+      <trans-unit id="loco:6063191b2cef0021c72d4055">
+        <source>more_faq_title</source>
+        <target>View FAQs</target>
+      </trans-unit>
+      <trans-unit id="loco:6063193881f6880ef90d7f22">
+        <source>more_share_title</source>
+        <target>Share</target>
+      </trans-unit>
+      <trans-unit id="loco:60631950cec53706fd4a4bf2">
+        <source>more_share_subtitle</source>
+        <target>Recommend Equity online to a friend</target>
+      </trans-unit>
+      <trans-unit id="loco:60640d1c25ab670c3671ce14">
+        <source>merchant-loan-header</source>
+        <target>Merchant</target>
+      </trans-unit>
+      <trans-unit id="loco:60640d547053b0583b770d63">
+        <source>Paragraph-The-loan-will-be-deposited-into-the-merc</source>
+        <target>The loan will be deposited into the merchant’s account</target>
+      </trans-unit>
+      <trans-unit id="loco:60640d7c7053b0583b770d67">
+        <source>Paragraph-Loan-request-details</source>
+        <target> Please enter the loan details</target>
+      </trans-unit>
+      <trans-unit id="loco:60640dbd8d2c37332b50c745">
+        <source>Paragraph-Enter-the-details-of-the-company-that-wi</source>
+        <target>Enter the details of the company you want to buy from. Make sure the product is available.</target>
+      </trans-unit>
+      <trans-unit id="loco:60640df10d5b702a18309d92">
+        <source>Label-Merchant-till-number</source>
+        <target>Till number</target>
+      </trans-unit>
+      <trans-unit id="loco:60640e3625ab670c3671ce16">
+        <source>Header-Please-enter-merchant-details</source>
+        <target>Please enter the merchant's details</target>
+      </trans-unit>
+      <trans-unit id="loco:606ed32b8a476904ef4d24f2">
+        <source>transaction-send-to-placeholder</source>
+        <target>Select the recipient</target>
+      </trans-unit>
+      <trans-unit id="loco:606ed34e18b1106a46116612">
+        <source>transaction-send-to-own-placeholder</source>
+        <target>Select an account</target>
+      </trans-unit>
+      <trans-unit id="loco:606f01b8b2dc832ff07b84d2">
+        <source>security_change_password_success_title</source>
+        <target>Your password has been changed successfully!</target>
+      </trans-unit>
+      <trans-unit id="loco:606f01e781bf151f955aedd4">
+        <source>security_change_password_title</source>
+        <target>Change your password</target>
+      </trans-unit>
+      <trans-unit id="loco:606f02138e2fd455166c90e2">
+        <source>security_change_password_subtitle</source>
+        <target>Create a new password</target>
+      </trans-unit>
+      <trans-unit id="loco:606f029428cf9709bf6b02b3">
+        <source>security_change_password_entry_title</source>
+        <target>Change your password</target>
+      </trans-unit>
+      <trans-unit id="loco:606f02bfcc63f60759548696">
+        <source>security_change_password_current_password</source>
+        <target>Current password</target>
+      </trans-unit>
+      <trans-unit id="loco:606f0303b3befa5fbc2be073">
+        <source>security_change_password_new_password</source>
+        <target>New password</target>
+      </trans-unit>
+      <trans-unit id="loco:606f03268d1c9914bc56afd2">
+        <source>security_change_password_confirm_new_password</source>
+        <target>Confirm your new password</target>
+      </trans-unit>
+      <trans-unit id="loco:6074379af9b0a97ee65a8603">
+        <source>empty-search</source>
+        <target>No items match your search</target>
+      </trans-unit>
+      <trans-unit id="loco:60754ccdd4d0cc7708115b22">
+        <source>support-call-us</source>
+        <target>Call us</target>
+      </trans-unit>
+      <trans-unit id="loco:60754cf604737b3e606b5ea4">
+        <source>support-email-us</source>
+        <target>Email us</target>
+      </trans-unit>
+      <trans-unit id="loco:60754d1c00dcf5137f1f09a2">
+        <source>support-talk-to-us</source>
+        <target>Talk to us</target>
+      </trans-unit>
+      <trans-unit id="loco:60754d4ad4d0cc7708115b25">
+        <source>support-visit-our-website</source>
+        <target>Visit our website</target>
+      </trans-unit>
+      <trans-unit id="loco:60754d78c5a6d553164212e2">
+        <source>support-facebook</source>
+        <target>Like us on Facebook</target>
+      </trans-unit>
+      <trans-unit id="loco:60754d9c0b777f0768365a74">
+        <source>support-twitter</source>
+        <target>Follow us on Twitter</target>
+      </trans-unit>
+      <trans-unit id="loco:60754dc66048b924cb7f8ff2">
+        <source>support-linkedin</source>
+        <target>Follow us on LinkedIn</target>
+      </trans-unit>
+      <trans-unit id="loco:60754df781529a5c233803e3">
+        <source>support-drop-message</source>
+        <target>Send us a message</target>
+      </trans-unit>
+      <trans-unit id="loco:607edf76cccc2a73e960a135">
+        <source>Header-Register-to-PesaLink</source>
+        <target>Register to PesaLink</target>
+      </trans-unit>
+      <trans-unit id="loco:607edf977e82c83d730a7ae2">
+        <source>Header-Register-this-account-to-PesaLink</source>
+        <target>Register this account to PesaLink</target>
+      </trans-unit>
+      <trans-unit id="loco:607edfd9e365577f2c1528b4">
+        <source>Paragraph-You-will-be-able-to-receive-money-from-o</source>
+        <target>You will be able to receive money from others directly to this account through PesaLink
+</target>
+      </trans-unit>
+      <trans-unit id="loco:607edfffa0aeb85f8f7cf692">
+        <source>Paragraph-Which-number-would-you-like-to-be-associ</source>
+        <target>Which number would you like to be associated with PesaLink? When others send to this number on PesaLink.</target>
+      </trans-unit>
+      <trans-unit id="loco:607ee0268aceb609b41318b3">
+        <source>Header-Account-successfully-registered</source>
+        <target>Your account has been registered successfully!</target>
+      </trans-unit>
+      <trans-unit id="loco:607ee09827a3ba4e7f336b05">
+        <source>Paragraph-Your-account-account-accountNumber-can-n</source>
+        <target>Your mobile number <x id="PH" equiv-text="{{  account.phoneNumber }}" /> has been linked to account number <x id="PH" equiv-text="{{ account.accountNumber }}" /></target>
+      </trans-unit>
+      <trans-unit id="loco:607ee0fe7324f44fbd68d1e2">
+        <source>Paragraph-By-deregistering-you-wont-be-able-to-rec</source>
+        <target>You won’t be able to receive money using PesaLink
+</target>
+      </trans-unit>
+      <trans-unit id="loco:6081640e14a96e6b4f33ea76">
+        <source>Title-We-couldnt-find-the-merchant</source>
+        <target>We couldn’t find the merchant</target>
+      </trans-unit>
+      <trans-unit id="loco:608165065afcfd37be61a463">
+        <source>Merchant-not-found-error-message-We-couldnt-find-a</source>
+        <target>We couldn’t find a merchant with this till number. Please try again.</target>
+      </trans-unit>
+      <trans-unit id="loco:608699a22a04203bef75d604">
+        <source>placeholder-Enter-their-mobile-number</source>
+        <target>Enter their mobile number</target>
+      </trans-unit>
+      <trans-unit id="loco:6086b0687dcfc965ce722972">
+        <source>placeholder-Enter-their-full-name</source>
+        <target>Enter their full name</target>
+      </trans-unit>
+      <trans-unit id="loco:6086b0948ef5f31351090552">
+        <source>placeholder-Enter-their-account-number</source>
+        <target>Enter their account number</target>
+      </trans-unit>
+      <trans-unit id="loco:6086b12e8bf7d74061767df2">
+        <source>placeholder-Enter-merchant-till-number</source>
+        <target>Enter merchant till number</target>
+      </trans-unit>
+      <trans-unit id="loco:6086b1ed8bf7d74061767df4">
+        <source>placeholder-Question</source>
+        <target>Question</target>
+      </trans-unit>
+      <trans-unit id="loco:6086b218246bb60f2b227435">
+        <source>placeholder-Enter-your-answer</source>
+        <target>Enter your answer</target>
+      </trans-unit>
+      <trans-unit id="loco:6086b283901ecf3f38533952">
+        <source>Button-Get-started</source>
+        <target>Get started</target>
+      </trans-unit>
+      <trans-unit id="loco:6086b2ae3278ce5c7e6308c3">
+        <source>Header-Security-questions</source>
+        <target>Security questions</target>
+      </trans-unit>
+      <trans-unit id="loco:6086b2daef036e19a3134664">
+        <source>Paragraph-Make-the-answers-easy-to-remember</source>
+        <target> Make the answers easy to remember</target>
+      </trans-unit>
+      <trans-unit id="loco:6086b38113a76b57704acac4">
+        <source>Label-Answer</source>
+        <target>Answer</target>
+      </trans-unit>
+      <trans-unit id="loco:6086b3a75815ac7e036a2762">
+        <source>Header-Please-select-a-security-question</source>
+        <target>Please select a security question</target>
+      </trans-unit>
+      <trans-unit id="loco:60925f4aba52733fae627da2">
+        <source>Get-started-title-more-than-just-banking</source>
+        <target>More than just banking</target>
+      </trans-unit>
+      <trans-unit id="loco:60925f9829af1c6736622cf2">
+        <source>Get-started-message-more-than-just-banking</source>
+        <target>With 24/7 access to your accounts, send money, pay your bills, buy airtime, and so much more!</target>
+      </trans-unit>
+      <trans-unit id="loco:60925fe604a85e7a6c226f52">
+        <source>Get-started-title-open-instant-account</source>
+        <target>Open an instant account</target>
+      </trans-unit>
+      <trans-unit id="loco:6092600f4dc7c042fe0fae02">
+        <source>Get-started-message-open-instant-account</source>
+        <target>Opening an Equity bank account is quick and simple. Say goodbye to long queues!</target>
+      </trans-unit>
+      <trans-unit id="loco:60926078dc71ff1727703192">
+        <source>Get-started-title-lifestyle</source>
+        <target>Lifestyle</target>
+      </trans-unit>
+      <trans-unit id="loco:6092608f56049f0c9b286972">
+        <source>Get-started-message-lifestyle</source>
+        <target>A convenient digital experience that can be tailored to meet your lifestyle needs</target>
+      </trans-unit>
+      <trans-unit id="loco:609260c0071cdb6d197b6092">
+        <source>Get-started-title-growth</source>
+        <target>Growth</target>
+      </trans-unit>
+      <trans-unit id="loco:609260d6d37f8424ea795422">
+        <source>Get-started-message-growth</source>
+        <target>Grow your money to its full potential with our integrated account management functionality and credit products</target>
+      </trans-unit>
+      <trans-unit id="loco:6093bca0a3eef6694f071432">
+        <source>unblock-card-header-Unblock-Card</source>
+        <target>Unblock Card</target>
+      </trans-unit>
+      <trans-unit id="loco:6093bd36ae79881b181410c2">
+        <source>verify-unblock-card-text-Please-verify-to-unblock</source>
+        <target>Please verify to unblock your card</target>
+      </trans-unit>
+      <trans-unit id="loco:60951c27c0d21764bd1efcba">
+        <source>Button-Send-to-mobile-money-providers</source>
+        <target>M-PESA and Airtel Money</target>
+        <note>subtext, send to mobile money</note>
+      </trans-unit>
+      <trans-unit id="loco:6095239e8510c000b317b5e3">
+        <source>loans_first_installment</source>
+        <target>First installment date</target>
+      </trans-unit>
+      <trans-unit id="loco:60a29ad2b4e5294414561852">
+        <source>signup_only_applicable</source>
+        <target>Only applicable to Kenya and Rwanda</target>
+      </trans-unit>
+      <trans-unit id="loco:60ae5834e76b5c5a3e5b8c92">
+        <source>recommend_title</source>
+        <target>Recommend to a friend</target>
+      </trans-unit>
+      <trans-unit id="loco:60ae5854b2416600461fd242">
+        <source>recommend_main_title</source>
+        <target>Sharing is caring</target>
+      </trans-unit>
+      <trans-unit id="loco:60ae587a9970ac68650e2f62">
+        <source>recommend_description</source>
+        <target>Tell your friends about us</target>
+      </trans-unit>
+      <trans-unit id="loco:60ae58903c2d1b1b2c7af5e4">
+        <source>recommend_button</source>
+        <target>Share link</target>
+      </trans-unit>
+      <trans-unit id="loco:60bb195a74ff3f7f1b5e4742">
+        <source>Button-Update-your-security-questions</source>
+        <target>Update your security questions</target>
+      </trans-unit>
+      <trans-unit id="loco:60bb1a976907207838474032">
+        <source>Button-Send-money-via-M-PESA-or-Airtel-Money</source>
+        <target>Send money via M-PESA or Airtel Money</target>
+      </trans-unit>
+      <trans-unit id="loco:60bdcde4ffb775599a6511d3">
+        <source>Label-Account-or-mobile-number</source>
+        <target>Account or mobile number</target>
+      </trans-unit>
+      <trans-unit id="loco:60bf392db9910116e2454665">
+        <source>Header-What-would-you-like-to-do</source>
+        <target>What would you like to do?</target>
+      </trans-unit>
+      <trans-unit id="loco:60bf394907a3d46de5180464">
+        <source>Button-Credit-and-prepaid-cards</source>
+        <target>Credit and prepaid cards</target>
+      </trans-unit>
+      <trans-unit id="loco:60bf6980ef94e921b059e1c2">
+        <source>Header-To-phone-linked-account</source>
+        <target>To phone-linked account</target>
+      </trans-unit>
+      <trans-unit id="loco:60c09ba8f987d87cf81ac6f2">
+        <source>withdrawal-charges-effect</source>
+        <target>This charge will take effect once you have completed your withdrawal at an agent</target>
+      </trans-unit>
+      <trans-unit id="loco:60c0bdad718fa5494a71ac63">
+        <source>Button-Pay-to-an-M-PESA-till</source>
+        <target>Pay to an M-PESA till</target>
+      </trans-unit>
+      <trans-unit id="loco:60c0c97b1fd51744f91fdf92">
+        <source>Header-Withdraw-money</source>
+        <target>Withdraw money</target>
+      </trans-unit>
+      <trans-unit id="loco:60c0c9e173436005926dc702">
+        <source>Button-Agent</source>
+        <target>Agent</target>
+      </trans-unit>
+      <trans-unit id="loco:60c47b657678a2739446b192">
+        <source>Paragraph-Please-enter-a-valid-phone-number</source>
+        <target>Please enter a valid phone number</target>
+        <note>validation error (phone linked)</note>
+      </trans-unit>
+      <trans-unit id="loco:60c65e34b59caa27bf6d9012">
+        <source>Placeholder-Search-favourites-or-recents</source>
+        <target>Search favourites or recents</target>
+      </trans-unit>
+      <trans-unit id="loco:60cc69138e242b09a24eb47d">
+        <source>side-menu-title-borrow</source>
+        <target>Borrow</target>
+      </trans-unit>
+      <trans-unit id="loco:60cc6961f64e923f724baba2">
+        <source>security-challenge-title</source>
+        <target>Security challenge</target>
+      </trans-unit>
+      <trans-unit id="loco:60cc69aa8c911565be105212">
+        <source>security-challenge-subtitle</source>
+        <target>Your security questions</target>
+      </trans-unit>
+      <trans-unit id="loco:60cc6a3604126b1e96606402">
+        <source>change-password-security-challenge-instruction</source>
+        <target>Answer the security questions to change your password</target>
+      </trans-unit>
+      <trans-unit id="loco:60cc6ba770bc7e7a352bdbd2">
+        <source>verify-user-title-equity-card</source>
+        <target>Equity card</target>
+      </trans-unit>
+      <trans-unit id="loco:60cc6bd6ba0688553b68e613">
+        <source>verify-user-card-instructions</source>
+        <target>Please enter your Equity card details</target>
+      </trans-unit>
+      <trans-unit id="loco:60cc6c6d7034ab017e67e544">
+        <source>verify-user-card-input-placeholder</source>
+        <target>Enter last 6 digits of your card</target>
+      </trans-unit>
+      <trans-unit id="loco:60cc6cd09a61011e1a7900e3">
+        <source>verify-user-card-number-error</source>
+        <target>Please enter a valid card number</target>
+      </trans-unit>
+      <trans-unit id="loco:60cc6db46c04bc0813629d83">
+        <source>verify-user-card-pin-input-label</source>
+        <target>Pin</target>
+      </trans-unit>
+      <trans-unit id="loco:60cc98ee5ad0914cad1f2f13">
+        <source>verify-user-card-pin-error</source>
+        <target>Pin is required</target>
+      </trans-unit>
+      <trans-unit id="loco:60cc993d91a52f4c5a3e0902">
+        <source>verify-user-eazzynet-instruction</source>
+        <target>Enter user ID and password</target>
+      </trans-unit>
+      <trans-unit id="loco:60cc99f775f6d669577a9d52">
+        <source>verify-user-mobile-banking-title</source>
+        <target>Mobile banking</target>
+      </trans-unit>
+      <trans-unit id="loco:60cc9a1d75f6d669577a9d54">
+        <source>verify-user-mobile-banking-instruction</source>
+        <target>Enter Eazzy Banking, Equitel or USSD PIN</target>
+      </trans-unit>
+      <trans-unit id="loco:60cc9b4a9ed17d11c641f624">
+        <source>merchant-loan-title</source>
+        <target>Get <x id="INTERPOLATION" equiv-text="{{ productName }}"/></target>
+        <note>productName is interpolated from the app</note>
+      </trans-unit>
+      <trans-unit id="loco:60cc9bbeca7fa708df3b7a84">
+        <source>manage-security-questions-instructions</source>
+        <target>You can edit your security questions to secure your sign in attempts</target>
+      </trans-unit>
+      <trans-unit id="loco:60cc9c10afdffa56a30ec94f">
+        <source>manage-security-questions-success-title</source>
+        <target>Your security questions have been changed successfully!</target>
+      </trans-unit>
+      <trans-unit id="loco:60cc9c3fa147424ba85782b5">
+        <source>manage-security-questions-success-subtitle</source>
+        <target>We’ll use your security questions to confirm the account belongs to you</target>
+      </trans-unit>
+      <trans-unit id="loco:60cc9c82cb343209f70f0b02">
+        <source>edit-question-button-text</source>
+        <target>Edit question</target>
+      </trans-unit>
+      <trans-unit id="loco:60cc9d2cd7dc1b23c24f3302">
+        <source>select-question-subtitle</source>
+        <target>Question <x id="INTERPOLATION" equiv-text="{{ number }}"/></target>
+      </trans-unit>
+      <trans-unit id="loco:60cc9d6859520662741dca93">
+        <source>mpesa-merchant-details-title</source>
+        <target>Please enter the M-PESA merchant’s details</target>
+      </trans-unit>
+      <trans-unit id="loco:60cc9e375691ea3e0a352fe2">
+        <source>biller-details-label</source>
+        <target>Please enter the biller’s details</target>
+      </trans-unit>
+      <trans-unit id="loco:60cc9e58823bad46172ae062">
+        <source>biller-number-input-label</source>
+        <target>Biller Number</target>
+      </trans-unit>
+      <trans-unit id="loco:60cc9e79823bad46172ae064">
+        <source>merchant-details-title</source>
+        <target>Please enter the merchant’s details</target>
+      </trans-unit>
+      <trans-unit id="loco:60d9ab07d0d32c4a9a232833">
+        <source>generic-error-message</source>
+        <target>Sorry, we're unable to complete your request, please try again later</target>
+      </trans-unit>
+      <trans-unit id="loco:60db2627f2256a77a12e00f2">
+        <source>Paragraph-Card-balance</source>
+        <target>Card balance</target>
+      </trans-unit>
+      <trans-unit id="loco:60ed53d17dadf013d62818e2">
+        <source>input-label-card-expiry</source>
+        <target>Card expiry</target>
+      </trans-unit>
+      <trans-unit id="loco:60ed540598573768b72027f2">
+        <source>input-hint-card-expiry</source>
+        <target>MM / YY</target>
+      </trans-unit>
+      <trans-unit id="loco:60ed5438040fb854ab6bf052">
+        <source>input-warning-expiry-date-required</source>
+        <target>Expiry date is required</target>
+      </trans-unit>
+      <trans-unit id="loco:60ed54a78a916701874b5303">
+        <source>accountid-input-placeholder</source>
+        <target>Enter email address, mobile number or  user ID</target>
+      </trans-unit>
+      <trans-unit id="loco:60ed54d698573768b72027f4">
+        <source>input-placeholder-text-expiry-date</source>
+        <target>Enter the expiry date of your card</target>
+      </trans-unit>
+      <trans-unit id="loco:60ed5515650bf8292912ff82">
+        <source>input-placeholder-text-mobile-number</source>
+        <target>Enter your mobile number</target>
+      </trans-unit>
+      <trans-unit id="loco:60ed5565cfb1851bf9058222">
+        <source>input-placeholder-text-mobile-banking-pin</source>
+        <target>Enter mobile banking PIN</target>
+      </trans-unit>
+      <trans-unit id="loco:60f144085cec35386746cc82">
+        <source>paragraph-text-Managing-your-favourites</source>
+        <target>Managing your favourites</target>
+      </trans-unit>
+      <trans-unit id="loco:60f144c3575022010409b513">
+        <source>paragraph-text-Your-favourite-contacts-will-appear</source>
+        <target>Your favourite contacts will appear here. Add a new one to quickly transact.</target>
+      </trans-unit>
+      <trans-unit id="loco:60f145472ac59d773842ff84">
+        <source>Add-a-favourite</source>
+        <target>Add a favourite</target>
+      </trans-unit>
+      <trans-unit id="loco:60f146b7f0777d0da5690893">
+        <source>Manage-Favourites</source>
+        <target>Manage Favourites</target>
+      </trans-unit>
+      <trans-unit id="loco:60f1474bd9db597957746892">
+        <source>Add-a-new-favourite</source>
+        <target>Add a new favourite</target>
+      </trans-unit>
+      <trans-unit id="loco:60f14ac274822d73574da912">
+        <source>Add-Favourite</source>
+        <target>Add Favourite</target>
+      </trans-unit>
+      <trans-unit id="loco:60f14e874dd7837add5baf33">
+        <source>Mobile-Money-Wallet</source>
+        <target>Mobile Money/Wallet</target>
+      </trans-unit>
+      <trans-unit id="loco:60f14eb032d88a6d721b10a2">
+        <source>Please-enter-favourites-details</source>
+        <target>Please enter favourite's details</target>
+      </trans-unit>
+      <trans-unit id="loco:60f14ee842d9a370de7d0593">
+        <source>Pay-Bills</source>
+        <target>Pay Bills</target>
+      </trans-unit>
+      <trans-unit id="loco:60f14f00976b014f0d176de6">
+        <source>Please-enter-billers-details</source>
+        <target>Please enter biller's details</target>
+      </trans-unit>
+      <trans-unit id="loco:60f1502a3432ea66684bd4d2">
+        <source>Buy-Goods-via-M-Pesa</source>
+        <target>Buy Goods via M-Pesa</target>
+      </trans-unit>
+      <trans-unit id="loco:60f15042000b334a2f5150b2">
+        <source>Send-to-Other-Equity-Account</source>
+        <target>Send to Other Equity Account</target>
+      </trans-unit>
+      <trans-unit id="loco:60f1505917a60931ce6b4333">
+        <source>Send-to-Other-Banks</source>
+        <target>Send to Other Banks</target>
+      </trans-unit>
+      <trans-unit id="loco:60f151fd6051f6731c7f1dd2">
+        <source>Enter-an-alias</source>
+        <target>Enter an alias</target>
+      </trans-unit>
+      <trans-unit id="loco:60f152ebcb050f2d4c54ec94">
+        <source>Select-Biller</source>
+        <target>Select Biller</target>
+      </trans-unit>
+      <trans-unit id="loco:60f1537ee9d02b456f5c9702">
+        <source>Code</source>
+        <target>Code</target>
+        <note>Phone dialing code for international phone number formats</note>
+      </trans-unit>
+      <trans-unit id="loco:60f154014ed0b60d91285072">
+        <source>Phone-number</source>
+        <target>Phone number</target>
+      </trans-unit>
+      <trans-unit id="loco:60f1578d825b0f25dd339fa2">
+        <source>Bank</source>
+        <target>Bank</target>
+      </trans-unit>
+      <trans-unit id="loco:60f15d9704bf711bf9518ab3">
+        <source>Review-favourite</source>
+        <target>Review favourite</target>
+      </trans-unit>
+      <trans-unit id="loco:60f15dc585f5946df65b7e63">
+        <source>To-continue-please-confirm-your-favourites-details</source>
+        <target>To continue, please confirm your favourite's details</target>
+      </trans-unit>
+      <trans-unit id="loco:60f15e594c59707bdd5e8463">
+        <source>Beneficiary</source>
+        <target>Beneficiary</target>
+      </trans-unit>
+      <trans-unit id="loco:60f7d79cf9c3956f3c54bf52">
+        <source>Edit-favourite</source>
+        <target>Edit favourite</target>
+      </trans-unit>
+      <trans-unit id="loco:60f7d82075b08012c50285e2">
+        <source>Nickname</source>
+        <target>Nickname</target>
+      </trans-unit>
+      <trans-unit id="loco:60f7d841b782777b2377e702">
+        <source>Transaction</source>
+        <target>Transaction</target>
+      </trans-unit>
+      <trans-unit id="loco:60f7d8b5b2fb4d776d69dee2">
+        <source>Past-transactions</source>
+        <target>Past transactions</target>
+      </trans-unit>
+      <trans-unit id="loco:60f7d8c58220be3e7a73a752">
+        <source>No-transactions-found</source>
+        <target>No transactions found</target>
+      </trans-unit>
+      <trans-unit id="loco:60f7d8d0e8faca58e75a3152">
+        <source>Delete-Favourite</source>
+        <target>Delete favourite</target>
+      </trans-unit>
+      <trans-unit id="loco:60f7d9298c61005af56586c2">
+        <source>Confirm-delete</source>
+        <target>Confirm delete</target>
+      </trans-unit>
+      <trans-unit id="loco:60f7d93e16c8bb6a6b0c1882">
+        <source>paragraph-text-Are-you-sure-you-want-to-delete-thi</source>
+        <target>Are you sure you want to delete this favourite?</target>
+      </trans-unit>
+      <trans-unit id="loco:60facee0441d6475b00846b2">
+        <source>Favourite-deleted-successfully</source>
+        <target>Favourite deleted successfully</target>
+      </trans-unit>
+      <trans-unit id="loco:60fffd766e24fe5fa6017322">
+        <source>Filter-chip-text-All</source>
+        <target>All</target>
+      </trans-unit>
+      <trans-unit id="loco:6102a7baff4c9730ec43d7b2">
+        <source>Info-text-Use-the-code-transactionMetadata-cashCod</source>
+        <target>Use the code {{ transactionMetadata.cashCode }} to withdraw {{ transactionMetadata.amount }} {{ transactionMetadata.currency }} from {{ transactionMetadata.name}} {{ transactionMetadata.agentCode }}.</target>
+        <note>This tells the user to use the agent withdrawal cash code.</note>
+      </trans-unit>
+      <trans-unit id="loco:6102a8357795fc7de81574b2">
+        <source>Info-text-This-code-is-valid-for-transactionMetada</source>
+        <target>This code is valid for {{ transactionMetadata.validFor }} minutes.</target>
+        <note>Specifies the cash code validity</note>
+      </trans-unit>
+      <trans-unit id="loco:6102a93898f7d53cb85cd082">
+        <source>Info-text-Ref-transactionMetadata-reference-on-tra</source>
+        <target>Ref {{ transactionMetadata.reference }} on {{ transactionMetadata.timestamp }} at {{ transactionMetadata.timestamp }}.</target>
+        <note>Displays reference number, date, and time of agent withdrawal transaction.</note>
+      </trans-unit>
+      <trans-unit id="loco:6102b3e29e0cd93b713128a2">
+        <source>Info-text-Charges-transactionMetadata-charge-trans</source>
+        <target>Charges {{ transactionMetadata.charge}} {{ transactionMetadata.currency }}.</target>
+        <note>Withdraw from agent charges</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
