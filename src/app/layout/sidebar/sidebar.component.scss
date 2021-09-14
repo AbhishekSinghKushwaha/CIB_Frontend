@@ -1,0 +1,36 @@
+@import "src/assets/scss/sizes.scss";
+
+.mat-nav-list {
+  padding: 0px 16px 0px 18px;
+}
+
+.mat-list-item {
+  border-radius: 8px;
+  margin: 16px 0px;
+  &.mat-list-item-disabled {
+    background: none !important;
+    color: var(--cool-grey-40) !important;
+  }
+  &.active {
+    color: var(--equity) !important;
+    font-weight: 600 !important;
+    svg {
+      fill: var(--equity) !important;
+    }
+    .menu-icon {
+      color: white !important;
+      svg {
+        fill: var(--equity) !important;
+      }
+    }
+  }
+}
+
+.logo_img {
+  // width: $logo-width;
+  height: $logo-height;
+  margin: 32px 38px;
+  &:hover {
+    cursor: pointer;
+  }
+}

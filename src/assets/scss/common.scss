@@ -1,0 +1,64 @@
+@import 'colours';
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  background-color: var(--pearl);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Open Sans' !important;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #221f1f;
+}
+
+.subTitle {
+  font-size: 14px;
+  color: #929497;
+}
+
+.mat-card .last-child {
+  margin-bottom: 0;
+}
+
+.icon-spacer {
+  flex: 1 1 auto;
+}
+
+.link-image {
+  background-size: cover;
+  background-color: var(--cool-grey-20);
+}
+
+.top-right {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.rounded-edge {
+  border-radius: 8px !important;
+}
+
+.shadow-none {
+  box-shadow: none !important;
+}
+
+.shadow-down {
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.16) !important;
+}
+
+.menu-icon-button {
+  width: 32px !important;
+  height: 32px !important;
+}
+
+
+
