@@ -20,7 +20,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatChipsModule } from '@angular/material/chips';
-import { CustomIconService } from './core/services/utils/custom-icon.service';
+import { CustomIconService } from './core/utils/custom-icon.service';
 
 const MatImports = [
   MatSidenavModule,

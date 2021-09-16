@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { PostLoginRoutingModule } from './post-login-routing.module';
 import { PostLoginComponent } from './post-login.component';
 import { MatStyleModule } from 'src/app/mat-style.module';
-import { LayoutModule } from 'src/app/layout/layout.module';
+import { LayoutModule } from 'src/app/presentation/layout/layout.module';
 
 
 @NgModule({

@@ -4,11 +4,11 @@ import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: (): Promise<any> => import('./modules/post-login/post-login.module').then(m => m.PostLoginModule)
+    loadChildren: (): Promise<any> => import('./presentation/modules/post-login/post-login.module').then(m => m.PostLoginModule)
   },
   {
     path: 'access',
-    loadChildren: (): Promise<any> => import('./modules/pre-login/pre-login.module').then(m => m.PreLoginModule)
+    loadChildren: (): Promise<any> => import('./presentation/modules/pre-login/pre-login.module').then(m => m.PreLoginModule)
   },
   {
     path: '**',
