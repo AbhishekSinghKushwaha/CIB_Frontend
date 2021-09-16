@@ -6,17 +6,8 @@ import { RouterModule } from '@angular/router';
 import { UserCardListComponent } from './user-card-list/user-card-list.component';
 
 @NgModule({
-  declarations: [
-    SidebarComponent,
-    UserCardListComponent,
-  ],
-  imports: [
-    CommonModule,
-    MatStyleModule,
-    RouterModule
-  ],
-  exports: [
-    SidebarComponent
-  ]
+  declarations: [SidebarComponent, UserCardListComponent],
+  imports: [CommonModule, MatStyleModule, RouterModule],
+  exports: [SidebarComponent, UserCardListComponent],
 })
-export class LayoutModule { }
+export class LayoutModule {}
