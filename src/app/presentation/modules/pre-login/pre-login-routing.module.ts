@@ -3,10 +3,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { PreLoginComponent } from './pre-login.component';
 
 const routes: Routes = [
-  { 
+  {
     path: '',
-    component: PreLoginComponent
-  }
+    component: PreLoginComponent,
+    children: [
+      {
+        path: 'login',
+        loadChildren: (): Promise<any> => import('./login/login.module').then(m => m.LoginModule)
+      }
+    ]
+  },
+
 ];
 
 @NgModule({
