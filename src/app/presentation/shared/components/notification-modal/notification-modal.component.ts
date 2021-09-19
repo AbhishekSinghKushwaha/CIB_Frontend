@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { IPreLoginModal } from './../../../../core/interfaces/pre-login-modal.interface';
+import { IPreLoginModal } from '../../../../core/interfaces/pre-login-modal.interface';
 
 @Component({
   selector: 'app-notification-modal',

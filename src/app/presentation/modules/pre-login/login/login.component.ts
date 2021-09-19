@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { NotificationModalService } from 'src/app/core/services/notification-modal/notification-modal.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +12,8 @@ export class LoginComponent implements OnInit {
   hidePassword = true;
   submitted = false;
 
-  constructor(readonly dialog: MatDialog) { }
+  constructor(
+    private readonly notificationModalService: NotificationModalService) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -33,4 +34,27 @@ export class LoginComponent implements OnInit {
     console.log('Submitted');
   }
 
+  // TODO: The modal services here are for examples only. These would be taken out
+  modalTakeAnotherLook(): void {
+    this.notificationModalService.open({
+      image: './assets/images/Illustrations/Illustrations_VerificationCode.svg',
+      title: 'Take another look',
+      message: 'The details you entered aren\'t familiar to us. Please try again or register to create your profile',
+      registerButtonEnabled: false
+    });
+  }
+  modalTryAgain(): void {
+    this.notificationModalService.open({
+      title: 'Lets try this again',
+      message: 'The details you entered aren\'t familiar to us. Please try again or register to create your profile',
+      registerButtonEnabled: true
+    });
+  }
+  modalIncorectVerification(): void {
+    this.notificationModalService.open({
+      title: 'Incorrect verification code',
+      message: 'The details you entered aren\'t familiar to us. Please try again or register to create your profile',
+      registerButtonEnabled: false
+    });
+  }
 }

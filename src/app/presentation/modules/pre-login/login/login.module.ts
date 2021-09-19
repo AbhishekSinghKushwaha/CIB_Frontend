@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 import { MatStyleModule } from 'src/app/mat-style.module';
+import { NotificationModalModule } from '../../../shared/components/notification-modal/notification-modal.module';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { MatStyleModule } from 'src/app/mat-style.module';
     LoginRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    MatStyleModule
+    MatStyleModule,
+    NotificationModalModule
   ]
 })
 export class LoginModule { }
