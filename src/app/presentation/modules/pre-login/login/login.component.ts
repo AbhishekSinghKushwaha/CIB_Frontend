@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-login',
@@ -7,11 +8,11 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  loginPasswordForm: FormGroup=new FormGroup({});
+  loginPasswordForm: FormGroup = new FormGroup({});
   hidePassword = true;
   submitted = false;
 
-  constructor() { }
+  constructor(readonly dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -28,7 +29,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  submit(){
+  submit() {
     console.log('Submitted');
   }
 

@@ -16,7 +16,7 @@ import { MatStyleModule } from 'src/app/mat-style.module';
     LoginRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    MatStyleModule,
+    MatStyleModule
   ]
 })
 export class LoginModule { }
