@@ -5,7 +5,16 @@ import { PreLoginComponent } from './pre-login.component';
 const routes: Routes = [
   { 
     path: '',
-    component: PreLoginComponent
+    component: PreLoginComponent,
+    children: [
+      {
+        path: 'forgot-password',
+        loadChildren: (): Promise<any> =>
+          import('./forgot-password/forgot-password.module').then(
+            (m) => m.ForgotPasswordModule
+          )
+      }
+    ]
   }
 ];
 
