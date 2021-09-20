@@ -19,7 +19,10 @@ const routes: Routes = [
         path: 'security-verification',
         loadChildren: (): Promise<any> => import('./security-verification/security-verification.module').then(m => m.SecurityVerificationModule)
       },
-
+      {
+        path: 'security-challenge',
+        loadChildren: (): Promise<any> => import('./security-challenge/security-challenge.module').then(m => m.SecurityChallengeModule)
+      },
     ]
   },
 
