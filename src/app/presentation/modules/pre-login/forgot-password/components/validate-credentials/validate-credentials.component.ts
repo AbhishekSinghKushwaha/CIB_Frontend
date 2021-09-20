@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ValidateCredentialsUsecase } from 'src/app/core/usecases/validate-credentials.usecase';
 
 @Component({
   selector: 'app-validate-credentials',
@@ -8,28 +9,41 @@ import { Router } from '@angular/router';
   styleUrls: ['./validate-credentials.component.scss'],
 })
 export class ValidateCredentialsComponent implements OnInit {
-  validateCredentialsForm: FormGroup = new FormGroup({
-    validCredentials: new FormControl(null, [
+  credentialsForm: FormGroup = new FormGroup({
+    credentials: new FormControl(null, [
       Validators.required,
       Validators.minLength(6),
     ]),
   });
-  submitted = false;
-  isEmail = false;
 
-  constructor(private router: Router) {}
+  constructor(
+    private validateCredentialsUsecase: ValidateCredentialsUsecase,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 
   validateCredentials(): void {
-    this.submitted = true;
-
-    if (this.validateCredentialsForm.invalid) {
+    if (this.credentialsForm.invalid) {
       return;
     }
+
+    const credentials = this.credentialsForm.get('credentials')?.value;
+    this.validateCredentialsUsecase.execute(credentials).subscribe(
+      (valid: boolean) => {
+        if (valid) {
+          // navigate to next step
+        } else {
+          // show "invalid credentials" notification
+        }
+      },
+      (error: any) => {
+        // handle error
+      }
+    );
   }
 
-  get validateCredentialControls(): any {
-    return this.validateCredentialsForm.controls;
+  get credentialsControls(): any {
+    return this.credentialsForm.controls;
   }
 }
