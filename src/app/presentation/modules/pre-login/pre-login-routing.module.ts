@@ -10,7 +10,11 @@ const routes: Routes = [
       {
         path: 'login',
         loadChildren: (): Promise<any> => import('./login/login.module').then(m => m.LoginModule)
-      }
+      },
+      {
+        path: 'security-challenge',
+        loadChildren: (): Promise<any> => import('./security-challenge/security-challenge.module').then(m => m.SecurityChallengeModule)
+      },
     ]
   },
 
