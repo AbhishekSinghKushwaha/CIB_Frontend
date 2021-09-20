@@ -8,7 +8,7 @@ import { NotificationModalService } from 'src/app/core/services/notification-mod
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  loginPasswordForm: FormGroup = new FormGroup({});
+  loginPasswordForm: FormGroup;
   hidePassword = true;
   submitted = false;
 

@@ -1,0 +1,52 @@
+<div class="card border-0 sms-verification">
+  <div class="card-body ps-5">
+    <h3 class="card-title">We have sent a verification code to +254 61 ****** 54</h3>
+    <div class="text-grey">
+      Please, enter the code below.
+    </div>
+    <div class="row pb-5">
+      <div class=" col-md-12 d-none d-sm-flex justify-content-center align-items-center">
+        <img src="./assets/images/Illustrations/Illustrations_VerificationCode.svg" height="228px" />
+      </div>
+    </div>
+
+    <div class="row">
+      <form [formGroup]="verifyOtpForm" (ngSubmit)="submit()" autocomplete="off">
+        <div class="row mb-2">
+          <div class="ml-3" formArrayName="digits">
+            <input type="tel" *ngFor="
+            let field of verifyOtpFormArray.controls;
+            let i = index " #inputs [maxLength]="1" [formControlName]="i" (keydown)="check(i, field, $event)"
+              class="otp-input" autocomplete="off" />
+          </div>
+
+          <div *ngIf="submitted && f.digits.errors" class="validationError">
+            <div *ngIf="f.digits.errors.required" i18n="@@loco:5e8c775bc38e0f2242068ff2">
+              Please enter the verification code
+            </div>
+          </div>
+          <div class="validationError">
+            OTP Error here
+          </div>
+        </div>
+        <div class="row gx-4 mb-2">
+          <div class="col">
+            <button mat-flat-button color="primary" type="submit" class="col-12" disabled>
+              Verify
+            </button>
+          </div>
+          <div class="col">
+            <button mat-stroked-button color="primary" type="submit" class="col-12" disabled>
+              Resend in 00:59
+            </button>
+          </div>
+        </div>
+        <div class="row-fluid">
+          <button mat-stroked-button color="primary" type="submit" class="col-11">
+            Change the mobile number
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
