@@ -1,17 +1,15 @@
-<div class="row g-0 h-100">
-  <div class="col-lg-8">
+<div class="row h-100">
+  <div class="col-lg-8 px-0">
     <app-welcome-info></app-welcome-info>
   </div>
-  <div class="col-lg-4">
+  <div class="col-lg-4 pt-4 access-panel">
     <router-outlet></router-outlet>
-    <div class="bottom-panel">
-      <div class="row g-0 justify-content-between bottom-panel-selections">
-        <div class="col-6">
-          <app-language-input></app-language-input>
-        </div>
-        <div class="col-6">
-          <app-customer-support></app-customer-support>
-        </div>
+    <div class="row gx-0 bottom-panel-selections">
+      <div class="col">
+        <app-language-input></app-language-input>
+      </div>
+      <div class="col">
+        <app-customer-support></app-customer-support>
       </div>
     </div>
   </div>

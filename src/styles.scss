@@ -1,45 +1,11 @@
-
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
-@use '~@angular/material' as mat;
-// Plus imports for other components in your app.
-
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
-@include mat.core();
-
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$CIB-primary: mat.define-palette(mat.$indigo-palette);
-$CIB-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
-
-// The warn palette is optional (defaults to red).
-$CIB-warn: mat.define-palette(mat.$red-palette);
-
-// Create the theme object. A theme consists of configurations for individual
-// theming systems such as "color" or "typography".
-$CIB-theme: mat.define-light-theme((
-  color: (
-    primary: $CIB-primary,
-    accent: $CIB-accent,
-    warn: $CIB-warn,
-  )
-));
-
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-@include mat.all-component-themes($CIB-theme);
-
-/* You can add global styles to this file, and also import other style files */
-
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif;  
+}
 
 /* You can add global styles to this file, and also import other style files */
-
+@import "./assets/scss/theme";
 @import "./assets/scss/base";
 .otp-input {
   width: 36px;
@@ -125,21 +91,17 @@ button {
 
 .access-panel {
   background-color: var(--white);
-
   height: 100vh;
   overflow-y: scroll;
   .access-panel-content {
     padding-bottom: 40px;
   }
   .access-language-selection {
-    border-top: 2px solid var(--cool-grey-20);
     background-color: var(--white);
-    // background-color: green;
     position: fixed;
     width: calc(100vw * 0.333333);
-    max-width: 420px;
     bottom: 0;
-    height: 80px;
+    height: 4rem;
     overflow: hidden;
     padding-left: 44px;
     padding-top: 16px;

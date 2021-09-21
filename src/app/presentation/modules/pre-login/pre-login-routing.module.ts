@@ -5,7 +5,7 @@ import { PreLoginComponent } from './pre-login.component';
 const routes: Routes = [
   { 
     path: '',
-    component: PreLoginComponent
+    component: PreLoginComponent,
   }
 ];
 
