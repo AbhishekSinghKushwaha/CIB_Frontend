@@ -1,4 +1,4 @@
-export interface IPreLoginModal {
+export interface PreLoginModal {
   title: string;
   image?: string;
   message: string;

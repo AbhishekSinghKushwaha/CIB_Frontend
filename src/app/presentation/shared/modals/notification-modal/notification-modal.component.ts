@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { IPreLoginModal } from '../../../../core/interfaces/pre-login-modal.interface';
+import { PreLoginModal } from '../../../../core/domain/pre-login-modal.model';
 
 @Component({
   selector: 'app-notification-modal',
@@ -11,7 +11,7 @@ import { IPreLoginModal } from '../../../../core/interfaces/pre-login-modal.inte
 export class NotificationModalComponent implements OnInit {
 
   constructor(readonly dialogRef: MatDialogRef<NotificationModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: IPreLoginModal) { }
+    @Inject(MAT_DIALOG_DATA) public data: PreLoginModal) { }
 
   ngOnInit(): void {
   }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NotificationModalModule } from './../../../shared/components/notification-modal/notification-modal.module';
+import { NotificationModalModule } from '../../../shared/modals/notification-modal/notification-modal.module';
 import { MatStyleModule } from './../../../../mat-style.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IUserVerifyProduct } from './../../../../core/interfaces/user-verify-product.interface';
+import { UserVerifyProduct } from './../../../../core/domain/user-verify-product.model';
 
 @Component({
   selector: 'app-security-verification',
@@ -7,9 +7,9 @@ import { IUserVerifyProduct } from './../../../../core/interfaces/user-verify-pr
   styleUrls: ['./security-verification.component.scss']
 })
 export class SecurityVerificationComponent implements OnInit {
-  selectedItem!: IUserVerifyProduct | null;
+  selectedItem!: UserVerifyProduct | null;
   submitted = false;
-  userVerifyProducts!: IUserVerifyProduct[];
+  userVerifyProducts!: UserVerifyProduct[];
 
   constructor() { }
 
@@ -24,7 +24,7 @@ export class SecurityVerificationComponent implements OnInit {
     ];
   }
 
-  toggleProduct(product: IUserVerifyProduct): void {
+  toggleProduct(product: UserVerifyProduct): void {
     this.submitted = false;
     if (this.selectedItem?.id === product.id) {
       this.selectedItem = null;
@@ -33,7 +33,7 @@ export class SecurityVerificationComponent implements OnInit {
     }
   }
 
-  isChecked(product: IUserVerifyProduct): boolean {
+  isChecked(product: UserVerifyProduct): boolean {
     return product.id === this.selectedItem?.id;
   }
 

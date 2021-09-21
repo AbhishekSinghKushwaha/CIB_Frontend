@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { IPreLoginModal } from './../../interfaces/pre-login-modal.interface';
-import { NotificationModalComponent } from '../../../presentation/shared/components/notification-modal/notification-modal.component';
+import { PreLoginModal } from '../../domain/pre-login-modal.model';
+import { NotificationModalComponent } from '../../../presentation/shared/modals/notification-modal/notification-modal.component';
 
 @Injectable()
 export class NotificationModalService {
 
   constructor(private readonly dialog: MatDialog) { }
 
-  open(data: IPreLoginModal): void {
-    this.dialog.open<NotificationModalComponent, IPreLoginModal>(NotificationModalComponent, {
+  open(data: PreLoginModal): void {
+    this.dialog.open<NotificationModalComponent, PreLoginModal>(NotificationModalComponent, {
       disableClose: true,
       data
     });
