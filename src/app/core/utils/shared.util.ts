@@ -1,7 +1,11 @@
 import { PreLoginModal } from './../domain/pre-login-modal.model';
-export const generateNotificationModalParam = (param: PreLoginModal): PreLoginModal => ({
+export default class ShareUtils {
+  static getNotificationModalParam(param: PreLoginModal): PreLoginModal {
+    return {
       image: param.image,
       title: param.title,
       message: param.message,
       registerButtonEnabled: !!param.registerButtonEnabled
-    })
+    }
+  }
+}
