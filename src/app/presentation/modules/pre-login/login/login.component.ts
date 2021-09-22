@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NotificationModalService } from 'src/app/core/services/notification-modal/notification-modal.service';
 import SharedUtil from './../../../../core/utils/shared.util';
 
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
   submitted = false;
 
   constructor(
-    private readonly notificationModalService: NotificationModalService) { }
+    private readonly notificationModalService: NotificationModalService,
+    private readonly router: Router) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -58,5 +60,9 @@ export class LoginComponent implements OnInit {
       message: 'The details you entered aren\'t familiar to us. Please try again or register to create your profile',
     })
     this.notificationModalService.open(message);
+  }
+
+  navigateToForgotPasswordSection(): void {
+    this.router.navigate(['forgot-password']);
   }
 }
