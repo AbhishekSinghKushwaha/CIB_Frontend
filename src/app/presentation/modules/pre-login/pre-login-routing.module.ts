@@ -8,6 +8,11 @@ const routes: Routes = [
     component: PreLoginComponent,
     children: [
       {
+         path: '',
+         redirectTo: 'login',
+         pathMatch: 'full'
+      },
+      {
         path: 'login',
         loadChildren: (): Promise<any> => import('./login/login.module').then(m => m.LoginModule)
       },
@@ -22,10 +27,8 @@ const routes: Routes = [
       {
         path: 'security-challenge',
         loadChildren: (): Promise<any> => import('./security-challenge/security-challenge.module').then(m => m.SecurityChallengeModule)
-      },
-    ]
+      },]
   },
-
 ];
 
 @NgModule({
