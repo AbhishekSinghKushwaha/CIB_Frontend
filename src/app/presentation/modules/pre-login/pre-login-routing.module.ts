@@ -30,10 +30,7 @@ const routes: Routes = [
       },
       {
         path: 'forgot-password',
-        loadChildren: (): Promise<any> =>
-          import('./forgot-password/forgot-password.module').then(
-            (m) => m.ForgotPasswordModule
-          )
+        loadChildren: (): Promise<any> => import('./forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule)
       }
     ]
   },
