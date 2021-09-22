@@ -1,0 +1,20 @@
+.bottom-panel {
+    background-color: var(--white);
+    // overflow-y: scroll;
+    height: 100vh;
+
+    .bottom-panel-selections {
+        background-color: var(--white);
+        position: fixed;
+        width: calc(100vw * 0.333333);
+        max-width: 420px;
+        bottom: 0;
+        height: 4rem;
+        overflow: hidden;
+        padding: 0.5rem;
+        @media (max-width: 991px) {
+            width: calc(100vw);
+            max-width: 100vw;
+          }
+    }
+}

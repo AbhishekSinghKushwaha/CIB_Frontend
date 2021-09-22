@@ -1,0 +1,17 @@
+.mat-stroked-button {
+  border: 1px solid !important;
+}
+
+button:focus {
+  outline: none !important;
+  border: 0 !important;
+}
+
+::ng-deep .round-checkbox {
+  & .mat-checkbox-background, .mat-checkbox-frame {
+    border-radius: 70% !important;
+  }
+}
+
+
+

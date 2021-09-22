@@ -1,0 +1,43 @@
+<div class="h-100 discover-background" [ngStyle]="{'background-image': backgroundImageUrl()}">
+    <div class="container-fluid d-flex p-5 flex-column justify-content-between">
+        <div class="row mb-4">
+            <div class="col access-logo">
+                <img [src]="appLogoSrc()" routerLink="/" style="cursor: pointer"/>
+            </div>
+        </div>
+
+        <div class="row d-md-none">
+            <div class="col">
+              <div class="display-4 strong-text" [ngClass]="isOneEquity ? 'text-white' : 'text-black-60'">
+                <span i18n="@@loco:5f818d3ae738c922e9257842">Welcome to <br></span>
+                Corporate Internet Banking
+              </div>
+              <p class="text-sm mt-3" [ngClass]="isOneEquity ? 'text-white' : 'text-black-60'" i18n="@@loco:602104b04a67620a25415743">
+                More than just banking
+              </p>
+            </div>
+          </div>
+          <div class="row mt-3 d-none d-lg-block">
+            <div class="col-md-6">
+              <div class="text-xxl strong-text" [ngClass]="isOneEquity ? 'text-white' : 'text-black-60'">
+                <span i18n="@@loco:5f818d3ae738c922e9257842">Welcome to <br></span>
+                Corporate Internet Banking
+              </div>
+              <p class="mt-3" [ngClass]="isOneEquity ? 'text-white' : 'text-black-60'" i18n="@@loco:602104b04a67620a25415743">
+                More than just banking
+              </p>
+            </div>
+          </div>
+          <div class="row mt-3 d-none d-md-block d-lg-none">
+            <div class="col-md-6">
+              <div class="text-xxl strong-text" [ngClass]="isOneEquity ? 'text-white' : 'text-black-60'">
+                <span i18n="@@loco:5f818d3ae738c922e9257842">Welcome to <br></span>
+                Corporate Internet Banking
+              </div>
+              <p class="mt-3" [ngClass]="isOneEquity ? 'text-white' : 'text-black-60'" i18n="@@loco:602104b04a67620a25415743">
+                More than just banking
+              </p>
+            </div>
+          </div>
+    </div>
+</div>

@@ -1,0 +1,95 @@
+GENERAL TERMS AND CONDITIONS FOR INTERNET BANKING SERVICES "EQUITY BCDC MOBILE" AND "EQUITY BCDC ONLINE".
+
+
+1.	Subject
+These General Terms and Conditions for Internet Banking Services "Equity BCDC Mobile" and "Equity BCDC Online" (hereinafter the "General Terms and Conditions for Internet Banking") contain the specific rules that must govern the Internet Banking services (hereinafter the "Services") that Equity BCDC, a limited company with a Board of Directors, offers to the natural persons of its clients.
+
+Equity BCDC is hereinafter referred to as the "Bank" or by any other term to be specified according to the context. Individuals who are clients of Equity BCDC are hereinafter referred to as "Clients" or "Customers" or by any other term to be specified in the context.
+
+2.	Modification of the General Terms and Conditions for Internet Banking
+The Bank reserves the right to amend or supplement these Internet Banking General Terms and Conditions at any time.
+Subject to mandatory legal or regulatory provisions, amendments to the General Terms and Conditions of Internet Banking shall come into force within 30 days of their publication on the Bank's website. In the event of disagreement on the modifications made, the Customer has a period of 60 days from this publication to terminate the Services from which he benefits. Failing to do so, the Customer is deemed to have agreed to the new provisions.
+
+3.	Communication of changes
+Notices of changes to the General Terms and Conditions for Internet Banking are brought to the Customer's attention on the Bank's website www.equitygroupholdings.com/cd, by letter, via account statements, via prospectuses and posters made available to customers in the Bank's branches, by e-mail or by any other channel that the Bank may use.
+
+4.	Tariff changes - Application and acceptance deadlines
+The rates, commissions and interest for the Services listed in the General Terms and Conditions for Internet Banking are subject to change. These changes are applied at the latest 30 days after their publication on the Bank's website. Changes are deemed to be accepted by the Customer if the Customer does not express his disagreement in writing within 30 days of publication of the changes on the Bank's website. The Client's disagreement shall result in the renunciation of the Services.
+
+5.	Right to terminate the Services
+The Bank reserves the right to terminate the Services at any time, without notice and without having to justify its decision.
+
+6.	Applicable law
+With regard to the Services listed in the Internet Banking General Terms and Conditions, relations between the Bank and the Customer are governed by these General Terms and Conditions, the General Regulations of Operations and Congolese law.
+
+7.	Conflict between the regulations
+In the event of any contradiction between the General Operating Regulations and the Internet Banking General Terms and Conditions, the latter shall apply.
+
+8.	Competent Jurisdiction
+Subject to specific legal or contractual provisions, disputes arising from the interpretation or application of these General Terms and Conditions are subject to the jurisdiction of the courts in whose jurisdiction the agency with which the Client has subscribed to the Services is located.
+
+9.	Origin of funds
+The Customer declares on his honour that the funds credited to and debited from his account(s) are not linked to illegal activities covered by the legal and regulatory provisions in force, in particular Law N°04/016 of 19 July 2004 on the fight against money laundering and the financing of terrorism.
+
+10.	Availability of the Internet Banking General Terms and Conditions
+These General Terms and Conditions are made available to customers on the website www.equitygroupholding.com/cd, or in each of the Bank's branches, or by any other means.
+
+11.	Adherence to the General Terms and Conditions Internet Banking
+Any Customer, who subscribes to one of the Services governed by the General Terms and Conditions for Internet Banking, adheres to all the provisions thereof.
+
+12.	Functionalities of the Services
+The Internet Banking Services, depending on the options chosen by the Customer, allow the Customer to:
+- consult the balance(s) of his account(s);
+- consult, print or export for printing account statements;
+- consult the daily transactions or the history of his account(s);
+- make local transfers;
+- make transfers abroad in compliance with the relevant regulations;
+- consult your time deposit(s) (DAT);
+- exchange with the Bank via electronic mail;
+- consult the exchange rate.
+
+13.	Access to the Services
+The Customer who applies to subscribe to the Internet Banking Services must first have an Internet connection.
+The Services can be accessed either from a computer or from an application on mobile devices such as smartphones and tablets connected to the Internet. The application can be downloaded free of charge from an online application download platform, such as the App Store or Play Store.
+Unless expressly reserved by the Customer, all the Customer's accounts of which the Customer is the Account Holder or Subscriber are linked to the Services subscribed to by the Customer.
+
+14.	Fees for Services
+The Customer using the Internet Banking Services is obliged to pay the subscription fees in advance. These subscription fees are non-refundable in the event of renunciation of these Services. They are automatically deducted by the Bank from the Customer's account provided for this purpose. The Customer is required to pay, where applicable, the bank charges relating to operations carried out via the Internet Banking Services.
+The rates applicable to the Internet Banking Services are available at the Bank's counters.
+
+15.	Duration, termination and modification of the Services
+The Internet Banking Services are made available to the Customer for an indefinite period of time. Any party wishing to terminate it shall notify the other party in writing.
+If the Customer wishes to cancel the Services, the cancellation takes effect 3 working days after the Bank has received the written request.
+The Bank reserves the right to terminate the Services immediately without notice without having to justify its decision to the Client.
+The Bank may make adjustments to the Services in line with technological developments. If these do not satisfy the Customer, the Customer may terminate the contract under the conditions set out above.
+
+16.	Authentication method
+When the Internet Banking Services are set up, the Bank provides the Customer with an initial login and password.
+The Customer is subsequently required to change the initial password by entering a password or personal code giving him access to the Services. The Client is solely responsible for maintaining the authentication method and undertakes to keep the password enabling him/her to access the Services confidential.
+The Bank cannot be held liable for any prejudicial consequences resulting from the fraudulent use of the authentication method by a third party.
+
+17.	Opposition to use
+If the authentication method is forgotten, disclosed or suspected to have been disclosed, stolen, lost or blocked, the Customer shall oppose the use of the related electronic signature by calling the Contact Center number or any other number previously communicated to him by the Bank during the Bank's opening hours and days. The Client shall confirm this objection in writing or by e-mail to the address contactcenter@equitybcdc.cd from the e-mail address previously communicated to the Bank. The Bank cannot be held liable for the consequences of an objection by telephone that does not emanate from the Customer.
+The Customer acknowledges that he is solely liable to the Bank, until the authentication method is blocked by the Bank, for the use that is made of it and undertakes to bear any direct or indirect prejudice resulting from the erroneous or illegal use of the authentication method, either by himself or by third parties. The Customer shall indemnify the Bank for any damage, loss and costs it may suffer and authorises it to automatically debit its account with the relevant amounts.
+In the event of an objection notified during the Bank's closing hours and days, the Bank shall be deemed to have received it on the next working day.
+
+18.	Authentication and transaction limits
+The Customer must use an electronic signature to authenticate the instructions carried out. If a transaction limit has been set, instructions exceeding the limits will be automatically rejected by the Bank's computer system.
+The Customer undertakes, at the time of each debit instruction, not to exceed the amount of the provision on the accounts of which he is the holder.
+
+19.	Information collected from the Customer
+The personal information collected is intended for the Bank, which is authorised to store it in computer memory, to use it and to communicate it for the same purposes to the companies in its group, its brokers and insurers, and even to third parties or subcontractors for management purposes.
+The Bank undertakes to respect the confidentiality of the information entrusted to it.
+The information may be communicated to credit or financial institutions, to the Central Bank of Congo and to any other third party in cases where the law provides for the obligation to disclose.
+The Customer may request the Bank to update his/her rights of access to the Services and to correct or delete the data provided to the Bank, provided that it is justified.
+
+20.	Approval of operations
+The Customer is required, within 30 days from the date of the operation on the account(s), to inform the Bank in writing of any disagreement. After this period, the Bank may consider the operations to be approved.
+
+21.	Responsibilities of the Bank
+Internet Banking Services are available 24 hours a day, 7 days a week, except during computer system maintenance work or in cases of force majeure.
+The Bank cannot be held liable for the consequences resulting from errors, mutilations or delays in the transmission of messages by telecommunications or the loss of their confidential nature.
+The Bank undertakes to take the utmost care to ensure that the Services operate smoothly. It does not enter into an obligation of result but an obligation of means for all stages of access to the site or the application and the various operational modules offered by the Services.
+The Bank declines all responsibility for failure to perform the contract in the event of force majeure.
+
+
