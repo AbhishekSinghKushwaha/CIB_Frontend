@@ -1,0 +1,183 @@
+@import "colours.scss";
+
+@font-face {
+  font-family: "Open Sans";
+  src: url("../fonts/Open_Sans/OpenSans-Regular.ttf");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Open Sans";
+  src: url("../fonts/Open_Sans/OpenSans-Light.ttf");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "Open Sans";
+  src: url("../fonts/Open_Sans/OpenSans-LightItalic.ttf");
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Open Sans";
+  src: url("../fonts/Open_Sans/OpenSans-SemiBold.ttf");
+  font-weight: 600;
+}
+@font-face {
+  font-family: "Open Sans";
+  src: url("../fonts/Open_Sans/OpenSans-SemiBoldItalic.ttf");
+  font-weight: 600;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Open Sans";
+  src: url("../fonts/Open_Sans/OpenSans-Bold.ttf");
+  font-weight: 700;
+}
+@font-face {
+  font-family: "Open Sans";
+  src: url("../fonts/Open_Sans/OpenSans-BoldItalic.ttf");
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Open Sans";
+  src: url("../fonts/Open_Sans/OpenSans-ExtraBold.ttf");
+  font-weight: 800;
+}
+@font-face {
+  font-family: "Open Sans";
+  src: url("../fonts/Open_Sans/OpenSans-ExtraBoldItalic.ttf");
+  font-weight: 800;
+  font-style: italic;
+}
+
+:root {
+  --font-primary: "Open Sans";
+
+  /* set base values */
+  --text-base-size: 1em; // 16px
+  --text-scale-ratio: 1.15;
+
+  // /* type scale */
+  // --text-xs: calc(1em / (var(--text-scale-ratio) * var(--text-scale-ratio))); // ~ 12 px
+  // --text-sm: calc(1em / var(--text-scale-ratio)); // ~ 14px
+  // --text-md: calc(1em * var(--text-scale-ratio)); // 16px
+  // --text-lg: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio));
+  // --text-xl: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio));
+  // --text-xxl: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio));
+  // --text-xxxl: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio));
+
+  --text-xs: 0.75em; // 12px
+  --text-sm: 0.875em; // 14px
+  --text-lg: 1.25em; // 20px
+  --text-xl: 2em; // 32px
+  --text-xxl: 3em; // 48px
+
+  /* spacing values */
+  --space-unit: 1;
+
+  --space-xxxxs: calc(0.125em * var(--space-unit)); // 2px
+  --space-xxxs: calc(0.25em * var(--space-unit)); // 4px
+  --space-xxs: calc(0.375em * var(--space-unit)); // 6px
+  --space-xs: calc(0.5em * var(--space-unit)); // 8px
+  --space-sm: calc(0.625em * var(--space-unit)); // 10px
+  --space-md: calc(0.75em * var(--space-unit)); // 12px
+  --space-lg: calc(1.25em * var(--space-unit)); // 20px
+  --space-xl: calc(2em * var(--space-unit)); // 32px
+  --space-xxl: calc(3.25em * var(--space-unit)); // 52px
+  --space-xxxl: calc(5.25em * var(--space-unit)); // 84px
+  --space-xxxxl: calc(8.5em * var(--space-unit)); // 136px
+
+  // text colours, we can apply themeing later
+  --color-text: var(--black);
+  --color-text-light: var(--cool-grey);
+  --color-text-heading: var(--black);
+
+  // line-height
+  --body-line-height: 1.5;
+  --heading-line-height: 1.4;
+  --small-text-line-height: 1.43;
+  --extra-small-text-line-height: 1.33;
+}
+
+body {
+  font-size: var(--text-base-size);
+  font-family: var(--font-primary) !important;
+  color: var(--color-text);
+  line-height: var(--body-line-height);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+form legend {
+  color: var(--color-text-heading) !important;
+  margin-bottom: var(--space-xxxs) !important;
+  line-height: var(--heading-line-height) !important;
+}
+
+h3,
+.text--lg {
+  font-size: var(--text-lg) !important;
+}
+
+.text-xxl {
+  font-size: var(--text-xxl) !important;
+  line-height: 1.17;
+}
+
+.text-sm {
+  font-size: var(--text-sm) !important;
+  font-weight: normal !important;
+  line-height: var(--small-text-line-height) !important;
+}
+
+.text-xs {
+  font-size: var(--text-xs) !important;
+  font-weight: normal !important;
+  line-height: var(--extra-small-text-line-height) !important;
+}
+
+.strong-text {
+  font-weight: 600 !important;
+}
+
+.text-grey {
+  color: var(--color-text-light) !important;
+}
+
+.text-white {
+  color: var(--white) !important;
+}
+
+.text-red {
+  color: var(--red) !important;
+}
+
+.text-orange {
+  color: var(--bcdc-mobile) !important;
+}
+
+.text-equity {
+  color: var(--equity) !important;
+}
+
+.text-black-60 {
+  color: var(--black-60) !important;
+}
+
+.text-normal {
+  color: var(--black) !important;
+}
+
+p,
+span {
+  line-height: var(--body-line-height);
+}
+
+.span-strong {
+  span {
+    font-weight: 800 !important;
+  }
+}
