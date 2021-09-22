@@ -1,0 +1,22 @@
+<mat-error *ngIf="formField?.dirty">
+	<span class="validationError"
+		*ngIf="formField?.hasError( 'required' )">
+		This is a required field.
+	</span>
+
+	<span class="validationError"
+		*ngIf="formField?.hasError( 'noEmptyString' )">
+		Please enter a valid name.
+	</span>
+
+	<span class="validationError"
+		*ngIf="formField?.hasError( 'normalEmailRule' )">
+		Email format is invalid.
+	</span>
+
+	<span class="validationError"
+		*ngIf="formField?.hasError( 'noWhitespaceRequired' )">
+		No spaces allowed.
+	</span>
+</mat-error>
+
