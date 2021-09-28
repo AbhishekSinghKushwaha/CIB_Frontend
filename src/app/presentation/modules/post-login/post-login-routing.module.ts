@@ -5,7 +5,16 @@ import { PostLoginComponent } from './post-login.component';
 const routes: Routes = [
   {
     path: '',
-    component: PostLoginComponent
+    component : PostLoginComponent,
+    children:[
+      {
+        path: 'transact',
+        loadChildren: (): Promise<any> => import('./transact/transact.module').then(m => m.TransactModule)
+      }
+    ]
+  },
+  {
+    
   }
 ];
 
