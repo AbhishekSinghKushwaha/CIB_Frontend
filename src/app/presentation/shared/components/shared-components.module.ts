@@ -19,7 +19,8 @@ import { BasicListComponent } from './basic-list/basic-list.component';
   ],
   exports: [
     LanguageInputComponent,
-    CustomerSupportComponent
+    CustomerSupportComponent,
+    BasicListComponent
   ]
 })
 export class SharedComponentsModule { }

@@ -8,13 +8,13 @@ const routes: Routes = [
     component : PostLoginComponent,
     children:[
       {
-        path: 'transact',
-        loadChildren: (): Promise<any> => import('./transact/transact.module').then(m => m.TransactModule)
-      }
+        path: '',
+        loadChildren: (): Promise<any> => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+      },
     ]
   },
   {
-    
+
   }
 ];
 
