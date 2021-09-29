@@ -3,14 +3,16 @@ import { CommonModule } from '@angular/common';
 import { NotificationModalComponent } from './notification-modal.component';
 import { MatStyleModule } from 'src/app/mat-style.module';
 import { NotificationModalService } from '../../../../core/services/notification-modal/notification-modal.service';
+import { SharedComponentsModule } from '../../components/shared-components.module';
 
 @NgModule({
   declarations: [
-    NotificationModalComponent
+    NotificationModalComponent,
   ],
   imports: [
     CommonModule,
-    MatStyleModule
+    MatStyleModule,
+    SharedComponentsModule
   ],
   exports:[
     NotificationModalComponent

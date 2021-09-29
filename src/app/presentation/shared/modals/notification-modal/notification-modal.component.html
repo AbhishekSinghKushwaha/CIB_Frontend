@@ -8,14 +8,10 @@
       {{data.message}}
     </p>
     <p *ngIf="data.registerButtonEnabled">
-      <span  class="mt-3 text text-danger cursor-pointer"
-        (click)="close()">Register</span>
-      <span  class=" ms-4 mt-3 text text-danger cursor-pointer" (click)="close()">Try again</span>
+      <app-register-button-footer (close)="close()"></app-register-button-footer>
     </p>
     <p *ngIf="data.logoutButtonEnabled">
-    <span class="mt-3 text  cursor-pointer"
-    (click)="close()">Keep me in</span>
-    <span  class="mt-3 ms-4 text text-danger cursor-pointer" (click)="close()">Sign me out</span>
+      <app-logout-button-footer (close)="close()"></app-logout-button-footer>
     </p>
     <p *ngIf="!(data.registerButtonEnabled||data.logoutButtonEnabled)">
       <span  class=" mt-3 text text-danger cursor-pointer" (click)="close()">Try again</span>
