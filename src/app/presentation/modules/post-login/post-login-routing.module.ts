@@ -5,7 +5,16 @@ import { PostLoginComponent } from './post-login.component';
 const routes: Routes = [
   {
     path: '',
-    component: PostLoginComponent
+    component : PostLoginComponent,
+    children:[
+      {
+        path: '',
+        loadChildren: (): Promise<any> => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+      },
+    ]
+  },
+  {
+
   }
 ];
 
