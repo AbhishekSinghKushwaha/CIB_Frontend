@@ -1,0 +1,17 @@
+    <div class="row product-list-item"  matRipple>
+      <div class="col-2 my-auto">
+        <div class="icon-container">
+          <mat-icon color="primary" [svgIcon]="item.leftIcon"></mat-icon>
+        </div>
+      </div>
+      <div class="col-10 product-list-item-label">
+        <div class="row h-100 justify-content-around align-items-center">
+          <div class="col-10 pl-0 text-truncate">
+            {{ item.text }}
+          </div>
+          <div class="col-2">
+            <mat-icon [svgIcon]="item.rightIcon"></mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
