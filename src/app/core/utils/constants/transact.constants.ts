@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import { dashboardListModel } from '../../domain/dashboard-list.model';
+import { transactListModel } from '../../domain/dashboard-list.model';
 
 @Injectable()
-export class DashboardConstants {
+export class TransactConstants {
 
   constructor() { }
 
-  DASHBOARD_LISTINGS: dashboardListModel[] = [{
+  DASHBOARD_LISTINGS: transactListModel[] = [{
     section: 'Send money',
     content: [
-      { leftIcon: 'swap_horiz', text: 'Own Equity account' },
+      { leftIcon: 'swap_horiz', text: 'Own Equity account',link:'/transact/send-own-equity/' },
       { leftIcon: 'input', text: 'Another equity account' },
       { leftIcon: 'phone_iphone', text: 'Mobile money' },
       { leftIcon: 'account_balance', text: 'Another bank', subtext: 'A local or international bank' },

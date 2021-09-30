@@ -9,7 +9,7 @@ const routes: Routes = [
     children:[
       {
         path: '',
-        loadChildren: (): Promise<any> => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+        loadChildren: (): Promise<any> => import('./transact/transact.module').then(m => m.TransactModule)
       },
     ]
   },

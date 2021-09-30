@@ -1,6 +1,6 @@
 import { BasicListItemModel } from "./basic-list-item.model";
 
-export interface dashboardListModel {
+export interface transactListModel {
   section: string;
   content: BasicListItemModel[];
 }
