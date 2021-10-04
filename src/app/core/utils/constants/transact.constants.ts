@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { transactListModel } from '../../domain/dashboard-list.model';
+import { transactListModel } from '../../domain/transact-list.model';
 
 @Injectable()
 export class TransactConstants {
