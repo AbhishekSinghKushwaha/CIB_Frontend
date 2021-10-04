@@ -1,26 +1,21 @@
 <mat-sidenav-container class="h-100">
-    <mat-sidenav #sidenav
-    class="col-9 col-sm-5 col-lg-3"
-    [opened]="!mobileQuery.matches"
-    [mode]="mobileQuery.matches ? 'push' : 'side'"
-    (keydown.escape)="sidenav.close()"
+  <mat-sidenav #sidenav class="col-9 col-sm-5 col-lg-3" [opened]="!mobileQuery.matches"
+    [mode]="mobileQuery.matches ? 'push' : 'side'" (keydown.escape)="sidenav.close()"
     [fixedInViewport]="mobileQuery.matches">
 
-        <app-sidebar-menu (ToggleSideMenu)="mobileQuery.matches ? sidenav.toggle() : ''"></app-sidebar-menu>
-    </mat-sidenav>
-    <mat-sidenav-content>
-        <mat-toolbar *ngIf="mobileQuery.matches" class="toolbar justify-content-between">
-            <button mat-icon-button (click)="sidenav.toggle()">
-              <mat-icon>menu</mat-icon>
-            </button>
-          </mat-toolbar>
+    <app-sidebar-menu (ToggleSideMenu)="mobileQuery.matches ? sidenav.toggle() : ''"></app-sidebar-menu>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar *ngIf="mobileQuery.matches" class="toolbar justify-content-between">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </mat-toolbar>
 
-          <div class="container content pt-5">
-            <div class="col-lg-10 ps-4">
-              <router-outlet></router-outlet>
-              <!-- <p class="text-center mt-5">Main Content</p>
-              <app-user-card-list></app-user-card-list> -->
-            </div>
-          </div>
-    </mat-sidenav-content>
+    <div class="container-fluid min-vh-100 content pt-5">
+      <div class="col-lg-11 ps-4">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </mat-sidenav-content>
 </mat-sidenav-container>

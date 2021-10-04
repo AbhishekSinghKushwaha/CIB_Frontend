@@ -5,7 +5,7 @@ import { CustomerSupportComponent } from './customer-support/customer-support.co
 import { MatStyleModule } from 'src/app/mat-style.module';
 import { RegisterButtonFooterComponent } from './register-button-footer/register-button-footer.component';
 import { LogoutButtonFooterComponent } from './logout-button-footer/logout-button-footer.component';
-import { BasicListComponent } from './basic-list/basic-list.component';
+import { TransactMenuItemComponent } from './transact-menu-item/transact-menu-item.component';
 
 
 
@@ -15,7 +15,7 @@ import { BasicListComponent } from './basic-list/basic-list.component';
     CustomerSupportComponent,
     RegisterButtonFooterComponent,
     LogoutButtonFooterComponent,
-    BasicListComponent
+    TransactMenuItemComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +26,7 @@ import { BasicListComponent } from './basic-list/basic-list.component';
     CustomerSupportComponent,
     RegisterButtonFooterComponent,
     LogoutButtonFooterComponent,
-    BasicListComponent
+    TransactMenuItemComponent
   ]
 })
 export class SharedComponentsModule { }
