@@ -4,6 +4,7 @@ import { InputComponent } from './input/input.component';
 import { PasswordInputComponent } from './password-input/password-input.component';
 import { FieldErrorsComponent } from './field-errors/field-errors.component';
 import { MatStyleModule } from 'src/app/mat-style.module';
+import { TransferAmountComponent } from './transfer-amount/transfer-amount.component';
 
 
 
@@ -11,7 +12,8 @@ import { MatStyleModule } from 'src/app/mat-style.module';
   declarations: [
     InputComponent,
     PasswordInputComponent,
-    FieldErrorsComponent
+    FieldErrorsComponent,
+    TransferAmountComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import { MatStyleModule } from 'src/app/mat-style.module';
   exports: [
     InputComponent,
     PasswordInputComponent,
-    FieldErrorsComponent
+    FieldErrorsComponent,
+    TransferAmountComponent
   ]
 })
 export class FormElementsModule { }

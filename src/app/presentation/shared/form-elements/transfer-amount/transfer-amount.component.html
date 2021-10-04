@@ -1,0 +1,28 @@
+<mat-form-field floatLabel="always" class="col-5 amount-and-currency-fields">
+    <mat-label > Amount </mat-label>
+    <input
+      matInput
+      type="text"
+      placeholder="KES"
+      class="currency-field"
+    />
+    <mat-icon
+    matSuffix
+    [ngStyle]="{
+      opacity: !fromAccount?.accountNumber ? '0.3' : '1',
+      cursor: 'pointer'
+    }"
+    svgIcon="chevron-down"
+    class="chevron"
+  >
+  </mat-icon>
+</mat-form-field>
+
+<mat-form-field floatLabel="never" class="col-7 pl-2 amount-and-currency-fields">
+    <input
+      matInput
+      type="text"
+      placeholder="Enter an amount"
+      class="currency-field"
+    />
+</mat-form-field>

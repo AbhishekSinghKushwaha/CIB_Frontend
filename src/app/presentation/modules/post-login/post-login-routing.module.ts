@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { FormTestingComponent } from './form-testing/form-testing.component';
 import { PostLoginComponent } from './post-login.component';
 
 const routes: Routes = [
@@ -7,10 +8,14 @@ const routes: Routes = [
     path: '',
     component : PostLoginComponent,
     children:[
+      // {
+      //   path: '',
+      //   loadChildren: (): Promise<any> => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+      // },
       {
         path: '',
-        loadChildren: (): Promise<any> => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
-      },
+        component: FormTestingComponent
+      }
     ]
   },
   {
