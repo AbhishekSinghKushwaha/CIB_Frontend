@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   loginPasswordForm: FormGroup=new FormGroup({});
   hidePassword = true;
   submitted = false;
+  isloggedOut=false;
 
   constructor(
     private readonly notificationModalService: NotificationModalService,
@@ -65,4 +66,25 @@ export class LoginComponent implements OnInit {
   navigateToForgotPasswordSection(): void {
     this.router.navigate(['forgot-password']);
   }
+
+  modalLogout(): void {
+    const message = SharedUtil.getNotificationModalParam({
+      title: 'Are you sure you want to sign out?',
+      message: '',
+      logoutButtonEnabled: true
+    })
+    this.notificationModalService.open(message);
+    this.isloggedOut=true;
+  }
+  modelSessionOut(): void {
+    const message = SharedUtil.getNotificationModalParam({
+      image: './assets/images/Illustrations/logout-illustration.svg',
+      title: 'Are you stil there?',
+      message: `You've been quiet. To keep your details safe, you will be automatically signed out in 00:59 seconds`,
+      logoutButtonEnabled: true
+    })
+    this.notificationModalService.open(message);
+  }
+
+  
 }

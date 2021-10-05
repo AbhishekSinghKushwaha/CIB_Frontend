@@ -4,7 +4,7 @@
   </a>
 
   <!-- Dashboard/Home -->
-  <a mat-list-item class="text-grey text-sm" (click)="toggleSideMenu()">
+  <a mat-list-item class="text-grey text-sm" (click)="toggleSideMenu()" [routerLink]="['/dashboard']" routerLinkActive="router-link-active" >
     <div class="row pl-3">
       <div class="col-12">
         <mat-icon svgIcon="home"></mat-icon>
@@ -14,7 +14,7 @@
   </a>
 
   <!-- Transact -->
-  <a mat-list-item class="text-grey text-sm">
+  <a mat-list-item class="text-grey text-sm" [routerLink]="['/transact']" routerLinkActive="router-link-active" >
     <div class="row pl-3">
       <div class="col-12">
         <mat-icon class="menu-icon" svgIcon="transact"></mat-icon>
@@ -26,7 +26,7 @@
   </a>
 
   <!-- Borrow -->
-  <a mat-list-item class="text-grey text-sm">
+  <a mat-list-item class="text-grey text-sm" [routerLink]="['/borrow']" routerLinkActive="router-link-active" >
     <div class="row pl-3">
       <div class="col-12">
         <mat-icon class="menu-icon" svgIcon="borrow-unselected"> </mat-icon>

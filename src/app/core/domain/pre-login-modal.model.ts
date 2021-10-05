@@ -3,4 +3,5 @@ export interface PreLoginModal {
   image?: string;
   message: string;
   registerButtonEnabled?: boolean;
+  logoutButtonEnabled?: boolean;
 }
