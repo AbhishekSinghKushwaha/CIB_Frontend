@@ -1,4 +1,4 @@
-export interface BasicListItemModel {
+export interface TransactMenuItem {
   leftIcon: string;
   rightIcon?: string;
   text: string;

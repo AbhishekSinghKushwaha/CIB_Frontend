@@ -4,7 +4,6 @@ import { TransactConstants } from '../../../../core/utils/constants/transact.con
 
 import { SharedComponentsModule } from 'src/app/presentation/shared/components/shared-components.module';
 import { MatStyleModule } from 'src/app/mat-style.module';
-// import { SendOwnEquityComponent } from './components/send-own-equity/send-own-equity.component';
 import { TransactComponent } from './transact.component';
 import { TransactRoutingModule } from './transact-routing.module';
 
@@ -12,7 +11,6 @@ import { TransactRoutingModule } from './transact-routing.module';
 @NgModule({
   declarations: [
     TransactComponent,
-    // SendOwnEquityComponent
   ],
   imports: [
     CommonModule,

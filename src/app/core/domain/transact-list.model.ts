@@ -1,6 +1,6 @@
-import { BasicListItemModel } from "./basic-list-item.model";
+import { TransactMenuItem } from "./transact-menu-item.model";
 
-export interface transactListModel {
+export interface TransactDashboardList {
   section: string;
-  content: BasicListItemModel[];
+  content: TransactMenuItem[];
 }

@@ -8,7 +8,7 @@ import { TransactConstants } from '../../../../core/utils/constants/transact.con
 })
 export class TransactComponent implements OnInit {
 
-  constructor(public readonly dashboardList: TransactConstants) { }
+  constructor(public readonly transactDashboardList: TransactConstants) { }
 
   ngOnInit(): void {
   }
