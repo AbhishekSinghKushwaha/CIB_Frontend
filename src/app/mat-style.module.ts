@@ -21,6 +21,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatChipsModule } from '@angular/material/chips';
 import { CustomIconService } from './core/utils/custom-icon.service';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatRadioModule } from '@angular/material/radio';
 
 const MatImports = [
   MatSidenavModule,
@@ -44,6 +46,8 @@ const MatImports = [
   MatExpansionModule,
   MatSnackBarModule,
   MatChipsModule,
+  MatNativeDateModule,
+  MatRadioModule
 ];
 
 
