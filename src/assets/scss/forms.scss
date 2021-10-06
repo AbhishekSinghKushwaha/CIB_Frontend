@@ -5,3 +5,13 @@
 .successMessage {
     color: var(--green);
 }
+
+.full-input {
+    display: flex;
+    flex-direction: column;
+}
+
+.full-input > * {
+    width: 100% !important;
+}
+

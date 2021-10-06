@@ -1,1 +1,88 @@
-<p>other-equity-account works!</p>
+<div class="row">
+  <div class="col-md-12">
+    <div class="row mb-4 justify-content-md-center">
+      <div class="col-md-11">
+        <div class="mb-3">
+          <button mat-icon-button aria-label="Back" class="back-icon" routerLink="/transact/">
+            <div class="strong-text">
+              <mat-icon svgIcon="caret_left"></mat-icon>
+              <span>Send to an equity account</span>
+            </div>
+          </button>
+        </div>
+        <h3 class="strong-text">Please enter the payment details</h3>
+        <form class="d-flex flex-column" autocomplete="off">
+          <div class="row pt-4">
+            <div class="col-md-6">
+              <mat-form-field appearance="standard" style="width: 100%" floatLabel="always" readonly>
+                <mat-label>Send from</mat-label>
+                <input matInput type="text" placeholder="Send from">
+                <button type='button' mat-icon-button matSuffix>
+                  <mat-icon svgIcon="caret_down"></mat-icon>
+                </button>
+                <p class="text-grey text-sm-start mt-2 mb-0">Available balance 999,999,999.99 CDF</p>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6  align-self-end">
+              <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
+                <mat-label>Send to</mat-label>
+                <input matInput type="text" placeholder="Select the recipient">
+                <button type='button' mat-icon-button matSuffix>
+                  <mat-icon svgIcon="caret_down"></mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <div class="row justify-content-between">
+                <div class="col-md-4">
+                  <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
+                    <mat-label>Amount</mat-label>
+                    <input matInput type="text">
+                    <button type='button' mat-icon-button matSuffix>
+                      <mat-icon svgIcon="caret_down"></mat-icon>
+                    </button>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-8">
+                  <mat-form-field appearance="standard" style="width: 100%">
+                    <mat-label>Enter an amount</mat-label>
+                    <input matInput type="text">
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
+                <mat-label>Schedule Payment</mat-label>
+                <input matInput [matDatepicker]="picker" placeholder="Select a payment a date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
+                <mat-label>FX Reference ID</mat-label>
+                <input matInput type="text" placeholder="Enter FX reference ID">
+                <button type='button' mat-button mat-icon-button matSuffix>
+                  <mat-icon svgIcon="caret_down"></mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
+                <mat-label>Payment reason</mat-label>
+                <input matInput type="text" placeholder="Optional">
+                <button type='button' mat-icon-button matSuffix>
+                  <mat-icon svgIcon="caret_down"></mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="mt-4">
+            <button mat-raised-button color="primary" disabled>Send money</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
