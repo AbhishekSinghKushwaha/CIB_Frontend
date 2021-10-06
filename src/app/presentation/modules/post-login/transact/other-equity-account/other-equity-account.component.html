@@ -16,11 +16,11 @@
             <div class="col-md-6">
               <mat-form-field appearance="standard" style="width: 100%" floatLabel="always" readonly>
                 <mat-label>Send from</mat-label>
-                <input matInput type="text" placeholder="Send from">
-                <button type='button' mat-icon-button matSuffix>
+                <input matInput type="text" placeholder="{{sendFrom?.name || 'Send from'}}">
+                <button type='button' mat-icon-button matSuffix (click)="openAccounts()">
                   <mat-icon svgIcon="caret_down"></mat-icon>
                 </button>
-                <p class="text-grey text-sm-start mt-2 mb-0">Available balance 999,999,999.99 CDF</p>
+                <p *ngIf="sendFrom" class="text-grey text-sm-start mt-2 mb-0">Available balance {{sendFrom?.balance | number:'0.2'}} {{sendFrom?.currency}}</p>
               </mat-form-field>
             </div>
             <div class="col-md-6  align-self-end">
