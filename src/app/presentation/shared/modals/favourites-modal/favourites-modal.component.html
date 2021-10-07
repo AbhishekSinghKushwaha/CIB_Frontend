@@ -1,0 +1,28 @@
+<div class="container favourites-modal-screen">
+  <button mat-icon-button matSuffix class="close-button" (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <p class="text-center fw-bold pt-2">Send to</p>
+  <h3 class="m-4 ms-3">Who are you sending money to</h3>
+  <div class="row m-2">
+    <mat-form-field appearance="outline">
+      <input matInput [(ngModel)]="searchText">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <div class="col ms-3 pb-2 border-bottom-grey">
+    <img src="./assets/images/icons/Visual support_Icon_with_container.svg" class="fav-icon" alt="" />
+    <span class="ps-3">Send to someone new</span>
+  </div>
+  <div class="d-flex justify-content-between bd-highlight m-2">
+    <h3>Favourites</h3>
+    <div class="text-danger">Manage</div>
+  </div>
+  <app-beneficiary-list-item *ngFor="let account of (data  | favouriteSearch:searchText)" [data]="account"
+    [isChecked]="selected &&  selected.name===account.name">
+  </app-beneficiary-list-item>
+  <div class="row ms-3" *ngIf="(data  | favouriteSearch:searchText).length <1">
+    0 favourites found
+  </div>
+</div>

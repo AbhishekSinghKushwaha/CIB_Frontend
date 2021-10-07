@@ -6,6 +6,7 @@ import { SelectAccountModalService } from 'src/app/core/services/select-account-
   selector: 'app-account-dropdown-item',
   templateUrl: './account-dropdown-item.component.html',
   styleUrls: ['./account-dropdown-item.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AccountDropdownItemComponent implements OnInit {
   @Input() isChecked: boolean;

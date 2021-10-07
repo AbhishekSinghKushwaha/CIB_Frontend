@@ -1,3 +1,4 @@
+import { MatDividerModule } from '@angular/material/divider';
 import { NgModule } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -46,7 +47,8 @@ const MatImports = [
   MatSnackBarModule,
   MatChipsModule,
   MatNativeDateModule,
-  MatRadioModule
+  MatRadioModule,
+  MatDividerModule
 ];
 
 

@@ -27,7 +27,7 @@
               <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
                 <mat-label>Send to</mat-label>
                 <input matInput type="text" placeholder="Select the recipient">
-                <button type='button' mat-icon-button matSuffix>
+                <button type='button' mat-icon-button matSuffix (click)="openFavourites()">
                   <mat-icon svgIcon="caret_down"></mat-icon>
                 </button>
               </mat-form-field>

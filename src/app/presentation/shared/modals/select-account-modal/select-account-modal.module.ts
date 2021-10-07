@@ -9,18 +9,17 @@ import { AccountDropdownItemComponent } from './account-dropdown-item/account-dr
 
 
 @NgModule({
-  declarations: [
-    SelectAccountModalComponent,
-    AccountDropdownItemComponent
-  ],
   imports: [
     CommonModule,
     MatStyleModule,
-    SharedComponentsModule,
-    MatStyleModule
   ],
   exports: [
-    SelectAccountModalComponent
+    SelectAccountModalComponent,
+    AccountDropdownItemComponent
+  ],
+  declarations: [
+    SelectAccountModalComponent,
+    AccountDropdownItemComponent
   ],
   providers: [
     SelectAccountModalService
