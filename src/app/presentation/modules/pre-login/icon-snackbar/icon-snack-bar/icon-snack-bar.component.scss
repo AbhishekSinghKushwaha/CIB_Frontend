@@ -1,0 +1,22 @@
+.mat-icon {
+    padding-top: 4px;
+    padding-left: 4px;
+    position: static;
+    width: 32px;
+    height: 32px;
+    left: calc(50% - 32px/2 - 143.5px);
+    top: calc(50% - 32px/2);
+
+    /* Utility/Green */
+
+    background: #2F9803;
+    border-radius: 80px;
+
+    /* Inside Auto Layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 0px 8px;
+    color: white;
+}
