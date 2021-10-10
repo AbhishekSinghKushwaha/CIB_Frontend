@@ -1,4 +1,4 @@
-<div class="own-equity-modal-screen p-0 mat-elevation-z0">
+<div class="own-equity-modal-screen p-0">
     <div class="row">
         <div class="col-md-4">
             <mat-icon (click)="close()">close</mat-icon>
@@ -6,22 +6,10 @@
         <h4 class="strong-text col-md-8">Currency</h4>
     </div>
     <h3 class="strong-text pt-4 mb-4">Please select a currency</h3>
-    <div *ngFor="let item of ownEquityCurrencyList.CURRENCY_LISTINGS; let isLast = last; let i = index">
-        <mat-radio-group aria-label="Select an option">
-            
-            <div class="mb-3 radio-container">
-                <div>
-                    <h4 class="strong-text">{{item.text}}</h4>
-                    <small class="text-grey">{{item.subtext}}</small>
-                </div>
-                <div>
-                    <mat-radio-button value={{i}}></mat-radio-button><br>
-                </div>
-            </div>
-        </mat-radio-group>
+    <div *ngFor="let item of data; let isLast = last; let i = index">
+        <app-currency-list-item [data]="item"  [isChecked]="selected?.text===item.text"> </app-currency-list-item>
         <mat-divider *ngIf="!isLast"  class="pt-3"></mat-divider>
-    </div>    
+    </div>
 </div>
-  
 
-  
+

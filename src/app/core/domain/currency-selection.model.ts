@@ -1,5 +1,4 @@
 export interface CurrencySelectionModal {
     text: string;
-    subtext?: string;
+    subtext: string;
   }
-  
