@@ -6,8 +6,7 @@ import { SelectAccountModel } from '../../domain/select-account.model';
 
 @Injectable()
 export class SelectAccountModalService {
-
-  selectedAccount = new Subject<SelectAccountModel>();
+  selected = new Subject<SelectAccountModel>();
 
   constructor(private readonly dialog: MatDialog) { }
 
@@ -18,7 +17,7 @@ export class SelectAccountModalService {
     });
   }
 
-  selectAccount(account: SelectAccountModel): void {
-    this.selectedAccount.next(account)
+  select(account: SelectAccountModel): void {
+    this.selected.next(account)
   }
 }

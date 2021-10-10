@@ -20,7 +20,7 @@ export class FavouritesModalComponent implements OnInit {
     private readonly favouritesModalService: FavouritesModalService) { }
 
   ngOnInit(): void {
-    this.favouritesModalService.selectedAccount.subscribe((x) => this.selected = x);
+    this.favouritesModalService.selected.subscribe((x) => this.selected = x);
   }
 
   close(): void {

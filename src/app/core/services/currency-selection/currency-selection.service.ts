@@ -6,7 +6,6 @@ import { CurrencySelectionComponent } from 'src/app/presentation/shared/modals/c
 
 @Injectable()
 export class CurrencySelectionService {
-
   selected = new Subject<CurrencySelectionModal>();
 
   constructor(private readonly dialog: MatDialog) { }

@@ -19,7 +19,7 @@ export class SelectAccountModalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.selectAccountModalService.selectedAccount.subscribe((x) => this.selected=x);
+    this.selectAccountModalService.selected.subscribe((x) => this.selected=x);
   }
 
   close(): void {

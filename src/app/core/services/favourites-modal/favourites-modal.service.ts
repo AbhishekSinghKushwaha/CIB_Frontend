@@ -7,7 +7,7 @@ import { FavouriteBeneficiaryModel } from '../../domain/favourites-beneficiary.m
 @Injectable()
 export class FavouritesModalService {
 
-  selectedAccount = new Subject<FavouriteBeneficiaryModel>();
+  selected = new Subject<FavouriteBeneficiaryModel>();
 
   constructor(private readonly dialog: MatDialog) { }
 
@@ -18,7 +18,7 @@ export class FavouritesModalService {
     });
   }
 
-  selectAccount(account: FavouriteBeneficiaryModel): void {
-    this.selectedAccount.next(account)
+  select(account: FavouriteBeneficiaryModel): void {
+    this.selected.next(account)
   }
 }
