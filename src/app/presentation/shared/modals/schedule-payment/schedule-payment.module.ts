@@ -4,8 +4,8 @@ import { SchedulePaymentComponent } from './schedule-payment.component';
 import { MatStyleModule } from 'src/app/mat-style.module';
 import { OwnequityModalService } from '../../../../core/services/ownequity-modal/ownequity-modal.service';
 import { ScheduledPaymentService } from 'src/app/core/services/scheduled-payment/scheduled-payment.service';
-import { PaymentFrequencyService } from 'src/app/core/services/payment-frequency/payment-frequency.service';
 import { PaymentFrequencyModalModule } from '../payment-frequency-modal/payment-frequency-modal.module';
+import { PaymentReminderModalModule } from '../payment-reminder-modal/payment-reminder-modal.module';
 
 
 
@@ -16,7 +16,8 @@ import { PaymentFrequencyModalModule } from '../payment-frequency-modal/payment-
   imports: [
     CommonModule,
     MatStyleModule,
-    PaymentFrequencyModalModule
+    PaymentFrequencyModalModule,
+    PaymentReminderModalModule
   ],
   exports:[
     SchedulePaymentComponent
@@ -24,7 +25,6 @@ import { PaymentFrequencyModalModule } from '../payment-frequency-modal/payment-
   providers:[
     OwnequityModalService,
     ScheduledPaymentService,
-    PaymentFrequencyService
   ]
 })
 export class SchedulePaymentModule { }

@@ -12,12 +12,14 @@ export class PaymentFrequencyModalComponent implements OnInit {
   selected: PaymentFrequencyModel;
 
   constructor(
-    private readonly dialogRef: MatDialogRef<PaymentFrequencyModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: PaymentFrequencyModel[],
-    private readonly paymentFrequencyService: PaymentFrequencyService) { }
+    private readonly paymentFrequencyService: PaymentFrequencyService) {
+    this.selected = paymentFrequencyService.default;
+    this.paymentFrequencyService.selected.subscribe((x) => this.selected = x);
+  }
 
   ngOnInit(): void {
-    this.paymentFrequencyService.selected.subscribe((x) => this.selected = x);
+
   }
 
 }

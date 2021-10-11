@@ -7,10 +7,10 @@
   </div>
   <h3 class="strong-text pt-4 mb-3">Please enter details</h3>
   <div>
-    <small class="text-grey">Frequency</small><br>
     <!-- d-flex flex-column -->
     <mat-form-field appearance="standard" style="width: 100%" floatLabel="always" readonly>
-      <input matInput type="text" placeholder="Select the frequency" [value]="frequency?.text">
+      <mat-label class="strong-text">Frequency</mat-label>
+      <input [readonly]="true" matInput type="text" placeholder="Select the frequency" [value]="frequency?.text">
       <button type='button' mat-icon-button matSuffix (click)="openFrequency()">
         <mat-icon svgIcon="caret_down"></mat-icon>
       </button>
@@ -38,71 +38,12 @@
   </div>
 
   <div>
-    <small class="text-grey">Remind me</small><br>
-    <mat-form-field class="d-flex flex-column">
-      <mat-label class="strong-text">Set a reminder</mat-label>
-      <mat-select>
-        <mat-option>
-          <mat-radio-group aria-label="Select an option">
-
-            <div class="radio-container">
-              <div>
-                <h4 class="strong-text">1 day before</h4>
-              </div>
-              <div>
-                <mat-radio-button value="1"></mat-radio-button><br>
-              </div>
-            </div>
-          </mat-radio-group>
-        </mat-option>
-        <mat-divider class="divider-radio"></mat-divider>
-
-        <mat-option>
-          <mat-radio-group aria-label="Select an option">
-
-            <div class="radio-container">
-              <div>
-                <h4 class="strong-text">2 days before</h4>
-              </div>
-              <div>
-                <mat-radio-button value="2"></mat-radio-button><br>
-              </div>
-            </div>
-          </mat-radio-group>
-        </mat-option>
-        <mat-divider class="divider-radio"></mat-divider>
-
-        <mat-option>
-          <mat-radio-group aria-label="Select an option">
-
-            <div class="radio-container">
-              <div>
-                <h4 class="strong-text">3 days before</h4>
-              </div>
-              <div>
-                <mat-radio-button value="3"></mat-radio-button><br>
-              </div>
-            </div>
-          </mat-radio-group>
-        </mat-option>
-        <mat-divider class="divider-radio"></mat-divider>
-
-        <mat-option>
-          <mat-radio-group aria-label="Select an option">
-
-            <div class="radio-container">
-              <div>
-                <h4 class="strong-text">1 week before</h4>
-              </div>
-              <div>
-                <mat-radio-button value="4"></mat-radio-button><br>
-              </div>
-            </div>
-          </mat-radio-group>
-        </mat-option>
-      </mat-select>
+    <mat-form-field appearance="standard" style="width: 100%" floatLabel="always" readonly>
+      <input [readonly]="true" matInput type="text" placeholder="Select the reminder" [value]="reminder?.text">
+      <button type='button' mat-icon-button matSuffix (click)="openReminder()">
+        <mat-icon svgIcon="caret_down"></mat-icon>
+      </button>
     </mat-form-field>
-
   </div>
 
   <div class="row">

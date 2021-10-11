@@ -16,7 +16,7 @@ export class PaymentFrequencyListItemComponent implements OnInit {
   }
 
   select(): void {
-    this.paymentFrequencyService.selected.next(this.data);
+    this.paymentFrequencyService.select(this.data);
   }
 
 }

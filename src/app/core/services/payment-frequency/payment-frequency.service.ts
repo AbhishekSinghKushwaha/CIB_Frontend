@@ -4,11 +4,10 @@ import { Subject } from 'rxjs';
 import { PaymentFrequencyModalComponent } from 'src/app/presentation/shared/modals/payment-frequency-modal/payment-frequency-modal.component';
 import { PaymentFrequencyModel } from '../../domain/payment-frequency.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class PaymentFrequencyService {
   selected = new Subject<PaymentFrequencyModel>();
+  private data:PaymentFrequencyModel;
 
   constructor(private readonly dialog: MatDialog) { }
 
@@ -20,6 +19,11 @@ export class PaymentFrequencyService {
   }
 
   select(input: PaymentFrequencyModel): void {
-    this.selected.next(input)
+    this.data = input;
+    this.selected.next(this.data)
+  }
+
+  get default(): PaymentFrequencyModel {
+    return this.data;
   }
 }
