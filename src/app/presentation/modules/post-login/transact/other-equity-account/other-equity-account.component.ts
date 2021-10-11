@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CurrencySelectionModal } from 'src/app/core/domain/currency-selection.model';
 import { FavouriteBeneficiaryModel } from 'src/app/core/domain/favourites-beneficiary.model';
+import { ScheduledPaymentModel } from 'src/app/core/domain/scheduled-payment.model';
 import { SelectAccountModel } from 'src/app/core/domain/select-account.model';
 import { CurrencySelectionService } from 'src/app/core/services/currency-selection/currency-selection.service';
 import { FavouritesModalService } from 'src/app/core/services/favourites-modal/favourites-modal.service';
 import { SelectAccountModalService } from 'src/app/core/services/select-account-modal/select-account-modal.service';
 import { CurrencySelectionConstants } from 'src/app/core/utils/constants/currency-selection.constants';
+import { ScheduledPaymentService } from './../../../../../core/services/scheduled-payment/scheduled-payment.service';
 
 @Component({
   selector: 'app-other-equity-account',
@@ -48,12 +50,14 @@ export class OtherEquityAccountComponent implements OnInit {
   currency: CurrencySelectionModal;
   equityForm: FormGroup;
   paymentDate: any;
+  schedulePaymentData: ScheduledPaymentModel;
 
   constructor(
     private readonly selectAccountService: SelectAccountModalService,
     private readonly favouritesModalService: FavouritesModalService,
-    private readonly currencySelectionService:CurrencySelectionService,
-    private readonly currencySelectionConstants:CurrencySelectionConstants
+    private readonly currencySelectionService: CurrencySelectionService,
+    private readonly currencySelectionConstants: CurrencySelectionConstants,
+    private readonly scheduledPaymentService: ScheduledPaymentService
   ) { }
 
   ngOnInit(): void {
@@ -86,8 +90,12 @@ export class OtherEquityAccountComponent implements OnInit {
     this.favouritesModalService.open(this.favouritesMock)
   }
 
-  openCurrencies():void{
+  openCurrencies(): void {
     this.currencySelectionService.open(this.currencySelectionConstants.CURRENCY_LISTINGS)
+  }
+
+  openPaymentDialog(): void {
+    this.scheduledPaymentService.open(this.schedulePaymentData);
   }
 
   submit() {

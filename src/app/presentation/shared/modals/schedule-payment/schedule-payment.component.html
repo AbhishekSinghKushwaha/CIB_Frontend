@@ -1,183 +1,122 @@
 <div class="own-equity-payment-modal-screen p-0 mat-elevation-z0">
-    <div class="row">
-        <div class="col-md-4">
-            <mat-icon (click)="close()">arrow_back_ios_new</mat-icon>
-        </div>
-        <h4 class="strong-text col-md-8">Schedule Payment</h4>
+  <div class="row">
+    <div class="col-md-4">
+      <mat-icon (click)="close()">arrow_back_ios_new</mat-icon>
     </div>
-    <h3 class="strong-text pt-4 mb-3">Please enter details</h3>
-    <div >
-        <small class="text-grey">Frequency</small><br> 
-          <mat-form-field class="d-flex flex-column">
-            <mat-label class="strong-text">Select the frequency</mat-label>
-            <mat-select>
-              <mat-option class="pt-5 pb-4">
-                <mat-radio-group aria-label="Select an option">
-                
-                    <div class="radio-container">
-                        <div>
-                            <h4 class="strong-text">Once-off</h4>
-                            <small class="text-grey">Description</small>
-                        </div>
-                        <div>
-                            <mat-radio-button value="1"></mat-radio-button><br>
-                        </div>
-                    </div>
-                </mat-radio-group>
-            </mat-option>
-            <mat-divider class="divider-radio"></mat-divider>
+    <h4 class="strong-text col-md-8">Schedule Payment</h4>
+  </div>
+  <h3 class="strong-text pt-4 mb-3">Please enter details</h3>
+  <div>
+    <small class="text-grey">Frequency</small><br>
+    <!-- d-flex flex-column -->
+    <mat-form-field appearance="standard" style="width: 100%" floatLabel="always" readonly>
+      <input matInput type="text" placeholder="Select the frequency" [value]="frequency?.text">
+      <button type='button' mat-icon-button matSuffix (click)="openFrequency()">
+        <mat-icon svgIcon="caret_down"></mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
 
-            <mat-option> 
-                <mat-radio-group aria-label="Select an option">
-                
-                    <div class="radio-container">
-                        <div>
-                            <h4 class="strong-text">Daily</h4>
-                        </div>
-                        <div>
-                            <mat-radio-button value="2"></mat-radio-button><br>
-                        </div>
-                    </div>
-                </mat-radio-group>
-            </mat-option>
-            <mat-divider class="divider-radio"></mat-divider>
+  <div>
+    <small class="text-grey">First payment date</small><br>
+    <mat-form-field class="d-flex flex-column">
+      <mat-label class="strong-text">Enter the start date</mat-label>
+      <input matInput class="pb-2" [matDatepicker]="startdatePicker">
+      <mat-datepicker-toggle matSuffix [for]="startdatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #startdatePicker></mat-datepicker>
+    </mat-form-field>
+  </div>
 
-            <mat-option>
-                <mat-radio-group aria-label="Select an option">
-                
-                    <div class="radio-container">
-                        <div>
-                            <h4 class="strong-text">Weekly</h4>
-                        </div>
-                        <div>
-                            <mat-radio-button value="3"></mat-radio-button><br>
-                        </div>
-                    </div>
-                </mat-radio-group>
-            </mat-option>
-            <mat-divider class="divider-radio"></mat-divider>
+  <div>
+    <small class="text-grey">Last payment date</small><br>
+    <mat-form-field class="d-flex flex-column">
+      <mat-label class="strong-text">Enter the end date</mat-label>
+      <input matInput class="pb-2" [matDatepicker]="lastdatePicker">
+      <mat-datepicker-toggle matSuffix [for]="lastdatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #lastdatePicker></mat-datepicker>
+    </mat-form-field>
+  </div>
 
-            <mat-option>
-                <mat-radio-group aria-label="Select an option">
-                
-                    <div class="radio-container">
-                        <div>
-                            <h4 class="strong-text">Monthly</h4>
-                        </div>
-                        <div>
-                            <mat-radio-button value="4"></mat-radio-button><br>
-                        </div>
-                    </div>
-                </mat-radio-group>
-            </mat-option>
-            </mat-select>
-          </mat-form-field>
-        
+  <div>
+    <small class="text-grey">Remind me</small><br>
+    <mat-form-field class="d-flex flex-column">
+      <mat-label class="strong-text">Set a reminder</mat-label>
+      <mat-select>
+        <mat-option>
+          <mat-radio-group aria-label="Select an option">
+
+            <div class="radio-container">
+              <div>
+                <h4 class="strong-text">1 day before</h4>
+              </div>
+              <div>
+                <mat-radio-button value="1"></mat-radio-button><br>
+              </div>
+            </div>
+          </mat-radio-group>
+        </mat-option>
+        <mat-divider class="divider-radio"></mat-divider>
+
+        <mat-option>
+          <mat-radio-group aria-label="Select an option">
+
+            <div class="radio-container">
+              <div>
+                <h4 class="strong-text">2 days before</h4>
+              </div>
+              <div>
+                <mat-radio-button value="2"></mat-radio-button><br>
+              </div>
+            </div>
+          </mat-radio-group>
+        </mat-option>
+        <mat-divider class="divider-radio"></mat-divider>
+
+        <mat-option>
+          <mat-radio-group aria-label="Select an option">
+
+            <div class="radio-container">
+              <div>
+                <h4 class="strong-text">3 days before</h4>
+              </div>
+              <div>
+                <mat-radio-button value="3"></mat-radio-button><br>
+              </div>
+            </div>
+          </mat-radio-group>
+        </mat-option>
+        <mat-divider class="divider-radio"></mat-divider>
+
+        <mat-option>
+          <mat-radio-group aria-label="Select an option">
+
+            <div class="radio-container">
+              <div>
+                <h4 class="strong-text">1 week before</h4>
+              </div>
+              <div>
+                <mat-radio-button value="4"></mat-radio-button><br>
+              </div>
+            </div>
+          </mat-radio-group>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+
+  <div class="row">
+    <div class="col-1 pt-2">
+      <mat-icon>info_outline</mat-icon>
     </div>
-
-    <div>
-        <small class="text-grey">First payment date</small><br> 
-        <mat-form-field class="d-flex flex-column">
-          <mat-label class="strong-text">Enter the start date</mat-label>
-          <input matInput class="pb-2" [matDatepicker]="picker">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
+    <div class="col-11">
+      <small class="text-grey">
+        You will be notified on the date that your payment is scheduled to take place
+      </small>
     </div>
+  </div>
 
-    <div>
-        <small class="text-grey">Last payment date</small><br> 
-        <mat-form-field class="d-flex flex-column">
-          <mat-label class="strong-text">Enter the end date</mat-label>
-          <input matInput class="pb-2" [matDatepicker]="picker">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-    </div>
-
-    <div >
-        <small class="text-grey">Remind me</small><br> 
-          <mat-form-field class="d-flex flex-column">
-            <mat-label class="strong-text">Set a reminder</mat-label>
-            <mat-select>
-                <mat-option>
-                  <mat-radio-group aria-label="Select an option">
-                  
-                      <div class="radio-container">
-                          <div>
-                              <h4 class="strong-text">1 day before</h4>
-                          </div>
-                          <div>
-                              <mat-radio-button value="1"></mat-radio-button><br>
-                          </div>
-                      </div>
-                  </mat-radio-group>
-              </mat-option>
-              <mat-divider class="divider-radio"></mat-divider>
-  
-              <mat-option> 
-                  <mat-radio-group aria-label="Select an option">
-                  
-                      <div class="radio-container">
-                          <div>
-                              <h4 class="strong-text">2 days before</h4>
-                          </div>
-                          <div>
-                              <mat-radio-button value="2"></mat-radio-button><br>
-                          </div>
-                      </div>
-                  </mat-radio-group>
-              </mat-option>
-              <mat-divider class="divider-radio"></mat-divider>
-  
-              <mat-option>
-                  <mat-radio-group aria-label="Select an option">
-                  
-                      <div class="radio-container">
-                          <div>
-                              <h4 class="strong-text">3 days before</h4>
-                          </div>
-                          <div>
-                              <mat-radio-button value="3"></mat-radio-button><br>
-                          </div>
-                      </div>
-                  </mat-radio-group>
-              </mat-option>
-              <mat-divider class="divider-radio"></mat-divider>
-  
-              <mat-option>
-                  <mat-radio-group aria-label="Select an option">
-                  
-                      <div class="radio-container">
-                          <div>
-                              <h4 class="strong-text">1 week before</h4>
-                          </div>
-                          <div>
-                              <mat-radio-button value="4"></mat-radio-button><br>
-                          </div>
-                      </div>
-                  </mat-radio-group>
-              </mat-option>
-              </mat-select>
-          </mat-form-field>
-        
-    </div>
-
-    <div class="row">
-        <div class="col-1 pt-2">
-            <mat-icon>info_outline</mat-icon>
-        </div>
-        <div class="col-11">
-            <small class="text-grey">
-                You will be notified on the date that your payment is scheduled to take place
-            </small>
-        </div>
-    </div>
-    
-    <div class="pt-4">
-        <button mat-flat-button disabled class="px-5">Continue</button>
-      </div>
+  <div class="pt-4">
+    <button mat-flat-button disabled class="px-5">Continue</button>
+  </div>
 </div>
-  
-
-  

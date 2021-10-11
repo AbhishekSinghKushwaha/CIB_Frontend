@@ -54,8 +54,8 @@
             <div class="col-md-6">
               <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
                 <mat-label>Schedule Payment</mat-label>
-                <input matInput [matDatepicker]="picker" placeholder="Select a payment a date">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <input matInput  placeholder="Select a payment a date">
+                <mat-datepicker-toggle matSuffix  (click)="openPaymentDialog()"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
             </div>
