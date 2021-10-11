@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NewRecipientModalComponent } from './new-recipient-modal.component';
 import { NewRecipientService } from 'src/app/core/services/new-recipient/new-recipient.service';
 import { MatStyleModule } from 'src/app/mat-style.module';
+import { CountryModalModule } from '../country-modal/country-modal.module';
 
 
 
@@ -17,7 +18,8 @@ import { MatStyleModule } from 'src/app/mat-style.module';
   imports: [
     CommonModule,
     MatStyleModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CountryModalModule
   ],
   providers:[
     NewRecipientService

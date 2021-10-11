@@ -7,6 +7,7 @@ import { CurrencySelectionComponent } from 'src/app/presentation/shared/modals/c
 @Injectable()
 export class CurrencySelectionService {
   selected = new Subject<CurrencySelectionModal>();
+  private data:CurrencySelectionModal;
 
   constructor(private readonly dialog: MatDialog) { }
 
@@ -17,7 +18,12 @@ export class CurrencySelectionService {
     });
   }
 
+  get default():CurrencySelectionModal{
+    return this.data;
+  }
+
   select(account: CurrencySelectionModal): void {
+    this.data=account;
     this.selected.next(account)
   }
 }

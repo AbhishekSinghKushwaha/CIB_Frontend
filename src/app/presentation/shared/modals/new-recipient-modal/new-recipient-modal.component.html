@@ -7,7 +7,7 @@
   <div class="row align-items-stretch mb-2 pb-2 cursor-pointer" (click)="openCountries()">
     <div class="col-md-2">
       <img class="rounded-circle img-d"
-        [src]="'https://flagcdn.com/h60/za.png'"
+        [src]="selected?.country?.flag || countryMock[0].flag"
         width="60px"
         height="60px"
         alt="Generic placeholder image">
@@ -15,7 +15,7 @@
     <div class="col-md-9">
       <div class="row user-list-item" style="height: 60px">
         <div class="col-md-10 d-flex">
-          <div class="align-self-center">Kenya</div>
+          <div class="align-self-center">{{selected?.country?.name || countryMock[0].name}}</div>
         </div>
         <div class="col-md-2 d-flex">
           <div class="align-self-center">

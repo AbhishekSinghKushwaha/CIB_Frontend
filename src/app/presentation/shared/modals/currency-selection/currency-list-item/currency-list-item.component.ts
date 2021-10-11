@@ -18,7 +18,7 @@ export class CurrencyListItemComponent implements OnInit {
   }
 
   select(): void {
-    this.currencySelectionService.selected.next(this.data);
+    this.currencySelectionService.select(this.data);
   }
 
 }
