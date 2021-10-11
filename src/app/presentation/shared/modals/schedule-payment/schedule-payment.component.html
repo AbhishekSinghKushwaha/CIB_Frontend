@@ -6,161 +6,50 @@
         <h4 class="strong-text col-md-8">Schedule Payment</h4>
     </div>
     <h3 class="strong-text pt-4 mb-3">Please enter details</h3>
-    <div >
-        <small class="text-grey">Frequency</small><br> 
-          <mat-form-field class="d-flex flex-column">
-            <mat-label class="strong-text">Select the frequency</mat-label>
-            <mat-select>
-              <mat-option class="pt-5 pb-4">
-                <mat-radio-group aria-label="Select an option">
-                
-                    <div class="radio-container">
-                        <div>
-                            <h4 class="strong-text">Once-off</h4>
-                            <small class="text-grey">Description</small>
-                        </div>
-                        <div>
-                            <mat-radio-button value="1"></mat-radio-button><br>
-                        </div>
-                    </div>
-                </mat-radio-group>
-            </mat-option>
-            <mat-divider class="divider-radio"></mat-divider>
-
-            <mat-option> 
-                <mat-radio-group aria-label="Select an option">
-                
-                    <div class="radio-container">
-                        <div>
-                            <h4 class="strong-text">Daily</h4>
-                        </div>
-                        <div>
-                            <mat-radio-button value="2"></mat-radio-button><br>
-                        </div>
-                    </div>
-                </mat-radio-group>
-            </mat-option>
-            <mat-divider class="divider-radio"></mat-divider>
-
-            <mat-option>
-                <mat-radio-group aria-label="Select an option">
-                
-                    <div class="radio-container">
-                        <div>
-                            <h4 class="strong-text">Weekly</h4>
-                        </div>
-                        <div>
-                            <mat-radio-button value="3"></mat-radio-button><br>
-                        </div>
-                    </div>
-                </mat-radio-group>
-            </mat-option>
-            <mat-divider class="divider-radio"></mat-divider>
-
-            <mat-option>
-                <mat-radio-group aria-label="Select an option">
-                
-                    <div class="radio-container">
-                        <div>
-                            <h4 class="strong-text">Monthly</h4>
-                        </div>
-                        <div>
-                            <mat-radio-button value="4"></mat-radio-button><br>
-                        </div>
-                    </div>
-                </mat-radio-group>
-            </mat-option>
+    <div>
+        <mat-form-field class="d-flex flex-column" appearance="standard" style="width: 100%" floatLabel="always">
+            <mat-label>Frequency</mat-label>
+            <mat-select placeholder="Select the frequency">
+                <div *ngFor="let item of frequencySelectionList.FREQUENCY_LISTINGS; let isLast = last; let i = index">
+                <mat-option [value]="item.text">
+                    <app-frequency-selection [data]="item" [isChecked]="selected?.text===item.text"> </app-frequency-selection>
+                </mat-option>
+                <mat-divider *ngIf="!isLast" class="divider-radio"></mat-divider>
+                </div>
             </mat-select>
-          </mat-form-field>
-        
+          </mat-form-field> 
     </div>
 
     <div>
-        <small class="text-grey">First payment date</small><br> 
-        <mat-form-field class="d-flex flex-column">
-          <mat-label class="strong-text">Enter the start date</mat-label>
-          <input matInput class="pb-2" [matDatepicker]="picker">
+        <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
+          <mat-label>First payment date</mat-label>
+          <input matInput [matDatepicker]="picker" placeholder="Select a payment a date">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-    </div>
+        </mat-form-field> 
+      </div>
 
     <div>
-        <small class="text-grey">Last payment date</small><br> 
-        <mat-form-field class="d-flex flex-column">
-          <mat-label class="strong-text">Enter the end date</mat-label>
-          <input matInput class="pb-2" [matDatepicker]="picker">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-    </div>
+        <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
+          <mat-label>Last payment date</mat-label>
+          <input matInput [matDatepicker]="picker2" placeholder="Enter the end date">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field> 
+      </div>
 
-    <div >
-        <small class="text-grey">Remind me</small><br> 
-          <mat-form-field class="d-flex flex-column">
-            <mat-label class="strong-text">Set a reminder</mat-label>
-            <mat-select>
-                <mat-option>
-                  <mat-radio-group aria-label="Select an option">
-                  
-                      <div class="radio-container">
-                          <div>
-                              <h4 class="strong-text">1 day before</h4>
-                          </div>
-                          <div>
-                              <mat-radio-button value="1"></mat-radio-button><br>
-                          </div>
-                      </div>
-                  </mat-radio-group>
-              </mat-option>
-              <mat-divider class="divider-radio"></mat-divider>
-  
-              <mat-option> 
-                  <mat-radio-group aria-label="Select an option">
-                  
-                      <div class="radio-container">
-                          <div>
-                              <h4 class="strong-text">2 days before</h4>
-                          </div>
-                          <div>
-                              <mat-radio-button value="2"></mat-radio-button><br>
-                          </div>
-                      </div>
-                  </mat-radio-group>
-              </mat-option>
-              <mat-divider class="divider-radio"></mat-divider>
-  
-              <mat-option>
-                  <mat-radio-group aria-label="Select an option">
-                  
-                      <div class="radio-container">
-                          <div>
-                              <h4 class="strong-text">3 days before</h4>
-                          </div>
-                          <div>
-                              <mat-radio-button value="3"></mat-radio-button><br>
-                          </div>
-                      </div>
-                  </mat-radio-group>
-              </mat-option>
-              <mat-divider class="divider-radio"></mat-divider>
-  
-              <mat-option>
-                  <mat-radio-group aria-label="Select an option">
-                  
-                      <div class="radio-container">
-                          <div>
-                              <h4 class="strong-text">1 week before</h4>
-                          </div>
-                          <div>
-                              <mat-radio-button value="4"></mat-radio-button><br>
-                          </div>
-                      </div>
-                  </mat-radio-group>
-              </mat-option>
+    <div>
+        <mat-form-field class="d-flex flex-column" appearance="standard" style="width: 100%" floatLabel="always">
+            <mat-label>Remind me</mat-label>
+            <mat-select placeholder="Set a reminder">
+                <div  *ngFor="let item of reminderSelectionList.REMINDER_LISTINGS; let isLast = last; let i = index">
+                <mat-option [value]="item.text">                  
+                    <app-reminder-selection [data]="item" [isChecked]="selectedReminder?.text===item.text"> </app-reminder-selection>
+                </mat-option>
+                <mat-divider *ngIf="!isLast" class="divider-radio"></mat-divider>
+                </div>
               </mat-select>
-          </mat-form-field>
-        
+          </mat-form-field>    
     </div>
 
     <div class="row">
@@ -178,6 +67,3 @@
         <button mat-flat-button disabled class="px-5">Continue</button>
       </div>
 </div>
-  
-
-  

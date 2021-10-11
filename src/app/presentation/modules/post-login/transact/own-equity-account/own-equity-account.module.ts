@@ -7,8 +7,9 @@ import { MatStyleModule } from 'src/app/mat-style.module';
 import { SharedComponentsModule } from 'src/app/presentation/shared/components/shared-components.module';
 import { CurrencySelectionModule } from '../../../../shared/modals/currency-selection/currency-selection.module';
 import { SchedulePaymentModule } from '../../../../shared/modals/schedule-payment/schedule-payment.module';
-import { AccountSelectionModule } from  '../../../../shared/modals/account-selection/account-selection.module';
-
+import { SelectAccountModalModule } from './../../../../shared/modals/select-account-modal/select-account-modal.module';
+import { SelectAccountSendToModule } from './../../../../shared/modals/select-account-send-to/select-account-send-to.module';
+import { CurrencySelectionConstants } from 'src/app/core/utils/constants/currency-selection.constants';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,11 @@ import { AccountSelectionModule } from  '../../../../shared/modals/account-selec
     MatStyleModule,
     CurrencySelectionModule,
     SchedulePaymentModule,
-    AccountSelectionModule
+    SelectAccountModalModule,
+    SelectAccountSendToModule
+  ],
+  providers: [
+    CurrencySelectionConstants
   ]
 })
 export class OwnEquityAccountModule { }

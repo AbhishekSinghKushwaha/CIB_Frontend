@@ -13,81 +13,69 @@
             </button>
           </div>
           <h3 class="strong-text">Please enter the payment details</h3>
-          <div class="row pt-5">
-            <div class="col-md-6 col-sm-6">
-              <div >
-                  <small class="text-grey">Send from</small><br>
-                    <mat-form-field class="d-flex flex-column">
-                      <mat-label class="strong-text">Loot</mat-label>
-                      <mat-select (click)="openAccountSendFrom()">
-                        <!-- <mat-option>
-                          Loot
-                        </mat-option> -->
-                      </mat-select>
-                      <small class="text-grey">Available balance 999,999,999.99 CDF</small>
-                    </mat-form-field>
-
+          <form class="d-flex flex-column" autocomplete="off">
+            <div class="row pt-4">
+              <div class="col-md-6">
+                <mat-form-field appearance="standard" style="width: 100%" floatLabel="always" readonly>
+                  <mat-label>Send from</mat-label>
+                  <input matInput type="text" class="strong-text" placeholder="{{sendFrom?.name || 'Send from'}}">
+                  <button type='button' mat-icon-button matSuffix (click)="openAccountSendFrom()">
+                    <mat-icon svgIcon="caret_down"></mat-icon>
+                  </button>
+                  <small *ngIf="sendFrom" class="text-grey text-sm-start mt-2 mb-0">Available balance {{sendFrom?.balance | number:'0.2'}} {{sendFrom?.currency}}</small>
+                </mat-form-field>
               </div>
-              <div class="row">
-                <div class="col-md-3 col-sm-3">
-                    <small class="text-grey">Amount</small>
-                    <mat-form-field class="d-flex flex-column">
-                      <mat-label class="strong-text">KES</mat-label>
-                      <mat-select (click)="openCurrencyDialog()">
-                        <!-- <mat-option>
-
-                        </mat-option> -->
-                      </mat-select>
-                    </mat-form-field>
-                </div>
-
-                <div class="col-md-9 col-sm-6 pt-4">
-                    <mat-form-field class="d-flex flex-column">
-                      <input matInput class="pb-2" placeholder="Enter an amount">
-                    </mat-form-field>
-                </div>
-            </div>
-
-            <div>
-              <small class="text-grey">FX reference ID</small><br>
-                <mat-form-field class="d-flex flex-column">
-                  <input matInput class="pb-2" placeholder="Enter FX reference ID">
+              <div class="col-md-6  align-self-end">
+                <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
+                  <mat-label>Send to</mat-label>
+                  <input matInput type="text" class="strong-text" placeholder="{{sendTo?.name || 'Select the recipient'}}">
+                  <button type='button' mat-icon-button matSuffix (click)="openAccountSendTo()">
+                    <mat-icon svgIcon="caret_down"></mat-icon>
+                  </button>
                 </mat-form-field>
-          </div>
-
-            </div>
-            <div class="col-md-6 col-sm-6 pt-3">
-              <div>
-                <small class="text-grey pr-5">Send to</small><br>
-                <mat-form-field class="d-flex flex-column">
-                  <mat-label>Select an account</mat-label>
-                  <mat-select (click)="openAccountSendTo()">
-                    <!-- <mat-option>
-
-                    </mat-option> -->
-                  </mat-select>
-                </mat-form-field>
-            </div>
-
-            <div>
-                <small class="text-grey">Schedule payment</small><br>
-                <mat-form-field class="d-flex flex-column">
-                  <mat-label>Select a payment date</mat-label>
-                  <input matInput class="pb-2">
+              </div>
+              <div class="col-md-6">
+                <div class="row justify-content-between">
+                  <div class="col-md-4">
+                    <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
+                      <mat-label>Amount</mat-label>
+                      <input matInput type="text" class="strong-text" placeholder="{{currency?.text || ''}}">
+                      <button type='button' mat-icon-button matSuffix>
+                        <mat-icon svgIcon="caret_down" (click)="openCurrencies()"></mat-icon>
+                      </button>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-8">
+                    <mat-form-field appearance="standard" style="width: 100%">
+                      <input matInput type="text" class="strong-text" placeholder="Enter an amount">
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
+                  <mat-label>Schedule Payment</mat-label>
+                  <input matInput [matDatepicker]="picker" placeholder="Select a payment a date">
                   <mat-datepicker-toggle matSuffix (click)="openPaymentDialog()"></mat-datepicker-toggle>
-                  <mat-datepicker></mat-datepicker>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field> 
+              </div>
+              <div class="col-md-6">
+                <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
+                  <mat-label>FX Reference ID</mat-label>
+                  <input matInput type="text" placeholder="Enter FX reference ID">
                 </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
+                  <mat-label>Payment reason</mat-label>
+                  <input matInput type="text" placeholder="Optional">
+                </mat-form-field>
+              </div>
             </div>
-
-            <div>
-                <small class="text-grey">Payment reason</small><br>
-                    <mat-form-field class="d-flex flex-column">
-                      <input matInput class="pb-2" placeholder="Optional">
-                    </mat-form-field>
+            <div class="mt-4">
+              <button mat-raised-button color="primary" disabled class="px-5">Send money</button>
             </div>
-            </div>
-          </div>
-          <div class="pt-5">
-            <button mat-flat-button disabled class="px-5">Send money</button>
-          </div>
+          </form>
         </div>
+
