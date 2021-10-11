@@ -4,7 +4,7 @@ import { SelectAccountSendToComponent } from './select-account-send-to.component
 import { AccountSendToComponent } from './account-send-to/account-send-to.component';
 import { MatStyleModule } from 'src/app/mat-style.module';
 import { SharedComponentsModule } from '../../components/shared-components.module';
-import { SelectAccountModalService } from 'src/app/core/services/select-account-modal/select-account-modal.service';
+import { SelectAccountSendtoService } from 'src/app/core/services/select-account-sendto/select-account-sendto.service';
 
 
 @NgModule({
@@ -21,7 +21,7 @@ import { SelectAccountModalService } from 'src/app/core/services/select-account-
     AccountSendToComponent
   ],
   providers: [
-    SelectAccountModalService
+    SelectAccountSendtoService
   ]
 })
 export class SelectAccountSendToModule { }

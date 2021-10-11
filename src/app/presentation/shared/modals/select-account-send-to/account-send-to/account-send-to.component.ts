@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { SelectAccountModel } from 'src/app/core/domain/select-account.model';
-import { SelectAccountModalService } from 'src/app/core/services/select-account-modal/select-account-modal.service';
+import { SelectAccountSendtoService } from 'src/app/core/services/select-account-sendto/select-account-sendto.service';
 
 
 @Component({
@@ -14,13 +14,13 @@ export class AccountSendToComponent implements OnInit {
   @Input() isChecked: boolean;
   @Input() data: SelectAccountModel;
   constructor(
-    private readonly selectAccountModalService: SelectAccountModalService) { }
+    private readonly selectAccountSendtoService: SelectAccountSendtoService) { }
 
   ngOnInit(): void {
   }
 
   select(): void {
-    this.selectAccountModalService.selectedAccountSendTo.next(this.data);
+    this.selectAccountSendtoService.selectedAccountSendTo.next(this.data);
   }
 
 }

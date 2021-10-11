@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SelectAccountModel } from 'src/app/core/domain/select-account.model';
 import { CurrencySelectionModal } from 'src/app/core/domain/currency-selection.model';
 import { SelectAccountModalService } from 'src/app/core/services/select-account-modal/select-account-modal.service';
+import { SelectAccountSendtoService } from 'src/app/core/services/select-account-sendto/select-account-sendto.service';
 import { SchedulePaymentService } from 'src/app/core/services/schedule-payment/schedule-payment.service';
 import { CurrencySelectionService } from 'src/app/core/services/currency-selection/currency-selection.service';
 import { CurrencySelectionConstants } from 'src/app/core/utils/constants/currency-selection.constants';
@@ -47,14 +48,15 @@ export class OwnEquityAccountComponent implements OnInit {
 
   constructor(
     private readonly selectAccountService: SelectAccountModalService,
+    private readonly selectAccountSendtoService:SelectAccountSendtoService,
     private readonly currencySelectionService:CurrencySelectionService,
     private readonly currencySelectionConstants:CurrencySelectionConstants,
     private readonly schedulePaymentService:SchedulePaymentService
   ) { }
 
   ngOnInit(): void {
-    this.selectAccountService.selectedAccount.subscribe((x) => this.sendFrom = x);
-    this.selectAccountService.selectedAccountSendTo.subscribe((x) => this.sendTo = x);
+    this.selectAccountService.selected.subscribe((x) => this.sendFrom = x);
+    this.selectAccountSendtoService.selectedAccountSendTo.subscribe((x) => this.sendTo = x);
     this.currencySelectionService.selected.subscribe(x => this.currency = x);
   }
 
@@ -63,7 +65,7 @@ export class OwnEquityAccountComponent implements OnInit {
   }
 
   openAccountSendTo(): void {
-    this.selectAccountService.openSendTo(this.accountsMockSendTo)
+    this.selectAccountSendtoService.open(this.accountsMockSendTo)
   }
 
   openCurrencies(): void {
