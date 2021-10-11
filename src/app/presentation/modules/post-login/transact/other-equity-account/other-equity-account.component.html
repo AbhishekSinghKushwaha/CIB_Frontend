@@ -14,19 +14,20 @@
         <form [formGroup]="equityForm" (ngSubmit)="submit()" class="d-flex flex-column" autocomplete="off">
           <div class="row pt-4">
             <div class="col-md-6">
-              <mat-form-field appearance="standard" style="width: 100%" floatLabel="always" readonly>
+              <mat-form-field appearance="standard" style="width: 100%">
                 <mat-label>Send from</mat-label>
-                <input matInput type="text" placeholder="{{sendFrom?.name || 'Send from'}}">
+                <input matInput type="text" [readonly]="true" formControlName="fromAccount">
                 <button type='button' mat-icon-button matSuffix (click)="openAccounts()">
                   <mat-icon svgIcon="caret_down"></mat-icon>
                 </button>
-                <p *ngIf="sendFrom" class="text-grey text-sm-start mt-2 mb-0">Available balance {{sendFrom?.balance | number:'0.2'}} {{sendFrom?.currency}}</p>
+                <p *ngIf="sendFrom" class="text-grey text-sm-start mt-2 mb-0">Available balance {{sendFrom?.balance |
+                  number:'0.2'}} {{sendFrom?.currency}}</p>
               </mat-form-field>
             </div>
             <div class="col-md-6  align-self-end">
               <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
                 <mat-label>Send to</mat-label>
-                <input matInput type="text" placeholder="Select the recipient" [value]="sendTo?.name" >
+                <input matInput type="text" placeholder="Select the recipient" [readonly]="true" formControlName="recipient">
                 <button type='button' mat-icon-button matSuffix (click)="openFavourites()">
                   <mat-icon svgIcon="caret_down"></mat-icon>
                 </button>
@@ -35,9 +36,9 @@
             <div class="col-md-6">
               <div class="row justify-content-between">
                 <div class="col-md-4">
-                  <mat-form-field appearance="standard" style="width: 100%"  floatLabel="always">
+                  <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
                     <mat-label>Amount</mat-label>
-                    <input matInput type="text" [value]="currency?.text || 'KES'">
+                    <input matInput type="text" [readonly]="true" formControlName="currency">
                     <button type='button' mat-icon-button matSuffix (click)="openCurrencies()">
                       <mat-icon svgIcon="caret_down"></mat-icon>
                     </button>
@@ -46,35 +47,45 @@
                 <div class="col-md-8">
                   <mat-form-field appearance="standard" style="width: 100%">
                     <mat-label>Enter an amount</mat-label>
-                    <input matInput type="text">
+                    <input matInput type="text" formControlName="amount">
                   </mat-form-field>
                 </div>
               </div>
             </div>
             <div class="col-md-6">
-              <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
-                <mat-label>{{paymentDate && 'Payment Scheduled' || 'Schedule Payment'}}</mat-label>
-                <input matInput  placeholder="Select a payment a date">
-                <mat-datepicker-toggle matSuffix  (click)="openPaymentDialog()"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-              </mat-form-field>
+              <small>{{paymentDate && 'Payment Scheduled' || 'Schedule Payment'}}</small>
+              <div class="row">
+                <div class="col-md-10">
+                  <div *ngIf="paymentDate">
+                    <p class="text-grey mb-0">
+                      {{paymentDate.frequency}} on the {{paymentDate.startDate | date:'d' }}
+                    </p>
+                    <p class="text-grey mb-0">
+                      Reminder {{paymentDate.reminder }}
+                    </p>
+                  </div>
+                  <div *ngIf="!paymentDate">
+                    <p class="text-grey mb-0">
+                      Select a payment date
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-2 cursor-pointer" (click)="openPaymentDialog()">
+                  <mat-icon>date_range</mat-icon>
+                </div>
+              </div>
+              <mat-divider class="p-1"></mat-divider>
             </div>
             <div class="col-md-6">
               <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
                 <mat-label>FX Reference ID</mat-label>
                 <input matInput type="text" placeholder="Enter FX reference ID">
-                <button type='button' mat-button mat-icon-button matSuffix>
-                  <mat-icon svgIcon="caret_down"></mat-icon>
-                </button>
               </mat-form-field>
             </div>
             <div class="col-md-6">
               <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
                 <mat-label>Payment reason</mat-label>
                 <input matInput type="text" placeholder="Optional">
-                <button type='button' mat-icon-button matSuffix>
-                  <mat-icon svgIcon="caret_down"></mat-icon>
-                </button>
               </mat-form-field>
             </div>
           </div>

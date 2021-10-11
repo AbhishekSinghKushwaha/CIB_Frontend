@@ -18,6 +18,6 @@ export class AccountDropdownItemComponent implements OnInit {
   }
 
   select(): void {
-    this.selectAccountModalService.selected.next(this.data);
+    this.selectAccountModalService.select(this.data);
   }
 }

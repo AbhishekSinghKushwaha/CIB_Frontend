@@ -67,9 +67,18 @@ export class OtherEquityAccountComponent implements OnInit {
   }
 
   private eventsSubscriptions(): void {
-    this.selectAccountService.selected.subscribe((response) => this.sendFrom = response);
-    this.favouritesModalService.selected.subscribe((response) => this.sendTo = response);
-    this.currencySelectionService.selected.subscribe(response => this.currency = response);
+    this.selectAccountService.selected.subscribe((response) => {
+      this.equityForm.controls.fromAccount.setValue(response.name);
+      this.sendFrom = response;
+    });
+    this.favouritesModalService.selected.subscribe((response) => {
+      this.equityForm.controls.recipient.setValue(response.name);
+      this.sendTo = response;
+    });
+    this.currencySelectionService.selected.subscribe(response => {
+      this.equityForm.controls.currency.setValue(response.text);
+      this.currency = response;
+      });
     this.scheduledPaymentService.data.subscribe(response => this.paymentDate = response)
   }
 

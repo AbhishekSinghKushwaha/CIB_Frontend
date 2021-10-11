@@ -20,7 +20,6 @@ export class PaymentReminderService {
 
   select(input: PaymentreminderModel): void {
     this.data = input;
-    console.log('this.data',this.data);
     this.selected.next(this.data);
   }
 

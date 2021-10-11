@@ -17,10 +17,14 @@ export class FavouritesModalComponent implements OnInit {
   constructor(
     readonly dialogRef: MatDialogRef<SelectAccountModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: FavouriteBeneficiaryModel[],
-    private readonly favouritesModalService: FavouritesModalService) { }
+    private readonly favouritesModalService: FavouritesModalService) {
+
+    this.selected = favouritesModalService.default;
+    this.favouritesModalService.selected.subscribe((x) => this.selected = x);
+  }
 
   ngOnInit(): void {
-    this.favouritesModalService.selected.subscribe((x) => this.selected = x);
+
   }
 
   close(): void {
