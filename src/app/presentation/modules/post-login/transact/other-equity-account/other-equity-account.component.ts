@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CurrencySelectionModal } from 'src/app/core/domain/currency-selection.model';
 import { FavouriteBeneficiaryModel } from 'src/app/core/domain/favourites-beneficiary.model';
+import { PaymentreminderModel } from 'src/app/core/domain/payment-reminder.model';
 import { ScheduledPaymentModel } from 'src/app/core/domain/scheduled-payment.model';
 import { SelectAccountModel } from 'src/app/core/domain/select-account.model';
 import { CurrencySelectionService } from 'src/app/core/services/currency-selection/currency-selection.service';
@@ -49,7 +50,7 @@ export class OtherEquityAccountComponent implements OnInit {
   sendTo: FavouriteBeneficiaryModel;
   currency: CurrencySelectionModal;
   equityForm: FormGroup;
-  paymentDate: any;
+  paymentDate: ScheduledPaymentModel;
   schedulePaymentData: ScheduledPaymentModel;
 
   constructor(
@@ -57,18 +58,19 @@ export class OtherEquityAccountComponent implements OnInit {
     private readonly favouritesModalService: FavouritesModalService,
     private readonly currencySelectionService: CurrencySelectionService,
     private readonly currencySelectionConstants: CurrencySelectionConstants,
-    private readonly scheduledPaymentService: ScheduledPaymentService
+    private readonly scheduledPaymentService: ScheduledPaymentService,
   ) { }
 
   ngOnInit(): void {
-    this.initForm()
+    this.initForm();
     this.eventsSubscriptions();
   }
 
   private eventsSubscriptions(): void {
-    this.selectAccountService.selected.subscribe((x) => this.sendFrom = x);
-    this.favouritesModalService.selected.subscribe((x) => this.sendTo = x);
-    this.currencySelectionService.selected.subscribe(x => this.currency = x);
+    this.selectAccountService.selected.subscribe((response) => this.sendFrom = response);
+    this.favouritesModalService.selected.subscribe((response) => this.sendTo = response);
+    this.currencySelectionService.selected.subscribe(response => this.currency = response);
+    this.scheduledPaymentService.data.subscribe(response => this.paymentDate = response)
   }
 
   private initForm(): void {
@@ -77,7 +79,6 @@ export class OtherEquityAccountComponent implements OnInit {
       recipient: new FormControl(null, [Validators.required]),
       currency: new FormControl(null, [Validators.required]),
       amount: new FormControl(null, [Validators.required]),
-      paymentDate: new FormControl(null, [Validators.required]),
       // recipient: new FormControl(null, [Validators.required]),
     });
   }

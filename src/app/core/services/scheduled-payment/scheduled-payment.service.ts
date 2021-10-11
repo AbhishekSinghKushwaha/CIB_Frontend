@@ -6,18 +6,29 @@ import { SchedulePaymentComponent } from 'src/app/presentation/shared/modals/sch
 
 @Injectable()
 export class ScheduledPaymentService {
-  data = new Subject<any>();
+  data = new Subject<ScheduledPaymentModel>();
+  dialogRef: any;
+  private defaultData:ScheduledPaymentModel;
 
   constructor(private readonly dialog: MatDialog) { }
 
   open(data: ScheduledPaymentModel): void {
-    this.dialog.open<SchedulePaymentComponent, ScheduledPaymentModel>(SchedulePaymentComponent, {
+    this.dialogRef = this.dialog.open<SchedulePaymentComponent, ScheduledPaymentModel>(SchedulePaymentComponent, {
       disableClose: true,
       data
     });
   }
 
   set(input: ScheduledPaymentModel): void {
-    this.data.next(input)
+    this.defaultData = input
+    this.data.next(this.defaultData)
+  }
+
+  get default():ScheduledPaymentModel {
+    return this.defaultData
+  }
+
+  close() {
+    this.dialogRef.close()
   }
 }

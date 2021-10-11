@@ -1,6 +1,6 @@
 export interface ScheduledPaymentModel {
   frequency: number;
-  firstpayment: Date;
-  lastpayment: Date;
+  startDate: Date;
+  endDate: Date;
   reminder: string
 }

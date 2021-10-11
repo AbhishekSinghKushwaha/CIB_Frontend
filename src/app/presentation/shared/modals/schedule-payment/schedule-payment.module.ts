@@ -6,6 +6,7 @@ import { OwnequityModalService } from '../../../../core/services/ownequity-modal
 import { ScheduledPaymentService } from 'src/app/core/services/scheduled-payment/scheduled-payment.service';
 import { PaymentFrequencyModalModule } from '../payment-frequency-modal/payment-frequency-modal.module';
 import { PaymentReminderModalModule } from '../payment-reminder-modal/payment-reminder-modal.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -17,7 +18,8 @@ import { PaymentReminderModalModule } from '../payment-reminder-modal/payment-re
     CommonModule,
     MatStyleModule,
     PaymentFrequencyModalModule,
-    PaymentReminderModalModule
+    PaymentReminderModalModule,
+    ReactiveFormsModule
   ],
   exports:[
     SchedulePaymentComponent
