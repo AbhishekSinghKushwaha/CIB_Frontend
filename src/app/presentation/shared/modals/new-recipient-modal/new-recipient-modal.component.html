@@ -1,4 +1,4 @@
-<div class="container new-recipient-modal-screen">
+<div class="container new-recipient-modal-screen p-1">
   <button mat-icon-button matSuffix class="close-button" (click)="close()">
     <mat-icon>close</mat-icon>
   </button>
@@ -33,7 +33,7 @@
         <input matInput type="text" placeholder="Enter an account number" formControlName="accountNumber">
       </mat-form-field>
     </div>
-    <div class="pt-4">
+    <div class="p-2">
       <button [disabled]="equityForm.invalid" color="primary" type="submit" mat-flat-button
         class="px-5">Continue</button>
     </div>
