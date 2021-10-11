@@ -1,0 +1,41 @@
+<div class="container new-recipient-modal-screen">
+  <button mat-icon-button matSuffix class="close-button" (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <p class="text-center fw-bold pt-2">Send to someone new</p>
+  <h3 class="m-4 ms-2">Please enter the recipient's details</h3>
+  <div class="row align-items-stretch mb-2 pb-2 cursor-pointer" (click)="openCountries()">
+    <div class="col-md-2">
+      <img class="rounded-circle img-d"
+        [src]="'https://flagcdn.com/h60/za.png'"
+        width="60px"
+        height="60px"
+        alt="Generic placeholder image">
+    </div>
+    <div class="col-md-9">
+      <div class="row user-list-item" style="height: 60px">
+        <div class="col-md-10 d-flex">
+          <div class="align-self-center">Kenya</div>
+        </div>
+        <div class="col-md-2 d-flex">
+          <div class="align-self-center">
+            <mat-icon color="primary" svgIcon="caret_right"></mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form [formGroup]="equityForm" (ngSubmit)="submit()" class="d-flex flex-column" autocomplete="off">
+    <div class="row">
+      <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
+        <mat-label>Account or mobile number</mat-label>
+        <input matInput type="text" placeholder="Enter an account number" formControlName="accountNumber">
+      </mat-form-field>
+    </div>
+    <div class="pt-4">
+      <button [disabled]="equityForm.invalid" color="primary" type="submit" mat-flat-button
+        class="px-5">Continue</button>
+    </div>
+  </form>
+</div>

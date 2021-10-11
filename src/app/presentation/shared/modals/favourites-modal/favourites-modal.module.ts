@@ -6,6 +6,7 @@ import { BeneficiaryListItemComponent } from './beneficiary-list-item/beneficiar
 import { MatStyleModule } from 'src/app/mat-style.module';
 import { FavouritesModalService } from 'src/app/core/services/favourites-modal/favourites-modal.service';
 import { FavouriteSearchPipe } from '../../pipes/favourite-search.pipe';
+import { NewRecipientModalModule } from '../new-recipient-modal/new-recipient-modal.module';
 
 
 
@@ -18,7 +19,8 @@ import { FavouriteSearchPipe } from '../../pipes/favourite-search.pipe';
   imports: [
     CommonModule,
     MatStyleModule,
-    FormsModule
+    FormsModule,
+    NewRecipientModalModule
   ],
   exports: [
     FavouritesModalComponent

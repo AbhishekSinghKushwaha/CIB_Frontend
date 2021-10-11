@@ -1,4 +1,4 @@
-<div class="container favourites-modal-screen">
+<div class="container favourites-modal-screen" *ngIf="visibility">
   <button mat-icon-button matSuffix class="close-button" (click)="close()">
     <mat-icon>close</mat-icon>
   </button>
@@ -11,10 +11,19 @@
     </mat-form-field>
   </div>
 
-  <div class="col ms-3 pb-2 border-bottom-grey">
-    <img src="./assets/images/icons/Visual support_Icon_with_container.svg" class="fav-icon" alt="" />
-    <span class="ps-3">Send to someone new</span>
+  <div class="row ms-3 mt-2 pb-3 cursor-pointer" (click)="openNewRecipient()">
+    <div class="col-md-10">
+      <img src="./assets/images/icons/Visual support_Icon_with_container.svg" class="fav-icon" alt="" />
+      <span class="ps-3">Send to someone new</span>
+    </div>
+    <div class="col-md-2">
+      <button type='button' mat-icon-button matSuffix>
+        <mat-icon svgIcon="caret_right"></mat-icon>
+      </button>
+    </div>
+
   </div>
+  <mat-divider class="p-2"></mat-divider>
   <div class="d-flex justify-content-between bd-highlight m-2">
     <h3>Favourites</h3>
     <div class="text-danger">Manage</div>
