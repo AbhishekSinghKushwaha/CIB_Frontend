@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { CurrencySelectionModal } from 'src/app/core/domain/currency-selection.model';
 import { FavouriteBeneficiaryModel } from 'src/app/core/domain/favourites-beneficiary.model';
 import { SelectAccountModel } from 'src/app/core/domain/select-account.model';
+import { CurrencySelectionService } from 'src/app/core/services/currency-selection/currency-selection.service';
 import { FavouritesModalService } from 'src/app/core/services/favourites-modal/favourites-modal.service';
 import { SelectAccountModalService } from 'src/app/core/services/select-account-modal/select-account-modal.service';
+import { CurrencySelectionConstants } from 'src/app/core/utils/constants/currency-selection.constants';
 
 @Component({
   selector: 'app-other-equity-account',
@@ -37,19 +41,41 @@ export class OtherEquityAccountComponent implements OnInit {
     phoneNumber: '+256 700 019 019',
     channel: 'MTN',
     country: 'Uganda'
-  },];
+  }];
 
   sendFrom: SelectAccountModel;
   sendTo: FavouriteBeneficiaryModel;
+  currency: CurrencySelectionModal;
+  equityForm: FormGroup;
+  paymentDate: any;
 
   constructor(
     private readonly selectAccountService: SelectAccountModalService,
-    private readonly favouritesModalService: FavouritesModalService
+    private readonly favouritesModalService: FavouritesModalService,
+    private readonly currencySelectionService:CurrencySelectionService,
+    private readonly currencySelectionConstants:CurrencySelectionConstants
   ) { }
 
   ngOnInit(): void {
-    this.selectAccountService.selectedAccount.subscribe((x) => this.sendFrom = x);
-    this.favouritesModalService.selectedAccount.subscribe((x) => this.sendTo = x);
+    this.initForm()
+    this.eventsSubscriptions();
+  }
+
+  private eventsSubscriptions(): void {
+    this.selectAccountService.selected.subscribe((x) => this.sendFrom = x);
+    this.favouritesModalService.selected.subscribe((x) => this.sendTo = x);
+    this.currencySelectionService.selected.subscribe(x => this.currency = x);
+  }
+
+  private initForm(): void {
+    this.equityForm = new FormGroup({
+      fromAccount: new FormControl(null, [Validators.required]),
+      recipient: new FormControl(null, [Validators.required]),
+      currency: new FormControl(null, [Validators.required]),
+      amount: new FormControl(null, [Validators.required]),
+      paymentDate: new FormControl(null, [Validators.required]),
+      // recipient: new FormControl(null, [Validators.required]),
+    });
   }
 
   openAccounts(): void {
@@ -60,4 +86,11 @@ export class OtherEquityAccountComponent implements OnInit {
     this.favouritesModalService.open(this.favouritesMock)
   }
 
+  openCurrencies():void{
+    this.currencySelectionService.open(this.currencySelectionConstants.CURRENCY_LISTINGS)
+  }
+
+  submit() {
+
+  }
 }

@@ -17,6 +17,6 @@ export class BeneficiaryListItemComponent implements OnInit {
   }
 
   select(): void {
-    this.favouritesModalService.selectedAccount.next(this.data);
+    this.favouritesModalService.selected.next(this.data);
   }
 }
