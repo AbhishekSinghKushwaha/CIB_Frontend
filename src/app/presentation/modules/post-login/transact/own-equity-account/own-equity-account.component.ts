@@ -11,7 +11,6 @@ import { SelectAccountConstants } from 'src/app/data/repository/select-account-m
 import { ScheduledPaymentModel } from 'src/app/core/domain/scheduled-payment.model';
 import { ScheduledPaymentService } from './../../../../../core/services/scheduled-payment/scheduled-payment.service';
 
-
 @Component({
   selector: 'app-own-equity-account',
   templateUrl: './own-equity-account.component.html',
