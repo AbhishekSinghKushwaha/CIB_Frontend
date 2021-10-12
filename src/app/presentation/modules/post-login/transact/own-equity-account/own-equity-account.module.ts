@@ -9,6 +9,7 @@ import { CurrencySelectionModule } from '../../../../shared/modals/currency-sele
 import { SchedulePaymentModule } from '../../../../shared/modals/schedule-payment/schedule-payment.module';
 import { SelectAccountModalModule } from './../../../../shared/modals/select-account-modal/select-account-modal.module';
 import { SelectAccountSendToModule } from './../../../../shared/modals/select-account-send-to/select-account-send-to.module';
+import { SupportingDocumentsUploadModule } from './../../../../shared/modals/supporting-documents-upload/supporting-documents-upload.module';
 import { CurrencySelectionConstants } from 'src/app/core/utils/constants/currency-selection.constants';
 import { SelectAccountConstants } from 'src/app/data/repository/select-account-mock-repository/select-account.constants';
 
@@ -24,7 +25,8 @@ import { SelectAccountConstants } from 'src/app/data/repository/select-account-m
     CurrencySelectionModule,
     SchedulePaymentModule,
     SelectAccountModalModule,
-    SelectAccountSendToModule
+    SelectAccountSendToModule,
+    SupportingDocumentsUploadModule
   ],
   providers: [
     CurrencySelectionConstants,
