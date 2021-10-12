@@ -6,6 +6,7 @@ import { SelectAccountSendtoService } from 'src/app/core/services/select-account
 import { SchedulePaymentService } from 'src/app/core/services/schedule-payment/schedule-payment.service';
 import { CurrencySelectionService } from 'src/app/core/services/currency-selection/currency-selection.service';
 import { CurrencySelectionConstants } from 'src/app/core/utils/constants/currency-selection.constants';
+import { SupportingDocumentsUploadService } from "src/app/core/services/supporting-documents-upload/supporting-documents-upload.service";
 
 @Component({
   selector: 'app-own-equity-account',
@@ -51,7 +52,8 @@ export class OwnEquityAccountComponent implements OnInit {
     private readonly selectAccountSendtoService:SelectAccountSendtoService,
     private readonly currencySelectionService:CurrencySelectionService,
     private readonly currencySelectionConstants:CurrencySelectionConstants,
-    private readonly schedulePaymentService:SchedulePaymentService
+    private readonly schedulePaymentService:SchedulePaymentService,
+    private readonly supportingDocumentsUploadService:SupportingDocumentsUploadService
   ) { }
 
   ngOnInit(): void {
@@ -74,6 +76,10 @@ export class OwnEquityAccountComponent implements OnInit {
 
   openPaymentDialog(): void {
     this.schedulePaymentService.openSchedulePayment();
+  }
+
+  openSupportingDocuments(): void {
+    this.supportingDocumentsUploadService.open();
   }
 
 }

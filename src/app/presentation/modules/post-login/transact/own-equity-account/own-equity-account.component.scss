@@ -1,3 +1,16 @@
 .mat-datepicker-toggle {
     color: #A32A29 !important;
 }
+
+.upload-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    background: white;
+    border-radius: 8px;
+}
+
+.folder-icon{
+    color: #A32A29;
+}
