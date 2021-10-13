@@ -60,6 +60,7 @@ export class NewRecipientModalComponent implements OnInit {
   submit(): void {
     this.selected = { ...this.selected, account: this.equityForm.controls.accountNumber.value };
     console.log(this.selected);
+    this.close();
   }
 
 }
