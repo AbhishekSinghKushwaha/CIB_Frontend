@@ -16,10 +16,11 @@ export class CurrencySelectionComponent implements OnInit {
     private readonly dialogRef: MatDialogRef<CurrencySelectionComponent>,
     private readonly currencySelectionService: CurrencySelectionService,
     @Inject(MAT_DIALOG_DATA) public data: CurrencySelectionModal[],
-  ) { }
+  ) {
+    this.selected = this.currencySelectionService.default;
+    this.currencySelectionService.selected.subscribe((x) => this.selected = x);}
 
   ngOnInit(): void {
-    this.currencySelectionService.selected.subscribe((x) => this.selected = x);
   }
 
   close(): void {

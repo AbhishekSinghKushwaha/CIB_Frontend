@@ -2,6 +2,7 @@ import { Component, Input, OnInit, Inject, ViewEncapsulation } from '@angular/co
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FavouriteBeneficiaryModel } from 'src/app/core/domain/favourites-beneficiary.model';
 import { FavouritesModalService } from 'src/app/core/services/favourites-modal/favourites-modal.service';
+import { NewRecipientService } from 'src/app/core/services/new-recipient/new-recipient.service';
 import { SelectAccountModalComponent } from '../select-account-modal/select-account-modal.component';
 
 @Component({
@@ -13,19 +14,31 @@ export class FavouritesModalComponent implements OnInit {
   @Input() isChecked: boolean;
   selected: FavouriteBeneficiaryModel;
   searchText: string;
+  visibility = true;
 
   constructor(
     readonly dialogRef: MatDialogRef<SelectAccountModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: FavouriteBeneficiaryModel[],
-    private readonly favouritesModalService: FavouritesModalService) { }
+    private readonly favouritesModalService: FavouritesModalService,
+    private readonly newRecipientService: NewRecipientService) {
+
+    this.selected = favouritesModalService.default;
+    this.favouritesModalService.selected.subscribe((x) => this.selected = x);
+  }
 
   ngOnInit(): void {
-    this.favouritesModalService.selected.subscribe((x) => this.selected = x);
+
   }
 
   close(): void {
     this.dialogRef.close(true);
   }
 
-
+  openNewRecipient(): void {
+    const modal = this.newRecipientService.open(null);
+    this.visibility = false;
+    modal.afterClosed().subscribe(() => {
+      this.visibility = true;
+    });
+  }
 }
