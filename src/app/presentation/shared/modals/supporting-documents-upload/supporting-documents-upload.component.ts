@@ -9,7 +9,11 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class SupportingDocumentsUploadComponent implements OnInit {
 
+  currentFile?: File;
   fileName = '';
+  files: any = [];
+  progress = 0;
+  message = '';
 
   constructor(
     readonly dialogRef: MatDialogRef<SupportingDocumentsUploadComponent>
@@ -23,14 +27,30 @@ export class SupportingDocumentsUploadComponent implements OnInit {
   }
 
   uploadFiles(event: any){
-    const file:File = event.target.files[0];
+    if (event.target.files && event.target.files[0]) {
+      const file:File = event.target.files[0];
 
-    if(file){
-      this.fileName = file.name;
+      if(file){
+        this.currentFile = file;
+        this.fileName = this.currentFile.name;
+        this.files.push(this.fileName);
+        // this.progress = 70;
+
+        
+        if(this.progress === 100){
+          this.message = 'Completed'
+        }
+      }
     }
+    
+  }
 
-    console.log(this.fileName);
+  cancelUpload(i:any) {
+    this.reset(i);
+  }
 
+  reset(num:any) {
+    this.files.splice(num, 1);
   }
   
 
