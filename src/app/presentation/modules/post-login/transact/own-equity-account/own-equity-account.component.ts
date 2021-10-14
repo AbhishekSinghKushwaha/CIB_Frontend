@@ -8,6 +8,8 @@ import { CurrencySelectionService } from 'src/app/core/services/currency-selecti
 import { CurrencySelectionConstants } from 'src/app/core/utils/constants/currency-selection.constants';
 import { SupportingDocumentsUploadService } from "src/app/core/services/supporting-documents-upload/supporting-documents-upload.service";
 import { SelectAccountConstants } from 'src/app/data/repository/select-account-mock-repository/select-account.constants';
+import { ScheduledPaymentModel } from 'src/app/core/domain/scheduled-payment.model';
+import { ScheduledPaymentService } from './../../../../../core/services/scheduled-payment/scheduled-payment.service';
 
 
 @Component({
@@ -20,6 +22,7 @@ export class OwnEquityAccountComponent implements OnInit {
   sendFrom: SelectAccountModel;
   sendTo: SelectAccountModel;
   currency: CurrencySelectionModal;
+  schedulePaymentData: ScheduledPaymentModel;
 
   constructor(
     private readonly selectAccountService: SelectAccountModalService,
@@ -28,7 +31,8 @@ export class OwnEquityAccountComponent implements OnInit {
     private readonly currencySelectionConstants:CurrencySelectionConstants,
     private readonly selectAccountConstants:SelectAccountConstants,
     private readonly schedulePaymentService:SchedulePaymentService,
-    private readonly supportingDocumentsUploadService:SupportingDocumentsUploadService
+    private readonly scheduledPaymentService: ScheduledPaymentService,
+    private readonly supportingDocumentsUploadService:SupportingDocumentsUploadService,
   ) { }
 
   ngOnInit(): void {
@@ -50,7 +54,7 @@ export class OwnEquityAccountComponent implements OnInit {
   }
 
   openPaymentDialog(): void {
-    this.schedulePaymentService.openSchedulePayment();
+    this.scheduledPaymentService.open(this.schedulePaymentData);
   }
 
   openSupportingDocuments(): void {
