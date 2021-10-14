@@ -12,7 +12,6 @@ import { ScheduledPaymentModel } from 'src/app/core/domain/scheduled-payment.mod
 import { ScheduledPaymentService } from './../../../../../core/services/scheduled-payment/scheduled-payment.service';
 
 
-
 @Component({
   selector: 'app-own-equity-account',
   templateUrl: './own-equity-account.component.html',
@@ -32,8 +31,8 @@ export class OwnEquityAccountComponent implements OnInit {
     private readonly currencySelectionConstants:CurrencySelectionConstants,
     private readonly selectAccountConstants:SelectAccountConstants,
     private readonly schedulePaymentService:SchedulePaymentService,
-    private readonly supportingDocumentsUploadService:SupportingDocumentsUploadService,
     private readonly scheduledPaymentService: ScheduledPaymentService,
+    private readonly supportingDocumentsUploadService:SupportingDocumentsUploadService,
   ) { }
 
   ngOnInit(): void {
