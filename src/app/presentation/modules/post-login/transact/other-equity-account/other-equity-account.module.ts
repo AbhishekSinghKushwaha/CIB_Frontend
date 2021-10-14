@@ -9,6 +9,7 @@ import { SharedComponentsModule } from 'src/app/presentation/shared/components/s
 import { MatStyleModule } from 'src/app/mat-style.module';
 import { SelectAccountModalModule } from './../../../../shared/modals/select-account-modal/select-account-modal.module';
 import { CurrencySelectionModule } from 'src/app/presentation/shared/modals/currency-selection/currency-selection.module';
+import { SchedulePaymentModule } from 'src/app/presentation/shared/modals/schedule-payment/schedule-payment.module';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { CurrencySelectionModule } from 'src/app/presentation/shared/modals/curr
     ReactiveFormsModule,
     FavouritesModalModule,
     SelectAccountModalModule,
-    CurrencySelectionModule
+    CurrencySelectionModule,
+    SchedulePaymentModule
   ],
   providers: []
 })

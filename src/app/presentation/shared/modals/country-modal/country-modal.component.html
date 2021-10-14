@@ -1,0 +1,13 @@
+<div class="country-modal-screen p-0">
+    <div class="row">
+        <div class="col-md-4">
+            <mat-icon svgIcon="caret_left" (click)="close()"></mat-icon>
+        </div>
+        <h4 class="strong-text col-md-8">Currency</h4>
+    </div>
+    <h3 class="strong-text pt-4 mb-4">Please select a currency</h3>
+    <div *ngFor="let item of data; let isLast = last; let i = index">
+        <app-country-list-item [data]="item"  [isChecked]="selected?.name===item.name"></app-country-list-item>
+        <mat-divider *ngIf="!isLast"  class="pt-3"></mat-divider>
+    </div>
+</div>

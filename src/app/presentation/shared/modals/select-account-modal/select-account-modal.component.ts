@@ -16,10 +16,11 @@ export class SelectAccountModalComponent implements OnInit {
     readonly dialogRef: MatDialogRef<SelectAccountModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: SelectAccountModel[],
     private readonly selectAccountModalService: SelectAccountModalService
-  ) { }
+  ) {
+    this.selected = this.selectAccountModalService.default;
+    this.selectAccountModalService.selected.subscribe((x) => this.selected=x); }
 
   ngOnInit(): void {
-    this.selectAccountModalService.selected.subscribe((x) => this.selected=x);
   }
 
   close(): void {

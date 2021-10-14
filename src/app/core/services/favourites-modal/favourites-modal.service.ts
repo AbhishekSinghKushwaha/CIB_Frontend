@@ -8,6 +8,7 @@ import { FavouriteBeneficiaryModel } from '../../domain/favourites-beneficiary.m
 export class FavouritesModalService {
 
   selected = new Subject<FavouriteBeneficiaryModel>();
+  private data:FavouriteBeneficiaryModel;
 
   constructor(private readonly dialog: MatDialog) { }
 
@@ -19,6 +20,11 @@ export class FavouritesModalService {
   }
 
   select(account: FavouriteBeneficiaryModel): void {
-    this.selected.next(account)
+    this.data = account
+    this.selected.next(this.data)
+  }
+
+  get default():FavouriteBeneficiaryModel{
+    return this.data
   }
 }
