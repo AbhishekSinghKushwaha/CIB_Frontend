@@ -6,6 +6,8 @@ import { SelectAccountSendtoService } from 'src/app/core/services/select-account
 import { SchedulePaymentService } from 'src/app/core/services/schedule-payment/schedule-payment.service';
 import { CurrencySelectionService } from 'src/app/core/services/currency-selection/currency-selection.service';
 import { CurrencySelectionConstants } from 'src/app/core/utils/constants/currency-selection.constants';
+import { SelectAccountConstants } from 'src/app/data/repository/select-account-mock-repository/select-account.constants';
+
 
 @Component({
   selector: 'app-own-equity-account',
@@ -13,34 +15,6 @@ import { CurrencySelectionConstants } from 'src/app/core/utils/constants/currenc
   styleUrls: ['./own-equity-account.component.scss']
 })
 export class OwnEquityAccountComponent implements OnInit {
-  accountsMockSendFrom: SelectAccountModel[] = [{
-    name: 'Loot',
-    balance: 999999999.99,
-    currency: 'KES',
-    type: 'Savings'
-  }, {
-    name: '0700000000',
-    balance: 30000,
-    currency: 'KES',
-    type: 'Mobile account'
-  }, {
-    name: '073019380132',
-    balance: 4430000,
-    currency: 'KES',
-    type: 'Current'
-  }];
-
-  accountsMockSendTo: SelectAccountModel[] = [{
-    name: '0700000000',
-    balance: 30000,
-    currency: 'KES',
-    type: 'Mobile account'
-  }, {
-    name: '073019380132',
-    balance: 4430000,
-    currency: 'KES',
-    type: 'Current'
-  }];
 
   sendFrom: SelectAccountModel;
   sendTo: SelectAccountModel;
@@ -51,6 +25,7 @@ export class OwnEquityAccountComponent implements OnInit {
     private readonly selectAccountSendtoService:SelectAccountSendtoService,
     private readonly currencySelectionService:CurrencySelectionService,
     private readonly currencySelectionConstants:CurrencySelectionConstants,
+    private readonly selectAccountConstants:SelectAccountConstants,
     private readonly schedulePaymentService:SchedulePaymentService
   ) { }
 
@@ -61,11 +36,11 @@ export class OwnEquityAccountComponent implements OnInit {
   }
 
   openAccountSendFrom(): void {
-    this.selectAccountService.open(this.accountsMockSendFrom)
+    this.selectAccountService.open(this.selectAccountConstants.accountsMockSendFrom)
   }
 
   openAccountSendTo(): void {
-    this.selectAccountSendtoService.open(this.accountsMockSendTo)
+    this.selectAccountSendtoService.open(this.selectAccountConstants.accountsMockSendTo)
   }
 
   openCurrencies(): void {
