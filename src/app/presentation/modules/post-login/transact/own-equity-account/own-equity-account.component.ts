@@ -7,9 +7,11 @@ import { SchedulePaymentService } from 'src/app/core/services/schedule-payment/s
 import { CurrencySelectionService } from 'src/app/core/services/currency-selection/currency-selection.service';
 import { CurrencySelectionConstants } from 'src/app/core/utils/constants/currency-selection.constants';
 import { SupportingDocumentsUploadService } from "src/app/core/services/supporting-documents-upload/supporting-documents-upload.service";
-import { ScheduledPaymentModel } from 'src/app/core/domain/scheduled-payment.model';
 import { SelectAccountConstants } from 'src/app/data/repository/select-account-mock-repository/select-account.constants';
+import { ScheduledPaymentModel } from 'src/app/core/domain/scheduled-payment.model';
 import { ScheduledPaymentService } from './../../../../../core/services/scheduled-payment/scheduled-payment.service';
+
+
 
 @Component({
   selector: 'app-own-equity-account',
@@ -28,10 +30,10 @@ export class OwnEquityAccountComponent implements OnInit {
     private readonly selectAccountSendtoService:SelectAccountSendtoService,
     private readonly currencySelectionService:CurrencySelectionService,
     private readonly currencySelectionConstants:CurrencySelectionConstants,
+    private readonly selectAccountConstants:SelectAccountConstants,
     private readonly schedulePaymentService:SchedulePaymentService,
     private readonly supportingDocumentsUploadService:SupportingDocumentsUploadService,
     private readonly scheduledPaymentService: ScheduledPaymentService,
-    private readonly selectAccountConstants:SelectAccountConstants,
   ) { }
 
   ngOnInit(): void {
