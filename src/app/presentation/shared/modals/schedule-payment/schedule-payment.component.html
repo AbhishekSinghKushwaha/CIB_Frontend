@@ -1,10 +1,10 @@
 <div class="own-equity-payment-modal-screen p-0 mat-elevation-z0">
-    <div class="row">
-        <div class="col-md-4">
-            <mat-icon (click)="close()" class="cursor-pointer">arrow_back_ios_new</mat-icon>
-        </div>
-        <h4 class="strong-text col-md-8">Schedule Payment</h4>
+  <div class="row">
+    <div class="col-md-4">
+      <mat-icon (click)="close()">arrow_back_ios_new</mat-icon>
     </div>
+    <h4 class="strong-text col-md-8">Schedule Payment</h4>
+  </div>
   <h3 class="strong-text pt-4 mb-3">Please enter details</h3>
   <form [formGroup]="equityForm" (ngSubmit)="submit()" class="d-flex flex-column" autocomplete="off">
     <div>
