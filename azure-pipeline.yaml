@@ -37,14 +37,14 @@ stages:
         tags: |
           $(tag)
           latest
-    - script: |
-        wget https://download.defensecode.com/latest/clients/tscli.tar.gz -O tscli.tar.gz
-        tar xvzf tscli.tar.gz
-      displayName: 'Download/Extract ThunderScan API CLI'
+    # - script: |
+    #     wget https://download.defensecode.com/latest/clients/tscli.tar.gz -O tscli.tar.gz
+    #     tar xvzf tscli.tar.gz
+    #   displayName: 'Download/Extract ThunderScan API CLI'
 
-    - script: |
-        ./tscli --upload $(system.defaultworkingdirectory) --threshold "high:10" --report --formats "html,json" --filename "$(appName)-report" --name "$(appName)-$(tag)"
-      displayName: 'ThunderScan Scan' 
+    # - script: |
+    #     ./tscli --upload $(system.defaultworkingdirectory) --threshold "high:10" --report --formats "html,json" --filename "$(appName)-report" --name "$(appName)-$(tag)"
+    #   displayName: 'ThunderScan Scan' 
     - task: Docker@2
       displayName: Push
       inputs:
