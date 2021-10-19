@@ -12,6 +12,7 @@ variables:
   containerRegistry: 'acromnichannel.azurecr.io'
   dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildId)'
+  appName: 'cibweb'
   
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
