@@ -42,7 +42,7 @@ stages:
       displayName: 'Download/Extract ThunderScan API CLI'
 
     - script: |
-        ./tscli --upload $(system.defaultworkingdirectory) --threshold "high:10" --engines 2 --report --formats "html,json" --filename "$(appName)-report" --name "$(appName)-$(tag)"
+        ./tscli --upload $(system.defaultworkingdirectory) --threshold "high:10" --report --formats "html,json" --filename "$(appName)-report" --name "$(appName)-$(tag)"
       displayName: 'ThunderScan Scan' 
     - task: Docker@2
       displayName: Push
