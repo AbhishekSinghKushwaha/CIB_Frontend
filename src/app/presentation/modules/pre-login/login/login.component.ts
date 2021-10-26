@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-    console.log('Submitted');
   }
 
   // TODO: The modal services here are for examples only. These would be taken out
@@ -86,5 +85,5 @@ export class LoginComponent implements OnInit {
     this.notificationModalService.open(message);
   }
 
-  
+
 }

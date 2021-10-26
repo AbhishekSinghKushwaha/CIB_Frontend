@@ -7,26 +7,20 @@ import { RegisterButtonFooterComponent } from './register-button-footer/register
 import { LogoutButtonFooterComponent } from './logout-button-footer/logout-button-footer.component';
 import { TransactMenuItemComponent } from './transact-menu-item/transact-menu-item.component';
 
-
+const components = [
+  LanguageInputComponent,
+  CustomerSupportComponent,
+  RegisterButtonFooterComponent,
+  LogoutButtonFooterComponent,
+  TransactMenuItemComponent,
+];
 
 @NgModule({
-  declarations: [
-    LanguageInputComponent,
-    CustomerSupportComponent,
-    RegisterButtonFooterComponent,
-    LogoutButtonFooterComponent,
-    TransactMenuItemComponent
-  ],
+  declarations: components,
   imports: [
     CommonModule,
     MatStyleModule
   ],
-  exports: [
-    LanguageInputComponent,
-    CustomerSupportComponent,
-    RegisterButtonFooterComponent,
-    LogoutButtonFooterComponent,
-    TransactMenuItemComponent
-  ]
+  exports: components
 })
 export class SharedComponentsModule { }
