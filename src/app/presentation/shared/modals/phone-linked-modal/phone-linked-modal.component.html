@@ -1,0 +1,34 @@
+<div class="phone-linked-modal-screen p-0 mat-elevation-z0">
+    <div class="row">
+        <div class="col-md-3">
+          <mat-icon (click)="close()">arrow_back_ios_new</mat-icon>
+        </div>
+        <h4 class="strong-text col-md-9">To phone-linked account</h4>
+    </div>
+    <h3 class="strong-text pt-4">Please enter the recipient’s details</h3>
+    <form [formGroup]="equityForm" (ngSubmit)="submit()" class="d-flex flex-column pt-4" autocomplete="off">
+            
+        <div>
+            <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
+                <mat-label>Mobile number</mat-label>
+                <input matInput type="text" placeholder="Enter their mobile number" formControlName="phone">
+            </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
+            <mat-label class="strong-text">Select bank</mat-label>
+            <input matInput type="text" placeholder="" formControlName="bank" [readonly]="true">
+            <button type='button' mat-icon-button matSuffix (click)="openBank()">
+              <mat-icon svgIcon="caret_down"></mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+
+        <div class="pt-4">
+          <button  [disabled]="equityForm.invalid" color="primary" type="submit" mat-flat-button
+            class="px-5">Continue</button>
+        </div>
+      </form>
+</div>
+  

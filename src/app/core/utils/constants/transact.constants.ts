@@ -36,6 +36,12 @@ export class TransactConstants {
           subtext: 'Credit and prepaid cards',
           link: '/transact/pay-to-card',
         },
+        {
+          leftIcon: 'account_balance',
+          text: 'Pesalink',
+          subtext: 'A local or international bank',
+          link: '/transact/pesa-link',
+        },
       ],
     },
     {

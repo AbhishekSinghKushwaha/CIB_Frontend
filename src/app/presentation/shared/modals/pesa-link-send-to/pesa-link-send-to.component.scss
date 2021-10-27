@@ -1,0 +1,29 @@
+.favourites-modal-screen {
+    width: 375px;
+    margin: 0;
+    padding: 0;
+    max-height: 560px;
+  }
+  
+  .mat-dialog-container {
+    margin: 0;
+    padding: 0;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+  
+  ::ng-deep .mat-form-field-outline-start {
+    border-radius: 28px 0 0 28px !important;
+    min-width: 28px !important;
+  }
+  
+  ::ng-deep .mat-form-field-outline-end {
+    border-radius: 0 28px 28px 0 !important;
+  }
+  
+    .border-bottom-grey {
+      border-bottom: 1px solid var(--cool-grey-20);
+    }
+  
