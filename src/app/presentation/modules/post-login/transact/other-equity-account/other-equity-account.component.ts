@@ -9,6 +9,7 @@ import { CurrencySelectionService } from 'src/app/core/services/currency-selecti
 import { FavouritesModalService } from 'src/app/core/services/favourites-modal/favourites-modal.service';
 import { SelectAccountModalService } from 'src/app/core/services/select-account-modal/select-account-modal.service';
 import { CurrencySelectionConstants } from 'src/app/core/utils/constants/currency-selection.constants';
+import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
 import { ScheduledPaymentService } from './../../../../../core/services/scheduled-payment/scheduled-payment.service';
 
 @Component({
@@ -17,34 +18,6 @@ import { ScheduledPaymentService } from './../../../../../core/services/schedule
   styleUrls: ['./other-equity-account.component.scss']
 })
 export class OtherEquityAccountComponent implements OnInit {
-  accountsMock: SelectAccountModel[] = [{
-    name: 'Loot',
-    balance: 999999999.99,
-    currency: 'KES',
-    type: 'Savings'
-  }, {
-    name: '0700000000',
-    balance: 30000,
-    currency: 'KES',
-    type: 'Mobile account'
-  }, {
-    name: '073019380132',
-    balance: 4430000,
-    currency: 'KES',
-    type: 'Current'
-  }];
-
-  favouritesMock: FavouriteBeneficiaryModel[] = [{
-    name: 'June Lowela',
-    phoneNumber: '+254 700 111 111',
-    channel: 'Safaricom',
-    country: 'Kenya'
-  }, {
-    name: 'Kevin Libega',
-    phoneNumber: '+256 700 019 019',
-    channel: 'MTN',
-    country: 'Uganda'
-  }];
 
   sendFrom: SelectAccountModel;
   sendTo: FavouriteBeneficiaryModel;
@@ -78,7 +51,7 @@ export class OtherEquityAccountComponent implements OnInit {
     this.currencySelectionService.selected.subscribe(response => {
       this.equityForm.controls.currency.setValue(response.text);
       this.currency = response;
-      });
+    });
     this.scheduledPaymentService.data.subscribe(response => this.paymentDate = response)
   }
 
@@ -93,11 +66,11 @@ export class OtherEquityAccountComponent implements OnInit {
   }
 
   openAccounts(): void {
-    this.selectAccountService.open(this.accountsMock)
+    this.selectAccountService.open(mockData.accounts)
   }
 
   openFavourites(): void {
-    this.favouritesModalService.open(this.favouritesMock)
+    this.favouritesModalService.open(mockData.favourites)
   }
 
   openCurrencies(): void {

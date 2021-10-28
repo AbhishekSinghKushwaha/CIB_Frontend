@@ -48,7 +48,7 @@ const MatImports = [
   MatChipsModule,
   MatNativeDateModule,
   MatRadioModule,
-  MatDividerModule
+  MatDividerModule,
 ];
 
 

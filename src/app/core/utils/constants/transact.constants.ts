@@ -36,6 +36,12 @@ export class TransactConstants {
           subtext: 'Credit and prepaid cards',
           link: '/transact/pay-to-card',
         },
+        {
+          leftIcon: 'build_circle',
+          text: 'Beneficiary management',
+          subtext: 'Manage your beneficiaries',
+          link: '/transact/beneficiary-management',
+        },
       ],
     },
     {

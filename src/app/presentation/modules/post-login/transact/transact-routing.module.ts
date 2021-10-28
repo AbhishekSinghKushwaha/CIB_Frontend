@@ -71,6 +71,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'beneficiary-management',
+    loadChildren: (): Promise<any> =>
+      import('./beneficiary-management/beneficiary-management.module').then(
+        (m) => m.BeneficiaryManagementModule
+      ),
+  },
+  {
     path: '**',
     redirectTo: ''
   }
