@@ -1,3 +1,5 @@
+import { BankModel } from '../../domain/bank.model';
+import { CountryModel } from '../../domain/country.model';
 import { FavouriteBeneficiaryModel } from './../../domain/favourites-beneficiary.model';
 import { SelectAccountModel } from './../../domain/select-account.model';
 
@@ -30,6 +32,25 @@ const favourites: FavouriteBeneficiaryModel[] = [{
   country: 'Uganda'
 }];
 
+const banks: BankModel[] = [{
+  id: 1,
+  name: 'Barclays Bank Kenya',
+}, {
+  id: 2,
+  name: 'Commercial Bank of Africa',
+}, {
+  id: 3,
+  name: 'Equity Bank Kenya',
+}];
+
+const countries: CountryModel[] = [
+  { name: 'Kenya', flag: 'https://flagcdn.com/h60/ke.png' },
+  { name: 'Democratic Republic of Congo', flag: 'https://flagcdn.com/h60/cd.png' },
+  { name: 'Rwanda', flag: 'https://flagcdn.com/h60/rw.png' },
+  { name: 'South Sudan', flag: 'https://flagcdn.com/h60/ss.png' },
+  { name: 'Tanzania', flag: 'https://flagcdn.com/h60/tz.png' }
+]
+
 export const mockData = {
-  accounts, favourites
+  accounts, favourites, banks, countries
 }

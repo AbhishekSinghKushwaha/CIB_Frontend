@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 
 import { BeneficiaryManagementRoutingModule } from './beneficiary-management-routing.module';
 import { BeneficiaryManagementComponent } from './beneficiary-management.component';
+import { BankService } from 'src/app/core/services/bank/bank.service';
+import { CountryService } from 'src/app/core/services/country/country.service';
 
 
 @NgModule({
@@ -16,6 +18,7 @@ import { BeneficiaryManagementComponent } from './beneficiary-management.compone
     BeneficiaryManagementRoutingModule,
     MatStyleModule,
     ReactiveFormsModule,
-  ]
+  ],
+  providers: [BankService, CountryService],
 })
 export class BeneficiaryManagementModule { }

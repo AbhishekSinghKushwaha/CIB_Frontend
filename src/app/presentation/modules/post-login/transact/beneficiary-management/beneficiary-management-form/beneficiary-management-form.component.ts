@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { BankModel } from 'src/app/core/domain/bank.model';
+import { BankService } from 'src/app/core/services/bank/bank.service';
+import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
 
 @Component({
   selector: 'app-beneficiary-management-form',
@@ -8,8 +11,11 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class BeneficiaryManagementFormComponent implements OnInit {
   equityForm: FormGroup;
+  bank: BankModel;
 
-  constructor() { }
+  constructor(
+    private readonly bankService: BankService
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -17,10 +23,11 @@ export class BeneficiaryManagementFormComponent implements OnInit {
   }
 
   private eventsSubscriptions(): void {
-    // this.selectAccountService.selected.subscribe((response) => {
-    //   this.equityForm.controls.fromAccount.setValue(response.name);
-    //   this.sendFrom = response;
-    // });
+    this.bankService.selected.subscribe((response) => {
+      console.log(response);
+      this.bank = response;
+      this.equityForm.controls.bank.setValue(response.name);
+    });
     // this.favouritesModalService.selected.subscribe((response) => {
     //   this.equityForm.controls.recipient.setValue(response.name);
     //   this.sendTo = response;
@@ -47,7 +54,7 @@ export class BeneficiaryManagementFormComponent implements OnInit {
   }
 
   openBanks() {
-
+    this.bankService.open(mockData.banks)
   }
 
 }

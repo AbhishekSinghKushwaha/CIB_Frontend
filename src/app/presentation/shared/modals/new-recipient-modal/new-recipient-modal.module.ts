@@ -5,6 +5,7 @@ import { NewRecipientModalComponent } from './new-recipient-modal.component';
 import { NewRecipientService } from 'src/app/core/services/new-recipient/new-recipient.service';
 import { MatStyleModule } from 'src/app/mat-style.module';
 import { CountryModalModule } from '../country-modal/country-modal.module';
+import { CountrySelectModule } from '../../components/country-select/country-select.module';
 
 
 
@@ -19,9 +20,10 @@ import { CountryModalModule } from '../country-modal/country-modal.module';
     CommonModule,
     MatStyleModule,
     ReactiveFormsModule,
-    CountryModalModule
+    CountryModalModule,
+    CountrySelectModule
   ],
-  providers:[
+  providers: [
     NewRecipientService
   ]
 })

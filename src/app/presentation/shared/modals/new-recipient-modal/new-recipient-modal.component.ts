@@ -5,6 +5,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { recipientModel } from 'src/app/core/domain/recipient.model';
 import { NewRecipientService } from './../../../../core/services/new-recipient/new-recipient.service';
 import { CountryModel } from 'src/app/core/domain/country.model';
+import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
+import { countrySettings } from 'src/app/core/utils/constants/country.settings';
 
 @Component({
   selector: 'app-new-recipient-modal',
@@ -15,19 +17,13 @@ export class NewRecipientModalComponent implements OnInit {
   selected: recipientModel;
   accountNumber: string;
   equityForm: FormGroup;
-  visibility = true;
-  countryMock: CountryModel[] = [
-    { name: 'Kenya', flag: 'https://flagcdn.com/h60/ke.png' },
-    { name: 'Democratic Republic of Congo', flag: 'https://flagcdn.com/h60/cd.png' },
-    { name: 'Rwanda', flag: 'https://flagcdn.com/h60/rw.png' },
-    { name: 'South Sudan', flag: 'https://flagcdn.com/h60/ss.png' },
-    { name: 'Tanzania', flag: 'https://flagcdn.com/h60/tz.png' }
-  ]
+  country: CountryModel;
+  countrySelectType = countrySettings.viewTypes.FLAG_AND_NAME;
 
   constructor(
     readonly dialogRef: MatDialogRef<NewRecipientModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: recipientModel,
     private readonly newRecipientService: NewRecipientService,
+    @Inject(MAT_DIALOG_DATA) public data: recipientModel,
     private readonly countryService: CountryService
   ) {
     this.selected = this.newRecipientService.default;
@@ -38,15 +34,6 @@ export class NewRecipientModalComponent implements OnInit {
     this.initForm()
   }
 
-  openCountries(): void {
-    this.visibility = false;
-    const modal = this.countryService.open(this.countryMock);
-    modal.afterClosed().subscribe((data: CountryModel) => {
-      this.visibility = true;
-      this.selected = { ...this.selected, country: data };
-    });
-  }
-
   initForm(): void {
     this.equityForm = new FormGroup({
       accountNumber: new FormControl(null, [Validators.required]),
@@ -55,6 +42,10 @@ export class NewRecipientModalComponent implements OnInit {
 
   close(): void {
     this.dialogRef.close(true);
+  }
+
+  setCountry(country: CountryModel) {
+    this.selected = { ...this.selected, country }
   }
 
   submit(): void {

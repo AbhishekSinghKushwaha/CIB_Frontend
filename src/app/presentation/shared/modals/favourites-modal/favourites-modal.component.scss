@@ -9,10 +9,10 @@
   padding: 0;
 }
 
-.close-button{
+.close-button {
   float: left;
-  top:0px;
-  right:0px;
+  top: 0px;
+  right: 0px;
 }
 
 mat-form-field {
@@ -28,6 +28,6 @@ mat-form-field {
   border-radius: 0 28px 28px 0 !important;
 }
 
-  .border-bottom-grey {
-    border-bottom: 1px solid var(--cool-grey-20);
-  }
+.border-bottom-grey {
+  border-bottom: 1px solid var(--cool-grey-20);
+}
