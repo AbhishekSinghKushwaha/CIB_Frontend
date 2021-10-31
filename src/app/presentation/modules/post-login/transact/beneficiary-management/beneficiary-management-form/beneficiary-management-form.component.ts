@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BankModel } from 'src/app/core/domain/bank.model';
 import { BankService } from 'src/app/core/services/bank/bank.service';
+import { TransactionTypeModalService } from 'src/app/core/services/transaction-type-modal/transaction-type-modal.service';
 import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
+import TRANSACT_TYPE from 'src/app/core/utils/constants/transaction-type.constants';
 
 @Component({
   selector: 'app-beneficiary-management-form',
@@ -14,7 +16,8 @@ export class BeneficiaryManagementFormComponent implements OnInit {
   bank: BankModel;
 
   constructor(
-    private readonly bankService: BankService
+    private readonly bankService: BankService,
+    private readonly transactionTypeModalService: TransactionTypeModalService,
   ) { }
 
   ngOnInit(): void {
@@ -57,4 +60,7 @@ export class BeneficiaryManagementFormComponent implements OnInit {
     this.bankService.open(mockData.banks)
   }
 
+  openTransactions() {
+    this.transactionTypeModalService.open(TRANSACT_TYPE)
+  }
 }

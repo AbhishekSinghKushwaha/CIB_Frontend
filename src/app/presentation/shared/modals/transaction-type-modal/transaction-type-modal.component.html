@@ -1,1 +1,30 @@
-<p>transaction-type-modal works!</p>
+<div class="own-equity-modal-screen p-0">
+  <div class="row">
+    <div class="col-md-4">
+      <mat-icon (click)="close()" class="cursor-pointer">close</mat-icon>
+    </div>
+    <h4 class="strong-text col-md-8">Transaction type</h4>
+  </div>
+  <div class="row p-3">
+    <h3 class="strong-text pt-4 mb-4">Please select the transaction type</h3>
+    <div *ngFor="let item of data; let isLast = last; let i = index">
+      <app-transaction-type-list-item
+        [data]="item"
+        [isChecked]="isChecked(item.id)"
+      >
+      </app-transaction-type-list-item>
+      <mat-divider *ngIf="!isLast" class="mt-3 mb-3"></mat-divider>
+    </div>
+    <div class="pt-4">
+      <button
+        [disabled]="!selected.length"
+        color="primary"
+        type="button"
+        mat-flat-button
+        class="col-md-12"
+      >
+        Continue
+      </button>
+    </div>
+  </div>
+</div>

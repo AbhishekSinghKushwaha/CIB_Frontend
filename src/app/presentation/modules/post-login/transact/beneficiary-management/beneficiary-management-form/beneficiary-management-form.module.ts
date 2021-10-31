@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { BeneficiaryManagementFormRoutingModule } from './beneficiary-management-form-routing.module';
 import { BeneficiaryManagementFormComponent } from './beneficiary-management-form.component';
 import { BankModalModule } from 'src/app/presentation/shared/modals/bank-modal/bank-modal.module';
-import { BankService } from 'src/app/core/services/bank/bank.service';
+import { TransactionTypeModalModule } from 'src/app/presentation/shared/modals/transaction-type-modal/transaction-type-modal.module';
 
 
 @NgModule({
@@ -18,9 +18,8 @@ import { BankService } from 'src/app/core/services/bank/bank.service';
     BeneficiaryManagementFormRoutingModule,
     MatStyleModule,
     BankModalModule,
-    ReactiveFormsModule
-  ],
-  providers: [BankService]
-
+    ReactiveFormsModule,
+    TransactionTypeModalModule
+  ]
 })
 export class BeneficiaryManagementFormModule { }
