@@ -1,4 +1,3 @@
-import { CountryService } from './../../../../core/services/country/country.service';
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -24,7 +23,6 @@ export class NewRecipientModalComponent implements OnInit {
     readonly dialogRef: MatDialogRef<NewRecipientModalComponent>,
     private readonly newRecipientService: NewRecipientService,
     @Inject(MAT_DIALOG_DATA) public data: recipientModel,
-    private readonly countryService: CountryService
   ) {
     this.selected = this.newRecipientService.default;
     this.newRecipientService.data.subscribe((x) => this.selected = x);
@@ -50,7 +48,6 @@ export class NewRecipientModalComponent implements OnInit {
 
   submit(): void {
     this.selected = { ...this.selected, account: this.equityForm.controls.accountNumber.value };
-    console.log(this.selected);
     this.close();
   }
 

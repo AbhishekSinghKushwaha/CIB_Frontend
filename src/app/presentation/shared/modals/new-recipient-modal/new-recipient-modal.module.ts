@@ -5,8 +5,6 @@ import { NewRecipientModalComponent } from './new-recipient-modal.component';
 import { NewRecipientService } from 'src/app/core/services/new-recipient/new-recipient.service';
 import { MatStyleModule } from 'src/app/mat-style.module';
 import { CountryModalModule } from '../country-modal/country-modal.module';
-import { CountrySelectModule } from '../../components/country-select/country-select.module';
-
 
 
 @NgModule({
@@ -20,8 +18,7 @@ import { CountrySelectModule } from '../../components/country-select/country-sel
     CommonModule,
     MatStyleModule,
     ReactiveFormsModule,
-    CountryModalModule,
-    CountrySelectModule
+    CountryModalModule
   ],
   providers: [
     NewRecipientService

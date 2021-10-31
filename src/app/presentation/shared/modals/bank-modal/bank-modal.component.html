@@ -1,4 +1,4 @@
-<div class="p-0">
+<div class="p-0" *ngIf="visibility">
   <div class="row">
     <div class="col-md-4">
       <mat-icon (click)="close()" class="cursor-pointer">close</mat-icon>
@@ -10,7 +10,7 @@
     (selected)="setCountry($event)"
     [category]="countrySelectType"
   ></app-country-select>
-  <mat-divider></mat-divider>
+  <mat-divider class="m-2"></mat-divider>
   <div class="row">
     <mat-form-field appearance="outline">
       <input
@@ -22,8 +22,19 @@
     </mat-form-field>
   </div>
   <div class="row p-3">
-    <h3 class="strong-text p-3">4 results</h3>
-    <div *ngFor="let item of data; let isLast = last; let i = index">
+    <h3
+      class="strong-text p-3"
+      *ngIf="(data | bankSearch: searchText).length as results"
+    >
+      {{ results }} result{{ results ? "s" : "" }}
+    </h3>
+    <div
+      *ngFor="
+        let item of data | bankSearch: searchText;
+        let isLast = last;
+        let i = index
+      "
+    >
       <app-bank-list-item [data]="item" [isChecked]="selected?.id === item.id">
       </app-bank-list-item>
       <mat-divider *ngIf="!isLast" class="pt-3 mt-3"></mat-divider>

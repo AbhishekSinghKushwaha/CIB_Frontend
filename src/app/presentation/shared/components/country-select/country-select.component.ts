@@ -28,10 +28,11 @@ export class CountrySelectComponent implements OnInit {
 
   openCountries(): void {
     this.visibility = false;
-    const modal = this.countryService.open(this.countries);
+    const modal = this.countryService.open(this.countries, this.category);
     modal.afterClosed().subscribe((data: CountryModel) => {
       this.visibility = true;
       this.selected.next(data);
+      this.countryService.openedStatus.next(false);
     });
   }
 

@@ -5,7 +5,8 @@ import { BankModalComponent } from './bank-modal.component';
 import { BankListItemComponent } from '../../components/bank-list-item/bank-list-item.component';
 import { MatStyleModule } from 'src/app/mat-style.module';
 import { BankService } from 'src/app/core/services/bank/bank.service';
-import { CountrySelectModule } from '../../components/country-select/country-select.module';
+import { CountryModalModule } from '../country-modal/country-modal.module';
+import { BankSearchPipe } from '../../pipes/bank-search/bank-search.pipe';
 
 
 
@@ -13,12 +14,13 @@ import { CountrySelectModule } from '../../components/country-select/country-sel
   declarations: [
     BankModalComponent,
     BankListItemComponent,
+    BankSearchPipe
   ],
   imports: [
     CommonModule,
     MatStyleModule,
     FormsModule,
-    CountrySelectModule,
+    CountryModalModule,
   ],
   exports: [
     BankModalComponent,
