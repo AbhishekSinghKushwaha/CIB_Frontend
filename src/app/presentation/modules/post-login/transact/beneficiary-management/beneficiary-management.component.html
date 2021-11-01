@@ -34,7 +34,9 @@
           class="text-grey mt-2 mb-2 d-flex justify-content-end"
         >
           {{ selection.selected.length }} selected |
-          <span (click)="deleteBeneficiary()" class="cursor-pointer"
+          <span
+            (click)="deleteBeneficiary(selection.selected)"
+            class="cursor-pointer"
             ><mat-icon svgIcon="delete-documents"></mat-icon> Delete</span
           >
         </div>
@@ -48,8 +50,8 @@
           matRipple
           routerLink="new"
         >
-          <div *ngIf="!beneficiaries?.length">Add Beneficiary</div>
-          <div *ngIf="beneficiaries?.length">
+          <div *ngIf="!dataSource.data.length">Add Beneficiary</div>
+          <div *ngIf="dataSource.data.length">
             Here's a list of your beneficiaries
           </div>
           <div class="d-flex justify-content-between text-danger">
@@ -64,7 +66,7 @@
             justify-content-center
             align-items-center
           "
-          *ngIf="!beneficiaries?.length"
+          *ngIf="!dataSource.data.length"
         >
           <img
             class="img-fluid mt-4 mb-4"
@@ -84,7 +86,7 @@
             Add a beneficiary
           </button>
         </div>
-        <div class="row" *ngIf="beneficiaries?.length">
+        <div class="row" *ngIf="dataSource.data.length">
           <table mat-table [dataSource]="dataSource">
             <!-- Position Column -->
             <ng-container matColumnDef="select">

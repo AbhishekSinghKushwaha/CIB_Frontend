@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { animate, group, style, transition, trigger } from '@angular/animations';
+import * as  _ from 'lodash';
 import { BeneficiaryModel } from 'src/app/core/domain/beneficiary.model';
 import { BeneficiaryManagementService } from 'src/app/core/services/beneficiary-management/beneficiary-management.service';
 import { Router } from '@angular/router';
@@ -84,7 +85,7 @@ export class BeneficiaryManagementComponent implements OnInit {
 
   edit(deleteMode: boolean, data: BeneficiaryModel, index: number) {
     if (deleteMode) {
-      this.deleteBeneficiary(index);
+      this.deleteBeneficiary([data]);
     } else {
       this.beneficiaryManagementService.beneficiaryEdit = data;
       this.router.navigate([`/transact/beneficiary-management/edit/${index + 1}`]);
@@ -97,17 +98,16 @@ export class BeneficiaryManagementComponent implements OnInit {
     cancelText: 'No, I\'m not',
     confirmText: 'Yes, I\'m sure'
   })
-  deleteBeneficiary(index: any = null) {
-    console.log('about to delete');
-    console.log('index', index)
-    if (index > -1) {
-      this.dataSource.data.splice(index, 1);
-    } else {
-      console.log('this.selection.selected', this.selection.selected);
-      const result = this.dataSource.data.filter((_, index) => this.selection.selected.some((_, i) => i !== index));
-      console.log('result', result);
-      this.dataSource.data = result;
-    }
+  deleteBeneficiary(data: BeneficiaryModel[]) {
+    console.log('about to delete multiple');
+    console.log('this.selection.selected', this.selection.selected);
+    data.forEach((selected) => {
+      this.dataSource.data = this.dataSource.data
+        .filter((value) => !_.isEqual(value, selected));
+      console.log('this.dataSource.data', this.dataSource.data);
+      selected && this.selection.deselect(selected);
+    });
+    this.beneficiaryManagementService.beneficiaries = this.dataSource.data;
   }
 
   loadBeneficiaries() {

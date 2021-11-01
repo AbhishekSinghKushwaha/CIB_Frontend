@@ -16,7 +16,7 @@ export class BeneficiaryManagementService {
     this.beneficiaries = [...this.beneficiaries, data]
     setTimeout(() => {
       this.formData.next(this.beneficiaries)
-    }, 0)
+    }, 0);
   }
 
   updateForm(data: BeneficiaryModel, id: number) {
