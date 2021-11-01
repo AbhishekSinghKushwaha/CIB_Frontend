@@ -83,7 +83,6 @@ export class BeneficiaryManagementComponent implements OnInit {
   }
 
   edit(deleteMode: boolean, data: BeneficiaryModel, index: number) {
-    console.log(data, index);
     if (deleteMode) {
       this.deleteBeneficiary(index);
     } else {
@@ -93,15 +92,22 @@ export class BeneficiaryManagementComponent implements OnInit {
   }
 
   @confirmModal({
-    title: 'CONFIRM.DOWNLOAD.JOB.TITLE',
-    message: 'CONFIRM.DOWNLOAD.JOB.MESSAGE',
-    cancelText: 'CONFIRM.DOWNLOAD.JOB.CANCELTEXT',
-    confirmText: 'CONFIRM.DOWNLOAD.JOB.CONFIRMTEXT'
+    title: 'Are you sure',
+    message: 'Once you remove a beneficiary, all their details will be deleted. You can add them again anytime.',
+    cancelText: 'No, I\'m not',
+    confirmText: 'Yes, I\'m sure'
   })
   deleteBeneficiary(index: any = null) {
+    console.log('about to delete');
+    console.log('index', index)
     if (index > -1) {
       this.dataSource.data.splice(index, 1);
-    };
+    } else {
+      console.log('this.selection.selected', this.selection.selected);
+      const result = this.dataSource.data.filter((_, index) => this.selection.selected.some((_, i) => i !== index));
+      console.log('result', result);
+      this.dataSource.data = result;
+    }
   }
 
   loadBeneficiaries() {

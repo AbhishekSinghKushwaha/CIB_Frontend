@@ -29,9 +29,12 @@
           <p>{{ alertMessage }}</p>
           <mat-icon (click)="closeAlert()">close</mat-icon>
         </div>
-        <div *ngIf="selection.selected.length" class="text-grey mt-2 mb-2">
+        <div
+          *ngIf="selection.selected.length"
+          class="text-grey mt-2 mb-2 d-flex justify-content-end"
+        >
           {{ selection.selected.length }} selected |
-          <span (click)="deleteBeneficiary()"
+          <span (click)="deleteBeneficiary()" class="cursor-pointer"
             ><mat-icon svgIcon="delete-documents"></mat-icon> Delete</span
           >
         </div>

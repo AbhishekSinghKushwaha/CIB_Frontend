@@ -1,17 +1,15 @@
 import { Injector, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConfirmDialogComponent } from './confirm-dialog.component';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
 import { ConfirmDialogService } from 'src/app/core/services/confirm-dialog/confirm-dialog.service';
+import { MatStyleModule } from 'src/app/mat-style.module';
 
 
 
 @NgModule({
   imports: [
     CommonModule,
-    MatDialogModule,
-    MatButtonModule
+    MatStyleModule
   ],
   declarations: [
     ConfirmDialogComponent
