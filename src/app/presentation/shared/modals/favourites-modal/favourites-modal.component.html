@@ -6,32 +6,54 @@
   <h3 class="m-4 ms-3">Who are you sending money to</h3>
   <div class="row m-2">
     <mat-form-field appearance="outline">
-      <input matInput [(ngModel)]="searchText">
+      <input matInput [(ngModel)]="searchText" />
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
   </div>
 
   <div class="row ms-3 mt-2 pb-3 cursor-pointer" (click)="openNewRecipient()">
     <div class="col-md-10">
-      <img src="./assets/images/icons/Visual support_Icon_with_container.svg" class="fav-icon" alt="" />
+      <img
+        src="./assets/images/icons/Visual support_Icon_with_container.svg"
+        class="fav-icon"
+        alt=""
+      />
       <span class="ps-3">Send to someone new</span>
     </div>
     <div class="col-md-2">
-      <button type='button' mat-icon-button matSuffix>
+      <button type="button" mat-icon-button matSuffix>
         <mat-icon svgIcon="caret_right"></mat-icon>
       </button>
     </div>
-
   </div>
   <mat-divider class="p-2"></mat-divider>
   <div class="d-flex justify-content-between bd-highlight m-2">
     <h3>Favourites</h3>
     <div class="text-danger">Manage</div>
   </div>
-  <app-beneficiary-list-item *ngFor="let account of (data  | favouriteSearch:searchText)" [data]="account"
-    [isChecked]="selected &&  selected.name===account.name">
+  <app-beneficiary-list-item
+    *ngFor="let account of data | favouriteSearch: searchText"
+    [data]="account"
+    [isChecked]="selected && selected.name === account.name"
+  >
   </app-beneficiary-list-item>
-  <div class="row ms-3" *ngIf="(data  | favouriteSearch:searchText).length <1">
+  <div class="row ms-3" *ngIf="(data | favouriteSearch: searchText).length < 1">
     0 favourites found
+  </div>
+  <div
+    class="
+      row
+      ms-3
+      d-flex
+      justify-content-center
+      text-danger text-decoration-underline
+      cursor-pointer
+    "
+    *ngIf="
+      searchText && data.length !== (data | favouriteSearch: searchText).length
+    "
+    (click)="resetBeneficiaries()"
+  >
+    See all beneficiaries
   </div>
 </div>

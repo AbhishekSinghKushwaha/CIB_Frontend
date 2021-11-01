@@ -41,4 +41,8 @@ export class FavouritesModalComponent implements OnInit {
       this.visibility = true;
     });
   }
+
+  resetBeneficiaries(): void {
+    this.searchText = '';
+  }
 }
