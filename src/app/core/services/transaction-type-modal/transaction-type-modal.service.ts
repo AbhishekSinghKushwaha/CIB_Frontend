@@ -6,8 +6,8 @@ import { TransactionTypeModel } from '../../domain/transaction-type.model';
 
 @Injectable()
 export class TransactionTypeModalService {
-  selected = new Subject<TransactionTypeModel[]>();
-  private data: TransactionTypeModel[] = [];
+  selected = new Subject<TransactionTypeModel>();
+  private data: TransactionTypeModel;
 
   constructor(private readonly dialog: MatDialog) { }
 
@@ -19,12 +19,12 @@ export class TransactionTypeModalService {
     });
   }
 
-  get default(): TransactionTypeModel[] {
+  get default(): TransactionTypeModel {
     return this.data;
   }
 
   select(account: TransactionTypeModel): void {
-    this.data = this.data.find(value => account.id === value.id) ? this.data.filter(value => account.id !== value.id) : [...this.data, account];
-    this.selected.next(this.data)
+    this.data = account;
+    this.selected.next(account)
   }
 }

@@ -9,7 +9,7 @@ import { TransactionTypeModalService } from 'src/app/core/services/transaction-t
   styleUrls: ['./transaction-type-modal.component.scss']
 })
 export class TransactionTypeModalComponent implements OnInit {
-  selected: TransactionTypeModel[];
+  selected: TransactionTypeModel;
 
   constructor(
     private readonly dialogRef: MatDialogRef<TransactionTypeModalComponent>,
@@ -25,10 +25,6 @@ export class TransactionTypeModalComponent implements OnInit {
 
   close(): void {
     this.dialogRef.close(true);
-  }
-
-  isChecked(id: number): boolean {
-    return this.selected ? this.selected.some(value => value.id === id) : false;
   }
 
 }

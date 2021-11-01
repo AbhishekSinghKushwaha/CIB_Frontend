@@ -7,6 +7,7 @@ import { BeneficiaryManagementFormRoutingModule } from './beneficiary-management
 import { BeneficiaryManagementFormComponent } from './beneficiary-management-form.component';
 import { BankModalModule } from 'src/app/presentation/shared/modals/bank-modal/bank-modal.module';
 import { TransactionTypeModalModule } from 'src/app/presentation/shared/modals/transaction-type-modal/transaction-type-modal.module';
+import { BeneficiaryManagementService } from 'src/app/core/services/beneficiary-management/beneficiary-management.service';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { TransactionTypeModalModule } from 'src/app/presentation/shared/modals/t
     BankModalModule,
     ReactiveFormsModule,
     TransactionTypeModalModule
-  ]
+  ],
+  providers: [BeneficiaryManagementService],
 })
 export class BeneficiaryManagementFormModule { }

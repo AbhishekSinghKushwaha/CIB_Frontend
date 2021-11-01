@@ -13,6 +13,13 @@ const routes: Routes = [{
     import('./beneficiary-management-form/beneficiary-management-form.module').then(
       (m) => m.BeneficiaryManagementFormModule
     ),
+}, {
+  path: 'edit/:id',
+  component: BeneficiaryManagementFormComponent,
+  loadChildren: (): Promise<any> =>
+    import('./beneficiary-management-form/beneficiary-management-form.module').then(
+      (m) => m.BeneficiaryManagementFormModule
+    ),
 }];
 
 

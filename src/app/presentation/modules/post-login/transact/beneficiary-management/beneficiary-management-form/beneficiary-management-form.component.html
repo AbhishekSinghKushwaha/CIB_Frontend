@@ -11,7 +11,7 @@
           >
             <div class="strong-text">
               <mat-icon svgIcon="caret_left"></mat-icon>
-              <span>Add Beneficiary</span>
+              <span> {{ editMode ? "Edit" : "Add" }} a beneficiary</span>
             </div>
           </button>
         </div>
@@ -97,8 +97,13 @@
             </div>
           </div>
           <div class="mt-4">
-            <button mat-raised-button color="primary" disabled>
-              Add the beneficiary
+            <button
+              type="submit"
+              mat-raised-button
+              color="primary"
+              [disabled]="equityForm.invalid"
+            >
+              {{ editMode ? "Update" : "Add the beneficiary" }}
             </button>
           </div>
         </form>
@@ -106,3 +111,5 @@
     </div>
   </div>
 </div>
+
+<!-- [disabled]="equityForm.invalid" -->

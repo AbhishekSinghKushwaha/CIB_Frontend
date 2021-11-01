@@ -8,6 +8,8 @@ import { BeneficiaryManagementComponent } from './beneficiary-management.compone
 import { TransactionTypeModalService } from 'src/app/core/services/transaction-type-modal/transaction-type-modal.service';
 import { BankService } from 'src/app/core/services/bank/bank.service';
 import { CountryService } from 'src/app/core/services/country/country.service';
+import { BeneficiaryManagementService } from 'src/app/core/services/beneficiary-management/beneficiary-management.service';
+import { ConfirmDialogModule } from 'src/app/presentation/shared/modals/confirm-dialog/confirm-dialog.module';
 
 
 @NgModule({
@@ -19,7 +21,8 @@ import { CountryService } from 'src/app/core/services/country/country.service';
     BeneficiaryManagementRoutingModule,
     MatStyleModule,
     ReactiveFormsModule,
+    ConfirmDialogModule
   ],
-  providers: [CountryService, BankService, TransactionTypeModalService],
+  providers: [CountryService, BankService, TransactionTypeModalService, BeneficiaryManagementService],
 })
 export class BeneficiaryManagementModule { }
