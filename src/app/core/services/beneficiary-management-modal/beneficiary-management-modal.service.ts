@@ -20,7 +20,8 @@ export class BeneficiaryManagementModalService {
   }
 
   select(account: FavouriteBeneficiaryModel): void {
-    this.data = this.data.some(value => value.id === account.id) ? this.data : [...this.data, account]
+    this.data = this.data.some(value => value.id === account.id) ? this.data.filter(value => value.id !== account.id) : [...this.data, account]
+    console.log('account', this.data);
     this.selected.next(this.data)
   }
 

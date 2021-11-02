@@ -44,7 +44,12 @@
     <button mat-button class="text-danger ps-0 ms-0" (click)="toggleSelect()">
       Select
     </button>
-    <button mat-button class="text-danger pe-0 me-0">
+    <button
+      mat-button
+      class="text-danger pe-0 me-0"
+      [disabled]="!this.selected.length"
+      (click)="deleteBeneficiaries()"
+    >
       <mat-icon svgIcon="delete-documents"></mat-icon> Delete
     </button>
   </div>

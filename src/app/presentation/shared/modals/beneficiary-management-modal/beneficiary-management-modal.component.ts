@@ -21,7 +21,7 @@ export class BeneficiaryManagementModalComponent implements OnInit {
     private readonly beneficiaryManagementModalService: BeneficiaryManagementModalService,) {
 
     this.selected = beneficiaryManagementModalService.default;
-    this.beneficiaryManagementModalService.selected.subscribe((x) => this.selected = x);
+    this.beneficiaryManagementModalService.selected.subscribe((x) => { this.selected = x; console.log(this.selected) });
   }
 
   ngOnInit(): void { }
@@ -32,6 +32,10 @@ export class BeneficiaryManagementModalComponent implements OnInit {
 
   isChecked(account: FavouriteBeneficiaryModel): boolean {
     return this.selected.some(value => value.id === account.id);
+  }
+
+  deleteBeneficiaries(): void {
+    this.data = this.data.filter(value => !this.selected.some(item => item.id === value.id))
   }
 
   openBeneficiaryForm(): void {
