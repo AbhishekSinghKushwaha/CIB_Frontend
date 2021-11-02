@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FavouriteBeneficiaryModel } from 'src/app/core/domain/favourites-beneficiary.model';
 import { BeneficiaryManagementModalService } from 'src/app/core/services/beneficiary-management-modal/beneficiary-management-modal.service';
+import { confirmModal } from '../../decorators/confirm-dialog.decorator';
 
 @Component({
   selector: 'app-beneficiary-management-modal',
@@ -34,6 +35,12 @@ export class BeneficiaryManagementModalComponent implements OnInit {
     return this.selected.some(value => value.id === account.id);
   }
 
+  @confirmModal({
+    title: 'Are you sure',
+    message: 'Once you remove a beneficiary, all their details will be deleted. You can add them again anytime.',
+    cancelText: 'No, I\'m not',
+    confirmText: 'Yes, I\'m sure'
+  })
   deleteBeneficiaries(): void {
     this.data = this.data.filter(value => !this.selected.some(item => item.id === value.id))
   }
