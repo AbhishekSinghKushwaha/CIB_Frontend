@@ -7,6 +7,7 @@ import { BeneficiaryListItemModule } from '../../components/beneficiary-list-ite
 import { BeneficiaryManagementModalService } from 'src/app/core/services/beneficiary-management-modal/beneficiary-management-modal.service';
 import { FavouriteSearchPipeModule } from '../../pipes/favourites-search/favourite-search-pipe.module';
 import { ConfirmDialogModule } from '../confirm-dialog/confirm-dialog.module';
+import { BeneficiaryManagementFormModalModule } from '../beneficiary-management-form-modal/beneficiary-management-form-modal.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ConfirmDialogModule } from '../confirm-dialog/confirm-dialog.module';
     BeneficiaryListItemModule,
     FavouriteSearchPipeModule,
     MatStyleModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    BeneficiaryManagementFormModalModule
   ],
   exports: [
     BeneficiaryManagementModalComponent

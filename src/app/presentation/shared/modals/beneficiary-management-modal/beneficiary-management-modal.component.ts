@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FavouriteBeneficiaryModel } from 'src/app/core/domain/favourites-beneficiary.model';
+import { BeneficiaryManagementFormModalService } from 'src/app/core/services/beneficiary-management-form-modal/beneficiary-management-form-modal.service';
 import { BeneficiaryManagementModalService } from 'src/app/core/services/beneficiary-management-modal/beneficiary-management-modal.service';
 import { confirmModal } from '../../decorators/confirm-dialog.decorator';
 
@@ -19,7 +20,8 @@ export class BeneficiaryManagementModalComponent implements OnInit {
   constructor(
     readonly dialogRef: MatDialogRef<BeneficiaryManagementModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: FavouriteBeneficiaryModel[],
-    private readonly beneficiaryManagementModalService: BeneficiaryManagementModalService,) {
+    private readonly beneficiaryManagementModalService: BeneficiaryManagementModalService,
+    private readonly beneficiaryManagementFormModalService: BeneficiaryManagementFormModalService) {
 
     this.selected = beneficiaryManagementModalService.default;
     this.beneficiaryManagementModalService.selected.subscribe((x) => { this.selected = x; console.log(this.selected) });
@@ -46,11 +48,11 @@ export class BeneficiaryManagementModalComponent implements OnInit {
   }
 
   openBeneficiaryForm(): void {
-    // const modal = this.newRecipientService.open(null);
-    // this.visibility = false;
-    // modal.afterClosed().subscribe(() => {
-    //   this.visibility = true;
-    // });
+    const modal = this.beneficiaryManagementFormModalService.open();
+    this.visibility = false;
+    modal.afterClosed().subscribe(() => {
+      this.visibility = true;
+    });
   }
 
   toggleSelect(): void {
