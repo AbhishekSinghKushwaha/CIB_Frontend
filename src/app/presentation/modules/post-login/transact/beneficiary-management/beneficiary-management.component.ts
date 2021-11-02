@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { animate, group, style, transition, trigger } from '@angular/animations';
@@ -99,12 +99,9 @@ export class BeneficiaryManagementComponent implements OnInit {
     confirmText: 'Yes, I\'m sure'
   })
   deleteBeneficiary(data: BeneficiaryModel[]) {
-    console.log('about to delete multiple');
-    console.log('this.selection.selected', this.selection.selected);
     data.forEach((selected) => {
       this.dataSource.data = this.dataSource.data
         .filter((value) => !_.isEqual(value, selected));
-      console.log('this.dataSource.data', this.dataSource.data);
       selected && this.selection.deselect(selected);
     });
     this.beneficiaryManagementService.beneficiaries = this.dataSource.data;

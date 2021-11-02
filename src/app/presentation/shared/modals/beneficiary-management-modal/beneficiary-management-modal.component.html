@@ -2,23 +2,26 @@
   <button mat-icon-button matSuffix class="close-button" (click)="close()">
     <mat-icon>close</mat-icon>
   </button>
-  <p class="text-center fw-bold pt-2">Send to</p>
-  <h3 class="m-4 ms-3">Who are you sending money to</h3>
+  <p class="text-center fw-bold pt-2">Manage</p>
   <div class="row m-2">
     <mat-form-field appearance="outline">
-      <input matInput [(ngModel)]="searchText" />
+      <input
+        matInput
+        [(ngModel)]="searchText"
+        placeholder="Search for a recipient"
+      />
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
   </div>
 
-  <div class="row ms-3 mt-2 pb-3 cursor-pointer" (click)="openNewRecipient()">
+  <div class="row ms-3 mt-2 pb-3 cursor-pointer">
     <div class="col-md-10">
       <img
         src="./assets/images/icons/Visual support_Icon_with_container.svg"
         class="fav-icon"
         alt=""
       />
-      <span class="ps-3">Send to someone new</span>
+      <span class="ps-3">Add a new beneficiary</span>
     </div>
     <div class="col-md-2">
       <button type="button" mat-icon-button matSuffix>
@@ -27,16 +30,30 @@
     </div>
   </div>
   <mat-divider class="p-2"></mat-divider>
-  <div class="d-flex justify-content-between bd-highlight m-2">
-    <h3>Favourites</h3>
-    <div class="text-danger cursor-pointer" (click)="openBeneficiaryModal()">
-      Manage
-    </div>
+  <div
+    class="
+      d-flex
+      justify-content-between
+      bd-highlight
+      m-2
+      cursor-pointer
+      ms-0
+      me-0
+    "
+  >
+    <button mat-button class="text-danger ps-0 ms-0" (click)="toggleSelect()">
+      Select
+    </button>
+    <button mat-button class="text-danger pe-0 me-0">
+      <mat-icon svgIcon="delete-documents"></mat-icon> Delete
+    </button>
   </div>
   <app-beneficiary-list-item
     *ngFor="let account of data | favouriteSearch: searchText"
     [data]="account"
-    [isChecked]="selected && selected.name === account.name"
+    [category]="category"
+    [isChecked]="isChecked(account)"
+    [showCheckbox]="showCheckbox"
   >
   </app-beneficiary-list-item>
   <div class="row ms-3" *ngIf="(data | favouriteSearch: searchText).length < 1">

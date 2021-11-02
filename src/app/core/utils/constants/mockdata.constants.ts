@@ -21,11 +21,13 @@ const accounts: SelectAccountModel[] = [{
 }];
 
 const favourites: FavouriteBeneficiaryModel[] = [{
+  id: 1,
   name: 'June Lowela',
   phoneNumber: '+254 700 111 111',
   channel: 'Safaricom',
   country: 'Kenya'
 }, {
+  id: 2,
   name: 'Kevin Libega',
   phoneNumber: '+256 700 019 019',
   channel: 'MTN',
