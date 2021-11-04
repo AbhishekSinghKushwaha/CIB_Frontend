@@ -11,8 +11,8 @@ export class BankService {
 
   constructor(private readonly dialog: MatDialog) { }
 
-  open(data: BankModel[]): void {
-    this.dialog.open<BankModalComponent, BankModel[]>(BankModalComponent, {
+  open(data: BankModel[]) {
+    return this.dialog.open<BankModalComponent, BankModel[]>(BankModalComponent, {
       maxWidth: '500px',
       disableClose: true,
       data
@@ -25,6 +25,6 @@ export class BankService {
 
   select(bank: BankModel): void {
     this.data = bank;
-    this.selected.next(bank)
+    this.selected.next(this.data)
   }
 }

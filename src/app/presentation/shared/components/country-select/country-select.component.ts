@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, Output, Input } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 import { CountryModel } from 'src/app/core/domain/country.model';
 import { recipientModel } from 'src/app/core/domain/recipient.model';
 import { CountryService } from 'src/app/core/services/country/country.service';
@@ -17,7 +17,7 @@ export class CountrySelectComponent implements OnInit {
   countries = mockData.countries;
   viewTypes = countrySettings.viewTypes
   @Input() category: string;
-  @Output() selected = new Subject<CountryModel>();
+  @Output() selected = new BehaviorSubject<CountryModel>(mockData.countries[0]);
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: recipientModel,
@@ -30,6 +30,7 @@ export class CountrySelectComponent implements OnInit {
     this.visibility = false;
     const modal = this.countryService.open(this.countries, this.category);
     modal.afterClosed().subscribe((data: CountryModel) => {
+      console.log('Inner', data);
       this.visibility = true;
       this.selected.next(data);
       this.countryService.openedStatus.next(false);

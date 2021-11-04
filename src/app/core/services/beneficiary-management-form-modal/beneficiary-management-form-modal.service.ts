@@ -14,7 +14,7 @@ export class BeneficiaryManagementFormModalService {
 
   open(data?: BeneficiaryModel) {
     return this.dialog.open<BeneficiaryManagementFormModalComponent, BeneficiaryModel>(BeneficiaryManagementFormModalComponent, {
-      maxWidth: '500px',
+      width: '500px',
       disableClose: true,
       data
     });

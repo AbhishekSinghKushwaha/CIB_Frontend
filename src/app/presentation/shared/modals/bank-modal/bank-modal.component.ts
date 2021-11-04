@@ -37,6 +37,7 @@ export class BankModalComponent implements OnInit {
   }
 
   setCountry(country: CountryModel) {
+    console.log('country', country)
     this.country = country
   }
 

@@ -1,8 +1,13 @@
 <div class="container favourites-modal-screen p-2">
   <button mat-icon-button matSuffix class="close-button" (click)="close()">
-    <mat-icon>close</mat-icon>
+    <mat-icon svgIcon="caret_left"></mat-icon>
   </button>
   <p class="text-center fw-bold pt-2">Manage</p>
 
-  <div class="row">Form here</div>
+  <div class="row">
+    <app-beneficiary-management-form
+      [modalMode]="true"
+      [modalData]="data"
+    ></app-beneficiary-management-form>
+  </div>
 </div>

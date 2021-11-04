@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Subject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BankModel } from 'src/app/core/domain/bank.model';
 import { BeneficiaryModel } from 'src/app/core/domain/beneficiary.model';
@@ -17,11 +18,24 @@ import TRANSACT_TYPE from 'src/app/core/utils/constants/transaction-type.constan
 })
 export class BeneficiaryManagementFormComponent implements OnInit {
   equityForm: FormGroup;
+  visibility = true;
   bank: BankModel;
   transactionType: TransactionTypeModel;
   editMode: boolean;
   id: number;
   editData: BeneficiaryModel;
+  @Input() modalMode = false;
+  private _modalData: BeneficiaryModel;
+  @Input()
+  set modalData(value: BeneficiaryModel) {
+    this._modalData = value;
+    this.editData = value;
+    this.initForm();
+  }
+  get modalData(): BeneficiaryModel {
+    return this._modalData;
+  }
+  @Output() formSubmitted = new Subject<BeneficiaryModel>();
 
   constructor(
     private readonly bankService: BankService,
@@ -69,20 +83,35 @@ export class BeneficiaryManagementFormComponent implements OnInit {
 
   submit() {
     if (!this.editMode) {
-      this.beneficiaryManagementService.submitForm(this.equityForm.value);
+      this.modalMode ?
+        this.formSubmitted.next(this.equityForm.value) :
+        this.beneficiaryManagementService.submitForm(this.equityForm.value);
       this.equityForm.reset();
       this.router.navigate(['/transact/beneficiary-management']);
     } else {
-      console.log('Edit mode');
-      this.beneficiaryManagementService.updateForm(this.equityForm.value, this.id);
+      this.modalMode ?
+        this.formSubmitted.next({ ...this.equityForm.value, id: this.id }) :
+        this.beneficiaryManagementService.updateForm(this.equityForm.value, this.id);
     }
   }
 
   openBanks() {
-    this.bankService.open(mockData.banks)
+    const modal = this.bankService.open(mockData.banks);
+    if (this.modalMode) {
+      this.visibility = false;
+      modal.afterClosed().subscribe(() => {
+        this.visibility = true;
+      });
+    }
   }
 
   openTransactions() {
-    this.transactionTypeModalService.open(TRANSACT_TYPE)
+    const modal = this.transactionTypeModalService.open(TRANSACT_TYPE);
+    if (this.modalMode) {
+      this.visibility = false;
+      modal.afterClosed().subscribe(() => {
+        this.visibility = true;
+      });
+    }
   }
 }

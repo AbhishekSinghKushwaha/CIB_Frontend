@@ -9,13 +9,11 @@ import { BeneficiaryModel } from 'src/app/core/domain/beneficiary.model';
   styleUrls: ['./beneficiary-management-form-modal.component.scss']
 })
 export class BeneficiaryManagementFormModalComponent implements OnInit {
-  formValue: BeneficiaryModel
 
   constructor(
     readonly dialogRef: MatDialogRef<BeneficiaryManagementFormModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: BeneficiaryModel,
     private readonly beneficiaryManagementFormModalService: BeneficiaryManagementFormModalService) {
-    this.beneficiaryManagementFormModalService.formValue.subscribe((x) => { this.formValue = x; });
   }
 
   ngOnInit(): void {
