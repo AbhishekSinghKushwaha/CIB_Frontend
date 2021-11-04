@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { CurrencyModel } from 'src/app/core/domain/transfer.models';
 import { CurrencySelectionService } from 'src/app/core/services/currency-selection/currency-selection.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { CurrencySelectionService } from 'src/app/core/services/currency-selecti
   styleUrls: ['./currency-list-item.component.scss']
 })
 export class CurrencyListItemComponent implements OnInit {
-  @Input() data:any;
+  @Input() data:CurrencyModel;
   @Input() isChecked: boolean;
 
   constructor(

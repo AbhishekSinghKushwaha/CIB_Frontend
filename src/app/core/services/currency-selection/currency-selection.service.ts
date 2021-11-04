@@ -3,27 +3,28 @@ import { Injectable } from '@angular/core';
 import { CurrencySelectionModal } from '../../domain/currency-selection.model';
 import { MatDialog } from '@angular/material/dialog';
 import { CurrencySelectionComponent } from 'src/app/presentation/shared/modals/currency-selection/currency-selection.component';
+import { CurrencyModel } from '../../domain/transfer.models';
 
 @Injectable()
 export class CurrencySelectionService {
-  selected = new Subject<CurrencySelectionModal>();
-  private data:CurrencySelectionModal;
+  selected = new Subject<CurrencyModel>();
+  private data:CurrencyModel;
 
   constructor(private readonly dialog: MatDialog) { }
 
-  open(data: CurrencySelectionModal[]): void {
-    this.dialog.open<CurrencySelectionComponent, CurrencySelectionModal[]>(CurrencySelectionComponent, {
+  open(data: CurrencyModel[]): void {
+    this.dialog.open<CurrencySelectionComponent, CurrencyModel[]>(CurrencySelectionComponent, {
       disableClose: true,
       data
     });
   }
 
-  get default():CurrencySelectionModal{
+  get default():CurrencyModel{
     return this.data;
   }
 
-  select(account: CurrencySelectionModal): void {
-    this.data=account;
-    this.selected.next(account)
+  select(currency: CurrencyModel): void {
+    this.data=currency;
+    this.selected.next(currency)
   }
 }

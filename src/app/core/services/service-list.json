@@ -1,0 +1,5 @@
+{
+    "accounts": {
+        "getUserAccounts": "/cibaccountservice-v1/api/v1/Accounts/GetUserMappedAccounts"
+    }
+}

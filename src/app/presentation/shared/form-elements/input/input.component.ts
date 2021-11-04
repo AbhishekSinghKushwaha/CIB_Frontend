@@ -15,13 +15,13 @@ import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR } from 
     }
   ]
 })
-export class InputComponent implements ControlValueAccessor {
+export class InputComponent implements ControlValueAccessor, OnInit {
 
   @Input()
   public parentForm!: FormGroup
 
   @Input()
-  public fieldName!: string;
+  public fieldName: string;
 
   @Input()
   public label!: string;
@@ -42,6 +42,10 @@ export class InputComponent implements ControlValueAccessor {
 	}
   constructor() { }
 
+  ngOnInit(): void {}
+
+
+
   public writeValue ( value: string ): void {
 		this.value = value;
 	}
@@ -49,7 +53,6 @@ export class InputComponent implements ControlValueAccessor {
 	public onChange ( event: Event ): void {
 		const value: string =
 			( <HTMLInputElement>event.target ).value;
-
 		this.changed( value );
 	}
 

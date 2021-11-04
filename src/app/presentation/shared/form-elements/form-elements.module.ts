@@ -5,6 +5,9 @@ import { PasswordInputComponent } from './password-input/password-input.componen
 import { FieldErrorsComponent } from './field-errors/field-errors.component';
 import { MatStyleModule } from 'src/app/mat-style.module';
 import { TransferAmountComponent } from './transfer-amount/transfer-amount.component';
+import { TransferFromComponent } from './transfer-from/transfer-from.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TransferToComponent } from './transfer-to/transfer-to.component';
 
 
 
@@ -13,17 +16,22 @@ import { TransferAmountComponent } from './transfer-amount/transfer-amount.compo
     InputComponent,
     PasswordInputComponent,
     FieldErrorsComponent,
-    TransferAmountComponent
+    TransferAmountComponent,
+    TransferFromComponent,
+    TransferToComponent
   ],
   imports: [
     CommonModule,
     MatStyleModule,
+    FormsModule
   ],
   exports: [
     InputComponent,
     PasswordInputComponent,
     FieldErrorsComponent,
-    TransferAmountComponent
+    TransferAmountComponent,
+    TransferFromComponent,
+    TransferToComponent
   ]
 })
 export class FormElementsModule { }

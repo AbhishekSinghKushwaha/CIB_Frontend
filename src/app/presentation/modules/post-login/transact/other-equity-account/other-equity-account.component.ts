@@ -17,35 +17,6 @@ import { ScheduledPaymentService } from './../../../../../core/services/schedule
   styleUrls: ['./other-equity-account.component.scss']
 })
 export class OtherEquityAccountComponent implements OnInit {
-  accountsMock: SelectAccountModel[] = [{
-    name: 'Loot',
-    balance: 999999999.99,
-    currency: 'KES',
-    type: 'Savings'
-  }, {
-    name: '0700000000',
-    balance: 30000,
-    currency: 'KES',
-    type: 'Mobile account'
-  }, {
-    name: '073019380132',
-    balance: 4430000,
-    currency: 'KES',
-    type: 'Current'
-  }];
-
-  favouritesMock: FavouriteBeneficiaryModel[] = [{
-    name: 'June Lowela',
-    phoneNumber: '+254 700 111 111',
-    channel: 'Safaricom',
-    country: 'Kenya'
-  }, {
-    name: 'Kevin Libega',
-    phoneNumber: '+256 700 019 019',
-    channel: 'MTN',
-    country: 'Uganda'
-  }];
-
   sendFrom: SelectAccountModel;
   sendTo: FavouriteBeneficiaryModel;
   currency: CurrencySelectionModal;
@@ -67,18 +38,18 @@ export class OtherEquityAccountComponent implements OnInit {
   }
 
   private eventsSubscriptions(): void {
-    this.selectAccountService.selected.subscribe((response) => {
-      this.equityForm.controls.fromAccount.setValue(response.name);
-      this.sendFrom = response;
-    });
+    // this.selectAccountService.selected.subscribe((response) => {
+    //   this.equityForm.controls.fromAccount.setValue(response.name);
+    //   this.sendFrom = response;
+    // });
     this.favouritesModalService.selected.subscribe((response) => {
       this.equityForm.controls.recipient.setValue(response.name);
       this.sendTo = response;
     });
-    this.currencySelectionService.selected.subscribe(response => {
-      this.equityForm.controls.currency.setValue(response.text);
-      this.currency = response;
-      });
+    // this.currencySelectionService.selected.subscribe(response => {
+    //   this.equityForm.controls.currency.setValue(response.text);
+    //   this.currency = response;
+    //   });
     this.scheduledPaymentService.data.subscribe(response => this.paymentDate = response)
   }
 
@@ -93,11 +64,11 @@ export class OtherEquityAccountComponent implements OnInit {
   }
 
   openAccounts(): void {
-    this.selectAccountService.open(this.accountsMock)
+    // this.selectAccountService.open(this.accountsMock)
   }
 
   openFavourites(): void {
-    this.favouritesModalService.open(this.favouritesMock)
+    // this.favouritesModalService.open(this.favouritesMock)
   }
 
   openCurrencies(): void {

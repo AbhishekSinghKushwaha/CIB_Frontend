@@ -12,6 +12,8 @@ import { SelectAccountSendToModule } from './../../../../shared/modals/select-ac
 import { SupportingDocumentsUploadModule } from './../../../../shared/modals/supporting-documents-upload/supporting-documents-upload.module';
 import { CurrencySelectionConstants } from 'src/app/core/utils/constants/currency-selection.constants';
 import { SelectAccountConstants } from 'src/app/data/repository/select-account-mock-repository/select-account.constants';
+import { FormElementsModule } from 'src/app/presentation/shared/form-elements/form-elements.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { SelectAccountConstants } from 'src/app/data/repository/select-account-m
     SchedulePaymentModule,
     SelectAccountModalModule,
     SelectAccountSendToModule,
-    SupportingDocumentsUploadModule
+    SupportingDocumentsUploadModule,
+    FormElementsModule,
+    ReactiveFormsModule
   ],
   providers: [
     CurrencySelectionConstants,

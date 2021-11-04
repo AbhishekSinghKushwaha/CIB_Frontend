@@ -10,18 +10,25 @@ import { SupportingDocumentsUploadService } from "src/app/core/services/supporti
 import { SelectAccountConstants } from 'src/app/data/repository/select-account-mock-repository/select-account.constants';
 import { ScheduledPaymentModel } from 'src/app/core/domain/scheduled-payment.model';
 import { ScheduledPaymentService } from './../../../../../core/services/scheduled-payment/scheduled-payment.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BaseTransactComponent } from '../base-transact.component';
+import { AccountsService } from 'src/app/core/services/accounts/accounts.service';
+import { accountLimitValidator } from 'src/app/core/utils/validators/limits.validators';
+import { UniversalValidators } from 'ngx-validators';
 
 @Component({
   selector: 'app-own-equity-account',
   templateUrl: './own-equity-account.component.html',
   styleUrls: ['./own-equity-account.component.scss']
 })
-export class OwnEquityAccountComponent implements OnInit {
+export class OwnEquityAccountComponent extends BaseTransactComponent implements OnInit {
 
-  sendFrom: SelectAccountModel;
+  // sendFrom: SelectAccountModel;
   sendTo: SelectAccountModel;
   currency: CurrencySelectionModal;
   schedulePaymentData: ScheduledPaymentModel;
+
+  ownEquityAccountTransferForm: FormGroup;
 
   constructor(
     private readonly selectAccountService: SelectAccountModalService,
@@ -32,16 +39,25 @@ export class OwnEquityAccountComponent implements OnInit {
     private readonly schedulePaymentService:SchedulePaymentService,
     private readonly scheduledPaymentService: ScheduledPaymentService,
     private readonly supportingDocumentsUploadService:SupportingDocumentsUploadService,
-  ) { }
+    private readonly fb: FormBuilder,
+    accountService: AccountsService
+  ) {
+    super(accountService)
+   }
 
   ngOnInit(): void {
-    this.selectAccountService.selected.subscribe((x) => this.sendFrom = x);
-    this.selectAccountSendtoService.selectedAccountSendTo.subscribe((x) => this.sendTo = x);
-    this.currencySelectionService.selected.subscribe(x => this.currency = x);
+    this.initForm()
+    this.getUserAccounts();
   }
 
-  openAccountSendFrom(): void {
-    this.selectAccountService.open(this.selectAccountConstants.accountsMockSendFrom)
+  initForm(): void {
+    this.ownEquityAccountTransferForm = this.fb.group({
+      sendFrom: ['', [Validators.required]],
+      sendTo: ['', ],
+      amount: [{}, [Validators.required, accountLimitValidator]],
+      reason: [''],
+      fxReferenceId: ['', [Validators.required]]
+    })
   }
 
   openAccountSendTo(): void {
@@ -58,6 +74,11 @@ export class OwnEquityAccountComponent implements OnInit {
 
   openSupportingDocuments(): void {
     this.supportingDocumentsUploadService.open();
+  }
+
+  sendMoney() {
+    console.log(this.ownEquityAccountTransferForm.getRawValue())
+    console.log(this.ownEquityAccountTransferForm.controls.amount.errors)
   }
 
 }

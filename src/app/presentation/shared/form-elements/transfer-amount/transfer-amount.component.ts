@@ -1,40 +1,164 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-
+import {
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
+import {
+  ControlValueAccessor,
+  FormControl,
+  FormGroup,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import {
+  CurrencyModel,
+  FromAccount,
+  TransferAmount,
+} from 'src/app/core/domain/transfer.models';
+import { CurrencySelectionService } from 'src/app/core/services/currency-selection/currency-selection.service';
+import { SelectAccountModalService } from 'src/app/core/services/select-account-modal/select-account-modal.service';
+import { CurrencySelectionConstants } from 'src/app/core/utils/constants/currency-selection.constants';
 @Component({
   selector: 'app-transfer-amount',
   templateUrl: './transfer-amount.component.html',
-  styleUrls: ['./transfer-amount.component.scss']
+  styleUrls: ['./transfer-amount.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => TransferAmountComponent),
+      multi: true,
+    },
+  ],
 })
-export class TransferAmountComponent implements OnInit {
-  @Input() fromAccount: any;
-  @Input() minAmount = 0;
-  @Input() maxAmount = 100000;
-  @Input() limit: any;
-  @Input() validationError: any;
-  @Input() currencies: any;
-  @Input() memoryAmount: any;
-  @Input() conversionRates: any;
-  @Input() priceType: string;
-  @Input() fixedAirtimeAmounts: any;
-  @Output()
-  private _paymentAmount = new EventEmitter();
-  public get paymentAmount() {
-    return this._paymentAmount;
-  }
-  public set paymentAmount(value) {
-    this._paymentAmount = value;
-  }
-  @Output() selectedCurrency = new EventEmitter();
-  @Output() selectingAirtimeAmount = new EventEmitter();
-  @Output() selectedAirtimeAmount = new EventEmitter();
+export class TransferAmountComponent implements ControlValueAccessor, OnInit {
+  @Input() parentForm: FormGroup;
 
-  constructor() { }
+  @Input()
+  public fieldName!: string;
+
+  @Input()
+  public label!: string;
+
+  @Input()
+  placeholder!: string;
+
+  currency: CurrencyModel = {currencyCode: '', currencyDescription: ''};
+
+  public value: TransferAmount = {amount: 0, currency: '', isWithinLimit: true};
+
+  sendFromAccount: FromAccount;
+
+  public changed!: (value: TransferAmount) => void;
+
+  public touched!: () => void;
+
+  public isDisabled!: boolean;
+
+  get formField(): FormControl {
+    return this.parentForm?.get(this.fieldName) as FormControl;
+  }
+
+
+  amount: number;
+  amountUpdate = new Subject<number>();
+
+  constructor(
+    private readonly currencySelectionService: CurrencySelectionService,
+    private readonly currencySelectionConstants: CurrencySelectionConstants,
+    private readonly selectAccountService: SelectAccountModalService
+  ) {}
 
   ngOnInit(): void {
+    console.log(this.sendFromAccount)
+    this.listenToDataEvents();
   }
 
+  // Listen to events, pick the sendFrom data
+  listenToDataEvents() {
+    // Get sendFrom Account
+    this.selectAccountService.selected.subscribe((x) => {
+      this.sendFromAccount = x;
+      this.currency.currencyCode = x.currency;
+    });
+
+    // Get Selected Currency
+    this.currencySelectionService.selected.subscribe((x) => {
+      this.currency = x;
+    });
+
+    this.onAmountEntered()
+  }
+
+  public writeValue(value: TransferAmount): void {
+    this.value = value;
+  }
+
+  public onChange(event: Event): void {
+    const value: string = (<HTMLInputElement>event.target).value;
+    this.amountUpdate.next(Number(value));
+  }
+
+  public registerOnChange(fn: any): void {
+    this.changed = fn;
+  }
+
+  public registerOnTouched(fn: any): void {
+    this.touched = fn;
+  }
+
+  public setDisabledState(isDisabled: boolean): void {
+    this.isDisabled = isDisabled;
+  }
+
+  /**
+   * Open Currency Modal
+   * @param supportedCurrencies
+   */
   openCurrencyModal() {
-
+    this.currencySelectionService.open(
+      this.currencySelectionConstants.CURRENCY_LISTINGS
+    );
   }
 
+  /**
+   * Perfom limit validation once amount is entered
+   */
+  onAmountEntered() {
+    this.amountUpdate.pipe(debounceTime(1000), distinctUntilChanged()).subscribe(res => {
+      this.value.amount = res;
+      this.checkLimit()
+    })
+  }
+
+  /**
+   * Calculate limits
+   * TODO:: Factor in limits as per transcations and daily limit calculations
+   */
+  checkLimit() {
+    if(this.value.amount > this.sendFromAccount.transactionLimit) {
+      this.value.isWithinLimit = false;
+      this.value.currency = this.currency.currencyCode;
+      this.changed(this.value);
+    } else {
+      this.value.isWithinLimit = true;
+      this.value.currency = this.currency.currencyCode;
+      this.changed(this.value)
+    }
+  }
+
+  // Get currency
+
+  // Do the currency conversions in case of a change of currency
+
+  // Get account that is being transferred from
+
+  // Get limits of the account
+
+  // Determine if account is more than 10,000,000
 }

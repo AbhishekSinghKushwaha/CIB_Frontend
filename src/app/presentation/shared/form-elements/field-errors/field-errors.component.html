@@ -1,22 +1,21 @@
 <mat-error *ngIf="formField?.dirty">
-	<span class="validationError"
-		*ngIf="formField?.hasError( 'required' )">
+	<small class="validationError" *ngIf="formField?.hasError('required')">
 		This is a required field.
-	</span>
+	</small>
 
-	<span class="validationError"
-		*ngIf="formField?.hasError( 'noEmptyString' )">
+	<span class="validationError" *ngIf="formField?.hasError('noEmptyString')">
 		Please enter a valid name.
 	</span>
 
-	<span class="validationError"
-		*ngIf="formField?.hasError( 'normalEmailRule' )">
+	<span class="validationError" *ngIf="formField?.hasError('normalEmailRule')">
 		Email format is invalid.
 	</span>
 
-	<span class="validationError"
-		*ngIf="formField?.hasError( 'noWhitespaceRequired' )">
+	<span class="validationError" *ngIf="formField?.hasError('noWhitespaceRequired')">
 		No spaces allowed.
 	</span>
-</mat-error>
 
+	<small class="validationError" *ngIf="formField?.errors?.isWithinLimit === false">
+		Invalid Limit for transaction
+	</small>
+</mat-error>

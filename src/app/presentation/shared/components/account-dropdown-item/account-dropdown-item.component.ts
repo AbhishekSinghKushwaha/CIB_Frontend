@@ -1,6 +1,9 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SelectAccountModel } from 'src/app/core/domain/select-account.model';
+import { FromAccount } from 'src/app/core/domain/transfer.models';
 import { SelectAccountModalService } from 'src/app/core/services/select-account-modal/select-account-modal.service';
+import { SelectAccountModalComponent } from '../../modals/select-account-modal/select-account-modal.component';
 
 @Component({
   selector: 'app-account-dropdown-item',
@@ -10,7 +13,7 @@ import { SelectAccountModalService } from 'src/app/core/services/select-account-
 })
 export class AccountDropdownItemComponent implements OnInit {
   @Input() isChecked: boolean;
-  @Input() data: SelectAccountModel;
+  @Input() data: FromAccount;
   constructor(
     private readonly selectAccountModalService: SelectAccountModalService) { }
 
@@ -19,5 +22,6 @@ export class AccountDropdownItemComponent implements OnInit {
 
   select(): void {
     this.selectAccountModalService.select(this.data);
+    // this.dialogRef.close()
   }
 }

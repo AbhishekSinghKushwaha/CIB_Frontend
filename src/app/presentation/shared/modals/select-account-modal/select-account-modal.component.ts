@@ -1,7 +1,7 @@
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
-import { SelectAccountModel } from 'src/app/core/domain/select-account.model';
 import { SelectAccountModalService } from 'src/app/core/services/select-account-modal/select-account-modal.service';
+import { FromAccount } from 'src/app/core/domain/transfer.models';
 
 @Component({
   selector: 'app-select-account-modal',
@@ -10,11 +10,11 @@ import { SelectAccountModalService } from 'src/app/core/services/select-account-
   encapsulation: ViewEncapsulation.None
 })
 export class SelectAccountModalComponent implements OnInit {
-  selected: SelectAccountModel;
+  selected: FromAccount;
 
   constructor(
     readonly dialogRef: MatDialogRef<SelectAccountModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: SelectAccountModel[],
+    @Inject(MAT_DIALOG_DATA) public data: FromAccount[],
     private readonly selectAccountModalService: SelectAccountModalService
   ) {
     this.selected = this.selectAccountModalService.default;
