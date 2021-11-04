@@ -7,18 +7,20 @@ import { CountryModalComponent } from 'src/app/presentation/shared/modals/countr
 @Injectable()
 export class CountryService {
   selected = new Subject<CountryModel>();
-  data:CountryModel;
+  openedStatus = new Subject<boolean>();
+  data: CountryModel;
 
   constructor(private readonly dialog: MatDialog) { }
 
-  open(data: CountryModel[]) {
-    return this.dialog.open<CountryModalComponent, CountryModel[]>(CountryModalComponent, {
+  open(country: CountryModel[], category: string) {
+    this.openedStatus.next(true);
+    return this.dialog.open<CountryModalComponent, any>(CountryModalComponent, {
       disableClose: true,
-      data
+      data: { country, category },
     });
   }
 
-  get default():CountryModel{
+  get default(): CountryModel {
     return this.data
   }
 

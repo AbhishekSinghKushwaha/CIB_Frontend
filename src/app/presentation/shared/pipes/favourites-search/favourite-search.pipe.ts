@@ -6,7 +6,7 @@ import { FavouriteBeneficiaryModel } from 'src/app/core/domain/favourites-benefi
 })
 export class FavouriteSearchPipe implements PipeTransform {
 
-  transform(value: FavouriteBeneficiaryModel[], searchValue: string): any {
+  transform(value: FavouriteBeneficiaryModel[], searchValue: string): FavouriteBeneficiaryModel[] {
     if (!searchValue) return value;
     return value.filter((v) =>
       v.name.toLowerCase().indexOf(searchValue.toLowerCase()) > -1 ||

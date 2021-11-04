@@ -9,6 +9,7 @@ import { CurrencySelectionService } from 'src/app/core/services/currency-selecti
 import { FavouritesModalService } from 'src/app/core/services/favourites-modal/favourites-modal.service';
 import { SelectAccountModalService } from 'src/app/core/services/select-account-modal/select-account-modal.service';
 import { CurrencySelectionConstants } from 'src/app/core/utils/constants/currency-selection.constants';
+import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
 import { ScheduledPaymentService } from './../../../../../core/services/scheduled-payment/scheduled-payment.service';
 
 @Component({
@@ -49,7 +50,7 @@ export class OtherEquityAccountComponent implements OnInit {
     // this.currencySelectionService.selected.subscribe(response => {
     //   this.equityForm.controls.currency.setValue(response.text);
     //   this.currency = response;
-    //   });
+    // });
     this.scheduledPaymentService.data.subscribe(response => this.paymentDate = response)
   }
 
@@ -64,11 +65,11 @@ export class OtherEquityAccountComponent implements OnInit {
   }
 
   openAccounts(): void {
-    // this.selectAccountService.open(this.accountsMock)
+    // this.selectAccountService.open(mockData.accounts)
   }
 
   openFavourites(): void {
-    // this.favouritesModalService.open(this.favouritesMock)
+    this.favouritesModalService.open(mockData.favourites)
   }
 
   openCurrencies(): void {
