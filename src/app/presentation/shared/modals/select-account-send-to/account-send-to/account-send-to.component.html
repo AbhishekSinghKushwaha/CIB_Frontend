@@ -4,9 +4,9 @@
         <mat-icon color="primary" [svgIcon]="isChecked ? 'check_round' : 'radio_button_off'"></mat-icon>
       </div>
       <div class="col-md-11">
-        <h4>{{data.name}}</h4>
+        <h4>{{data.accountName}}</h4>
         <p class="mb-1">Account Balance {{data.balance | number:'0.2'}} {{data.currency}}</p>
-        <small class="mb-1 text-grey">{{data.name}} &#183; {{data.type}} </small>
+        <small class="mb-1 text-grey">{{data.accountName}} &#183; {{data.accountType}} </small>
       </div>
     </div>
   </mat-card>

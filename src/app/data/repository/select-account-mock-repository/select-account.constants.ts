@@ -6,18 +6,5 @@ import { SelectAccountModel } from '../../../../app/core/domain/select-account.m
 export class SelectAccountConstants {
   constructor() {}
 
-  accountsMockSendTo: SelectAccountModel[] = [
-    {
-      name: '0700000000',
-      balance: 30000,
-      currency: 'KES',
-      type: 'Mobile account',
-    },
-    {
-      name: '073019380132',
-      balance: 4430000,
-      currency: 'KES',
-      type: 'Current',
-    },
-  ];
+  
 }

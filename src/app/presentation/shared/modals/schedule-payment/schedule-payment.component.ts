@@ -15,7 +15,7 @@ import { ScheduledPaymentModel } from 'src/app/core/domain/scheduled-payment.mod
   encapsulation: ViewEncapsulation.None
 })
 export class SchedulePaymentComponent implements OnInit {
-  equityForm: FormGroup;
+  paymentScheduleForm: FormGroup;
   frequency: PaymentFrequencyModel;
   reminder: PaymentreminderModel;
   data: ScheduledPaymentModel;
@@ -56,7 +56,7 @@ export class SchedulePaymentComponent implements OnInit {
   }
 
   initForm() {
-    this.equityForm = new FormGroup({
+    this.paymentScheduleForm = new FormGroup({
       frequency: new FormControl(this.data?.frequency, [Validators.required]),
       startDate: new FormControl(this.data?.startDate, [Validators.required]),
       endDate: new FormControl(this.data?.endDate, [Validators.required]),
@@ -65,8 +65,8 @@ export class SchedulePaymentComponent implements OnInit {
   }
 
   private eventsSubscriptions(): void {
-    this.paymentFrequencyService.selected.subscribe(response => this.equityForm.controls.frequency.setValue(response.text));
-    this.paymentReminderService.selected.subscribe(response => this.equityForm.controls.reminder.setValue(response.text));
+    this.paymentFrequencyService.selected.subscribe(response => this.paymentScheduleForm.controls.frequency.setValue(response.text));
+    this.paymentReminderService.selected.subscribe(response => this.paymentScheduleForm.controls.reminder.setValue(response.text));
   }
 
   close(): void {
@@ -82,7 +82,7 @@ export class SchedulePaymentComponent implements OnInit {
   }
 
   submit() {
-    this.scheduledPaymentService.set(this.equityForm.value);
+    this.scheduledPaymentService.set(this.paymentScheduleForm.value);
     this.scheduledPaymentService.close();
   }
 }

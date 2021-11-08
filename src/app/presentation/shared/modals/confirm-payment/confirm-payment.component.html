@@ -1,0 +1,50 @@
+<div class="confirm-payment p-0">
+    <div class="row">
+        <div class="col-md-4">
+            <mat-icon (click)="close()" class="cursor-pointer">close</mat-icon>
+        </div>
+        <div class="col-md-8">
+          <h5 class="strong-text col-md-8">Payment Confirmation</h5>  
+        </div>
+    </div>
+    <div class="row">
+        <div class="col mb-4">
+            <h4 class="ml-4">To continue, please confirm your transaction</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+            <span class="text-grey text-sm">Transaction</span>
+            <p class="mb-0 pb-0">{{paymentData?.transactionType}}</p>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+            <span class="text-grey text-sm">Amount</span>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+            <span class="text-grey text-sm">Charges</span>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+            <span class="text-grey text-sm">From</span>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+            <span class="text-grey text-sm">To</span>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+            <span class="text-grey text-sm">Frequency</span>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+            <span class="text-grey text-sm">IBAN Number</span>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+            <span class="text-grey text-sm">Fx Reference ID</span>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+            <span class="text-grey text-sm">Payment Date</span>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+            <span class="text-grey text-sm">Payment Reason</span>
+        </div>
+    </div>
+
+</div>

@@ -6,7 +6,7 @@
     <h4 class="strong-text col-md-8">Schedule Payment</h4>
   </div>
   <h3 class="strong-text pt-4 mb-3">Please enter details</h3>
-  <form [formGroup]="equityForm" (ngSubmit)="submit()" class="d-flex flex-column" autocomplete="off">
+  <form [formGroup]="paymentScheduleForm" (ngSubmit)="submit()" class="d-flex flex-column" autocomplete="off">
     <div>
       <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
         <mat-label class="strong-text">Frequency</mat-label>
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="pt-4">
-      <button [disabled]="equityForm.invalid" color="primary" type="submit" mat-flat-button
+      <button [disabled]="paymentScheduleForm.invalid" color="primary" type="submit" mat-flat-button
         class="px-5">Continue</button>
     </div>
   </form>

@@ -4,7 +4,7 @@
     </button>
     <p class="text-center fw-bold pt-2">Send to</p>
     <h3 class="m-4 ms-2">Please select an account</h3>
-    <app-account-send-to *ngFor="let account of data" [data]="account" [isChecked]="selected &&  selected.name===account.name">
+    <app-account-send-to *ngFor="let account of data" [data]="account" [isChecked]="selected &&  selected.accountName===account.accountName">
     </app-account-send-to>
   </div>
   

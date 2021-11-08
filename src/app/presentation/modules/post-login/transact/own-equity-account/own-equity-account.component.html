@@ -8,7 +8,7 @@
     </button>
   </div>
   <h3 class="strong-text">Please enter the payment details</h3>
-  <form class="d-flex flex-column" autocomplete="off" [formGroup]="ownEquityAccountTransferForm" (submit)="sendMoney()">
+  <form class="d-flex flex-column" autocomplete="off" [formGroup]="ownEquityAccountTransferForm" (submit)="confirmPayment()">
     <div class="row pt-4">
       <div class="col-md-6">
         <app-transfer-from [parentForm]="ownEquityAccountTransferForm" label="Send From" placeholder="Send From"
@@ -40,7 +40,7 @@
           formControlName="reason" placeholder="Optional"></app-input>
       </div>
     </div>
-    <div class="pt-3">
+    <div class="pt-3" *ngIf="aboveTransactionTypeLimit">
       <h3 class="strong-text">Additional Information</h3>
       <small class="text-grey">If you are sending more than 10,000,000 we need more information from you</small><br>
 
@@ -50,7 +50,7 @@
       </div>
     </div>
     <div class="mt-4">
-      <button mat-raised-button color="primary" class="px-5">Send money</button>
+      <button mat-raised-button type="submit" [disabled]="ownEquityAccountTransferForm.invalid" color="primary" class="px-5">Send money</button>
     </div>
   </form>
 </div>

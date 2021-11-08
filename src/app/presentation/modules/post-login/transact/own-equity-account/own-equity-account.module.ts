@@ -14,6 +14,7 @@ import { CurrencySelectionConstants } from 'src/app/core/utils/constants/currenc
 import { SelectAccountConstants } from 'src/app/data/repository/select-account-mock-repository/select-account.constants';
 import { FormElementsModule } from 'src/app/presentation/shared/form-elements/form-elements.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ConfirmPaymentModule } from 'src/app/presentation/shared/modals/confirm-payment/confirm-payment.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     SelectAccountSendToModule,
     SupportingDocumentsUploadModule,
     FormElementsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ConfirmPaymentModule
   ],
   providers: [
     CurrencySelectionConstants,

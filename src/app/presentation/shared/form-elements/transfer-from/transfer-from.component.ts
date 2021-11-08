@@ -20,6 +20,7 @@ import { BaseTransactComponent } from 'src/app/presentation/modules/post-login/t
 })
 export class TransferFromComponent extends BaseTransactComponent implements ControlValueAccessor, OnInit {
   sourceAccounts: FromAccount[];
+  
   @Input()
   parentForm!: FormGroup;
 
