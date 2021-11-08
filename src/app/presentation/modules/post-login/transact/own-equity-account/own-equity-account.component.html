@@ -8,7 +8,7 @@
     </button>
   </div>
   <h3 class="strong-text">Please enter the payment details</h3>
-  <form class="d-flex flex-column" autocomplete="off" [formGroup]="ownEquityAccountTransferForm" (submit)="confirmPayment()">
+  <form class="d-flex flex-column" autocomplete="off" [formGroup]="ownEquityAccountTransferForm" (submit)="getTransferCharges()">
     <div class="row pt-4">
       <div class="col-md-6">
         <app-transfer-from [parentForm]="ownEquityAccountTransferForm" label="Send From" placeholder="Send From"

@@ -4,6 +4,7 @@
     },
 
     "transfers": {
-        "sendOwnEquityAccount": "/cibpaymentservice-v1/api/v1/Transfer/Send"
+        "sendOwnEquityAccount": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+        "getTransferCharges": "/cibpaymentservice-v1/api/v1/Transfer/GetTransferCharge"
     }
 }

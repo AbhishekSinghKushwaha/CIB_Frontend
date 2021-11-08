@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-confirm-payment',
@@ -8,18 +8,18 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class ConfirmPaymentComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public paymentData: any) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public paymentData: any, private dialogRef: MatDialogRef<ConfirmPaymentComponent>) { }
 
   ngOnInit(): void {
     console.log(this.paymentData)
   }
 
   submitReview() {
-
+    this.dialogRef.close({confirmed: true})
   }
 
   close() {
-
+    this.dialogRef.close({confirmed: false});
   }
 
 }

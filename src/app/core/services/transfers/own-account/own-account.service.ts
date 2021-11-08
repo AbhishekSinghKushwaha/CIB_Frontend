@@ -13,4 +13,8 @@ export class OwnAccountService {
   sendToOwnEquityAccount(payload: any): Observable<any> {
     return this.http.post(environment.apiUrl + urlList.transfers.sendOwnEquityAccount, payload);
   }
+
+  getTransferCharges(payload: any): Observable<any> {
+    return this.http.post(environment.apiUrl + urlList.transfers.getTransferCharges, payload);
+  }
 }
