@@ -7,8 +7,11 @@ import {
 } from '@angular/forms';
 import { FromAccount } from 'src/app/core/domain/transfer.models';
 import { AccountsService } from 'src/app/core/services/accounts/accounts.service';
+import { FavouritesModalService } from 'src/app/core/services/favourites-modal/favourites-modal.service';
+import { NewRecipientService } from 'src/app/core/services/new-recipient/new-recipient.service';
 import { SelectAccountSendtoService } from 'src/app/core/services/select-account-sendto/select-account-sendto.service';
 import { CurrencySelectionConstants } from 'src/app/core/utils/constants/currency-selection.constants';
+import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
 import { SelectAccountConstants } from 'src/app/data/repository/select-account-mock-repository/select-account.constants';
 import { BaseTransactComponent } from 'src/app/presentation/modules/post-login/transact/base-transact.component';
 
@@ -55,7 +58,9 @@ export class TransferToComponent extends BaseTransactComponent implements Contro
   constructor(
     private readonly selectAccountSendtoService: SelectAccountSendtoService,
     private readonly selectAccountConstants:SelectAccountConstants,
-    private readonly accountsService: AccountsService
+    private readonly favouritesModalService: FavouritesModalService,
+    private readonly accountsService: AccountsService,
+    private newRecipientService: NewRecipientService
   ) {
     super(accountsService)
   }
@@ -95,6 +100,8 @@ export class TransferToComponent extends BaseTransactComponent implements Contro
         break;
       case 'intraBankTransfer':
       // Open Favourites
+        this.favouritesModalService.open(mockData.favourites)
+        break;
       default:
         break;
     }
@@ -107,7 +114,13 @@ export class TransferToComponent extends BaseTransactComponent implements Contro
           this.parentForm.controls.sendTo.setValue(x)
         });
         break;
-    
+      case 'intraBankTransfer':
+        this.newRecipientService.data.subscribe((x) => {
+          console.log(x);
+          this.parentForm.controls.sendTo.setValue(x)
+        }
+        );
+        break;
       default:
         break;
     }

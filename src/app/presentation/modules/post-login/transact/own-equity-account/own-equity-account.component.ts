@@ -33,21 +33,11 @@ export class OwnEquityAccountComponent
   extends BaseTransactComponent
   implements OnInit
 {
-  // sendFrom: SelectAccountModel;
-  sendTo: SelectAccountModel;
-  currency: CurrencySelectionModal;
   schedulePaymentData: ScheduledPaymentModel;
-
   ownEquityAccountTransferForm: FormGroup;
   aboveTransactionTypeLimit: boolean = false;
 
   constructor(
-    private readonly selectAccountService: SelectAccountModalService,
-    private readonly selectAccountSendtoService: SelectAccountSendtoService,
-    private readonly currencySelectionService: CurrencySelectionService,
-    private readonly currencySelectionConstants: CurrencySelectionConstants,
-    private readonly selectAccountConstants: SelectAccountConstants,
-    private readonly schedulePaymentService: SchedulePaymentService,
     private readonly scheduledPaymentService: ScheduledPaymentService,
     private readonly supportingDocumentsUploadService: SupportingDocumentsUploadService,
     private readonly fb: FormBuilder,

@@ -11,46 +11,21 @@
           </button>
         </div>
         <h3 class="strong-text">Please enter the payment details</h3>
-        <form [formGroup]="equityForm" (ngSubmit)="submit()" class="d-flex flex-column" autocomplete="off">
+        <form [formGroup]="intraBankTransferForm" (submit)="getTransferCharges()" class="d-flex flex-column"
+          autocomplete="off">
           <div class="row pt-4">
             <div class="col-md-6">
-              <mat-form-field appearance="standard" style="width: 100%">
-                <mat-label>Send from</mat-label>
-                <input matInput type="text" [readonly]="true" formControlName="fromAccount">
-                <button type='button' mat-icon-button matSuffix (click)="openAccounts()">
-                  <mat-icon svgIcon="caret_down"></mat-icon>
-                </button>
-                <p *ngIf="sendFrom" class="text-grey text-sm-start mt-2 mb-0">Available balance {{sendFrom?.balance |
-                  number:'0.2'}} {{sendFrom?.currency}}</p>
-              </mat-form-field>
+              <app-transfer-from [parentForm]="intraBankTransferForm" label="Send From" placeholder="Send From"
+                formControlName="sendFrom" fieldName="sendFrom"></app-transfer-from>
             </div>
             <div class="col-md-6  align-self-end">
-              <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
-                <mat-label>Send to</mat-label>
-                <input matInput type="text" placeholder="Select the recipient" [readonly]="true" formControlName="recipient">
-                <button type='button' mat-icon-button matSuffix (click)="openFavourites()">
-                  <mat-icon svgIcon="caret_down"></mat-icon>
-                </button>
-              </mat-form-field>
+              <app-transfer-to [parentForm]="intraBankTransferForm" label="Send To" formControlName="sendTo"
+                fieldName="sendTo" placeholder="Select the recipient" transactionType="intraBankTransfer">
+              </app-transfer-to>
             </div>
             <div class="col-md-6">
-              <div class="row justify-content-between">
-                <div class="col-md-4">
-                  <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
-                    <mat-label>Amount</mat-label>
-                    <input matInput type="text" [readonly]="true" formControlName="currency">
-                    <button type='button' mat-icon-button matSuffix (click)="openCurrencies()">
-                      <mat-icon svgIcon="caret_down"></mat-icon>
-                    </button>
-                  </mat-form-field>
-                </div>
-                <div class="col-md-8">
-                  <mat-form-field appearance="standard" style="width: 100%">
-                    <mat-label>Enter an amount</mat-label>
-                    <input matInput type="text" formControlName="amount">
-                  </mat-form-field>
-                </div>
-              </div>
+              <app-transfer-amount [parentForm]="intraBankTransferForm" label="Amount" fieldName="amount"
+                placeholder="Enter an amount" formControlName="amount"></app-transfer-amount>
             </div>
             <div class="col-md-6">
               <small>{{paymentDate && 'Payment Scheduled' || 'Schedule Payment'}}</small>
@@ -77,20 +52,14 @@
               <mat-divider class="p-1"></mat-divider>
             </div>
             <div class="col-md-6">
-              <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
-                <mat-label>FX Reference ID</mat-label>
-                <input matInput type="text" placeholder="Enter FX reference ID">
-              </mat-form-field>
+              <app-input [parentForm]="intraBankTransferForm" label="Fx Reference ID" fieldName="fxReferenceId" formControlName="fxReferenceId" placeholder="Enter FX reference ID"></app-input>
             </div>
             <div class="col-md-6">
-              <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
-                <mat-label>Payment reason</mat-label>
-                <input matInput type="text" placeholder="Optional">
-              </mat-form-field>
+              <app-input [parentForm]="intraBankTransferForm" label="Payment Reason" fieldName="reason" formControlName="reason" placeholder="Optional"></app-input>
             </div>
           </div>
           <div class="mt-4">
-            <button mat-raised-button color="primary" disabled>Send money</button>
+            <button mat-raised-button [disabled]="intraBankTransferForm.invalid" color="primary" disabled>Send money</button>
           </div>
         </form>
       </div>

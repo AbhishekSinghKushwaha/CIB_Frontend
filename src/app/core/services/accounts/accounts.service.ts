@@ -14,4 +14,5 @@ export class AccountsService {
   getUserAccounts(): Observable<any> {
     return this.http.get(environment.apiUrl + urlList.accounts.getUserAccounts);
   }
+
 }
