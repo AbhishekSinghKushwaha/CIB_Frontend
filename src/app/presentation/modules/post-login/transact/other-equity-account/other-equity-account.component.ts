@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { CurrencySelectionModal } from 'src/app/core/domain/currency-selection.model';
 import { FavouriteBeneficiaryModel } from 'src/app/core/domain/favourites-beneficiary.model';
 import { PaymentreminderModel } from 'src/app/core/domain/payment-reminder.model';
@@ -28,7 +29,7 @@ export class OtherEquityAccountComponent extends BaseTransactComponent implement
   intraBankTransferForm: FormGroup;
   paymentDate: ScheduledPaymentModel;
   schedulePaymentData: ScheduledPaymentModel;
-
+  loading: boolean = false;
   get getForm() {
     return this.intraBankTransferForm.controls;
   }
@@ -40,7 +41,8 @@ export class OtherEquityAccountComponent extends BaseTransactComponent implement
     accountsService: AccountsService,
     private fb: FormBuilder,
     private dialog: MatDialog,
-    private intraBankTransferService: IntrabankService
+    private intraBankTransferService: IntrabankService,
+    private router: Router
   ) { 
     super(accountsService);
   }
@@ -74,6 +76,7 @@ export class OtherEquityAccountComponent extends BaseTransactComponent implement
 
   // Get Transfer charges, then confirm payment.
   getTransferCharges() {
+    this.loading = true;
     const payload = {
       amount: this.getForm.amount.value.amount,
       currency: this.getForm.amount.value.currency,
@@ -81,19 +84,19 @@ export class OtherEquityAccountComponent extends BaseTransactComponent implement
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
       transferType: 1 // For Own Equity Account
     }
-    // TODO: Connect to Get transfer charges API
-    // this.ownEquityAccountService.getTransferCharges(payload).subscribe(res => {
-    //   if (res.status) {
-    //     this.confirmPayment('100')
-    //   } else {
-    //     // TODO:: Notify error
-    //   }
-    // })
-    this.confirmPayment('100');
+    this.intraBankTransferService.getTransferCharges(payload).subscribe(res => {
+      if (res.status) {
+        this.loading = false;
+        this.confirmPayment(res.data)
+      } else {
+        this.loading = false;
+        // TODO:: Notify error
+      }
+    })
   }
 
   // Confirm Payment and return the confirmation boolean before initiating payment. 
-  confirmPayment(transferFee: string) {
+  confirmPayment(transferFee: number) {
     if (this.intraBankTransferForm.valid) {
       const paymentData = {
         from: this.getForm.sendFrom.value,
@@ -120,6 +123,7 @@ export class OtherEquityAccountComponent extends BaseTransactComponent implement
 
   // Initiate fund transfer to another equity account
   sendMoney() {
+    this.loading = true;
     const payload = {
       amount: this.getForm.amount.value.amount,
       beneficiaryAccount:this.getForm.sendTo.value.accountNumber,
@@ -139,9 +143,12 @@ export class OtherEquityAccountComponent extends BaseTransactComponent implement
         .sendToAnotherEquityAccount(payload)
         .subscribe((res) => {
           if (res.status) {
-            console.log(res);
+            this.loading = false;
+            this.router.navigate(['/transact/other-equity-account/submit-transfer']);
           } else {
-            console.log(res);
+            this.loading = false;
+            alert(res.message);
+            // TODO:: Notify error
           }
         });
     }

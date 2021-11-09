@@ -15,6 +15,7 @@ import { SelectAccountConstants } from 'src/app/data/repository/select-account-m
 import { FormElementsModule } from 'src/app/presentation/shared/form-elements/form-elements.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ConfirmPaymentModule } from 'src/app/presentation/shared/modals/confirm-payment/confirm-payment.module';
+import { FavouritesModalModule } from 'src/app/presentation/shared/modals/favourites-modal/favourites-modal.module';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ConfirmPaymentModule } from 'src/app/presentation/shared/modals/confirm
     SupportingDocumentsUploadModule,
     FormElementsModule,
     ReactiveFormsModule,
-    ConfirmPaymentModule
+    ConfirmPaymentModule,
+    FavouritesModalModule
   ],
   providers: [
     CurrencySelectionConstants,

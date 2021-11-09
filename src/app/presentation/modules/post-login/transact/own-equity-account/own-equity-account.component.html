@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="!loading">
   <div class="mb-3">
     <button mat-icon-button aria-label="Back" class="back-icon" routerLink="/transact">
       <div class="strong-text">
@@ -53,4 +53,8 @@
       <button mat-raised-button type="submit" [disabled]="ownEquityAccountTransferForm.invalid" color="primary" class="px-5">Send money</button>
     </div>
   </form>
+</div>
+
+<div class="row justify-content-md-center" *ngIf="loading">
+  <mat-spinner style="margin-top: 30vh;"></mat-spinner>
 </div>

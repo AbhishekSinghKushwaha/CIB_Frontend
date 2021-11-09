@@ -23,6 +23,7 @@ import { UniversalValidators } from 'ngx-validators';
 import { OwnAccountService } from 'src/app/core/services/transfers/own-account/own-account.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmPaymentComponent } from 'src/app/presentation/shared/modals/confirm-payment/confirm-payment.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-own-equity-account',
@@ -36,6 +37,7 @@ export class OwnEquityAccountComponent
   schedulePaymentData: ScheduledPaymentModel;
   ownEquityAccountTransferForm: FormGroup;
   aboveTransactionTypeLimit: boolean = false;
+  loading: boolean = false;
 
   constructor(
     private readonly scheduledPaymentService: ScheduledPaymentService,
@@ -43,7 +45,8 @@ export class OwnEquityAccountComponent
     private readonly fb: FormBuilder,
     accountService: AccountsService,
     private ownEquityAccountService: OwnAccountService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private readonly router: Router
   ) {
     super(accountService);
   }
@@ -76,6 +79,7 @@ export class OwnEquityAccountComponent
 
   // Get Transfer charges, then confirm payment.
   getTransferCharges() {
+    this.loading = true;
     const payload = {
       amount: this.getForm.amount.value.amount,
       currency: this.getForm.amount.value.currency,
@@ -83,15 +87,15 @@ export class OwnEquityAccountComponent
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
       transferType: 1 // For Own Equity Account
     }
-    // TODO: Connect to Get transfer charges API
-    // this.ownEquityAccountService.getTransferCharges(payload).subscribe(res => {
-    //   if (res.status) {
-    //     this.confirmPayment('100')
-    //   } else {
-    //     // TODO:: Notify error
-    //   }
-    // })
-    this.confirmPayment('100');
+    this.ownEquityAccountService.getTransferCharges(payload).subscribe(res => {
+      if (res.status) {
+        this.loading = false;
+        this.confirmPayment(res.data);
+      } else {
+        this.loading = false;
+        // TODO:: Notify error
+      }
+    })
   }
 
   // Confirm Payment and return the confirmation boolean before initiating payment. 
@@ -117,11 +121,14 @@ export class OwnEquityAccountComponent
           this.sendMoney()
         }
       });
+    } else {
+      this.loading = false;
     }
   }
 
   // Initiate fund transfer to own equity account
   sendMoney() {
+    this.loading = true;
     const payload = {
       amount: this.getForm.amount.value.amount,
       beneficiaryAccount:this.getForm.sendTo.value.accountNumber,
@@ -141,9 +148,12 @@ export class OwnEquityAccountComponent
         .sendToOwnEquityAccount(payload)
         .subscribe((res) => {
           if (res.status) {
-            console.log(res);
+            this.loading = false;
+            this.router.navigate(['/transact/other-equity-account/submit-transfer']);
           } else {
-            console.log(res);
+            this.loading = false;
+            alert(res.message);
+            // TODO:: Notify Error
           }
         });
     }
