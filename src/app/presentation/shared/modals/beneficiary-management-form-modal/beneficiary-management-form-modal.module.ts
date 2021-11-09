@@ -4,6 +4,7 @@ import { BeneficiaryManagementFormModalComponent } from './beneficiary-managemen
 import { BeneficiaryManagementFormModalService } from 'src/app/core/services/beneficiary-management-form-modal/beneficiary-management-form-modal.service';
 import { MatStyleModule } from 'src/app/mat-style.module';
 import { BeneficiaryManagementFormModule } from './../../../modules/post-login/transact/beneficiary-management/beneficiary-management-form/beneficiary-management-form.module';
+import { NotificationModalModule } from '../notification-modal/notification-modal.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { BeneficiaryManagementFormModule } from './../../../modules/post-login/t
   imports: [
     CommonModule,
     MatStyleModule,
-    BeneficiaryManagementFormModule
+    BeneficiaryManagementFormModule,
+    NotificationModalModule
   ],
   providers: [
     BeneficiaryManagementFormModalService

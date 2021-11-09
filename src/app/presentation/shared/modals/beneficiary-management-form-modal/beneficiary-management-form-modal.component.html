@@ -1,4 +1,4 @@
-<div class="container favourites-modal-screen p-2">
+<div class="container favourites-modal-screen p-2" *ngIf="visibility">
   <button mat-icon-button matSuffix class="close-button" (click)="close()">
     <mat-icon svgIcon="caret_left"></mat-icon>
   </button>
@@ -8,6 +8,7 @@
     <app-beneficiary-management-form
       [modalMode]="true"
       [modalData]="data"
+      (formSubmitted)="submitForm($event)"
     ></app-beneficiary-management-form>
   </div>
 </div>
