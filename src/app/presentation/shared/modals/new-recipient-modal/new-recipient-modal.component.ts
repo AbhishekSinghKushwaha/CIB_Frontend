@@ -54,16 +54,16 @@ export class NewRecipientModalComponent implements OnInit {
       accountNumber: this.newRecipientForm.controls.accountNumber.value,
       bankCode: '54' // TODO:: Countercheck this service
     }
-    // this.intraBankTransferService.accountSearch(payload).subscribe(res => {
-    //   if (res.status) {
-
-    //   } else {
-    //     // TODO:: Throw Error
-    //   }
-    // })
-    this.selected = { accountNumber: this.newRecipientForm.controls.accountNumber.value, balance: 10000, currency: 'KES', accountName: 'EMMANUEL SAMUEL KIANGAI MACHARIA'};
-    this.newRecipientService.set(this.selected)
-    this.dialog.closeAll();
+    this.intraBankTransferService.accountSearch(payload).subscribe(res => {
+      if (res.status) {
+        this.selected = { accountNumber: this.newRecipientForm.controls.accountNumber.value, balance: 1000000, currency: res.data.currency, accountName: res.data.accountName};
+        this.newRecipientService.set(this.selected)
+        this.dialog.closeAll();
+      } else {
+        alert(res.message)
+        // TODO:: Throw Error
+      }
+    });
   }
 
 }

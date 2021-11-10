@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FormTestingComponent } from './form-testing/form-testing.component';
 import { PostLoginComponent } from './post-login.component';
 
 const routes: Routes = [
