@@ -1,90 +1,60 @@
-    <div>
-          <div class="mb-3">
-            <button
-              mat-icon-button
-              aria-label="Back"
-              class="back-icon"
-              routerLink="/transact"
-            >
-              <div class="strong-text">
-                <mat-icon svgIcon="caret_left"></mat-icon>
-                <span>Send to your own equity account</span>
-              </div>
-            </button>
-          </div>
-          <h3 class="strong-text">Please enter the payment details</h3>
-          <form class="d-flex flex-column" autocomplete="off">
-            <div class="row pt-4">
-              <div class="col-md-6">
-                <mat-form-field appearance="standard" style="width: 100%" floatLabel="always" readonly>
-                  <mat-label>Send from</mat-label>
-                  <input matInput type="text" class="strong-text" placeholder="{{sendFrom?.name || 'Send from'}}">
-                  <button type='button' mat-icon-button matSuffix (click)="openAccountSendFrom()">
-                    <mat-icon svgIcon="caret_down"></mat-icon>
-                  </button>
-                  <small *ngIf="sendFrom" class="text-grey text-sm-start mt-2 mb-0">Available balance {{sendFrom?.balance | number:'0.2'}} {{sendFrom?.currency}}</small>
-                </mat-form-field>
-              </div>
-              <div class="col-md-6  align-self-end">
-                <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
-                  <mat-label>Send to</mat-label>
-                  <input matInput type="text" class="strong-text" placeholder="{{sendTo?.name || 'Select the recipient'}}">
-                  <button type='button' mat-icon-button matSuffix (click)="openAccountSendTo()">
-                    <mat-icon svgIcon="caret_down"></mat-icon>
-                  </button>
-                </mat-form-field>
-              </div>
-              <div class="col-md-6">
-                <div class="row justify-content-between">
-                  <div class="col-md-4">
-                    <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
-                      <mat-label>Amount</mat-label>
-                      <input matInput type="text" class="strong-text" placeholder="{{currency?.text || 'KES'}}">
-                      <button type='button' mat-icon-button matSuffix>
-                        <mat-icon svgIcon="caret_down" (click)="openCurrencies()"></mat-icon>
-                      </button>
-                    </mat-form-field>
-                  </div>
-                  <div class="col-md-8">
-                    <mat-form-field appearance="standard" style="width: 100%">
-                      <input matInput type="text" class="strong-text" placeholder="Enter an amount">
-                    </mat-form-field>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
-                  <mat-label>Schedule Payment</mat-label>
-                  <input matInput [matDatepicker]="picker" placeholder="Select a payment a date">
-                  <mat-datepicker-toggle matSuffix (click)="openPaymentDialog()"></mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field> 
-              </div>
-              <div class="col-md-6">
-                <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
-                  <mat-label>FX Reference ID</mat-label>
-                  <input matInput type="text" placeholder="Enter FX reference ID">
-                </mat-form-field>
-              </div>
-              <div class="col-md-6">
-                <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
-                  <mat-label>Payment reason</mat-label>
-                  <input matInput type="text" placeholder="Optional">
-                </mat-form-field>
-              </div>
-            </div>
-            <div class="pt-3">
-              <h3 class="strong-text">Additional Information</h3>
-              <small class="text-grey">If you are sending more than 10,000,000 we need more information from you</small><br>
-              
-                <div class="col-md-6 upload-container mt-4"  (click)="openSupportingDocuments()">
-                  <div>Upload a document</div>
-                  <mat-icon class="folder-icon">note_add</mat-icon>
-                </div>
-              </div>
-            <div class="mt-4">
-              <button mat-raised-button color="primary" disabled class="px-5">Send money</button>
-            </div>
-          </form>
-        </div>
+<div *ngIf="!loading">
+  <div class="mb-3">
+    <button mat-icon-button aria-label="Back" class="back-icon" routerLink="/transact">
+      <div class="strong-text">
+        <mat-icon svgIcon="caret_left"></mat-icon>
+        <span>Send to your own equity account</span>
+      </div>
+    </button>
+  </div>
+  <h3 class="strong-text">Please enter the payment details</h3>
+  <form class="d-flex flex-column" autocomplete="off" [formGroup]="ownEquityAccountTransferForm" (submit)="getTransferCharges()">
+    <div class="row pt-4">
+      <div class="col-md-6">
+        <app-transfer-from [parentForm]="ownEquityAccountTransferForm" label="Send From" placeholder="Send From"
+          formControlName="sendFrom" fieldName="sendFrom"></app-transfer-from>
+      </div>
+      <div class="col-md-6  align-self-end">
+        <app-transfer-to [parentForm]="ownEquityAccountTransferForm" fieldName="sendTo" formControlName="sendTo"
+          label="Send To" placeholder="Select Recipient" transactionType="ownEquityAccount"></app-transfer-to>
+      </div>
+      <div class="col-md-6">
+        <app-transfer-amount [parentForm]="ownEquityAccountTransferForm" fieldName="amount" label="Amount"
+          placeholder="Enter an amount" formControlName="amount">
+        </app-transfer-amount>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
+          <mat-label>Schedule Payment</mat-label>
+          <input matInput [matDatepicker]="picker" placeholder="Select a payment a date">
+          <mat-datepicker-toggle matSuffix (click)="openPaymentDialog()"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <app-input [parentForm]="ownEquityAccountTransferForm" fieldName="fxReferenceId" label="FX Reference ID"
+          placeholder="Enter FX reference ID" formControlName="fxReferenceId"></app-input>
+      </div>
+      <div class="col-md-6">
+        <app-input [parentForm]="ownEquityAccountTransferForm" fieldName="reason" label="Payment Reason"
+          formControlName="reason" placeholder="Optional"></app-input>
+      </div>
+    </div>
+    <div class="pt-3" *ngIf="aboveTransactionTypeLimit">
+      <h3 class="strong-text">Additional Information</h3>
+      <small class="text-grey">If you are sending more than 10,000,000 we need more information from you</small><br>
 
+      <div class="col-md-6 upload-container mt-4" (click)="openSupportingDocuments()">
+        <div>Upload a document</div>
+        <mat-icon class="folder-icon">note_add</mat-icon>
+      </div>
+    </div>
+    <div class="mt-4">
+      <button mat-raised-button type="submit" [disabled]="ownEquityAccountTransferForm.invalid" color="primary" class="px-5">Send money</button>
+    </div>
+  </form>
+</div>
+
+<div class="row justify-content-md-center" *ngIf="loading">
+  <mat-spinner style="margin-top: 30vh;"></mat-spinner>
+</div>

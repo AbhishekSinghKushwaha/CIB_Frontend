@@ -2,6 +2,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
 import { SelectAccountModel } from 'src/app/core/domain/select-account.model';
 import { SelectAccountSendtoService } from 'src/app/core/services/select-account-sendto/select-account-sendto.service';
+import { FromAccount } from 'src/app/core/domain/transfer.models';
 
 
 @Component({
@@ -11,16 +12,16 @@ import { SelectAccountSendtoService } from 'src/app/core/services/select-account
   encapsulation: ViewEncapsulation.None
 })
 export class SelectAccountSendToComponent implements OnInit {
-  selected: SelectAccountModel;
+  selected: FromAccount;
 
   constructor(
     readonly dialogRef: MatDialogRef<SelectAccountSendToComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: SelectAccountModel[],
+    @Inject(MAT_DIALOG_DATA) public data: FromAccount[],
     private readonly selectAccountSendtoService: SelectAccountSendtoService
   ) { }
 
   ngOnInit(): void {
-    this.selectAccountSendtoService.selectedAccountSendTo.subscribe((x) => this.selected=x);
+    this.selectAccountSendtoService.selected.subscribe((x) => this.selected=x);
   }
 
   close(): void {

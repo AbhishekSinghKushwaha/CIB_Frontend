@@ -8,7 +8,7 @@
   <div class="row p-3">
     <h3 class="strong-text pt-4 mb-4">Please select a currency</h3>
     <div *ngFor="let item of data; let isLast = last; let i = index">
-      <app-currency-list-item [data]="item" [isChecked]="selected?.text===item.text"> </app-currency-list-item>
+      <app-currency-list-item [data]="item" [isChecked]="selected?.currencyCode===item.currencyCode"> </app-currency-list-item>
       <mat-divider *ngIf="!isLast" class="pt-3"></mat-divider>
     </div>
   </div>

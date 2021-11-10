@@ -1,23 +1,24 @@
 import { Injectable } from '@angular/core';
 import { CurrencySelectionModal } from '../../domain/currency-selection.model';
+import { CurrencyModel } from '../../domain/transfer.models';
 
 @Injectable()
 export class CurrencySelectionConstants {
   constructor() { }
-  CURRENCY_LISTINGS: CurrencySelectionModal[] = [{
-    text: 'EUR',
-    subtext: 'Euro'
+  CURRENCY_LISTINGS: CurrencyModel[] = [{
+    currencyCode: 'EUR',
+    currencyDescription: 'Euro'
   }, {
-    text: 'GBP',
-    subtext: 'Sterling Pound'
+    currencyCode: 'GBP',
+    currencyDescription: 'Sterling Pound'
   }, {
-    text: 'KES',
-    subtext: 'Kenya Shilling'
+    currencyCode: 'KES',
+    currencyDescription: 'Kenya Shilling'
   }, {
-    text: 'USD',
-    subtext: 'United States Dollar'
+    currencyCode: 'USD',
+    currencyDescription: 'United States Dollar'
   }, {
-    text: 'ZAR',
-    subtext: 'South African Rand'
+    currencyCode: 'ZAR',
+    currencyDescription: 'South African Rand'
   }];
 }

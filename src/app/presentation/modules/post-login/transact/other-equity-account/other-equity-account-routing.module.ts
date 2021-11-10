@@ -6,6 +6,10 @@ const routes: Routes = [
   {
     path: '',
     component: OtherEquityAccountComponent
+  },
+  {
+    path: 'submit-transfer',
+    loadChildren: () => import('../complete-transfer/complete-transfer.module').then(m => m.CompleteTransferModule)
   }
 ];
 

@@ -1,0 +1,67 @@
+<div class="confirm-payment p-0">
+    <div class="row">
+        <div class="col-md-4">
+            <mat-icon (click)="close()" class="cursor-pointer">close</mat-icon>
+        </div>
+        <div class="col-md-8">
+          <h5 class="strong-text col-md-8">Payment Confirmation</h5>  
+        </div>
+    </div>
+    <div class="row">
+        <div class="col mb-4">
+            <h4 class="ml-4">To continue, please confirm your transaction</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+            <span class="text-grey text-sm">Transaction</span>
+            <p class="mb-0 text-sm pb-0">{{paymentData?.transactionType | titlecase}}</p>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+            <span class="text-grey text-sm">Amount</span>
+            <p class="mb-0 text-sm pb-0">{{paymentData?.amount?.amount}} {{paymentData?.amount?.currency}}</p>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+            <span class="text-grey text-sm">Charges</span>
+            <p class="mb-0 text-sm pb-0">{{paymentData?.transferFee }} {{paymentData?.amount?.currency}}</p>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+            <span class="text-grey text-sm">From</span>
+            <p class="mb-0 text-sm pb-0">{{paymentData?.from?.accountName}}</p>
+            <p class="mb-0 text-sm pb-0">{{paymentData?.from?.accountNumber}}</p>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+            <span class="text-grey text-sm">To</span>
+            <p class="mb-0 text-sm pb-0">{{paymentData?.to?.accountName}}</p>
+            <p class="mb-0 text-sm pb-0">{{paymentData?.to?.accountNumber}}</p>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+            <span class="text-grey text-sm">Frequency</span>
+            <p class="mb-0 text-sm pb-0">{{paymentData?.schedulePayment?.frequency}}</p>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+            <span class="text-grey text-sm">IBAN Number</span>
+            <p class="mb-0 text-sm pb-0">{{paymentData?.IBANNumber}}</p>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+            <span class="text-grey text-sm">Fx Reference ID</span>
+            <p class="mb-0 text-sm pb-0">{{paymentData?.fxReferenceId}}</p>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+            <span class="text-grey text-sm">Payment Date</span>
+            <p class="mb-0 text-sm pb-0">{{paymentData?.schedulePayment?.paymentDate}}</p>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+            <span class="text-grey text-sm">Payment Reason</span>
+            <p class="mb-0 text-sm pb-0">{{paymentData?.paymentReason}}</p>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col">
+            <button mat-raised-button type="button" color="primary" class="px-5 mt-4" (click)="submitReview()">Confirm</button>
+        </div>
+    </div>
+
+</div>
