@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, Output, Input } from '@angular/core';
+import { Component, OnInit, Inject, Output, Input, ChangeDetectorRef } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subject, BehaviorSubject } from 'rxjs';
 import { CountryModel } from 'src/app/core/domain/country.model';
@@ -15,15 +15,27 @@ import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
 export class CountrySelectComponent implements OnInit {
   visibility = true;
   countries = mockData.countries;
-  viewTypes = countrySettings.viewTypes
+  viewTypes = countrySettings.viewTypes;
+  selected: CountryModel;
   @Input() category: string;
-  @Output() selected = new BehaviorSubject<CountryModel>(mockData.countries[0]);
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: recipientModel,
-    private readonly countryService: CountryService) { }
+    private readonly cd: ChangeDetectorRef,
+    private readonly countryService: CountryService) {
+    this.selected = this.countries[0];
+  }
 
   ngOnInit(): void {
+    this.subscribeEvents();
+  }
+
+  subscribeEvents(): void {
+    this.countryService.selected.subscribe((x) => {
+      console.log('selected', x);
+      this.selected = x;
+      this.cd.detectChanges()
+    });
   }
 
   openCountries(): void {
@@ -32,7 +44,6 @@ export class CountrySelectComponent implements OnInit {
     modal.afterClosed().subscribe((data: CountryModel) => {
       console.log('Inner', data);
       this.visibility = true;
-      this.selected.next(data);
       this.countryService.openedStatus.next(false);
     });
   }

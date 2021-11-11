@@ -82,17 +82,22 @@ export class BeneficiaryManagementFormComponent implements OnInit {
   }
 
   submit() {
+    console.log('this.editMode', this.editMode);
+    console.log('this.modalMode', this.modalMode);
     if (!this.editMode) {
-      this.modalMode ?
-        this.formSubmitted.next(this.equityForm.value) :
+      if (this.modalMode) {
+        this.formSubmitted.next(this.equityForm.value);
+      } else {
         this.beneficiaryManagementService.submitForm(this.equityForm.value);
-      this.equityForm.reset();
-      this.router.navigate(['/transact/beneficiary-management']);
+        this.router.navigate(['/transact/beneficiary-management']);
+      }
     } else {
       this.modalMode ?
         this.formSubmitted.next({ ...this.equityForm.value, id: this.id }) :
         this.beneficiaryManagementService.updateForm(this.equityForm.value, this.id);
     }
+
+    this.equityForm.reset();
   }
 
   openBanks() {

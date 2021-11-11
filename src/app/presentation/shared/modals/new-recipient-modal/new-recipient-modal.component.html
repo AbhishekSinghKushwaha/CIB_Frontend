@@ -4,16 +4,36 @@
   </button>
   <p class="text-center fw-bold pt-2">Send to someone new</p>
   <h3 class="m-4 ms-2">Please enter the recipient's details</h3>
-  <app-country-select (selected)="setCountry($event)" [category]="countrySelectType"></app-country-select>
-  <form [formGroup]="newRecipientForm" (ngSubmit)="submit()" class="d-flex flex-column" autocomplete="off">
+  <app-country-select [category]="countrySelectType"></app-country-select>
+  <form
+    [formGroup]="newRecipientForm"
+    (ngSubmit)="submit()"
+    class="d-flex flex-column"
+    autocomplete="off"
+  >
     <div class="row">
-      <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
+      <mat-form-field
+        appearance="standard"
+        style="width: 100%"
+        floatLabel="always"
+      >
         <mat-label>Account or mobile number</mat-label>
-        <input matInput type="text" placeholder="Enter an account number" formControlName="accountNumber" />
+        <input
+          matInput
+          type="text"
+          placeholder="Enter an account number"
+          formControlName="accountNumber"
+        />
       </mat-form-field>
     </div>
     <div class="p-2">
-      <button [disabled]="newRecipientForm.invalid" color="primary" type="submit" mat-flat-button class="px-5">
+      <button
+        [disabled]="newRecipientForm.invalid"
+        color="primary"
+        type="submit"
+        mat-flat-button
+        class="px-5"
+      >
         Continue
       </button>
     </div>

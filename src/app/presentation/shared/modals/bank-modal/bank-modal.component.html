@@ -6,10 +6,7 @@
     <h4 class="strong-text col-md-8">Select a bank</h4>
     <h3 class="strong-text pt-4 mb-4">Please select the beneficiary's bank</h3>
   </div>
-  <app-country-select
-    (selected)="setCountry($event)"
-    [category]="countrySelectType"
-  ></app-country-select>
+  <app-country-select [category]="countrySelectType"></app-country-select>
   <mat-divider class="m-2"></mat-divider>
   <div class="row">
     <mat-form-field appearance="outline">

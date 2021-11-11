@@ -12,6 +12,7 @@ import { NotificationModalService } from 'src/app/core/services/notification-mod
 })
 export class BeneficiaryManagementFormModalComponent implements OnInit {
   visibility = true;
+  modalMode = true;
 
   constructor(
     readonly dialogRef: MatDialogRef<BeneficiaryManagementFormModalComponent>,
@@ -21,6 +22,7 @@ export class BeneficiaryManagementFormModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.modalMode)
   }
 
 
