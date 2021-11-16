@@ -19,7 +19,6 @@ export class CountryModalComponent implements OnInit {
   searchText: string;
 
   constructor(
-    private readonly dialogRef: MatDialogRef<CountryModalComponent>,
     private readonly countryService: CountryService,
     @Inject(MAT_DIALOG_DATA) public data: IData,
   ) {
@@ -31,7 +30,7 @@ export class CountryModalComponent implements OnInit {
   }
 
   close(): void {
-    this.dialogRef.close(this.selected)
+    this.countryService.close(this.selected)
   }
 
 }

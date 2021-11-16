@@ -5,7 +5,7 @@
   <div *ngIf="category === viewTypes?.FLAG_AND_NAME" class="col-md-2">
     <img
       class="rounded-circle img-d"
-      [src]="selected?.flag"
+      [src]="(selected | async)?.flag || countries[0].flag"
       width="60px"
       height="60px"
       alt="Generic placeholder image"
@@ -14,11 +14,10 @@
   <div
     [ngClass]="category === viewTypes?.FLAG_AND_NAME ? 'col-md-9' : 'col-md-12'"
   >
-    {{ selected | json }}
     <div class="row user-list-item" style="height: 60px">
       <div class="col-md-10 d-flex">
         <div class="align-self-center">
-          {{ selected?.name }}
+          {{ (selected | async)?.name || countries[0].name }}
         </div>
       </div>
       <div class="col-md-2 d-flex">

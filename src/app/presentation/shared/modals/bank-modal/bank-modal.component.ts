@@ -32,13 +32,15 @@ export class BankModalComponent implements OnInit {
   }
 
   subscribeEvents(): void {
-    this.countryService.openedStatus.subscribe(response => this.visibility = !response);
-    this.bankService.selected.subscribe((x) => this.selected = x);
-    this.countryService.selected.subscribe((x) => this.country = x);
+    this.countryService.openedStatus.subscribe(response => response ? this.visibility = false : this.visibility = true);
+    this.bankService.selected.subscribe((response) => this.selected = response);
   }
 
   close(): void {
     this.dialogRef.close(true);
   }
 
+  setCountry(country: CountryModel) {
+    this.country = country;
+  }
 }

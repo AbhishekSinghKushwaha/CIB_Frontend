@@ -21,9 +21,7 @@ export class BeneficiaryManagementFormModalComponent implements OnInit {
     private readonly notificationModalService: NotificationModalService) {
   }
 
-  ngOnInit(): void {
-    console.log(this.modalMode)
-  }
+  ngOnInit(): void { }
 
 
   close(): void {
@@ -32,7 +30,6 @@ export class BeneficiaryManagementFormModalComponent implements OnInit {
 
   submitForm(value: BeneficiaryModel): void {
     this.visibility = false;
-    console.log('submitForm', value);
     if (value) {
       const message = SharedUtil.getNotificationModalParam({
         title: 'Your beneficiary has been added',

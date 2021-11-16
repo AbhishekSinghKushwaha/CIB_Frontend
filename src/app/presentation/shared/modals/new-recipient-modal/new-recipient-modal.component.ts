@@ -38,7 +38,7 @@ export class NewRecipientModalComponent implements OnInit {
   }
 
   subscribeEvents(): void {
-    this.countryService.selected.subscribe((x) => this.country = x);
+    // this.countryService.selected.subscribe((x) => this.country = x);
   }
 
   initForm(): void {
@@ -52,7 +52,7 @@ export class NewRecipientModalComponent implements OnInit {
   }
 
   setCountry(country: CountryModel) {
-    this.selected = { ...this.selected, country }
+    this.selected = country;
   }
 
   submit(): void {

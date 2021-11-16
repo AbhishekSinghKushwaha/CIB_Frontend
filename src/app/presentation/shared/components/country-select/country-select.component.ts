@@ -1,6 +1,6 @@
-import { Component, OnInit, Inject, Output, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Inject, Output, Input, OnDestroy } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Subject, BehaviorSubject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { CountryModel } from 'src/app/core/domain/country.model';
 import { recipientModel } from 'src/app/core/domain/recipient.model';
 import { CountryService } from 'src/app/core/services/country/country.service';
@@ -12,40 +12,34 @@ import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
   templateUrl: './country-select.component.html',
   styleUrls: ['./country-select.component.scss']
 })
-export class CountrySelectComponent implements OnInit {
+export class CountrySelectComponent implements OnInit, OnDestroy {
   visibility = true;
   countries = mockData.countries;
   viewTypes = countrySettings.viewTypes;
-  selected: CountryModel;
+  subscriptions: Subscription[] = [];
   @Input() category: string;
+  @Output() selected = new Subject<CountryModel>();
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: recipientModel,
-    private readonly cd: ChangeDetectorRef,
-    private readonly countryService: CountryService) {
-    this.selected = this.countries[0];
-  }
+    private readonly countryService: CountryService) { }
 
-  ngOnInit(): void {
-    this.subscribeEvents();
-  }
-
-  subscribeEvents(): void {
-    this.countryService.selected.subscribe((x) => {
-      console.log('selected', x);
-      this.selected = x;
-      this.cd.detectChanges()
-    });
-  }
+  ngOnInit(): void { }
 
   openCountries(): void {
     this.visibility = false;
     const modal = this.countryService.open(this.countries, this.category);
-    modal.afterClosed().subscribe((data: CountryModel) => {
+    this.subscriptions.push(modal.afterClosed().subscribe((data: CountryModel) => {
       console.log('Inner', data);
-      this.visibility = true;
       this.countryService.openedStatus.next(false);
-    });
+      this.visibility = true;
+      this.selected.next(data);
+    }));
+  }
+
+  ngOnDestroy(): void {
+    console.log('Destroyed');
+    this.subscriptions.length && this.subscriptions.forEach(value => value && value.unsubscribe());
   }
 
 }
