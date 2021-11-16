@@ -1,7 +1,10 @@
-html, body { height: 100%; }
-body { 
-  margin: 0; 
-  font-family: Roboto, "Helvetica Neue", sans-serif;  
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
   min-height: 100vh;
 }
 
@@ -408,3 +411,8 @@ button {
   }
 }
 
+// Removing dotted underline on disabled form fields
+.mat-form-field-disabled .mat-form-field-underline {
+  background-image: unset !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+}
