@@ -26,7 +26,7 @@
     class="strong-text"
     [id]="fieldName"
     [name]="fieldName"
-    [value]="value || ''"
+    [value]="value?.value || ''"
     [disabled]="isDisabled"
     (input)="onChange($event)"
     [placeholder]="placeholder"
@@ -39,7 +39,7 @@
   >
     <mat-icon>date_range</mat-icon>
   </button>
-  <!-- <small *ngIf="value.accountName" class="text-grey text-sm-start mt-2 mb-0"
-    >Available balance {{ value?.balance | number: "0.2" }}
-    {{ value?.currency }}</small> -->
+  <small *ngIf="value?.reminder" class="text-grey text-sm-start mt-2 mb-0"
+    >Reminder: {{ value?.reminder }}</small
+  >
 </mat-form-field>

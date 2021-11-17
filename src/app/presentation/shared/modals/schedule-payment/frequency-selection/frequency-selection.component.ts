@@ -15,9 +15,7 @@ export class FrequencySelectionComponent implements OnInit {
     private readonly schedulePaymentService: SchedulePaymentService
   ) {}
 
-  ngOnInit(): void {
-    console.log(this.data);
-  }
+  ngOnInit(): void {}
 
   select(): void {
     this.schedulePaymentService.selectedFrequency.next(this.data);

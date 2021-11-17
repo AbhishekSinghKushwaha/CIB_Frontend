@@ -48,6 +48,7 @@
         <input
           placeholder="Enter the start date"
           matInput
+          [min]="minDate"
           class="pb-2"
           [matDatepicker]="startdatePicker"
           formControlName="startDate"
@@ -70,6 +71,7 @@
         <input
           matInput
           class="pb-2"
+          [min]="minDate"
           [matDatepicker]="enddatePicker"
           formControlName="endDate"
           placeholder="Enter the end date"

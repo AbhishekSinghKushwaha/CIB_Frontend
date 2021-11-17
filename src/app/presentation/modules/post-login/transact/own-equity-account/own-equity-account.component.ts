@@ -63,6 +63,7 @@ export class OwnEquityAccountComponent
       amount: [{}, [Validators.required, accountLimitValidator]],
       reason: [''],
       fxReferenceId: ['', [Validators.required]],
+      schedulePayment: ['', [Validators.required]],
     });
   }
 
@@ -103,7 +104,7 @@ export class OwnEquityAccountComponent
         transactionType: 'Send to your own Equity account',
         paymentReason: this.getForm.reason.value,
         fxReferenceId: this.getForm.fxReferenceId.value,
-        schedulePayment: {},
+        schedulePayment: this.getForm.schedulePayment.value,
         transferFee,
       };
       const dialogRef = this.dialog.open(ConfirmPaymentComponent, {
@@ -134,7 +135,12 @@ export class OwnEquityAccountComponent
       currency: this.getForm.amount.value.currency,
       fxReferenceId: this.getForm.fxReferenceId.value,
       paymentReason: this.getForm.reason.value,
-      schedulePayment: {},
+      schedulePayment: {
+        frequency: this.getForm.schedulePayment.value.frequency.value,
+        reminderDay: this.getForm.schedulePayment.value.reminder.value,
+        startDate: this.getForm.schedulePayment.value.startDate.toISOString(),
+        endDate: this.getForm.schedulePayment.value.endDate.toISOString(),
+      },
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
       transferType: 1, // Own Equity Account
     };

@@ -1,11 +1,5 @@
-import {
-  Component,
-  Input,
-  Inject,
-  OnInit,
-  ViewEncapsulation,
-} from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import {
   FrequencySelectionModel,
@@ -14,6 +8,7 @@ import {
 } from 'src/app/core/domain/scheduled-payment.model';
 import { SchedulePaymentConstants } from 'src/app/core/utils/constants/schedule-payment.constants';
 import { SchedulePaymentService } from 'src/app/core/services/schedule-payment/schedule-payment.service';
+import moment from 'moment';
 
 @Component({
   selector: 'app-schedule-payment',
@@ -26,13 +21,13 @@ export class SchedulePaymentComponent implements OnInit {
   reminder: ReminderSelectionModel;
   frequency: FrequencySelectionModel;
   scheduledPayment: ScheduledPaymentModel;
-
+  minDate = new Date();
   constructor(
-    public readonly frequencies: SchedulePaymentConstants,
+    public readonly schedulePaymentConstants: SchedulePaymentConstants,
     private readonly dialogRef: MatDialogRef<SchedulePaymentComponent>,
     private readonly schedulePaymentService: SchedulePaymentService // private readonly scheduledPaymentService: ScheduledPaymentService
   ) {
-    // this.data = schedulePaymentService.default;
+    this.scheduledPayment = schedulePaymentService.defaultSchedulePayment;
     this.eventsSubscriptions();
   }
 
@@ -42,7 +37,7 @@ export class SchedulePaymentComponent implements OnInit {
 
   initForm() {
     this.paymentScheduleForm = new FormGroup({
-      frequency: new FormControl(this.scheduledPayment?.frequency, [
+      frequency: new FormControl(this.scheduledPayment?.frequency?.frequency, [
         Validators.required,
       ]),
       startDate: new FormControl(this.scheduledPayment?.startDate, [
@@ -51,7 +46,7 @@ export class SchedulePaymentComponent implements OnInit {
       endDate: new FormControl(this.scheduledPayment?.endDate, [
         Validators.required,
       ]),
-      reminder: new FormControl(this.scheduledPayment?.reminderDay, [
+      reminder: new FormControl(this.scheduledPayment?.reminderDay?.reminder, [
         Validators.required,
       ]),
     });
@@ -75,25 +70,30 @@ export class SchedulePaymentComponent implements OnInit {
   // Open Frequency Modal
   openFrequencyModal(): void {
     this.schedulePaymentService.openFrequencySelectionModal(
-      this.frequencies.FREQUENCY_LISTINGS
+      this.schedulePaymentConstants.FREQUENCY_LISTINGS
     );
   }
 
   // Open Reminder Modal
   openReminderModal(): void {
     this.schedulePaymentService.openReminderSelectionModal(
-      this.frequencies.REMINDER_LISTINGS
+      this.schedulePaymentConstants.REMINDER_LISTINGS
     );
   }
 
   // Set the scheduled payment
   submit() {
     const scheduledPaymentData: ScheduledPaymentModel = {
-      frequency: this.frequency.value,
-      reminderDay: this.reminder.value,
-      startDate:
-        this.paymentScheduleForm.controls.startDate.value.toISOString(),
-      endDate: this.paymentScheduleForm.controls.endDate.value.toISOString(),
+      frequency:
+        this.frequency === undefined
+          ? this.scheduledPayment.frequency
+          : this.frequency,
+      reminderDay:
+        this.frequency === undefined
+          ? this.scheduledPayment.reminderDay
+          : this.reminder,
+      startDate: this.paymentScheduleForm.controls.startDate.value,
+      endDate: this.paymentScheduleForm.controls.endDate.value,
     };
     this.schedulePaymentService.selectScheduledPayment(scheduledPaymentData);
     this.schedulePaymentService.close();

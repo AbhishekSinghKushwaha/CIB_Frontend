@@ -37,6 +37,11 @@ export class SchedulePaymentConstants {
 
   REMINDER_LISTINGS: ReminderSelectionModel[] = [
     {
+      reminder: 'No reminder',
+      description: '',
+      value: 0,
+    },
+    {
       reminder: '1 day before',
       description: '',
       value: 1,

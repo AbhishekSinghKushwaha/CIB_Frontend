@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import * as moment from 'moment';
 import { Subject } from 'rxjs';
 import { PaymentFrequencyModalComponent } from 'src/app/presentation/shared/modals/payment-frequency-modal/payment-frequency-modal.component';
 import { PaymentReminderModalComponent } from 'src/app/presentation/shared/modals/payment-reminder-modal/payment-reminder-modal.component';
@@ -11,6 +12,7 @@ import {
   ReminderSelectionModel,
   ScheduledPaymentModel,
 } from '../../domain/scheduled-payment.model';
+import { SchedulePaymentConstants } from '../../utils/constants/schedule-payment.constants';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +26,24 @@ export class SchedulePaymentService {
   selectedFrequency = new Subject<FrequencySelectionModel>();
   selectedReminder = new Subject<ReminderSelectionModel>();
 
-  constructor(private readonly dialog: MatDialog) {}
+  constructor(
+    private readonly dialog: MatDialog,
+    private schedulePaymentConstants: SchedulePaymentConstants
+  ) {
+    this.setDefaultData();
+  }
+
+  // Set default data
+  setDefaultData() {
+    this.frequencyData = this.schedulePaymentConstants.FREQUENCY_LISTINGS[0];
+    this.reminderData = this.schedulePaymentConstants.REMINDER_LISTINGS[0];
+    this.schedulePaymentData = {
+      reminderDay: this.reminderData,
+      frequency: this.frequencyData,
+      startDate: new Date(),
+      endDate: new Date(),
+    };
+  }
 
   // Open the schedule payment modal
   openSchedulePaymentModal(data: ScheduledPaymentModel): void {
