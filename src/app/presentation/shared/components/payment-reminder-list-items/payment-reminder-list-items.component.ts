@@ -1,21 +1,22 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PaymentreminderModel } from 'src/app/core/domain/payment-reminder.model';
-import { PaymentReminderService } from 'src/app/core/services/payment-reminder/payment-reminder.service';
+import { ReminderSelectionModel } from 'src/app/core/domain/scheduled-payment.model';
+import { SchedulePaymentService } from 'src/app/core/services/schedule-payment/schedule-payment.service';
 
 @Component({
   selector: 'app-payment-reminder-list-items',
   templateUrl: './payment-reminder-list-items.component.html',
-  styleUrls: ['./payment-reminder-list-items.component.scss']
+  styleUrls: ['./payment-reminder-list-items.component.scss'],
 })
 export class PaymentReminderListItemsComponent implements OnInit {
   @Input() isChecked: boolean;
-  @Input() data: PaymentreminderModel;
-  constructor(private readonly paymentReminderService: PaymentReminderService) { }
+  @Input() data: ReminderSelectionModel;
+  constructor(
+    private readonly schedulePaymentService: SchedulePaymentService
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   select(): void {
-    this.paymentReminderService.select(this.data);
+    this.schedulePaymentService.selectReminder(this.data);
   }
 }

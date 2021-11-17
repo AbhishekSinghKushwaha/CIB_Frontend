@@ -3,25 +3,15 @@ import { CommonModule } from '@angular/common';
 import { PaymentFrequencyModalComponent } from './payment-frequency-modal.component';
 import { PaymentFrequencyListItemComponent } from '../../components/payment-frequency-list-item/payment-frequency-list-item.component';
 import { MatStyleModule } from 'src/app/mat-style.module';
-import { PaymentFrequencyService } from 'src/app/core/services/payment-frequency/payment-frequency.service';
-
-
+import { SchedulePaymentService } from 'src/app/core/services/schedule-payment/schedule-payment.service';
 
 @NgModule({
   declarations: [
     PaymentFrequencyModalComponent,
-    PaymentFrequencyListItemComponent
+    PaymentFrequencyListItemComponent,
   ],
-  imports: [
-    CommonModule,
-    MatStyleModule,
-  ],
-  exports: [
-    PaymentFrequencyModalComponent,
-    PaymentFrequencyListItemComponent
-  ],
-  providers:[
-    PaymentFrequencyService
-  ]
+  imports: [CommonModule, MatStyleModule],
+  exports: [PaymentFrequencyModalComponent, PaymentFrequencyListItemComponent],
+  providers: [SchedulePaymentService],
 })
-export class PaymentFrequencyModalModule { }
+export class PaymentFrequencyModalModule {}

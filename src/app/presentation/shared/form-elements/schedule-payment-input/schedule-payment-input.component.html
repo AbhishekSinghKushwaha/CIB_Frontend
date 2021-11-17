@@ -1,0 +1,45 @@
+<!-- <small>{{ (paymentDate && "Payment Scheduled") || "Schedule Payment" }}</small>
+<div class="row">
+  <div class="col-md-10">
+    <div *ngIf="paymentDate">
+      <p class="text-grey mb-0">
+        {{ paymentDate.frequency }} on the
+        {{ paymentDate.startDate | date: "d" }}
+      </p>
+      <p class="text-grey mb-0">Reminder {{ paymentDate.reminderDay }}</p>
+    </div>
+    <div *ngIf="!paymentDate">
+      <p class="text-grey mb-0">Select a payment date</p>
+    </div>
+  </div>
+  <div class="col-md-2 cursor-pointer" (click)="openSchedulePaymentModal()">
+    <mat-icon>date_range</mat-icon>
+  </div>
+</div>
+<mat-divider class="p-1"></mat-divider> -->
+
+<mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
+  <mat-label>{{ label }}</mat-label>
+  <input
+    matInput
+    type="text"
+    class="strong-text"
+    [id]="fieldName"
+    [name]="fieldName"
+    [value]="value || ''"
+    [disabled]="isDisabled"
+    (input)="onChange($event)"
+    [placeholder]="placeholder"
+  />
+  <button
+    type="button"
+    mat-icon-button
+    matSuffix
+    (click)="openSchedulePaymentModal()"
+  >
+    <mat-icon>date_range</mat-icon>
+  </button>
+  <!-- <small *ngIf="value.accountName" class="text-grey text-sm-start mt-2 mb-0"
+    >Available balance {{ value?.balance | number: "0.2" }}
+    {{ value?.currency }}</small> -->
+</mat-form-field>
