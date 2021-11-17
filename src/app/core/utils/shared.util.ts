@@ -5,6 +5,7 @@ export default class ShareUtils {
       image: param.image,
       title: param.title,
       message: param.message,
+      buttonText: param.buttonText,
       registerButtonEnabled: !!param.registerButtonEnabled,
       logoutButtonEnabled: !!param.logoutButtonEnabled
     }

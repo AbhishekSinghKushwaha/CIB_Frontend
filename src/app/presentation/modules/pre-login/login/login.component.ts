@@ -10,10 +10,10 @@ import SharedUtil from './../../../../core/utils/shared.util';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  loginPasswordForm: FormGroup=new FormGroup({});
+  loginPasswordForm: FormGroup = new FormGroup({});
   hidePassword = true;
   submitted = false;
-  isloggedOut=false;
+  isloggedOut = false;
 
   constructor(
     private readonly notificationModalService: NotificationModalService,
@@ -50,7 +50,8 @@ export class LoginComponent implements OnInit {
     const message = SharedUtil.getNotificationModalParam({
       title: 'Lets try this again',
       message: 'The details you entered aren\'t familiar to us. Please try again or register to create your profile',
-      registerButtonEnabled: true
+      registerButtonEnabled: true,
+      buttonText: 'Try again'
     })
     this.notificationModalService.open(message);
   }
@@ -58,6 +59,7 @@ export class LoginComponent implements OnInit {
     const message = SharedUtil.getNotificationModalParam({
       title: 'Incorrect verification code',
       message: 'The details you entered aren\'t familiar to us. Please try again or register to create your profile',
+      buttonText: 'Try again'
     })
     this.notificationModalService.open(message);
   }
@@ -70,17 +72,17 @@ export class LoginComponent implements OnInit {
     const message = SharedUtil.getNotificationModalParam({
       title: 'Are you sure you want to sign out?',
       message: '',
-      logoutButtonEnabled: true
+      logoutButtonEnabled: true,
     })
     this.notificationModalService.open(message);
-    this.isloggedOut=true;
+    this.isloggedOut = true;
   }
   modelSessionOut(): void {
     const message = SharedUtil.getNotificationModalParam({
       image: './assets/images/Illustrations/logout-illustration.svg',
       title: 'Are you stil there?',
       message: `You've been quiet. To keep your details safe, you will be automatically signed out in 00:59 seconds`,
-      logoutButtonEnabled: true
+      logoutButtonEnabled: true,
     })
     this.notificationModalService.open(message);
   }
