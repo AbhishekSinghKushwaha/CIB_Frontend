@@ -4,22 +4,19 @@ import { SchedulePaymentService } from 'src/app/core/services/schedule-payment/s
 @Component({
   selector: 'app-reminder-selection',
   templateUrl: './reminder-selection.component.html',
-  styleUrls: ['./reminder-selection.component.scss']
+  styleUrls: ['./reminder-selection.component.scss'],
 })
 export class ReminderSelectionComponent implements OnInit {
-
-  @Input() data:any;
+  @Input() data: any;
   @Input() isChecked: boolean;
 
   constructor(
-    private readonly schedulePaymentService: SchedulePaymentService,
-  ) { }
+    private readonly schedulePaymentService: SchedulePaymentService
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   selectReminder(): void {
-    this.schedulePaymentService.ReminderSelection.next(this.data);
+    this.schedulePaymentService.selectedReminder.next(this.data);
   }
-
 }

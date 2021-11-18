@@ -1,22 +1,25 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PaymentFrequencyModel } from 'src/app/core/domain/payment-frequency.model';
-import { PaymentFrequencyService } from 'src/app/core/services/payment-frequency/payment-frequency.service';
+import {
+  FrequencySelectionModel,
+  ReminderSelectionModel,
+} from 'src/app/core/domain/scheduled-payment.model';
+import { SchedulePaymentService } from 'src/app/core/services/schedule-payment/schedule-payment.service';
 
 @Component({
   selector: 'app-payment-frequency-list-item',
   templateUrl: './payment-frequency-list-item.component.html',
-  styleUrls: ['./payment-frequency-list-item.component.scss']
+  styleUrls: ['./payment-frequency-list-item.component.scss'],
 })
 export class PaymentFrequencyListItemComponent implements OnInit {
   @Input() isChecked: boolean;
-  @Input() data: PaymentFrequencyModel;
-  constructor(private readonly paymentFrequencyService:PaymentFrequencyService) { }
+  @Input() data: FrequencySelectionModel;
+  constructor(
+    private readonly schedulePaymentService: SchedulePaymentService
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   select(): void {
-    this.paymentFrequencyService.select(this.data);
+    this.schedulePaymentService.selectFrequency(this.data);
   }
-
 }
