@@ -22,7 +22,7 @@
           class="d-flex flex-column"
           autocomplete="off"
         >
-          <mat-radio-group class="pt-4">
+          <mat-radio-group class="pt-4" formControlName="transactionType">
             <div class="row">
               <div class="col-md-6">
                 <mat-form-field
@@ -37,11 +37,7 @@
                     disabled
                     placeholder="Transfer Via RTGS"
                   />
-                  <mat-radio-button
-                    matSuffix
-                    value="2"
-                    formControlName="transactionType"
-                  ></mat-radio-button>
+                  <mat-radio-button matSuffix value="2"></mat-radio-button>
                 </mat-form-field>
               </div>
 
@@ -58,16 +54,13 @@
                     disabled
                     placeholder="Transfer Via EFT"
                   />
-                  <mat-radio-button
-                    matSuffix
-                    value="1"
-                    formControlName="transactionType"
-                  ></mat-radio-button>
+                  <mat-radio-button matSuffix value="1"></mat-radio-button>
                 </mat-form-field>
               </div>
             </div>
           </mat-radio-group>
           <div class="row">
+            <!-- Send From -->
             <div class="col-md-6">
               <app-transfer-from
                 [parentForm]="interBankTransferForm"
@@ -78,6 +71,7 @@
               >
               </app-transfer-from>
             </div>
+            <!-- Send To -->
             <div class="col-md-6 align-self-end">
               <app-transfer-to
                 [parentForm]="interBankTransferForm"
@@ -89,6 +83,7 @@
               >
               </app-transfer-to>
             </div>
+            <!-- Transfer Amount -->
             <div class="col-md-6">
               <app-transfer-amount
                 [parentForm]="interBankTransferForm"
@@ -99,32 +94,13 @@
               ></app-transfer-amount>
             </div>
             <div class="col-md-6">
-              <!-- <small>{{
-                (paymentDate && "Payment Scheduled") || "Schedule Payment"
-              }}</small>
-              <div class="row">
-                <div class="col-md-10">
-                  <div *ngIf="paymentDate">
-                    <p class="text-grey mb-0">
-                      {{ paymentDate.frequency }} on the
-                      {{ paymentDate.startDate | date: "d" }}
-                    </p>
-                    <p class="text-grey mb-0">
-                      Reminder {{ paymentDate.reminder }}
-                    </p>
-                  </div>
-                  <div *ngIf="!paymentDate">
-                    <p class="text-grey mb-0">Select a payment date</p>
-                  </div>
-                </div>
-                <div
-                  class="col-md-2 cursor-pointer"
-                  (click)="openPaymentDialog()"
-                >
-                  <mat-icon>date_range</mat-icon>
-                </div>
-              </div>
-              <mat-divider class="p-1"></mat-divider> -->
+              <app-schedule-payment-input
+                [parentForm]="interBankTransferForm"
+                label="Schedule Payment"
+                fieldName="schedulePayment"
+                placeholder="Select a payment date"
+                transactionType="interBankTransfer"
+              ></app-schedule-payment-input>
             </div>
             <div class="col-md-6">
               <app-input

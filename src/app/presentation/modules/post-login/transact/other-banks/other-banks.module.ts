@@ -12,6 +12,7 @@ import { CurrencySelectionConstants } from 'src/app/core/utils/constants/currenc
 import { SelectAccountConstants } from 'src/app/data/repository/select-account-mock-repository/select-account.constants';
 import { FavouritesModalModule } from 'src/app/presentation/shared/modals/favourites-modal/favourites-modal.module';
 import { CurrencySelectionModule } from 'src/app/presentation/shared/modals/currency-selection/currency-selection.module';
+import { SchedulePaymentModule } from 'src/app/presentation/shared/modals/schedule-payment/schedule-payment.module';
 
 @NgModule({
   declarations: [OtherBanksComponent],
@@ -24,6 +25,7 @@ import { CurrencySelectionModule } from 'src/app/presentation/shared/modals/curr
     FormElementsModule,
     SharedComponentsModule,
     SelectAccountModalModule,
+    SchedulePaymentModule,
     FavouritesModalModule,
     CurrencySelectionModule,
   ],
