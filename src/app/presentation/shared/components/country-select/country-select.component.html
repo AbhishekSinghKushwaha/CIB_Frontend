@@ -1,9 +1,19 @@
-<div class="row align-items-stretch mb-2 pb-2 cursor-pointer" (click)="openCountries()">
+<div
+  class="row align-items-stretch mb-2 pb-2 cursor-pointer"
+  (click)="openCountries()"
+>
   <div *ngIf="category === viewTypes?.FLAG_AND_NAME" class="col-md-2">
-    <img class="rounded-circle img-d" [src]="(selected | async)?.flag || countries[0].flag" width="60px" height="60px"
-      alt="Generic placeholder image" />
+    <img
+      class="rounded-circle img-d"
+      [src]="(selected | async)?.flag || countries[0].flag"
+      width="60px"
+      height="60px"
+      alt="Generic placeholder image"
+    />
   </div>
-  <div [ngClass]="category === viewTypes?.FLAG_AND_NAME ? 'col-md-9' : 'col-md-12'">
+  <div
+    [ngClass]="category === viewTypes?.FLAG_AND_NAME ? 'col-md-9' : 'col-md-12'"
+  >
     <div class="row user-list-item" style="height: 60px">
       <div class="col-md-10 d-flex">
         <div class="align-self-center">

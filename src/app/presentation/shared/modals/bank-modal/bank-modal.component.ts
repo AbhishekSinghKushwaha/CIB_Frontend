@@ -25,7 +25,6 @@ export class BankModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: BankModel[],
   ) {
     this.selected = this.bankService.default;
-    this.bankService.selected.subscribe((x) => this.selected = x);
   }
 
   ngOnInit(): void {
@@ -33,15 +32,15 @@ export class BankModalComponent implements OnInit {
   }
 
   subscribeEvents(): void {
-    this.countryService.openedStatus.subscribe(response => this.visibility = !response)
-  }
-
-  setCountry(country: CountryModel) {
-    this.country = country
+    this.countryService.openedStatus.subscribe(response => response ? this.visibility = false : this.visibility = true);
+    this.bankService.selected.subscribe((response) => this.selected = response);
   }
 
   close(): void {
     this.dialogRef.close(true);
   }
 
+  setCountry(country: CountryModel) {
+    this.country = country;
+  }
 }

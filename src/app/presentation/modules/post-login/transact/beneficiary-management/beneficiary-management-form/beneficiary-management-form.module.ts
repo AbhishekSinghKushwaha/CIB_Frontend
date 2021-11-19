@@ -22,6 +22,9 @@ import { BeneficiaryManagementService } from 'src/app/core/services/beneficiary-
     ReactiveFormsModule,
     TransactionTypeModalModule
   ],
+  exports: [
+    BeneficiaryManagementFormComponent
+  ],
   providers: [BeneficiaryManagementService],
 })
 export class BeneficiaryManagementFormModule { }

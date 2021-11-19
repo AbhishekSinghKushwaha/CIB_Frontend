@@ -17,7 +17,7 @@ export class CountryListItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  select():void{
+  select(): void {
     this.countryService.select(this.data);
   }
 

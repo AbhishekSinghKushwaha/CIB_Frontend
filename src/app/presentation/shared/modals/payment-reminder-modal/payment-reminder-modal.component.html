@@ -1,5 +1,11 @@
-<div class="row payment-reminder-modal-screen" *ngFor="let reminder of data; let isLast = last">
-  <app-payment-reminder-list-items [data]="reminder" [isChecked]="selected?.id===reminder?.id">
+<div
+  class="row payment-reminder-modal-screen"
+  *ngFor="let reminder of data; let isLast = last"
+>
+  <app-payment-reminder-list-items
+    [data]="reminder"
+    [isChecked]="selected?.value === reminder?.value"
+  >
   </app-payment-reminder-list-items>
   <mat-divider class="p-2" *ngIf="!isLast"></mat-divider>
 </div>

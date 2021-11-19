@@ -7,6 +7,7 @@ import { CountryModel } from 'src/app/core/domain/country.model';
 import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
 import { countrySettings } from 'src/app/core/utils/constants/country.settings';
 import { IntrabankService } from 'src/app/core/services/transfers/intrabank/intrabank.service';
+import { CountryService } from 'src/app/core/services/country/country.service';
 @Component({
   selector: 'app-new-recipient-modal',
   templateUrl: './new-recipient-modal.component.html',
@@ -24,6 +25,7 @@ export class NewRecipientModalComponent implements OnInit {
     readonly dialogRef: MatDialogRef<NewRecipientModalComponent>,
     private readonly newRecipientService: NewRecipientService,
     @Inject(MAT_DIALOG_DATA) public data: recipientModel,
+    private readonly countryService: CountryService,
     private intraBankTransferService: IntrabankService
   ) {
     this.selected = this.newRecipientService.default;
@@ -31,7 +33,12 @@ export class NewRecipientModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.initForm()
+    this.initForm();
+    this.subscribeEvents();
+  }
+
+  subscribeEvents(): void {
+    // this.countryService.selected.subscribe((x) => this.country = x);
   }
 
   initForm(): void {
@@ -45,7 +52,7 @@ export class NewRecipientModalComponent implements OnInit {
   }
 
   setCountry(country: CountryModel) {
-    this.selected = { ...this.selected, country }
+    this.selected = country;
   }
 
   submit(): void {
@@ -56,7 +63,7 @@ export class NewRecipientModalComponent implements OnInit {
     }
     this.intraBankTransferService.accountSearch(payload).subscribe(res => {
       if (res.status) {
-        this.selected = { accountNumber: this.newRecipientForm.controls.accountNumber.value, balance: 1000000, currency: res.data.currency, accountName: res.data.accountName};
+        this.selected = { accountNumber: this.newRecipientForm.controls.accountNumber.value, balance: 1000000, currency: res.data.currency, accountName: res.data.accountName };
         this.newRecipientService.set(this.selected)
         this.dialog.closeAll();
       } else {
