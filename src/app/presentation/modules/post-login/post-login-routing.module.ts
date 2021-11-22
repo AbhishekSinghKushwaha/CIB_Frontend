@@ -7,6 +7,10 @@ const routes: Routes = [
     path: '',
     component : PostLoginComponent,
     children:[
+      // {
+      //   path: '',
+      //   loadChildren: (): Promise<any> => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+      // },
       {
         path: '',
         redirectTo: 'dashboard',

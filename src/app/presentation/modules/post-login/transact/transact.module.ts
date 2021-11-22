@@ -6,10 +6,9 @@ import { MatStyleModule } from 'src/app/mat-style.module';
 import { TransactComponent } from './transact.component';
 import { TransactRoutingModule } from './transact-routing.module';
 
-
 @NgModule({
   declarations: [
-    TransactComponent,
+    TransactComponent
   ],
   imports: [
     CommonModule,

@@ -1,9 +1,15 @@
-<div class="row align-items-stretch mb-2 pb-2 cursor-pointer" (click)="select()">
+<div
+  class="row align-items-stretch mb-2 pb-2 cursor-pointer"
+  (click)="select()"
+>
   <div class="col-md-10">
-    <h4>{{data?.text}}</h4>
-    <small class="mb-1 text-grey">{{data?.subText}} </small><br>
+    <h4>{{ data?.frequency }}</h4>
+    <small class="mb-1 text-grey">{{ data?.description }} </small><br />
   </div>
   <div class="col-md-2">
-    <mat-icon color="primary" [svgIcon]="isChecked ? 'check_round' : 'radio_button_off'"></mat-icon>
+    <mat-icon
+      color="primary"
+      [svgIcon]="isChecked ? 'check_round' : 'radio_button_off'"
+    ></mat-icon>
   </div>
 </div>

@@ -1,19 +1,51 @@
-<div class="row align-items-stretch mb-2 pb-2 cursor-pointer" (click)="select()">
-    <div class="col-md-3">
-      <img class="rounded-circle img-fluid"
-        [src]="data.imageLink || 'https://images.pexels.com/photos/1317712/pexels-photo-1317712.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=750'"
-        alt="Generic placeholder image">
-    </div>
-    <div class="col-md-9">
-      <div class="row user-list-item">
-        <div class="col-md-10">
-          <h4>{{data.name}}</h4>
-          <small class="mb-1 text-grey">{{data.phoneNumber}} </small><br>
-          <small class="mb-1 text-grey">{{data.channel}} &#183; {{data.country}} </small>
-        </div>
-        <div class="col-md-2">
-          <mat-icon color="primary" [svgIcon]="isChecked ? 'check_round' : 'radio_button_off'"></mat-icon>
-        </div>
+<div class="row align-items-stretch align-items-center mb-2 pb-2">
+  <div
+    class="col-md-1 mt-4"
+    *ngIf="category === 'manage-beneficiary' && showCheckbox"
+    (click)="selectMultiple()"
+  >
+    <mat-icon
+      color="primary"
+      [svgIcon]="isChecked ? 'square-check' : 'square-check-off'"
+    ></mat-icon>
+  </div>
+  <div class="col-md-3">
+    <img
+      class="rounded-circle img-fluid"
+      [src]="
+        data.imageLink ||
+        'https://images.pexels.com/photos/1317712/pexels-photo-1317712.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=750'
+      "
+      alt="Generic placeholder image"
+    />
+  </div>
+  <div class="col-md-8">
+    <div class="row">
+      <div class="col-md-10">
+        <h4>{{ data.name }}</h4>
+        <small class="mb-1 text-grey">{{ data.phoneNumber }} </small><br />
+        <small class="mb-1 text-grey"
+          >{{ data.channel }} &#183; {{ data.country }}
+        </small>
+      </div>
+      <div
+        class="col-md-1"
+        *ngIf="category === 'manage-favourites'"
+        (click)="selectSingle()"
+      >
+        <mat-icon
+          color="primary"
+          [svgIcon]="isChecked ? 'check_round' : 'radio_button_off'"
+        ></mat-icon>
+      </div>
+      <div
+        class="col-md-1 mt-4 cursor-pointer"
+        *ngIf="category === 'manage-beneficiary'"
+        (click)="openBeneficiaryForm()"
+      >
+        <mat-icon color="primary" svgIcon="caret_right"></mat-icon>
       </div>
     </div>
+    <mat-divider class="mt-2 mb-2"></mat-divider>
   </div>
+</div>

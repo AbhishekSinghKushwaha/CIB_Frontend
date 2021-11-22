@@ -1,0 +1,12 @@
+{
+    "accounts": {
+        "getUserAccounts": "/cibaccountservice-v1/api/v1/Accounts/GetUserMappedAccounts"
+    },
+
+    "transfers": {
+        "sendOwnEquityAccount": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+        "intraBankTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+        "getTransferCharges": "/cibpaymentservice-v1/api/v1/Transfer/GetTransferCharge",
+        "getAccountDetails": "/cibpaymentservice-v1/api/v1/Transfer/NameEnquiry"
+    }
+}

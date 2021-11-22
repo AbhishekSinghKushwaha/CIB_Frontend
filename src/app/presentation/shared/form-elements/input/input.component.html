@@ -1,21 +1,16 @@
-<div class="row mb-3">
-  <mat-form-field class="col-md-12">
-    <mat-label [attr.for]="fieldName"> {{label}} </mat-label>
-    <input
-      matInput
-      type="text"
-      class="form-element"
-      [ngClass]="{
-        'has-error': formField?.invalid && formField?.dirty
-      }"
-      [id]="fieldName"
-      [name]="fieldName"
-      [value]="value"
-      [disabled]="isDisabled"
-      (input)="onChange($event)"
-      (blur)="touched()"
-      [placeholder]="placeholder"
-    />
-  </mat-form-field>
-  <app-field-errors [formField]="formField"> </app-field-errors>
-</div>
+<mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
+  <mat-label>{{ label }}</mat-label>
+  <input
+    matInput
+    type="text"
+    [id]="fieldName"
+    [name]="fieldName"
+    [value]="value"
+    [disabled]="isDisabled"
+    (input)="onChange($event)"
+    (blur)="touched()"
+    [placeholder]="placeholder"
+  />
+</mat-form-field>
+<app-field-errors [formField]="formField"></app-field-errors>
+

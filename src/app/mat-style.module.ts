@@ -23,6 +23,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatChipsModule } from '@angular/material/chips';
 import { CustomIconService } from './core/utils/custom-icon.service';
 import { MatRadioModule } from '@angular/material/radio';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 const MatImports = [
   MatSidenavModule,
@@ -48,7 +49,8 @@ const MatImports = [
   MatChipsModule,
   MatNativeDateModule,
   MatRadioModule,
-  MatDividerModule
+  MatDividerModule,
+  MatProgressSpinnerModule
 ];
 
 

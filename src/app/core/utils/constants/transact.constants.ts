@@ -37,6 +37,12 @@ export class TransactConstants {
           link: '/transact/pay-to-card',
         },
         {
+          leftIcon: 'build_circle',
+          text: 'Beneficiary management',
+          subtext: 'Manage your beneficiaries',
+          link: '/transact/beneficiary-management',
+        },
+        {
           leftIcon: 'account_balance',
           text: 'Pesalink',
           subtext: 'A local or international bank',

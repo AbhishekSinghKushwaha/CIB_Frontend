@@ -7,7 +7,6 @@ import { MatStyleModule } from 'src/app/mat-style.module';
 import { CountryModalModule } from '../country-modal/country-modal.module';
 
 
-
 @NgModule({
   declarations: [
     NewRecipientModalComponent
@@ -21,7 +20,7 @@ import { CountryModalModule } from '../country-modal/country-modal.module';
     ReactiveFormsModule,
     CountryModalModule
   ],
-  providers:[
+  providers: [
     NewRecipientService
   ]
 })

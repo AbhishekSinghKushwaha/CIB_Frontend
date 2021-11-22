@@ -4,4 +4,5 @@ export interface PreLoginModal {
   message: string;
   registerButtonEnabled?: boolean;
   logoutButtonEnabled?: boolean;
+  buttonText?: string;
 }

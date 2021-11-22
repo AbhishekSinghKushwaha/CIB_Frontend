@@ -1,20 +1,32 @@
 <mat-card class="notification-modal-screen p-0 mat-elevation-z0">
-  <div *ngIf="data.image" class="d-none d-sm-flex justify-content-center align-items-center">
+  <div
+    *ngIf="data.image"
+    class="d-none d-sm-flex justify-content-center align-items-center"
+  >
     <img [src]="data.image" width="228px" />
   </div>
   <mat-card-content class="p-4">
-    <h3 class="card-title">{{data.title}}</h3>
+    <h3 class="card-title">{{ data.title }}</h3>
     <p class="text-muted">
-      {{data.message}}
+      {{ data.message }}
     </p>
     <p *ngIf="data.registerButtonEnabled">
-      <app-register-button-footer (close)="close()"></app-register-button-footer>
+      <app-register-button-footer
+        (close)="close()"
+      ></app-register-button-footer>
     </p>
     <p *ngIf="data.logoutButtonEnabled">
       <app-logout-button-footer (close)="close()"></app-logout-button-footer>
     </p>
-    <p *ngIf="!(data.registerButtonEnabled||data.logoutButtonEnabled)">
-      <span  class=" mt-3 text text-danger cursor-pointer" (click)="close()">Try again</span>
+    <p
+      *ngIf="
+        !(data.registerButtonEnabled || data.logoutButtonEnabled) ||
+        data?.buttonText
+      "
+    >
+      <span class="mt-3 text text-danger cursor-pointer" (click)="close()">{{
+        data.buttonText
+      }}</span>
     </p>
-</mat-card-content>
+  </mat-card-content>
 </mat-card>

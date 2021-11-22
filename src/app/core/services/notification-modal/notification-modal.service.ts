@@ -8,8 +8,8 @@ export class NotificationModalService {
 
   constructor(private readonly dialog: MatDialog) { }
 
-  open(data: PreLoginModal): void {
-    this.dialog.open<NotificationModalComponent, PreLoginModal>(NotificationModalComponent, {
+  open(data: PreLoginModal) {
+    return this.dialog.open<NotificationModalComponent, PreLoginModal>(NotificationModalComponent, {
       disableClose: true,
       data
     });

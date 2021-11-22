@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
-import { SelectAccountModel } from '../../domain/select-account.model';
 import { SelectAccountSendToComponent } from 'src/app/presentation/shared/modals/select-account-send-to/select-account-send-to.component';
+import { FromAccount } from '../../domain/transfer.models';
 
 
 @Injectable({
@@ -10,18 +10,18 @@ import { SelectAccountSendToComponent } from 'src/app/presentation/shared/modals
 })
 export class SelectAccountSendtoService {
 
-  selectedAccountSendTo = new Subject<SelectAccountModel>();
+  selected = new Subject<FromAccount>();
 
   constructor(private readonly dialog: MatDialog) { }
 
-  open(data: SelectAccountModel[]): void {
-    this.dialog.open<SelectAccountSendToComponent, SelectAccountModel[]>(SelectAccountSendToComponent, {
+  open(data: FromAccount[]): void {
+    this.dialog.open<SelectAccountSendToComponent, FromAccount[]>(SelectAccountSendToComponent, {
       disableClose: true,
       data
     });
   }
 
-  selectAccountSendTo(accountSendTo: SelectAccountModel): void {
-    this.selectedAccountSendTo.next(accountSendTo)
+  selectAccountSendTo(accountSendTo: FromAccount): void {
+    this.selected.next(accountSendTo)
   }
 }

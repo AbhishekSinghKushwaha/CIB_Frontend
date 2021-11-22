@@ -1,16 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { BankSelectionModel } from 'src/app/core/domain/bank-selection.model';
+import { BankModel } from 'src/app/core/domain/bank.model';
 
 @Pipe({
   name: 'bankSearch'
 })
 export class BankSearchPipe implements PipeTransform {
-
-  transform(value: BankSelectionModel[], searchValue: string): any {
+  transform(value: BankModel[], searchValue: string): any {
     if (!searchValue) return value;
-    return value.filter((v) =>
-      v.name.toLowerCase().indexOf(searchValue.toLowerCase()) > -1)
-
+    return value.filter((v) => v.name.toLowerCase().indexOf(searchValue.toLowerCase()) > -1)
   }
-
 }

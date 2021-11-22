@@ -1,114 +1,142 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { CurrencySelectionModal } from 'src/app/core/domain/currency-selection.model';
-import { FavouriteBeneficiaryModel } from 'src/app/core/domain/favourites-beneficiary.model';
-import { PaymentreminderModel } from 'src/app/core/domain/payment-reminder.model';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { ScheduledPaymentModel } from 'src/app/core/domain/scheduled-payment.model';
-import { SelectAccountModel } from 'src/app/core/domain/select-account.model';
-import { CurrencySelectionService } from 'src/app/core/services/currency-selection/currency-selection.service';
-import { FavouritesModalService } from 'src/app/core/services/favourites-modal/favourites-modal.service';
-import { SelectAccountModalService } from 'src/app/core/services/select-account-modal/select-account-modal.service';
-import { CurrencySelectionConstants } from 'src/app/core/utils/constants/currency-selection.constants';
-import { ScheduledPaymentService } from './../../../../../core/services/scheduled-payment/scheduled-payment.service';
-
+import { AccountsService } from 'src/app/core/services/accounts/accounts.service';
+import { IntrabankService } from 'src/app/core/services/transfers/intrabank/intrabank.service';
+import { accountLimitValidator } from 'src/app/core/utils/validators/limits.validators';
+import { ConfirmPaymentComponent } from 'src/app/presentation/shared/modals/confirm-payment/confirm-payment.component';
+import { BaseTransactComponent } from '../base-transact.component';
 @Component({
   selector: 'app-other-equity-account',
   templateUrl: './other-equity-account.component.html',
-  styleUrls: ['./other-equity-account.component.scss']
+  styleUrls: ['./other-equity-account.component.scss'],
 })
-export class OtherEquityAccountComponent implements OnInit {
-  accountsMock: SelectAccountModel[] = [{
-    name: 'Loot',
-    balance: 999999999.99,
-    currency: 'KES',
-    type: 'Savings'
-  }, {
-    name: '0700000000',
-    balance: 30000,
-    currency: 'KES',
-    type: 'Mobile account'
-  }, {
-    name: '073019380132',
-    balance: 4430000,
-    currency: 'KES',
-    type: 'Current'
-  }];
-
-  favouritesMock: FavouriteBeneficiaryModel[] = [{
-    name: 'June Lowela',
-    phoneNumber: '+254 700 111 111',
-    channel: 'Safaricom',
-    country: 'Kenya'
-  }, {
-    name: 'Kevin Libega',
-    phoneNumber: '+256 700 019 019',
-    channel: 'MTN',
-    country: 'Uganda'
-  }];
-
-  sendFrom: SelectAccountModel;
-  sendTo: FavouriteBeneficiaryModel;
-  currency: CurrencySelectionModal;
-  equityForm: FormGroup;
+export class OtherEquityAccountComponent
+  extends BaseTransactComponent
+  implements OnInit
+{
+  intraBankTransferForm: FormGroup;
   paymentDate: ScheduledPaymentModel;
   schedulePaymentData: ScheduledPaymentModel;
+  loading: boolean = false;
+  get getForm() {
+    return this.intraBankTransferForm.controls;
+  }
 
   constructor(
-    private readonly selectAccountService: SelectAccountModalService,
-    private readonly favouritesModalService: FavouritesModalService,
-    private readonly currencySelectionService: CurrencySelectionService,
-    private readonly currencySelectionConstants: CurrencySelectionConstants,
-    private readonly scheduledPaymentService: ScheduledPaymentService,
-  ) { }
+    accountsService: AccountsService,
+    private fb: FormBuilder,
+    private dialog: MatDialog,
+    private intraBankTransferService: IntrabankService,
+    private router: Router
+  ) {
+    super(accountsService);
+  }
 
   ngOnInit(): void {
     this.initForm();
-    this.eventsSubscriptions();
-  }
-
-  private eventsSubscriptions(): void {
-    this.selectAccountService.selected.subscribe((response) => {
-      this.equityForm.controls.fromAccount.setValue(response.name);
-      this.sendFrom = response;
-    });
-    this.favouritesModalService.selected.subscribe((response) => {
-      this.equityForm.controls.recipient.setValue(response.name);
-      this.sendTo = response;
-    });
-    this.currencySelectionService.selected.subscribe(response => {
-      this.equityForm.controls.currency.setValue(response.text);
-      this.currency = response;
-      });
-    this.scheduledPaymentService.data.subscribe(response => this.paymentDate = response)
   }
 
   private initForm(): void {
-    this.equityForm = new FormGroup({
-      fromAccount: new FormControl(null, [Validators.required]),
-      recipient: new FormControl(null, [Validators.required]),
-      currency: new FormControl(null, [Validators.required]),
-      amount: new FormControl(null, [Validators.required]),
-      // recipient: new FormControl(null, [Validators.required]),
+    this.intraBankTransferForm = this.fb.group({
+      sendFrom: ['', [Validators.required]],
+      sendTo: ['', [Validators.required]],
+      amount: [{}, [Validators.required, accountLimitValidator]],
+      reason: [''],
+      fxReferenceId: ['', [Validators.required]],
+      schedulePayment: ['', [Validators.required]],
     });
   }
 
-  openAccounts(): void {
-    this.selectAccountService.open(this.accountsMock)
+  // Get Transfer charges, then confirm payment.
+  getTransferCharges() {
+    this.loading = true;
+    const payload = {
+      amount: this.getForm.amount.value.amount,
+      currency: this.getForm.amount.value.currency,
+      destinationAccount: this.getForm.sendTo.value.accountNumber,
+      sourceAccount: this.getForm.sendFrom.value.accountNumber,
+      transferType: 1, // For Own Equity Account
+    };
+    this.intraBankTransferService
+      .getTransferCharges(payload)
+      .subscribe((res) => {
+        if (res.status) {
+          this.loading = false;
+          this.confirmPayment(res.data);
+        } else {
+          this.loading = false;
+          // TODO:: Notify error
+        }
+      });
   }
 
-  openFavourites(): void {
-    this.favouritesModalService.open(this.favouritesMock)
+  // Confirm Payment and return the confirmation boolean before initiating payment.
+  confirmPayment(transferFee: number) {
+    if (this.intraBankTransferForm.valid) {
+      const paymentData = {
+        from: this.getForm.sendFrom.value,
+        to: this.getForm.sendTo.value,
+        amount: this.getForm.amount.value,
+        transactionType: 'Send to another Equity account',
+        paymentReason: this.getForm.reason.value,
+        fxReferenceId: this.getForm.fxReferenceId.value,
+        schedulePayment: this.getForm.schedulePayment.value,
+        transferFee,
+      };
+      const dialogRef = this.dialog.open(ConfirmPaymentComponent, {
+        data: paymentData,
+        disableClose: true,
+      });
+
+      dialogRef.afterClosed().subscribe((res) => {
+        if (res.confirmed) {
+          this.sendMoney();
+        }
+      });
+    }
   }
 
-  openCurrencies(): void {
-    this.currencySelectionService.open(this.currencySelectionConstants.CURRENCY_LISTINGS)
-  }
+  // Initiate fund transfer to another equity account
+  sendMoney() {
+    this.loading = true;
+    const payload = {
+      amount: this.getForm.amount.value.amount,
+      beneficiaryAccount: this.getForm.sendTo.value.accountNumber,
+      beneficiaryBank: '',
+      beneficiaryBankCode: '54', // TODO:: Needs some more analysis. Bank Code is required in the intrabank journey
+      beneficiaryCurrency: this.getForm.sendTo.value.currency,
+      beneficiaryName: this.getForm.sendTo.value.accountName,
+      currency: this.getForm.amount.value.currency,
+      fxReferenceId: this.getForm.fxReferenceId.value,
+      paymentReason: this.getForm.reason.value,
+      schedulePayment: {
+        frequency: this.getForm.schedulePayment.value.frequency.value,
+        reminderDay: this.getForm.schedulePayment.value.reminder.value,
+        startDate: this.getForm.schedulePayment.value.startDate.toISOString(),
+        endDate: this.getForm.schedulePayment.value.endDate.toISOString(),
+      },
+      sourceAccount: this.getForm.sendFrom.value.accountNumber,
+      transferType: 2, // Intrabank transfer
+    };
 
-  openPaymentDialog(): void {
-    this.scheduledPaymentService.open(this.schedulePaymentData);
-  }
-
-  submit() {
-
+    if (this.intraBankTransferForm.valid) {
+      this.intraBankTransferService
+        .sendToAnotherEquityAccount(payload)
+        .subscribe((res) => {
+          if (res.status) {
+            this.loading = false;
+            this.router.navigate([
+              '/transact/other-equity-account/submit-transfer',
+            ]);
+          } else {
+            this.loading = false;
+            alert(res.message);
+            // TODO:: Notify error
+          }
+        });
+    }
   }
 }
