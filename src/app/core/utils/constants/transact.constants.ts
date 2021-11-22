@@ -42,6 +42,12 @@ export class TransactConstants {
           subtext: 'Manage your beneficiaries',
           link: '/transact/beneficiary-management',
         },
+        {
+          leftIcon: 'account_balance',
+          text: 'Pesalink',
+          subtext: 'A local or international bank',
+          link: '/transact/pesa-link',
+        },
       ],
     },
     {

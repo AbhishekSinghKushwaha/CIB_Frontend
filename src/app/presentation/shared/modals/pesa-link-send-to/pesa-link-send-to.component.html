@@ -1,0 +1,54 @@
+<div class="favourites-modal-screen p-0 mat-elevation-z0" *ngIf="visibility">
+    <div class="row">
+      <div class="col-md-4">
+        <mat-icon (click)="close()">close</mat-icon>
+      </div>
+      <h4 class="strong-text col-md-8">Send to</h4>
+    </div>
+    <h3 class="strong-text pt-4 pb-3">Who are you sending money to?</h3>
+    <div class="row my-2">
+      <mat-form-field appearance="outline">
+        <input matInput [(ngModel)]="searchText">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+  
+    <div class="row mt-2 pb-3 cursor-pointer" (click)="openBankList()">
+      <div class="col-md-10">
+        <img src="./assets/images/icons/visual-support-icon-other-bank.svg" class="fav-icon" alt="" />
+        <span class="ps-3">Send to a bank account</span>
+      </div>
+      <div class="col-md-2">
+        <button type='button' mat-icon-button matSuffix>
+          <mat-icon svgIcon="caret_right"></mat-icon>
+        </button>
+      </div>
+  
+    </div>
+    <mat-divider class="p-2"></mat-divider>
+
+    <div class="row mt-2 pb-3 cursor-pointer" (click)="openPhoneLinked()">
+        <div class="col-md-10">
+          <img src="./assets/images/icons/Phone-linked account.svg" class="fav-icon" alt="" />
+          <span class="ps-3">Send to phone-linked account</span>
+        </div>
+        <div class="col-md-2">
+          <button type='button' mat-icon-button matSuffix>
+            <mat-icon svgIcon="caret_right"></mat-icon>
+          </button>
+        </div>
+    
+      </div>
+      <mat-divider class="p-2"></mat-divider>
+    <div class="d-flex justify-content-between bd-highlight my-2">
+      <h3 class="strong-text">Favourites</h3>
+      <div class="text-danger">Manage</div>
+    </div>
+    <app-beneficiary-list-item *ngFor="let account of (data  | favouriteSearch:searchText)" [data]="account"
+      [isChecked]="selected &&  selected.name===account.name">
+    </app-beneficiary-list-item>
+    <div class="row ms-3" *ngIf="(data | favouriteSearch:searchText).length <1">
+      0 favourites found
+    </div>
+  </div>
+  
