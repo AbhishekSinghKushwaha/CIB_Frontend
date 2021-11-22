@@ -78,6 +78,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'pesa-link',
+    loadChildren: (): Promise<any> =>
+      import('./pesa-link/pesa-link.module').then(
+        (m) => m.PesaLinkModule
+      ),
+  },
+  {
     path: '**',
     redirectTo: ''
   }
