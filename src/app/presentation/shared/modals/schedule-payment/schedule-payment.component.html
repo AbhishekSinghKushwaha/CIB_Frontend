@@ -6,41 +6,104 @@
     <h4 class="strong-text col-md-8">Schedule Payment</h4>
   </div>
   <h3 class="strong-text pt-4 mb-3">Please enter details</h3>
-  <form [formGroup]="paymentScheduleForm" (ngSubmit)="submit()" class="d-flex flex-column" autocomplete="off">
+  <form
+    [formGroup]="paymentScheduleForm"
+    (ngSubmit)="submit()"
+    class="d-flex flex-column"
+    autocomplete="off"
+  >
+    <!-- Frequency -->
     <div>
-      <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
+      <mat-form-field
+        appearance="standard"
+        style="width: 100%"
+        floatLabel="always"
+      >
         <mat-label class="strong-text">Frequency</mat-label>
-        <input matInput type="text" placeholder="Select the frequency" formControlName="frequency" [readonly]="true">
-        <button type='button' mat-icon-button matSuffix (click)="openFrequency()">
+        <input
+          matInput
+          type="text"
+          placeholder="Select the frequency"
+          formControlName="frequency"
+          [readonly]="true"
+        />
+        <button
+          type="button"
+          mat-icon-button
+          matSuffix
+          (click)="openFrequencyModal()"
+        >
           <mat-icon svgIcon="caret_down"></mat-icon>
         </button>
       </mat-form-field>
     </div>
 
     <div>
-      <mat-form-field class="d-flex flex-column">
+      <mat-form-field
+        class="d-flex flex-column"
+        appearance="standard"
+        floatLabel="always"
+      >
         <mat-label class="strong-text">First payment date</mat-label>
-        <input placeholder="Enter the start date" matInput class="pb-2" [matDatepicker]="startdatePicker"
-          formControlName="startDate">
-        <mat-datepicker-toggle matSuffix [for]="startdatePicker"></mat-datepicker-toggle>
+        <input
+          placeholder="Enter the start date"
+          matInput
+          [min]="minDate"
+          class="pb-2"
+          [matDatepicker]="startdatePicker"
+          formControlName="startDate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="startdatePicker"
+        ></mat-datepicker-toggle>
         <mat-datepicker #startdatePicker></mat-datepicker>
       </mat-form-field>
     </div>
 
     <div>
-      <small class="text-grey">Last payment date</small><br>
-      <mat-form-field class="d-flex flex-column">
-        <mat-label class="strong-text">Enter the end date</mat-label>
-        <input matInput class="pb-2" [matDatepicker]="enddatePicker" formControlName="endDate">
-        <mat-datepicker-toggle matSuffix [for]="enddatePicker"></mat-datepicker-toggle>
+      <mat-form-field
+        class="d-flex flex-column"
+        appearance="standard"
+        floatLabel="always"
+      >
+        <mat-label class="strong-text">Last payment date</mat-label>
+        <input
+          matInput
+          class="pb-2"
+          [min]="minDate"
+          [matDatepicker]="enddatePicker"
+          formControlName="endDate"
+          placeholder="Enter the end date"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="enddatePicker"
+        ></mat-datepicker-toggle>
         <mat-datepicker #enddatePicker></mat-datepicker>
       </mat-form-field>
     </div>
 
     <div>
-      <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
-        <input matInput type="text" placeholder="Select the reminder" formControlName="reminder" [readonly]="true">
-        <button type='button' mat-icon-button matSuffix (click)="openReminder()">
+      <mat-form-field
+        appearance="standard"
+        style="width: 100%"
+        floatLabel="always"
+      >
+        <mat-label class="strong-text">Remind me</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="Select the reminder"
+          formControlName="reminder"
+          [readonly]="true"
+        />
+        <button
+          type="button"
+          mat-icon-button
+          matSuffix
+          (click)="openReminderModal()"
+        >
           <mat-icon svgIcon="caret_down"></mat-icon>
         </button>
       </mat-form-field>
@@ -52,15 +115,21 @@
       </div>
       <div class="col-11">
         <small class="text-grey">
-          You will be notified on the date that your payment is scheduled to take place
+          You will be notified on the date that your payment is scheduled to
+          take place
         </small>
       </div>
     </div>
     <div class="pt-4">
-      <button [disabled]="paymentScheduleForm.invalid" color="primary" type="submit" mat-flat-button
-        class="px-5">Continue</button>
+      <button
+        [disabled]="paymentScheduleForm.invalid"
+        color="primary"
+        type="submit"
+        mat-flat-button
+        class="px-5"
+      >
+        Continue
+      </button>
     </div>
   </form>
-
-
 </div>
