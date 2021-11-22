@@ -2,6 +2,7 @@ import { BankModel } from '../../domain/bank.model';
 import { CountryModel } from '../../domain/country.model';
 import { FavouriteBeneficiaryModel } from './../../domain/favourites-beneficiary.model';
 import { SelectAccountModel } from './../../domain/select-account.model';
+import { BuyGoodsFavouriteModel } from './../../domain/buy-goods-favourites.model';
 
 const accounts: SelectAccountModel[] = [{
   name: 'Loot',
@@ -53,6 +54,19 @@ const countries: CountryModel[] = [
   { name: 'Tanzania', flag: 'https://flagcdn.com/h60/tz.png' }
 ]
 
+const buyGoodsFavourites: BuyGoodsFavouriteModel[] = [{
+  id: 1,
+  accountName: 'Diners Grill',
+  accountNumber: '444400',
+  imageLink: './assets/images/icons/visual-support-icon-till.svg'
+}, {
+  id: 2,
+  accountName: 'Afro Home Deliveries',
+  accountNumber: '988766',
+  imageLink: './assets/images/icons/visual-support-icon-till.svg'
+}];
+
+
 export const mockData = {
-  accounts, favourites, banks, countries
+  accounts, favourites, banks, countries, buyGoodsFavourites
 }

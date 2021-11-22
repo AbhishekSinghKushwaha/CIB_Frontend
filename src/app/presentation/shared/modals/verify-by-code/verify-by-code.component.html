@@ -1,0 +1,53 @@
+<div *ngIf="alertVisible" class="d-flex justify-content-right alert alert-light mat-elevation-z8">
+    <mat-icon class="text-success">check_circle</mat-icon>
+    <span style="padding-left: 10px;">{{ alertMessage }}</span>
+</div>
+<form [formGroup]="form" (submit)="submit()">
+    <div class="row mt-5">
+        <div class="col-5">
+            <div *ngIf="data === 'By email'">
+            <img src="assets/images/Illustrations/Illustrations_MagicLink.svg" alt="">  
+            </div>
+            <div *ngIf="data === 'By sms'">
+                <img src="assets/images/Illustrations/verification-code.svg" alt="">  
+            </div>
+        </div>
+
+        <div class="col-7">
+            <h3 class="strong-text m-2">We sent a verification code to</h3>
+            <div *ngIf="data === 'By email'">
+                <h3 class="strong-text m-2">v••••••••i@•••••••co.ke</h3>
+            </div>
+            <div *ngIf="data === 'By sms'">
+                <h3 class="strong-text m-2">+254 72 •••••••••• 13</h3>
+            </div>
+            <small class="text-grey m-2">Please enter the code below</small>
+
+            <div class="inputs d-flex flex-row mt-3">
+                <div class="form-group" *ngFor="let input of formInput">
+                    <input matInput class="m-2 text-center form-control rounded" type="text" formControlName="{{input}}" maxlength="1">
+                </div>
+            </div>
+        </div>
+    </div> 
+
+    <div class="row mt-4">
+        <div class="col-md-2">
+            <button mat-raised-button [disabled]="form.invalid" type="submit" color="primary" class="px-5" routerLink="/transact/buy-goods/submit-transfer">Verify</button>
+        </div>  
+        <div class="col-md-3">
+            <button mat-stroked-button [disabled]="timeLeft != 60" type="button" color="primary" (click)="startTimer()" class="px-5">{{timeLeft == 60 ? 'Resend code' : 'Resend in 0:'+timeLeft}}</button>
+        </div>
+        <div class="col-md-1">
+            <button mat-stroked-button type="button" color="primary" class="px-5" routerLink="/transact/buy-goods/otp-verification">Try another method</button>
+        </div>          
+    </div> 
+    <div class="row col-md-11 mt-3" *ngIf="data === 'By email'">
+        <div class="col-md-3">
+            <button mat-stroked-button type="button" color="primary" class="px-5">Open Outlook</button>
+        </div>
+        <div class="col-md-3">
+            <button mat-stroked-button type="button" color="primary" class="px-5">Open Gmail</button>
+        </div>
+    </div>   
+</form>

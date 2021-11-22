@@ -1,1 +1,76 @@
-<p>buy-goods works!</p>
+<div *ngIf="!loading">
+    <div class="mb-3">
+      <button mat-icon-button aria-label="Back" class="back-icon" routerLink="/transact">
+        <div class="strong-text">
+          <mat-icon svgIcon="caret_left"></mat-icon>
+          <span>Buy goods</span>
+        </div>
+      </button>
+    </div>
+    <h3 class="strong-text">Please enter the payment details</h3>
+    <form class="d-flex flex-column" autocomplete="off" [formGroup]="fundTransferBuyGoodsForm" (submit)="getTransferCharges()">
+      <div class="row pt-4">
+        <div class="col-md-6">
+          <app-transfer-from [parentForm]="fundTransferBuyGoodsForm" label="Pay from"
+            formControlName="sendFrom" fieldName="sendFrom"></app-transfer-from>
+        </div>
+        <div class="col-md-6  align-self-end">
+          <app-transfer-to [parentForm]="fundTransferBuyGoodsForm" fieldName="sendTo" formControlName="sendTo"
+            label="Pay to" placeholder="Select the merchant" transactionType="fundTransferBuyGoods"></app-transfer-to>
+        </div>
+        <div class="col-md-6">
+          <app-transfer-amount [parentForm]="fundTransferBuyGoodsForm" fieldName="amount" label="Amount"
+            placeholder="Enter an amount" formControlName="amount">
+          </app-transfer-amount>
+        </div>
+        <div class="col-md-6">
+            <small>{{paymentDate && 'Payment Scheduled' || 'Schedule Payment'}}</small>
+            <div class="row">
+              <div class="col-md-10">
+                <div *ngIf="paymentDate">
+                  <p class="text-grey mb-0">
+                    {{paymentDate.frequency}} on the {{paymentDate.startDate | date:'d' }}
+                  </p>
+                  <p class="text-grey mb-0">
+                    Reminder {{paymentDate.reminder }}
+                  </p>
+                </div>
+                <div *ngIf="!paymentDate">
+                  <p class="text-grey mb-0">
+                    Select a payment date
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-2 cursor-pointer" (click)="openPaymentDialog()">
+                <mat-icon class="schedule-icon">date_range</mat-icon>
+              </div>
+            </div>
+            <mat-divider class="p-1"></mat-divider>
+          </div>
+        <div class="col-md-6">
+          <app-input [parentForm]="fundTransferBuyGoodsForm" fieldName="fxReferenceId" label="FX Reference ID"
+            placeholder="Enter FX reference ID" formControlName="fxReferenceId"></app-input>
+        </div>
+        <div class="col-md-6">
+          <app-input [parentForm]="fundTransferBuyGoodsForm" fieldName="reason" label="Payment Reason"
+            formControlName="reason" placeholder="Optional"></app-input>
+        </div>
+      </div>
+      <div class="pt-3" *ngIf="aboveTransactionTypeLimit">
+        <h3 class="strong-text">Additional Information</h3>
+        <small class="text-grey">If you are sending more than 10,000,000 we need more information from you</small><br>
+  
+        <div class="col-md-6 upload-container mt-4" (click)="openSupportingDocuments()">
+          <div>Upload a document</div>
+          <mat-icon class="folder-icon">note_add</mat-icon>
+        </div>
+      </div>
+      <div class="mt-4">
+        <button mat-raised-button type="submit" [disabled]="fundTransferBuyGoodsForm.invalid" color="primary" class="px-5">Buy goods</button>
+      </div>
+    </form>
+  </div>
+  
+  <div class="row justify-content-md-center" *ngIf="loading">
+    <mat-spinner style="margin-top: 30vh;"></mat-spinner>
+  </div>
