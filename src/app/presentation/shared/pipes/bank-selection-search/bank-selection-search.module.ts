@@ -1,17 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// import { FavouriteSearchPipe } from '../favourite-search.pipe';
+import { BankSelectionSearchPipe } from './bank-selection-search.pipe';
+
 
 
 @NgModule({
   declarations: [
-    // FavouriteSearchPipe
+    BankSelectionSearchPipe
   ],
   imports: [
     CommonModule
   ],
   exports: [
-    // FavouriteSearchPipe
+    BankSelectionSearchPipe
   ]
 })
-export class FavouriteSearchModule { }
+export class BankSelectionSearchModule { }

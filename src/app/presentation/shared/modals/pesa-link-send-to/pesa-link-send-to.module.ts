@@ -6,7 +6,7 @@ import { MatStyleModule } from 'src/app/mat-style.module';
 import { PesaLinkSendToService } from 'src/app/core/services/pesa-link-send-to/pesa-link-send-to.service';
 import { RecepientBankModalModule } from '../recepient-bank-modal/recepient-bank-modal.module';
 import { BeneficiaryListItemModule } from '../../components/beneficiary-list-item/beneficiary-list-item.module';
-import { FavouriteSearchModule } from '../../pipes/favourite-search/favourite-search.module';
+import { FavouriteSearchPipeModule } from '../../pipes/favourites-search/favourite-search-pipe.module';
 import { PhoneLinkedModalModule } from '../phone-linked-modal/phone-linked-modal.module';
 
 @NgModule({
@@ -19,7 +19,7 @@ import { PhoneLinkedModalModule } from '../phone-linked-modal/phone-linked-modal
     FormsModule,
     RecepientBankModalModule,
     BeneficiaryListItemModule,
-    FavouriteSearchModule,
+    FavouriteSearchPipeModule,
     PhoneLinkedModalModule
   ],
   exports: [

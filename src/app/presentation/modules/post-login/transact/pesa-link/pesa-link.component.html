@@ -1,4 +1,124 @@
-<div>
+<div *ngIf="!loading">
+  <div class="mb-3">
+    <button
+      mat-icon-button
+      aria-label="Back"
+      class="back-icon"
+      routerLink="/transact"
+    >
+      <div class="strong-text">
+        <mat-icon svgIcon="caret_left"></mat-icon>
+        <span>Send via pesalink</span>
+      </div>
+    </button>
+  </div>
+  <h3 class="strong-text">Please enter the payment details</h3>
+  <form
+    class="d-flex flex-column"
+    autocomplete="off"
+    [formGroup]="ownEquityAccountTransferForm"
+    (submit)="getTransferCharges()"
+  >
+    <div class="row pt-4">
+      <!-- Transfer From -->
+      <div class="col-md-6">
+        <app-transfer-from
+          [parentForm]="ownEquityAccountTransferForm"
+          label="Send From"
+          placeholder="Send From"
+          formControlName="sendFrom"
+          fieldName="sendFrom"
+        ></app-transfer-from>
+      </div>
+      <!-- Transfer To -->
+      <div class="col-md-6 align-self-end">
+        <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
+          <mat-label>Send to</mat-label>
+          <input matInput type="text" placeholder="Select the recipient" [readonly]="true" formControlName="recipient">
+          <button type='button' mat-icon-button matSuffix (click)="openFavourites()">
+            <mat-icon svgIcon="caret_down"></mat-icon>
+          </button>
+          <small class="text-grey text-sm-start mt-2 mb-0">{{phoneLinked ? phoneLinked?.bank : recepientBankDetails?.bank}}</small>
+        </mat-form-field>
+      </div>
+      <!-- Transfer amount -->
+      <div class="col-md-6">
+        <app-transfer-amount
+          [parentForm]="ownEquityAccountTransferForm"
+          fieldName="amount"
+          label="Amount"
+          placeholder="Enter an amount"
+          formControlName="amount"
+        >
+        </app-transfer-amount>
+      </div>
+      <!-- Schedule Payment -->
+      <div class="col-md-6">
+        <app-schedule-payment-input
+          [parentForm]="ownEquityAccountTransferForm"
+          label="Schedule Payment"
+          fieldName="schedulePayment"
+          placeholder="Select a payment date"
+          transactionType="ownEquityAccount"
+        ></app-schedule-payment-input>
+      </div>
+      <!-- FX Reference ID -->
+      <div class="col-md-6">
+        <app-input
+          [parentForm]="ownEquityAccountTransferForm"
+          fieldName="fxReferenceId"
+          label="FX Reference ID"
+          placeholder="Enter FX reference ID"
+          formControlName="fxReferenceId"
+        ></app-input>
+      </div>
+      <!-- Payment Reason -->
+      <div class="col-md-6">
+        <app-input
+          [parentForm]="ownEquityAccountTransferForm"
+          fieldName="reason"
+          label="Payment Reason"
+          formControlName="reason"
+          placeholder="Optional"
+        ></app-input>
+      </div>
+    </div>
+    <!-- Additional Information Upload -->
+    <div class="pt-3" *ngIf="aboveTransactionTypeLimit">
+      <h3 class="strong-text">Additional Information</h3>
+      <small class="text-grey"
+        >If you are sending more than 10,000,000 we need more information from
+        you</small
+      ><br />
+
+      <div
+        class="col-md-6 upload-container mt-4"
+        (click)="openSupportingDocuments()"
+      >
+        <div>Upload a document</div>
+        <mat-icon class="folder-icon">note_add</mat-icon>
+      </div>
+    </div>
+    <!-- Submit Button -->
+    <div class="mt-4">
+      <button
+        mat-raised-button
+        type="submit"
+        [disabled]="ownEquityAccountTransferForm.invalid"
+        color="primary"
+        class="px-5"
+      >
+        Send money
+      </button>
+    </div>
+  </form>
+</div>
+
+<div class="row justify-content-md-center" *ngIf="loading">
+  <mat-spinner style="margin-top: 30vh"></mat-spinner>
+</div>
+
+<!-- <div>
     <div class="mb-3">
       <button mat-icon-button aria-label="Back" class="back-icon" routerLink="/transact/">
         <div class="strong-text">
@@ -100,4 +220,4 @@
         <button mat-raised-button color="primary" disabled class="px-5">Send money</button>
       </div>
     </form>
-  </div>
+  </div> -->

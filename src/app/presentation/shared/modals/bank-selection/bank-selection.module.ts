@@ -5,18 +5,18 @@ import { BankSelectionComponent } from './bank-selection.component';
 import { BankSelectionListItemComponent } from '../../components/bank-selection-list-item/bank-selection-list-item.component';
 import { MatStyleModule } from 'src/app/mat-style.module';
 import { BankSelectionService } from 'src/app/core/services/bank-selection/bank-selection.service';
-import { BankSearchPipe } from '../../pipes/bank-search/bank-search.pipe';
+import { BankSelectionSearchModule } from '../../pipes/bank-selection-search/bank-selection-search.module';
 
 @NgModule({
   declarations: [
     BankSelectionComponent,
-    BankSelectionListItemComponent,
-    BankSearchPipe
+    BankSelectionListItemComponent
   ],
   imports: [
     CommonModule,
     MatStyleModule,
-    FormsModule
+    FormsModule,
+    BankSelectionSearchModule
   ],
   exports: [
     BankSelectionComponent,
