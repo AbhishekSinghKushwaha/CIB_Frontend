@@ -9,7 +9,6 @@ import { CurrencySelectionConstants } from 'src/app/core/utils/constants/currenc
 import { SupportingDocumentsUploadService } from 'src/app/core/services/supporting-documents-upload/supporting-documents-upload.service';
 import { SelectAccountConstants } from 'src/app/data/repository/select-account-mock-repository/select-account.constants';
 import { ScheduledPaymentModel } from 'src/app/core/domain/scheduled-payment.model';
-import { ScheduledPaymentService } from './../../../../../core/services/scheduled-payment/scheduled-payment.service';
 import {
   FormBuilder,
   FormControl,
@@ -44,7 +43,6 @@ implements OnInit
   
 
   constructor(
-    private readonly scheduledPaymentService: ScheduledPaymentService,
     private readonly supportingDocumentsUploadService: SupportingDocumentsUploadService,
     private readonly fb: FormBuilder,
     accountService: AccountsService,
@@ -64,11 +62,6 @@ implements OnInit
   ngOnInit(): void {
     this.initForm();
     this.getUserAccounts();
-    this.eventsSubscriptions();
-  }
-
-  private eventsSubscriptions(): void {
-    this.scheduledPaymentService.data.subscribe(response => this.paymentDate = response);
   }
 
   initForm(): void {
@@ -81,10 +74,6 @@ implements OnInit
     });
   }
   
-
-  openPaymentDialog(): void {
-    this.scheduledPaymentService.open(this.schedulePaymentData);
-  }
 
   openSupportingDocuments(): void {
     this.supportingDocumentsUploadService.open();

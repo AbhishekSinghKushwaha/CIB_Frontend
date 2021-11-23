@@ -24,29 +24,14 @@
           </app-transfer-amount>
         </div>
         <div class="col-md-6">
-            <small>{{paymentDate && 'Payment Scheduled' || 'Schedule Payment'}}</small>
-            <div class="row">
-              <div class="col-md-10">
-                <div *ngIf="paymentDate">
-                  <p class="text-grey mb-0">
-                    {{paymentDate.frequency}} on the {{paymentDate.startDate | date:'d' }}
-                  </p>
-                  <p class="text-grey mb-0">
-                    Reminder {{paymentDate.reminder }}
-                  </p>
-                </div>
-                <div *ngIf="!paymentDate">
-                  <p class="text-grey mb-0">
-                    Select a payment date
-                  </p>
-                </div>
-              </div>
-              <div class="col-md-2 cursor-pointer" (click)="openPaymentDialog()">
-                <mat-icon class="schedule-icon">date_range</mat-icon>
-              </div>
-            </div>
-            <mat-divider class="p-1"></mat-divider>
-          </div>
+          <app-schedule-payment-input
+          [parentForm]="fundTransferBuyGoodsForm"
+          label="Schedule Payment"
+          fieldName="schedulePayment"
+          placeholder="Select a payment date"
+          transactionType="fundTransferBuyGoods"
+          ></app-schedule-payment-input>
+        </div>
         <div class="col-md-6">
           <app-input [parentForm]="fundTransferBuyGoodsForm" fieldName="fxReferenceId" label="FX Reference ID"
             placeholder="Enter FX reference ID" formControlName="fxReferenceId"></app-input>
