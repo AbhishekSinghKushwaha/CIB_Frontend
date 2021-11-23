@@ -1,4 +1,10 @@
-import { Component, Input, OnInit, Inject, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  Inject,
+  ViewEncapsulation,
+} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FavouriteBeneficiaryModel } from 'src/app/core/domain/favourites-beneficiary.model';
 import { BeneficiaryManagementModalService } from 'src/app/core/services/beneficiary-management-modal/beneficiary-management-modal.service';
@@ -20,23 +26,25 @@ export class FavouritesModalComponent implements OnInit {
 
   constructor(
     readonly dialogRef: MatDialogRef<SelectAccountModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: FavouriteBeneficiaryModel[],
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private readonly favouritesModalService: FavouritesModalService,
     private readonly newRecipientService: NewRecipientService,
-    private readonly beneficiaryManagementModalService: BeneficiaryManagementModalService) {
-
+    private readonly beneficiaryManagementModalService: BeneficiaryManagementModalService
+  ) {
     this.selected = favouritesModalService.default;
-    this.favouritesModalService.selected.subscribe((x) => this.selected = x);
+    this.favouritesModalService.selected.subscribe((x) => (this.selected = x));
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    console.log(this.data);
+  }
 
   close(): void {
     this.dialogRef.close(true);
   }
 
   openNewRecipient(): void {
-    const modal = this.newRecipientService.open(null);
+    const modal = this.newRecipientService.open(this.data.transactionType);
     this.visibility = false;
     modal.afterClosed().subscribe(() => {
       this.visibility = true;
@@ -48,7 +56,9 @@ export class FavouritesModalComponent implements OnInit {
   }
 
   openBeneficiaryModal(): void {
-    const modal = this.beneficiaryManagementModalService.open(mockData.favourites);
+    const modal = this.beneficiaryManagementModalService.open(
+      mockData.favourites
+    );
     this.visibility = false;
     modal.afterClosed().subscribe(() => {
       this.visibility = true;

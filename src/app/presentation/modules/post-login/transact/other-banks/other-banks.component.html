@@ -37,7 +37,7 @@
                     disabled
                     placeholder="Transfer Via RTGS"
                   />
-                  <mat-radio-button matSuffix value="2"></mat-radio-button>
+                  <mat-radio-button matSuffix value="6"></mat-radio-button>
                 </mat-form-field>
               </div>
 
@@ -54,7 +54,7 @@
                     disabled
                     placeholder="Transfer Via EFT"
                   />
-                  <mat-radio-button matSuffix value="1"></mat-radio-button>
+                  <mat-radio-button matSuffix value="4"></mat-radio-button>
                 </mat-form-field>
               </div>
             </div>
@@ -79,7 +79,7 @@
                 formControlName="sendTo"
                 fieldName="sendTo"
                 placeholder="Select the recipient"
-                transactionType="intraBankTransfer"
+                transactionType="interBankTransfer"
               >
               </app-transfer-to>
             </div>
@@ -93,6 +93,7 @@
                 formControlName="amount"
               ></app-transfer-amount>
             </div>
+            <!-- Schedule Payment -->
             <div class="col-md-6">
               <app-schedule-payment-input
                 [parentForm]="interBankTransferForm"
@@ -102,6 +103,7 @@
                 transactionType="interBankTransfer"
               ></app-schedule-payment-input>
             </div>
+            <!-- FX Reference ID -->
             <div class="col-md-6">
               <app-input
                 [parentForm]="interBankTransferForm"
@@ -111,6 +113,7 @@
                 placeholder="Enter FX reference ID"
               ></app-input>
             </div>
+            <!-- Payment Reason -->
             <div class="col-md-6">
               <app-input
                 [parentForm]="interBankTransferForm"

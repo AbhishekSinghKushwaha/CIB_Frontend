@@ -2,7 +2,7 @@
   appearance="standard"
   style="width: 100%"
   floatLabel="always"
-  (click)="openTransferToModal()"
+  (click)="openBankSelectionModal()"
 >
   <mat-label>{{ label }}</mat-label>
   <input
@@ -11,7 +11,7 @@
     class="strong-text"
     [id]="fieldName"
     [name]="fieldName"
-    [value]="value?.accountName || ''"
+    [value]="value?.bankName || ''"
     [disabled]="isDisabled"
     (input)="onChange($event)"
     (blur)="touched()"
@@ -20,11 +20,4 @@
   <button type="button" mat-icon-button matSuffix>
     <mat-icon svgIcon="caret_down"></mat-icon>
   </button>
-  <small *ngIf="value.bank" class="text-grey text-sm-start mt-2 mb-0">{{
-    value?.bank?.bankName
-  }}</small
-  ><br />
-  <small *ngIf="value.accountName" class="text-grey text-sm-start mt-2 mb-0">{{
-    value?.accountNumber
-  }}</small>
 </mat-form-field>

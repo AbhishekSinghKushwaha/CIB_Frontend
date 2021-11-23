@@ -14,7 +14,7 @@ import TRANSACT_TYPE from 'src/app/core/utils/constants/transaction-type.constan
 @Component({
   selector: 'app-beneficiary-management-form',
   templateUrl: './beneficiary-management-form.component.html',
-  styleUrls: ['./beneficiary-management-form.component.scss']
+  styleUrls: ['./beneficiary-management-form.component.scss'],
 })
 export class BeneficiaryManagementFormComponent implements OnInit {
   equityForm: FormGroup;
@@ -42,8 +42,8 @@ export class BeneficiaryManagementFormComponent implements OnInit {
     private readonly transactionTypeModalService: TransactionTypeModalService,
     private readonly beneficiaryManagementService: BeneficiaryManagementService,
     private readonly router: Router,
-    private readonly route: ActivatedRoute,
-  ) { }
+    private readonly route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.formMode();
@@ -64,7 +64,7 @@ export class BeneficiaryManagementFormComponent implements OnInit {
   private eventsSubscriptions(): void {
     this.bankService.selected.subscribe((response) => {
       this.bank = response;
-      this.equityForm.controls.bank.setValue(response.name);
+      this.equityForm.controls.bank.setValue(response.bankName);
     });
     this.transactionTypeModalService.selected.subscribe((response) => {
       this.equityForm.controls.transactionType.setValue(response.name);
@@ -76,8 +76,12 @@ export class BeneficiaryManagementFormComponent implements OnInit {
     this.equityForm = new FormGroup({
       name: new FormControl(this.editData?.name, [Validators.required]),
       bank: new FormControl(this.editData?.bank, [Validators.required]),
-      accountNumber: new FormControl(this.editData?.accountNumber, [Validators.required]),
-      transactionType: new FormControl(this.editData?.transactionType, [Validators.required]),
+      accountNumber: new FormControl(this.editData?.accountNumber, [
+        Validators.required,
+      ]),
+      transactionType: new FormControl(this.editData?.transactionType, [
+        Validators.required,
+      ]),
     });
   }
 
@@ -92,9 +96,12 @@ export class BeneficiaryManagementFormComponent implements OnInit {
         this.router.navigate(['/transact/beneficiary-management']);
       }
     } else {
-      this.modalMode ?
-        this.formSubmitted.next({ ...this.equityForm.value, id: this.id }) :
-        this.beneficiaryManagementService.updateForm(this.equityForm.value, this.id);
+      this.modalMode
+        ? this.formSubmitted.next({ ...this.equityForm.value, id: this.id })
+        : this.beneficiaryManagementService.updateForm(
+            this.equityForm.value,
+            this.id
+          );
     }
 
     this.equityForm.reset();

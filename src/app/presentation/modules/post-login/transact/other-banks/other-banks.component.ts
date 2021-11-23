@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { InterbankService } from 'src/app/core/services/transfers/interbank/interbank.service';
+import { accountLimitValidator } from 'src/app/core/utils/validators/limits.validators';
 import { ConfirmPaymentComponent } from 'src/app/presentation/shared/modals/confirm-payment/confirm-payment.component';
 
 @Component({
@@ -33,7 +34,7 @@ export class OtherBanksComponent implements OnInit {
       transactionType: ['', [Validators.required]],
       sendFrom: ['', [Validators.required]],
       sendTo: ['', Validators.required],
-      amount: [{}, [Validators.required]],
+      amount: [{}, [Validators.required, accountLimitValidator]],
       fxReferenceId: ['', [Validators.required]],
       schedulePayment: ['', [Validators.required]],
       reason: [''],
@@ -47,13 +48,15 @@ export class OtherBanksComponent implements OnInit {
       amount: this.getForm.amount.value.amount,
       currency: this.getForm.amount.value.currency,
       destinationAccount: this.getForm.sendTo.value.accountNumber,
+      destinationBankCode: this.getForm.sendTo.value.bankCode,
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
-      transferType: 1, // For Own Equity Account
+      transferType: Number(this.getForm.transactionType.value), // For Own Equity Account
     };
     this.interBankTransferService
       .getTransferCharges(payload)
       .subscribe((res) => {
         if (res.status) {
+          console.log(res);
           this.loading = false;
           this.confirmPayment(res.data);
         } else {

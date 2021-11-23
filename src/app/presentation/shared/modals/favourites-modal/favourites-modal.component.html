@@ -34,7 +34,7 @@
     </div>
   </div>
   <app-beneficiary-list-item
-    *ngFor="let account of data | favouriteSearch: searchText"
+    *ngFor="let account of data?.favourites | favouriteSearch: searchText"
     [data]="account"
     [isChecked]="selected && selected.name === account.name"
   >

@@ -5,6 +5,7 @@ import {
   FormGroup,
   NG_VALUE_ACCESSOR,
 } from '@angular/forms';
+import { recipientModel } from 'src/app/core/domain/recipient.model';
 import { FromAccount } from 'src/app/core/domain/transfer.models';
 import { AccountsService } from 'src/app/core/services/accounts/accounts.service';
 import { FavouritesModalService } from 'src/app/core/services/favourites-modal/favourites-modal.service';
@@ -27,7 +28,10 @@ import { BaseTransactComponent } from 'src/app/presentation/modules/post-login/t
     },
   ],
 })
-export class TransferToComponent extends BaseTransactComponent implements ControlValueAccessor, OnInit {
+export class TransferToComponent
+  extends BaseTransactComponent
+  implements ControlValueAccessor, OnInit
+{
   destinationAccounts: any[];
 
   @Input() transactionType: string;
@@ -44,7 +48,7 @@ export class TransferToComponent extends BaseTransactComponent implements Contro
   @Input()
   placeholder!: string;
 
-  public value!: FromAccount;
+  public value!: recipientModel;
 
   public changed!: (value: string) => void;
 
@@ -57,12 +61,12 @@ export class TransferToComponent extends BaseTransactComponent implements Contro
   }
   constructor(
     private readonly selectAccountSendtoService: SelectAccountSendtoService,
-    private readonly selectAccountConstants:SelectAccountConstants,
+    private readonly selectAccountConstants: SelectAccountConstants,
     private readonly favouritesModalService: FavouritesModalService,
     private readonly accountsService: AccountsService,
     private newRecipientService: NewRecipientService
   ) {
-    super(accountsService)
+    super(accountsService);
   }
 
   ngOnInit(): void {
@@ -91,16 +95,26 @@ export class TransferToComponent extends BaseTransactComponent implements Contro
     this.isDisabled = isDisabled;
   }
 
+  // TODO:: Get beneficiaries as per the transaction type
+
+  // Open transfer to modal based on transaction type
   openTransferToModal() {
     switch (this.transactionType) {
       case 'ownEquityAccount':
-        this.selectAccountSendtoService.open(
-          this.accounts
-        );
+        this.selectAccountSendtoService.open(this.accounts);
         break;
       case 'intraBankTransfer':
-      // Open Favourites
-        this.favouritesModalService.open(mockData.favourites)
+        // Open Favourites
+        this.favouritesModalService.open(
+          this.transactionType,
+          mockData.favourites
+        );
+        break;
+      case 'interBankTransfer':
+        this.favouritesModalService.open(
+          this.transactionType,
+          mockData.favourites
+        );
         break;
       default:
         break;
@@ -111,15 +125,20 @@ export class TransferToComponent extends BaseTransactComponent implements Contro
     switch (this.transactionType) {
       case 'ownEquityAccount':
         this.selectAccountSendtoService.selected.subscribe((x) => {
-          this.parentForm.controls.sendTo.setValue(x)
+          this.parentForm.controls.sendTo.setValue(x);
         });
         break;
       case 'intraBankTransfer':
         this.newRecipientService.data.subscribe((x) => {
           console.log(x);
-          this.parentForm.controls.sendTo.setValue(x)
-        }
-        );
+          this.parentForm.controls.sendTo.setValue(x);
+        });
+        break;
+      case 'interBankTransfer':
+        this.newRecipientService.data.subscribe((x) => {
+          console.log(x);
+          this.parentForm.controls.sendTo.setValue(x);
+        });
         break;
       default:
         break;
