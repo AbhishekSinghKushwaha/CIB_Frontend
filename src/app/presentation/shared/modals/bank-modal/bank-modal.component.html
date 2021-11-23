@@ -1,4 +1,4 @@
-<div class="p-0" *ngIf="visibility">
+<div class="p-0" [hidden]="!visibility">
   <div class="row">
     <div class="col-md-4">
       <mat-icon (click)="close()" class="cursor-pointer">close</mat-icon>
@@ -7,8 +7,8 @@
     <h3 class="strong-text pt-4 mb-4">Please select the beneficiary's bank</h3>
   </div>
   <app-country-select
-    (selected)="setCountry($event)"
     [category]="countrySelectType"
+    (selected)="setCountry($event)"
   ></app-country-select>
   <mat-divider class="m-2"></mat-divider>
   <div class="row">

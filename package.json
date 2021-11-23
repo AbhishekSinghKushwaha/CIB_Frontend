@@ -24,6 +24,7 @@
     "bootstrap": "^5.1.1",
     "jquery": "^3.6.0",
     "lodash": "^4.17.21",
+    "moment": "^2.29.1",
     "ngx-validators": "^5.4.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",

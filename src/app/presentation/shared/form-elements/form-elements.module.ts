@@ -8,8 +8,7 @@ import { TransferAmountComponent } from './transfer-amount/transfer-amount.compo
 import { TransferFromComponent } from './transfer-from/transfer-from.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TransferToComponent } from './transfer-to/transfer-to.component';
-
-
+import { SchedulePaymentInputComponent } from './schedule-payment-input/schedule-payment-input.component';
 
 @NgModule({
   declarations: [
@@ -18,20 +17,18 @@ import { TransferToComponent } from './transfer-to/transfer-to.component';
     FieldErrorsComponent,
     TransferAmountComponent,
     TransferFromComponent,
-    TransferToComponent
+    TransferToComponent,
+    SchedulePaymentInputComponent,
   ],
-  imports: [
-    CommonModule,
-    MatStyleModule,
-    FormsModule
-  ],
+  imports: [CommonModule, MatStyleModule, FormsModule],
   exports: [
     InputComponent,
     PasswordInputComponent,
     FieldErrorsComponent,
     TransferAmountComponent,
     TransferFromComponent,
-    TransferToComponent
-  ]
+    TransferToComponent,
+    SchedulePaymentInputComponent,
+  ],
 })
-export class FormElementsModule { }
+export class FormElementsModule {}

@@ -6,7 +6,6 @@ import { PreLoginModal } from '../../../../core/domain/pre-login-modal.model';
   selector: 'app-notification-modal',
   templateUrl: './notification-modal.component.html',
   styleUrls: ['./notification-modal.component.scss'],
-  encapsulation: ViewEncapsulation.None
 })
 export class NotificationModalComponent implements OnInit {
 

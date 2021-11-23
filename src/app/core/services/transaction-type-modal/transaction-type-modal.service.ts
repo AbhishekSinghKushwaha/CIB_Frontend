@@ -11,8 +11,8 @@ export class TransactionTypeModalService {
 
   constructor(private readonly dialog: MatDialog) { }
 
-  open(data: TransactionTypeModel[]): void {
-    this.dialog.open<TransactionTypeModalComponent, TransactionTypeModel[]>(TransactionTypeModalComponent, {
+  open(data: TransactionTypeModel[]) {
+    return this.dialog.open<TransactionTypeModalComponent, TransactionTypeModel[]>(TransactionTypeModalComponent, {
       maxWidth: '500px',
       disableClose: true,
       data
