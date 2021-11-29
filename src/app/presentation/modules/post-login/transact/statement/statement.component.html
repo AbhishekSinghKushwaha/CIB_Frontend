@@ -16,27 +16,62 @@
           </button>
         </div>
         <h3 class="strong-text">Please enter the payment details</h3>
+        <div class="row pt-3 col-md-5">
+          <div class="d-flex justify-content-between">
+            <button mat-stroked-button>1 Month</button>
+            <button mat-stroked-button>3 Months</button>
+            <button mat-stroked-button>6 Months</button>
+            <button mat-stroked-button>1 Year</button>
+          </div>
+        </div>
         <form
           [formGroup]="statementForm"
           (submit)="submit()"
           class="d-flex flex-column"
           autocomplete="off"
         >
-          <div class="row pt-3 col-md-5">
-            <div class="d-flex justify-content-between">
-              <button mat-stroked-button>1 Month</button>
-              <button mat-stroked-button>3 Months</button>
-              <button mat-stroked-button>6 Months</button>
-              <button mat-stroked-button>1 Year</button>
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field appearance="fill" style="width: 100%">
+                <mat-label>Input disabled</mat-label>
+                <input
+                  matInput
+                  placeholder="Select a date"
+                  [matDatepicker]="startDate"
+                  formControlName="startDate"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="startDate"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #startDate disabled="false"></mat-datepicker>
+              </mat-form-field>
             </div>
-            <!-- <div class="col-md-6">
+            <div class="col-md-6">
+              <mat-form-field appearance="fill" style="width: 100%">
+                <mat-label>End date</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="dp3"
+                  placeholder="Select a date"
+                  disabled
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="dp3"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+              </mat-form-field>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-6">
+              <app-schedule-payment-input
+                [parentForm]="statementForm"
+                label="Schedule Payment"
+                fieldName="schedulePayment"
+                placeholder="Select a date"
+                transactionType="statement"
+              ></app-schedule-payment-input>
             </div>
-            <div class="col-md-2">
-            </div>
-            <div class="col-md-2">
-            </div> -->
           </div>
         </form>
       </div>
