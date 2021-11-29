@@ -9,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class StatementComponent implements OnInit {
   loading: boolean;
   statementForm: FormGroup;
+  selectedButton: string;
 
   constructor(
     private readonly fb: FormBuilder,) { }
@@ -22,6 +23,10 @@ export class StatementComponent implements OnInit {
       endDate: ['', [Validators.required]],
       scheduleStatement: ['', [Validators.required]],
     });
+  }
+
+  setRange(button: string) {
+    this.selectedButton = button
   }
 
   submit() {

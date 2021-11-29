@@ -1,0 +1,10 @@
+button.mat-stroked-button {
+  border-color: grey !important;
+  background-color: var(--content-grey) !important;
+}
+
+.toggleColor {
+  border-color: var(--red) !important;
+  border: 1px solid !important;
+  font-weight: bold;
+}

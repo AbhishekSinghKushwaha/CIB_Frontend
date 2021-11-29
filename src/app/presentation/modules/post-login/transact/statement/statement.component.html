@@ -18,10 +18,38 @@
         <h3 class="strong-text">Please enter the payment details</h3>
         <div class="row pt-3 col-md-5">
           <div class="d-flex justify-content-between">
-            <button mat-stroked-button>1 Month</button>
-            <button mat-stroked-button>3 Months</button>
-            <button mat-stroked-button>6 Months</button>
-            <button mat-stroked-button>1 Year</button>
+            <button
+              mat-stroked-button
+              (click)="setRange('buttonA')"
+              [ngClass]="{ toggleColor: selectedButton === 'buttonA' }"
+              [color]="selectedButton === 'buttonA' && 'primary'"
+            >
+              1 Month
+            </button>
+            <button
+              mat-stroked-button
+              (click)="setRange('buttonB')"
+              [ngClass]="{ toggleColor: selectedButton === 'buttonB' }"
+              [color]="selectedButton === 'buttonB' && 'primary'"
+            >
+              3 Months
+            </button>
+            <button
+              mat-stroked-button
+              (click)="setRange('buttonC')"
+              [ngClass]="{ toggleColor: selectedButton === 'buttonC' }"
+              [color]="selectedButton === 'buttonC' && 'primary'"
+            >
+              6 Months
+            </button>
+            <button
+              mat-stroked-button
+              (click)="setRange('buttonB')"
+              [ngClass]="{ toggleColor: selectedButton === 'buttonD' }"
+              [color]="selectedButton === 'buttonD' && 'primary'"
+            >
+              1 Year
+            </button>
           </div>
         </div>
         <form
