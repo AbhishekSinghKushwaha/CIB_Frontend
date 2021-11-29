@@ -1,0 +1,49 @@
+<div class="row" *ngIf="!loading">
+  <div class="col-md-12">
+    <div class="row mb-4 justify-content-md-center">
+      <div class="col-md-11">
+        <div class="mb-3">
+          <button
+            mat-icon-button
+            aria-label="Back"
+            class="back-icon"
+            routerLink="/transact/"
+          >
+            <div class="strong-text">
+              <mat-icon svgIcon="caret_left"></mat-icon>
+              <span>View your statement</span>
+            </div>
+          </button>
+        </div>
+        <h3 class="strong-text">Please enter the payment details</h3>
+        <form
+          [formGroup]="statementForm"
+          (submit)="submit()"
+          class="d-flex flex-column"
+          autocomplete="off"
+        >
+          <div class="row pt-3 col-md-5">
+            <div class="d-flex justify-content-between">
+              <button mat-stroked-button>1 Month</button>
+              <button mat-stroked-button>3 Months</button>
+              <button mat-stroked-button>6 Months</button>
+              <button mat-stroked-button>1 Year</button>
+            </div>
+            <!-- <div class="col-md-6">
+            </div>
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-2">
+            </div> -->
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row justify-content-md-center" *ngIf="loading">
+  <mat-spinner style="margin-top: 30vh"></mat-spinner>
+</div>

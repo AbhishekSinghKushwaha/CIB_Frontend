@@ -1,0 +1,50 @@
+<mat-card class="account-card" (click)="openAccDetails(acc.accountNumber)">
+  <div class="pattern-holder"></div>
+  <div class="top-right">
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="accountMenu"
+      (click)="$event.stopPropagation()"
+    >
+      <mat-icon
+        svgIcon="three_dots_on_white"
+        class="menu-icon-button"
+      ></mat-icon>
+    </button>
+    <mat-menu #accountMenu="matMenu" xPosition="before" class="mat_menu_style">
+      <button mat-menu-item (click)="onTransactClicked()">
+        <mat-icon svgIcon="transact"></mat-icon>
+        <span i18n="@@loco:5f4e2c80f481f82a62140882">Transact</span>
+      </button>
+      <hr />
+      <button mat-menu-item (click)="onToggleBalanceClicked()">
+        <mat-icon
+          [svgIcon]="acc.balanceHidden ? 'show_balance' : 'hide_balance'"
+        ></mat-icon>
+        <span *ngIf="acc.balanceHidden" i18n="@@loco:5f0723ce06455b635664fe96"
+          >Show balance</span
+        >
+        <span *ngIf="!acc.balanceHidden" i18n="@@loco:5f0723b3252e02490e43a474"
+          >Hide balance</span
+        >
+      </button>
+      <hr />
+      <button mat-menu-item (click)="onUnlinkClicked()">
+        <mat-icon svgIcon="unlink_account"></mat-icon>
+        <span>Remove the account</span>
+      </button>
+    </mat-menu>
+  </div>
+  <div class="accounts text-white" style="position: absolute; top: 0">
+    <span class="accountName">{{
+      acc.nickName ? acc.nickName : (acc.accountName | titlecase)
+    }}</span>
+    <h3 class="text-left strong-text text-white" *ngIf="!acc.balanceHidden">
+      {{ acc.accountBalance | currency: acc.accountCurrency:"":"1.2-2" }}
+      {{ acc.accountCurrency }}
+    </h3>
+  </div>
+  <div class="bottom-right">
+    <p>{{ acc.accountNumber }} • {{ acc.accountType }}</p>
+  </div>
+</mat-card>
