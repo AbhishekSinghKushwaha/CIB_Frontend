@@ -30,7 +30,6 @@ export class CountrySelectComponent implements OnInit, OnDestroy {
     this.visibility = false;
     const modal = this.countryService.open(this.countries, this.category);
     this.subscriptions.push(modal.afterClosed().subscribe((data: CountryModel) => {
-      console.log('Inner', data);
       this.countryService.openedStatus.next(false);
       this.visibility = true;
       this.selected.next(data);
@@ -38,7 +37,6 @@ export class CountrySelectComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log('Destroyed');
     this.subscriptions.length && this.subscriptions.forEach(value => value && value.unsubscribe());
   }
 

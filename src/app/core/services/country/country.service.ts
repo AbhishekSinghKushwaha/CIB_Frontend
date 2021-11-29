@@ -16,6 +16,7 @@ export class CountryService {
   open(country: CountryModel[], category: string) {
     this.openedStatus.next(true);
     this.modal = this.dialog.open<CountryModalComponent, any>(CountryModalComponent, {
+      maxWidth: '500px',
       disableClose: true,
       data: { country, category },
     });
