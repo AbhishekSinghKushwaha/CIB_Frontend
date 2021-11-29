@@ -14,19 +14,15 @@
     <mat-menu #accountMenu="matMenu" xPosition="before" class="mat_menu_style">
       <button mat-menu-item (click)="onTransactClicked()">
         <mat-icon svgIcon="transact"></mat-icon>
-        <span i18n="@@loco:5f4e2c80f481f82a62140882">Transact</span>
+        <span>Transact</span>
       </button>
       <hr />
       <button mat-menu-item (click)="onToggleBalanceClicked()">
         <mat-icon
           [svgIcon]="acc.balanceHidden ? 'show_balance' : 'hide_balance'"
         ></mat-icon>
-        <span *ngIf="acc.balanceHidden" i18n="@@loco:5f0723ce06455b635664fe96"
-          >Show balance</span
-        >
-        <span *ngIf="!acc.balanceHidden" i18n="@@loco:5f0723b3252e02490e43a474"
-          >Hide balance</span
-        >
+        <span *ngIf="acc.balanceHidden">Show balance</span>
+        <span *ngIf="!acc.balanceHidden">Hide balance</span>
       </button>
       <hr />
       <button mat-menu-item (click)="onUnlinkClicked()">

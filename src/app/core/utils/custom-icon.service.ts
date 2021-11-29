@@ -7,7 +7,7 @@ export class CustomIconService {
   constructor(
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer
-  ) {}
+  ) { }
   init(): void {
     this.matIconRegistry.addSvgIcon(
       'account_information',
@@ -639,6 +639,31 @@ export class CustomIconService {
         'assets/images/icons/tick-icon.svg'
       )
     );
+    this.matIconRegistry.addSvgIcon(
+      'modulator',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/visual-support-icons-modulator.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'eyes_view',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/visual-support-icons-eyes-view.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'share',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/visual-support-icons-share.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'download_grey',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/visual-support-icon-download-with-grey-bg.svg'
+      )
+    );
+
   }
 }
 

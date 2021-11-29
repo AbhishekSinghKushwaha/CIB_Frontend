@@ -61,18 +61,19 @@
           <div class="row mt-4">
             <div class="col-md-6">
               <mat-form-field style="width: 100%">
-                <mat-label>Input disabled</mat-label>
+                <mat-label>Start date</mat-label>
                 <input
                   matInput
                   placeholder="Select a date"
-                  [matDatepicker]="startDate"
+                  [matDatepicker]="startD"
                   formControlName="startDate"
+                  #startDateRef
                 />
                 <mat-datepicker-toggle
                   matSuffix
-                  [for]="startDate"
+                  [for]="startD"
                 ></mat-datepicker-toggle>
-                <mat-datepicker #startDate disabled="false"></mat-datepicker>
+                <mat-datepicker #startD disabled="false"></mat-datepicker>
               </mat-form-field>
             </div>
             <div class="col-md-6">
@@ -80,15 +81,16 @@
                 <mat-label>End date</mat-label>
                 <input
                   matInput
-                  [matDatepicker]="dp3"
+                  [matDatepicker]="endD"
                   placeholder="Select a date"
                   formControlName="endDate"
+                  [min]="formatDate(startDateRef.value)"
                 />
                 <mat-datepicker-toggle
                   matSuffix
-                  [for]="dp3"
+                  [for]="endD"
                 ></mat-datepicker-toggle>
-                <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+                <mat-datepicker #endD disabled="false"></mat-datepicker>
               </mat-form-field>
             </div>
             <div class="col-md-6">
@@ -101,12 +103,136 @@
               ></app-schedule-payment-input>
             </div>
           </div>
+          <div class="row col-md-3 mt-4">
+            <button
+              mat-raised-button
+              [disabled]="statementForm.invalid"
+              color="primary"
+            >
+              View statement
+            </button>
+          </div>
         </form>
+
+        <div class="row mt-4">
+          <div class="row strong-text">
+            <mat-icon svgIcon="caret_left"></mat-icon>
+            <span>Transaction history</span>
+          </div>
+          <div class="row">
+            <div class="col-md-11">
+              <mat-form-field appearance="outline" style="width: 100%">
+                <input matInput [(ngModel)]="searchText" placeholder="Search" />
+                <mat-icon matSuffix>search</mat-icon>
+              </mat-form-field>
+            </div>
+            <div class="col-md-1">
+              <img
+                class="img-fluid"
+                style="width: 80px"
+                src="./assets/images/icons/visual-support-icons-modulator.svg"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <span class="fw-bold"> November 2020</span>
+          </div>
+          <div class="row mt-4">
+            <mat-card>
+              <mat-card-content class="p-1">
+                <div class="row">
+                  <div class="col-md-11">
+                    <p class="fw-bold">Reference:87272782623</p>
+                  </div>
+                  <div class="col-md-1 d-flex justify-content-end">
+                    <img
+                      [matMenuTriggerFor]="menu"
+                      class="img-fluid"
+                      style="width: 40px"
+                      src="./assets/images/icons/icon-button-three-dots-on-grey.svg"
+                    />
+                    <mat-menu #menu="matMenu">
+                      <button mat-menu-item (click)="loadPDF()">
+                        <mat-icon svgIcon="eyes_view"></mat-icon>
+                        <span>View details</span>
+                      </button>
+                      <button mat-menu-item>
+                        <mat-icon svgIcon="download"></mat-icon>
+                        <span>Download</span>
+                      </button>
+                    </mat-menu>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-9">
+                    <p class="fw-bold">
+                      PAYMENT TO YOUR OWN ACCOUNT 055******113
+                    </p>
+                  </div>
+                  <div class="col-md-3 d-flex justify-content-end">
+                    <p class="text-success">000,000.00</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-8">
+                    <small class="text-grey"> Thurs 14th Nov </small>
+                  </div>
+                  <div class="col-md-4 d-flex justify-content-end">
+                    <p class="text-success fw-bold">000,000.00 KES</p>
+                  </div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+          <div class="row mt-4">
+            <mat-card>
+              <mat-card-content class="p-1">
+                <div class="row">
+                  <div class="col-md-11">
+                    <p class="fw-bold">Reference:63287323223</p>
+                  </div>
+                  <div class="col-md-1 d-flex justify-content-end">
+                    <img
+                      [matMenuTriggerFor]="menu1"
+                      class="img-fluid"
+                      style="width: 40px"
+                      src="./assets/images/icons/icon-button-three-dots-on-grey.svg"
+                    />
+                    <mat-menu #menu1="matMenu" (click)="loadPDF()">
+                      <button mat-menu-item>
+                        <mat-icon svgIcon="eyes_view"></mat-icon>
+                        <span>View details</span>
+                      </button>
+                      <button mat-menu-item>
+                        <mat-icon svgIcon="download"></mat-icon>
+                        <span>Download</span>
+                      </button>
+                    </mat-menu>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-9">
+                    <p class="fw-bold">
+                      PAYMENT TO YOUR OWN ACCOUNT 055******113
+                    </p>
+                  </div>
+                  <div class="col-md-3 d-flex justify-content-end">
+                    <p class="text-success">000,000.00</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-8">
+                    <small class="text-grey"> Thurs 14th Nov </small>
+                  </div>
+                  <div class="col-md-4 d-flex justify-content-end">
+                    <p class="text-success fw-bold">000,000.00 KES</p>
+                  </div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
-<div class="row justify-content-md-center" *ngIf="loading">
-  <mat-spinner style="margin-top: 30vh"></mat-spinner>
 </div>
