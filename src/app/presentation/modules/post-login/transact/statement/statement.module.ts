@@ -6,6 +6,7 @@ import { StatementComponent } from './statement.component';
 import { MatStyleModule } from 'src/app/mat-style.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormElementsModule } from 'src/app/presentation/shared/form-elements/form-elements.module';
+import { SchedulePaymentModule } from 'src/app/presentation/shared/modals/schedule-payment/schedule-payment.module';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { FormElementsModule } from 'src/app/presentation/shared/form-elements/fo
     ReactiveFormsModule,
     StatementRoutingModule,
     FormElementsModule,
+    SchedulePaymentModule,
   ]
 })
 export class StatementModule { }

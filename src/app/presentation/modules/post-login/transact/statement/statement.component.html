@@ -30,9 +30,9 @@
           class="d-flex flex-column"
           autocomplete="off"
         >
-          <div class="row">
+          <div class="row mt-4">
             <div class="col-md-6">
-              <mat-form-field appearance="fill" style="width: 100%">
+              <mat-form-field style="width: 100%">
                 <mat-label>Input disabled</mat-label>
                 <input
                   matInput
@@ -48,13 +48,13 @@
               </mat-form-field>
             </div>
             <div class="col-md-6">
-              <mat-form-field appearance="fill" style="width: 100%">
+              <mat-form-field style="width: 100%">
                 <mat-label>End date</mat-label>
                 <input
                   matInput
                   [matDatepicker]="dp3"
                   placeholder="Select a date"
-                  disabled
+                  formControlName="endDate"
                 />
                 <mat-datepicker-toggle
                   matSuffix
@@ -66,8 +66,8 @@
             <div class="col-md-6">
               <app-schedule-payment-input
                 [parentForm]="statementForm"
-                label="Schedule Payment"
-                fieldName="schedulePayment"
+                label="Schedule statement"
+                fieldName="scheduleStatement"
                 placeholder="Select a date"
                 transactionType="statement"
               ></app-schedule-payment-input>

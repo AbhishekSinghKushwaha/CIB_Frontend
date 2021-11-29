@@ -20,7 +20,7 @@ export class StatementComponent implements OnInit {
     this.statementForm = this.fb.group({
       startDate: ['', [Validators.required]],
       endDate: ['', [Validators.required]],
-      schedulePayment: ['', [Validators.required]],
+      scheduleStatement: ['', [Validators.required]],
     });
   }
 
