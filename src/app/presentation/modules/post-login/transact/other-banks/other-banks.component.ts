@@ -48,10 +48,12 @@ export class OtherBanksComponent implements OnInit {
       amount: this.getForm.amount.value.amount,
       currency: this.getForm.amount.value.currency,
       destinationAccount: this.getForm.sendTo.value.accountNumber,
-      destinationBankCode: this.getForm.sendTo.value.bankCode,
+      destinationBankCode: this.getForm.sendTo.value.bank.bankCode,
+      countryCode: 'KE', //TODO:: Default have it as kenya, then change to pick the user's country
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
       transferType: Number(this.getForm.transactionType.value), // For Own Equity Account
     };
+    console.log(payload);
     this.interBankTransferService
       .getTransferCharges(payload)
       .subscribe((res) => {
@@ -73,7 +75,9 @@ export class OtherBanksComponent implements OnInit {
         from: this.getForm.sendFrom.value,
         to: this.getForm.sendTo.value,
         amount: this.getForm.amount.value,
-        transactionType: 'Send to your own Equity account',
+        transactionType: `Send to another bank via ${
+          this.getForm.transactionType.value === '4' ? 'EFT' : 'RTGS'
+        }`,
         paymentReason: this.getForm.reason.value,
         fxReferenceId: this.getForm.fxReferenceId.value,
         schedulePayment: this.getForm.schedulePayment.value,
@@ -100,22 +104,23 @@ export class OtherBanksComponent implements OnInit {
     const payload = {
       amount: this.getForm.amount.value.amount,
       beneficiaryAccount: this.getForm.sendTo.value.accountNumber,
-      beneficiaryBank: '',
-      beneficiaryBankCode: '',
-      beneficiaryCurrency: this.getForm.sendTo.value.currency,
+      beneficiaryBank: this.getForm.sendTo.value.bank.bankName,
+      beneficiaryBankCode: this.getForm.sendTo.value.bank.bankCode,
+      beneficiaryCurrency: this.getForm.amount.value.currency,
       beneficiaryName: this.getForm.sendTo.value.accountName,
       currency: this.getForm.amount.value.currency,
       fxReferenceId: this.getForm.fxReferenceId.value,
       paymentReason: this.getForm.reason.value,
       schedulePayment: {
         frequency: this.getForm.schedulePayment.value.frequency.value,
-        reminderDay: this.getForm.schedulePayment.value.reminder.value,
+        reminderDay: this.getForm.schedulePayment.value.reminderDay.value,
         startDate: this.getForm.schedulePayment.value.startDate.toISOString(),
         endDate: this.getForm.schedulePayment.value.endDate.toISOString(),
       },
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
-      transferType: 1, // Own Equity Account
+      transferType: Number(this.getForm.transactionType.value), // RTGS or EFT
     };
+    console.log(payload);
     if (this.interBankTransferForm.valid) {
       this.interBankTransferService
         .sendToOtherBanks(payload)

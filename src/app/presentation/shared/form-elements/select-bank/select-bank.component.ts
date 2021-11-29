@@ -3,6 +3,7 @@ import { FormGroup, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BankModel } from 'src/app/core/domain/bank.model';
 import { FromAccount } from 'src/app/core/domain/transfer.models';
 import { BankService } from 'src/app/core/services/bank/bank.service';
+import { SharedDataService } from 'src/app/core/services/shared-data/shared-data.service';
 import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
 
 @Component({
@@ -18,7 +19,7 @@ import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
   ],
 })
 export class SelectBankComponent implements OnInit {
-  // banks: Banks[];
+  banks: BankModel[];
 
   @Input()
   parentForm!: FormGroup;
@@ -43,13 +44,19 @@ export class SelectBankComponent implements OnInit {
   get formField(): FormControl {
     return this.parentForm?.get(this.fieldName) as FormControl;
   }
-  constructor(private readonly selectBankService: BankService) {}
+  constructor(
+    private readonly selectBankService: BankService,
+    private sharedDataService: SharedDataService
+  ) {}
 
   ngOnInit(): void {
     this.eventsSubscriptions();
   }
 
   private eventsSubscriptions(): void {
+    this.sharedDataService.banks.subscribe((res) => {
+      this.banks = res;
+    });
     this.selectBankService.selected.subscribe((response) => {
       this.parentForm.controls.bank.setValue(response);
     });
@@ -77,6 +84,6 @@ export class SelectBankComponent implements OnInit {
   }
 
   openBankSelectionModal() {
-    this.selectBankService.open(mockData.banks);
+    this.selectBankService.open(this.banks);
   }
 }

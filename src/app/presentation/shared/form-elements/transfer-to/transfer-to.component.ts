@@ -11,6 +11,7 @@ import { AccountsService } from 'src/app/core/services/accounts/accounts.service
 import { FavouritesModalService } from 'src/app/core/services/favourites-modal/favourites-modal.service';
 import { NewRecipientService } from 'src/app/core/services/new-recipient/new-recipient.service';
 import { SelectAccountSendtoService } from 'src/app/core/services/select-account-sendto/select-account-sendto.service';
+import { SharedDataService } from 'src/app/core/services/shared-data/shared-data.service';
 import { CurrencySelectionConstants } from 'src/app/core/utils/constants/currency-selection.constants';
 import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
 import { SelectAccountConstants } from 'src/app/data/repository/select-account-mock-repository/select-account.constants';
@@ -28,10 +29,7 @@ import { BaseTransactComponent } from 'src/app/presentation/modules/post-login/t
     },
   ],
 })
-export class TransferToComponent
-  extends BaseTransactComponent
-  implements ControlValueAccessor, OnInit
-{
+export class TransferToComponent implements ControlValueAccessor, OnInit {
   destinationAccounts: any[];
 
   @Input() transactionType: string;
@@ -63,14 +61,11 @@ export class TransferToComponent
     private readonly selectAccountSendtoService: SelectAccountSendtoService,
     private readonly selectAccountConstants: SelectAccountConstants,
     private readonly favouritesModalService: FavouritesModalService,
-    private readonly accountsService: AccountsService,
+    private readonly sharedDataService: SharedDataService,
     private newRecipientService: NewRecipientService
-  ) {
-    super(accountsService);
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.getUserAccounts();
     this.listenToDataStreams();
   }
 
@@ -101,7 +96,13 @@ export class TransferToComponent
   openTransferToModal() {
     switch (this.transactionType) {
       case 'ownEquityAccount':
-        this.selectAccountSendtoService.open(this.accounts);
+        let accounts = this.destinationAccounts.filter((el) => {
+          return (
+            el.accountNumber !==
+            this.parentForm.controls.sendFrom.value.accountNumber
+          );
+        });
+        this.selectAccountSendtoService.open(accounts);
         break;
       case 'intraBankTransfer':
         // Open Favourites
@@ -124,6 +125,9 @@ export class TransferToComponent
   listenToDataStreams() {
     switch (this.transactionType) {
       case 'ownEquityAccount':
+        this.sharedDataService.userAccounts.subscribe((res) => {
+          this.destinationAccounts = res;
+        });
         this.selectAccountSendtoService.selected.subscribe((x) => {
           this.parentForm.controls.sendTo.setValue(x);
         });

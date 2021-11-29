@@ -114,7 +114,7 @@ export class OtherEquityAccountComponent
       paymentReason: this.getForm.reason.value,
       schedulePayment: {
         frequency: this.getForm.schedulePayment.value.frequency.value,
-        reminderDay: this.getForm.schedulePayment.value.reminder.value,
+        reminderDay: this.getForm.schedulePayment.value.reminderDay.value,
         startDate: this.getForm.schedulePayment.value.startDate.toISOString(),
         endDate: this.getForm.schedulePayment.value.endDate.toISOString(),
       },
