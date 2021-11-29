@@ -44,7 +44,7 @@
             </button>
             <button
               mat-stroked-button
-              (click)="setRange('buttonB')"
+              (click)="setRange('buttonD')"
               [ngClass]="{ toggleColor: selectedButton === 'buttonD' }"
               [color]="selectedButton === 'buttonD' && 'primary'"
             >
@@ -152,7 +152,7 @@
                       src="./assets/images/icons/icon-button-three-dots-on-grey.svg"
                     />
                     <mat-menu #menu="matMenu">
-                      <button mat-menu-item (click)="loadPDF()">
+                      <button mat-menu-item (click)="loadPDFDetail()">
                         <mat-icon svgIcon="eyes_view"></mat-icon>
                         <span>View details</span>
                       </button>
@@ -198,7 +198,7 @@
                       style="width: 40px"
                       src="./assets/images/icons/icon-button-three-dots-on-grey.svg"
                     />
-                    <mat-menu #menu1="matMenu" (click)="loadPDF()">
+                    <mat-menu #menu1="matMenu" (click)="loadPDFDetail()">
                       <button mat-menu-item>
                         <mat-icon svgIcon="eyes_view"></mat-icon>
                         <span>View details</span>

@@ -1,6 +1,7 @@
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { StatementService } from 'src/app/core/services/statement/statement.service';
+import { StatementDetailService } from 'src/app/core/services/statement/statement-detail/statement-detail.service';
+import { StatementListService } from 'src/app/core/services/statement/statement-list/statement-list.service';
 
 @Component({
   selector: 'app-statement',
@@ -13,7 +14,8 @@ export class StatementComponent implements OnInit {
   selectedButton: string;
   searchText: string;
 
-  constructor(private readonly statementService: StatementService) { }
+  constructor(private readonly statementDetailService: StatementDetailService,
+    private readonly statementListService: StatementListService) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -35,9 +37,15 @@ export class StatementComponent implements OnInit {
     this.selectedButton = button
   }
 
-  loadPDF() {
-    this.statementService.open()
+  loadPDFDetail() {
+    this.statementDetailService.open()
   }
 
-  submit() { }
+  loadPDFList() {
+    this.statementListService.open()
+  }
+
+  submit() {
+    this.loadPDFList()
+  }
 }
