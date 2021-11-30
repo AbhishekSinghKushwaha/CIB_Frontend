@@ -1,0 +1,23 @@
+<div>
+    <div class="mb-3">
+      <button mat-icon-button aria-label="Back" class="back-icon" routerLink="/transact/buy-goods">
+        <div class="strong-text">
+          <mat-icon svgIcon="caret_left"></mat-icon>
+          <span>Verify</span>
+        </div>
+      </button>
+    </div>
+    <form class="d-flex flex-column" autocomplete="off" [formGroup]="otpVerificationForm" (submit)="submit()">
+
+      <app-otp-verification-select></app-otp-verification-select>
+
+      <div class="row col-md-10 mt-4">
+          <div class="col-md-3">
+              <button mat-raised-button [disabled]="otpVerificationForm.invalid" color="primary" class="px-5">Continue</button>
+          </div>
+          <div class="col-md-3">
+              <button mat-stroked-button type="button" color="primary" class="px-5" (click)="contactDetails()">I’ve changed my contact details</button>
+          </div>
+      </div>
+    </form>
+</div>
