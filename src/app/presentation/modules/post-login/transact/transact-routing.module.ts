@@ -85,6 +85,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'statement',
+    loadChildren: (): Promise<any> =>
+      import('./statement/statement.module').then(
+        (m) => m.StatementModule
+      ),
+  },
+  {
     path: '**',
     redirectTo: ''
   }
