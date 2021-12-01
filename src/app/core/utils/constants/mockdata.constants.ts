@@ -3,6 +3,7 @@ import { CountryModel } from '../../domain/country.model';
 import { StatementListModel } from '../../domain/statement-list.model';
 import { FavouriteBeneficiaryModel } from './../../domain/favourites-beneficiary.model';
 import { SelectAccountModel } from './../../domain/select-account.model';
+import { BuyGoodsFavouriteModel } from './../../domain/buy-goods-favourites.model';
 
 const accounts: SelectAccountModel[] = [{
   name: 'Loot',
@@ -105,6 +106,19 @@ const statementList: StatementListModel[] = [{ transactionDate: '1/17/2021', val
 { transactionDate: '5/24/2021', valueDate: '10/23/2021', narrative: 'Destruction of Left Anterior Tibial Artery, Percutaneous Approach', transactionReference: '3133341146', debit: 5340, credit: 9099, runningBalance: 7138 },
 { transactionDate: '5/25/2021', valueDate: '12/23/2020', narrative: 'Drainage of Right Brachial Artery, Percutaneous Endoscopic Approach', transactionReference: '0358611474', debit: 1775, credit: 9461, runningBalance: 5836 }];
 
+const buyGoodsFavourites: BuyGoodsFavouriteModel[] = [{
+  id: 1,
+  accountName: 'Diners Grill',
+  accountNumber: '444400',
+  imageLink: './assets/images/icons/visual-support-icon-till.svg'
+}, {
+  id: 2,
+  accountName: 'Afro Home Deliveries',
+  accountNumber: '988766',
+  imageLink: './assets/images/icons/visual-support-icon-till.svg'
+}];
+
+
 export const mockData = {
-  accounts, favourites, banks, countries, statementList
+  accounts, favourites, banks, countries, statementList, buyGoodsFavourites
 }
