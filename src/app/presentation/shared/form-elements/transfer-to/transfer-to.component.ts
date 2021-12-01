@@ -12,10 +12,12 @@ import { FavouritesModalService } from 'src/app/core/services/favourites-modal/f
 import { NewRecipientService } from 'src/app/core/services/new-recipient/new-recipient.service';
 import { SelectAccountSendtoService } from 'src/app/core/services/select-account-sendto/select-account-sendto.service';
 import { SharedDataService } from 'src/app/core/services/shared-data/shared-data.service';
+import { BuyGoodsPayToService } from 'src/app/core/services/buy-goods-pay-to/buy-goods-pay-to.service';
 import { CurrencySelectionConstants } from 'src/app/core/utils/constants/currency-selection.constants';
 import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
 import { SelectAccountConstants } from 'src/app/data/repository/select-account-mock-repository/select-account.constants';
 import { BaseTransactComponent } from 'src/app/presentation/modules/post-login/transact/base-transact.component';
+import { MerchantTillNumberService } from 'src/app/core/services/merchant-till-number/merchant-till-number.service';
 
 @Component({
   selector: 'app-transfer-to',
@@ -62,7 +64,10 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
     private readonly selectAccountConstants: SelectAccountConstants,
     private readonly favouritesModalService: FavouritesModalService,
     private readonly sharedDataService: SharedDataService,
-    private newRecipientService: NewRecipientService
+    private readonly accountsService: AccountsService,
+    private newRecipientService: NewRecipientService,
+    private readonly buyGoodsPayToService: BuyGoodsPayToService,
+    private readonly merchantTillNumberService: MerchantTillNumberService
   ) {}
 
   ngOnInit(): void {
@@ -117,6 +122,9 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
           mockData.favourites
         );
         break;
+      case 'fundTransferBuyGoods':
+        this.buyGoodsPayToService.open(mockData.buyGoodsFavourites);
+        break;
       default:
         break;
     }
@@ -140,6 +148,16 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
         break;
       case 'interBankTransfer':
         this.newRecipientService.data.subscribe((x) => {
+          console.log(x);
+          this.parentForm.controls.sendTo.setValue(x);
+        });
+        break;
+      case 'fundTransferBuyGoods':
+        this.buyGoodsPayToService.selected.subscribe((x) => {
+          console.log(x);
+          this.parentForm.controls.sendTo.setValue(x);
+        });
+        this.merchantTillNumberService.data.subscribe((x) => {
           console.log(x);
           this.parentForm.controls.sendTo.setValue(x);
         });
