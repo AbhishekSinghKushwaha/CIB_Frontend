@@ -122,9 +122,8 @@ export class OtherBanksComponent implements OnInit {
     };
     console.log(payload);
     if (this.interBankTransferForm.valid) {
-      this.interBankTransferService
-        .sendToOtherBanks(payload)
-        .subscribe((res) => {
+      this.interBankTransferService.sendToOtherBanks(payload).subscribe(
+        (res) => {
           if (res.status) {
             this.loading = false;
             this.router.navigate([
@@ -135,7 +134,14 @@ export class OtherBanksComponent implements OnInit {
             alert(res.message);
             // TODO:: Notify Error
           }
-        });
+        },
+        (err) => {
+          this.loading = false;
+          alert(
+            `Sorry, we're unable to complete your transaction. Please give us some time to fix the problem and try again later.`
+          );
+        }
+      );
     }
   }
 }

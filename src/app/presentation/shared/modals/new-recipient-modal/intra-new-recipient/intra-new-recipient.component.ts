@@ -5,6 +5,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { SubsidiaryModel } from 'src/app/core/domain/bank.model';
 import { CountryModel } from 'src/app/core/domain/country.model';
 import { recipientModel } from 'src/app/core/domain/recipient.model';
 import { CountryService } from 'src/app/core/services/country/country.service';
@@ -54,8 +55,9 @@ export class IntraNewRecipientComponent implements OnInit {
     this.dialogRef.close(true);
   }
 
-  setCountry(country: CountryModel) {
-    this.selected = country;
+  setSubsidiary(subsidiary: SubsidiaryModel) {
+    console.log(subsidiary);
+    this.selected = subsidiary;
   }
   // Do the Name search to return account details
   submit(): void {

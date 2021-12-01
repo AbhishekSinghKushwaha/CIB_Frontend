@@ -11,6 +11,7 @@
     "dataLookUp": {
         "getCountries": "/cibpaymentservice-v1/api/v1/Transfer/GetCountries",
         "getBanks":"/cibpaymentservice-v1/api/v1/Transfer/GetBanks/",
-        "getCurrencies":"/cibpaymentservice-v1/api/v1/Transfer/GetCurrencies"
+        "getCurrencies":"/cibpaymentservice-v1/api/v1/Transfer/GetCurrencies",
+        "getSubsidiaries": "/cibpaymentservice-v1/api/v1/Transfer/GetSubsidiaries"
     }
 }

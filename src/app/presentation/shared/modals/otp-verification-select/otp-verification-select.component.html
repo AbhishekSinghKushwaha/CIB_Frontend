@@ -1,0 +1,16 @@
+<div class="row mt-5">
+    <div class="col-5">
+        <div class="">
+          <img src="assets/images/Illustrations/verification-code.svg" alt="">  
+        </div>
+        
+    </div>
+
+    <div class="col-7">
+        <h3 class="strong-text">How would you like to get verified?</h3>
+        <small class="text-grey">Select one of the options below</small>
+        <app-otp-verification-list *ngFor="let account of data.OTP_LIST" [data]="account"
+        [isChecked]="selected &&  selected.verificationType===account.verificationType"
+        ></app-otp-verification-list>
+    </div>
+</div>  

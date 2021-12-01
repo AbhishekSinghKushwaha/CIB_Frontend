@@ -145,9 +145,8 @@ export class OwnEquityAccountComponent
       transferType: 1, // Own Equity Account
     };
     if (this.ownEquityAccountTransferForm.valid) {
-      this.ownEquityAccountService
-        .sendToOwnEquityAccount(payload)
-        .subscribe((res) => {
+      this.ownEquityAccountService.sendToOwnEquityAccount(payload).subscribe(
+        (res) => {
           if (res.status) {
             this.loading = false;
             this.router.navigate([
@@ -158,7 +157,14 @@ export class OwnEquityAccountComponent
             alert(res.message);
             // TODO:: Notify Error
           }
-        });
+        },
+        (err) => {
+          this.loading = false;
+          alert(
+            `Sorry, we're unable to complete your transaction. Please give us some time to fix the problem and try again later.`
+          );
+        }
+      );
     }
   }
 }

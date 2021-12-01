@@ -125,18 +125,26 @@ export class OtherEquityAccountComponent
     if (this.intraBankTransferForm.valid) {
       this.intraBankTransferService
         .sendToAnotherEquityAccount(payload)
-        .subscribe((res) => {
-          if (res.status) {
+        .subscribe(
+          (res) => {
+            if (res.status) {
+              this.loading = false;
+              this.router.navigate([
+                '/transact/other-equity-account/submit-transfer',
+              ]);
+            } else {
+              this.loading = false;
+              alert(res.message);
+              // TODO:: Notify error
+            }
+          },
+          (err) => {
             this.loading = false;
-            this.router.navigate([
-              '/transact/other-equity-account/submit-transfer',
-            ]);
-          } else {
-            this.loading = false;
-            alert(res.message);
-            // TODO:: Notify error
+            alert(
+              `Sorry, we're unable to complete your transaction. Please give us some time to fix the problem and try again later.`
+            );
           }
-        });
+        );
     }
   }
 }

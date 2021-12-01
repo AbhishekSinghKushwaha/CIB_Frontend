@@ -1,0 +1,24 @@
+<div class="add-modal-screen p-0 mat-elevation-z0"  *ngIf="visibility">
+    <div class="row">
+        <div class="col-md-3">
+          <mat-icon (click)="close()">close</mat-icon>
+        </div>
+        <h4 class="strong-text col-md-9">Add to favourites</h4>
+    </div>
+    <h3 class="strong-text pt-4">Please enter the merchant’s details</h3>
+    <form [formGroup]="equityForm" (ngSubmit)="submit()" class="d-flex flex-column pt-4" autocomplete="off">
+            
+        <div>
+            <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
+                <mat-label>Who would you like to add?</mat-label>
+                <input matInput type="text" placeholder="Enter their name" formControlName="name">
+            </mat-form-field>
+        </div>
+
+        <div class="pt-4">
+          <button  [disabled]="equityForm.invalid" color="primary" type="submit" mat-flat-button
+            class="px-5">Continue</button>
+        </div>
+      </form>
+</div>
+  
