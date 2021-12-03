@@ -35,7 +35,10 @@
         let i = index
       "
     >
-      <app-bank-list-item [data]="item" [isChecked]="selected?.id === item.id">
+      <app-bank-list-item
+        [data]="item"
+        [isChecked]="selected?.bankCode === item.bankCode"
+      >
       </app-bank-list-item>
       <mat-divider *ngIf="!isLast" class="pt-3 mt-3"></mat-divider>
     </div>

@@ -5,11 +5,13 @@ import {
   FormGroup,
   NG_VALUE_ACCESSOR,
 } from '@angular/forms';
+import { recipientModel } from 'src/app/core/domain/recipient.model';
 import { FromAccount } from 'src/app/core/domain/transfer.models';
 import { AccountsService } from 'src/app/core/services/accounts/accounts.service';
 import { FavouritesModalService } from 'src/app/core/services/favourites-modal/favourites-modal.service';
 import { NewRecipientService } from 'src/app/core/services/new-recipient/new-recipient.service';
 import { SelectAccountSendtoService } from 'src/app/core/services/select-account-sendto/select-account-sendto.service';
+import { SharedDataService } from 'src/app/core/services/shared-data/shared-data.service';
 import { BuyGoodsPayToService } from 'src/app/core/services/buy-goods-pay-to/buy-goods-pay-to.service';
 import { CurrencySelectionConstants } from 'src/app/core/utils/constants/currency-selection.constants';
 import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
@@ -29,7 +31,7 @@ import { MerchantTillNumberService } from 'src/app/core/services/merchant-till-n
     },
   ],
 })
-export class TransferToComponent extends BaseTransactComponent implements ControlValueAccessor, OnInit {
+export class TransferToComponent implements ControlValueAccessor, OnInit {
   destinationAccounts: any[];
 
   @Input() transactionType: string;
@@ -46,7 +48,7 @@ export class TransferToComponent extends BaseTransactComponent implements Contro
   @Input()
   placeholder!: string;
 
-  public value!: FromAccount;
+  public value!: recipientModel;
 
   public changed!: (value: string) => void;
 
@@ -59,18 +61,16 @@ export class TransferToComponent extends BaseTransactComponent implements Contro
   }
   constructor(
     private readonly selectAccountSendtoService: SelectAccountSendtoService,
-    private readonly selectAccountConstants:SelectAccountConstants,
+    private readonly selectAccountConstants: SelectAccountConstants,
     private readonly favouritesModalService: FavouritesModalService,
+    private readonly sharedDataService: SharedDataService,
     private readonly accountsService: AccountsService,
     private newRecipientService: NewRecipientService,
     private readonly buyGoodsPayToService: BuyGoodsPayToService,
     private readonly merchantTillNumberService: MerchantTillNumberService
-  ) {
-    super(accountsService)
-  } 
+  ) {}
 
   ngOnInit(): void {
-    this.getUserAccounts();
     this.listenToDataStreams();
   }
 
@@ -95,16 +95,32 @@ export class TransferToComponent extends BaseTransactComponent implements Contro
     this.isDisabled = isDisabled;
   }
 
+  // TODO:: Get beneficiaries as per the transaction type
+
+  // Open transfer to modal based on transaction type
   openTransferToModal() {
     switch (this.transactionType) {
       case 'ownEquityAccount':
-        this.selectAccountSendtoService.open(
-          this.accounts
-        );
+        let accounts = this.destinationAccounts.filter((el) => {
+          return (
+            el.accountNumber !==
+            this.parentForm.controls.sendFrom.value.accountNumber
+          );
+        });
+        this.selectAccountSendtoService.open(accounts);
         break;
       case 'intraBankTransfer':
-      // Open Favourites
-        this.favouritesModalService.open(mockData.favourites)
+        // Open Favourites
+        this.favouritesModalService.open(
+          this.transactionType,
+          mockData.favourites
+        );
+        break;
+      case 'interBankTransfer':
+        this.favouritesModalService.open(
+          this.transactionType,
+          mockData.favourites
+        );
         break;
       case 'fundTransferBuyGoods':
         this.buyGoodsPayToService.open(mockData.buyGoodsFavourites);
@@ -117,27 +133,34 @@ export class TransferToComponent extends BaseTransactComponent implements Contro
   listenToDataStreams() {
     switch (this.transactionType) {
       case 'ownEquityAccount':
+        this.sharedDataService.userAccounts.subscribe((res) => {
+          this.destinationAccounts = res;
+        });
         this.selectAccountSendtoService.selected.subscribe((x) => {
-          this.parentForm.controls.sendTo.setValue(x)
+          this.parentForm.controls.sendTo.setValue(x);
         });
         break;
       case 'intraBankTransfer':
         this.newRecipientService.data.subscribe((x) => {
           console.log(x);
-          this.parentForm.controls.sendTo.setValue(x)
-        }
-        );
+          this.parentForm.controls.sendTo.setValue(x);
+        });
+        break;
+      case 'interBankTransfer':
+        this.newRecipientService.data.subscribe((x) => {
+          console.log(x);
+          this.parentForm.controls.sendTo.setValue(x);
+        });
         break;
       case 'fundTransferBuyGoods':
         this.buyGoodsPayToService.selected.subscribe((x) => {
           console.log(x);
-          this.parentForm.controls.sendTo.setValue(x)
-        }
-        );
+          this.parentForm.controls.sendTo.setValue(x);
+        });
         this.merchantTillNumberService.data.subscribe((x) => {
           console.log(x);
-          this.parentForm.controls.sendTo.setValue(x)
-        })
+          this.parentForm.controls.sendTo.setValue(x);
+        });
         break;
       default:
         break;

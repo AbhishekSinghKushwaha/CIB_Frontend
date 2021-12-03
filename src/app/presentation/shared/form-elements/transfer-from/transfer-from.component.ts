@@ -1,8 +1,21 @@
-import { Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  Component,
+  forwardRef,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
+import {
+  ControlValueAccessor,
+  FormControl,
+  FormGroup,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
 import { FromAccount } from 'src/app/core/domain/transfer.models';
 import { AccountsService } from 'src/app/core/services/accounts/accounts.service';
 import { SelectAccountModalService } from 'src/app/core/services/select-account-modal/select-account-modal.service';
+import { SharedDataService } from 'src/app/core/services/shared-data/shared-data.service';
 import { SelectAccountConstants } from 'src/app/data/repository/select-account-mock-repository/select-account.constants';
 import { BaseTransactComponent } from 'src/app/presentation/modules/post-login/transact/base-transact.component';
 
@@ -18,9 +31,9 @@ import { BaseTransactComponent } from 'src/app/presentation/modules/post-login/t
     },
   ],
 })
-export class TransferFromComponent extends BaseTransactComponent implements ControlValueAccessor, OnInit {
+export class TransferFromComponent implements ControlValueAccessor, OnInit {
   sourceAccounts: FromAccount[];
-  
+
   @Input()
   parentForm!: FormGroup;
 
@@ -46,16 +59,15 @@ export class TransferFromComponent extends BaseTransactComponent implements Cont
   }
   constructor(
     private readonly selectAccountService: SelectAccountModalService,
-    private readonly selectAccountConstants: SelectAccountConstants,
-    private readonly accountsService: AccountsService
-  ) {
-    super(accountsService)
-  }
+    private readonly sharedDataService: SharedDataService
+  ) {}
 
   ngOnInit(): void {
-    this.getUserAccounts()
+    this.sharedDataService.userAccounts.subscribe((res) => {
+      this.sourceAccounts = res;
+    });
     this.selectAccountService.selected.subscribe((x) => {
-      this.parentForm.controls.sendFrom.setValue(x)
+      this.parentForm.controls.sendFrom.setValue(x);
     });
   }
 
@@ -81,12 +93,16 @@ export class TransferFromComponent extends BaseTransactComponent implements Cont
   }
 
   openTransferFromModal() {
-    this.selectAccountService.open(
-      this.accounts
-    );
+    // Remove accounts that have been selected under sendTo
+    const accounts = this.sourceAccounts.filter((el) => {
+      return (
+        el.accountNumber !== this.parentForm.controls.sendTo.value.accountNumber
+      );
+    });
+    this.selectAccountService.open(accounts);
   }
 
   // Subscribe to Account Selection Event
 
-  // Get User Accounts  
+  // Get User Accounts
 }

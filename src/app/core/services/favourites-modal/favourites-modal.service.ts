@@ -6,25 +6,24 @@ import { FavouriteBeneficiaryModel } from '../../domain/favourites-beneficiary.m
 
 @Injectable()
 export class FavouritesModalService {
-
   selected = new Subject<FavouriteBeneficiaryModel>();
-  private data:FavouriteBeneficiaryModel;
+  private data: FavouriteBeneficiaryModel;
 
-  constructor(private readonly dialog: MatDialog) { }
+  constructor(private readonly dialog: MatDialog) {}
 
-  open(data: FavouriteBeneficiaryModel[]): void {
-    this.dialog.open<FavouritesModalComponent, FavouriteBeneficiaryModel[]>(FavouritesModalComponent, {
+  open(transactionType: string, data: FavouriteBeneficiaryModel[]): void {
+    this.dialog.open<FavouritesModalComponent>(FavouritesModalComponent, {
       disableClose: true,
-      data
+      data: { transactionType, favourites: data },
     });
   }
 
   select(account: FavouriteBeneficiaryModel): void {
-    this.data = account
-    this.selected.next(this.data)
+    this.data = account;
+    this.selected.next(this.data);
   }
 
-  get default():FavouriteBeneficiaryModel{
-    return this.data
+  get default(): FavouriteBeneficiaryModel {
+    return this.data;
   }
 }
