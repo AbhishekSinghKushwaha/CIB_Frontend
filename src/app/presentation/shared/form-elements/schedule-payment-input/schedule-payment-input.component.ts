@@ -26,8 +26,7 @@ export interface Value {
   ],
 })
 export class SchedulePaymentInputComponent
-  implements ControlValueAccessor, OnInit
-{
+  implements ControlValueAccessor, OnInit {
   paymentDate: ScheduledPaymentModel;
 
   @Input()
@@ -56,7 +55,7 @@ export class SchedulePaymentInputComponent
   get formField(): FormControl {
     return this.parentForm?.get(this.fieldName) as FormControl;
   }
-  constructor(private schedulePaymentService: SchedulePaymentService) {}
+  constructor(private schedulePaymentService: SchedulePaymentService) { }
 
   ngOnInit(): void {
     this.eventsSubscription();
@@ -125,6 +124,6 @@ export class SchedulePaymentInputComponent
         break;
     }
     console.log(scheduledPayment);
-    this.parentForm.controls.schedulePayment.setValue(scheduledPayment);
+    this.parentForm.controls[this.fieldName].setValue(scheduledPayment);
   }
 }

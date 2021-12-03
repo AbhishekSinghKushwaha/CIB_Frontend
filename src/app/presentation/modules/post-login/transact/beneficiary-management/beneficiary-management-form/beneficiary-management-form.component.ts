@@ -86,8 +86,6 @@ export class BeneficiaryManagementFormComponent implements OnInit {
   }
 
   submit() {
-    console.log('this.editMode', this.editMode);
-    console.log('this.modalMode', this.modalMode);
     if (!this.editMode) {
       if (this.modalMode) {
         this.formSubmitted.next(this.equityForm.value);

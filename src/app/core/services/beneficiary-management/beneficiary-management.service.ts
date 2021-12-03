@@ -20,9 +20,7 @@ export class BeneficiaryManagementService {
   }
 
   updateForm(data: BeneficiaryModel, id: number) {
-    console.log('new', data);
     this.beneficiaries = [...this.beneficiaries.map((value, index) => index + 1 === id ? data : value)];
-    console.log('changed', this.beneficiaries);
     setTimeout(() => {
       this.formData.next(this.beneficiaries)
     }, 0)
