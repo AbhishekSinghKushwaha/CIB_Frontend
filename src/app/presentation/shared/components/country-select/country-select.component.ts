@@ -54,5 +54,20 @@ export class CountrySelectComponent implements OnInit, OnDestroy {
     console.log('Destroyed');
     this.subscriptions.length &&
       this.subscriptions.forEach((value) => value && value.unsubscribe());
+    const modal = this.countryService.openCountry(
+      this.countries,
+      this.category
+    );
+    this.subscriptions.push(
+      modal.afterClosed().subscribe((data: CountryModel) => {
+        this.countryService.openedStatus.next(false);
+        this.visibility = true;
+        this.selected.next(data);
+      })
+    );
   }
+
+  // ngOnDestroy(): void {
+  //   this.subscriptions.length && this.subscriptions.forEach(value => value && value.unsubscribe());
+  // }
 }
