@@ -66,8 +66,4 @@ export class CountrySelectComponent implements OnInit, OnDestroy {
       })
     );
   }
-
-  // ngOnDestroy(): void {
-  //   this.subscriptions.length && this.subscriptions.forEach(value => value && value.unsubscribe());
-  // }
 }
