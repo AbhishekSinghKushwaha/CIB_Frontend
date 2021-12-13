@@ -1,4 +1,7 @@
-<mat-card class="notification-modal-screen p-0 mat-elevation-z7">
+<mat-card
+  class="notification-modal-screen p-0 mat-elevation-z7 cursor-pointer"
+  (click)="openLink()"
+>
   <div
     *ngIf="data.image"
     class="

@@ -9,11 +9,11 @@ import { PreLoginModal } from 'src/app/core/domain/pre-login-modal.model';
   styleUrls: ['./account-card.component.scss'],
 })
 export class AccountCardComponent implements OnInit {
-  @Input() data: PreLoginModal;
+  @Input() data: PreLoginModal | any;
   @Input() enableClose: boolean;
   @Output() onClose = new Subject<boolean>();
 
-  constructor() { }
+  constructor(private readonly router: Router) { }
 
   ngOnInit(): void { }
 
@@ -21,4 +21,10 @@ export class AccountCardComponent implements OnInit {
     this.onClose.next(true);
   }
 
+  openLink() {
+
+    this.router.navigate([
+      this.data?.primaryLink,
+    ]);
+  }
 }

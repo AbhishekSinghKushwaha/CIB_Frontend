@@ -14,6 +14,13 @@ const routes: Routes = [{
     ),
 },
 {
+  path: 'add-account',
+  loadChildren: (): Promise<any> =>
+    import('./add-account/add-account.module').then(
+      (m) => m.AddAccountModule
+    ),
+},
+{
   path: '**',
   redirectTo: ''
 }];

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { VirtualAccountConstants } from 'src/app/core/utils/constants/virtual-account.constants';
+import { AccountConstants } from 'src/app/core/utils/constants/account.constants';
 import SharedUtil from './../../../../../core/utils/shared.util';
 
 @Component({
@@ -9,11 +9,6 @@ import SharedUtil from './../../../../../core/utils/shared.util';
 })
 export class VirtualAccountComponent implements OnInit {
 
-  data: any;
-
-  constructor(private readonly virtualAccountConstants: VirtualAccountConstants) {
-    this.data = virtualAccountConstants.DASHBOARD_LIST;
-  }
 
   ngOnInit(): void {
   }
