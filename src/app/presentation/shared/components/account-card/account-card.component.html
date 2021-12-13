@@ -1,46 +1,39 @@
-<mat-card class="account-card" (click)="openAccDetails(acc.accountNumber)">
-  <div class="pattern-holder"></div>
-  <div class="top-right">
-    <button
-      mat-icon-button
-      [matMenuTriggerFor]="accountMenu"
-      (click)="$event.stopPropagation()"
+<mat-card class="notification-modal-screen p-0 mat-elevation-z7">
+  <div
+    *ngIf="data.image"
+    class="
+      d-none d-sm-flex
+      justify-content-center
+      align-items-center
+      img-bg
+      p-2
+    "
+  >
+    <img [src]="data.image" height="130px" />
+  </div>
+  <mat-card-content class="p-4">
+    <h3 class="card-title">{{ data.title }}</h3>
+    <p class="text-muted text-grey">
+      {{ data.message }}
+    </p>
+    <p *ngIf="enableClose && data.registerButtonEnabled">
+      <app-register-button-footer
+        (close)="close()"
+      ></app-register-button-footer>
+    </p>
+    <p *ngIf="enableClose && data.logoutButtonEnabled">
+      <app-logout-button-footer (close)="close()"></app-logout-button-footer>
+    </p>
+    <p
+      *ngIf="
+        enableClose &&
+        (!(data.registerButtonEnabled || data.logoutButtonEnabled) ||
+          data?.buttonText)
+      "
     >
-      <mat-icon
-        svgIcon="three_dots_on_white"
-        class="menu-icon-button"
-      ></mat-icon>
-    </button>
-    <mat-menu #accountMenu="matMenu" xPosition="before" class="mat_menu_style">
-      <button mat-menu-item (click)="onTransactClicked()">
-        <mat-icon svgIcon="transact"></mat-icon>
-        <span>Transact</span>
-      </button>
-      <hr />
-      <button mat-menu-item (click)="onToggleBalanceClicked()">
-        <mat-icon
-          [svgIcon]="acc.balanceHidden ? 'show_balance' : 'hide_balance'"
-        ></mat-icon>
-        <span *ngIf="acc.balanceHidden">Show balance</span>
-        <span *ngIf="!acc.balanceHidden">Hide balance</span>
-      </button>
-      <hr />
-      <button mat-menu-item (click)="onUnlinkClicked()">
-        <mat-icon svgIcon="unlink_account"></mat-icon>
-        <span>Remove the account</span>
-      </button>
-    </mat-menu>
-  </div>
-  <div class="accounts text-white" style="position: absolute; top: 0">
-    <span class="accountName">{{
-      acc.nickName ? acc.nickName : (acc.accountName | titlecase)
-    }}</span>
-    <h3 class="text-left strong-text text-white" *ngIf="!acc.balanceHidden">
-      {{ acc.accountBalance | currency: acc.accountCurrency:"":"1.2-2" }}
-      {{ acc.accountCurrency }}
-    </h3>
-  </div>
-  <div class="bottom-right">
-    <p>{{ acc.accountNumber }} • {{ acc.accountType }}</p>
-  </div>
+      <span class="mt-3 text text-danger cursor-pointer" (click)="close()">{{
+        data.buttonText
+      }}</span>
+    </p>
+  </mat-card-content>
 </mat-card>
