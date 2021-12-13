@@ -663,6 +663,12 @@ export class CustomIconService {
         'assets/images/icons/visual-support-icon-download-with-grey-bg.svg'
       )
     );
+    this.matIconRegistry.addSvgIcon(
+      'add_card',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/add_card.svg'
+      )
+    );
 
   }
 }

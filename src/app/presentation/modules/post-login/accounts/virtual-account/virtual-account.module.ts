@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { VirtualAccountRoutingModule } from './virtual-account-routing.module';
 import { VirtualAccountComponent } from './virtual-account.component';
-import { AccountCardModule } from 'src/app/presentation/shared/components/account-card/account-card.module';
+import { MatStyleModule } from 'src/app/mat-style.module';
+import { AccountVeriticalListItemModule } from 'src/app/presentation/shared/components/account-veritical-list-item/account-veritical-list-item.module';
 
 
 @NgModule({
@@ -13,6 +13,8 @@ import { AccountCardModule } from 'src/app/presentation/shared/components/accoun
   imports: [
     CommonModule,
     VirtualAccountRoutingModule,
+    MatStyleModule,
+    AccountVeriticalListItemModule
   ]
 })
 export class VirtualAccountModule { }
