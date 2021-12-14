@@ -48,6 +48,11 @@
             *ngIf="formStage === 1"
             (onSubmit)="submit($event)"
           ></app-virtual-account-form>
+          <app-virtual-account-verification-medium
+            *ngIf="formStage === 2"
+            (onSubmit)="submit($event)"
+          >
+          </app-virtual-account-verification-medium>
         </div>
       </div>
     </div>
