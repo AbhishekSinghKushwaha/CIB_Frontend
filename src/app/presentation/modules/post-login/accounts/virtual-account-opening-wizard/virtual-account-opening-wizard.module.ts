@@ -7,12 +7,14 @@ import { MatStyleModule } from 'src/app/mat-style.module';
 import { VirtualAccountFormComponent } from './virtual-account-form/virtual-account-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { VirtualAccountVerificationMediumComponent } from './virtual-account-verification-medium/virtual-account-verification-medium.component';
+import { VirtualAccountEmailVerificationComponent } from './virtual-account-email-verification/virtual-account-email-verification.component';
 
 @NgModule({
   declarations: [
     VirtualAccountOpeningWizardComponent,
     VirtualAccountFormComponent,
-    VirtualAccountVerificationMediumComponent
+    VirtualAccountVerificationMediumComponent,
+    VirtualAccountEmailVerificationComponent
   ],
   imports: [
     CommonModule,
