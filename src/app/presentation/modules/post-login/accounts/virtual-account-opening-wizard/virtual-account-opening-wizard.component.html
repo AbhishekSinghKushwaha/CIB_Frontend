@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="row mb-4 justify-content-md-center">
+      <div class="col-md-11">
+        <div class="mb-3">
+          <button
+            mat-icon-button
+            aria-label="Back"
+            class="back-icon"
+            routerLink="/account/virtual-account/"
+          >
+            <div class="strong-text">
+              <mat-icon svgIcon="caret_left"></mat-icon>
+              <span>Open virtual account</span>
+            </div>
+          </button>
+        </div>
+        <div class="mb-3">
+          <mat-icon
+            aria-hidden="false"
+            svgIcon="wizard_progress_primary"
+            class="mat-icon-custom"
+          ></mat-icon>
+          <mat-icon
+            aria-hidden="false"
+            [svgIcon]="
+              formStage > 1 ? 'wizard_progress_primary' : 'wizard_progress_grey'
+            "
+            class="mat-icon-custom"
+          ></mat-icon>
+          <mat-icon
+            aria-hidden="false"
+            [svgIcon]="
+              formStage > 2 ? 'wizard_progress_primary' : 'wizard_progress_grey'
+            "
+            class="mat-icon-custom"
+          ></mat-icon>
+          <mat-icon
+            aria-hidden="false"
+            [svgIcon]="
+              formStage > 3 ? 'wizard_progress_primary' : 'wizard_progress_grey'
+            "
+            class="mat-icon-custom"
+          ></mat-icon>
+        </div>
+        <div class="row">
+          <app-virtual-account-form
+            *ngIf="formStage === 1"
+            (onSubmit)="submit($event)"
+          ></app-virtual-account-form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

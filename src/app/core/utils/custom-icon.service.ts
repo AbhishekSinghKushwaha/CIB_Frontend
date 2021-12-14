@@ -669,6 +669,18 @@ export class CustomIconService {
         'assets/images/icons/add_card.svg'
       )
     );
+    this.matIconRegistry.addSvgIcon(
+      'wizard_progress_grey',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/wizard-progress-grey.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'wizard_progress_primary',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/wizard-progress-primary.svg'
+      )
+    );
 
   }
 }
