@@ -12,5 +12,8 @@
         "getCountries": "/cibpaymentservice-v1/api/v1/Transfer/GetCountries",
         "getBanks":"/cibpaymentservice-v1/api/v1/Transfer/GetBanks/",
         "getCurrencies":"/cibpaymentservice-v1/api/v1/Transfer/GetCurrencies"
+    },
+    "statement": {
+        "getPdf": "/v1/generatepdf/statement"
     }
 }
