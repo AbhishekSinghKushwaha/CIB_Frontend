@@ -61,7 +61,6 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
   }
   constructor(
     private readonly selectAccountSendtoService: SelectAccountSendtoService,
-    private readonly selectAccountConstants: SelectAccountConstants,
     private readonly favouritesModalService: FavouritesModalService,
     private readonly sharedDataService: SharedDataService,
     private newRecipientService: NewRecipientService,
