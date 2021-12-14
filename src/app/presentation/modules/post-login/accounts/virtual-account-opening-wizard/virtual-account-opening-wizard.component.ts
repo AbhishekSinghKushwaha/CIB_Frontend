@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./virtual-account-opening-wizard.component.scss']
 })
 export class VirtualAccountOpeningWizardComponent implements OnInit {
-  formStage = 3;
+  formStage = 1;
 
   constructor() { }
 

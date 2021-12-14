@@ -59,6 +59,11 @@
             class="mt-4"
           >
           </app-virtual-account-email-verification>
+          <app-virtual-account-sms-verification
+            *ngIf="formStage === 4"
+            (onSubmit)="submit($event)"
+          >
+          </app-virtual-account-sms-verification>
         </div>
       </div>
     </div>
