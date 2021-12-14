@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-account-veritical-list-item',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountVeriticalListItemComponent implements OnInit {
 
-  constructor() { }
+  constructor(private readonly router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  loadFormWizard() {
+    this.router.navigate([
+      '/account/virtual-account/new-account',
+    ]);
   }
 
 }

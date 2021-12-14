@@ -1,4 +1,4 @@
-<mat-card class="mt-4 main-card">
+<mat-card class="mt-4 main-card cursor-pointer" (click)="loadFormWizard()">
   <mat-card-content>
     <div class="row">
       <div class="col-md-3 card card-block justify-content-center">
@@ -26,7 +26,9 @@
         <p>List Item</p>
       </div>
       <div class="col-md-1 card card-block justify-content-center">
-        <mat-icon svgIcon="caret_right"></mat-icon>
+        <button mat-icon-button class="back-icon">
+          <mat-icon svgIcon="caret_right"></mat-icon>
+        </button>
       </div>
     </div>
   </mat-card-content>
