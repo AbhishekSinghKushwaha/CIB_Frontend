@@ -14,8 +14,8 @@ export class VirtualAccountVerificationMediumComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  submit() {
-    this.onSubmit.next(3);
+  submit(next: number) {
+    this.onSubmit.next(next);
   }
 
 }
