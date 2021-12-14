@@ -53,6 +53,12 @@
             (onSubmit)="submit($event)"
           >
           </app-virtual-account-verification-medium>
+          <app-virtual-account-email-verification
+            *ngIf="formStage === 3"
+            (onSubmit)="submit($event)"
+            class="mt-4"
+          >
+          </app-virtual-account-email-verification>
         </div>
       </div>
     </div>
