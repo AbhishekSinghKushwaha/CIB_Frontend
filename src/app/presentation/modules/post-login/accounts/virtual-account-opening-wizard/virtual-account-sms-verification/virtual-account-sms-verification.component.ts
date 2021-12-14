@@ -14,7 +14,7 @@ export class VirtualAccountSmsVerificationComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  submit() {
+  otpVerified(verified: boolean) {
     this.onSubmit.next(0);
   }
 }

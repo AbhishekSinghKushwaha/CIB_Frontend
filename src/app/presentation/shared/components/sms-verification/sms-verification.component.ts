@@ -1,5 +1,5 @@
 import { Subject } from 'rxjs';
-import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 
 @Component({
@@ -14,7 +14,8 @@ export class SmsVerificationComponent implements OnInit {
   otpResent = false;
   submitted = false;
   numOfDigits = 6;
-  formSubmission = new Subject<boolean>()
+  formSubmission = new Subject<boolean>();
+  @Output() onOTPVerified = new Subject<boolean>();
 
   constructor(private readonly fb: FormBuilder) {
     this.initOtpForm();
@@ -66,6 +67,10 @@ export class SmsVerificationComponent implements OnInit {
 
   submit() {
     this.formSubmission.next(true)
+  }
+
+  verifyOTP() {
+    this.onOTPVerified.next(true);
   }
 
 }

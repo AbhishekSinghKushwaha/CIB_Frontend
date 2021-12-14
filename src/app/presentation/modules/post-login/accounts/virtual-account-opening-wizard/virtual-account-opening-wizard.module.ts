@@ -10,6 +10,7 @@ import { VirtualAccountVerificationMediumComponent } from './virtual-account-ver
 import { VirtualAccountEmailVerificationComponent } from './virtual-account-email-verification/virtual-account-email-verification.component';
 import { SharedComponentsModule } from 'src/app/presentation/shared/components/shared-components.module';
 import { VirtualAccountSmsVerificationComponent } from './virtual-account-sms-verification/virtual-account-sms-verification.component';
+import { VirtualAccountSubmissionComponent } from './virtual-account-submission/virtual-account-submission.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { VirtualAccountSmsVerificationComponent } from './virtual-account-sms-ve
     VirtualAccountFormComponent,
     VirtualAccountVerificationMediumComponent,
     VirtualAccountEmailVerificationComponent,
-    VirtualAccountSmsVerificationComponent
+    VirtualAccountSmsVerificationComponent,
+    VirtualAccountSubmissionComponent
   ],
   imports: [
     CommonModule,

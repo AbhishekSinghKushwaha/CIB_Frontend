@@ -64,6 +64,8 @@
             (onSubmit)="submit($event)"
           >
           </app-virtual-account-sms-verification>
+          <app-virtual-account-submission *ngIf="formStage === 0">
+          </app-virtual-account-submission>
         </div>
       </div>
     </div>

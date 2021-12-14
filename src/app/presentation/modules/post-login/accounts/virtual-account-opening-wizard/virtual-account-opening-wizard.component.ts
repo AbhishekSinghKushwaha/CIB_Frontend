@@ -14,9 +14,7 @@ export class VirtualAccountOpeningWizardComponent implements OnInit {
   }
 
   submit(stage: number) {
-    if (stage !== 0) {
-      this.formStage = stage
-    }
+    this.formStage = stage;
   }
 
 }
