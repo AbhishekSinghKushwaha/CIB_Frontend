@@ -23,6 +23,7 @@ import { OwnAccountService } from 'src/app/core/services/transfers/own-account/o
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmPaymentComponent } from 'src/app/presentation/shared/modals/confirm-payment/confirm-payment.component';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-own-equity-account',
@@ -40,12 +41,12 @@ export class OwnEquityAccountComponent
   constructor(
     private readonly supportingDocumentsUploadService: SupportingDocumentsUploadService,
     private readonly fb: FormBuilder,
-    accountService: AccountsService,
+    snackbar: MatSnackBar,
     private ownEquityAccountService: OwnAccountService,
     public dialog: MatDialog,
     private readonly router: Router
   ) {
-    super(accountService);
+    super(snackbar);
   }
 
   get getForm() {
@@ -53,7 +54,6 @@ export class OwnEquityAccountComponent
   }
   ngOnInit(): void {
     this.initForm();
-    this.getUserAccounts();
   }
 
   initForm(): void {
@@ -145,9 +145,8 @@ export class OwnEquityAccountComponent
       transferType: 1, // Own Equity Account
     };
     if (this.ownEquityAccountTransferForm.valid) {
-      this.ownEquityAccountService
-        .sendToOwnEquityAccount(payload)
-        .subscribe((res) => {
+      this.ownEquityAccountService.sendToOwnEquityAccount(payload).subscribe(
+        (res) => {
           if (res.status) {
             this.loading = false;
             this.router.navigate([
@@ -158,7 +157,14 @@ export class OwnEquityAccountComponent
             alert(res.message);
             // TODO:: Notify Error
           }
-        });
+        },
+        (err) => {
+          this.loading = false;
+          alert(
+            `Sorry, we're unable to complete your transaction. Please give us some time to fix the problem and try again later.`
+          );
+        }
+      );
     }
   }
 }

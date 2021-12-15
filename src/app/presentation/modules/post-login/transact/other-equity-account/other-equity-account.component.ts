@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ScheduledPaymentModel } from 'src/app/core/domain/scheduled-payment.model';
 import { AccountsService } from 'src/app/core/services/accounts/accounts.service';
@@ -26,13 +27,13 @@ export class OtherEquityAccountComponent
   }
 
   constructor(
-    accountsService: AccountsService,
+    snackBar: MatSnackBar,
     private fb: FormBuilder,
     private dialog: MatDialog,
     private intraBankTransferService: IntrabankService,
     private router: Router
   ) {
-    super(accountsService);
+    super(snackBar);
   }
 
   ngOnInit(): void {
@@ -125,18 +126,26 @@ export class OtherEquityAccountComponent
     if (this.intraBankTransferForm.valid) {
       this.intraBankTransferService
         .sendToAnotherEquityAccount(payload)
-        .subscribe((res) => {
-          if (res.status) {
+        .subscribe(
+          (res) => {
+            if (res.status) {
+              this.loading = false;
+              this.router.navigate([
+                '/transact/other-equity-account/submit-transfer',
+              ]);
+            } else {
+              this.loading = false;
+              alert(res.message);
+              // TODO:: Notify error
+            }
+          },
+          (err) => {
             this.loading = false;
-            this.router.navigate([
-              '/transact/other-equity-account/submit-transfer',
-            ]);
-          } else {
-            this.loading = false;
-            alert(res.message);
-            // TODO:: Notify error
+            alert(
+              `Sorry, we're unable to complete your transaction. Please give us some time to fix the problem and try again later.`
+            );
           }
-        });
+        );
     }
   }
 }

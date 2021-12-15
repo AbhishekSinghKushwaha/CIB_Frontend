@@ -1,0 +1,28 @@
+.cdk-overlay-container {
+  z-index: 10000 !important;
+}
+
+.mat-snack-bar-container {
+  background-color: var(--white);
+  width: auto;
+
+  .snackbar-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    &.unhappy {
+      color: var(--black);
+      .icon {
+        color: var(--red);
+      }
+    }
+
+    &.happy {
+      color: var(--black);
+      .icon {
+        color: var(--green);
+      }
+    }
+  }
+}

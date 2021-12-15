@@ -17,4 +17,11 @@ export class DataLookupService {
       environment.apiUrl + urlList.dataLookUp.getBanks + country
     );
   }
+
+  // Get subsidiaries (Countries equity operates in)
+  getSubsidiaries(): Observable<any> {
+    return this.http.get(
+      environment.apiUrl + urlList.dataLookUp.getSubsidiaries
+    );
+  }
 }

@@ -5,19 +5,25 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SubsidiaryModel } from 'src/app/core/domain/bank.model';
 import { CountryModel } from 'src/app/core/domain/country.model';
 import { recipientModel } from 'src/app/core/domain/recipient.model';
 import { CountryService } from 'src/app/core/services/country/country.service';
 import { NewRecipientService } from 'src/app/core/services/new-recipient/new-recipient.service';
 import { IntrabankService } from 'src/app/core/services/transfers/intrabank/intrabank.service';
 import { countrySettings } from 'src/app/core/utils/constants/country.settings';
+import { BaseTransactComponent } from 'src/app/presentation/modules/post-login/transact/base-transact.component';
 
 @Component({
   selector: 'app-intra-new-recipient',
   templateUrl: './intra-new-recipient.component.html',
   styleUrls: ['./intra-new-recipient.component.scss'],
 })
-export class IntraNewRecipientComponent implements OnInit {
+export class IntraNewRecipientComponent
+  extends BaseTransactComponent
+  implements OnInit
+{
   selected: any; // TODO:: Give the correct interface for account details
   newRecipientForm: FormGroup;
   country: CountryModel;
@@ -29,8 +35,10 @@ export class IntraNewRecipientComponent implements OnInit {
     private readonly newRecipientService: NewRecipientService,
     @Inject(MAT_DIALOG_DATA) public data: recipientModel,
     private readonly countryService: CountryService,
+    private snackBar: MatSnackBar,
     private intraBankTransferService: IntrabankService
   ) {
+    super(snackBar);
     this.selected = this.newRecipientService.default;
     this.newRecipientService.data.subscribe((x) => (this.selected = x));
   }
@@ -54,8 +62,9 @@ export class IntraNewRecipientComponent implements OnInit {
     this.dialogRef.close(true);
   }
 
-  setCountry(country: CountryModel) {
-    this.selected = country;
+  setSubsidiary(subsidiary: SubsidiaryModel) {
+    console.log(subsidiary);
+    this.selected = subsidiary;
   }
   // Do the Name search to return account details
   submit(): void {

@@ -1,4 +1,11 @@
-import { Component, OnInit, Inject, Output, Input, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Inject,
+  Output,
+  Input,
+  OnDestroy,
+} from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subject, Subscription } from 'rxjs';
 import { CountryModel } from 'src/app/core/domain/country.model';
@@ -10,7 +17,7 @@ import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
 @Component({
   selector: 'app-country-select',
   templateUrl: './country-select.component.html',
-  styleUrls: ['./country-select.component.scss']
+  styleUrls: ['./country-select.component.scss'],
 })
 export class CountrySelectComponent implements OnInit, OnDestroy {
   visibility = true;
@@ -22,22 +29,41 @@ export class CountrySelectComponent implements OnInit, OnDestroy {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: recipientModel,
-    private readonly countryService: CountryService) { }
+    private readonly countryService: CountryService
+  ) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   openCountries(): void {
     this.visibility = false;
-    const modal = this.countryService.open(this.countries, this.category);
-    this.subscriptions.push(modal.afterClosed().subscribe((data: CountryModel) => {
-      this.countryService.openedStatus.next(false);
-      this.visibility = true;
-      this.selected.next(data);
-    }));
+    const modal = this.countryService.openCountry(
+      this.countries,
+      this.category
+    );
+    this.subscriptions.push(
+      modal.afterClosed().subscribe((data: CountryModel) => {
+        console.log('Inner', data);
+        this.countryService.openedStatus.next(false);
+        this.visibility = true;
+        this.selected.next(data);
+      })
+    );
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.length && this.subscriptions.forEach(value => value && value.unsubscribe());
+    console.log('Destroyed');
+    this.subscriptions.length &&
+      this.subscriptions.forEach((value) => value && value.unsubscribe());
+    const modal = this.countryService.openCountry(
+      this.countries,
+      this.category
+    );
+    this.subscriptions.push(
+      modal.afterClosed().subscribe((data: CountryModel) => {
+        this.countryService.openedStatus.next(false);
+        this.visibility = true;
+        this.selected.next(data);
+      })
+    );
   }
-
 }

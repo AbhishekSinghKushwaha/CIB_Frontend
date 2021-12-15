@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { BankModel } from '../../domain/bank.model';
+import { BankModel, SubsidiaryModel } from '../../domain/bank.model';
 import { FromAccount } from '../../domain/transfer.models';
 
 @Injectable({
@@ -8,6 +8,7 @@ import { FromAccount } from '../../domain/transfer.models';
 })
 export class SharedDataService {
   banks = new BehaviorSubject<BankModel[]>([]);
+  subsidiaries = new BehaviorSubject<SubsidiaryModel[]>([]);
   userAccounts = new BehaviorSubject<FromAccount[]>([]);
   constructor() {}
 
@@ -17,5 +18,9 @@ export class SharedDataService {
 
   setUserAccounts(accounts: FromAccount[]) {
     this.userAccounts.next(accounts);
+  }
+
+  setSubsidiaries(subsidiaries: SubsidiaryModel[]) {
+    this.subsidiaries.next(subsidiaries);
   }
 }
