@@ -2,11 +2,11 @@ import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-sms-verification',
-  templateUrl: './sms-verification.component.html',
-  styleUrls: ['./sms-verification.component.scss']
+  selector: 'app-login-sms-verification',
+  templateUrl: './login-sms-verification.component.html',
+  styleUrls: ['./login-sms-verification.component.scss']
 })
-export class SmsVerificationComponent implements OnInit {
+export class LoginSmsVerificationComponent implements OnInit {
   @ViewChildren('inputs') inputs: QueryList<any>;
   verifyOtpForm: FormGroup = new FormGroup({});
   timeToResend: number;

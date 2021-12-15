@@ -1,0 +1,51 @@
+<h3 class="strong-text">How would you like to get verified</h3>
+<small>Select one of the options below</small>
+<div class="row pt-4">
+  <div class="col-md-6">
+    <mat-card class="cursor-pointer p-3" (click)="submit(4)">
+      <mat-card-content>
+        <div class="row">
+          <div class="col-md-3">
+            <button mat-fab>
+              <mat-icon svgIcon="withdraw"></mat-icon>
+            </button>
+          </div>
+          <div class="col-md-7">
+            <p class="mb-0">By sms</p>
+            <small class="text-grey">+254 72 ******13</small>
+          </div>
+          <div class="col-md-2 card card-block justify-content-center">
+            <mat-icon color="primary" svgIcon="radio_button_off"></mat-icon>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="col-md-6">
+    <mat-card class="cursor-pointer p-3" (click)="submit(3)">
+      <mat-card-content>
+        <div class="row">
+          <div class="col-md-3">
+            <button mat-fab>
+              <mat-icon svgIcon="withdraw"></mat-icon>
+            </button>
+          </div>
+          <div class="col-md-7">
+            <p class="mb-0">By email</p>
+            <small class="text-grey">v**********i@*****.co.ke</small>
+          </div>
+          <div class="col-md-2 card card-block justify-content-center">
+            <mat-icon color="primary" svgIcon="radio_button_off"></mat-icon>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+<!-- Submit Button -->
+<div class="mt-5">
+  <button mat-raised-button color="primary" class="me-4">Submit</button>
+  <button mat-stroked-button color="primary">
+    I've changed my contact details**
+  </button>
+</div>
