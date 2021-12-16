@@ -11,7 +11,7 @@ interface IData {
 @Component({
   selector: 'app-country-modal',
   templateUrl: './country-modal.component.html',
-  styleUrls: ['./country-modal.component.scss']
+  styleUrls: ['./country-modal.component.scss'],
 })
 export class CountryModalComponent implements OnInit {
   selected: CountryModel;
@@ -20,17 +20,17 @@ export class CountryModalComponent implements OnInit {
 
   constructor(
     private readonly countryService: CountryService,
-    @Inject(MAT_DIALOG_DATA) public data: IData,
+    @Inject(MAT_DIALOG_DATA) public data: IData
   ) {
-    this.selected = countryService.default;
-    this.countryService.selected.subscribe((response) => this.selected = response);
+    this.selected = countryService.defaultCountry;
+    this.countryService.selected.subscribe(
+      (response) => (this.selected = response)
+    );
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   close(): void {
-    this.countryService.close(this.selected)
+    this.countryService.closeCountryModal(this.selected);
   }
-
 }

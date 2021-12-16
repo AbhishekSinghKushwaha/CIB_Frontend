@@ -12,7 +12,6 @@ import { ConfirmPaymentComponent } from 'src/app/presentation/shared/modals/conf
   styleUrls: ['./other-banks.component.scss'],
 })
 export class OtherBanksComponent implements OnInit {
-  loading: boolean = false;
   interBankTransferForm: FormGroup;
 
   get getForm() {
@@ -43,26 +42,22 @@ export class OtherBanksComponent implements OnInit {
 
   // Get Transfer charges, then confirm payment.
   getTransferCharges() {
-    this.loading = true;
     const payload = {
       amount: this.getForm.amount.value.amount,
       currency: this.getForm.amount.value.currency,
       destinationAccount: this.getForm.sendTo.value.accountNumber,
       destinationBankCode: this.getForm.sendTo.value.bank.bankCode,
+      destinationCountryCode: 'KE', // Default have it as kenya, then change to pick the user's country
       countryCode: 'KE', //TODO:: Default have it as kenya, then change to pick the user's country
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
-      transferType: Number(this.getForm.transactionType.value), // For Own Equity Account
+      transferType: Number(this.getForm.transactionType.value), // For Another Bank Transfer Type
     };
-    console.log(payload);
     this.interBankTransferService
       .getTransferCharges(payload)
       .subscribe((res) => {
         if (res.status) {
-          console.log(res);
-          this.loading = false;
           this.confirmPayment(res.data);
         } else {
-          this.loading = false;
           // TODO:: Notify error
         }
       });
@@ -94,13 +89,11 @@ export class OtherBanksComponent implements OnInit {
         }
       });
     } else {
-      this.loading = false;
     }
   }
 
   // Initiate fund transfer to own equity account
   sendMoney() {
-    this.loading = true;
     const payload = {
       amount: this.getForm.amount.value.amount,
       beneficiaryAccount: this.getForm.sendTo.value.accountNumber,
@@ -126,12 +119,10 @@ export class OtherBanksComponent implements OnInit {
         .sendToOtherBanks(payload)
         .subscribe((res) => {
           if (res.status) {
-            this.loading = false;
             this.router.navigate([
               '/transact/other-equity-account/submit-transfer',
             ]);
           } else {
-            this.loading = false;
             alert(res.message);
             // TODO:: Notify Error
           }

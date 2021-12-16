@@ -5,20 +5,17 @@ import { CountryService } from 'src/app/core/services/country/country.service';
 @Component({
   selector: 'app-country-list-item',
   templateUrl: './country-list-item.component.html',
-  styleUrls: ['./country-list-item.component.scss']
+  styleUrls: ['./country-list-item.component.scss'],
 })
 export class CountryListItemComponent implements OnInit {
   @Input() isChecked: boolean;
   @Input() data: CountryModel;
 
-  constructor(
-    private readonly countryService: CountryService) { }
+  constructor(private readonly countryService: CountryService) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   select(): void {
-    this.countryService.select(this.data);
+    this.countryService.selectCountry(this.data);
   }
-
 }

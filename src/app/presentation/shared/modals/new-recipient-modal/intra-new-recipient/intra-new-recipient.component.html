@@ -4,10 +4,11 @@
   </button>
   <p class="text-center fw-bold pt-2">Send to someone new</p>
   <h3 class="m-4 ms-2">Please enter the recipient's details</h3>
-  <app-country-select
+  <app-subsidiary-select
     [category]="countrySelectType"
-    (selected)="setCountry($event)"
-  ></app-country-select>
+    (selected)="setSubsidiary($event)"
+  ></app-subsidiary-select>
+
   <form
     [formGroup]="newRecipientForm"
     (ngSubmit)="submit()"

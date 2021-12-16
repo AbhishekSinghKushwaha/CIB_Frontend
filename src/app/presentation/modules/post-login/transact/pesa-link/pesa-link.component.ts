@@ -35,31 +35,27 @@ import { RecepientBankService } from 'src/app/core/services/recepient-bank/recep
 @Component({
   selector: 'app-pesa-link',
   templateUrl: './pesa-link.component.html',
-  styleUrls: ['./pesa-link.component.scss']
+  styleUrls: ['./pesa-link.component.scss'],
 })
-export class PesaLinkComponent extends BaseTransactComponent implements OnInit {
-
+export class PesaLinkComponent implements OnInit {
   ownEquityAccountTransferForm: FormGroup;
   aboveTransactionTypeLimit: boolean = false;
   loading: boolean = false;
   sendTo: FavouriteBeneficiaryModel;
   phoneLinked: phoneLinkedModel;
-  recepientBankDetails: recipientBankDetailsModel
+  recepientBankDetails: recipientBankDetailsModel;
 
   constructor(
     private readonly supportingDocumentsUploadService: SupportingDocumentsUploadService,
     private readonly fb: FormBuilder,
-    accountService: AccountsService,
     private ownEquityAccountService: OwnAccountService,
     public dialog: MatDialog,
     private readonly router: Router,
     private readonly pesaLinkSendToService: PesaLinkSendToService,
     private readonly favouritesModalService: FavouritesModalService,
     private readonly phoneLinkedService: PhoneLinkedService,
-    private readonly recepientBankService: RecepientBankService,
-  ) {
-    super(accountService);
-  }
+    private readonly recepientBankService: RecepientBankService
+  ) {}
 
   get getForm() {
     return this.ownEquityAccountTransferForm.controls;
@@ -67,21 +63,26 @@ export class PesaLinkComponent extends BaseTransactComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.getUserAccounts();
     this.eventsSubscriptions();
   }
 
   private eventsSubscriptions(): void {
     this.favouritesModalService.selected.subscribe((response) => {
-      this.ownEquityAccountTransferForm.controls.recipient.setValue(response.name);
+      this.ownEquityAccountTransferForm.controls.recipient.setValue(
+        response.name
+      );
       this.sendTo = response;
     });
     this.phoneLinkedService.data.subscribe((response) => {
-      this.ownEquityAccountTransferForm.controls.recipient.setValue(response.phone);
+      this.ownEquityAccountTransferForm.controls.recipient.setValue(
+        response.phone
+      );
       this.phoneLinked = response;
     });
     this.recepientBankService.data.subscribe((response) => {
-      this.ownEquityAccountTransferForm.controls.recipient.setValue(response.accountno);
+      this.ownEquityAccountTransferForm.controls.recipient.setValue(
+        response.accountno
+      );
       this.recepientBankDetails = response;
     });
   }
@@ -153,14 +154,12 @@ export class PesaLinkComponent extends BaseTransactComponent implements OnInit {
   }
 
   openFavourites(): void {
-    this.pesaLinkSendToService.open(mockData.favourites)
+    this.pesaLinkSendToService.open(mockData.favourites);
   }
 
   // Initiate fund transfer to own equity account
   sendMoney() {
-    this.router.navigate([
-      '/transact/other-equity-account/submit-transfer',
-    ]);
+    this.router.navigate(['/transact/other-equity-account/submit-transfer']);
     // this.loading = true;
     // const payload = {
     //   amount: this.getForm.amount.value.amount,
@@ -198,5 +197,4 @@ export class PesaLinkComponent extends BaseTransactComponent implements OnInit {
     //     });
     // }
   }
-
 }

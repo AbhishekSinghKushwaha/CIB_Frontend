@@ -4,6 +4,7 @@ import { NotificationModalComponent } from './notification-modal.component';
 import { MatStyleModule } from 'src/app/mat-style.module';
 import { NotificationModalService } from '../../../../core/services/notification-modal/notification-modal.service';
 import { SharedComponentsModule } from '../../components/shared-components.module';
+import { AccountCardModule } from '../../components/account-card/account-card.module';
 
 @NgModule({
   declarations: [
@@ -12,12 +13,13 @@ import { SharedComponentsModule } from '../../components/shared-components.modul
   imports: [
     CommonModule,
     MatStyleModule,
-    SharedComponentsModule
+    SharedComponentsModule,
+    AccountCardModule
   ],
-  exports:[
+  exports: [
     NotificationModalComponent
   ],
-  providers:[
+  providers: [
     NotificationModalService
   ]
 })

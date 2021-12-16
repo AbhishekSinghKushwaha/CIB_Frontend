@@ -19,4 +19,8 @@ export class NotificationModalComponent implements OnInit {
     this.dialogRef.close(true);
   }
 
+  onClose(event: boolean) {
+    event && this.dialogRef.close(true);
+  }
+
 }
