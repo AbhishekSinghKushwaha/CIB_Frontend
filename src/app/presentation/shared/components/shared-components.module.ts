@@ -7,8 +7,8 @@ import { MatStyleModule } from 'src/app/mat-style.module';
 import { RegisterButtonFooterComponent } from './register-button-footer/register-button-footer.component';
 import { LogoutButtonFooterComponent } from './logout-button-footer/logout-button-footer.component';
 import { TransactMenuItemComponent } from './transact-menu-item/transact-menu-item.component';
-import { SmsVerificationComponent } from './sms-verification/sms-verification.component';
 import { EmailVerificationComponent } from './email-verification/email-verification.component';
+import { SmsVerificationComponent } from './sms-verification/sms-verification.component';
 
 const components = [
   LanguageInputComponent,
