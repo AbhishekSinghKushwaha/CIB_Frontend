@@ -70,7 +70,7 @@ export class CustomerOnboardingComponent implements OnInit {
 
   skipOnboarding(): void {
     this.onboardingService.showOnboarding = false;
-    this.router.navigate(['../auth/login']);
+    this.router.navigate(['auth/customer-onboarding/account']);
   }
 
   animationCreated(animationItem: AnimationItem): void {
