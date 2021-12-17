@@ -5,17 +5,17 @@ import { SharedComponentsModule } from 'src/app/presentation/shared/components/s
 import { MatStyleModule } from 'src/app/mat-style.module';
 import { TransactComponent } from './transact.component';
 import { TransactRoutingModule } from './transact-routing.module';
+import { SnackbarModule } from 'src/app/presentation/shared/components/snackbar/snackbar.module';
 
 @NgModule({
-  declarations: [
-    TransactComponent
-  ],
+  declarations: [TransactComponent],
   imports: [
     CommonModule,
     TransactRoutingModule,
     SharedComponentsModule,
-    MatStyleModule
+    MatStyleModule,
+    SnackbarModule,
   ],
-  providers: [TransactConstants]
+  providers: [TransactConstants],
 })
-export class TransactModule { }
+export class TransactModule {}

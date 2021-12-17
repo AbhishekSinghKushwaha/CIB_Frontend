@@ -8,9 +8,9 @@ const routes: Routes = [
     component: PreLoginComponent,
     children: [
       {
-         path: '',
-         redirectTo: 'login',
-         pathMatch: 'full'
+        path: '',
+        redirectTo: 'login',
+        pathMatch: 'full'
       },
       {
         path: 'login',
@@ -18,7 +18,7 @@ const routes: Routes = [
       },
       {
         path: 'sms-verification',
-        loadChildren: (): Promise<any> => import('./sms-verification/sms-verification.module').then(m => m.SmsVerificationModule)
+        loadChildren: (): Promise<any> => import('./login-sms-verification/login-sms-verification.module').then(m => m.LoginSmsVerificationModule)
       },
       {
         path: 'security-verification',

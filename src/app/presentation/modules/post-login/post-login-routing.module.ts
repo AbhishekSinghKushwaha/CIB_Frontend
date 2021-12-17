@@ -5,8 +5,8 @@ import { PostLoginComponent } from './post-login.component';
 const routes: Routes = [
   {
     path: '',
-    component : PostLoginComponent,
-    children:[
+    component: PostLoginComponent,
+    children: [
       // {
       //   path: '',
       //   loadChildren: (): Promise<any> => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
@@ -27,6 +27,10 @@ const routes: Routes = [
       {
         path: 'borrow',
         loadChildren: (): Promise<any> => import('./borrow/borrow.module').then(m => m.BorrowModule)
+      },
+      {
+        path: 'account',
+        loadChildren: (): Promise<any> => import('./accounts/accounts.module').then(m => m.AccountsModule)
       }
     ]
   }

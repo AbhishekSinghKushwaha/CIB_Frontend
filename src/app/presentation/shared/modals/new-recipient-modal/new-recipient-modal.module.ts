@@ -8,6 +8,7 @@ import { CountryModalModule } from '../country-modal/country-modal.module';
 import { IntraNewRecipientComponent } from './intra-new-recipient/intra-new-recipient.component';
 import { InterNewRecipientComponent } from './inter-new-recipient/inter-new-recipient.component';
 import { FormElementsModule } from '../../form-elements/form-elements.module';
+import { SubsidiaryModalModule } from '../subsidiary-modal/subsidiary-modal.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { FormElementsModule } from '../../form-elements/form-elements.module';
     MatStyleModule,
     ReactiveFormsModule,
     CountryModalModule,
+    SubsidiaryModalModule,
     FormsModule,
     ReactiveFormsModule,
     FormElementsModule,

@@ -22,6 +22,7 @@ export class TransactComponent implements OnInit {
   ngOnInit(): void {
     this.getUserAccounts();
     this.getBanks();
+    this.getSubsidiaries();
   }
 
   getUserAccounts() {
@@ -38,6 +39,16 @@ export class TransactComponent implements OnInit {
     this.dataLookUpService.getBanks('KE').subscribe((res) => {
       if (res.status) {
         this.sharedDataService.banks.next(res.data);
+      } else {
+        // TODO:: Notify error
+      }
+    });
+  }
+
+  getSubsidiaries() {
+    this.dataLookUpService.getSubsidiaries().subscribe((res) => {
+      if (res.status) {
+        this.sharedDataService.subsidiaries.next(res.data);
       } else {
         // TODO:: Notify error
       }

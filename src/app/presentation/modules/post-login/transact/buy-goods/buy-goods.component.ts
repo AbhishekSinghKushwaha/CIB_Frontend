@@ -23,45 +23,37 @@ import { OwnAccountService } from 'src/app/core/services/transfers/own-account/o
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmPaymentComponent } from 'src/app/presentation/shared/modals/confirm-payment/confirm-payment.component';
 import { Router } from '@angular/router';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-buy-goods',
   templateUrl: './buy-goods.component.html',
-  styleUrls: ['./buy-goods.component.scss']
+  styleUrls: ['./buy-goods.component.scss'],
 })
-export class BuyGoodsComponent 
-extends BaseTransactComponent
-implements OnInit
- {
-
+export class BuyGoodsComponent extends BaseTransactComponent implements OnInit {
   schedulePaymentData: ScheduledPaymentModel;
   paymentDate: ScheduledPaymentModel;
   fundTransferBuyGoodsForm: FormGroup;
   aboveTransactionTypeLimit: boolean = false;
   loading: boolean = false;
-  
 
   constructor(
     private readonly supportingDocumentsUploadService: SupportingDocumentsUploadService,
     private readonly fb: FormBuilder,
-    accountService: AccountsService,
+    snackBar: MatSnackBar,
     private ownEquityAccountService: OwnAccountService,
     public dialog: MatDialog,
-    private readonly router: Router,
+    private readonly router: Router
   ) {
-    super(accountService);
+    super(snackBar);
   }
-
 
   get getForm() {
     return this.fundTransferBuyGoodsForm.controls;
   }
 
-
   ngOnInit(): void {
     this.initForm();
-    this.getUserAccounts();
   }
 
   initForm(): void {
@@ -73,7 +65,6 @@ implements OnInit
       fxReferenceId: ['', [Validators.required]],
     });
   }
-  
 
   openSupportingDocuments(): void {
     this.supportingDocumentsUploadService.open();
@@ -87,20 +78,22 @@ implements OnInit
       currency: this.getForm.amount.value.currency,
       destinationAccount: this.getForm.sendTo.value.accountNumber,
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
-      transferType: 1 // For Own Equity Account
-    }
-    this.ownEquityAccountService.getTransferCharges(payload).subscribe(res => {
-      if (res.status) {
-        this.loading = false;
-        this.confirmPayment(res.data);
-      } else {
-        this.loading = false;
-        // TODO:: Notify error
-      }
-    })
+      transferType: 1, // For Own Equity Account
+    };
+    this.ownEquityAccountService
+      .getTransferCharges(payload)
+      .subscribe((res) => {
+        if (res.status) {
+          this.loading = false;
+          this.confirmPayment(res.data);
+        } else {
+          this.loading = false;
+          // TODO:: Notify error
+        }
+      });
   }
 
-  // Confirm Payment and return the confirmation boolean before initiating payment. 
+  // Confirm Payment and return the confirmation boolean before initiating payment.
   confirmPayment(transferFee: string) {
     if (this.fundTransferBuyGoodsForm.valid) {
       const paymentData = {
@@ -111,7 +104,7 @@ implements OnInit
         paymentReason: this.getForm.reason.value,
         fxReferenceId: this.getForm.fxReferenceId.value,
         schedulePayment: this.paymentDate,
-        transferFee
+        transferFee,
       };
       const dialogRef = this.dialog.open(ConfirmPaymentComponent, {
         data: paymentData,
@@ -138,9 +131,9 @@ implements OnInit
     this.loading = true;
     const payload = {
       amount: this.getForm.amount.value.amount,
-      beneficiaryAccount:this.getForm.sendTo.value.accountNumber,
-      beneficiaryBank: "",
-      beneficiaryBankCode: "",
+      beneficiaryAccount: this.getForm.sendTo.value.accountNumber,
+      beneficiaryBank: '',
+      beneficiaryBankCode: '',
       beneficiaryCurrency: this.getForm.sendTo.value.currency,
       beneficiaryName: this.getForm.sendTo.value.accountName,
       currency: this.getForm.amount.value.currency,
@@ -148,8 +141,8 @@ implements OnInit
       paymentReason: this.getForm.reason.value,
       schedulePayment: this.paymentDate,
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
-      transferType: 1 // Buy goods
-    }
+      transferType: 1, // Buy goods
+    };
     if (this.fundTransferBuyGoodsForm.valid) {
       this.ownEquityAccountService
         .sendToOwnEquityAccount(payload)
@@ -165,5 +158,4 @@ implements OnInit
         });
     }
   }
-
 }

@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SmsVerificationComponent } from './sms-verification.component';
+import { AddAccountComponent } from './add-account.component';
 
 const routes: Routes = [{
-    path: '',
-    component: SmsVerificationComponent
-  }];
+  path: '',
+  component: AddAccountComponent
+}];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class SmsVerificationRoutingModule { }
+export class AddAccountRoutingModule { }
