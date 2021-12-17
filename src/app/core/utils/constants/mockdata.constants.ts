@@ -597,6 +597,8 @@ const buyGoodsFavourites: BuyGoodsFavouriteModel[] = [
   },
 ];
 
+const accountNumber: string = "2837181638719349"
+
 export const mockData = {
   accounts,
   favourites,
@@ -604,4 +606,5 @@ export const mockData = {
   countries,
   statementList,
   buyGoodsFavourites,
+  accountNumber
 };

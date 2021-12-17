@@ -13,7 +13,7 @@
       </button>
 
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>
+        <button mat-menu-item (click)="downloadPdf()">
           <mat-icon svgIcon="download"></mat-icon>
           <span>Download PDF</span>
         </button>
