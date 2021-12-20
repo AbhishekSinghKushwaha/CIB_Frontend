@@ -30,4 +30,12 @@ export class BuyGoodsPayToService {
   get default():BuyGoodsFavouriteModel{
     return this.data
   }
+
+  getMerchants(): void{
+    console.log('getMerchants');
+  }
+
+  getFavouriteMerchants(): void{
+    console.log('getFavouriteMerchants');
+  }
 }

@@ -33,10 +33,10 @@
 
     <div class="row mt-4">
         <div class="col-md-2">
-            <button mat-raised-button [disabled]="form.invalid" type="submit" color="primary" class="px-5" routerLink="/transact/buy-goods/submit-transfer">Verify</button>
+            <button mat-raised-button [disabled]="form.invalid" type="submit" color="primary" class="px-5" (click)="verify()">Verify</button>
         </div>  
         <div class="col-md-3">
-            <button mat-stroked-button [disabled]="timeLeft != 60" type="button" color="primary" (click)="startTimer()" class="px-5">{{timeLeft == 60 ? 'Resend code' : 'Resend in 0:'+timeLeft}}</button>
+            <button mat-stroked-button [disabled]="timeLeft != 60" type="button" color="primary" (click)="resendOtp()" class="px-5">{{timeLeft == 60 ? 'Resend code' : 'Resend in 0:'+timeLeft}}</button>
         </div>
         <div class="col-md-1">
             <button mat-stroked-button type="button" color="primary" class="px-5" routerLink="/transact/buy-goods/otp-verification">Try another method</button>

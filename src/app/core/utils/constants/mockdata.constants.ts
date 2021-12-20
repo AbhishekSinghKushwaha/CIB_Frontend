@@ -586,13 +586,15 @@ const buyGoodsFavourites: BuyGoodsFavouriteModel[] = [
   {
     id: 1,
     accountName: 'Diners Grill',
-    accountNumber: '444400',
+    tillNumber: '444400',
+    accountNumber: '1120161406205',
     imageLink: './assets/images/icons/visual-support-icon-till.svg',
   },
   {
     id: 2,
     accountName: 'Afro Home Deliveries',
-    accountNumber: '988766',
+    tillNumber: '988766',
+    accountNumber: '1120161406205',
     imageLink: './assets/images/icons/visual-support-icon-till.svg',
   },
 ];

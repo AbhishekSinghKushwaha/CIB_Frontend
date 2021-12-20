@@ -2,6 +2,9 @@ import { Component, OnInit, Input, Inject, ViewChildren, ElementRef  } from '@an
 import { otpCodeModel } from 'src/app/core/domain/otp-code.model';
 import { OtpCodeService } from 'src/app/core/services/otp-code/otp-code.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { GenerateOtpService } from 'src/app/core/services/generate-otp/generate-otp.service';
+import { BuyGoodsService } from 'src/app/core/services/transfers/buy-goods/buy-goods.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-verify-by-code',
@@ -15,6 +18,7 @@ export class VerifyByCodeComponent implements OnInit {
   alertVisible: boolean;
   alertMessage: string;
   @Input() data: any;
+  payload: any;
 
 
   form: FormGroup;
@@ -22,7 +26,10 @@ export class VerifyByCodeComponent implements OnInit {
   @ViewChildren('formRow') rows: any;
 
   constructor(
-    private readonly otpCodeService: OtpCodeService
+    private readonly otpCodeService: OtpCodeService,
+    private readonly generateOtpService: GenerateOtpService,
+    private readonly buyGoodsService: BuyGoodsService,
+    private readonly router: Router,
   ) { 
     this.form = this.toFormGroup(this.formInput);
   }
@@ -52,7 +59,7 @@ export class VerifyByCodeComponent implements OnInit {
     setTimeout(() => this.alertVisible = false, 2500)
   }
 
-  startTimer() {
+  resendOtp() {
     this.interval = setInterval(() => {
       if(this.timeLeft > 0) {
         this.timeLeft--;
@@ -62,6 +69,25 @@ export class VerifyByCodeComponent implements OnInit {
       }
     },1000)
     this.showAlert("We’ve sent you another code");
+    this.buyGoodsService.currentData.subscribe(data => {
+      this.payload = data;
+      if(data) {
+        this.generateOtpService.generateOtp(this.payload);
+      }
+    });
+  }
+
+  verify() {
+    this.buyGoodsService.currentData.subscribe(data => {
+      this.payload = data;
+      if(data) {
+        this.buyGoodsService.sendToBuyGoods(this.payload).subscribe((res) => {
+          if(res.status){
+            this.router.navigate(["/transact/buy-goods/submit-transfer"]);
+          }
+        });
+      }
+    });
   }
 
   pauseTimer() {
