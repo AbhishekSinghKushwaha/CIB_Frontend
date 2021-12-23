@@ -1,1 +1,103 @@
-<p>mobile-money works!</p>
+<div class="row">
+  <div class="col-md-12">
+    <div class="row mb-4 justify-content-md-center">
+      <div class="col-md-11">
+        <div class="mb-3">
+          <button
+            mat-icon-button
+            aria-label="Back"
+            class="back-icon"
+            routerLink="/transact/"
+          >
+            <div class="strong-text">
+              <mat-icon svgIcon="caret_left"></mat-icon>
+              <span>Send mobile money</span>
+            </div>
+          </button>
+        </div>
+        <h3 class="strong-text">Please enter the payment details</h3>
+        <form
+          [formGroup]="mobileMoneyTransferForm"
+          (submit)="getTransferCharges()"
+          class="d-flex flex-column"
+          autocomplete="off"
+        >
+          <div class="row pt-4">
+            <!-- Transfer-from -->
+            <div class="col-md-6">
+              <app-transfer-from
+                [parentForm]="mobileMoneyTransferForm"
+                label="Send From"
+                placeholder="Send From"
+                formControlName="sendFrom"
+                fieldName="sendFrom"
+              ></app-transfer-from>
+            </div>
+            <!-- Transfer To -->
+            <div class="col-md-6 align-self-end">
+              <app-transfer-to
+                [parentForm]="mobileMoneyTransferForm"
+                label="Send To"
+                formControlName="sendTo"
+                fieldName="sendTo"
+                placeholder="Select the recipient"
+                transactionType="intraBankTransfer"
+              >
+              </app-transfer-to>
+            </div>
+            <!-- Transaction Amount -->
+            <div class="col-md-6">
+              <app-transfer-amount
+                [parentForm]="mobileMoneyTransferForm"
+                label="Amount"
+                fieldName="amount"
+                placeholder="Enter an amount"
+                formControlName="amount"
+              ></app-transfer-amount>
+            </div>
+            <!-- Schedule Payment -->
+            <div class="col-md-6">
+              <app-schedule-payment-input
+                [parentForm]="mobileMoneyTransferForm"
+                label="Schedule Payment"
+                fieldName="schedulePayment"
+                placeholder="Select a payment date"
+                transactionType="intraBankTransfer"
+              ></app-schedule-payment-input>
+            </div>
+            <!-- FX Reference ID -->
+            <div class="col-md-6">
+              <app-input
+                [parentForm]="mobileMoneyTransferForm"
+                label="Fx Reference ID"
+                fieldName="fxReferenceId"
+                formControlName="fxReferenceId"
+                placeholder="Enter FX reference ID"
+              ></app-input>
+            </div>
+            <!-- Payment Reason -->
+            <div class="col-md-6">
+              <app-input
+                [parentForm]="mobileMoneyTransferForm"
+                label="Payment Reason"
+                fieldName="reason"
+                formControlName="reason"
+                placeholder="Optional"
+              ></app-input>
+            </div>
+          </div>
+          <!-- Submit Button -->
+          <div class="mt-4">
+            <button
+              mat-raised-button
+              [disabled]="mobileMoneyTransferForm.invalid"
+              color="primary"
+            >
+              Send money
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
