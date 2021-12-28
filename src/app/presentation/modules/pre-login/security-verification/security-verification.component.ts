@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserVerifyProduct } from './../../../../core/domain/user-verify-product.model';
 
 @Component({
@@ -11,7 +12,7 @@ export class SecurityVerificationComponent implements OnInit {
   submitted = false;
   userVerifyProducts!: UserVerifyProduct[];
 
-  constructor() { }
+  constructor(private readonly router: Router) { }
 
   ngOnInit(): void {
     this.getProducts()
@@ -19,8 +20,8 @@ export class SecurityVerificationComponent implements OnInit {
 
   getProducts() {
     this.userVerifyProducts = [
-      {id:1, name: 'Answer the security answers', icon: 'email' },
-      {id:2, name: 'Contact support', icon: 'pay-card' },
+      { id: 1, name: 'Answer the security answers', icon: 'email' },
+      { id: 2, name: 'Contact support', icon: 'pay-card' },
     ];
   }
 
@@ -30,6 +31,9 @@ export class SecurityVerificationComponent implements OnInit {
       this.selectedItem = null;
     } else {
       this.selectedItem = product;
+    }
+    if (this.selectedItem?.id === 1) {
+      this.router.navigate(['/auth/security-challenge']);
     }
   }
 

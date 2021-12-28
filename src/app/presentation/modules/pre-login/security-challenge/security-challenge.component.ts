@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserModel } from 'src/app/core/domain/user.model';
+import { SecurityChallengeService } from 'src/app/core/services/security-challenge/security-challenge.service';
+import { StorageService } from 'src/app/core/services/storage/storage.service';
 
 @Component({
   selector: 'app-security-challenge',
@@ -14,12 +18,25 @@ export class SecurityChallengeComponent implements OnInit {
     'At what age did you start working'
   ];
   submitted = false;
+  user: UserModel;
 
-  constructor(private readonly fb: FormBuilder) {
+  constructor(private readonly fb: FormBuilder,
+    private readonly storageService: StorageService,
+    private readonly router: Router,
+    private readonly securityChallengeService: SecurityChallengeService) {
     this.initOtpForm();
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.user = await this.storageService.getData('loginCred');
+    this.securityChallengeService.getSecurityQuestions(this.user).subscribe(
+      response => {
+        this.securityQuestions = response;
+      },
+      error => {
+        console.log({ error });
+      }
+    )
     this.initForm()
   }
 
@@ -46,7 +63,22 @@ export class SecurityChallengeComponent implements OnInit {
   }
 
   submit(): void {
+    const answers = this.securityChallengeFormArray.getRawValue();
+    if (answers?.length === this.securityQuestions.length) {
+      this.securityChallengeService.submitSecurityAnswers(answers, this.user).subscribe(
+        response => {
+          console.log(response);
+          if (response) {
+            this.router.navigate(['/dashboard']);
+          } else {
 
+          }
+        },
+        error => {
+          console.log({ error });
+        }
+      )
+    }
   }
 
 }

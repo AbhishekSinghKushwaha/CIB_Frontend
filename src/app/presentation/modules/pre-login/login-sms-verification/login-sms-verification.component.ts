@@ -1,5 +1,10 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserModel } from 'src/app/core/domain/user.model';
+import { LoginSmsVerificationService } from 'src/app/core/services/login-sms-verification/login-sms-verification.service';
+import { LoginService } from 'src/app/core/services/login/login.service';
+import { StorageService } from 'src/app/core/services/storage/storage.service';
 
 @Component({
   selector: 'app-login-sms-verification',
@@ -13,14 +18,34 @@ export class LoginSmsVerificationComponent implements OnInit {
   otpResent = false;
   submitted = false;
   numOfDigits = 6;
+  user: UserModel;
+  otpError: boolean;
 
-  constructor(private readonly fb: FormBuilder) {
+  constructor(private readonly fb: FormBuilder,
+    private readonly loginSmsVerificationService: LoginSmsVerificationService,
+    private readonly router: Router,
+    private readonly storageService: StorageService,
+    private readonly loginService: LoginService) {
     this.initOtpForm();
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.initForm();
+    this.checkLoginStatus();
   }
+
+  private async checkLoginStatus(): Promise<void> {
+    this.loginService.getUserData().then(
+      (data: UserModel) => {
+        if (!data) {
+          this.router.navigate(['/auth/login']);
+        }
+        this.user = data;
+      }
+    ).catch(e => console.log(e))
+
+  }
+
 
   get f(): any {
     return this.verifyOtpForm.controls;
@@ -62,8 +87,20 @@ export class LoginSmsVerificationComponent implements OnInit {
     }
   }
 
-  submit() {
-
+  submit(otp: string) {
+    this.otpError = false;
+    if (otp) {
+      this.loginSmsVerificationService.submitOTP(otp, this.user).subscribe(
+        response => {
+          this.storageService.setData('otpToken', { otp });
+          this.router.navigate(['/auth/security-verification']);
+        },
+        error => {
+          this.otpError = true;
+          console.log({ error });
+        }
+      )
+    }
   }
 
 }
