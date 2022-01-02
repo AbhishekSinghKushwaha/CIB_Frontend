@@ -7,7 +7,6 @@ import { PreLoginModal } from 'src/app/core/domain/pre-login-modal.model';
   selector: 'app-account-card',
   templateUrl: './account-card.component.html',
   styleUrls: ['./account-card.component.scss'],
-  encapsulation: ViewEncapsulation.None
 })
 export class AccountCardComponent implements OnInit {
   @Input() data: PreLoginModal | any;
