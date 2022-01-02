@@ -4,6 +4,7 @@ import { StatementListModel } from '../../domain/statement-list.model';
 import { FavouriteBeneficiaryModel } from './../../domain/favourites-beneficiary.model';
 import { SelectAccountModel } from './../../domain/select-account.model';
 import { BuyGoodsFavouriteModel } from './../../domain/buy-goods-favourites.model';
+import { UserModel } from '../../domain/user.model';
 
 const accounts: SelectAccountModel[] = [
   {
@@ -25,6 +26,23 @@ const accounts: SelectAccountModel[] = [
     type: 'Current',
   },
 ];
+
+const users: UserModel[] = [
+  {
+    id: 1,
+    name: 'Oluwatosin Iyiola',
+    username: 'olu.iyiola1@gmail.com',
+    password: 'Temmanuel2',
+    transactionType: 'Login',
+    smsToken: '666666',
+    securityQuestions: [
+      { question: 'What village were you born in?', answer: 'aaa' },
+      { question: 'What was the last city you visited?', answer: 'bbb' },
+      { question: 'At what age did you start working', answer: 'ccc' }
+    ]
+  },
+];
+
 
 const favourites: FavouriteBeneficiaryModel[] = [
   {
@@ -606,5 +624,6 @@ export const mockData = {
   countries,
   statementList,
   buyGoodsFavourites,
-  accountNumber
+  accountNumber,
+  users
 };

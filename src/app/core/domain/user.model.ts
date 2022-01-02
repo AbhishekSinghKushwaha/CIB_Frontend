@@ -4,7 +4,11 @@ export interface UserModel {
   email?: string;
   access_token?: string;
   newLogin?: boolean;
+  password?: string;
+  transactionType?: string;
   response_code?: number;
-  family: string;
+  family?: string;
   smsToken?: string;
+  username?: string;
+  securityQuestions: { question: string; answer: string }[];
 }

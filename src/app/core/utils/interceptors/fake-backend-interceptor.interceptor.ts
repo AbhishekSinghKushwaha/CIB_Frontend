@@ -4,22 +4,10 @@ import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 import ShareUtils from '../shared.util';
 import urlList from '../../services/service-list.json';
+import { UserModel } from '../../domain/user.model';
+import { mockData } from '../constants/mockdata.constants';
 
-const users: any[] = [
-  {
-    id: 1,
-    name: 'Oluwatosin Iyiola',
-    username: 'olu.iyiola1@gmail.com',
-    password: 'Temmanuel2',
-    transactionType: 'Login',
-    smsToken: '666666',
-    securityQuestions: [
-      { question: 'What village were you born in?', answer: 'aaa' },
-      { question: 'What was the last city you visited?', answer: 'bbb' },
-      { question: 'At what age did you start working', answer: 'ccc' }
-    ]
-  },
-];
+const users = mockData.users;
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
