@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { UserModel } from 'src/app/core/domain/user.model';
 import { SecurityChallengeService } from 'src/app/core/services/security-challenge/security-challenge.service';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
+import LOGIN_CONSTANTS from 'src/app/core/utils/constants/pre-login.constants';
 
 @Component({
   selector: 'app-security-challenge',
@@ -69,6 +70,7 @@ export class SecurityChallengeComponent implements OnInit {
         response => {
           console.log(response);
           if (response) {
+            this.storageService.setData('loginState', { stage: LOGIN_CONSTANTS.LOGIN_STAGES.LOGIN_SUCCESS });
             this.router.navigate(['/dashboard']);
           } else {
 

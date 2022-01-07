@@ -31,10 +31,14 @@ const users: UserModel[] = [
   {
     id: 1,
     name: 'Oluwatosin Iyiola',
+    family: 'Father',
     username: 'olu.iyiola1@gmail.com',
     password: 'Temmanuel2',
     transactionType: 'Login',
+    access_token: 'BEARER AUTHCODE',
+    newLogin: false,
     smsToken: '666666',
+    response_code: 200,
     securityQuestions: [
       { question: 'What village were you born in?', answer: 'aaa' },
       { question: 'What was the last city you visited?', answer: 'bbb' },

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { StorageService } from 'src/app/core/services/storage/storage.service';
+import LOGIN_CONSTANTS from 'src/app/core/utils/constants/pre-login.constants';
 import { UserVerifyProduct } from './../../../../core/domain/user-verify-product.model';
 
 @Component({
@@ -12,7 +14,7 @@ export class SecurityVerificationComponent implements OnInit {
   submitted = false;
   userVerifyProducts!: UserVerifyProduct[];
 
-  constructor(private readonly router: Router) { }
+  constructor(private readonly router: Router, private readonly storageService: StorageService) { }
 
   ngOnInit(): void {
     this.getProducts()
@@ -33,6 +35,7 @@ export class SecurityVerificationComponent implements OnInit {
       this.selectedItem = product;
     }
     if (this.selectedItem?.id === 1) {
+      this.storageService.setData('loginState', { stage: LOGIN_CONSTANTS.LOGIN_STAGES.SECURITY_CHALLENGE });
       this.router.navigate(['/auth/security-challenge']);
     }
   }

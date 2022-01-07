@@ -5,6 +5,7 @@ import { UserModel } from 'src/app/core/domain/user.model';
 import { LoginSmsVerificationService } from 'src/app/core/services/login-sms-verification/login-sms-verification.service';
 import { LoginService } from 'src/app/core/services/login/login.service';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
+import LOGIN_CONSTANTS from 'src/app/core/utils/constants/pre-login.constants';
 
 @Component({
   selector: 'app-login-sms-verification',
@@ -92,6 +93,7 @@ export class LoginSmsVerificationComponent implements OnInit {
     if (otp) {
       this.loginSmsVerificationService.submitOTP(otp, this.user).subscribe(
         response => {
+          this.storageService.setData('loginState', { stage: LOGIN_CONSTANTS.LOGIN_STAGES.SECURITY_VERIFICATION });
           this.storageService.setData('otpToken', { otp });
           this.router.navigate(['/auth/security-verification']);
         },

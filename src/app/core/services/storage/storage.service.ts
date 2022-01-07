@@ -43,6 +43,7 @@ export class StorageService {
         if (data) {
           resolve(JSON.parse(this.b64DecodeData(data)))
         }
+        resolve(null);
       } catch (e) {
         reject(e);
       }

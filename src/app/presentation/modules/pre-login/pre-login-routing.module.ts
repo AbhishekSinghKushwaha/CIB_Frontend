@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SmsVerificationGuard } from 'src/app/core/utils/guards/sms-verification.guard';
 import { PreLoginComponent } from './pre-login.component';
 
 const routes: Routes = [
@@ -18,7 +19,8 @@ const routes: Routes = [
       },
       {
         path: 'sms-verification',
-        loadChildren: (): Promise<any> => import('./login-sms-verification/login-sms-verification.module').then(m => m.LoginSmsVerificationModule)
+        loadChildren: (): Promise<any> => import('./login-sms-verification/login-sms-verification.module').then(m => m.LoginSmsVerificationModule),
+        canActivate: [SmsVerificationGuard]
       },
       {
         path: 'security-verification',

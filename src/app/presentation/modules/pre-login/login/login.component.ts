@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { LoginService } from 'src/app/core/services/login/login.service';
 import { NotificationModalService } from 'src/app/core/services/notification-modal/notification-modal.service';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
+import LOGIN_CONSTANTS from 'src/app/core/utils/constants/pre-login.constants';
 import SharedUtil from './../../../../core/utils/shared.util';
 
 @Component({
@@ -57,6 +58,7 @@ export class LoginComponent implements OnInit {
         user => {
           console.log({ user })
           const { access_token, ...mainUser } = user;
+          this.storageService.setData('loginState', { stage: LOGIN_CONSTANTS.LOGIN_STAGES.SMS_VERIFICATION });
           this.storageService.setData('accessToken', { access_token });
           this.storageService.setData('loginCred', mainUser);
           this.router.navigate(['/auth/sms-verification']);
