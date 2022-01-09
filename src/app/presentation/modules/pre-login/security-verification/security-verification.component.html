@@ -1,12 +1,7 @@
 <div class="card border-0 security-verification">
   <div class="row ps-5">
     <div class="col-md-12">
-      <button
-        mat-button
-        aria-label="Back"
-        class="back-icon"
-        routerLink="/auth/sms-verification"
-      >
+      <button mat-button aria-label="Back" class="back-icon" (click)="back()">
         <div class="strong-text">
           <mat-icon svgIcon="chevron-left" class="chevron"></mat-icon>
           <span> Verify </span>
@@ -51,7 +46,15 @@
 
     <div class="row mt-5">
       <div class="col-12 text-left">
-        <button mat-flat-button color="primary" class="px-5">Continue</button>
+        <button
+          [disabled]="!selectedItem"
+          mat-flat-button
+          color="primary"
+          class="px-5"
+          (click)="submit()"
+        >
+          Continue
+        </button>
       </div>
     </div>
   </div>

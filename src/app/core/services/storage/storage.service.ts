@@ -36,19 +36,12 @@ export class StorageService {
     }
   }
 
-  getData(key: string): Promise<any> {
-    return new Promise((resolve, reject) => {
-      try {
-        const data = sessionStorage.getItem(this.b64EncodeData(key));
-        if (data) {
-          resolve(JSON.parse(this.b64DecodeData(data)))
-        }
-        resolve(null);
-      } catch (e) {
-        reject(e);
-      }
-    })
-
+  getData(key: string) {
+    const data = sessionStorage.getItem(this.b64EncodeData(key));
+    if (data) {
+      return (JSON.parse(this.b64DecodeData(data)))
+    }
+    return null;
   }
 
   removeData(key: string): void {

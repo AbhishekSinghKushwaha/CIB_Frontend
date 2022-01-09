@@ -34,14 +34,23 @@ export class SecurityVerificationComponent implements OnInit {
     } else {
       this.selectedItem = product;
     }
-    if (this.selectedItem?.id === 1) {
-      this.storageService.setData('loginState', { stage: LOGIN_CONSTANTS.LOGIN_STAGES.SECURITY_CHALLENGE });
-      this.router.navigate(['/auth/security-challenge']);
-    }
+  }
+
+  back() {
+    this.storageService.setData('loginState', { stage: LOGIN_CONSTANTS.LOGIN_STAGES.SMS_VERIFICATION });
+    this.router.navigate(['/auth/sms-verification']);
   }
 
   isChecked(product: UserVerifyProduct): boolean {
     return product.id === this.selectedItem?.id;
+  }
+
+  submit() {
+    console.log(this.selectedItem);
+    if (this.selectedItem?.id === 1) {
+      this.storageService.setData('loginState', { stage: LOGIN_CONSTANTS.LOGIN_STAGES.SECURITY_CHALLENGE });
+      this.router.navigate(['/auth/security-challenge']);
+    }
   }
 
 }

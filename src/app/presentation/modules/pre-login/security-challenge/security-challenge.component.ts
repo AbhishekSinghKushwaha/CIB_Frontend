@@ -63,6 +63,12 @@ export class SecurityChallengeComponent implements OnInit {
     }
   }
 
+  back() {
+    this.storageService.setData('loginState', { stage: LOGIN_CONSTANTS.LOGIN_STAGES.SECURITY_VERIFICATION });
+    this.router.navigate(['/auth/security-verification']);
+  }
+
+
   submit(): void {
     const answers = this.securityChallengeFormArray.getRawValue();
     if (answers?.length === this.securityQuestions.length) {
