@@ -13,7 +13,7 @@ export class BeneficiaryManagementService {
   constructor() { }
 
   submitForm(data: BeneficiaryModel) {
-    this.beneficiaries = [...this.beneficiaries, data]
+    this.beneficiaries = data && [...this.beneficiaries, data];
     setTimeout(() => {
       this.formData.next(this.beneficiaries)
     }, 0);

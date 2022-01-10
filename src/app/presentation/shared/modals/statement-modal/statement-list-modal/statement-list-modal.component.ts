@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { StatementListModel } from 'src/app/core/domain/statement-list.model';
 import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
 import PerfectScrollbar from 'perfect-scrollbar';
-import SharedUtil from './../../../../../core/utils/shared.util';
+import { SharedUtils } from './../../../../../core/utils/shared.util';
 import { NotificationModalService } from 'src/app/core/services/notification-modal/notification-modal.service';
 import { StatementPdfDownloadService } from 'src/app/core/services/statement/statement-pdf-download/statement-pdf-download.service';
 import { FormGroup } from '@angular/forms';
@@ -41,11 +41,11 @@ export class StatementListModalComponent implements OnInit {
   downloadPdf() {
     const fromDate = (this.data[0] as FormGroup).get('startDate')?.value;
     const toDate = (this.data[0] as FormGroup).get('endDate')?.value;
-    this.statementPdfDownloadService.pdfDownload({FromDate: fromDate, ToDate: toDate, AccountNumber: mockData.accountNumber},'statement.pdf')
+    this.statementPdfDownloadService.pdfDownload({ FromDate: fromDate, ToDate: toDate, AccountNumber: mockData.accountNumber }, 'statement.pdf')
   }
 
   sendEmail() {
-    const message = SharedUtil.getNotificationModalParam({
+    const message = SharedUtils.getNotificationModalParam({
       title: 'You\'ve got mail',
       message: 'We sent your sttement to v*******i@********.co.ke',
       buttonText: 'Dismiss'

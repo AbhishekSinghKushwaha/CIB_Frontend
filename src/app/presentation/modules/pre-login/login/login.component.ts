@@ -5,7 +5,7 @@ import { LoginService } from 'src/app/core/services/login/login.service';
 import { NotificationModalService } from 'src/app/core/services/notification-modal/notification-modal.service';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import LOGIN_CONSTANTS from 'src/app/core/utils/constants/pre-login.constants';
-import SharedUtil from './../../../../core/utils/shared.util';
+import { SharedUtils } from './../../../../core/utils/shared.util';
 
 @Component({
   selector: 'app-login',
@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit {
 
   // TODO: The modal services here are for examples only. These would be taken out
   modalTakeAnotherLook(): void {
-    const message = SharedUtil.getNotificationModalParam({
+    const message = SharedUtils.getNotificationModalParam({
       image: './assets/images/Illustrations/Illustrations_VerificationCode.svg',
       title: 'Take another look',
       message: 'The details you entered aren\'t familiar to us. Please try again or register to create your profile',
@@ -81,7 +81,7 @@ export class LoginComponent implements OnInit {
     this.notificationModalService.open(message);
   }
   modalTryAgain(): void {
-    const message = SharedUtil.getNotificationModalParam({
+    const message = SharedUtils.getNotificationModalParam({
       title: 'Lets try this again',
       message: 'The details you entered aren\'t familiar to us. Please try again or register to create your profile',
       registerButtonEnabled: true,
@@ -95,7 +95,7 @@ export class LoginComponent implements OnInit {
   }
 
   modalLogout(): void {
-    const message = SharedUtil.getNotificationModalParam({
+    const message = SharedUtils.getNotificationModalParam({
       title: 'Are you sure you want to sign out?',
       message: '',
       logoutButtonEnabled: true,
@@ -104,7 +104,7 @@ export class LoginComponent implements OnInit {
     this.isloggedOut = true;
   }
   modelSessionOut(): void {
-    const message = SharedUtil.getNotificationModalParam({
+    const message = SharedUtils.getNotificationModalParam({
       image: './assets/images/Illustrations/logout-illustration.svg',
       title: 'Are you stil there?',
       message: `You've been quiet. To keep your details safe, you will be automatically signed out in 00:59 seconds`,
