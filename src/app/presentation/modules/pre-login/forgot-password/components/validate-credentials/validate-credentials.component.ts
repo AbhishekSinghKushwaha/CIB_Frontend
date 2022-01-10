@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NotificationModalService } from 'src/app/core/services/notification-modal/notification-modal.service';
 import { ValidateCredentialsUsecase } from 'src/app/core/usecases/validate-credentials.usecase';
-import SharedUtil from './../../../../../../core/utils/shared.util';
+import { SharedUtils } from 'src/app/core/utils/shared.util';
 
 @Component({
   selector: 'app-validate-credentials',
@@ -22,9 +22,9 @@ export class ValidateCredentialsComponent implements OnInit {
     private validateCredentialsUsecase: ValidateCredentialsUsecase,
     private router: Router,
     private readonly notificationModalService: NotificationModalService
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   validateCredentials(): void {
     if (this.credentialsForm.invalid) {
@@ -52,7 +52,7 @@ export class ValidateCredentialsComponent implements OnInit {
   }
 
   private showInvalidCredentialsNotification(): void {
-    const message = SharedUtil.getNotificationModalParam({
+    const message = SharedUtils.getNotificationModalParam({
       image: './assets/images/Illustrations/Illustrations_VerificationCode.svg',
       title: 'Let’s try this again',
       message:

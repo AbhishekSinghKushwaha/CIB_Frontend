@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
-import ShareUtils from '../shared.util';
 import urlList from '../../services/service-list.json';
 import { UserModel } from '../../domain/user.model';
 import { mockData } from '../constants/mockdata.constants';

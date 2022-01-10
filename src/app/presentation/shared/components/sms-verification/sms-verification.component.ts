@@ -1,7 +1,7 @@
 import { Subject } from 'rxjs';
 import { Component, OnInit, QueryList, ViewChildren, Output, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
-import SharedUtil from './../../../../core/utils/shared.util';
+import { SharedUtils } from './../../../../core/utils/shared.util';
 import { NotificationModalService } from 'src/app/core/services/notification-modal/notification-modal.service';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { LoginSmsVerificationService } from 'src/app/core/services/login-sms-verification/login-sms-verification.service';
@@ -108,7 +108,7 @@ export class SmsVerificationComponent implements OnInit {
   }
 
   modalIncorectVerification(): void {
-    const message = SharedUtil.getNotificationModalParam({
+    const message = SharedUtils.getNotificationModalParam({
       title: 'Incorrect verification code',
       message: 'The details you entered aren\'t familiar to us. Please try again or register to create your profile',
       buttonText: 'Try again'
