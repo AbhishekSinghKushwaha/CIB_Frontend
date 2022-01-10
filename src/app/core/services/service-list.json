@@ -16,5 +16,13 @@
     },
     "statement": {
         "getPdf": "/v1/generatepdf/statement"
+    },
+    "login":{
+      "loginUser":"/users/authorization/login",
+      "verifyOtp":"/authorization/login/verifyOtp",
+      "resendOtp":"/authorization/oauth/regenerateOtp",
+      "validateOtp":"/authorization/user/validateOTPReset",
+      "securityQuestions":"/authorization/user/securityQuestions",
+      "securityAnswers":"/authorization/user/securityAnswers"
     }
 }

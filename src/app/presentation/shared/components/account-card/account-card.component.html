@@ -1,5 +1,5 @@
 <mat-card
-  class="notification-modal-screen p-0 mat-elevation-z7 cursor-pointer"
+  class="notification-modal-screen p-0 cursor-pointer"
   (click)="openLink()"
 >
   <div
@@ -15,7 +15,7 @@
     <img [src]="data.image" height="100px" />
   </div>
   <mat-card-content class="p-4">
-    <h3 class="card-title">{{ data.title }}</h3>
+    <h3 class="card-title fw-bold">{{ data.title }}</h3>
     <p class="text-muted text-grey">
       {{ data.message }}
     </p>

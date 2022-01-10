@@ -10,6 +10,7 @@ export class NotificationModalService {
 
   open(data: PreLoginModal) {
     return this.dialog.open<NotificationModalComponent, PreLoginModal>(NotificationModalComponent, {
+      width: '400px',
       disableClose: true,
       data
     });

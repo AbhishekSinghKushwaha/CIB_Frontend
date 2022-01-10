@@ -43,7 +43,6 @@
             Please enter the verification code
           </div>
         </div>
-        <div class="validationError">OTP Error here</div>
       </div>
       <div class="row gx-4 mb-2">
         <div class="col">
@@ -64,9 +63,22 @@
             color="primary"
             type="submit"
             class="col-12"
-            disabled
+            [disabled]="timeToResend > 0"
+            (click)="resendOTPCode()"
           >
-            Resend in 00:59
+            <div *ngIf="timeToResend > 0" class="resend-otp-text">
+              <div class="btn-text">
+                <span>Resend in</span>
+                00:{{
+                  timeToResend > 10
+                    ? timeToResend
+                    : ("0" + timeToResend).slice(-2)
+                }}
+              </div>
+            </div>
+            <div *ngIf="!otpResent && timeToResend === 0" class="btn-text">
+              Resend code
+            </div>
           </button>
         </div>
       </div>

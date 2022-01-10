@@ -13,6 +13,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserRepository } from './core/repositories/user.repository';
 import { UserMockRepository } from './data/repository/user-mock-repository/user-mock.repository';
 import { ErrorIntercept } from './core/utils/interceptors/error.interceptor';
+import { fakeBackendProvider } from './core/utils/interceptors/fake-backend-interceptor.interceptor';
+import { PostLoginGuard } from './core/utils/guards/post-login/post-login.guard';
+import { LoginGuard } from './core/utils/guards/login/login.guard';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,7 +35,10 @@ import { ErrorIntercept } from './core/utils/interceptors/error.interceptor';
   providers: [
     { provide: UserRepository, useClass: UserMockRepository },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorIntercept, multi: true },
+    fakeBackendProvider,
+    PostLoginGuard,
+    LoginGuard
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

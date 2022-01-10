@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { StorageService } from 'src/app/core/services/storage/storage.service';
+import LOGIN_CONSTANTS from 'src/app/core/utils/constants/pre-login.constants';
 import { UserVerifyProduct } from './../../../../core/domain/user-verify-product.model';
 
 @Component({
@@ -11,7 +14,7 @@ export class SecurityVerificationComponent implements OnInit {
   submitted = false;
   userVerifyProducts!: UserVerifyProduct[];
 
-  constructor() { }
+  constructor(private readonly router: Router, private readonly storageService: StorageService) { }
 
   ngOnInit(): void {
     this.getProducts()
@@ -19,8 +22,8 @@ export class SecurityVerificationComponent implements OnInit {
 
   getProducts() {
     this.userVerifyProducts = [
-      {id:1, name: 'Answer the security answers', icon: 'email' },
-      {id:2, name: 'Contact support', icon: 'pay-card' },
+      { id: 1, name: 'Answer the security answers', icon: 'email' },
+      { id: 2, name: 'Contact support', icon: 'pay-card' },
     ];
   }
 
@@ -33,8 +36,21 @@ export class SecurityVerificationComponent implements OnInit {
     }
   }
 
+  back() {
+    this.storageService.setData('loginState', { stage: LOGIN_CONSTANTS.LOGIN_STAGES.SMS_VERIFICATION });
+    this.router.navigate(['/auth/sms-verification']);
+  }
+
   isChecked(product: UserVerifyProduct): boolean {
     return product.id === this.selectedItem?.id;
+  }
+
+  submit() {
+    console.log(this.selectedItem);
+    if (this.selectedItem?.id === 1) {
+      this.storageService.setData('loginState', { stage: LOGIN_CONSTANTS.LOGIN_STAGES.SECURITY_CHALLENGE });
+      this.router.navigate(['/auth/security-challenge']);
+    }
   }
 
 }
