@@ -30,9 +30,9 @@ export class CountrySelectComponent implements OnInit, OnDestroy {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: recipientModel,
     private readonly countryService: CountryService
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   openCountries(): void {
     this.visibility = false;
@@ -51,9 +51,6 @@ export class CountrySelectComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log('Destroyed');
-    this.subscriptions.length &&
-      this.subscriptions.forEach((value) => value && value.unsubscribe());
     const modal = this.countryService.openCountry(
       this.countries,
       this.category
@@ -65,5 +62,7 @@ export class CountrySelectComponent implements OnInit, OnDestroy {
         this.selected.next(data);
       })
     );
+    this.subscriptions.length &&
+      this.subscriptions.forEach((value) => value && value.unsubscribe());
   }
 }

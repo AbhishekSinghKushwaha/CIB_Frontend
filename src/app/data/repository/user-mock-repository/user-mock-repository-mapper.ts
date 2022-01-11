@@ -5,16 +5,32 @@ import { Mapper } from 'src/app/core/base/mapper';
 export class UserMockRepositoryMapper extends Mapper<UserMockEntity, UserModel> {
   mapFrom(param: UserMockEntity): UserModel {
     return {
+      id: param.id,
       name: param.name,
       family: param.family,
-    };
-  }
-
+      access_token: param.access_token,
+      newLogin: param.newLogin,
+      password: param.password,
+      transactionType: param.transactionType,
+      response_code: param.response_code,
+      smsToken: param.smsToken,
+      username: param.username,
+      securityQuestions: param.securityQuestions
+    }
+  };
   mapTo(param: UserModel): UserMockEntity {
     return {
-      id: 0,
+      id: param.id,
       name: param.name,
-      family: param.family
+      family: param.family,
+      access_token: param.access_token,
+      newLogin: param.newLogin,
+      password: param.password,
+      transactionType: param.transactionType,
+      response_code: param.response_code,
+      smsToken: param.smsToken,
+      username: param.username,
+      securityQuestions: param.securityQuestions,
     };
   }
 }

@@ -2,7 +2,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, OnInit, Inject } from '@angular/core';
 import { BeneficiaryManagementFormModalService } from 'src/app/core/services/beneficiary-management-form-modal/beneficiary-management-form-modal.service';
 import { BeneficiaryModel } from 'src/app/core/domain/beneficiary.model';
-import SharedUtil from './../../../../core/utils/shared.util';
+import { SharedUtils } from './../../../../core/utils/shared.util';
 import { NotificationModalService } from 'src/app/core/services/notification-modal/notification-modal.service';
 
 @Component({
@@ -31,7 +31,7 @@ export class BeneficiaryManagementFormModalComponent implements OnInit {
   submitForm(value: BeneficiaryModel): void {
     this.visibility = false;
     if (value) {
-      const message = SharedUtil.getNotificationModalParam({
+      const message = SharedUtils.getNotificationModalParam({
         title: 'Your beneficiary has been added',
         message: `A new beneficiary has been added to your list.
         You can now send them money or buy them airtime at anytime`,

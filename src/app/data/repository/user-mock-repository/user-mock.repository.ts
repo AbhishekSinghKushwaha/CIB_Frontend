@@ -5,6 +5,7 @@ import { from, Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { UserRepository } from 'src/app/core/repositories/user.repository';
 import { UserMockRepositoryMapper } from './user-mock-repository-mapper';
+import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
 
 @Injectable({
   providedIn: 'root'
@@ -13,23 +14,7 @@ export class UserMockRepository extends UserRepository {
 
   private mapper = new UserMockRepositoryMapper();
 
-  users = [
-    {
-      'id': 1,
-      'name': 'Mr. MockBig',
-      'family': 'father'
-    },
-    {
-      'id': 2,
-      'name': 'Mrs. MockTootoot',
-      'family': 'mother'
-    },
-    {
-      'id': 3,
-      'name': 'LittleMockToot',
-      'family': 'baby'
-    }
-  ];
+  users = mockData.users;
 
   constructor() {
     super();
