@@ -31,6 +31,12 @@ export class TransactConstants {
           link: '/transact/other-banks',
         },
         {
+          leftIcon: 'account_balance',
+          text: 'Swift',
+          subtext: 'An international bank',
+          link: '/transact/swift',
+        },
+        {
           leftIcon: 'credit_card',
           text: 'Pay to card',
           subtext: 'Credit and prepaid cards',
