@@ -31,6 +31,10 @@ const routes: Routes = [
       {
         path: 'account',
         loadChildren: (): Promise<any> => import('./accounts/accounts.module').then(m => m.AccountsModule)
+      },
+      {
+        path: 'user-management',
+        loadChildren: (): Promise<any> => import('./user-management/user-management.module').then(m => m.UserManagementModule)
       }
     ]
   }
