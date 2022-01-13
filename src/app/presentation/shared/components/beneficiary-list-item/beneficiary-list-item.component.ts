@@ -3,12 +3,12 @@ import { BeneficiaryModel } from 'src/app/core/domain/beneficiary.model';
 import { FavouriteBeneficiaryModel } from 'src/app/core/domain/favourites-beneficiary.model';
 import { BeneficiaryManagementFormModalService } from 'src/app/core/services/beneficiary-management-form-modal/beneficiary-management-form-modal.service';
 import { BeneficiaryManagementModalService } from 'src/app/core/services/beneficiary-management-modal/beneficiary-management-modal.service';
-import { FavouritesModalService } from 'src/app/core/services/favourites-modal/favourites-modal.service';
+import { FavouritesModalService } from 'src/app/core/services/modal-services/favourites-modal/favourites-modal.service';
 
 @Component({
   selector: 'app-beneficiary-list-item',
   templateUrl: './beneficiary-list-item.component.html',
-  styleUrls: ['./beneficiary-list-item.component.scss']
+  styleUrls: ['./beneficiary-list-item.component.scss'],
 })
 export class BeneficiaryListItemComponent implements OnInit {
   @Input() isChecked: boolean;
@@ -16,12 +16,13 @@ export class BeneficiaryListItemComponent implements OnInit {
   @Input() data: FavouriteBeneficiaryModel;
   @Input() showCheckbox = false;
 
-  constructor(private readonly favouritesModalService: FavouritesModalService,
+  constructor(
+    private readonly favouritesModalService: FavouritesModalService,
     private readonly beneficiaryManagementModalService: BeneficiaryManagementModalService,
-    private readonly beneficiaryManagementFormModalService: BeneficiaryManagementFormModalService,) { }
+    private readonly beneficiaryManagementFormModalService: BeneficiaryManagementFormModalService
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   selectSingle(): void {
     this.favouritesModalService.select(this.data);

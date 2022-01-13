@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
-import { recipientModel } from '../../domain/recipient.model';
-import { NewRecipientModalComponent } from './../../../presentation/shared/modals/new-recipient-modal/new-recipient-modal.component';
+import { recipientModel } from '../../../domain/recipient.model';
+import { NewRecipientModalComponent } from '../../../../presentation/shared/modals/new-recipient-modal/new-recipient-modal.component';
 
 @Injectable()
 export class NewRecipientService {
@@ -10,13 +10,16 @@ export class NewRecipientService {
   dialogRef: any;
   private defaultData: recipientModel;
 
-  constructor(private readonly dialog: MatDialog) { }
+  constructor(private readonly dialog: MatDialog) {}
 
   open(data: recipientModel | null) {
-    return this.dialog.open<NewRecipientModalComponent, recipientModel>(NewRecipientModalComponent, {
-      disableClose: true,
-      data
-    });
+    return this.dialog.open<NewRecipientModalComponent, recipientModel>(
+      NewRecipientModalComponent,
+      {
+        disableClose: true,
+        data,
+      }
+    );
   }
 
   set(input: any): void {
@@ -25,7 +28,6 @@ export class NewRecipientService {
   }
 
   get default(): recipientModel {
-    return this.defaultData
+    return this.defaultData;
   }
-
 }

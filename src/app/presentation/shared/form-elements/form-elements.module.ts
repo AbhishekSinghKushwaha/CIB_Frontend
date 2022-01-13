@@ -10,6 +10,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TransferToComponent } from './transfer-to/transfer-to.component';
 import { SchedulePaymentInputComponent } from './schedule-payment-input/schedule-payment-input.component';
 import { SelectBankComponent } from './select-bank/select-bank.component';
+import { PaymentCategoryComponent } from './payment-category/payment-category.component';
+import { SwiftChargesComponent } from './swift-charges/swift-charges.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { SelectBankComponent } from './select-bank/select-bank.component';
     TransferToComponent,
     SchedulePaymentInputComponent,
     SelectBankComponent,
+    PaymentCategoryComponent,
+    SwiftChargesComponent,
   ],
   imports: [CommonModule, MatStyleModule, FormsModule],
   exports: [
@@ -32,6 +36,8 @@ import { SelectBankComponent } from './select-bank/select-bank.component';
     TransferToComponent,
     SchedulePaymentInputComponent,
     SelectBankComponent,
+    SwiftChargesComponent,
+    PaymentCategoryComponent,
   ],
 })
 export class FormElementsModule {}

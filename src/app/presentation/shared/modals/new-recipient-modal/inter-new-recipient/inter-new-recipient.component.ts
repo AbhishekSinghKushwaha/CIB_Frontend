@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { BankService } from 'src/app/core/services/bank/bank.service';
-import { NewRecipientService } from 'src/app/core/services/new-recipient/new-recipient.service';
+import { NewRecipientService } from 'src/app/core/services/modal-services/new-recipient/new-recipient.service';
 
 @Component({
   selector: 'app-inter-new-recipient',

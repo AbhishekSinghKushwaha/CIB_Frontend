@@ -25,6 +25,7 @@ import { FavouritesModalModule } from 'src/app/presentation/shared/modals/favour
     FavouritesModalModule,
     CurrencySelectionModule,
     SchedulePaymentModule,
+    SharedComponentsModule,
   ],
 })
 export class SwiftModule {}

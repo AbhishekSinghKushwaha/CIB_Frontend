@@ -1,7 +1,7 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { SelectAccountModel } from 'src/app/core/domain/select-account.model';
 import { CurrencySelectionModal } from 'src/app/core/domain/currency-selection.model';
-import { SelectAccountModalService } from 'src/app/core/services/select-account-modal/select-account-modal.service';
+import { SelectAccountModalService } from 'src/app/core/services/modal-services/select-account-modal/select-account-modal.service';
 import { SelectAccountSendtoService } from 'src/app/core/services/select-account-sendto/select-account-sendto.service';
 import { SchedulePaymentService } from 'src/app/core/services/schedule-payment/schedule-payment.service';
 import { CurrencySelectionService } from 'src/app/core/services/currency-selection/currency-selection.service';
@@ -26,7 +26,7 @@ import { Router } from '@angular/router';
 import { PesaLinkSendToService } from 'src/app/core/services/pesa-link-send-to/pesa-link-send-to.service';
 import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
 import { FavouriteBeneficiaryModel } from 'src/app/core/domain/favourites-beneficiary.model';
-import { FavouritesModalService } from 'src/app/core/services/favourites-modal/favourites-modal.service';
+import { FavouritesModalService } from 'src/app/core/services/modal-services/favourites-modal/favourites-modal.service';
 import { phoneLinkedModel } from 'src/app/core/domain/phone-linked.modal';
 import { PhoneLinkedService } from 'src/app/core/services/phone-linked/phone-linked.service';
 import { recipientBankDetailsModel } from 'src/app/core/domain/recepient-bank-details.model';

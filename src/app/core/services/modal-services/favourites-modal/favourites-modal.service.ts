@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { FavouritesModalComponent } from 'src/app/presentation/shared/modals/favourites-modal/favourites-modal.component';
-import { FavouriteBeneficiaryModel } from '../../domain/favourites-beneficiary.model';
+import { FavouriteBeneficiaryModel } from '../../../domain/favourites-beneficiary.model';
 
 @Injectable()
 export class FavouritesModalService {

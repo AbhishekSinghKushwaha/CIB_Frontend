@@ -87,6 +87,26 @@
               >
               </app-input>
             </div>
+            <!-- Foreign Charges -->
+            <div class="col-md-6">
+              <app-swift-charges
+                [parentForm]="swiftTransferForm"
+                label="Charges"
+                formControlName="charges"
+                fieldName="charges"
+                placeholder="Select an option"
+              ></app-swift-charges>
+            </div>
+            <!-- Payment Category -->
+            <div class="col-md-6">
+              <app-payment-category
+                [parentForm]="swiftTransferForm"
+                label="Payment Category"
+                fieldName="paymentCategory"
+                formControlName="paymentCategory"
+                placeholder="Select a Payment Category"
+              ></app-payment-category>
+            </div>
             <!-- Payment Reason -->
             <div class="col-md-6">
               <app-input

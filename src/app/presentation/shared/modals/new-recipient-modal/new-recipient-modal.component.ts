@@ -6,7 +6,7 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { recipientModel } from 'src/app/core/domain/recipient.model';
-import { NewRecipientService } from './../../../../core/services/new-recipient/new-recipient.service';
+import { NewRecipientService } from '../../../../core/services/modal-services/new-recipient/new-recipient.service';
 import { CountryModel } from 'src/app/core/domain/country.model';
 import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
 import { countrySettings } from 'src/app/core/utils/constants/country.settings';

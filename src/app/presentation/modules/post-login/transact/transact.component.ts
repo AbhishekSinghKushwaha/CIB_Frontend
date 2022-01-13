@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountsService } from 'src/app/core/services/accounts/accounts.service';
 import { DataLookupService } from 'src/app/core/services/data-lookup/data-lookup.service';
-import { SelectAccountModalService } from 'src/app/core/services/select-account-modal/select-account-modal.service';
+import { SelectAccountModalService } from 'src/app/core/services/modal-services/select-account-modal/select-account-modal.service';
 import { SharedDataService } from 'src/app/core/services/shared-data/shared-data.service';
 import { TransactConstants } from '../../../../core/utils/constants/transact.constants';
 import { BaseTransactComponent } from './base-transact.component';

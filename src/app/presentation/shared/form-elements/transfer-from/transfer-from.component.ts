@@ -13,11 +13,8 @@ import {
   NG_VALUE_ACCESSOR,
 } from '@angular/forms';
 import { FromAccount } from 'src/app/core/domain/transfer.models';
-import { AccountsService } from 'src/app/core/services/accounts/accounts.service';
-import { SelectAccountModalService } from 'src/app/core/services/select-account-modal/select-account-modal.service';
+import { SelectAccountModalService } from 'src/app/core/services/modal-services/select-account-modal/select-account-modal.service';
 import { SharedDataService } from 'src/app/core/services/shared-data/shared-data.service';
-import { SelectAccountConstants } from 'src/app/data/repository/select-account-mock-repository/select-account.constants';
-import { BaseTransactComponent } from 'src/app/presentation/modules/post-login/transact/base-transact.component';
 
 @Component({
   selector: 'app-transfer-from',

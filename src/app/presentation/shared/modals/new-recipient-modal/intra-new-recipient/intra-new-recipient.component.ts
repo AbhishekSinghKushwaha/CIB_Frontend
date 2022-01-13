@@ -10,7 +10,7 @@ import { SubsidiaryModel } from 'src/app/core/domain/bank.model';
 import { CountryModel } from 'src/app/core/domain/country.model';
 import { recipientModel } from 'src/app/core/domain/recipient.model';
 import { CountryService } from 'src/app/core/services/country/country.service';
-import { NewRecipientService } from 'src/app/core/services/new-recipient/new-recipient.service';
+import { NewRecipientService } from 'src/app/core/services/modal-services/new-recipient/new-recipient.service';
 import { IntrabankService } from 'src/app/core/services/transfers/intrabank/intrabank.service';
 import { countrySettings } from 'src/app/core/utils/constants/country.settings';
 import { BaseTransactComponent } from 'src/app/presentation/modules/post-login/transact/base-transact.component';

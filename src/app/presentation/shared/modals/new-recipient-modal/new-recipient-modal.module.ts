@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NewRecipientModalComponent } from './new-recipient-modal.component';
-import { NewRecipientService } from 'src/app/core/services/new-recipient/new-recipient.service';
+import { NewRecipientService } from 'src/app/core/services/modal-services/new-recipient/new-recipient.service';
 import { MatStyleModule } from 'src/app/mat-style.module';
 import { CountryModalModule } from '../country-modal/country-modal.module';
 import { IntraNewRecipientComponent } from './intra-new-recipient/intra-new-recipient.component';
