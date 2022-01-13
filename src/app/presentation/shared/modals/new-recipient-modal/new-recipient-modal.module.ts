@@ -9,12 +9,16 @@ import { IntraNewRecipientComponent } from './intra-new-recipient/intra-new-reci
 import { InterNewRecipientComponent } from './inter-new-recipient/inter-new-recipient.component';
 import { FormElementsModule } from '../../form-elements/form-elements.module';
 import { SubsidiaryModalModule } from '../subsidiary-modal/subsidiary-modal.module';
+import { AirtimeNewRecepientComponent } from './airtime-new-recepient/airtime-new-recepient.component';
+import { MobileOperatorsModule } from 'src/app/presentation/shared/components/mobile-operators/mobile-operators.module';
+import { MobileOperatorsConstants } from 'src/app/core/utils/constants/mobile-operator.constants';
 
 @NgModule({
   declarations: [
     NewRecipientModalComponent,
     IntraNewRecipientComponent,
     InterNewRecipientComponent,
+    AirtimeNewRecepientComponent,
   ],
   exports: [NewRecipientModalComponent],
   imports: [
@@ -26,7 +30,8 @@ import { SubsidiaryModalModule } from '../subsidiary-modal/subsidiary-modal.modu
     FormsModule,
     ReactiveFormsModule,
     FormElementsModule,
+    MobileOperatorsModule
   ],
-  providers: [NewRecipientService],
+  providers: [NewRecipientService, MobileOperatorsConstants],
 })
 export class NewRecipientModalModule {}

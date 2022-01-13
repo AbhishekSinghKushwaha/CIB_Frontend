@@ -2,23 +2,25 @@
   <button mat-icon-button matSuffix class="close-button" (click)="close()">
     <mat-icon>close</mat-icon>
   </button>
-  <p class="text-center fw-bold pt-2">Send to</p>
-  <h3 class="m-4 ms-3">Who are you sending money to</h3>
-  <div class="row m-2">
+  <div>
+    <p class="text-center fw-bold pt-2">{{data.transactionType === 'buyAirTime' ? 'Buy for' : 'Send to'}}</p>
+    <h3 class="my-4 strong-text">{{data.transactionType === 'buyAirTime' ? 'Who are you buying airtime for?' : 'Who are you sending money to'}}</h3>
+  </div>
+  <div class="row my-2">
     <mat-form-field appearance="outline">
       <input matInput [(ngModel)]="searchText" />
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
   </div>
 
-  <div class="row ms-3 mt-2 pb-3 cursor-pointer" (click)="openNewRecipient()">
+  <div class="row mt-2 pb-3 cursor-pointer" (click)="openNewRecipient()">
     <div class="col-md-10">
       <img
         src="./assets/images/icons/Visual support_Icon_with_container.svg"
         class="fav-icon"
         alt=""
       />
-      <span class="ps-3">Send to someone new</span>
+      <span class="ps-3">{{data.transactionType === 'buyAirTime' ? 'Buy for someone new' : 'Send to someone new'}}</span>
     </div>
     <div class="col-md-2">
       <button type="button" mat-icon-button matSuffix>

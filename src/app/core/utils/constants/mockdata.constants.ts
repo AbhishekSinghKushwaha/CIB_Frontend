@@ -5,6 +5,8 @@ import { FavouriteBeneficiaryModel } from './../../domain/favourites-beneficiary
 import { SelectAccountModel } from './../../domain/select-account.model';
 import { BuyGoodsFavouriteModel } from './../../domain/buy-goods-favourites.model';
 import { UserModel } from '../../domain/user.model';
+import { AirtimeAmountRangeModel } from '../../domain/international-airtime-amount-range.model';
+import { CountryMobileCodeModal } from 'src/app/core/domain/countryCode.model';
 
 const accounts: SelectAccountModel[] = [
   {
@@ -621,6 +623,33 @@ const buyGoodsFavourites: BuyGoodsFavouriteModel[] = [
 
 const accountNumber: string = "2837181638719349"
 
+const airtimeAmountRange: AirtimeAmountRangeModel[] = [
+  {
+    amountRangeType: 'Amount range'
+  },
+  {
+    amountRangeType: 'Fixed bundles'
+  }
+];
+
+const mobileCodes: CountryMobileCodeModal[] = [
+  {
+    mobileCode: '+254',
+  },
+  {
+    mobileCode: '+256',
+  },
+  {
+    mobileCode: '+255',
+  },
+  {
+    mobileCode: '+249',
+  },
+  {
+    mobileCode: '+250',
+  }
+];
+
 export const mockData = {
   accounts,
   favourites,
@@ -629,5 +658,7 @@ export const mockData = {
   statementList,
   buyGoodsFavourites,
   accountNumber,
-  users
+  users,
+  airtimeAmountRange,
+  mobileCodes
 };

@@ -5,11 +5,14 @@ import { SelectAccountModalComponent } from 'src/app/presentation/shared/modals/
 import { SelectAccountModel } from '../../domain/select-account.model';
 import { FromAccount } from '../../domain/transfer.models';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class SelectAccountModalService {
   dialogRef: any;
   selected = new Subject<FromAccount>();
   private data: FromAccount;
+  transactionType: string;
 
   constructor(private readonly dialog: MatDialog) { }
 

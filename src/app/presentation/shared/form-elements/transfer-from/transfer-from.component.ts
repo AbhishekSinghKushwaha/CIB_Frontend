@@ -34,6 +34,8 @@ import { BaseTransactComponent } from 'src/app/presentation/modules/post-login/t
 export class TransferFromComponent implements ControlValueAccessor, OnInit {
   sourceAccounts: FromAccount[];
 
+  @Input() transactionType: string;
+
   @Input()
   parentForm!: FormGroup;
 
@@ -69,6 +71,7 @@ export class TransferFromComponent implements ControlValueAccessor, OnInit {
     this.selectAccountService.selected.subscribe((x) => {
       this.parentForm.controls.sendFrom.setValue(x);
     });
+    this.selectAccountService.transactionType = this.transactionType;
   }
 
   public writeValue(value: FromAccount): void {

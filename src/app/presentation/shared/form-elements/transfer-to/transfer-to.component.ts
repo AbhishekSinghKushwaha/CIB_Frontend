@@ -124,6 +124,12 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
       case 'fundTransferBuyGoods':
         this.buyGoodsPayToService.open(mockData.buyGoodsFavourites);
         break;
+      case 'buyAirTime':
+        this.favouritesModalService.open(
+          this.transactionType,
+          mockData.favourites
+        );
+        break;  
       default:
         break;
     }
@@ -161,6 +167,12 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
           this.parentForm.controls.sendTo.setValue(x);
         });
         break;
+      case 'buyAirTime':
+        this.newRecipientService.data.subscribe((x) => {
+          console.log(x);
+          this.parentForm.controls.sendTo.setValue(x);
+        });
+          break;
       default:
         break;
     }

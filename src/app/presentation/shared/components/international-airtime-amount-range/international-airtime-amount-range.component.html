@@ -1,0 +1,22 @@
+<div class="international-airtime-mobile-modal-screen p-1">
+    <div class="row">
+        <div class="col-md-4">
+          <mat-icon (click)="close()">close</mat-icon>
+        </div>
+        <h4 class="fw-bold col-md-8">Buy airtime</h4>
+    </div>
+    <h3 class="strong-text py-4">How much do you want to pay?</h3>
+
+    <div *ngFor="let account of data ; let isLast = last; let i = index">
+        <app-select-airtime-amount 
+            [data]="account"
+            [isChecked]="selected && selected.amountRangeType === account.amountRangeType">
+        </app-select-airtime-amount>
+        <mat-divider *ngIf="!isLast" class="pt-3"></mat-divider>
+    </div>
+
+    <div class="pt-4">
+        <button color="primary" (click)="submit()" mat-flat-button
+        class="px-5" style="width: 393px; position: absolute; bottom: 35px;">Continue</button>
+    </div>
+</div>

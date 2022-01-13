@@ -13,10 +13,11 @@ export class NewRecipientService {
   constructor(private readonly dialog: MatDialog) { }
 
   open(data: recipientModel | null) {
-    return this.dialog.open<NewRecipientModalComponent, recipientModel>(NewRecipientModalComponent, {
+    this.dialogRef =  this.dialog.open<NewRecipientModalComponent, recipientModel>(NewRecipientModalComponent, {
       disableClose: true,
       data
     });
+    return this.dialogRef;
   }
 
   set(input: any): void {
@@ -26,6 +27,10 @@ export class NewRecipientService {
 
   get default(): recipientModel {
     return this.defaultData
+  }
+
+  close() {
+    this.dialogRef.close()
   }
 
 }

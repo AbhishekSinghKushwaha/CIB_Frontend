@@ -11,6 +11,7 @@ import { FromAccount } from 'src/app/core/domain/transfer.models';
 })
 export class SelectAccountModalComponent implements OnInit {
   selected: FromAccount;
+  transactionType: string;
 
   constructor(
     readonly dialogRef: MatDialogRef<SelectAccountModalComponent>,
@@ -21,6 +22,7 @@ export class SelectAccountModalComponent implements OnInit {
     this.selectAccountModalService.selected.subscribe((x) => this.selected=x); }
 
   ngOnInit(): void {
+    this.transactionType = this.selectAccountModalService.transactionType;
   }
 
   close(): void {
