@@ -11,6 +11,8 @@ import { TeamMembersDetailsComponent } from './components/team-members-details/t
 import { FormElementsModule } from 'src/app/presentation/shared/form-elements/form-elements.module';
 import { TeamMembersAddComponent } from './components/team-members-add/team-members-add.component';
 import { TeamMemberMenuItemComponent } from 'src/app/presentation/shared/components/team-member-menu-item/team-member-menu-item.component';
+import { CustomerOnboardingRegisterComponent } from './components/customer-onboarding-register/customer-onboarding-register.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 export function playerFactory(): Promise<any> {
   return import(/* webpackChunkName: 'lottie-web' */ 'lottie-web');
@@ -23,12 +25,14 @@ export function playerFactory(): Promise<any> {
     TeamMembersRolesComponent,
     TeamMembersDetailsComponent,
     TeamMembersAddComponent,
-    TeamMemberMenuItemComponent
+    TeamMemberMenuItemComponent,
+    CustomerOnboardingRegisterComponent,
   ],
   imports: [
     CommonModule,
     CustomerOnboardingRoutingModule,
     MatStyleModule,
+    ReactiveFormsModule,
     LottieModule.forRoot({ player: playerFactory }),
     FormElementsModule
   ],

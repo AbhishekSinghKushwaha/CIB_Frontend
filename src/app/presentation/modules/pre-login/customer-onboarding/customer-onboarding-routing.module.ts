@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CustomerOnboardingAccountComponent } from './components/customer-onboarding-account/customer-onboarding-account.component';
+import { CustomerOnboardingRegisterComponent } from './components/customer-onboarding-register/customer-onboarding-register.component';
 import { CustomerOnboardingComponent } from './components/customer-onboarding/customer-onboarding.component';
 import { TeamMembersAddComponent } from './components/team-members-add/team-members-add.component';
 import { TeamMembersDetailsComponent } from './components/team-members-details/team-members-details.component';
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'team-member-add', component: TeamMembersAddComponent },
   { path: 'team-member-detail', component: TeamMembersDetailsComponent },
   { path: 'team-member-roles', component: TeamMembersRolesComponent },
+  { path: 'register', component: CustomerOnboardingRegisterComponent },
 ];
 
 @NgModule({

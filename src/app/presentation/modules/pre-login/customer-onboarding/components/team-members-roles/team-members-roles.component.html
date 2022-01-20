@@ -17,10 +17,6 @@
           <div class="row mt-3">
             <div class="d-flex justify-content-between">
                 <h3>Initiator</h3>
-                <div>
-                    <a class="text-sm" [innerText]="'Show more'"></a>
-                    <mat-icon [svgIcon]="'caret_down'" color="primary"></mat-icon>
-                </div>
             </div>
             <div class="row product-list-item col-md-6 mt-3" (click)="toggle(roleList.ROLES.INITIATOR.TRANSACTIONS)">
               <div class="col-1 my-auto">
@@ -98,10 +94,6 @@
             <div class="row mt-5">
                 <div class="d-flex justify-content-between">
                     <h3>Approvers</h3>
-                    <div>
-                        <a class="text-sm" [innerText]="'Show more'"></a>
-                        <mat-icon [svgIcon]="'caret_down'" color="primary"></mat-icon>
-                    </div>
                 </div>
                 <div class="row product-list-item col-md-6 mt-3" (click)="toggle(roleList.ROLES.APPROVER.APPROVE_PAYMENTS)">
                 <div class="col-1 my-auto">
@@ -179,10 +171,6 @@
             <div class="row mt-5">
                 <div class="d-flex justify-content-between">
                     <h3>Super Admin</h3>
-                    <div>
-                        <a class="text-sm" [innerText]="'Show more'"></a>
-                        <mat-icon [svgIcon]="'caret_down'" color="primary"></mat-icon>
-                    </div>
                 </div>
                 <div class="row product-list-item col-md-6 mt-3" (click)="toggle(roleList.ROLES.SUPER_ADMIN.CREATE_USERS)">
                     <div class="col-1 my-auto">
