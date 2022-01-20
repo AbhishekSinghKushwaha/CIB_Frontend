@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { CustomerOnboardingService } from '../../services/customer-onboarding.service';
 
@@ -14,7 +15,10 @@ export class CustomerOnboardingRegisterComponent implements OnInit {
     registrationNumber: new FormControl(null, [Validators.required]),
   });
 
-  constructor(private customerOnboardingService: CustomerOnboardingService) {}
+  constructor(
+    private customerOnboardingService: CustomerOnboardingService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 
@@ -26,6 +30,10 @@ export class CustomerOnboardingRegisterComponent implements OnInit {
       .open()
       .afterClosed()
       .pipe(take(1))
-      .subscribe(() => {});
+      .subscribe(() => {
+        this.router.navigate([
+          'customer-onboarding/register/company-details',
+        ]);
+      });
   }
 }
