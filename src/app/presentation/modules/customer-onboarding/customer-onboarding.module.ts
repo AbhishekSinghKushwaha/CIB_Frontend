@@ -21,6 +21,7 @@ import { CustomerOnboardingService } from './services/customer-onboarding.servic
 import { NotificationConstants } from 'src/app/core/utils/constants/notification-menu.constants';
 import { LayoutModule } from '../../layout/layout.module';
 import { CustomerOnboardingComponent } from './customer-onboarding.component';
+import { CompanyDetailsSummaryComponent } from './components/customer-onboarding-register-company-details/company-details-summary/company-details-summary.component';
 
 export function playerFactory(): Promise<any> {
   return import(/* webpackChunkName: 'lottie-web' */ 'lottie-web');
@@ -39,6 +40,7 @@ export function playerFactory(): Promise<any> {
     NotificationPreferencesComponent,
     AddTeamMembersComponent,
     CustomerOnboardingRegisterCompanyDetailsComponent,
+    CompanyDetailsSummaryComponent,
   ],
   imports: [
     CommonModule,
