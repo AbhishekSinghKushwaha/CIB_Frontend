@@ -40,4 +40,4 @@ export function playerFactory(): Promise<any> {
   ],
   providers: [],
 })
-export class CustomerOnboardingModule {}
+export class CustomerOnboardingModule { }

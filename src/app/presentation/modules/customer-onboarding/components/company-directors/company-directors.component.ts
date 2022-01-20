@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { confirmModal } from 'src/app/presentation/shared/decorators/confirm-dialog.decorator';
+import { DirectorConfirmationModalComponent } from 'src/app/presentation/shared/modals/director-confirmation-modal/director-confirmation-modal.component';
 
 @Component({
   selector: 'app-company-directors',
@@ -9,7 +11,7 @@ import { confirmModal } from 'src/app/presentation/shared/decorators/confirm-dia
 export class CompanyDirectorsComponent implements OnInit {
   directors = [1, 2, 3, 4]
 
-  constructor() { }
+  constructor(private readonly dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -22,6 +24,16 @@ export class CompanyDirectorsComponent implements OnInit {
   })
   delete() {
     this.directors.pop()
+  }
+
+  openDirectorInfoModal() {
+    this.dialog.open<DirectorConfirmationModalComponent>(
+      DirectorConfirmationModalComponent,
+      {
+        maxWidth: '1000px',
+        disableClose: true,
+      }
+    );
   }
 
 }
