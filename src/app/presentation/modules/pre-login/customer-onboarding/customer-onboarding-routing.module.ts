@@ -4,13 +4,21 @@ import { AddCompanyDirectorsComponent } from './components/company-directors/add
 import { CompanyDirectorsComponent } from './components/company-directors/company-directors.component';
 import { CustomerOnboardingAccountComponent } from './components/customer-onboarding-account/customer-onboarding-account.component';
 import { CustomerOnboardingComponent } from './components/customer-onboarding/customer-onboarding.component';
+import { CustomerOnboardingShellComponent } from './customer-onboarding-shell/customer-onboarding-shell.component';
 
 const routes: Routes = [
-  { path: '', component: CustomerOnboardingComponent },
-  { path: 'account', component: CustomerOnboardingAccountComponent },
-  { path: 'company-directors', component: CompanyDirectorsComponent },
-  { path: 'company-directors/add-new', component: AddCompanyDirectorsComponent },
-  { path: 'company-directors/edit/:index', component: AddCompanyDirectorsComponent },
+  {
+    path: '',
+    component: CustomerOnboardingShellComponent,
+    children: [
+      { path: '', component: CustomerOnboardingComponent },
+      { path: 'account', component: CustomerOnboardingAccountComponent },
+      { path: 'company-directors', component: CompanyDirectorsComponent },
+      { path: 'company-directors/add-new', component: AddCompanyDirectorsComponent },
+      { path: 'company-directors/edit/:index', component: AddCompanyDirectorsComponent },
+    ]
+  }
+
 ];
 
 @NgModule({
