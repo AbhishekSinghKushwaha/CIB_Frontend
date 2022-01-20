@@ -9,6 +9,7 @@ import { LogoutButtonFooterComponent } from './logout-button-footer/logout-butto
 import { TransactMenuItemComponent } from './transact-menu-item/transact-menu-item.component';
 import { EmailVerificationComponent } from './email-verification/email-verification.component';
 import { SmsVerificationComponent } from './sms-verification/sms-verification.component';
+import { NotificationMenuItemComponent } from './notification-menu-item/notification-menu-item.component';
 
 const components = [
   LanguageInputComponent,
@@ -18,7 +19,7 @@ const components = [
   TransactMenuItemComponent,
   SmsVerificationComponent,
   EmailVerificationComponent,
-
+  NotificationMenuItemComponent
 ];
 
 @NgModule({

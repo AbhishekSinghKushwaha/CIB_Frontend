@@ -14,6 +14,12 @@ import { TeamMemberMenuItemComponent } from 'src/app/presentation/shared/compone
 import { CustomerOnboardingRegisterComponent } from './components/customer-onboarding-register/customer-onboarding-register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CustomerOnboardingRegistrationModalComponent } from './components/customer-onboarding-registration-modal/customer-onboarding-registration-modal.component';
+import { NotificationPreferencesComponent } from './components/notification-preferences/notification-preferences.component';
+import { SharedComponentsModule } from 'src/app/presentation/shared/components/shared-components.module';
+import { NotificationConstants } from 'src/app/core/utils/constants/notification-menu.constants';
+import { AddTeamMembersComponent } from './components/notification-preferences/add-team-members/add-team-members.component';
+import { CustomerOnboardingRegisterCompanyDetailsComponent } from './components/customer-onboarding-register-company-details/customer-onboarding-register-company-details.component';
+import { LayoutModule } from 'src/app/presentation/layout/layout.module';
 
 export function playerFactory(): Promise<any> {
   return import(/* webpackChunkName: 'lottie-web' */ 'lottie-web');
@@ -29,6 +35,9 @@ export function playerFactory(): Promise<any> {
     TeamMemberMenuItemComponent,
     CustomerOnboardingRegisterComponent,
     CustomerOnboardingRegistrationModalComponent,
+    NotificationPreferencesComponent,
+    AddTeamMembersComponent,
+    CustomerOnboardingRegisterCompanyDetailsComponent,
   ],
   imports: [
     CommonModule,
@@ -36,8 +45,10 @@ export function playerFactory(): Promise<any> {
     MatStyleModule,
     ReactiveFormsModule,
     LottieModule.forRoot({ player: playerFactory }),
-    FormElementsModule
+    FormElementsModule,
+    LayoutModule,
+    SharedComponentsModule,
   ],
-  providers: [CustomerOnboardingService],
+  providers: [CustomerOnboardingService, NotificationConstants],
 })
 export class CustomerOnboardingModule {}
