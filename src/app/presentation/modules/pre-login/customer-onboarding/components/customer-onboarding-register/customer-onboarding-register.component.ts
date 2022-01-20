@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { take } from 'rxjs/operators';
+import { CustomerOnboardingService } from '../../services/customer-onboarding.service';
 
 @Component({
   selector: 'app-customer-onboarding-register',
@@ -12,7 +14,7 @@ export class CustomerOnboardingRegisterComponent implements OnInit {
     registrationNumber: new FormControl(null, [Validators.required]),
   });
 
-  constructor() {}
+  constructor(private customerOnboardingService: CustomerOnboardingService) {}
 
   ngOnInit(): void {}
 
@@ -20,5 +22,10 @@ export class CustomerOnboardingRegisterComponent implements OnInit {
     if (this.registrationForm.invalid) {
       return;
     }
+    this.customerOnboardingService
+      .open()
+      .afterClosed()
+      .pipe(take(1))
+      .subscribe(() => {});
   }
 }
