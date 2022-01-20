@@ -1,0 +1,75 @@
+<div>
+    <div class="mb-3">
+      <button mat-icon-button aria-label="Back" class="back-icon" routerLink="/auth/customer-onboarding/notification-preferences">
+        <div class="strong-text">
+          <mat-icon svgIcon="caret_left"></mat-icon>
+          <span>Add team memebers</span>
+        </div>
+      </button>
+    </div>
+    <h3 class="strong-text">Please enter the team member’s details</h3>
+      <div class="row pt-4">
+        <div class="col-md-6">
+            <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
+                <mat-label>Full name</mat-label>
+                <input matInput type="text" class="strong-text" name="name"/>
+            </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
+                <mat-label>Email address</mat-label>
+                <input matInput type="text" class="strong-text" name="email"/>
+            </mat-form-field>
+        </div> 
+        <div class="col-md-6">
+            <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
+                <mat-label>ID/PP</mat-label>
+                <input matInput type="text" class="strong-text" name="id"/>
+            </mat-form-field>
+        </div>    
+        <div class="row col-md-6">
+            <div class="col-md-4">
+                <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
+                    <mat-label>Mobile number</mat-label>
+                    <input matInput type="text" class="strong-text" name="mobilecode"/>
+                    <button type="button" mat-icon-button matSuffix>
+                        <mat-icon svgIcon="caret_down"></mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+            <div class="col-md-8">
+                <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
+                    <input matInput type="text" class="strong-text" name="mobilenumber"/>
+                </mat-form-field>
+            </div>
+        </div>   
+        <div class="col-md-6">
+            <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
+                <mat-label>Transaction limit</mat-label>
+                <input matInput type="text" class="strong-text" name="id"/>
+                <button type="button" mat-icon-button matSuffix>
+                    <mat-icon svgIcon="caret_down"></mat-icon>
+                </button>
+            </mat-form-field>
+        </div>   
+        <div class="row col-md-6">
+            <div class="col-md-4">
+                <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
+                    <mat-label>Office phone number</mat-label>
+                    <input matInput type="text" class="strong-text" name="officecode"/>
+                    <button type="button" mat-icon-button matSuffix>
+                        <mat-icon svgIcon="caret_down"></mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+            <div class="col-md-8">
+                <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
+                    <input matInput type="text" class="strong-text" name="officenumber"/>
+                </mat-form-field>
+            </div>
+        </div> 
+        
+        <div class="mt-4">
+            <button mat-raised-button color="primary" class="px-5">Add</button>
+        </div>
+  </div>

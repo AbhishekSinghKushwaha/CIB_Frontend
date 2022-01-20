@@ -8,6 +8,10 @@ import { CustomerOnboardingService } from './services/customer-onboarding.servic
 import { CustomerOnboardingAccountComponent } from './components/customer-onboarding-account/customer-onboarding-account.component';
 import { CustomerOnboardingRegisterComponent } from './components/customer-onboarding-register/customer-onboarding-register.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NotificationPreferencesComponent } from './components/notification-preferences/notification-preferences.component'
+import { SharedComponentsModule } from 'src/app/presentation/shared/components/shared-components.module';
+import { NotificationConstants } from 'src/app/core/utils/constants/notification-menu.constants';
+import { AddTeamMembersComponent } from './components/notification-preferences/add-team-members/add-team-members.component';
 
 export function playerFactory(): Promise<any> {
   return import(/* webpackChunkName: 'lottie-web' */ 'lottie-web');
@@ -18,6 +22,8 @@ export function playerFactory(): Promise<any> {
     CustomerOnboardingComponent,
     CustomerOnboardingAccountComponent,
     CustomerOnboardingRegisterComponent,
+    NotificationPreferencesComponent,
+    AddTeamMembersComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +31,8 @@ export function playerFactory(): Promise<any> {
     MatStyleModule,
     ReactiveFormsModule,
     LottieModule.forRoot({ player: playerFactory }),
+    SharedComponentsModule
   ],
-  providers: [CustomerOnboardingService],
+  providers: [CustomerOnboardingService, NotificationConstants],
 })
 export class CustomerOnboardingModule {}

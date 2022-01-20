@@ -1,0 +1,27 @@
+<div>
+    <div class="mb-3">
+      <button
+        mat-icon-button
+        aria-label="Back"
+        class="back-icon"
+        routerLink="/auth/customer-onboarding"
+      >
+        <div class="strong-text">
+          <mat-icon svgIcon="caret_left"></mat-icon>
+          <span>Team member roles</span>
+        </div>
+      </button>
+    </div>
+    <div class="container" *ngFor="let mainList of notificationDashboardList.NOTIFICATION_DASHBOARD_LIST; let isLast = last">
+        <h3 class="strong-text mt-4">{{mainList.section}}</h3>
+        <div class="row">
+          <div class="col-lg-6" *ngFor="let item of mainList.content">
+            <app-notification-menu-item [item]="item"></app-notification-menu-item>
+          </div>
+        </div>
+        <mat-divider *ngIf="!isLast" class="divider"></mat-divider>
+      </div>
+      <div class="mt-4 mb-5 pb-5">
+        <button mat-raised-button (click)="submit()" color="primary" class="px-5">Submit</button>
+      </div>
+</div>
