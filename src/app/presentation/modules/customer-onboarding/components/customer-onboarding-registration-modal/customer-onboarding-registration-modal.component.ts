@@ -14,6 +14,6 @@ export class CustomerOnboardingRegistrationModalComponent implements OnInit {
   ngOnInit(): void {}
 
   close() {
-    this.customerOnboardingService.close();
+    this.customerOnboardingService.closeRegistrationModal();
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-team-members-details',
@@ -8,7 +8,14 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class TeamMembersDetailsComponent implements OnInit {
 
-  teamMemberDetailsForm: FormGroup;
+  teamMemberDetailsForm: FormGroup = new FormGroup( {
+    fullName: new FormControl(''),
+    email: new FormControl(''),
+    idpp: new FormControl(''),
+    mobileNumber: new FormControl(''),
+    transactionLimit: new FormControl(''),
+    officePhoneNumber: new FormControl(''),
+  });
   
   constructor(private readonly fb: FormBuilder) {
    }

@@ -22,7 +22,7 @@ export class DirectorConfirmationModalComponent implements OnInit {
   submitReview() {
     this.close();
     setTimeout(() => {
-      this.router.navigate(['/customer-onboarding/team-member-add']);
+      this.router.navigate(['/customer-onboarding/team-members']);
     }, 0);
 
   }

@@ -24,9 +24,22 @@ const routes: Routes = [
         path: 'company-directors/edit/:index',
         component: AddCompanyDirectorsComponent,
       },
-      { path: 'team-member-add', component: TeamMembersAddComponent },
-      { path: 'team-member-detail', component: TeamMembersDetailsComponent },
-      { path: 'team-member-roles', component: TeamMembersRolesComponent },
+      { 
+        path: 'team-members', 
+        component: TeamMembersAddComponent 
+      },
+      { 
+        path: 'team-members/add', 
+        component: TeamMembersDetailsComponent 
+      },
+      { 
+        path: 'team-members/edit/:index', 
+        component: TeamMembersDetailsComponent 
+      },
+      { 
+        path: 'team-members/roles', 
+        component: TeamMembersRolesComponent 
+      },
       {
         path: 'notification-preferences',
         component: NotificationPreferencesComponent,
