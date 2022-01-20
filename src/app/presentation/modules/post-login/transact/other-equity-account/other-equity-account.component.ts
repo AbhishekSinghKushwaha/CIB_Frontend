@@ -131,14 +131,12 @@ export class OtherEquityAccountComponent
                 '/transact/other-equity-account/submit-transfer',
               ]);
             } else {
-              alert(res.message);
+              console.log(res.message);
               // TODO:: Notify error
             }
           },
           (err) => {
-            alert(
-              `Sorry, we're unable to complete your transaction. Please give us some time to fix the problem and try again later.`
-            );
+            console.log(err);
           }
         );
     }
