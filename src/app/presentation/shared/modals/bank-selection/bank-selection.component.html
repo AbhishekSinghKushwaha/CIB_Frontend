@@ -1,15 +1,24 @@
 <div class="row my-2">
-    <mat-form-field appearance="outline">
-      <input matInput [(ngModel)]="searchBank">
-      <mat-icon matSuffix>search</mat-icon>
-    </mat-form-field>
+  <mat-form-field appearance="outline">
+    <input matInput [(ngModel)]="searchBank" />
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
 </div>
 
-<div class="row ms-3 strong-text" *ngIf="(data | bankSelectionSearch:searchBank).length <1">
-    0 favourites found
+<div
+  class="row ms-3 strong-text"
+  *ngIf="(data | bankSearch: searchBank).length < 1"
+>
+  0 favourites found
 </div>
-<div class="bank-selection-modal-screen" *ngFor="let bank of (data  | bankSelectionSearch:searchBank); let isLast = last">
-    <app-bank-selection-list-item [data]="bank" [isChecked]="selected?.name===bank.name">
-    </app-bank-selection-list-item>
-    <mat-divider class="p-2" *ngIf="!isLast"></mat-divider>
+<div
+  class="bank-selection-modal-screen"
+  *ngFor="let bank of data | bankSearch: searchBank; let isLast = last"
+>
+  <app-bank-selection-list-item
+    [data]="bank"
+    [isChecked]="selected?.name === bank.name"
+  >
+  </app-bank-selection-list-item>
+  <mat-divider class="p-2" *ngIf="!isLast"></mat-divider>
 </div>

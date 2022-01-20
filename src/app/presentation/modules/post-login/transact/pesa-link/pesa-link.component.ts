@@ -1,22 +1,7 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { SelectAccountModel } from 'src/app/core/domain/select-account.model';
-import { CurrencySelectionModal } from 'src/app/core/domain/currency-selection.model';
-import { SelectAccountModalService } from 'src/app/core/services/select-account-modal/select-account-modal.service';
-import { SelectAccountSendtoService } from 'src/app/core/services/select-account-sendto/select-account-sendto.service';
-import { SchedulePaymentService } from 'src/app/core/services/schedule-payment/schedule-payment.service';
-import { CurrencySelectionService } from 'src/app/core/services/currency-selection/currency-selection.service';
-import { CurrencySelectionConstants } from 'src/app/core/utils/constants/currency-selection.constants';
+import { Component, OnInit } from '@angular/core';
 import { SupportingDocumentsUploadService } from 'src/app/core/services/supporting-documents-upload/supporting-documents-upload.service';
-import { SelectAccountConstants } from 'src/app/data/repository/select-account-mock-repository/select-account.constants';
-import { ScheduledPaymentModel } from 'src/app/core/domain/scheduled-payment.model';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BaseTransactComponent } from '../base-transact.component';
-import { AccountsService } from 'src/app/core/services/accounts/accounts.service';
 import { accountLimitValidator } from 'src/app/core/utils/validators/limits.validators';
 import { UniversalValidators } from 'ngx-validators';
 import { OwnAccountService } from 'src/app/core/services/transfers/own-account/own-account.service';

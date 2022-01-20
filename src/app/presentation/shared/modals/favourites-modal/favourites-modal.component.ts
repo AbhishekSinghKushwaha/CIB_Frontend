@@ -9,9 +9,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FavouriteBeneficiaryModel } from 'src/app/core/domain/favourites-beneficiary.model';
 import { BeneficiaryManagementModalService } from 'src/app/core/services/beneficiary-management-modal/beneficiary-management-modal.service';
 import { FavouritesModalService } from 'src/app/core/services/favourites-modal/favourites-modal.service';
-import { NewRecipientService } from 'src/app/core/services/new-recipient/new-recipient.service';
+import { NewRecipientService } from 'src/app/core/services/modal-services/new-recipient.service';
 import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
-import { SelectAccountModalComponent } from '../select-account-modal/select-account-modal.component';
+// import { SelectAccountModalComponent } from '../select-account-modal/select-account-modal.component';
 
 @Component({
   selector: 'app-favourites-modal',
@@ -25,7 +25,7 @@ export class FavouritesModalComponent implements OnInit {
   visibility = true;
 
   constructor(
-    readonly dialogRef: MatDialogRef<SelectAccountModalComponent>,
+    // readonly dialogRef: MatDialogRef<SelectAccountModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private readonly favouritesModalService: FavouritesModalService,
     private readonly newRecipientService: NewRecipientService,
@@ -40,7 +40,7 @@ export class FavouritesModalComponent implements OnInit {
   }
 
   close(): void {
-    this.dialogRef.close(true);
+    // this.dialogRef.close(true);
   }
 
   openNewRecipient(): void {

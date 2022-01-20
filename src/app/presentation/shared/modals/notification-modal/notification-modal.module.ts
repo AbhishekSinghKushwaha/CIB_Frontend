@@ -7,20 +7,14 @@ import { SharedComponentsModule } from '../../components/shared-components.modul
 import { AccountCardModule } from '../../components/account-card/account-card.module';
 
 @NgModule({
-  declarations: [
-    NotificationModalComponent,
-  ],
+  declarations: [NotificationModalComponent],
   imports: [
     CommonModule,
     MatStyleModule,
     SharedComponentsModule,
-    AccountCardModule
+    AccountCardModule,
   ],
-  exports: [
-    NotificationModalComponent
-  ],
-  providers: [
-    NotificationModalService
-  ]
+  exports: [NotificationModalComponent],
+  providers: [NotificationModalService],
 })
-export class NotificationModalModule { }
+export class NotificationModalModule {}

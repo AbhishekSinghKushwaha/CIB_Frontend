@@ -1,0 +1,15 @@
+.transfer-to-modal-screen {
+  width: 22vw;
+  position: relative;
+}
+
+.mat-card {
+  background-color: #f7f7f7;
+}
+
+.close-button {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 1000;
+}

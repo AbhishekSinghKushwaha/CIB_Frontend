@@ -22,8 +22,10 @@ import { SelectBankComponent } from './select-bank/select-bank.component';
     SchedulePaymentInputComponent,
     SelectBankComponent,
   ],
-  imports: [CommonModule, MatStyleModule, FormsModule],
+  imports: [CommonModule, MatStyleModule, FormsModule, ReactiveFormsModule],
   exports: [
+    FormsModule,
+    ReactiveFormsModule,
     InputComponent,
     PasswordInputComponent,
     FieldErrorsComponent,

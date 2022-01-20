@@ -6,12 +6,13 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { recipientModel } from 'src/app/core/domain/recipient.model';
-import { NewRecipientService } from './../../../../core/services/new-recipient/new-recipient.service';
-import { CountryModel } from 'src/app/core/domain/country.model';
+import { NewRecipientService } from '../../../../core/services/modal-services/new-recipient.service';
+import { CountryModel } from 'src/app/core/domain/bank.model';
 import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
 import { countrySettings } from 'src/app/core/utils/constants/country.settings';
 import { IntrabankService } from 'src/app/core/services/transfers/intrabank/intrabank.service';
-import { CountryService } from 'src/app/core/services/country/country.service';
+import { CountryService } from 'src/app/core/services/modal-services/country.service';
+import { TransactionTypeConstants } from 'src/app/core/utils/constants/transaction-type.constants';
 @Component({
   selector: 'app-new-recipient-modal',
   templateUrl: './new-recipient-modal.component.html',
@@ -24,10 +25,14 @@ export class NewRecipientModalComponent implements OnInit {
   country: CountryModel;
   countrySelectType = countrySettings.viewTypes.FLAG_AND_NAME;
 
+  transferType = TransactionTypeConstants.TransferType;
+
   constructor(
     readonly dialogRef: MatDialogRef<NewRecipientModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: string
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.data);
+  }
 }

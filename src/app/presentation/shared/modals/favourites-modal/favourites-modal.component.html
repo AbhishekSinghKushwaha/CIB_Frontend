@@ -43,14 +43,7 @@
     0 favourites found
   </div>
   <div
-    class="
-      row
-      ms-3
-      d-flex
-      justify-content-center
-      text-danger text-decoration-underline
-      cursor-pointer
-    "
+    class="row ms-3 d-flex justify-content-center text-danger text-decoration-underline cursor-pointer"
     *ngIf="
       searchText && data.length !== (data | favouriteSearch: searchText).length
     "

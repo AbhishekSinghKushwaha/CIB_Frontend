@@ -1,7 +1,29 @@
-<div *ngIf="data === 'intraBankTransfer'">
-  <app-intra-new-recipient></app-intra-new-recipient>
+<div *ngIf="data === transferType.INTRA_BANK">
+  <app-intra-new-recipient [transferType]="data"></app-intra-new-recipient>
 </div>
 
-<div *ngIf="data === 'interBankTransfer'">
-  <app-inter-new-recipient></app-inter-new-recipient>
+<div
+  *ngIf="
+    data === transferType.INTER_BANK ||
+    data === transferType.EFT ||
+    data === transferType.RTGS
+  "
+>
+  <app-inter-new-recipient [transferType]="data"></app-inter-new-recipient>
+</div>
+
+<div *ngIf="data === transferType.MOBILE_MONEY">
+  <app-mobile-money-new-recipient></app-mobile-money-new-recipient>
+</div>
+
+<div *ngIf="data === transferType.BUY_GOODS">
+  <app-buy-goods-new-recipient></app-buy-goods-new-recipient>
+</div>
+
+<div *ngIf="data === transferType.SWIFT">
+  <app-swift-new-recipient></app-swift-new-recipient>
+</div>
+
+<div *ngIf="data === transferType.PESALINK">
+  <app-pesalink-new-recipient></app-pesalink-new-recipient>
 </div>

@@ -8,23 +8,19 @@ import { MatStyleModule } from 'src/app/mat-style.module';
 import { BuyGoodsPayToService } from 'src/app/core/services/buy-goods-pay-to/buy-goods-pay-to.service';
 import { BuyGoodsFavouritesModule } from '../../components/buy-goods-favourites/buy-goods-favourites.module';
 import { MerchantTillNumberModule } from '../merchant-till-number/merchant-till-number.module';
-import { TillNumberSearchModule } from '../../pipes/tillNumber-search/till-number-search.module';
+import { PipesModule } from '../../pipes/pipes.module';
 
 @NgModule({
-  declarations: [
-    BuyGoodsPayToComponent
-  ],
+  declarations: [BuyGoodsPayToComponent],
   imports: [
     CommonModule,
     FormsModule,
     MatStyleModule,
     BuyGoodsFavouritesModule,
     MerchantTillNumberModule,
-    TillNumberSearchModule
+    PipesModule,
   ],
-  exports: [
-    BuyGoodsPayToComponent
-  ],
-  providers: [BuyGoodsPayToService]
+  exports: [BuyGoodsPayToComponent],
+  providers: [BuyGoodsPayToService],
 })
-export class BuyGoodsPayToModule { }
+export class BuyGoodsPayToModule {}

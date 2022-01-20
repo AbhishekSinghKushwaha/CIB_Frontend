@@ -2,7 +2,7 @@ import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BankModel } from 'src/app/core/domain/bank.model';
 import { FromAccount } from 'src/app/core/domain/transfer.models';
-import { BankService } from 'src/app/core/services/bank/bank.service';
+import { BankService } from 'src/app/core/services/modal-services/bank.service';
 import { SharedDataService } from 'src/app/core/services/shared-data/shared-data.service';
 import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
 

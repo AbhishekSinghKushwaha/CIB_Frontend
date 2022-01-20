@@ -5,26 +5,22 @@ import { FormsModule } from '@angular/forms';
 import { MatStyleModule } from 'src/app/mat-style.module';
 import { PesaLinkSendToService } from 'src/app/core/services/pesa-link-send-to/pesa-link-send-to.service';
 import { RecepientBankModalModule } from '../recepient-bank-modal/recepient-bank-modal.module';
-import { BeneficiaryListItemModule } from '../../components/beneficiary-list-item/beneficiary-list-item.module';
-import { FavouriteSearchPipeModule } from '../../pipes/favourites-search/favourite-search-pipe.module';
 import { PhoneLinkedModalModule } from '../phone-linked-modal/phone-linked-modal.module';
+import { PipesModule } from '../../pipes/pipes.module';
+import { SharedComponentsModule } from '../../components/shared-components.module';
 
 @NgModule({
-  declarations: [
-    PesaLinkSendToComponent,
-  ],
+  declarations: [PesaLinkSendToComponent],
   imports: [
     CommonModule,
     MatStyleModule,
     FormsModule,
     RecepientBankModalModule,
-    BeneficiaryListItemModule,
-    FavouriteSearchPipeModule,
-    PhoneLinkedModalModule
+    SharedComponentsModule,
+    PipesModule,
+    PhoneLinkedModalModule,
   ],
-  exports: [
-    PesaLinkSendToComponent
-  ],
-  providers: [PesaLinkSendToService]
+  exports: [PesaLinkSendToComponent],
+  providers: [PesaLinkSendToService],
 })
-export class PesaLinkSendToModule { }
+export class PesaLinkSendToModule {}

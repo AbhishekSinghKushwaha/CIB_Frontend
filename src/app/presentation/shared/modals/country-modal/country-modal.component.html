@@ -3,14 +3,9 @@
     <div class="col-md-4">
       <mat-icon svgIcon="caret_left" (click)="close()"></mat-icon>
     </div>
-    <h4 class="strong-text col-md-8">
-      {{ data.category === viewTypes.FLAG_AND_NAME ? "Currency" : "Country" }}
-    </h4>
+    <h4 class="strong-text col-md-8">Country</h4>
   </div>
-  <h3 class="strong-text pt-4 mb-4">
-    Please select a
-    {{ data.category === viewTypes.FLAG_AND_NAME ? "currency" : "country" }}
-  </h3>
+  <h3 class="strong-text pt-4 mb-4">Please select a country</h3>
   <div class="row">
     <mat-form-field appearance="outline">
       <input
@@ -24,7 +19,7 @@
   <div *ngFor="let item of data.country; let isLast = last; let i = index">
     <app-country-list-item
       [data]="item"
-      [isChecked]="selected?.name === item.name"
+      [isChecked]="selected?.countryName === item.countryName"
     ></app-country-list-item>
     <mat-divider *ngIf="!isLast" class="pt-3"></mat-divider>
   </div>

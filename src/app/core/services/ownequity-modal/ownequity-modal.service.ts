@@ -3,14 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { CurrencySelectionComponent } from '../../../presentation/shared/modals/currency-selection/currency-selection.component';
 import { SchedulePaymentComponent } from '../../../presentation/shared/modals/schedule-payment/schedule-payment.component';
 
-
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OwnequityModalService {
-
-  constructor(private readonly dialog: MatDialog) { }
+  constructor(private readonly dialog: MatDialog) {}
 
   openCurrency(): void {
     this.dialog.open<CurrencySelectionComponent>(CurrencySelectionComponent, {
