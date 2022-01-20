@@ -13,25 +13,58 @@
                 <span>Register</span>
               </div>
             </button>
+          </div>        <div class="mb-3">
+            <mat-icon
+              aria-hidden="false"
+              svgIcon="wizard_progress_primary"
+              class="mat-icon-custom"
+            ></mat-icon>
+            <mat-icon
+              aria-hidden="false"
+              svgIcon="wizard_progress_primary"
+              class="mat-icon-custom"
+            ></mat-icon>
+            <mat-icon
+              aria-hidden="false"
+              svgIcon="wizard_progress_primary"
+              class="mat-icon-custom"
+            ></mat-icon>
+            <mat-icon
+              aria-hidden="false"
+              svgIcon="wizard_progress_grey"
+              class="mat-icon-custom"
+            ></mat-icon>
+            <mat-icon
+              aria-hidden="false"
+              svgIcon="wizard_progress_grey"
+              class="mat-icon-custom"
+            ></mat-icon>
+            <mat-icon
+              aria-hidden="false"
+              svgIcon="wizard_progress_grey"
+              class="mat-icon-custom"
+            ></mat-icon>
           </div>
           <div class="row mt-3">
             <h3>Please add the team members in your company</h3>
           </div>
           <div class="row">
-            <div class="row product-list-item" routerLink="roles" routerLink="/auth/customer-onboarding/team-member-detail" matRipple>
-              <div class="col-1 my-auto">
-                <div class="icon-container">
-                <mat-icon color="primary" aria-hidden="false">withdraw</mat-icon>
-                </div>
-              </div>
-              <div class="col-10  offset-md-1 product-list-item-label">
-                <div class="row h-100 justify-content-around align-items-center">
-                  <div class="col-10 float-left text-truncate">
-                    <h4>Add team members</h4>
-                    <small class="text-grey">Team members have access to various permissions and roles </small>
+            <div class="col-md-6">
+              <div class="row product-list-item" routerLink="roles" routerLink="/customer-onboarding/team-members/add" matRipple>
+                <div class="col-1 my-auto">
+                  <div class="icon-container">
+                  <mat-icon color="primary" aria-hidden="false"></mat-icon>
                   </div>
-                  <div class="col-2 float-right">
-                    <mat-icon [svgIcon]="'caret_right'"></mat-icon>
+                </div>
+                <div class="col-10  offset-md-1 product-list-item-label">
+                  <div class="row h-100 justify-content-around align-items-center">
+                    <div class="col-10 float-left text-truncate">
+                      <h4>Add team members</h4>
+                      <small class="text-grey">Team members have access to various permissions and roles </small>
+                    </div>
+                    <div class="col-2 float-right">
+                      <mat-icon [svgIcon]="'caret_right'"></mat-icon>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -40,14 +73,55 @@
           <div class="row mt-3">
             <h3>List of team members</h3>
           </div>
-          <div class="row">
-            <div class="col-md-6">
-              <app-team-member-menu-item></app-team-member-menu-item>
+          <div class="row mt-3">
+              <div
+                *ngFor="let item of members; let i = index"
+                class="col-md-6 align-items-stretch align-items-center mb-2 pb-2"
+              >
+                <div class="col-md-2">
+                  <img
+                    class="rounded-circle img-fluid"
+                    src="assets/images/icons/visual-support-icons-BM-image-placeholder.svg"
+                    alt="Generic placeholder image"
+                  />
+                </div>
+                <div class="col-md-8">
+                  <div class="row">
+                    <div class="col-md-10">
+                      <h4>Name and last name</h4>
+                      <small class="mb-1 text-grey">email address</small>
+                    </div>
+                    <div class="col-md-2">
+                      <mat-icon
+                        color="primary"
+                        svgIcon="three_dots_on_grey"
+                        [matMenuTriggerFor]="menu"
+                      ></mat-icon>
+
+                      <mat-menu #menu="matMenu">
+                        <button
+                          mat-menu-item
+                          [routerLink]="
+                            '/customer-onboarding/team-members/edit/' + i + 1
+                          "
+                        >
+                          <mat-icon svgIcon="edit"></mat-icon>
+                          <span>Edit</span>
+                        </button>
+                        <button mat-menu-item (click)="delete()">
+                          <mat-icon svgIcon="delete-documents"></mat-icon>
+                          <span>Delete</span>
+                        </button>
+                      </mat-menu>
+                    </div>
+                  </div>
+                  <mat-divider class="mt-2 mb-2"></mat-divider>
+                </div>
+            </div>
+            <div class="row">
+                <button mat-raised-button color="primary" class="mt-5 col-md-4" routerLink="">Save & continue</button>
             </div>
           </div>   
-        </div>
-        <div class="row">
-            <button mat-raised-button color="primary" class="mt-5 col-md-4" routerLink="">Save & continue</button>
         </div>
       </div>   
     </div>

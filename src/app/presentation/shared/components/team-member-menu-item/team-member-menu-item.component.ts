@@ -9,11 +9,14 @@ import { Router } from '@angular/router';
 })
 export class TeamMemberMenuItemComponent implements OnInit {
   item: any;
+  
+  displayMenu = false;
+
   constructor(private readonly router: Router) { }
 
   ngOnInit(): void {
   }
   showMenu() {
-
+    this.displayMenu = !this.displayMenu;
   }
 }
