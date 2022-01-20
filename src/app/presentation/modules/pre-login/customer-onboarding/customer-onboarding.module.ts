@@ -6,6 +6,8 @@ import { MatStyleModule } from 'src/app/mat-style.module';
 import { LottieModule } from 'ngx-lottie';
 import { CustomerOnboardingService } from './services/customer-onboarding.service';
 import { CustomerOnboardingAccountComponent } from './components/customer-onboarding-account/customer-onboarding-account.component';
+import { CustomerOnboardingRegisterComponent } from './components/customer-onboarding-register/customer-onboarding-register.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 export function playerFactory(): Promise<any> {
   return import(/* webpackChunkName: 'lottie-web' */ 'lottie-web');
@@ -15,11 +17,13 @@ export function playerFactory(): Promise<any> {
   declarations: [
     CustomerOnboardingComponent,
     CustomerOnboardingAccountComponent,
+    CustomerOnboardingRegisterComponent,
   ],
   imports: [
     CommonModule,
     CustomerOnboardingRoutingModule,
     MatStyleModule,
+    ReactiveFormsModule,
     LottieModule.forRoot({ player: playerFactory }),
   ],
   providers: [CustomerOnboardingService],

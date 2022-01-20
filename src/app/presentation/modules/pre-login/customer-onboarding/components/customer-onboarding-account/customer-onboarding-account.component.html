@@ -38,7 +38,8 @@
               color="primary"
               type="button"
               class="col-12"
-              [routerLink]="['/access/signup']"
+              [routerLink]="['../register']"
+              [disabled]="!selectedAccountType"
             >
               Register
             </button>
