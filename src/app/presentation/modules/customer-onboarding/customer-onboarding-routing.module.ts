@@ -5,9 +5,9 @@ import { CompanyDirectorsComponent } from './components/company-directors/compan
 import { CustomerOnboardingRegisterCompanyDetailsComponent } from './components/customer-onboarding-register-company-details/customer-onboarding-register-company-details.component';
 import { AddTeamMembersComponent } from './components/notification-preferences/add-team-members/add-team-members.component';
 import { NotificationPreferencesComponent } from './components/notification-preferences/notification-preferences.component';
-import { TeamMembersAddComponent } from './components/team-members-add/team-members-add.component';
-import { TeamMembersDetailsComponent } from './components/team-members-details/team-members-details.component';
-import { TeamMembersRolesComponent } from './components/team-members-roles/team-members-roles.component';
+import { TeamMembersComponent } from './components/team-members/team-members.component';
+import { TeamMembersDetailsComponent } from './components/team-members/team-members-details/team-members-details.component';
+import { TeamMembersRolesComponent } from './components/team-members/team-members-roles/team-members-roles.component';
 import { CustomerOnboardingComponent } from './customer-onboarding.component';
 
 const routes: Routes = [
@@ -26,7 +26,7 @@ const routes: Routes = [
       },
       { 
         path: 'team-members', 
-        component: TeamMembersAddComponent 
+        component: TeamMembersComponent 
       },
       { 
         path: 'team-members/add', 

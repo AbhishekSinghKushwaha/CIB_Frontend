@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { CustomerOnboardingRoutingModule } from './customer-onboarding-routing.module';
 import { CompanyDirectorsComponent } from './components/company-directors/company-directors.component';
 import { AddCompanyDirectorsComponent } from './components/company-directors/add-company-directors/add-company-directors.component';
-import { TeamMembersRolesComponent } from './components/team-members-roles/team-members-roles.component';
-import { TeamMembersDetailsComponent } from './components/team-members-details/team-members-details.component';
-import { TeamMembersAddComponent } from './components/team-members-add/team-members-add.component';
+import { TeamMembersRolesComponent } from './components/team-members/team-members-roles/team-members-roles.component';
+import { TeamMembersDetailsComponent } from './components/team-members/team-members-details/team-members-details.component';
+import { TeamMembersComponent } from './components/team-members/team-members.component';
 import { TeamMemberMenuItemComponent } from '../../shared/components/team-member-menu-item/team-member-menu-item.component';
 import { CustomerOnboardingRegistrationModalComponent } from './components/customer-onboarding-registration-modal/customer-onboarding-registration-modal.component';
 import { NotificationPreferencesComponent } from './components/notification-preferences/notification-preferences.component';
@@ -36,7 +36,7 @@ export function playerFactory(): Promise<any> {
     AddCompanyDirectorsComponent,
     TeamMembersRolesComponent,
     TeamMembersDetailsComponent,
-    TeamMembersAddComponent,
+    TeamMembersComponent,
     TeamMemberMenuItemComponent,
     CustomerOnboardingRegistrationModalComponent,
     NotificationPreferencesComponent,

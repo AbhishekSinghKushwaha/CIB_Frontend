@@ -5,11 +5,11 @@ import { confirmModal } from 'src/app/presentation/shared/decorators/confirm-dia
 import { TeamMembersConfirmationModalComponent } from 'src/app/presentation/shared/modals/team-members-confirmation-modal/team-members-confirmation-modal.component';
 
 @Component({
-  selector: 'app-team-members-add',
-  templateUrl: './team-members-add.component.html',
-  styleUrls: ['./team-members-add.component.scss']
+  selector: 'app-team-members',
+  templateUrl: './team-members.component.html',
+  styleUrls: ['./team-members.component.scss']
 })
-export class TeamMembersAddComponent implements OnInit {
+export class TeamMembersComponent implements OnInit {
 
   members = [1,2,3,4,5];
 
