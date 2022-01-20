@@ -18,7 +18,7 @@ export class NotificationPreferencesComponent implements OnInit {
   }
 
   submit() {
-    this.router.navigate(['/auth/customer-onboarding/add-members']);
+    this.router.navigate(['/customer-onboarding/add-members']);
   }
 
 }
