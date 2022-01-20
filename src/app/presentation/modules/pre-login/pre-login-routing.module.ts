@@ -37,6 +37,10 @@ const routes: Routes = [
       {
         path: 'forgot-password',
         loadChildren: (): Promise<any> => import('./forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule)
+      },
+      {
+        path: 'customer-onboarding',
+        loadChildren: (): Promise<any> => import('./customer-onboarding/customer-onboarding.module').then(m => m.CustomerOnboardingModule)
       }
     ]
   },

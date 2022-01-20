@@ -1,0 +1,32 @@
+.nav-button {
+  background-color: var(--white);
+  height: 48px;
+  width: 48px;
+  border-radius: 100px;
+  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.breadcrumb-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .breadcrumb-dot {
+    background-color: var(--cool-grey-20);
+    height: 10px;
+    width: 10px;
+    border-radius: 20px;
+    margin: 4px;
+    &.selected {
+      background-color: var(--equity);
+    }
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
