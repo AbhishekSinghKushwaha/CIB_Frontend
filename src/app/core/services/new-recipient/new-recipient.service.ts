@@ -22,6 +22,7 @@ export class NewRecipientService {
   set(input: any): void {
     this.defaultData = { ...this.defaultData, ...input };
     this.data.next(this.defaultData);
+    console.log('adsaf', this.defaultData);
   }
 
   get default(): recipientModel {
