@@ -1,0 +1,111 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="row mb-4 justify-content-md-center">
+      <div class="col-md-11">
+        <div class="mb-3">
+          <button
+            mat-icon-button
+            aria-label="Back"
+            class="back-icon"
+            routerLink="/"
+          >
+            <div class="strong-text">
+              <mat-icon svgIcon="caret_left"></mat-icon>
+              <span> {{ index ? "Edit" : "Add" }} direction</span>
+            </div>
+          </button>
+        </div>
+        <h3 class="title">
+          Please {{ index ? "update" : "enter" }} the director's details
+        </h3>
+        <div class="row">
+          <form
+            [formGroup]="addDirectorForm"
+            (ngSubmit)="submit()"
+            class="d-flex flex-column"
+            autocomplete="off"
+          >
+            <div class="row pt-4">
+              <div class="col-md-6">
+                <mat-form-field
+                  appearance="standard"
+                  style="width: 100%"
+                  floatLabel="always"
+                >
+                  <mat-label>Full name</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    placeholder="Enter their first and last name"
+                    formControlName="fullname"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field
+                  appearance="standard"
+                  style="width: 100%"
+                  floatLabel="always"
+                >
+                  <mat-label>Email address</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    placeholder="Enter their email address"
+                    formControlName="email"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <div class="row d-flex justify-content-between">
+                  <mat-form-field appearance="standard" class="col-md-4">
+                    <mat-select formControlName="officePhoneCode">
+                      <mat-option value="000">000</mat-option>
+                      <mat-option value="002">002</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field appearance="standard" class="col-md-8">
+                    <input
+                      matInput
+                      type="text"
+                      placeholder="Enter their office number"
+                      formControlName="officePhone"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="row d-flex justify-content-between">
+                  <mat-form-field appearance="standard" class="col-md-4">
+                    <mat-select formControlName="mobilePhoneCode">
+                      <mat-option value="000">000</mat-option>
+                      <mat-option value="002">002</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field appearance="standard" class="col-md-8">
+                    <input
+                      matInput
+                      type="text"
+                      placeholder="Enter their mobile number"
+                      formControlName="mobilePhone"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="mt-4">
+              <button
+                type="submit"
+                mat-raised-button
+                color="primary"
+                routerLink="/customer-onboarding/company-directors"
+              >
+                {{ index ? "Update" : "Add" }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
