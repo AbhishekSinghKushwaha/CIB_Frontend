@@ -1,0 +1,28 @@
+<div class="row product-list-item" (click)="showMenu()"  matRipple>
+    <div class="col-1 my-auto">
+      <div class="icon-container">
+      <mat-icon color="primary" aria-hidden="false">user</mat-icon>
+      </div>
+    </div>
+    <div class="col-10  offset-md-1 product-list-item-label">
+      <div class="row h-100 justify-content-around align-items-center">
+        <div class="col-10 float-left text-truncate">
+          <h4>{{ item.text }}</h4>
+          <small class="text-grey"> {{ item.subtext }}</small>
+        </div>
+        <div class="col-2 float-right">
+          <mat-icon [svgIcon]="'three_dots_on_red'"></mat-icon>
+        </div>
+      </div>
+    </div>
+    <div class="menu">
+      <div class="menu-item">
+        <mat-icon color="primary" aria-hidden="false">edit</mat-icon>
+        <p>Edit</p>
+      </div>
+      <div class="menu-item">
+        <mat-icon color="primary" aria-hidden="false">delete</mat-icon>
+        <p>Remove</p>
+      </div>
+    </div>
+  </div>

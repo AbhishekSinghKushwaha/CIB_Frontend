@@ -1,0 +1,105 @@
+<div class="row">
+    <div class="col-md-12">
+      <div class="row mb-4 justify-content-md-center">
+        <div class="col-md-11">
+          <div class="mb-3">
+            <button
+              mat-icon-button
+              aria-label="Back"
+              class="back-icon"
+            >
+              <div class="strong-text">
+                <mat-icon svgIcon="caret_left"></mat-icon>
+                <span>Roles</span>
+              </div>
+            </button>
+          </div>
+          <div class="row mt-3">
+          <h3>Please enter the team member's details</h3>
+          <form>
+            <div class="col-md-6">
+                <app-input
+                    [parentForm]="teamMemberDetailsForm"
+                    label="Full name"
+                    fieldName="fullName"
+                    formControlName="fullName"
+                    placeholder="Enter full name"
+                 ></app-input>
+            </div>
+            <div class="col-md-6">
+                <app-input
+                    [parentForm]="teamMemberDetailsForm"
+                    label="Email address"
+                    fieldName="email"
+                    formControlName="email"
+                    placeholder="Enter email address"
+                 ></app-input>
+            </div>
+            <div class="col-md-6">
+                <app-input
+                    [parentForm]="teamMemberDetailsForm"
+                    label="ID/PP"
+                    fieldName="idpp"
+                    formControlName="idpp"
+                    placeholder="Enter ID/PP"
+                 ></app-input>
+            </div>
+            <div class="col-md-6">
+                <app-input
+                    [parentForm]="teamMemberDetailsForm"
+                    label="Mobile number"
+                    fieldName="mobileNumber"
+                    formControlName="mobileNumber"
+                    placeholder="Enter Mobile number"
+                 ></app-input>
+            </div>
+            <div class="col-md-6">
+                <app-input
+                    [parentForm]="teamMemberDetailsForm"
+                    label="Transaction limit"
+                    fieldName="transactionLimit"
+                    formControlName="transactionLimit"
+                    placeholder="Enter transaction limit"
+                 ></app-input>
+            </div>
+            <div class="col-md-6">
+                <app-input
+                    [parentForm]="teamMemberDetailsForm"
+                    label="Office phone number"
+                    fieldName="officePhoneNumber"
+                    formControlName="officePhoneNumber"
+                    placeholder="Enter Office Phone number"
+                 ></app-input>
+            </div>            
+            <div class="col-md-6">
+                <div class="row product-list-item" routerLink="/auth/customer-onboarding/team-member-roles" matRipple>
+                    <div class="col-1 my-auto">
+                      <div class="icon-container">
+                      <mat-icon color="primary" aria-hidden="false">user</mat-icon>
+                      </div>
+                    </div>
+                    <div class="col-10  offset-md-1 product-list-item-label">
+                      <div class="row h-100 justify-content-around align-items-center">
+                        <div class="col-10 float-left text-truncate">
+                          <h4>Team member roles</h4>
+                          <small class="text-grey">Assign roles to a team member</small>
+                        </div>
+                        <div class="col-1 float-right">
+                          off
+                        </div>
+                        <div class="col-1 float-right">
+                          <mat-icon [svgIcon]="'caret_right'"></mat-icon>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+          </form>
+        </div>
+        <div class="row">
+            <button mat-raised-button color="primary" class="mt-5 col-md-3" routerLink="/auth/customer-onboarding/team-members-add">Add</button>
+        </div>
+      </div>   
+    </div>
+</div>
+  
