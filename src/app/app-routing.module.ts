@@ -16,7 +16,7 @@ const routes: Routes = [
   },
   {
     path: 'customer-onboarding',
-    loadChildren: (): Promise<any> => import('./presentation/modules/pre-login/customer-onboarding/customer-onboarding.module').then(m => m.CustomerOnboardingModule)
+    loadChildren: (): Promise<any> => import('./presentation/modules/customer-onboarding/customer-onboarding.module').then(m => m.CustomerOnboardingModule)
   },
   {
     path: '**',
