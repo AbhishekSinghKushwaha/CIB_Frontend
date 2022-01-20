@@ -47,7 +47,7 @@
             class="mat-icon-custom"
           ></mat-icon>
         </div>
-        <h3 class="title">Please add the company directors</h3>
+        <h3 class="title mb-3">Please add the company directors</h3>
         <div class="row">
           <div class="col-md-6">
             <mat-card
@@ -123,6 +123,16 @@
               </div>
             </div>
           </div>
+        </div>
+        <div class="mt-5">
+          <button
+            type="submit"
+            mat-raised-button
+            color="primary"
+            (click)="openDirectorInfoModal()"
+          >
+            Save & Continue
+          </button>
         </div>
       </div>
     </div>

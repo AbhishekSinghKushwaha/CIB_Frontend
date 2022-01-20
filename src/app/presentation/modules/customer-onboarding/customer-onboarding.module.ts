@@ -21,6 +21,7 @@ import { CustomerOnboardingService } from './services/customer-onboarding.servic
 import { NotificationConstants } from 'src/app/core/utils/constants/notification-menu.constants';
 import { LayoutModule } from '../../layout/layout.module';
 import { CustomerOnboardingComponent } from './customer-onboarding.component';
+import { SharedModalsModule } from '../../shared/modals/shared-modals.module';
 
 export function playerFactory(): Promise<any> {
   return import(/* webpackChunkName: 'lottie-web' */ 'lottie-web');
@@ -45,6 +46,7 @@ export function playerFactory(): Promise<any> {
     ReactiveFormsModule,
     CustomerOnboardingRoutingModule,
     ConfirmDialogModule,
+    SharedModalsModule,
     LayoutModule,
     MatStyleModule,
     LottieModule.forRoot({ player: playerFactory }),
@@ -53,4 +55,4 @@ export function playerFactory(): Promise<any> {
   ],
   providers: [CustomerOnboardingService, NotificationConstants],
 })
-export class CustomerOnboardingModule {}
+export class CustomerOnboardingModule { }
