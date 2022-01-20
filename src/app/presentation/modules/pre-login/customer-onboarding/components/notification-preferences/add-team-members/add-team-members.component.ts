@@ -8,9 +8,15 @@ import { Router } from '@angular/router';
 })
 export class AddTeamMembersComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private readonly router : Router
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  submit() {
+    this.router.navigate(['/customer-onboarding/add-members/register']);
   }
 
 }

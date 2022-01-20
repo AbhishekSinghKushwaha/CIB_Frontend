@@ -24,6 +24,8 @@ import { NotificationConstants } from 'src/app/core/utils/constants/notification
 import { AddTeamMembersComponent } from './components/notification-preferences/add-team-members/add-team-members.component';
 import { CustomerOnboardingRegisterCompanyDetailsComponent } from './components/customer-onboarding-register-company-details/customer-onboarding-register-company-details.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RegisterTeamMembersComponent } from './components/register-team-members/register-team-members.component';
+import { DeleteTeamMemberModule } from '../../../shared/components/delete-team-member/delete-team-member.module';
 
 export function playerFactory(): Promise<any> {
   return import(/* webpackChunkName: 'lottie-web' */ 'lottie-web');
@@ -45,6 +47,7 @@ export function playerFactory(): Promise<any> {
     NotificationPreferencesComponent,
     AddTeamMembersComponent,
     CustomerOnboardingRegisterCompanyDetailsComponent,
+    RegisterTeamMembersComponent,
   ],
   imports: [
     CommonModule,
@@ -57,6 +60,7 @@ export function playerFactory(): Promise<any> {
     FormElementsModule,
     LayoutModule,
     SharedComponentsModule,
+    DeleteTeamMemberModule
   ],
   providers: [CustomerOnboardingService, NotificationConstants],
 })

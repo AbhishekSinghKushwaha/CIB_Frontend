@@ -12,6 +12,7 @@ import { TeamMembersDetailsComponent } from './components/team-members-details/t
 import { TeamMembersRolesComponent } from './components/team-members-roles/team-members-roles.component';
 import { NotificationPreferencesComponent } from './components/notification-preferences/notification-preferences.component';
 import { AddTeamMembersComponent } from './components/notification-preferences/add-team-members/add-team-members.component';
+import { RegisterTeamMembersComponent } from './components/register-team-members/register-team-members.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,7 @@ const routes: Routes = [
         path: 'register/company-details',
         component: CustomerOnboardingRegisterCompanyDetailsComponent,
       },
+      { path: 'add-members/register', component: RegisterTeamMembersComponent },
     ]
   }
 ]
