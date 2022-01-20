@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserManagementSuccessComponent } from './user-management-success.component';
+import { MatStyleModule } from 'src/app/mat-style.module';
+import { UserManagementSuccessRoutingModule } from './user-management-success-routing.module';
 
 
 
@@ -9,7 +11,9 @@ import { UserManagementSuccessComponent } from './user-management-success.compon
     UserManagementSuccessComponent
   ],
   imports: [
-    CommonModule
+    UserManagementSuccessRoutingModule,
+    CommonModule,    
+    MatStyleModule
   ]
 })
 export class UserManagementSuccessModule { }

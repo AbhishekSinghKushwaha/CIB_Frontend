@@ -674,11 +674,53 @@ export class CustomIconService {
       this.domSanitizer.bypassSecurityTrustResourceUrl(
         'assets/images/icons/wizard-progress-grey.svg'
       )
-    );
+    ); 
     this.matIconRegistry.addSvgIcon(
       'wizard_progress_primary',
       this.domSanitizer.bypassSecurityTrustResourceUrl(
         'assets/images/icons/wizard-progress-primary.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'user_profile',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/visual-support-icons-user.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'user_limit',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/visual-support-icons-user-limit.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'toggle_button_on',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/toggle-button-selected.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'toggle_button_off',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/toggle-button-idle.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'notification',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/visual-support-icons-notification.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'pay',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/visual-support-icons-pay.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'create_user',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/visual-support-icons-create_user.svg'
       )
     );
 

@@ -7,7 +7,7 @@
               mat-icon-button
               aria-label="Back"
               class="back-icon"
-              routerLink="/account/open-account/"
+              routerLink="/user-management"
             >
               <div class="strong-text">
                 <mat-icon svgIcon="caret_left"></mat-icon>
@@ -19,15 +19,18 @@
       <div class="row mt-5">
         <div class="col-md-5">
             <div class="">
-              <img src="assets/images/Illustrations/Group 29.svg" alt="">  
+              <img src="assets/images/Illustrations/Group 29.svg" alt="Request submitted for approval">  
             </div>
             
         </div>
         <div class="col-md-7">
+          <div class="row">
             <h4 class="mt-5">Your user request has been submitted for approval!</h4>
-
             <span class="text-sm text-grey">You will be notified about your request progress</span>
-            <button mat-raised-button type="button" color="primary" class="px-5 mt-4">Done</button>
+          </div>
+          <div class="row col-md-3">
+            <button mat-raised-button type="button" color="primary" class="px-5 mt-4" routerLink="/user-management">Done</button>
+          </div>
         </div>
     </div>
     </div>
