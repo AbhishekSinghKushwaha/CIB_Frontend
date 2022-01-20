@@ -8,6 +8,7 @@ import { CustomerOnboardingService } from './services/customer-onboarding.servic
 import { CustomerOnboardingAccountComponent } from './components/customer-onboarding-account/customer-onboarding-account.component';
 import { CustomerOnboardingRegisterComponent } from './components/customer-onboarding-register/customer-onboarding-register.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CustomerOnboardingRegistrationModalComponent } from './components/customer-onboarding-registration-modal/customer-onboarding-registration-modal.component';
 
 export function playerFactory(): Promise<any> {
   return import(/* webpackChunkName: 'lottie-web' */ 'lottie-web');
@@ -18,6 +19,7 @@ export function playerFactory(): Promise<any> {
     CustomerOnboardingComponent,
     CustomerOnboardingAccountComponent,
     CustomerOnboardingRegisterComponent,
+    CustomerOnboardingRegistrationModalComponent,
   ],
   imports: [
     CommonModule,
