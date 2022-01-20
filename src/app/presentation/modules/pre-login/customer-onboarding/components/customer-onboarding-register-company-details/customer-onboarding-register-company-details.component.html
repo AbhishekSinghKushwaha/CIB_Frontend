@@ -1,0 +1,26 @@
+<div class="row h-100">
+  <div class="col-lg-4 px-0">
+    <div
+      class="h-100 discover-background"
+      [ngStyle]="{ 'background-image': backgroundImageUrl() }"
+    >
+      <div
+        class="container-fluid d-flex p-5 flex-column justify-content-between"
+      >
+        <div class="row mb-4">
+          <div class="col access-logo">
+            <img [src]="appLogoSrc()" routerLink="/" style="cursor: pointer" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-8 pt-4 access-panel">
+    <router-outlet></router-outlet>
+    <div class="row gx-0 bottom-panel-selections">
+      <div class="col">
+        <app-customer-support></app-customer-support>
+      </div>
+    </div>
+  </div>
+</div>

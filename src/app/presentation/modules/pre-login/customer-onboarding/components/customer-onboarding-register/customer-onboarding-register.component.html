@@ -1,0 +1,73 @@
+<div class="row pt-md-5 access-panel-content">
+  <div class="col-md-12">
+    <div class="row mb-3 justify-content-md-center">
+      <div class="col-md-10">
+        <div class="row mb-3">
+          <div class="col-md-12">
+            <button
+              mat-icon-button
+              aria-label="Back"
+              class="back-icon"
+              [routerLink]="['../..']"
+            >
+              <div class="strong-text">
+                <mat-icon svgIcon="caret_left"></mat-icon>
+                <span>Register</span>
+              </div>
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h3 class="strong-text">Register for corporate internet banking</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row pb-5">
+      <form
+        [formGroup]="registrationForm"
+        class="col-md-10 offset-md-1"
+        (ngSubmit)="validateRegistrationInformation()"
+      >
+        <div class="row mb-3">
+          <mat-form-field class="col-md-12">
+            <input
+              matInput
+              type="text"
+              id="accountNumber"
+              formControlName="accountNumber"
+              label="Account number"
+              placeholder="Enter your account number"
+            />
+          </mat-form-field>
+        </div>
+        <div class="row mb-3">
+          <mat-form-field class="col-md-12">
+            <input
+              matInput
+              type="text"
+              id="registrationNumber"
+              formControlName="registrationNumber"
+              label="Company registration number"
+              placeholder="Enter your registration number"
+            />
+          </mat-form-field>
+        </div>
+        <div class="row mb-3">
+          <div class="col-sm-5 pr-sm-0 mb-3 mb-sm-0">
+            <button
+              mat-flat-button
+              color="primary"
+              type="submit"
+              class="col-12"
+              [disabled]="registrationForm.invalid"
+            >
+              Continue
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
