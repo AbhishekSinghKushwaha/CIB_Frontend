@@ -12,6 +12,7 @@ import { TeamMembersDetailsComponent } from './components/team-members/team-memb
 import { TeamMembersRolesComponent } from './components/team-members/team-members-roles/team-members-roles.component';
 import { CustomerOnboardingComponent } from './customer-onboarding.component';
 import { ProductServicesComponent } from './components/product-services/product-services.component';
+import { RegistrationConfirmationComponent } from './components/registration-confirmation/registration-confirmation.component';
 
 const routes: Routes = [
   {
@@ -64,6 +65,7 @@ const routes: Routes = [
         path: 'register/company-details',
         component: CustomerOnboardingRegisterCompanyDetailsComponent,
       },
+      { path: 'registration-confirmation', component: RegistrationConfirmationComponent },
       {
         path: '',
         pathMatch: 'full',
@@ -77,4 +79,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class CustomerOnboardingRoutingModule {}
+export class CustomerOnboardingRoutingModule { }

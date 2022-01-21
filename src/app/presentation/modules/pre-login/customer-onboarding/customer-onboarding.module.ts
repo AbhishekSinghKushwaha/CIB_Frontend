@@ -13,6 +13,7 @@ import { SharedComponentsModule } from 'src/app/presentation/shared/components/s
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterTeamMembersComponent } from './components/register-team-members/register-team-members.component';
 import { DeleteTeamMemberModule } from '../../../shared/components/delete-team-member/delete-team-member.module';
+import { RegistrationConfirmationComponent } from '../../customer-onboarding/components/registration-confirmation/registration-confirmation.component';
 
 export function playerFactory(): Promise<any> {
   return import(/* webpackChunkName: 'lottie-web' */ 'lottie-web');
@@ -24,6 +25,7 @@ export function playerFactory(): Promise<any> {
     CustomerOnboardingAccountComponent,
     CustomerOnboardingRegisterComponent,
     RegisterTeamMembersComponent,
+    RegistrationConfirmationComponent,
   ],
   imports: [
     CommonModule,
