@@ -1,3 +1,4 @@
+import { ProductServiceConfirmationModalComponent } from './../../../../shared/modals/product-service-confirmation-modal/product-service-confirmation-modal.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -17,6 +18,10 @@ export class ProductServicesComponent implements OnInit {
 
   delete() {
     this.products.pop()
+  }
+
+  confirmTeamProductAndServices() {
+    this.dialog.open<ProductServiceConfirmationModalComponent>(ProductServiceConfirmationModalComponent, {disableClose: true});
   }
 
 }

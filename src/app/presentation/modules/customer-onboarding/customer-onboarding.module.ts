@@ -1,3 +1,4 @@
+import { ProductServiceConfirmationModalComponent } from './../../shared/modals/product-service-confirmation-modal/product-service-confirmation-modal.component';
 import { AddProductServicesComponent } from './components/product-services/add-product-services/add-product-services.component';
 import { ProductServicesOptionsComponent } from './components/product-services/product-services-options/product-services-options.component';
 import { ProductServicesComponent } from './components/product-services/product-services.component';
@@ -49,7 +50,8 @@ export function playerFactory(): Promise<any> {
     TeamMembersConfirmationModalComponent,
     ProductServicesComponent,
     ProductServicesOptionsComponent,
-    AddProductServicesComponent
+    AddProductServicesComponent,
+    ProductServiceConfirmationModalComponent
   ],
   imports: [
     CommonModule,

@@ -56,7 +56,7 @@ const routes: Routes = [
         component: ProductServicesOptionsComponent
       },
       {
-        path: 'notification-preferences',
+        path: 'product-services/options/selection',
         component: NotificationPreferencesComponent,
       },
       { path: 'add-members', component: AddTeamMembersComponent },

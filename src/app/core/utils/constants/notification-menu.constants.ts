@@ -3,83 +3,73 @@ import { NotificationDashboardList } from '../../domain/notification-preferences
 
 @Injectable()
 export class NotificationConstants {
-  constructor() {}
+  constructor() { }
 
   NOTIFICATION_DASHBOARD_LIST: NotificationDashboardList[] = [
     {
-      section: 'Initiator',
+      section: 'Please select payment options',
       content: [
         {
           leftIcon: 'swap_horiz',
-          text: 'Payments',
+          text: 'Internal fund transfer',
           subtext: '0810174008113 • Savings',
         },
         {
           leftIcon: 'input',
-          text: 'Transfers',
+          text: 'Intra bank fund transfer',
           subtext: '0810174008 • Current account',
-        }
-      ],
-    },
-    {
-      section: 'Approver',
-      content: [
+        },
         {
           leftIcon: 'add_shopping_cart',
-          text: 'Approve/reject',
+          text: 'ETF/RTGS transfer',
           subtext: 'Notification enabled'
         },
         {
           leftIcon: 'add_shopping_cart',
-          text: 'Payments',
+          text: 'Tax payment',
           subtext: 'For Equity online'
         },
         {
-            leftIcon: 'add_shopping_cart',
-            text: 'Push notification',
-            subtext: 'For Equity online'
+          leftIcon: 'add_shopping_cart',
+          text: 'International funds transfer',
+          subtext: 'For Equity online'
         },
         {
-            leftIcon: 'add_shopping_cart',
-            text: 'Push notification',
-            subtext: 'For Equity online'
+          leftIcon: 'add_shopping_cart',
+          text: 'Bulk payment',
+          subtext: 'For Equity online'
         },
+        {
+          leftIcon: 'add_shopping_cart',
+          text: 'Salary payment',
+          subtext: 'For Equity online'
+        },
+        {
+          leftIcon: 'add_shopping_cart',
+          text: 'Utility payment',
+          subtext: 'For Equity online'
+        },
+        {
+          leftIcon: 'add_shopping_cart',
+          text: 'Inter country transfers',
+          subtext: 'For Equity online'
+        },
+        {
+          leftIcon: 'add_shopping_cart',
+          text: 'Card payment',
+          subtext: 'For Equity online'
+        },
+        {
+          leftIcon: 'add_shopping_cart',
+          text: 'Pesalink transfer',
+          subtext: 'For Equity online'
+        },
+        {
+          leftIcon: 'add_shopping_cart',
+          text: 'Standing instruction',
+          subtext: 'For Equity online'
+        }
       ],
-    },
-    {
-      section: 'Super admin',
-      content: [
-        {
-            leftIcon: 'add_shopping_cart',
-            text: 'Approve/reject',
-            subtext: 'Notification enabled'
-          },
-          {
-            leftIcon: 'add_shopping_cart',
-            text: 'Payments',
-            subtext: 'For Equity online'
-          },
-          {
-              leftIcon: 'add_shopping_cart',
-              text: 'Push notification',
-              subtext: 'For Equity online'
-          },
-          {
-              leftIcon: 'add_shopping_cart',
-              text: 'Push notification',
-              subtext: 'For Equity online'
-          },
-          {
-            leftIcon: 'add_shopping_cart',
-            text: 'Push notification',
-            subtext: 'For Equity online'
-        },
-        {
-            leftIcon: 'add_shopping_cart',
-            text: 'Push notification',
-            subtext: 'For Equity online'
-        },
-      ],
-    },
+    }
   ];
 }

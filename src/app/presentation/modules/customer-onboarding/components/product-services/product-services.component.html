@@ -52,7 +52,7 @@
           <div class="col-md-6 mt-2">
             <mat-card
               class="cursor-pointer p-3"
-              routerLink="/customer-onboarding/product-services/option"
+              routerLink="/customer-onboarding/product-services/add"
             >
               <mat-card-content>
                 <div class="row">
@@ -62,7 +62,7 @@
                     </button>
                   </div>
                   <div class="col-md-7">
-                    <p class="mb-0">Add Product & services</p>
+                    <p class="mb-0"> Product & services</p>
                     <small class="text-grey"
                       >Add the details of your company's directors</small
                     >
@@ -132,6 +132,7 @@
               type="submit"
               class="col-8"
               [disabled]="false"
+              (click)="confirmTeamProductAndServices()"
             >
               Save & continue
             </button>

@@ -1,3 +1,4 @@
+import { ProductServiceConfirmationModalComponent } from './../../../shared/modals/product-service-confirmation-modal/product-service-confirmation-modal.component';
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CompanyDetailsSummaryComponent } from '../components/customer-onboarding-register-company-details/company-details-summary/company-details-summary.component';
@@ -11,6 +12,8 @@ export class CustomerOnboardingService {
     CustomerOnboardingRegistrationModalComponent,
     any
   >;
+
+  productServiceModal: MatDialogRef<ProductServiceConfirmationModalComponent, any>;
 
   companyDetailsModal: MatDialogRef<CompanyDetailsSummaryComponent, any>;
 
@@ -46,4 +49,20 @@ export class CustomerOnboardingService {
   closeCompanyDetailsModal() {
     this.companyDetailsModal.close();
   }
+
+  openServiceAndProducstModal() {
+    this.productServiceModal = this.dialog.open<
+      ProductServiceConfirmationModalComponent,
+      any
+    >(ProductServiceConfirmationModalComponent, {
+      maxWidth: '800px',
+      disableClose: true,
+    });
+    return this.productServiceModal;
+  }
+
+  closeServiceAndProducstModal() {
+    this.productServiceModal.close();
+  }
+
 }

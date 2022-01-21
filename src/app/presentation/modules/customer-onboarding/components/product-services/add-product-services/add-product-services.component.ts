@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-product-services.component.scss']
 })
 export class AddProductServicesComponent implements OnInit {
+  options = [1, 2, 3, 4];
 
   constructor() { }
 
