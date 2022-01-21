@@ -180,6 +180,12 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
           this.parentForm.controls.sendTo.setValue(x);
         });
         break;
+      case this.transferType.MOBILE_MONEY:
+        this.newRecipientService.data.subscribe((x) => {
+          console.log(x);
+          this.parentForm.controls.sendTo.setValue(x);
+        });
+        break;
       // case 'fundTransferBuyGoods':
       //   this.buyGoodsPayToService.selected.subscribe((x) => {
       //     console.log(x);

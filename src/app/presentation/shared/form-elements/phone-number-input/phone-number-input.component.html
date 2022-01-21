@@ -1,17 +1,17 @@
 <div class="row justify-content-between">
-  <div class="col-4">
+  <div class="col-5">
     <mat-form-field
       appearance="standard"
       style="width: 100%"
       floatLabel="always"
       (click)="openDialCodeModal()"
     >
-      <mat-label>Mobile Number</mat-label>
+      <mat-label>{{ label }}</mat-label>
       <input
         matInput
         type="text"
         class="strong-text"
-        [value]="country?.dialCode || ''"
+        [value]="country?.dialCode ? '+' + country?.dialCode : ''"
         [placeholder]="country?.dialCode || '' || '+254'"
       />
       <button type="button" mat-icon-button matSuffix>
@@ -19,13 +19,11 @@
       </button>
     </mat-form-field>
   </div>
-  <div class="col-8">
+  <div class="col-7">
     <mat-form-field appearance="standard" style="width: 100%">
       <input
         matInput
         type="number"
-        [id]="fieldName"
-        [name]="fieldName"
         class="strong-text"
         [id]="fieldName"
         [name]="fieldName"

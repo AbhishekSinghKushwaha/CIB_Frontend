@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
+import { MobileMoneyNewRecipientComponent } from '../mobile-money-new-recipient/mobile-money-new-recipient.component';
 
 @Component({
   selector: 'app-mobile-operators-modal',
@@ -9,10 +11,18 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class MobileOperatorsModalComponent implements OnInit {
   @Input() transferType: string;
 
-  operators: any;
+  operators = mockData.mobileOperators;
 
   isChecked: boolean = false;
-  constructor(private dialogRef: MatDialogRef<MobileOperatorsModalComponent>) {}
+
+  selected: any;
+
+  visibility: boolean = true;
+
+  constructor(
+    private dialogRef: MatDialogRef<MobileOperatorsModalComponent>,
+    private readonly dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {}
 
@@ -20,5 +30,20 @@ export class MobileOperatorsModalComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  select() {}
+  select(i: number) {
+    this.selected = this.operators[i];
+    this.visibility = false;
+    this.openMobileMoneyNewRecipientModal();
+  }
+
+  openMobileMoneyNewRecipientModal() {
+    const modal = this.dialog.open(MobileMoneyNewRecipientComponent, {
+      disableClose: true,
+      data: this.selected,
+    });
+
+    modal.afterClosed().subscribe((x) => {
+      console.log(x);
+    });
+  }
 }

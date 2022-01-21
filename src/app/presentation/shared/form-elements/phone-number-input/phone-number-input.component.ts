@@ -1,6 +1,12 @@
 import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { CountryModel } from 'src/app/core/domain/bank.model';
+import { CountryService } from 'src/app/core/services/modal-services/country.service';
+import { NewRecipientService } from 'src/app/core/services/modal-services/new-recipient.service';
+import { countrySettings } from 'src/app/core/utils/constants/country.settings';
+import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
 
 @Component({
   selector: 'app-phone-number-input',
@@ -28,7 +34,9 @@ export class PhoneNumberInputComponent implements OnInit {
   @Input()
   placeholder!: string;
 
-  country: CountryModel;
+  country!: CountryModel;
+
+  phoneNumberEntered = new Subject<number>();
 
   public changed!: (value: string) => void;
 
@@ -40,9 +48,14 @@ export class PhoneNumberInputComponent implements OnInit {
     return this.parentForm?.get(this.fieldName) as FormControl;
   }
 
-  constructor() {}
+  constructor(
+    private countryService: CountryService,
+    private newRecipientService: NewRecipientService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.listenToDataStreams();
+  }
 
   public writeValue(value: string): void {
     this.value = value;
@@ -50,6 +63,7 @@ export class PhoneNumberInputComponent implements OnInit {
 
   public onChange(event: Event): void {
     const value: string = (<HTMLInputElement>event.target).value;
+    this.phoneNumberEntered.next(Number(value));
   }
 
   public registerOnChange(fn: any): void {
@@ -64,5 +78,25 @@ export class PhoneNumberInputComponent implements OnInit {
     this.isDisabled = isDisabled;
   }
 
-  openDialCodeModal() {}
+  openDialCodeModal() {
+    this.countryService.openCountry(
+      mockData.countries,
+      countrySettings.viewTypes.NAME_ONLY
+    );
+  }
+
+  onPhoneNumberEntered() {
+    this.phoneNumberEntered
+      .pipe(debounceTime(1000), distinctUntilChanged())
+      .subscribe((res) => {
+        this.value = res.toString();
+        this.changed(this.country.dialCode + this.value);
+      });
+  }
+
+  listenToDataStreams() {
+    this.countryService.selectedCountry.subscribe((x) => (this.country = x));
+
+    this.onPhoneNumberEntered();
+  }
 }

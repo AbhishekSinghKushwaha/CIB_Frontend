@@ -5,6 +5,7 @@ import { FavouriteBeneficiaryModel } from './../../domain/favourites-beneficiary
 import { SelectAccountModel } from './../../domain/select-account.model';
 import { BuyGoodsFavouriteModel } from './../../domain/buy-goods-favourites.model';
 import { UserModel } from '../../domain/user.model';
+import { MobileOperator } from '../../domain/transfer.models';
 
 const accounts: SelectAccountModel[] = [
   {
@@ -667,6 +668,41 @@ const buyGoodsFavourites: BuyGoodsFavouriteModel[] = [
 
 const accountNumber: string = '2837181638719349';
 
+const mobileOperators: MobileOperator[] = [
+  {
+    id: '1',
+    operatorName: 'Airtel',
+    operatorIconPath: 'assets/images/icons/airtel.svg',
+    serviceName: 'Airtel Money',
+    serviceIconPath: '',
+    operatorCountry: 'Kenya',
+  },
+  {
+    id: '2',
+    operatorName: 'Equitel',
+    operatorIconPath: 'assets/images/icons/equitel.svg',
+    serviceName: 'Equitel',
+    serviceIconPath: '',
+    operatorCountry: 'Kenya',
+  },
+  {
+    id: '3',
+    operatorName: 'Safaricom',
+    operatorIconPath: 'assets/images/icons/safaricom.svg',
+    serviceName: 'MPESA',
+    serviceIconPath: '',
+    operatorCountry: 'Kenya',
+  },
+  {
+    id: '4',
+    operatorName: 'Telkom',
+    operatorIconPath: 'assets/images/icons/telkom.svg',
+    serviceName: 'T-Kash',
+    serviceIconPath: '',
+    operatorCountry: 'Kenya',
+  },
+];
+
 export const mockData = {
   accounts,
   favourites,
@@ -676,4 +712,5 @@ export const mockData = {
   buyGoodsFavourites,
   accountNumber,
   users,
+  mobileOperators,
 };

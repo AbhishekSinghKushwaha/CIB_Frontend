@@ -69,7 +69,6 @@ export class TransferAmountComponent implements ControlValueAccessor, OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.sendFromAccount);
     this.listenToDataEvents();
   }
 

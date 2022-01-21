@@ -12,13 +12,13 @@
     autocomplete="off"
   >
     <div class="row gx-0 m-3">
-      <app-input
+      <app-phone-number-input
         [parentForm]="mobileMoneyNewRecipientForm"
-        label="Account or Mobile number"
-        placeholder="Enter account or mobile number"
-        fieldName="accountNumber"
-        formControlName="accountNumber"
-      ></app-input>
+        fieldName="phoneNumber"
+        formControlName="phoneNumber"
+        placeholder="Enter their mobile number"
+        label="Mobile Number"
+      ></app-phone-number-input>
     </div>
     <div class="p-2">
       <button
