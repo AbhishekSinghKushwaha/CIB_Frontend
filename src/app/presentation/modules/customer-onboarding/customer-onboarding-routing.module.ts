@@ -9,6 +9,7 @@ import { TeamMembersComponent } from './components/team-members/team-members.com
 import { TeamMembersDetailsComponent } from './components/team-members/team-members-details/team-members-details.component';
 import { TeamMembersRolesComponent } from './components/team-members/team-members-roles/team-members-roles.component';
 import { CustomerOnboardingComponent } from './customer-onboarding.component';
+import { RegistrationConfirmationComponent } from './components/registration-confirmation/registration-confirmation.component';
 
 const routes: Routes = [
   {
@@ -24,21 +25,21 @@ const routes: Routes = [
         path: 'company-directors/edit/:index',
         component: AddCompanyDirectorsComponent,
       },
-      { 
-        path: 'team-members', 
-        component: TeamMembersComponent 
+      {
+        path: 'team-members',
+        component: TeamMembersComponent
       },
-      { 
-        path: 'team-members/add', 
-        component: TeamMembersDetailsComponent 
+      {
+        path: 'team-members/add',
+        component: TeamMembersDetailsComponent
       },
-      { 
-        path: 'team-members/edit/:index', 
-        component: TeamMembersDetailsComponent 
+      {
+        path: 'team-members/edit/:index',
+        component: TeamMembersDetailsComponent
       },
-      { 
-        path: 'team-members/roles', 
-        component: TeamMembersRolesComponent 
+      {
+        path: 'team-members/roles',
+        component: TeamMembersRolesComponent
       },
       {
         path: 'notification-preferences',
@@ -49,6 +50,7 @@ const routes: Routes = [
         path: 'register/company-details',
         component: CustomerOnboardingRegisterCompanyDetailsComponent,
       },
+      { path: 'registration-confirmation', component: RegistrationConfirmationComponent },
       {
         path: '',
         pathMatch: 'full',
@@ -62,4 +64,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class CustomerOnboardingRoutingModule {}
+export class CustomerOnboardingRoutingModule { }
