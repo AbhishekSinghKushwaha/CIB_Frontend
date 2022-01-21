@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TransferToComponent } from './transfer-to/transfer-to.component';
 import { SchedulePaymentInputComponent } from './schedule-payment-input/schedule-payment-input.component';
 import { SelectBankComponent } from './select-bank/select-bank.component';
+import { PhoneNumberInputComponent } from './phone-number-input/phone-number-input.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { SelectBankComponent } from './select-bank/select-bank.component';
     TransferToComponent,
     SchedulePaymentInputComponent,
     SelectBankComponent,
+    PhoneNumberInputComponent,
   ],
   imports: [CommonModule, MatStyleModule, FormsModule, ReactiveFormsModule],
   exports: [
@@ -34,6 +36,7 @@ import { SelectBankComponent } from './select-bank/select-bank.component';
     TransferToComponent,
     SchedulePaymentInputComponent,
     SelectBankComponent,
+    PhoneNumberInputComponent,
   ],
 })
 export class FormElementsModule {}

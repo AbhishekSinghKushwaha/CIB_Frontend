@@ -13,7 +13,9 @@
 </div>
 
 <div *ngIf="data === transferType.MOBILE_MONEY">
-  <app-mobile-money-new-recipient></app-mobile-money-new-recipient>
+  <app-mobile-operators-modal
+    [transferType]="data"
+  ></app-mobile-operators-modal>
 </div>
 
 <div *ngIf="data === transferType.BUY_GOODS">

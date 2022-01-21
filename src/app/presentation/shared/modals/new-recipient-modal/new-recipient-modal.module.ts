@@ -12,6 +12,7 @@ import { BuyGoodsNewRecipientComponent } from './buy-goods-new-recipient/buy-goo
 import { PesalinkNewRecipientComponent } from './pesalink-new-recipient/pesalink-new-recipient.component';
 import { MobileMoneyNewRecipientComponent } from './mobile-money-new-recipient/mobile-money-new-recipient.component';
 import { BankModalModule } from '../bank-modal/bank-modal.module';
+import { MobileOperatorsModalComponent } from './mobile-operators-modal/mobile-operators-modal.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { BankModalModule } from '../bank-modal/bank-modal.module';
     BuyGoodsNewRecipientComponent,
     PesalinkNewRecipientComponent,
     MobileMoneyNewRecipientComponent,
+    MobileOperatorsModalComponent,
   ],
   exports: [NewRecipientModalComponent],
   imports: [
