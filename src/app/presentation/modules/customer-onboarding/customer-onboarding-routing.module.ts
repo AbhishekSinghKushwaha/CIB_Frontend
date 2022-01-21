@@ -1,3 +1,4 @@
+import { ContractDownloadComponent } from './components/contract-download/contract-download.component';
 import { ProductServicesOptionsComponent } from './components/product-services/product-services-options/product-services-options.component';
 import { AddProductServicesComponent } from './components/product-services/add-product-services/add-product-services.component';
 import { NgModule } from '@angular/core';
@@ -66,6 +67,7 @@ const routes: Routes = [
         component: CustomerOnboardingRegisterCompanyDetailsComponent,
       },
       { path: 'registration-confirmation', component: RegistrationConfirmationComponent },
+      { path: 'contract-download', component: ContractDownloadComponent },
       {
         path: '',
         pathMatch: 'full',
