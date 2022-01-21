@@ -62,6 +62,7 @@ export class CustomerOnboardingService {
   }
 
   closeServiceAndProducstModal() {
+    console.log(this.productServiceModal);
     this.productServiceModal.close();
   }
 
