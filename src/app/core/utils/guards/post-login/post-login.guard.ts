@@ -16,7 +16,7 @@ export class PostLoginGuard implements CanActivate {
     if (data?.stage === LOGIN_CONSTANTS.LOGIN_STAGES.LOGIN_SUCCESS && loginDataSet) {
       return true
     }
-    this.router.navigate(['/auth/login']);
+    this.router.navigate(['/auth/customer-onboarding']);
     return false
   }
 

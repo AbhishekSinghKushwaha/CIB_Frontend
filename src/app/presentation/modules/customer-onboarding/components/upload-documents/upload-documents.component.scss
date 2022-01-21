@@ -1,0 +1,91 @@
+.mat-icon-custom {
+  width: 60px;
+  padding-right: 7px;
+}
+
+.mat-flat-button.mat-accent,
+.mat-raised-button.mat-accent,
+.mat-fab.mat-accent,
+.mat-mini-fab.mat-accent {
+  background-color: var(--cool-grey-40);
+}
+
+.card {
+  background-color: inherit;
+  border: none !important;
+  border-radius: none !important;
+}
+
+.own-equity-modal-screen {
+  width: 675px;
+  margin: 0;
+  padding: 0;
+  max-height: 543px;
+}
+
+.upload {
+  background: #f7f7f7;
+  border: 1.5px dashed #929497;
+  box-sizing: border-box;
+  border-radius: 8px;
+  width: 335px;
+  height: 286px;
+}
+
+.icon {
+  background-color: var(--cool-grey-20);
+  height: 48px;
+  width: 48px;
+  border-radius: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-close {
+  background-color: var(--cool-grey-20);
+  height: 30px;
+  width: 30px;
+  border-radius: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-align {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon-alignment {
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 80px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.browse {
+  color: #a32a29 !important;
+}
+
+.mat-progress-bar {
+  height: 10px !important;
+  border-radius: 6px !important;
+}
+
+.progress-container {
+  background-color: #f7f7f7;
+}
+
+.progress-pre {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.align-upload {
+  padding-left: 15px !important;
+}

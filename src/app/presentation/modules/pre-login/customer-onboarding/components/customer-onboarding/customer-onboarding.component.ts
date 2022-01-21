@@ -3,7 +3,6 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AnimationItem, AnimationSegment } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
-import { CustomerOnboardingService } from '../../services/customer-onboarding.service';
 
 @Component({
   selector: 'app-customer-onboarding',
@@ -60,16 +59,11 @@ export class CustomerOnboardingComponent implements OnInit {
 
   private animationItem: AnimationItem;
 
-  constructor(
-    private router: Router,
-    private onboardingService: CustomerOnboardingService,
-    private ngZone: NgZone
-  ) {}
+  constructor(private router: Router, private ngZone: NgZone) {}
 
   ngOnInit(): void {}
 
   skipOnboarding(): void {
-    this.onboardingService.showOnboarding = false;
     this.router.navigate(['auth/customer-onboarding/account']);
   }
 

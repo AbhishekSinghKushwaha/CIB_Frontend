@@ -12,7 +12,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'login',
+        redirectTo: 'customer-onboarding',
         pathMatch: 'full'
       },
       {
@@ -41,7 +41,7 @@ const routes: Routes = [
       {
         path: 'customer-onboarding',
         loadChildren: (): Promise<any> => import('./customer-onboarding/customer-onboarding.module').then(m => m.CustomerOnboardingModule)
-      }
+      },
     ]
   },
 ];
