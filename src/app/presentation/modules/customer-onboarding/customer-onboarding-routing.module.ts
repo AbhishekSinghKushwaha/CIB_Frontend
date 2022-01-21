@@ -1,3 +1,5 @@
+import { ProductServicesOptionsComponent } from './components/product-services/product-services-options/product-services-options.component';
+import { AddProductServicesComponent } from './components/product-services/add-product-services/add-product-services.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddCompanyDirectorsComponent } from './components/company-directors/add-company-directors/add-company-directors.component';
@@ -9,6 +11,7 @@ import { TeamMembersComponent } from './components/team-members/team-members.com
 import { TeamMembersDetailsComponent } from './components/team-members/team-members-details/team-members-details.component';
 import { TeamMembersRolesComponent } from './components/team-members/team-members-roles/team-members-roles.component';
 import { CustomerOnboardingComponent } from './customer-onboarding.component';
+import { ProductServicesComponent } from './components/product-services/product-services.component';
 
 const routes: Routes = [
   {
@@ -24,21 +27,33 @@ const routes: Routes = [
         path: 'company-directors/edit/:index',
         component: AddCompanyDirectorsComponent,
       },
-      { 
-        path: 'team-members', 
-        component: TeamMembersComponent 
+      {
+        path: 'team-members',
+        component: TeamMembersComponent
       },
-      { 
-        path: 'team-members/add', 
-        component: TeamMembersDetailsComponent 
+      {
+        path: 'team-members/add',
+        component: TeamMembersDetailsComponent
       },
-      { 
-        path: 'team-members/edit/:index', 
-        component: TeamMembersDetailsComponent 
+      {
+        path: 'team-members/edit/:index',
+        component: TeamMembersDetailsComponent
       },
-      { 
-        path: 'team-members/roles', 
-        component: TeamMembersRolesComponent 
+      {
+        path: 'team-members/roles',
+        component: TeamMembersRolesComponent
+      },
+      {
+        path: 'product-services',
+        component: ProductServicesComponent
+      },
+      {
+        path: 'product-services/add',
+        component: AddProductServicesComponent
+      },
+      {
+        path: 'product-services/options',
+        component: ProductServicesOptionsComponent
       },
       {
         path: 'notification-preferences',

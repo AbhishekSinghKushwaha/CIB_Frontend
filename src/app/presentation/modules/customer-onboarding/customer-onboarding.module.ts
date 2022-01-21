@@ -1,3 +1,6 @@
+import { AddProductServicesComponent } from './components/product-services/add-product-services/add-product-services.component';
+import { ProductServicesOptionsComponent } from './components/product-services/product-services-options/product-services-options.component';
+import { ProductServicesComponent } from './components/product-services/product-services.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CustomerOnboardingRoutingModule } from './customer-onboarding-routing.module';
@@ -43,7 +46,10 @@ export function playerFactory(): Promise<any> {
     AddTeamMembersComponent,
     CustomerOnboardingRegisterCompanyDetailsComponent,
     CompanyDetailsSummaryComponent,
-    TeamMembersConfirmationModalComponent
+    TeamMembersConfirmationModalComponent,
+    ProductServicesComponent,
+    ProductServicesOptionsComponent,
+    AddProductServicesComponent
   ],
   imports: [
     CommonModule,
