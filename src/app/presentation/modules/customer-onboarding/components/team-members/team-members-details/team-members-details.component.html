@@ -20,68 +20,116 @@
           <form [formGroup]="teamMemberDetailsForm" class="d-flex flex-column">
             <div class="row pt-4">
               <div class="col-md-6">
-                <app-input
-                  label="Full name"
-                  placeholder="Enter full name"
-                ></app-input>
+                <mat-form-field
+                appearance="standard"
+                style="width: 100%"
+                floatLabel="always"
+              >
+                <mat-label>Full name</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  placeholder="Enter their first and last name"
+                  formControlName="fullName"
+                />
+              </mat-form-field>
               </div>
               <div class="col-md-6">
-                <app-input
-                  label="Email address"
-                  placeholder="Enter email address"
-                ></app-input>
-              </div>
-              <div class="col-md-6">
-                <app-input label="ID/PP" placeholder="Enter ID/PP"></app-input>
-              </div>
-              <div class="col-md-6">
-                <app-input
-                  label="Mobile number"
-                  placeholder="Enter Mobile number"
-                ></app-input>
-              </div>
-              <div class="col-md-6">
-                <app-input
-                  label="Transaction limit"
-                  placeholder="Enter transaction limit"
-                ></app-input>
-              </div>
-              <div class="col-md-6">
-                <app-input
-                  label="Office phone number"
-                  placeholder="Enter Office Phone number"
-                ></app-input>
-              </div>
-              <div class="col-md-6">
-                <div
-                  class="row product-list-item"
-                  routerLink="/customer-onboarding/team-members/roles"
-                  matRipple
+                <mat-form-field
+                  appearance="standard"
+                  style="width: 100%"
+                  floatLabel="always"
                 >
-                  <div class="col-1 my-auto">
-                    <div class="icon-container">
-                      <mat-icon color="primary" aria-hidden="false"
-                        >person</mat-icon
-                      >
-                    </div>
+                  <mat-label>Email address</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    placeholder="Enter their email address"
+                    formControlName="email"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field
+                  appearance="standard"
+                  style="width: 100%"
+                  floatLabel="always"
+                >
+                  <mat-label>ID/PP</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    placeholder="Enter their ID number"
+                    formControlName="idpp"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field
+                  appearance="standard"
+                  style="width: 100%"
+                  floatLabel="always"
+                >
+                  <mat-label>Mobile number</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    placeholder="Enter their mobile number"
+                    formControlName="mobileNumber"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field
+                  appearance="standard"
+                  style="width: 100%"
+                  floatLabel="always"
+                >
+                  <mat-label>Transaction Limit</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    placeholder="5,000,000.00"
+                    formControlName="transactionLimit"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field
+                  appearance="standard"
+                  style="width: 100%"
+                  floatLabel="always"
+                >
+                  <mat-label>Office phone number</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    placeholder="Enter their office number"
+                    formControlName="officePhoneNumber"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="col-md-6 mt-5">
+                <div class="row product-list-item"
+                routerLink="/customer-onboarding/team-members/roles" >
+                  <div class="col-md-2">
+                    <button mat-fab class="text-primary">
+                      <mat-icon >person</mat-icon>
+                    </button>
                   </div>
-                  <div class="col-10 offset-md-1 product-list-item-label">
-                    <div
-                      class="row h-100 justify-content-around align-items-center"
+                  <div class="col-md-7 product-list-item-label ">
+                    <p class="mb-0">Team member roles</p>
+                    <small class="text-grey"
+                      >Add the details of your company's directors</small
                     >
-                      <div class="col-10 float-left text-truncate">
-                        <h4>Team member roles</h4>
-                        <small class="text-grey"
-                          >Assign roles to a team member</small
-                        >
-                      </div>
-                      <div class="col-1 float-right">off</div>
-                      <div class="col-1 float-right">
-                        <mat-icon [svgIcon]="'caret_right'"></mat-icon>
-                      </div>
-                    </div>
+                  </div>
+                  <div class="col-1 text-grey pt-4">off</div>
+                  <div class="col-md-2 card card-block justify-content-center">
+                    <mat-icon color="primary" svgIcon="caret_right"></mat-icon>
                   </div>
                 </div>
+
+
               </div>
             </div>
           </form>

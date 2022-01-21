@@ -41,6 +41,10 @@ body {
   color: var(--green) !important;
 }
 
+.text-primary {
+  color: #a32a29 !important;
+}
+
 button {
   &.mat-button {
     border-radius: 8px !important;
@@ -388,6 +392,7 @@ button {
 
 .product-list-item {
   height: 80px !important;
+  border-bottom: 1px solid var(--cool-grey-20);
   &:hover {
     cursor: pointer;
     background-color: var(--pearl);
@@ -404,7 +409,7 @@ button {
 
   .product-list-item-label {
     height: 100%;
-    border-bottom: 1px solid var(--cool-grey-20);
+
     &.is-last {
       border-bottom: none;
     }

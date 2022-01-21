@@ -8,23 +8,21 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 })
 export class TeamMembersDetailsComponent implements OnInit {
 
-  teamMemberDetailsForm: FormGroup = new FormGroup( {
-    fullName: new FormControl(''),
-    email: new FormControl(''),
-    idpp: new FormControl(''),
-    mobileNumber: new FormControl(''),
-    transactionLimit: new FormControl(''),
-    officePhoneNumber: new FormControl(''),
-  });
-  
+  teamMemberDetailsForm: FormGroup ;
+
   constructor(private readonly fb: FormBuilder) {
    }
 
   ngOnInit(): void {
-    
-    this.teamMemberDetailsForm = this.fb.group({
-      
-    })
+
+    this.teamMemberDetailsForm = new FormGroup( {
+      fullName: new FormControl(''),
+      email: new FormControl(''),
+      idpp: new FormControl(''),
+      mobileNumber: new FormControl(''),
+      transactionLimit: new FormControl(''),
+      officePhoneNumber: new FormControl(''),
+    });
   }
 
 }
