@@ -28,6 +28,7 @@ import { CustomerOnboardingComponent } from './customer-onboarding.component';
 import { SharedModalsModule } from '../../shared/modals/shared-modals.module';
 import { CompanyDetailsSummaryComponent } from './components/customer-onboarding-register-company-details/company-details-summary/company-details-summary.component';
 import { TeamMembersConfirmationModalComponent } from '../../shared/modals/team-members-confirmation-modal/team-members-confirmation-modal.component';
+import { UploadDocumentsComponent } from './components/upload-documents/upload-documents.component';
 
 export function playerFactory(): Promise<any> {
   return import(/* webpackChunkName: 'lottie-web' */ 'lottie-web');
@@ -51,7 +52,8 @@ export function playerFactory(): Promise<any> {
     ProductServicesComponent,
     ProductServicesOptionsComponent,
     AddProductServicesComponent,
-    ProductServiceConfirmationModalComponent
+    ProductServiceConfirmationModalComponent,
+    UploadDocumentsComponent,
   ],
   imports: [
     CommonModule,
@@ -67,4 +69,4 @@ export function playerFactory(): Promise<any> {
   ],
   providers: [CustomerOnboardingService, NotificationConstants],
 })
-export class CustomerOnboardingModule { }
+export class CustomerOnboardingModule {}

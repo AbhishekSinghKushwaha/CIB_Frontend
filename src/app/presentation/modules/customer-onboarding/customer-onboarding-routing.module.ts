@@ -13,6 +13,7 @@ import { TeamMembersRolesComponent } from './components/team-members/team-member
 import { CustomerOnboardingComponent } from './customer-onboarding.component';
 import { ProductServicesComponent } from './components/product-services/product-services.component';
 import { RegistrationConfirmationComponent } from './components/registration-confirmation/registration-confirmation.component';
+import { UploadDocumentsComponent } from './components/upload-documents/upload-documents.component';
 
 const routes: Routes = [
   {
@@ -30,31 +31,31 @@ const routes: Routes = [
       },
       {
         path: 'team-members',
-        component: TeamMembersComponent
+        component: TeamMembersComponent,
       },
       {
         path: 'team-members/add',
-        component: TeamMembersDetailsComponent
+        component: TeamMembersDetailsComponent,
       },
       {
         path: 'team-members/edit/:index',
-        component: TeamMembersDetailsComponent
+        component: TeamMembersDetailsComponent,
       },
       {
         path: 'team-members/roles',
-        component: TeamMembersRolesComponent
+        component: TeamMembersRolesComponent,
       },
       {
         path: 'product-services',
-        component: ProductServicesComponent
+        component: ProductServicesComponent,
       },
       {
         path: 'product-services/add',
-        component: AddProductServicesComponent
+        component: AddProductServicesComponent,
       },
       {
         path: 'product-services/options',
-        component: ProductServicesOptionsComponent
+        component: ProductServicesOptionsComponent,
       },
       {
         path: 'product-services/options/selection',
@@ -65,7 +66,14 @@ const routes: Routes = [
         path: 'register/company-details',
         component: CustomerOnboardingRegisterCompanyDetailsComponent,
       },
-      { path: 'registration-confirmation', component: RegistrationConfirmationComponent },
+      {
+        path: 'registration-confirmation',
+        component: RegistrationConfirmationComponent,
+      },
+      {
+        path: 'upload-documents',
+        component: UploadDocumentsComponent,
+      },
       {
         path: '',
         pathMatch: 'full',
@@ -79,4 +87,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class CustomerOnboardingRoutingModule { }
+export class CustomerOnboardingRoutingModule {}
