@@ -1,3 +1,4 @@
+import { ContractDownloadComponent } from './components/contract-download/contract-download.component';
 import { ProductServiceConfirmationModalComponent } from './../../shared/modals/product-service-confirmation-modal/product-service-confirmation-modal.component';
 import { AddProductServicesComponent } from './components/product-services/add-product-services/add-product-services.component';
 import { ProductServicesOptionsComponent } from './components/product-services/product-services-options/product-services-options.component';
@@ -29,6 +30,7 @@ import { SharedModalsModule } from '../../shared/modals/shared-modals.module';
 import { CompanyDetailsSummaryComponent } from './components/customer-onboarding-register-company-details/company-details-summary/company-details-summary.component';
 import { TeamMembersConfirmationModalComponent } from '../../shared/modals/team-members-confirmation-modal/team-members-confirmation-modal.component';
 import { UploadDocumentsComponent } from './components/upload-documents/upload-documents.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 export function playerFactory(): Promise<any> {
   return import(/* webpackChunkName: 'lottie-web' */ 'lottie-web');
@@ -54,6 +56,7 @@ export function playerFactory(): Promise<any> {
     AddProductServicesComponent,
     ProductServiceConfirmationModalComponent,
     UploadDocumentsComponent,
+    ContractDownloadComponent,
   ],
   imports: [
     CommonModule,
@@ -66,6 +69,7 @@ export function playerFactory(): Promise<any> {
     LottieModule.forRoot({ player: playerFactory }),
     FormElementsModule,
     SharedComponentsModule,
+    PdfViewerModule,
   ],
   providers: [CustomerOnboardingService, NotificationConstants],
 })
