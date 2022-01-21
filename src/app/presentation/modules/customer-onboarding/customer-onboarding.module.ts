@@ -31,6 +31,7 @@ import { CompanyDetailsSummaryComponent } from './components/customer-onboarding
 import { TeamMembersConfirmationModalComponent } from '../../shared/modals/team-members-confirmation-modal/team-members-confirmation-modal.component';
 import { UploadDocumentsComponent } from './components/upload-documents/upload-documents.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { SubmitSuccessfulComponent } from './components/submit-successful/submit-successful.component';
 
 export function playerFactory(): Promise<any> {
   return import(/* webpackChunkName: 'lottie-web' */ 'lottie-web');
@@ -57,6 +58,7 @@ export function playerFactory(): Promise<any> {
     ProductServiceConfirmationModalComponent,
     UploadDocumentsComponent,
     ContractDownloadComponent,
+    SubmitSuccessfulComponent,
   ],
   imports: [
     CommonModule,

@@ -15,6 +15,7 @@ import { CustomerOnboardingComponent } from './customer-onboarding.component';
 import { ProductServicesComponent } from './components/product-services/product-services.component';
 import { RegistrationConfirmationComponent } from './components/registration-confirmation/registration-confirmation.component';
 import { UploadDocumentsComponent } from './components/upload-documents/upload-documents.component';
+import { SubmitSuccessfulComponent } from './components/submit-successful/submit-successful.component';
 
 const routes: Routes = [
   {
@@ -67,19 +68,17 @@ const routes: Routes = [
         path: 'register/company-details',
         component: CustomerOnboardingRegisterCompanyDetailsComponent,
       },
-<<<<<<< HEAD
-      {
-        path: 'registration-confirmation',
-        component: RegistrationConfirmationComponent,
-      },
+
       {
         path: 'upload-documents',
         component: UploadDocumentsComponent,
       },
-=======
-      { path: 'registration-confirmation', component: RegistrationConfirmationComponent },
+      {
+        path: 'registration-confirmation',
+        component: RegistrationConfirmationComponent,
+      },
+      { path: 'submit-successful', component: SubmitSuccessfulComponent },
       { path: 'contract-download', component: ContractDownloadComponent },
->>>>>>> f8dd467eb5716b8629f1fed081e36a052b483014
       {
         path: '',
         pathMatch: 'full',
