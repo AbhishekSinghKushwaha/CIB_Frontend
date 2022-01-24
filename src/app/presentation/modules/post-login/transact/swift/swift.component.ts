@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TransactionTypeConstants } from 'src/app/core/utils/constants/transaction-type.constants';
 import { accountLimitValidator } from 'src/app/core/utils/validators/limits.validators';
 
 @Component({
@@ -10,6 +11,8 @@ import { accountLimitValidator } from 'src/app/core/utils/validators/limits.vali
 })
 export class SwiftComponent implements OnInit {
   swiftTransferForm: FormGroup;
+
+  transferType = TransactionTypeConstants.TransferType;
 
   get getForm() {
     return this.swiftTransferForm.controls;
@@ -23,7 +26,6 @@ export class SwiftComponent implements OnInit {
 
   initForm(): void {
     this.swiftTransferForm = this.fb.group({
-      transactionType: ['', [Validators.required]],
       sendFrom: ['', [Validators.required]],
       sendTo: ['', [Validators.required]],
       fxReferenceId: ['', [Validators.required]],
@@ -31,7 +33,7 @@ export class SwiftComponent implements OnInit {
       schedulePayment: ['', [Validators.required]],
       license: ['', [Validators.required]],
       charges: ['', [Validators.required]],
-      paymentCategory: [''],
+      paymentCategory: ['', [Validators.required]],
       reason: [''],
     });
   }

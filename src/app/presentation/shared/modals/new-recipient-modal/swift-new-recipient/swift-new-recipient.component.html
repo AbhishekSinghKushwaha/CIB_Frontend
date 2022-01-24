@@ -1,1 +1,112 @@
-<p>swift-new-recipient works!</p>
+<div class="new-recipient-modal-screen p-1">
+  <button mat-icon-button matSuffix class="close-button" (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <p class="text-center fw-bold pt-2">Send to someone new</p>
+  <h3 class="m-4 ms-2">Please enter the recipient's details</h3>
+
+  <app-country-select
+    [category]="countrySelectType"
+    (selectedCountry)="setCountry($event)"
+  ></app-country-select>
+  <form
+    [formGroup]="newRecipientForm"
+    (submit)="submit()"
+    class="m-3 d-flex flex-column"
+    autocomplete="off"
+  >
+    <div class="row gx-0">
+      <!-- Bank -->
+      <div class="col-md-6 col-lg-12">
+        <app-select-bank
+          [parentForm]="newRecipientForm"
+          fieldName="bank"
+          formControlName="bank"
+          label="Select Bank"
+          placeholder="Select their bank"
+        ></app-select-bank>
+      </div>
+      <!-- First Name -->
+      <div class="col-md-6 col-lg-12">
+        <app-input
+          [parentForm]="newRecipientForm"
+          fieldName="firstName"
+          placeholder="Enter their first name"
+          formControlName="firstName"
+          label="First name"
+        ></app-input>
+      </div>
+      <!-- Last Name -->
+      <div class="col-md-6 col-lg-12">
+        <app-input
+          [parentForm]="newRecipientForm"
+          fieldName="lastName"
+          placeholder="Enter their last name"
+          formControlName="lastName"
+          label="Last name"
+        ></app-input>
+      </div>
+      <!-- Account Number -->
+      <div class="col-md-6 col-lg-12">
+        <app-input
+          [parentForm]="newRecipientForm"
+          fieldName="accountNumber"
+          placeholder="Enter their account number"
+          formControlName="accountNumber"
+          label="Account number"
+        ></app-input>
+      </div>
+      <!-- Mobile Number -->
+      <div class="col-md-6 col-lg-12">
+        <app-phone-number-input
+          [parentForm]="newRecipientForm"
+          fieldName="phoneNumber"
+          placeholder="Enter their mobile number"
+          formControlName="phoneNumber"
+          label="Mobile number"
+        ></app-phone-number-input>
+      </div>
+      <!-- IBAN Number -->
+      <div class="col-md-6 col-lg-12">
+        <app-input
+          [parentForm]="newRecipientForm"
+          fieldName="IBANNumber"
+          placeholder="Enter their IBAN number"
+          formControlName="IBANNumber"
+          label="IBAN number"
+        ></app-input>
+      </div>
+      <!-- Street Address -->
+      <div class="col-md-6 col-lg-12">
+        <app-input
+          [parentForm]="newRecipientForm"
+          fieldName="streetAddress"
+          placeholder="Enter their street address"
+          formControlName="streetAddress"
+          label="Street address"
+        ></app-input>
+      </div>
+      <!-- Postal Address -->
+      <div class="col-md-6 col-lg-12">
+        <app-input
+          [parentForm]="newRecipientForm"
+          fieldName="postalAddress"
+          placeholder="Enter their postal address"
+          formControlName="postalAddress"
+          label="Postal address"
+        ></app-input>
+      </div>
+      <div class="col-md-6 col-lg-12"></div>
+    </div>
+    <div class="mt-4">
+      <button
+        type="submit"
+        mat-raised-button
+        color="primary"
+        [disabled]="newRecipientForm.invalid"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</div>

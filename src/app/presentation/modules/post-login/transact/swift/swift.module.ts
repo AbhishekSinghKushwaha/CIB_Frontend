@@ -4,13 +4,9 @@ import { CommonModule } from '@angular/common';
 import { SwiftRoutingModule } from './swift-routing.module';
 import { SwiftComponent } from './swift.component';
 import { MatStyleModule } from 'src/app/mat-style.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FormElementsModule } from 'src/app/presentation/shared/form-elements/form-elements.module';
 import { SharedComponentsModule } from 'src/app/presentation/shared/components/shared-components.module';
-import { SelectAccountModalModule } from 'src/app/presentation/shared/modals/select-account-modal/select-account-modal.module';
-import { SchedulePaymentModule } from 'src/app/presentation/shared/modals/schedule-payment/schedule-payment.module';
-import { CurrencySelectionModule } from 'src/app/presentation/shared/modals/currency-selection/currency-selection.module';
-import { FavouritesModalModule } from 'src/app/presentation/shared/modals/favourites-modal/favourites-modal.module';
+import { SharedModalsModule } from 'src/app/presentation/shared/modals/shared-modals.module';
+import { FormElementsModule } from 'src/app/presentation/shared/form-elements/form-elements.module';
 
 @NgModule({
   declarations: [SwiftComponent],
@@ -18,14 +14,9 @@ import { FavouritesModalModule } from 'src/app/presentation/shared/modals/favour
     CommonModule,
     SwiftRoutingModule,
     MatStyleModule,
-    FormsModule,
-    ReactiveFormsModule,
-    FormElementsModule,
-    SelectAccountModalModule,
-    FavouritesModalModule,
-    CurrencySelectionModule,
-    SchedulePaymentModule,
     SharedComponentsModule,
+    SharedModalsModule,
+    FormElementsModule,
   ],
 })
 export class SwiftModule {}

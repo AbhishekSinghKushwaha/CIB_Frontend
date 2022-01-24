@@ -1,5 +1,6 @@
 import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { SwiftModalsService } from 'src/app/core/services/modal-services/swift-modals.service';
 
 @Component({
   selector: 'app-swift-charges',
@@ -14,7 +15,7 @@ import { FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
   ],
 })
 export class SwiftChargesComponent implements OnInit {
-  @Input() parentForm: FormGroup;
+  @Input() parentForm!: FormGroup;
 
   @Input() fieldName: string;
 
@@ -22,7 +23,7 @@ export class SwiftChargesComponent implements OnInit {
 
   @Input() placeholder: string;
 
-  public value: string;
+  public value: any;
 
   public changed: (value: string) => void;
 
@@ -34,9 +35,11 @@ export class SwiftChargesComponent implements OnInit {
     return this.parentForm?.get(this.fieldName) as FormControl;
   }
 
-  constructor() {}
+  constructor(private readonly swiftModalsService: SwiftModalsService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.listenToDataStreams();
+  }
 
   public writeValue(value: string): void {
     this.value = value;
@@ -59,5 +62,13 @@ export class SwiftChargesComponent implements OnInit {
     this.isDisabled = isDisabled;
   }
 
-  openForeignBankChargesModal() {}
+  openForeignBankChargesModal() {
+    this.swiftModalsService.openSwiftCharges();
+  }
+
+  listenToDataStreams() {
+    this.swiftModalsService.selectedCharge.subscribe((x) => {
+      this.parentForm.controls.charges.setValue(x);
+    });
+  }
 }

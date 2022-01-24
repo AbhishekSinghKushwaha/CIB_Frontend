@@ -11,7 +11,7 @@
     matInput
     [id]="fieldName"
     [name]="fieldName"
-    [value]="value"
+    [value]="value?.name || ''"
     (input)="onChange($event)"
     (blur)="touched()"
     [placeholder]="placeholder"

@@ -42,4 +42,33 @@ const TransferType = {
   PESALINK: '10',
 };
 
-export const TransactionTypeConstants = { TRANSACT_TYPE, TransferType };
+const SwiftChargesOptions = [
+  {
+    option: 'Pay full charges',
+    description:
+      'You will pay the full amount of the foreign bank charges, which is 20 USD',
+    charge: '20USD',
+  },
+  {
+    option: 'Share Charges',
+    description:
+      'Your recipient will receive 10 USD less than what you send, and you will pay 10 USD',
+    charge: '10USD',
+  },
+];
+
+const PaymentCategories = [
+  { name: 'Oil and allied' },
+  { name: 'Chemicals' },
+  { name: 'Manufacturing goods' },
+  { name: 'Food Imports' },
+  { name: 'Raw materials (e.g tobacco, rubber)' },
+  { name: 'Outwards investments' },
+];
+
+export const TransactionTypeConstants = {
+  TRANSACT_TYPE,
+  TransferType,
+  SwiftChargesOptions,
+  PaymentCategories,
+};

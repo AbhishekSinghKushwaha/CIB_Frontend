@@ -1,5 +1,6 @@
 import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { SwiftModalsService } from 'src/app/core/services/modal-services/swift-modals.service';
 
 @Component({
   selector: 'app-payment-category',
@@ -22,7 +23,7 @@ export class PaymentCategoryComponent implements OnInit {
 
   @Input() placeholder: string;
 
-  public value: string;
+  public value: any;
 
   public changed: (value: string) => void;
 
@@ -34,9 +35,11 @@ export class PaymentCategoryComponent implements OnInit {
     return this.parentForm?.get(this.fieldName) as FormControl;
   }
 
-  constructor() {}
+  constructor(private readonly swiftModalsService: SwiftModalsService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.listenToDataStreams();
+  }
 
   public writeValue(value: string): void {
     this.value = value;
@@ -59,5 +62,13 @@ export class PaymentCategoryComponent implements OnInit {
     this.isDisabled = isDisabled;
   }
 
-  openPaymentCategoryModal() {}
+  openPaymentCategoryModal() {
+    this.swiftModalsService.openPaymentCategoryModal();
+  }
+
+  listenToDataStreams() {
+    this.swiftModalsService.selectedPaymentCategory.subscribe((x) => {
+      this.parentForm.controls.paymentCategory.setValue(x);
+    });
+  }
 }

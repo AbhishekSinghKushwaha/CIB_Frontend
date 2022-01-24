@@ -6,6 +6,8 @@ import { CurrencySelectionModule } from './currency-selection/currency-selection
 import { SchedulePaymentModule } from './schedule-payment/schedule-payment.module';
 import { ConfirmPaymentModule } from './confirm-payment/confirm-payment.module';
 import { SupportingDocumentsUploadModule } from './supporting-documents-upload/supporting-documents-upload.module';
+import { SwiftChargesModalModule } from './swift-charges-modal/swift-charges-modal.module';
+import { PaymentCategoryModalModule } from './payment-category-modal/payment-category-modal.module';
 
 @NgModule({
   declarations: [],
@@ -17,6 +19,8 @@ import { SupportingDocumentsUploadModule } from './supporting-documents-upload/s
     SchedulePaymentModule,
     ConfirmPaymentModule,
     SupportingDocumentsUploadModule,
+    SwiftChargesModalModule,
+    PaymentCategoryModalModule,
   ],
   exports: [
     TransferFromModalModule,
@@ -25,6 +29,8 @@ import { SupportingDocumentsUploadModule } from './supporting-documents-upload/s
     SchedulePaymentModule,
     ConfirmPaymentModule,
     SupportingDocumentsUploadModule,
+    SwiftChargesModalModule,
+    PaymentCategoryModalModule,
   ],
   providers: [],
 })

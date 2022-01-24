@@ -10,4 +10,9 @@ export interface recipientModel {
   phoneNumber?: any;
   tillNumber?: any;
   tillName?: any;
+  firstName?: string;
+  lastName?: string;
+  IBANNumber?: string;
+  streetAddress?: string;
+  postalAddress?: string;
 }

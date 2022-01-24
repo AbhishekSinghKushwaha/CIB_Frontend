@@ -134,7 +134,7 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
         break;
       case this.transferType.SWIFT:
         this.transferToService.openTransferToModal({
-          favourites: mockData.buyGoodsFavourites,
+          favourites: mockData.favourites,
           transactionType: this.transactionType,
         });
         break;
@@ -190,6 +190,12 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
         });
         break;
       case this.transferType.PESALINK:
+        this.newRecipientService.data.subscribe((x) => {
+          console.log(x);
+          this.parentForm.controls.sendTo.setValue(x);
+        });
+        break;
+      case this.transferType.SWIFT:
         this.newRecipientService.data.subscribe((x) => {
           console.log(x);
           this.parentForm.controls.sendTo.setValue(x);
