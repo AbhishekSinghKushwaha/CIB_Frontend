@@ -15,6 +15,10 @@ const routes: Routes = [
     canActivate: [LoginGuard]
   },
   {
+    path: 'customer-onboarding',
+    loadChildren: (): Promise<any> => import('./presentation/modules/customer-onboarding/customer-onboarding.module').then(m => m.CustomerOnboardingModule)
+  },
+  {
     path: '**',
     redirectTo: '',
   }
