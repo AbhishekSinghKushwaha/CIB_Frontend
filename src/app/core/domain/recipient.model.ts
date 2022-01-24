@@ -8,4 +8,6 @@ export interface recipientModel {
   bank?: BankModel;
   mobileOperator?: MobileOperator;
   phoneNumber?: any;
+  tillNumber?: any;
+  tillName?: any;
 }

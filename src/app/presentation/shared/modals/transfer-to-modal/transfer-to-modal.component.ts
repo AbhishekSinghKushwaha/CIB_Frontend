@@ -16,7 +16,9 @@ export class TransferToModalComponent implements OnInit {
     private readonly transferToService: TransferToService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.data);
+  }
 
   close() {
     this.transferToService.closeTransferToModal();

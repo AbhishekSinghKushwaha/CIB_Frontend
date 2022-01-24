@@ -1,4 +1,4 @@
-<div *ngIf="!loading">
+<div>
   <div class="mb-3">
     <button
       mat-icon-button
@@ -16,13 +16,13 @@
   <form
     class="d-flex flex-column"
     autocomplete="off"
-    [formGroup]="fundTransferBuyGoodsForm"
+    [formGroup]="buyGoodsForm"
     (submit)="getTransferCharges()"
   >
     <div class="row pt-4">
       <div class="col-md-6">
         <app-transfer-from
-          [parentForm]="fundTransferBuyGoodsForm"
+          [parentForm]="buyGoodsForm"
           label="Pay from"
           formControlName="sendFrom"
           fieldName="sendFrom"
@@ -30,17 +30,17 @@
       </div>
       <div class="col-md-6 align-self-end">
         <app-transfer-to
-          [parentForm]="fundTransferBuyGoodsForm"
+          [parentForm]="buyGoodsForm"
           fieldName="sendTo"
           formControlName="sendTo"
           label="Pay to"
           placeholder="Select the merchant"
-          transactionType="transferType.BUY_GOODS"
+          transactionType="{{ transferType.BUY_GOODS }}"
         ></app-transfer-to>
       </div>
       <div class="col-md-6">
         <app-transfer-amount
-          [parentForm]="fundTransferBuyGoodsForm"
+          [parentForm]="buyGoodsForm"
           fieldName="amount"
           label="Amount"
           placeholder="Enter an amount"
@@ -50,7 +50,7 @@
       </div>
       <div class="col-md-6">
         <app-schedule-payment-input
-          [parentForm]="fundTransferBuyGoodsForm"
+          [parentForm]="buyGoodsForm"
           label="Schedule Payment"
           fieldName="schedulePayment"
           placeholder="Select a payment date"
@@ -59,7 +59,7 @@
       </div>
       <div class="col-md-6">
         <app-input
-          [parentForm]="fundTransferBuyGoodsForm"
+          [parentForm]="buyGoodsForm"
           fieldName="fxReferenceId"
           label="FX Reference ID"
           placeholder="Enter FX reference ID"
@@ -68,7 +68,7 @@
       </div>
       <div class="col-md-6">
         <app-input
-          [parentForm]="fundTransferBuyGoodsForm"
+          [parentForm]="buyGoodsForm"
           fieldName="reason"
           label="Payment Reason"
           formControlName="reason"
@@ -95,7 +95,7 @@
       <button
         mat-raised-button
         type="submit"
-        [disabled]="fundTransferBuyGoodsForm.invalid"
+        [disabled]="buyGoodsForm.invalid"
         color="primary"
         class="px-5"
       >
@@ -103,8 +103,4 @@
       </button>
     </div>
   </form>
-</div>
-
-<div class="row justify-content-md-center" *ngIf="loading">
-  <mat-spinner style="margin-top: 30vh"></mat-spinner>
 </div>

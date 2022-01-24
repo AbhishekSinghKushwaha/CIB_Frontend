@@ -1,9 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BeneficiaryModel } from 'src/app/core/domain/beneficiary.model';
-import { FavouriteBeneficiaryModel } from 'src/app/core/domain/favourites-beneficiary.model';
-import { BeneficiaryManagementFormModalService } from 'src/app/core/services/beneficiary-management-form-modal/beneficiary-management-form-modal.service';
-import { BeneficiaryManagementModalService } from 'src/app/core/services/beneficiary-management-modal/beneficiary-management-modal.service';
-import { FavouritesModalService } from 'src/app/core/services/favourites-modal/favourites-modal.service';
+
 import { TransferToService } from 'src/app/core/services/modal-services/transfer-to.service';
 
 @Component({

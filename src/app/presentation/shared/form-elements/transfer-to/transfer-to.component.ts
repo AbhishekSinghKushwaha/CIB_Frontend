@@ -6,18 +6,9 @@ import {
   NG_VALUE_ACCESSOR,
 } from '@angular/forms';
 import { recipientModel } from 'src/app/core/domain/recipient.model';
-import { FromAccount } from 'src/app/core/domain/transfer.models';
-import { AccountsService } from 'src/app/core/services/accounts/accounts.service';
-import { FavouritesModalService } from 'src/app/core/services/favourites-modal/favourites-modal.service';
 import { NewRecipientService } from 'src/app/core/services/modal-services/new-recipient.service';
-import { SelectAccountSendtoService } from 'src/app/core/services/select-account-sendto/select-account-sendto.service';
 import { SharedDataService } from 'src/app/core/services/shared-data/shared-data.service';
-import { BuyGoodsPayToService } from 'src/app/core/services/buy-goods-pay-to/buy-goods-pay-to.service';
-import { CurrencySelectionConstants } from 'src/app/core/utils/constants/currency-selection.constants';
 import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
-import { SelectAccountConstants } from 'src/app/data/repository/select-account-mock-repository/select-account.constants';
-import { BaseTransactComponent } from 'src/app/presentation/modules/post-login/transact/base-transact.component';
-import { MerchantTillNumberService } from 'src/app/core/services/merchant-till-number/merchant-till-number.service';
 import { TransferToService } from 'src/app/core/services/modal-services/transfer-to.service';
 import { TransactionTypeConstants } from 'src/app/core/utils/constants/transaction-type.constants';
 
@@ -147,6 +138,12 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
           transactionType: this.transactionType,
         });
         break;
+      case this.transferType.PESALINK:
+        this.transferToService.openTransferToModal({
+          favourites: mockData.favourites,
+          transactionType: this.transactionType,
+        });
+        break;
       default:
         break;
     }
@@ -180,22 +177,18 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
           this.parentForm.controls.sendTo.setValue(x);
         });
         break;
-      case this.transferType.MOBILE_MONEY:
+      case this.transferType.MOBILE_MONEY: // Mobile Money
         this.newRecipientService.data.subscribe((x) => {
           console.log(x);
           this.parentForm.controls.sendTo.setValue(x);
         });
         break;
-      // case 'fundTransferBuyGoods':
-      //   this.buyGoodsPayToService.selected.subscribe((x) => {
-      //     console.log(x);
-      //     this.parentForm.controls.sendTo.setValue(x);
-      //   });
-      //   this.merchantTillNumberService.data.subscribe((x) => {
-      //     console.log(x);
-      //     this.parentForm.controls.sendTo.setValue(x);
-      //   });
-      //   break;
+      case this.transferType.BUY_GOODS:
+        this.newRecipientService.data.subscribe((x) => {
+          console.log(x);
+          this.parentForm.controls.sendTo.setValue(x);
+        });
+        break;
       default:
         break;
     }

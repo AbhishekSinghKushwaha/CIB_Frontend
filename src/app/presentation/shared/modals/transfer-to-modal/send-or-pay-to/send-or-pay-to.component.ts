@@ -76,10 +76,17 @@ export class SendOrPayToComponent implements OnInit {
     } else if (this.transactionType === this.transferType.BUY_GOODS) {
       this.purposeText.heading = 'Pay To';
       this.purposeText.subheading = 'Please select a merchant';
-      this.purposeText.heading = 'Till number';
-      this.purposeText.heading = `Enter merchant's till number`;
+      this.purposeText.navigationHeading = 'Till number';
+      this.purposeText.navigationSubheading = `Enter merchant's till number`;
       this.purposeText.navigationIcon =
         './assets/images/icons/visual-support-icon-till.svg';
+    } else if (this.transactionType === this.transferType.PESALINK) {
+      this.purposeText.heading = 'Send To';
+      this.purposeText.subheading = 'Who are you sending money to?';
+      this.purposeText.navigationHeading = 'Send to a bank account';
+      this.purposeText.navigationSubheading = `Enter account details`;
+      this.purposeText.navigationIcon =
+        './assets/images/icons/visual-support-icon-other-bank.svg';
     }
   }
 }

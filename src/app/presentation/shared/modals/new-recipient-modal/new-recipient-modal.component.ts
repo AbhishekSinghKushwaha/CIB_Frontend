@@ -5,13 +5,8 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
-import { recipientModel } from 'src/app/core/domain/recipient.model';
-import { NewRecipientService } from '../../../../core/services/modal-services/new-recipient.service';
 import { CountryModel } from 'src/app/core/domain/bank.model';
-import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
 import { countrySettings } from 'src/app/core/utils/constants/country.settings';
-import { IntrabankService } from 'src/app/core/services/transfers/intrabank/intrabank.service';
-import { CountryService } from 'src/app/core/services/modal-services/country.service';
 import { TransactionTypeConstants } from 'src/app/core/utils/constants/transaction-type.constants';
 @Component({
   selector: 'app-new-recipient-modal',

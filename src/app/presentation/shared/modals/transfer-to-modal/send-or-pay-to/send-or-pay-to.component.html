@@ -39,6 +39,41 @@
       </button>
     </div>
   </div>
+
+  <!-- ONLY IF PESALINK -->
+  <div
+    *ngIf="transactionType === transferType.PESALINK"
+    class="row gx-0 ms-3 mt-2 pb-3 cursor-pointer"
+    (click)="openNewRecipient()"
+  >
+    <div class="col-md-10">
+      <div class="row">
+        <div class="col-md-2 icon">
+          <img
+            src="./assets/images/icons/Phone-linked account.svg"
+            class="fav-icon"
+            alt=""
+          />
+        </div>
+        <div class="col-md-10">
+          <div class="">
+            <span>Send to phone-linked account</span>
+            <p *ngIf="purposeText?.navigationSubheading">
+              <small class="text-grey">{{
+                purposeText?.navigationSubheading
+              }}</small>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <button type="button" mat-icon-button matSuffix>
+        <mat-icon svgIcon="caret_right"></mat-icon>
+      </button>
+    </div>
+  </div>
+
   <mat-divider class="p-2"></mat-divider>
   <div class="d-flex justify-content-between bd-highlight m-2">
     <h3>Favourites</h3>
