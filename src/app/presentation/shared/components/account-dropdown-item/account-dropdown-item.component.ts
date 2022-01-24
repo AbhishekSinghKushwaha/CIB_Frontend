@@ -1,16 +1,7 @@
-import {
-  Component,
-  Inject,
-  Input,
-  OnInit,
-  ViewEncapsulation,
-} from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { SelectAccountModel } from 'src/app/core/domain/select-account.model';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { FromAccount } from 'src/app/core/domain/transfer.models';
-import { SelectAccountModalService } from 'src/app/core/services/modal-services/select-account-modal/select-account-modal.service';
-import { SelectAccountModalComponent } from '../../modals/select-account-modal/select-account-modal.component';
-
+import { TransferFromService } from 'src/app/core/services/modal-services/transfer-from.service';
+import { TransferToService } from 'src/app/core/services/modal-services/transfer-to.service';
 @Component({
   selector: 'app-account-dropdown-item',
   templateUrl: './account-dropdown-item.component.html',
@@ -20,14 +11,25 @@ import { SelectAccountModalComponent } from '../../modals/select-account-modal/s
 export class AccountDropdownItemComponent implements OnInit {
   @Input() isChecked: boolean;
   @Input() data: FromAccount;
+  @Input() transferType: string;
+  accounts: FromAccount[];
   constructor(
-    private readonly selectAccountModalService: SelectAccountModalService
+    private readonly transferFromService: TransferFromService,
+    private transferToService: TransferToService
   ) {}
 
   ngOnInit(): void {}
 
   select(): void {
-    this.selectAccountModalService.select(this.data);
-    // this.dialogRef.close()
+    switch (this.transferType) {
+      case 'from':
+        this.transferFromService.selectTransferFromAccount(this.data);
+        break;
+      case 'to':
+        this.transferToService.selectTransferToAccount(this.data);
+        break;
+      default:
+        break;
+    }
   }
 }

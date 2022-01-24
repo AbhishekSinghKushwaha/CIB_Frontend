@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {
   MatDialog,
@@ -6,11 +6,10 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { SubsidiaryModel } from 'src/app/core/domain/bank.model';
-import { CountryModel } from 'src/app/core/domain/country.model';
+import { CountryModel } from 'src/app/core/domain/bank.model';
 import { recipientModel } from 'src/app/core/domain/recipient.model';
-import { CountryService } from 'src/app/core/services/country/country.service';
-import { NewRecipientService } from 'src/app/core/services/modal-services/new-recipient/new-recipient.service';
+import { CountryService } from 'src/app/core/services/modal-services/country.service';
+import { NewRecipientService } from 'src/app/core/services/modal-services/new-recipient.service';
 import { IntrabankService } from 'src/app/core/services/transfers/intrabank/intrabank.service';
 import { countrySettings } from 'src/app/core/utils/constants/country.settings';
 import { BaseTransactComponent } from 'src/app/presentation/modules/post-login/transact/base-transact.component';
@@ -24,7 +23,8 @@ export class IntraNewRecipientComponent
   extends BaseTransactComponent
   implements OnInit
 {
-  selected: any; // TODO:: Give the correct interface for account details
+  setAccount: any; // TODO:: Give the correct interface for account details
+  @Input() transferType: string;
   newRecipientForm: FormGroup;
   country: CountryModel;
   countrySelectType = countrySettings.viewTypes.FLAG_AND_NAME;
@@ -39,8 +39,8 @@ export class IntraNewRecipientComponent
     private intraBankTransferService: IntrabankService
   ) {
     super(snackBar);
-    this.selected = this.newRecipientService.default;
-    this.newRecipientService.data.subscribe((x) => (this.selected = x));
+    this.setAccount = this.newRecipientService.default;
+    this.newRecipientService.data.subscribe((x) => (this.setAccount = x));
   }
 
   ngOnInit(): void {
@@ -49,7 +49,9 @@ export class IntraNewRecipientComponent
   }
 
   subscribeEvents(): void {
-    // this.countryService.selected.subscribe((x) => this.country = x);
+    this.countryService.selectedCountry.subscribe((x) => {
+      this.country = x;
+    });
   }
 
   initForm(): void {
@@ -62,9 +64,8 @@ export class IntraNewRecipientComponent
     this.dialogRef.close(true);
   }
 
-  setSubsidiary(subsidiary: SubsidiaryModel) {
-    console.log(subsidiary);
-    this.selected = subsidiary;
+  setCountry(country: CountryModel) {
+    this.setAccount = country;
   }
   // Do the Name search to return account details
   submit(): void {
@@ -74,13 +75,13 @@ export class IntraNewRecipientComponent
     };
     this.intraBankTransferService.accountSearch(payload).subscribe((res) => {
       if (res.status) {
-        this.selected = {
+        this.setAccount = {
           accountNumber: this.newRecipientForm.controls.accountNumber.value,
-          balance: 1000000,
+          balance: 1000000, // TODO:: Work on the balance
           currency: res.data.currency,
           accountName: res.data.accountName,
         };
-        this.newRecipientService.set(this.selected);
+        this.newRecipientService.set(this.setAccount);
         this.dialog.closeAll();
       } else {
         alert(res.message);

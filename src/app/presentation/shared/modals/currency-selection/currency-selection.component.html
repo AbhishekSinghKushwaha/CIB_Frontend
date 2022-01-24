@@ -1,14 +1,16 @@
 <div class="own-equity-modal-screen p-0">
-    <div class="row">
-        <div class="col-md-4">
-            <mat-icon (click)="close()" class="cursor-pointer">close</mat-icon>
-        </div>
-        <h4 class="strong-text col-md-8">Currency</h4>
-    </div>
-  <div class="row p-3">
-    <h3 class="strong-text pt-4 mb-4">Please select a currency</h3>
+  <button mat-icon-button matSuffix class="close-button" (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <p class="text-center fw-bold pt-2">Currency</p>
+  <h3 class="m-4 ms-2">Please select currency</h3>
+  <div class="row gx-0 p-3">
     <div *ngFor="let item of data; let isLast = last; let i = index">
-      <app-currency-list-item [data]="item" [isChecked]="selected?.currencyCode===item.currencyCode"> </app-currency-list-item>
+      <app-currency-list-item
+        [data]="item"
+        [isChecked]="selected?.currencyCode === item.currencyCode"
+      >
+      </app-currency-list-item>
       <mat-divider *ngIf="!isLast" class="pt-3"></mat-divider>
     </div>
   </div>

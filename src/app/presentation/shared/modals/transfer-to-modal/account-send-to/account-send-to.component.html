@@ -1,0 +1,11 @@
+<div>
+  <p class="text-center fw-bold pt-2">Send to</p>
+  <h3 class="m-4 ms-2">Please select an account</h3>
+  <app-account-dropdown-item
+    *ngFor="let account of accounts"
+    [data]="account"
+    [transferType]="'to'"
+    [isChecked]="selected && selected?.accountName === account?.accountName"
+  >
+  </app-account-dropdown-item>
+</div>

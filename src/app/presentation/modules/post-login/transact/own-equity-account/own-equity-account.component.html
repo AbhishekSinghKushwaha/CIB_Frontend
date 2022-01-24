@@ -1,4 +1,4 @@
-<div *ngIf="!loading">
+<div>
   <div class="mb-3">
     <button
       mat-icon-button
@@ -38,7 +38,7 @@
           formControlName="sendTo"
           label="Send To"
           placeholder="Select Recipient"
-          transactionType="ownEquityAccount"
+          transactionType="{{ transferType.OWN_EQUITY }}"
         ></app-transfer-to>
       </div>
       <!-- Transfer amount -->
@@ -112,8 +112,4 @@
       </button>
     </div>
   </form>
-</div>
-
-<div class="row justify-content-md-center" *ngIf="loading">
-  <mat-spinner style="margin-top: 30vh"></mat-spinner>
 </div>

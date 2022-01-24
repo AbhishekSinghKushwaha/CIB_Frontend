@@ -1,11 +1,4 @@
-import {
-  Component,
-  forwardRef,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import {
   ControlValueAccessor,
   FormControl,
@@ -13,7 +6,7 @@ import {
   NG_VALUE_ACCESSOR,
 } from '@angular/forms';
 import { FromAccount } from 'src/app/core/domain/transfer.models';
-import { SelectAccountModalService } from 'src/app/core/services/modal-services/select-account-modal/select-account-modal.service';
+import { TransferFromService } from 'src/app/core/services/modal-services/transfer-from.service';
 import { SharedDataService } from 'src/app/core/services/shared-data/shared-data.service';
 
 @Component({
@@ -55,7 +48,7 @@ export class TransferFromComponent implements ControlValueAccessor, OnInit {
     return this.parentForm?.get(this.fieldName) as FormControl;
   }
   constructor(
-    private readonly selectAccountService: SelectAccountModalService,
+    private readonly transferFromAccountService: TransferFromService,
     private readonly sharedDataService: SharedDataService
   ) {}
 
@@ -63,9 +56,11 @@ export class TransferFromComponent implements ControlValueAccessor, OnInit {
     this.sharedDataService.userAccounts.subscribe((res) => {
       this.sourceAccounts = res;
     });
-    this.selectAccountService.selected.subscribe((x) => {
-      this.parentForm.controls.sendFrom.setValue(x);
-    });
+    this.transferFromAccountService.selectedTransferFromAccount.subscribe(
+      (x) => {
+        this.parentForm.controls.sendFrom.setValue(x);
+      }
+    );
   }
 
   public writeValue(value: FromAccount): void {
@@ -93,10 +88,11 @@ export class TransferFromComponent implements ControlValueAccessor, OnInit {
     // Remove accounts that have been selected under sendTo
     const accounts = this.sourceAccounts.filter((el) => {
       return (
-        el.accountNumber !== this.parentForm.controls.sendTo.value.accountNumber
+        el.accountNumber !==
+        this.parentForm.controls?.sendTo.value.accountNumber
       );
     });
-    this.selectAccountService.open(accounts);
+    this.transferFromAccountService.openTransferFromModal(accounts);
   }
 
   // Subscribe to Account Selection Event

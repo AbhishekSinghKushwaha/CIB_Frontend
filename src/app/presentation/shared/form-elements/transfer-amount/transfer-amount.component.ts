@@ -1,13 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  forwardRef,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import {
   ControlValueAccessor,
   FormControl,
@@ -21,8 +12,8 @@ import {
   FromAccount,
   TransferAmount,
 } from 'src/app/core/domain/transfer.models';
-import { CurrencySelectionService } from 'src/app/core/services/currency-selection/currency-selection.service';
-import { SelectAccountModalService } from 'src/app/core/services/modal-services/select-account-modal/select-account-modal.service';
+import { CurrencySelectionService } from 'src/app/core/services/modal-services/currency-selection.service';
+import { TransferFromService } from 'src/app/core/services/modal-services/transfer-from.service';
 import { CurrencySelectionConstants } from 'src/app/core/utils/constants/currency-selection.constants';
 @Component({
   selector: 'app-transfer-amount',
@@ -74,18 +65,17 @@ export class TransferAmountComponent implements ControlValueAccessor, OnInit {
   constructor(
     private readonly currencySelectionService: CurrencySelectionService,
     private readonly currencySelectionConstants: CurrencySelectionConstants,
-    private readonly selectAccountService: SelectAccountModalService
+    private readonly transferFromService: TransferFromService
   ) {}
 
   ngOnInit(): void {
-    console.log(this.sendFromAccount);
     this.listenToDataEvents();
   }
 
   // Listen to events, pick the sendFrom data
   listenToDataEvents() {
     // Get sendFrom Account
-    this.selectAccountService.selected.subscribe((x) => {
+    this.transferFromService.selectedTransferFromAccount.subscribe((x) => {
       this.sendFromAccount = x;
       this.currency.currencyCode = x.currency;
     });

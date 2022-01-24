@@ -16,14 +16,14 @@
   <form
     class="d-flex flex-column"
     autocomplete="off"
-    [formGroup]="ownEquityAccountTransferForm"
+    [formGroup]="pesalinkTransferForm"
     (submit)="getTransferCharges()"
   >
     <div class="row pt-4">
       <!-- Transfer From -->
       <div class="col-md-6">
         <app-transfer-from
-          [parentForm]="ownEquityAccountTransferForm"
+          [parentForm]="pesalinkTransferForm"
           label="Send From"
           placeholder="Send From"
           formControlName="sendFrom"
@@ -31,20 +31,47 @@
         ></app-transfer-from>
       </div>
       <!-- Transfer To -->
-      <div class="col-md-6 align-self-end">
-        <mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
+      <div class="col-md-6">
+        <app-transfer-to
+          [parentForm]="pesalinkTransferForm"
+          label="Send to"
+          fieldName="sendTo"
+          formControlName="sendTo"
+          placeholder="Select the recipient"
+          transactionType="{{ transferType?.PESALINK }}"
+        ></app-transfer-to>
+      </div>
+      <!-- <div class="col-md-6 align-self-end">
+        <mat-form-field
+          appearance="standard"
+          style="width: 100%"
+          floatLabel="always"
+        >
           <mat-label>Send to</mat-label>
-          <input matInput type="text" placeholder="Select the recipient" [readonly]="true" formControlName="recipient">
-          <button type='button' mat-icon-button matSuffix (click)="openFavourites()">
+          <input
+            matInput
+            type="text"
+            placeholder="Select the recipient"
+            [readonly]="true"
+            formControlName="recipient"
+          />
+          <button
+            type="button"
+            mat-icon-button
+            matSuffix
+            (click)="openFavourites()"
+          >
             <mat-icon svgIcon="caret_down"></mat-icon>
           </button>
-          <small class="text-grey text-sm-start mt-2 mb-0">{{phoneLinked ? phoneLinked?.bank : recepientBankDetails?.bank}}</small>
+          <small class="text-grey text-sm-start mt-2 mb-0">{{
+            phoneLinked ? phoneLinked?.bank : recepientBankDetails?.bank
+          }}</small>
         </mat-form-field>
-      </div>
+      </div> -->
       <!-- Transfer amount -->
       <div class="col-md-6">
         <app-transfer-amount
-          [parentForm]="ownEquityAccountTransferForm"
+          [parentForm]="pesalinkTransferForm"
           fieldName="amount"
           label="Amount"
           placeholder="Enter an amount"
@@ -55,7 +82,7 @@
       <!-- Schedule Payment -->
       <div class="col-md-6">
         <app-schedule-payment-input
-          [parentForm]="ownEquityAccountTransferForm"
+          [parentForm]="pesalinkTransferForm"
           label="Schedule Payment"
           fieldName="schedulePayment"
           placeholder="Select a payment date"
@@ -65,7 +92,7 @@
       <!-- FX Reference ID -->
       <div class="col-md-6">
         <app-input
-          [parentForm]="ownEquityAccountTransferForm"
+          [parentForm]="pesalinkTransferForm"
           fieldName="fxReferenceId"
           label="FX Reference ID"
           placeholder="Enter FX reference ID"
@@ -75,7 +102,7 @@
       <!-- Payment Reason -->
       <div class="col-md-6">
         <app-input
-          [parentForm]="ownEquityAccountTransferForm"
+          [parentForm]="pesalinkTransferForm"
           fieldName="reason"
           label="Payment Reason"
           formControlName="reason"
@@ -104,7 +131,7 @@
       <button
         mat-raised-button
         type="submit"
-        [disabled]="ownEquityAccountTransferForm.invalid"
+        [disabled]="pesalinkTransferForm.invalid"
         color="primary"
         class="px-5"
       >

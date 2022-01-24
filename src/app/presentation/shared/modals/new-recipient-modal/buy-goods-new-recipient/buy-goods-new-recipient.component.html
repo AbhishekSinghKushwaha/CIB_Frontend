@@ -1,0 +1,35 @@
+<div class="container new-recipient-modal-screen p-1">
+  <button mat-icon-button matSuffix class="close-button" (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <p class="text-center fw-bold pt-2">Select a merchant</p>
+  <h3 class="m-4 ms-2">Please enter the merchants's details</h3>
+
+  <form
+    [formGroup]="newRecipientForm"
+    (ngSubmit)="submit()"
+    class="d-flex flex-column"
+    autocomplete="off"
+  >
+    <div class="row gx-0 m-3">
+      <app-input
+        [parentForm]="newRecipientForm"
+        label="Till Number"
+        placeholder="Enter till number"
+        fieldName="tillNumber"
+        formControlName="tillNumber"
+      ></app-input>
+    </div>
+    <div class="p-2">
+      <button
+        [disabled]="newRecipientForm.invalid"
+        color="primary"
+        type="submit"
+        mat-flat-button
+        class="px-5"
+      >
+        Continue
+      </button>
+    </div>
+  </form>
+</div>
