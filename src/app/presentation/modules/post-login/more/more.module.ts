@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MoreRoutingModule } from './more-routing.module';
 import { MoreComponent } from './more.component';
 
-import { TransactConstants } from '../../../../core/utils/constants/transact.constants';
+import { MoreConstants } from '../../../../core/utils/constants/more.constants';
 import { SharedComponentsModule } from 'src/app/presentation/shared/components/shared-components.module';
 import { MatStyleModule } from 'src/app/mat-style.module';
 import { SnackbarModule } from 'src/app/presentation/shared/components/snackbar/snackbar.module';
@@ -21,7 +21,7 @@ import { SnackbarModule } from 'src/app/presentation/shared/components/snackbar/
     SharedComponentsModule
   ],
   providers: [
-    TransactConstants
+    MoreConstants
   ]
 })
 export class MoreModule { }

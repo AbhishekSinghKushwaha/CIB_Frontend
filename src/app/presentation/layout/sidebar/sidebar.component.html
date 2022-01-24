@@ -40,7 +40,7 @@
   <mat-divider class="ml-4"></mat-divider>
 
   <!-- More -->
-  <a mat-list-item class="text-grey text-sm" (click)="toggleSideMenu()">
+  <a mat-list-item class="text-grey text-sm" [routerLink]="['/more']" routerLinkActive="router-link-active" (click)="toggleSideMenu()">
     <div class="row pl-3">
       <div class="col-12">
         <mat-icon svgIcon="nav_more"></mat-icon>

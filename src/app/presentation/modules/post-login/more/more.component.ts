@@ -3,7 +3,7 @@ import { AccountsService } from 'src/app/core/services/accounts/accounts.service
 import { DataLookupService } from 'src/app/core/services/data-lookup/data-lookup.service';
 import { SelectAccountModalService } from 'src/app/core/services/select-account-modal/select-account-modal.service';
 import { SharedDataService } from 'src/app/core/services/shared-data/shared-data.service';
-import { TransactConstants } from '../../../../core/utils/constants/transact.constants';
+import { MoreConstants } from '../../../../core/utils/constants/more.constants';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class MoreComponent implements OnInit {
 
   constructor(
-    public readonly transactDashboardList: TransactConstants,
+    public readonly moreDashboardList: MoreConstants,
     private dataLookUpService: DataLookupService,
     private accountsService: AccountsService,
     private sharedDataService: SharedDataService,

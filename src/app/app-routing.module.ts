@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: (): Promise<any> => import('./presentation/modules/post-login/post-login.module').then(m => m.PostLoginModule),
-    // canActivate: [PostLoginGuard]
+    canActivate: [PostLoginGuard]
   },
   {
     path: 'auth',
