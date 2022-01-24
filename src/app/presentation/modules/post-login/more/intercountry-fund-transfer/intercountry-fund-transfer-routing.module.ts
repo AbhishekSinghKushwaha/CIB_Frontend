@@ -7,6 +7,10 @@ const routes: Routes = [
     path: '',
     component: IntercountryFundTransferComponent
   },
+  {
+    path: 'submit-transfer',
+    loadChildren: () => import('../../transact/complete-transfer/complete-transfer.module').then(m => m.CompleteTransferModule)
+  }
 ];
 
 @NgModule({

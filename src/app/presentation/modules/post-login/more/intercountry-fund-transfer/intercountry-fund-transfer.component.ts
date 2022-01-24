@@ -97,12 +97,18 @@ export class IntercountryFundTransferComponent extends BaseTransactComponent imp
 
       dialogRef.afterClosed().subscribe((res) => {
         if (res.confirmed) {
-          this.sendMoney();
+          this.confirmation();
         }
       });
     } else {
       this.loading = false;
     }
+  }
+
+  confirmation() {
+    this.router.navigate([
+      '/more/intercountry-fund-transfer/submit-transfer',
+    ]);
   }
 
   // Initiate fund transfer to own equity account
