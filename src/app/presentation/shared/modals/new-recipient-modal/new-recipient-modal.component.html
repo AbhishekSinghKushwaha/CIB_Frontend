@@ -26,6 +26,6 @@
   <app-swift-new-recipient></app-swift-new-recipient>
 </div>
 
-<div *ngIf="data === transferType.PESALINK">
-  <app-pesalink-new-recipient></app-pesalink-new-recipient>
+<div *ngIf="data === 'bank' || 'phone-linked'">
+  <app-pesalink-new-recipient [mode]="data"></app-pesalink-new-recipient>
 </div>

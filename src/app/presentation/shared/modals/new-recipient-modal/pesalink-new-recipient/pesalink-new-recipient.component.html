@@ -1,1 +1,109 @@
-<p>pesalink-new-recipient works!</p>
+<div *ngIf="mode === 'bank'">
+  <div class="new-recipient-modal-screen p-1">
+    <button mat-icon-button matSuffix class="close-button" (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+    <p class="text-center fw-bold pt-2">Send to a bank account</p>
+    <h3 class="m-4 ms-2">Please enter the recipient's details</h3>
+    <form
+      [formGroup]="selectBankForm"
+      (submit)="submit()"
+      class="m-3 d-flex flex-column"
+      autocomplete="off"
+    >
+      <div class="row gx-0 pt-3">
+        <div class="col-md-6 col-lg-12">
+          <app-select-bank
+            [parentForm]="selectBankForm"
+            fieldName="bank"
+            formControlName="bank"
+            label="Select Bank"
+            placeholder="Select their bank"
+            transactionType="{{ transferType?.PESALINK }}"
+          ></app-select-bank>
+        </div>
+        <div class="col-md-6 col-lg-12">
+          <app-input
+            [parentForm]="selectBankForm"
+            fieldName="accountName"
+            placeholder="Enter their account name"
+            formControlName="accountName"
+            label="Account Name"
+          ></app-input>
+        </div>
+
+        <div class="col-md-6 col-lg-12">
+          <app-input
+            [parentForm]="selectBankForm"
+            fieldName="accountNumber"
+            placeholder="Enter their account number"
+            formControlName="accountNumber"
+            label="Account Number"
+          ></app-input>
+        </div>
+        <div class="col-md-6 col-lg-12"></div>
+      </div>
+      <div class="mt-4">
+        <button
+          type="submit"
+          mat-raised-button
+          color="primary"
+          [disabled]="selectBankForm.invalid"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div *ngIf="mode === 'phone-linked'">
+  <div class="container new-recipient-modal-screen p-1">
+    <button mat-icon-button matSuffix class="close-button" (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+    <p class="text-center fw-bold pt-2">Send to phone-linked account</p>
+    <h3 class="m-4 ms-2">Please enter the recipient's details</h3>
+
+    <form
+      [formGroup]="phoneLinkedForm"
+      (ngSubmit)="submit()"
+      class="d-flex flex-column"
+      autocomplete="off"
+    >
+      <div class="row gx-0 pt-3 m-3">
+        <div class="col-md-6 col-lg-12">
+          <app-phone-number-input
+            [parentForm]="phoneLinkedForm"
+            fieldName="phoneNumber"
+            formControlName="phoneNumber"
+            placeholder="Enter their mobile number"
+            label="Mobile Number"
+          ></app-phone-number-input>
+        </div>
+
+        <div class="col-md-6 col-lg-12">
+          <app-select-bank
+            [parentForm]="phoneLinkedForm"
+            fieldName="bank"
+            formControlName="bank"
+            label="Select Bank"
+            placeholder="Select their bank"
+            transactionType="{{ transferType?.PESALINK }}"
+          ></app-select-bank>
+        </div>
+      </div>
+      <div class="p-2">
+        <button
+          [disabled]="phoneLinkedForm.invalid"
+          color="primary"
+          type="submit"
+          mat-flat-button
+          class="px-5"
+        >
+          Continue
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

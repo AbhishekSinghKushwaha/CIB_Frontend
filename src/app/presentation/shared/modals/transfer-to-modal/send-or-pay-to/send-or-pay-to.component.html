@@ -10,7 +10,11 @@
 
   <div
     class="row gx-0 ms-3 mt-2 pb-3 cursor-pointer"
-    (click)="openNewRecipient()"
+    (click)="
+      transactionType === transferType.PESALINK
+        ? openPesalinkNewRecipient('bank')
+        : openNewRecipient()
+    "
   >
     <div class="col-md-10">
       <div class="row">
@@ -30,6 +34,9 @@
               }}</small>
             </p>
           </div>
+          <mat-divider
+            *ngIf="transactionType === transferType.PESALINK"
+          ></mat-divider>
         </div>
       </div>
     </div>
@@ -44,7 +51,11 @@
   <div
     *ngIf="transactionType === transferType.PESALINK"
     class="row gx-0 ms-3 mt-2 pb-3 cursor-pointer"
-    (click)="openNewRecipient()"
+    (click)="
+      transactionType === transferType.PESALINK
+        ? openPesalinkNewRecipient('phone-linked')
+        : openNewRecipient()
+    "
   >
     <div class="col-md-10">
       <div class="row">

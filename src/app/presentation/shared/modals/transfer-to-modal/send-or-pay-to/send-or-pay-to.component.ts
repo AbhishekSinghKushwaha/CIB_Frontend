@@ -54,6 +54,14 @@ export class SendOrPayToComponent implements OnInit {
     });
   }
 
+  openPesalinkNewRecipient(mode: string) {
+    const modal = this.newRecipientService.open(mode);
+    this.visibility = false;
+    modal.afterClosed().subscribe(() => {
+      this.visibility = true;
+    });
+  }
+
   resetBeneficiaries(): void {
     this.searchText = '';
   }

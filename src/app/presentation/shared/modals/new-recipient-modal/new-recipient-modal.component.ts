@@ -27,7 +27,5 @@ export class NewRecipientModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: string
   ) {}
 
-  ngOnInit(): void {
-    console.log(this.data);
-  }
+  ngOnInit(): void {}
 }

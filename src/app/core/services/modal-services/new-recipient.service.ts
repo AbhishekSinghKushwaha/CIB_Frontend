@@ -24,6 +24,18 @@ export class NewRecipientService {
     );
   }
 
+  // Opens the New Recipient Modal but instead of transaction Type we pass the mode of pesalink selected i.e bank or phone-linked
+  openPesalinkNewRecipient(mode: string) {
+    return this.dialog.open<NewRecipientModalComponent, any>(
+      NewRecipientModalComponent,
+      {
+        maxWidth: '22vw',
+        disableClose: true,
+        data: mode,
+      }
+    );
+  }
+
   set(input: any): void {
     this.defaultData = { ...this.defaultData, ...input };
     this.data.next(this.defaultData);

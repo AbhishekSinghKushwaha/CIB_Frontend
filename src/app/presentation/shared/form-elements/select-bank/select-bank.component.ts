@@ -33,6 +33,8 @@ export class SelectBankComponent implements OnInit {
   @Input()
   placeholder!: string;
 
+  @Input() transactionType!: string;
+
   public value!: BankModel;
 
   public changed!: (value: string) => void;
