@@ -1,0 +1,83 @@
+<div class="row access-panel-content">
+  <div class="col-md-12">
+    <div class="row justify-content-md-center">
+      <div class="col-md-10">
+        <div class="row">
+          <div class="col-md-12">
+            <button
+              mat-button
+              aria-label="Skip"
+              (click)="skipOnboarding()"
+              i18n="@@loco:5e731ff5c38e0f0bea4e7763"
+              color="primary"
+            >
+              Skip
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-md-center">
+      <div class="col-2 text-center m-auto">
+        <div
+          class="nav-button"
+          matRipple
+          *ngIf="currentContent !== 0"
+          (click)="changeContent(-1)"
+        >
+          <mat-icon svgIcon="chevron-left" color="primary"></mat-icon>
+        </div>
+      </div>
+      <div class="col-8 text-center">
+        <ng-lottie
+          [options]="animationOptions"
+          (animationCreated)="animationCreated($event)"
+          (enterFrame)="enterFrame()"
+        ></ng-lottie>
+      </div>
+      <div class="col-2 text-center m-auto">
+        <div
+          class="nav-button"
+          matRipple
+          *ngIf="currentContent !== 3"
+          (click)="changeContent(1)"
+        >
+          <mat-icon svgIcon="chevron-right" color="primary"></mat-icon>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngFor="let content of contentArray; let i = index">
+      <div class="col-12" [@slideInOut] *ngIf="i === currentContent">
+        <h3 class="text-center strong-text text-lg">
+          {{ content.title }}
+        </h3>
+        <p class="text-center text-grey text-sm">
+          {{ content.message }}
+        </p>
+      </div>
+    </div>
+    <div class="row my-3">
+      <div class="col-12 breadcrumb-row">
+        <div
+          *ngFor="let breadCrumb of contentArray; let i = index"
+          class="breadcrumb-dot"
+          [ngClass]="{ selected: i === currentContent }"
+          (click)="gotoContent(i)"
+        ></div>
+      </div>
+    </div>
+    <div class="row pb-5">
+      <div class="col-12 text-center">
+        <button
+          mat-stroked-button
+          (click)="skipOnboarding()"
+          i18n="@@loco:6086b283901ecf3f38533952"
+          color="primary"
+          class="px-5"
+        >
+          Get Started
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,194 @@
+<div class="row gx-0">
+  <div class="col-md-12">
+    <div class="row gx-0 mb-4 justify-content-md-center">
+      <div class="col-md-11">
+        <div class="mb-3">
+          <button
+            mat-icon-button
+            aria-label="Back"
+            class="back-icon"
+            [routerLink]="['../register/company-details']"
+          >
+            <div class="strong-text">
+              <mat-icon svgIcon="caret_left"></mat-icon>
+              <span>Register</span>
+            </div>
+          </button>
+        </div>
+        <div class="mb-3">
+          <mat-icon
+            aria-hidden="false"
+            svgIcon="wizard_progress_primary"
+            class="mat-icon-custom"
+          ></mat-icon>
+          <mat-icon
+            aria-hidden="false"
+            svgIcon="wizard_progress_primary"
+            class="mat-icon-custom"
+          ></mat-icon>
+          <mat-icon
+            aria-hidden="false"
+            svgIcon="wizard_progress_primary"
+            class="mat-icon-custom"
+          ></mat-icon>
+          <mat-icon
+            aria-hidden="false"
+            svgIcon="wizard_progress_primary"
+            class="mat-icon-custom"
+          ></mat-icon>
+          <mat-icon
+            aria-hidden="false"
+            svgIcon="wizard_progress_primary"
+            class="mat-icon-custom"
+          ></mat-icon>
+          <mat-icon
+            aria-hidden="false"
+            svgIcon="wizard_progress_primary"
+            class="mat-icon-custom"
+          ></mat-icon>
+        </div>
+
+        <h3 class="strong-text pt-4">Upload documents</h3>
+        <small class="text-grey"
+          >Please upload supporting documents in PDF or Jpeg format. The maximum
+          size allowed is 20mb.</small
+        ><br />
+        <div class="row align-upload">
+          <div class="col-md-6 upload my-4">
+            <div class="icon icon-alignment">
+              <mat-icon color="primary" aria-hidden="false"
+                >file_upload</mat-icon
+              >
+            </div>
+            <div class="text-center">
+              <small>Upload your documents</small><br />
+              <small class="text-grey"
+                >Drag & drop or
+                <label for="input-file-id" class="browse strong-text"
+                  >browse</label
+                >
+                files here</small
+              >
+              <input
+                class="ng-hide"
+                id="input-file-id"
+                (change)="uploadFiles($event)"
+                multiple="multiple"
+                type="file"
+                style="display: none"
+              />
+            </div>
+          </div>
+
+          <div class="col-md-6 mt-4">
+            <div *ngIf="fileName">
+              <div *ngFor="let data of files; let i = index">
+                <div class="progress-container mb-2">
+                  <div class="mx-4 py-2">
+                    <div class="flex-align">
+                      <small>{{ data }}</small>
+                      <mat-icon
+                        *ngIf="progress < 100"
+                        color="primary"
+                        class="icon-close cursor-pointer"
+                        aria-hidden="false"
+                        (click)="cancelUpload(i)"
+                        >close</mat-icon
+                      >
+                      <mat-icon
+                        *ngIf="progress === 100"
+                        style="color: #2f9803"
+                        class="icon-close cursor-pointer"
+                        aria-hidden="false"
+                        >done</mat-icon
+                      >
+                    </div>
+                    <mat-progress-bar
+                      *ngIf="progress < 100"
+                      color="#2f9803"
+                      [value]="progress"
+                      class="mt-2"
+                    ></mat-progress-bar>
+                    <mat-progress-bar
+                      *ngIf="message === 'Completed'"
+                      class="green-progress mt-2"
+                      mode="determinate"
+                      [value]="progress"
+                    ></mat-progress-bar>
+                    <small class="progress-pre">{{
+                      progress === 100 ? message : progress + "%"
+                    }}</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="progress-container mb-2">
+              <div class="row gx-0 m-4 py-3">
+                <div class="col-9">
+                  <p class="mb-0"><strong>Signedapplication.pdf</strong></p>
+                  <small>1.2mb</small>
+                </div>
+                <div class="col-3">
+                  <div class="d-flex flex-row mt-1">
+                    <mat-icon
+                      color="primary"
+                      class="icon-close cursor-pointer m-2"
+                      aria-hidden="false"
+                      >visibility</mat-icon
+                    >
+                    <mat-icon
+                      color="primary"
+                      class="icon-close cursor-pointer m-2"
+                      aria-hidden="false"
+                      >delete</mat-icon
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="progress-container mb-2">
+              <div class="row gx-0 m-4 py-3">
+                <div class="col-9">
+                  <p class="mb-0"><strong>Signedapplication.pdf</strong></p>
+                  <small>1.2mb</small>
+                </div>
+                <div class="col-3">
+                  <div class="d-flex flex-row mt-1">
+                    <mat-icon
+                      color="primary"
+                      class="icon-close cursor-pointer m-2"
+                      aria-hidden="false"
+                      >visibility</mat-icon
+                    >
+                    <mat-icon
+                      color="primary"
+                      class="icon-close cursor-pointer m-2"
+                      aria-hidden="false"
+                      >delete</mat-icon
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <small class="text-grey">Additional information if required</small>
+        <div class="py-4">
+          <button
+            type="submit"
+            [disabled]="progress !== 100"
+            mat-raised-button
+            color="primary"
+            class="px-5"
+            [routerLink]="['/customer-onboarding/submit-successful']"
+            routerLinkActive="router-link-active"
+          >
+            Upload
+          </button>
+          <!-- <button mat-flat-button class="px-5">Upload</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

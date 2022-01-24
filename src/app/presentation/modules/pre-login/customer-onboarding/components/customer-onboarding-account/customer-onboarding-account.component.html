@@ -1,0 +1,83 @@
+<div class="row pt-md-5 access-panel-content">
+  <div class="col-md-12">
+    <div class="row mb-3">
+      <div class="col-md-10 offset-md-1">
+        <h3 class="strong-text">Hello there</h3>
+        <div class="text-sm text-grey">Please select an account option</div>
+      </div>
+    </div>
+    <div class="row pb-5">
+      <div class="col-md-10 offset-md-1">
+        <div class="row mb-3">
+          <ng-container
+            [ngTemplateOutlet]="accountType"
+            [ngTemplateOutletContext]="accountOptions[0]"
+          >
+          </ng-container>
+          <ng-container
+            [ngTemplateOutlet]="accountType"
+            [ngTemplateOutletContext]="accountOptions[1]"
+          >
+          </ng-container>
+        </div>
+        <div class="row">
+          <div class="col d-flex justify-content-end">
+            <button
+              mat-flat-button
+              color="primary"
+              class="col-12"
+              type="submit"
+              [disabled]="true"
+            >
+              Sign in
+            </button>
+          </div>
+          <div class="col">
+            <button
+              mat-stroked-button
+              color="primary"
+              type="button"
+              class="col-12"
+              [routerLink]="['../register']"
+              [disabled]="!selectedAccountType"
+            >
+              Register
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template
+  #accountType
+  let-initials="initials"
+  let-text="text"
+  let-title="title"
+  let-type="type"
+>
+  <div
+    class="row product-list-item"
+    (click)="accountOptionClick(type)"
+    matRipple
+  >
+    <div class="col-1 my-auto">
+      <div class="icon-container initials">{{ initials }}</div>
+    </div>
+    <div class="col-10 offset-md-1 product-list-item-label">
+      <div class="row h-100 justify-content-around align-items-center">
+        <div class="col-10 float-left text-truncate">
+          <h4>{{ title }}</h4>
+          <small class="text-grey">{{ text }}</small>
+        </div>
+        <mat-icon class="col-2 float-right" matSuffix color="primary">
+          {{
+            type === selectedAccountType
+              ? "check_circle"
+              : "radio_button_unchecked"
+          }}
+        </mat-icon>
+      </div>
+    </div>
+  </div>
+</ng-template>
