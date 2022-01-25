@@ -56,7 +56,8 @@ export class SwiftNewRecipientComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.newRecipientForm.getRawValue());
+    this.newRecipientService.set(this.newRecipientForm.getRawValue());
+    this.dialog.closeAll();
   }
 
   close() {
