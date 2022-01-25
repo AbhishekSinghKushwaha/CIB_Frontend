@@ -1,6 +1,6 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { CurrencySelectionService } from 'src/app/core/services/currency-selection/currency-selection.service';
 import { LimitEditorService } from 'src/app/core/services/limit-editor/limit-editor.service';
 import { CurrencySelectionConstants } from 'src/app/core/utils/constants/currency-selection.constants';
@@ -17,13 +17,11 @@ export class LimitsComponent implements OnInit {
 
   constructor(private readonly limitService: LimitEditorService,
     private readonly fb: FormBuilder,
-    private readonly router: Router,
-    private readonly activeRoute: ActivatedRoute,
     private readonly currencySelectionService: CurrencySelectionService,    
-    private readonly currencySelectionConstants: CurrencySelectionConstants,) { }
+    private readonly currencySelectionConstants: CurrencySelectionConstants,
+    private readonly location: Location) { }
 
   ngOnInit(): void {    
-    this.redirectTo = this.activeRoute.snapshot.data.redirectTo;
     this.userLimitsForm = this.limitService.currentUserDetails$.value.get("limits") as FormGroup || this.fb.group({
       userName: new FormControl(null, [Validators.required]),
       currency: new FormControl(null, [Validators.required,]),
@@ -49,7 +47,7 @@ export class LimitsComponent implements OnInit {
     this.goBack();
   }
 
-  goBack(): void {    
-    this.router.navigate([this.redirectTo]);
+  goBack(): void {
+    this.location.back();
   }
 }

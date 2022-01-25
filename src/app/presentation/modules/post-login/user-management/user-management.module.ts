@@ -4,6 +4,8 @@ import { SharedComponentsModule } from 'src/app/presentation/shared/components/s
 import { MatStyleModule } from 'src/app/mat-style.module';
 import { UserManagementRoutingModule } from './user-management-routing.module';
 import { RolesConstants } from 'src/app/core/utils/constants/roles.constants';
+import { ProductsConstants } from 'src/app/core/utils/constants/products.constants';
+import { UserSearchModule } from 'src/app/presentation/shared/modals/user-search/user-search.module';
 
 @NgModule({
   declarations: [],
@@ -12,7 +14,8 @@ import { RolesConstants } from 'src/app/core/utils/constants/roles.constants';
     UserManagementRoutingModule,
     SharedComponentsModule,
     MatStyleModule,
+    UserSearchModule
   ],
-  providers: [RolesConstants],
+  providers: [RolesConstants, ProductsConstants],
 })
 export class UserManagementModule {}

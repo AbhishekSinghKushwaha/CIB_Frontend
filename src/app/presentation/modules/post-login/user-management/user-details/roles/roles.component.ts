@@ -1,5 +1,5 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { RoleEditorService } from 'src/app/core/services/role-editor/role-editor.service';
 import { RolesConstants } from 'src/app/core/utils/constants/roles.constants';
 
@@ -14,14 +14,12 @@ export class RolesComponent implements OnInit {
 
   constructor(public readonly roleList: RolesConstants, 
     private readonly roleService: RoleEditorService, 
-    private readonly router:Router, 
-    private readonly activeRoute: ActivatedRoute) {
+    private readonly location: Location) {
     this.activeRoles = [];
    }
 
   ngOnInit(): void {
-    this.redirectTo = this.activeRoute.snapshot.data.redirectTo;
-    this.roleService.selected.subscribe( (value) => {
+    this.roleService.selected.subscribe( (value: string[]) => {
       this.activeRoles = value;
     })
   }
@@ -44,7 +42,7 @@ export class RolesComponent implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate([this.redirectTo]);
+    this.location.back();
   }
 
 }

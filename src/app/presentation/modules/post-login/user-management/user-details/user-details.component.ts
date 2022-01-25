@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { FromAccount } from 'src/app/core/domain/transfer.models';
 import { LimitEditorService } from 'src/app/core/services/limit-editor/limit-editor.service';
+import { ProductEditorService } from 'src/app/core/services/product-editor/product-editor.service';
 import { RoleEditorService } from 'src/app/core/services/role-editor/role-editor.service';
 import { SelectAccountAccessService } from 'src/app/core/services/select-account-access/select-account-access.service';
 import { SharedDataService } from 'src/app/core/services/shared-data/shared-data.service';
@@ -22,12 +23,15 @@ export class UserDetailsComponent implements OnInit {
     private readonly sharedDataService: SharedDataService,
     private readonly roleService: RoleEditorService,
     private readonly limitsService: LimitEditorService,
+    private readonly productService: ProductEditorService,
     private readonly router: Router) {
 
     }
 
   ngOnInit(): void {  
-          
+
+    //ToDo: bind form to user model 
+
     this.userDetailsForm =this.fb.group({
       roles: new FormControl(null),
       userName: new FormControl(null, [Validators.required]),
@@ -55,7 +59,10 @@ export class UserDetailsComponent implements OnInit {
     });
     this.roleService.selected.subscribe( (data) => {
       this.userDetailsForm.get("roles")?.setValue(data);
-    })
+    });
+    this.productService.selected.subscribe( (data) => {
+      this.userDetailsForm.get("products")?.setValue(data);
+    });
     this.limitsService.currentUserDetails$.subscribe( (data) => {
       this.userDetailsForm.get("limits")?.setValue(data);
     })

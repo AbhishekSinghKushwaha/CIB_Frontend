@@ -1,0 +1,35 @@
+<div class="own-equity-modal-screen p-0">
+    <div class="row">
+      <h4 class="strong-text col-md-8">User search</h4>
+      <div class="col-md-4">
+        <mat-icon (click)="close()" class="cursor-pointer">close</mat-icon>
+      </div>
+    </div>
+    <div class="row p-3">
+      <p class="strong-text pt-4 mb-4">Search for a user using their ID number, user ID or mobile number</p>
+      <form>
+      <mat-form-field>
+        <mat-select>
+          <mat-option>ID Number</mat-option>
+          <mat-option>User ID</mat-option>
+          <mat-option>Mobile Number</mat-option>
+        </mat-select>
+        <app-input
+          [parentForm]="searchForm"
+          label="Search"
+          fieldName="value"
+          formControlName="search"
+          placeholder="Enter value to search"
+        ></app-input>
+      </mat-form-field>
+    </form>
+    </div>
+    <div class="row">
+        <button (click)="close()">
+            Cancel
+        </button>
+        <button (click)="search()">
+            Search
+        </button>
+    </div>
+</div>
