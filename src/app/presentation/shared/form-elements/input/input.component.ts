@@ -45,7 +45,9 @@ export class InputComponent implements ControlValueAccessor, OnInit {
 	}
   constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.placeholder);
+  }
 
 
 

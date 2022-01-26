@@ -1,0 +1,49 @@
+<div class="row gx-0">
+  <div class="col-md-12">
+    <div class="row gx-0 mb-4 justify-content-md-center">
+      <div class="col-md-11">
+        <div class="mb-3">
+          <button
+            mat-icon-button
+            aria-label="Back"
+            class="back-icon"
+            routerLink="/customer-onboarding"
+          >
+            <div class="strong-text">
+              <mat-icon svgIcon="caret_left"></mat-icon>
+              <span>Products and services</span>
+            </div>
+          </button>
+        </div>
+        <h3 class="title mb-3">Please Select products and services</h3>
+        <div
+          class="container"
+          *ngFor="
+            let mainList of notificationDashboardList.NOTIFICATION_DASHBOARD_LIST;
+            let isLast = last
+          "
+        >
+          <!-- <h3 class="strong-text mt-4">{{ mainList.section }}</h3> -->
+          <div class="row gx-0">
+            <div class="col-lg-6" *ngFor="let item of mainList.content">
+              <app-notification-menu-item
+                [item]="item"
+              ></app-notification-menu-item>
+            </div>
+          </div>
+          <mat-divider *ngIf="!isLast" class="divider"></mat-divider>
+        </div>
+        <div class="mt-5 mb-5 pb-5">
+          <button
+            mat-raised-button
+            (click)="submit()"
+            color="primary"
+            class="px-5"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -9,12 +9,14 @@ import { IntraNewRecipientComponent } from './intra-new-recipient/intra-new-reci
 import { InterNewRecipientComponent } from './inter-new-recipient/inter-new-recipient.component';
 import { FormElementsModule } from '../../form-elements/form-elements.module';
 import { SubsidiaryModalModule } from '../subsidiary-modal/subsidiary-modal.module';
+import { IntercountryNewRecipientComponent } from './intercountry-new-recipient/intercountry-new-recipient.component';
 
 @NgModule({
   declarations: [
     NewRecipientModalComponent,
     IntraNewRecipientComponent,
     InterNewRecipientComponent,
+    IntercountryNewRecipientComponent,
   ],
   exports: [NewRecipientModalComponent],
   imports: [

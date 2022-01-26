@@ -68,12 +68,9 @@ export class UserDetailsComponent implements OnInit {
     })
   }
 
-  showRoles(): void {}
   showAccounts(): void {
     this.accountAccessService.open(this.sourceAccounts)
   }
-  showUserLimit(): void {}
-  showModules(): void {}
 
   save(): void {    
     this.router.navigate(['/user-management/success']);

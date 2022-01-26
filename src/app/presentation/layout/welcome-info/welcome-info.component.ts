@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -8,6 +8,8 @@ import { environment } from 'src/environments/environment';
 })
 export class WelcomeInfoComponent implements OnInit {
   isOneEquity = true;
+  @Input() category: string;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -19,14 +21,14 @@ export class WelcomeInfoComponent implements OnInit {
 
   appLogoSrc() {
     switch (environment.appInstance) {
-    case 'bcdc':
-      return `./assets/images/logos/${environment.appInstance}/Primary.png`;
-    case 'bcdc-mobile':
-      return `./assets/images/logos/${environment.appInstance}/BCDC-mobile.svg`;
-    case 'one-equity':
-      return `./assets/images/logos/${environment.appInstance}/Inverse.svg`;
-    default:
-      return '';
+      case 'bcdc':
+        return `./assets/images/logos/${environment.appInstance}/Primary.png`;
+      case 'bcdc-mobile':
+        return `./assets/images/logos/${environment.appInstance}/BCDC-mobile.svg`;
+      case 'one-equity':
+        return `./assets/images/logos/${environment.appInstance}/Inverse.svg`;
+      default:
+        return '';
     }
   }
 
