@@ -31,6 +31,10 @@ const routes: Routes = [
       {
         path: 'account',
         loadChildren: (): Promise<any> => import('./accounts/accounts.module').then(m => m.AccountsModule)
+      },
+      {
+        path: 'service-request',
+        loadChildren: (): Promise<any> => import('./service-request/service-request.module').then(m => m.ServiceRequestModule)
       }
     ]
   }

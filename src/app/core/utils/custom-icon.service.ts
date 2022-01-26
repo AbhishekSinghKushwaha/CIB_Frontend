@@ -693,6 +693,30 @@ export class CustomIconService {
         'assets/images/icons/toggle-button-idle.svg'
       )
     );
+    this.matIconRegistry.addSvgIcon(
+      'service_request_chequebook',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/visual-support-icons-sr-chequebook.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'service_request_edit_company',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/visual-support-icons-sr-edit-company-limit.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'service_request_edit_user_limit',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/visual-support-icons-sr-edit-user-limit.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'service_request_static_data_update',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/visual-support-icons-sr-static-data-update.svg'
+      )
+    );
 
   }
 }

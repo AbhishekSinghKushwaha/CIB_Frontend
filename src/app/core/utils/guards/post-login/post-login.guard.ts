@@ -13,11 +13,12 @@ export class PostLoginGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const data = this.storageService.getData('loginState');
     const loginDataSet = !!this.storageService.getData('loginCred');
-    if (data?.stage === LOGIN_CONSTANTS.LOGIN_STAGES.LOGIN_SUCCESS && loginDataSet) {
-      return true
-    }
-    this.router.navigate(['/auth/customer-onboarding']);
-    return false
+    // if (data?.stage === LOGIN_CONSTANTS.LOGIN_STAGES.LOGIN_SUCCESS && loginDataSet) {
+    //   return true
+    // }
+    // this.router.navigate(['/auth/customer-onboarding']);
+    // return false
+    return true;
   }
 
 }
