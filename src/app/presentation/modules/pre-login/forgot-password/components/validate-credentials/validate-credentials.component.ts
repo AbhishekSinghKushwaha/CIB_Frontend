@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NotificationModalService } from 'src/app/core/services/notification-modal/notification-modal.service';
+import { NotificationModalService } from 'src/app/core/services/modal-services/notification-modal/notification-modal.service';
 import { ValidateCredentialsUsecase } from 'src/app/core/usecases/validate-credentials.usecase';
 import { SharedUtils } from 'src/app/core/utils/shared.util';
 
@@ -22,9 +22,9 @@ export class ValidateCredentialsComponent implements OnInit {
     private validateCredentialsUsecase: ValidateCredentialsUsecase,
     private router: Router,
     private readonly notificationModalService: NotificationModalService
-  ) { }
+  ) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   validateCredentials(): void {
     if (this.credentialsForm.invalid) {

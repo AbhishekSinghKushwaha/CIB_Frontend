@@ -1,28 +1,32 @@
 {
-    "accounts": {
-        "getUserAccounts": "/cibaccountservice-v1/api/v1/Accounts/GetUserMappedAccounts"
-    },
-    "transfers": {
-        "sendOwnEquityAccount": "/cibpaymentservice-v1/api/v1/Transfer/Send",
-        "intraBankTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
-        "getTransferCharges": "/cibpaymentservice-v1/api/v1/Transfer/GetTransferCharge",
-        "getAccountDetails": "/cibpaymentservice-v1/api/v1/Transfer/NameEnquiry"
-    },
-    "dataLookUp": {
-        "getCountries": "/cibpaymentservice-v1/api/v1/Transfer/GetCountries",
-        "getBanks":"/cibpaymentservice-v1/api/v1/Transfer/GetBanks/",
-        "getCurrencies":"/cibpaymentservice-v1/api/v1/Transfer/GetCurrencies",
-        "getSubsidiaries": "/cibpaymentservice-v1/api/v1/Transfer/GetSubsidiaries"
-    },
-    "statement": {
-        "getPdf": "/v1/generatepdf/statement"
-    },
-    "login":{
-      "loginUser":"/users/authorization/login",
-      "verifyOtp":"/authorization/login/verifyOtp",
-      "resendOtp":"/authorization/oauth/regenerateOtp",
-      "validateOtp":"/authorization/user/validateOTPReset",
-      "securityQuestions":"/authorization/user/securityQuestions",
-      "securityAnswers":"/authorization/user/securityAnswers"
-    }
+  "accounts": {
+    "getUserAccounts": "/cibaccountservice-v1/api/v1/Accounts/GetUserMappedAccounts"
+  },
+  "transfers": {
+    "sendOwnEquityAccount": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+    "intraBankTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+    "swiftTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+    "mobileMoneyTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+    "buyAirtimeTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+    "buyGoodsTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+    "getTransferCharges": "/cibpaymentservice-v1/api/v1/Transfer/GetTransferCharge",
+    "getAccountDetails": "/cibpaymentservice-v1/api/v1/Transfer/NameEnquiry"
+  },
+  "dataLookUp": {
+    "getCountries": "/cibpaymentservice-v1/api/v1/Transfer/GetCountries",
+    "getBanks": "/cibpaymentservice-v1/api/v1/Transfer/GetBanks/",
+    "getCurrencies": "/cibpaymentservice-v1/api/v1/Transfer/GetCurrencies",
+    "getSubsidiaries": "/cibpaymentservice-v1/api/v1/Transfer/GetSubsidiaries"
+  },
+  "statement": {
+    "getPdf": "/v1/generatepdf/statement"
+  },
+  "login": {
+    "loginUser": "/users/authorization/login",
+    "verifyOtp": "/authorization/login/verifyOtp",
+    "resendOtp": "/authorization/oauth/regenerateOtp",
+    "validateOtp": "/authorization/user/validateOTPReset",
+    "securityQuestions": "/authorization/user/securityQuestions",
+    "securityAnswers": "/authorization/user/securityAnswers"
+  }
 }

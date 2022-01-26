@@ -1,21 +1,21 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { BankService } from 'src/app/core/services/bank/bank.service';
-import { NewRecipientService } from 'src/app/core/services/new-recipient/new-recipient.service';
-import { CountryModel } from 'src/app/core/domain/country.model';
-import { CountryService } from 'src/app/core/services/country/country.service';
+import { BankService } from 'src/app/core/services/modal-services/bank.service';
+
+import { CountryService } from 'src/app/core/services/modal-services/country.service';
 import { countrySettings } from 'src/app/core/utils/constants/country.settings';
 import { Subject, Subscription } from 'rxjs';
 import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
+import { CountryModel } from 'src/app/core/domain/bank.model';
+import { NewRecipientService } from 'src/app/core/services/modal-services/new-recipient.service';
 
 @Component({
   selector: 'app-intercountry-new-recipient',
   templateUrl: './intercountry-new-recipient.component.html',
-  styleUrls: ['./intercountry-new-recipient.component.scss']
+  styleUrls: ['./intercountry-new-recipient.component.scss'],
 })
 export class IntercountryNewRecipientComponent implements OnInit {
-
   interCountryNewRecipientForm: FormGroup;
   countrySelectType = countrySettings.viewTypes.NAME_ONLY;
   country: CountryModel;
@@ -63,12 +63,12 @@ export class IntercountryNewRecipientComponent implements OnInit {
     private newRecipientService: NewRecipientService,
     private fb: FormBuilder,
     private dialog: MatDialog,
-    private readonly countryService: CountryService,
+    private readonly countryService: CountryService
   ) {}
 
   ngOnInit(): void {
     this.initForm();
-    this.subscribeEvents()
+    this.subscribeEvents();
   }
 
   initForm() {
@@ -81,7 +81,9 @@ export class IntercountryNewRecipientComponent implements OnInit {
   }
 
   subscribeEvents(): void {
-    this.countryService.openedStatus.subscribe(response => response ? this.visibility = false : this.visibility = true);
+    this.countryService.openedStatus.subscribe((response) =>
+      response ? (this.visibility = false) : (this.visibility = true)
+    );
   }
 
   close(): void {
@@ -100,5 +102,4 @@ export class IntercountryNewRecipientComponent implements OnInit {
       this.dialog.closeAll();
     }
   }
-
 }

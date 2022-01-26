@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TransactDashboardList } from '../../domain/transact-list.model';
+import { TransactionTypeModel } from '../../domain/transfer.models';
 
 @Injectable()
 export class TransactConstants {
@@ -29,6 +30,12 @@ export class TransactConstants {
           text: 'Another bank',
           subtext: 'A local or international bank',
           link: '/transact/other-banks',
+        },
+        {
+          leftIcon: 'account_balance',
+          text: 'Swift',
+          subtext: 'An international bank',
+          link: '/transact/swift',
         },
         {
           leftIcon: 'credit_card',
