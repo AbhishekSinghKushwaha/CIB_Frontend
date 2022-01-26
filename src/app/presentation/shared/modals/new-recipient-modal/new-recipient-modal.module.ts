@@ -13,6 +13,7 @@ import { PesalinkNewRecipientComponent } from './pesalink-new-recipient/pesalink
 import { MobileMoneyNewRecipientComponent } from './mobile-money-new-recipient/mobile-money-new-recipient.component';
 import { BankModalModule } from '../bank-modal/bank-modal.module';
 import { MobileOperatorsModalComponent } from './mobile-operators-modal/mobile-operators-modal.component';
+import { IntercountryNewRecipientComponent } from './intercountry-new-recipient/intercountry-new-recipient.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { MobileOperatorsModalComponent } from './mobile-operators-modal/mobile-o
     PesalinkNewRecipientComponent,
     MobileMoneyNewRecipientComponent,
     MobileOperatorsModalComponent,
+    IntercountryNewRecipientComponent,
   ],
   exports: [NewRecipientModalComponent],
   imports: [

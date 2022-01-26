@@ -144,6 +144,12 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
           transactionType: this.transactionType,
         });
         break;
+      case 'intercountryFundTransfer':
+        this.favouritesModalService.open(
+          this.transactionType,
+          mockData.favourites
+        );
+        break;
       default:
         break;
     }
@@ -196,6 +202,12 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
         });
         break;
       case this.transferType.SWIFT:
+        this.newRecipientService.data.subscribe((x) => {
+          console.log(x);
+          this.parentForm.controls.sendTo.setValue(x);
+        });
+        break;
+      case 'intercountryFundTransfer':
         this.newRecipientService.data.subscribe((x) => {
           console.log(x);
           this.parentForm.controls.sendTo.setValue(x);

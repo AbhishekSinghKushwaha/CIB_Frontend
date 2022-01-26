@@ -12,14 +12,15 @@ export interface BankModel {
   isDirectPesalink: boolean;
 }
 
-export interface CountryModel {
-  countryCode?: string;
-  countryName?: string;
-  currency?: string;
-  currencySymbol?: string;
-  nationality?: string;
-  dialCode?: string;
-  flagPath?: string;
-  operatingCountry?: boolean;
-  countryCode3Chars?: null;
+export interface SubsidiaryModel {
+  id?: string;
+  countryCode: string;
+  countryName: string;
+  currency: string;
+  currencySymbol: string;
+  nationality: string;
+  dialCode: string;
+  flagPath: string;
+  operatingCountry: boolean;
+  countryCode3Chars: null;
 }

@@ -11,6 +11,7 @@ import { EmailVerificationComponent } from './email-verification/email-verificat
 import { SmsVerificationComponent } from './sms-verification/sms-verification.component';
 import { AccountDropdownItemComponent } from './account-dropdown-item/account-dropdown-item.component';
 import { BeneficiaryListItemComponent } from './beneficiary-list-item/beneficiary-list-item.component';
+import { NotificationMenuItemComponent } from './notification-menu-item/notification-menu-item.component';
 
 const components = [
   AccountDropdownItemComponent,
@@ -22,6 +23,7 @@ const components = [
   SmsVerificationComponent,
   EmailVerificationComponent,
   BeneficiaryListItemComponent,
+  NotificationMenuItemComponent,
 ];
 
 @NgModule({

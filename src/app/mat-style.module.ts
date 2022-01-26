@@ -24,6 +24,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { CustomIconService } from './core/utils/custom-icon.service';
 import { MatRadioModule } from '@angular/material/radio';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 const MatImports = [
   MatSidenavModule,
@@ -50,7 +51,8 @@ const MatImports = [
   MatNativeDateModule,
   MatRadioModule,
   MatDividerModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatSlideToggleModule
 ];
 
 

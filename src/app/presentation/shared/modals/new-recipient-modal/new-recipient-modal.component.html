@@ -29,3 +29,7 @@
 <div *ngIf="data === 'bank' || 'phone-linked'">
   <app-pesalink-new-recipient [mode]="data"></app-pesalink-new-recipient>
 </div>
+
+<div *ngIf="data === 'intercountryFundTransfer'">
+  <app-intercountry-new-recipient></app-intercountry-new-recipient>
+</div>

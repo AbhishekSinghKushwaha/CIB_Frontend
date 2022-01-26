@@ -28,7 +28,7 @@ import { CurrencySelectionConstants } from 'src/app/core/utils/constants/currenc
   ],
 })
 export class TransferAmountComponent implements ControlValueAccessor, OnInit {
-  @Input() parentForm: FormGroup;
+  @Input() parentForm!: FormGroup;
 
   @Input()
   public fieldName!: string;
