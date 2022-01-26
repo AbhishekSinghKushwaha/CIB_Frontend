@@ -59,15 +59,24 @@ export class TransferFromComponent implements ControlValueAccessor, OnInit {
   }
   constructor(
     private readonly selectAccountService: SelectAccountModalService,
-    private readonly sharedDataService: SharedDataService
-  ) {}
+    private readonly sharedDataService: SharedDataService,
+    private readonly accountsService: AccountsService
+  ) { }
 
   ngOnInit(): void {
+    this.accountsService.getUserAccounts().subscribe((res) => {
+      if (res.status) {
+        this.sharedDataService.setUserAccounts(res.data);
+      } else {
+        // TODO:: Notify error
+      }
+    });
+
     this.sharedDataService.userAccounts.subscribe((res) => {
       this.sourceAccounts = res;
     });
     this.selectAccountService.selected.subscribe((x) => {
-      this.parentForm.controls.sendFrom.setValue(x);
+      this.parentForm.controls[this.fieldName].setValue(x);
     });
   }
 
@@ -94,9 +103,10 @@ export class TransferFromComponent implements ControlValueAccessor, OnInit {
 
   openTransferFromModal() {
     // Remove accounts that have been selected under sendTo
+    console.log('this.sourceAccounts', this.sourceAccounts)
     const accounts = this.sourceAccounts.filter((el) => {
       return (
-        el.accountNumber !== this.parentForm.controls.sendTo.value.accountNumber
+        el.accountNumber !== this.parentForm.controls[this.fieldName].value.accountNumber
       );
     });
     this.selectAccountService.open(accounts);

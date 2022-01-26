@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TransferToComponent } from './transfer-to/transfer-to.component';
 import { SchedulePaymentInputComponent } from './schedule-payment-input/schedule-payment-input.component';
 import { SelectBankComponent } from './select-bank/select-bank.component';
+import { SelectAccountModalModule } from '../modals/select-account-modal/select-account-modal.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { SelectBankComponent } from './select-bank/select-bank.component';
     SchedulePaymentInputComponent,
     SelectBankComponent,
   ],
-  imports: [CommonModule, MatStyleModule, FormsModule],
+  imports: [CommonModule, MatStyleModule, FormsModule, SelectAccountModalModule],
   exports: [
     InputComponent,
     PasswordInputComponent,
@@ -34,4 +35,4 @@ import { SelectBankComponent } from './select-bank/select-bank.component';
     SelectBankComponent,
   ],
 })
-export class FormElementsModule {}
+export class FormElementsModule { }

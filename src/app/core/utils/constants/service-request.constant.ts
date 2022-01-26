@@ -4,7 +4,7 @@ const dashboardLinks: CardModel[] = [{
   text: 'Request for Cheque Book',
   prefixIcon: 'assets/images/icons/visual-support-icons-sr-chequebook.svg',
   suffixIcon: 'caret_right',
-  route: '/service-request/cheque-book'
+  route: '/service-request/chequebook-request'
 }, {
   text: 'Edit User Limit',
   prefixIcon: 'assets/images/icons/visual-support-icons-sr-edit-user-limit.svg',
