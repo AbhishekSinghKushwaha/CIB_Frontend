@@ -13,6 +13,7 @@ export interface BankModel {
 }
 
 export interface SubsidiaryModel {
+  id?: string;
   countryCode: string;
   countryName: string;
   currency: string;
