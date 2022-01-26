@@ -8,11 +8,14 @@ import { ConfirmPaymentModule } from './confirm-payment/confirm-payment.module';
 import { SupportingDocumentsUploadModule } from './supporting-documents-upload/supporting-documents-upload.module';
 import { SwiftChargesModalModule } from './swift-charges-modal/swift-charges-modal.module';
 import { PaymentCategoryModalModule } from './payment-category-modal/payment-category-modal.module';
+import { DirectorConfirmationModalComponent } from './director-confirmation-modal/director-confirmation-modal.component';
+import { MatStyleModule } from 'src/app/mat-style.module';
 
 @NgModule({
-  declarations: [],
+  declarations: [DirectorConfirmationModalComponent],
   imports: [
     CommonModule,
+    MatStyleModule,
     TransferFromModalModule,
     TransferToModalModule,
     CurrencySelectionModule,
@@ -31,6 +34,7 @@ import { PaymentCategoryModalModule } from './payment-category-modal/payment-cat
     SupportingDocumentsUploadModule,
     SwiftChargesModalModule,
     PaymentCategoryModalModule,
+    DirectorConfirmationModalComponent,
   ],
   providers: [],
 })

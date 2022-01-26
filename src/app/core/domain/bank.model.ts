@@ -12,7 +12,7 @@ export interface BankModel {
   isDirectPesalink: boolean;
 }
 
-export interface SubsidiaryModel {
+export interface CountryModel {
   id?: string;
   countryCode: string;
   countryName: string;

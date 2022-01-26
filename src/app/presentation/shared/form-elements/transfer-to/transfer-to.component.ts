@@ -144,12 +144,12 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
           transactionType: this.transactionType,
         });
         break;
-      case 'intercountryFundTransfer':
-        this.favouritesModalService.open(
-          this.transactionType,
-          mockData.favourites
-        );
-        break;
+      // case 'intercountryFundTransfer':
+      //   this.favouritesModalService.open(
+      //     this.transactionType,
+      //     mockData.favourites
+      //   );
+      //   break;
       default:
         break;
     }

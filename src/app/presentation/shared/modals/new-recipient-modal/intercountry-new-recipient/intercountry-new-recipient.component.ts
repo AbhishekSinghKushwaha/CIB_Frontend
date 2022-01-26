@@ -2,13 +2,13 @@ import { Component, OnInit, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { BankService } from 'src/app/core/services/modal-services/bank.service';
-import { NewRecipientService } from 'src/app/core/services/new-recipient/new-recipient.service';
 
 import { CountryService } from 'src/app/core/services/modal-services/country.service';
 import { countrySettings } from 'src/app/core/utils/constants/country.settings';
 import { Subject, Subscription } from 'rxjs';
 import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
 import { CountryModel } from 'src/app/core/domain/bank.model';
+import { NewRecipientService } from 'src/app/core/services/modal-services/new-recipient.service';
 
 @Component({
   selector: 'app-intercountry-new-recipient',
