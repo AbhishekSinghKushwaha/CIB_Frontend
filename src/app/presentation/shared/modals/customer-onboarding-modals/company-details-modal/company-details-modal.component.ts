@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { CustomerOnboardingService } from 'src/app/core/services/customer-onboarding/customer-onboarding.service';
 import { CustomerOnboardingModalsService } from 'src/app/core/services/modal-services/customer-onboarding-modals.service';
 
 @Component({
@@ -10,7 +11,8 @@ import { CustomerOnboardingModalsService } from 'src/app/core/services/modal-ser
 })
 export class CompanyDetailsModalComponent implements OnInit {
   constructor(
-    private customerOnboardingService: CustomerOnboardingModalsService,
+    private onboardingModalService: CustomerOnboardingModalsService,
+    private onboardingService: CustomerOnboardingService,
     private router: Router,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
@@ -18,14 +20,26 @@ export class CompanyDetailsModalComponent implements OnInit {
   ngOnInit(): void {}
 
   close() {
-    this.customerOnboardingService.closeCompanyDetailsModal();
+    this.onboardingModalService.closeCompanyDetailsModal();
   }
 
+  //  Save company details
   confirm() {
-    this.customerOnboardingService.closeCompanyDetailsModal();
+    let data = this.data;
+    const countryId = data.country.id;
+    delete data['country']; // Remove the country object
+    const newPayload = { ...{ countryId }, ...data }; // Create a new payload with countryId only
 
-    this.router.navigate([
-      '/auth/customer-onboarding/register/company-directors',
-    ]);
+    this.onboardingService
+      .registerCompanyDetails(newPayload)
+      .subscribe((res) => {
+        if (res.isSuccessful) {
+          this.router.navigate([
+            '/auth/customer-onboarding/register/company-directors',
+          ]);
+          // TODO:: Notify success
+          this.onboardingModalService.closeCompanyDetailsModal();
+        }
+      });
   }
 }

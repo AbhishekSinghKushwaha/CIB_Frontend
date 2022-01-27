@@ -10,6 +10,7 @@ import { MatStyleModule } from 'src/app/mat-style.module';
 import { AccountTypeOptionsComponent } from './account-type-options/account-type-options.component';
 import { RegistrationStartDetailsComponent } from './registration-start-details/registration-start-details.component';
 import { FormElementsModule } from 'src/app/presentation/shared/form-elements/form-elements.module';
+import { CustomerOnboardingService } from 'src/app/core/services/customer-onboarding/customer-onboarding.service';
 
 export function playerFactory(): Promise<any> {
   return import(/* webpackChunkName: 'lottie-web' */ 'lottie-web');
@@ -30,5 +31,6 @@ export function playerFactory(): Promise<any> {
     LottieModule.forRoot({ player: playerFactory }),
     FormElementsModule,
   ],
+  providers: [CustomerOnboardingService],
 })
 export class OnboardingStepsModule {}

@@ -57,51 +57,33 @@
           >
             <div class="row pt-4">
               <div class="col-md-6">
-                <mat-form-field
-                  appearance="standard"
-                  style="width: 100%"
-                  floatLabel="always"
-                >
-                  <mat-label>Company name</mat-label>
-                  <input
-                    matInput
-                    type="text"
-                    placeholder="Enter your company name"
-                    formControlName="name"
-                  />
-                </mat-form-field>
+                <app-input
+                  [parentForm]="companyDetailsForm"
+                  label="Company Name"
+                  placeholder="Enter your company name"
+                  fieldName="companyName"
+                  formControlName="companyName"
+                ></app-input>
               </div>
               <div class="col-md-6">
-                <mat-form-field
-                  appearance="standard"
-                  style="width: 100%"
-                  floatLabel="always"
-                >
-                  <mat-label>Company registration number</mat-label>
-                  <input
-                    matInput
-                    type="text"
-                    placeholder="Enter your registration number"
-                    formControlName="registrationNumber"
-                  />
-                </mat-form-field>
+                <app-input
+                  [parentForm]="companyDetailsForm"
+                  label="Company Registration Number"
+                  placeholder="Enter your registration number"
+                  fieldName="registrationNumber"
+                  formControlName="registrationNumber"
+                ></app-input>
               </div>
             </div>
             <div class="row pt-4">
               <div class="col-md-6">
-                <mat-form-field
-                  appearance="standard"
-                  style="width: 100%"
-                  floatLabel="always"
-                >
-                  <mat-label>Email address</mat-label>
-                  <input
-                    matInput
-                    type="text"
-                    placeholder="Enter your email address"
-                    formControlName="email"
-                  />
-                </mat-form-field>
+                <app-input
+                  [parentForm]="companyDetailsForm"
+                  label="Email Address"
+                  placeholder="Enter your email address"
+                  fieldName="emailAddress"
+                  formControlName="emailAddress"
+                ></app-input>
               </div>
               <div class="col-md-6">
                 <mat-form-field
@@ -119,45 +101,34 @@
                 </mat-form-field>
               </div>
             </div>
-            <div class="row">
+            <div class="row pt-4">
               <div class="col-md-6">
-                <mat-form-field
-                  appearance="standard"
-                  style="width: 100%"
-                  floatLabel="always"
-                >
-                  <mat-label>Mobile number</mat-label>
-                  <input
-                    matInput
-                    type="text"
-                    placeholder="Enter your mobile number"
-                    formControlName="mobile"
-                  />
-                </mat-form-field>
+                <app-country-select-input
+                  [parentForm]="companyDetailsForm"
+                  label="Country"
+                  fieldName="country"
+                  formControlName="country"
+                  placeholder="Select a country"
+                ></app-country-select-input>
               </div>
               <div class="col-md-6">
                 <div class="row d-flex justify-content-between">
-                  <mat-form-field appearance="standard" class="col-md-12">
-                    <mat-label>Country</mat-label>
-                    <mat-select
-                      formControlName="country"
-                      placeholder="Select a country"
-                    >
-                      <mat-option value="Kenia">Kenia</mat-option>
-                      <mat-option value="Uganda">Uganda</mat-option>
-                    </mat-select>
-                  </mat-form-field>
+                  <app-phone-number-input
+                    [parentForm]="companyDetailsForm"
+                    label="Mobile Number"
+                    fieldName="phoneNumber"
+                    formControlName="phoneNumber"
+                  ></app-phone-number-input>
                 </div>
               </div>
             </div>
-            <div class="row mb-3">
+            <div class="row pt-4 mb-3">
               <div class="col-sm-5 pr-sm-0 mb-3 mb-sm-0">
                 <button
                   mat-flat-button
                   color="primary"
                   type="submit"
                   class="col-8"
-                  [disabled]="companyDetailsForm.invalid"
                 >
                   Save & continue
                 </button>

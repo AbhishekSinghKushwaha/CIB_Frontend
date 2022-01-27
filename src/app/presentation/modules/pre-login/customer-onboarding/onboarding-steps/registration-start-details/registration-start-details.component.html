@@ -26,33 +26,27 @@
     </div>
     <div class="row pb-5">
       <form
-        [formGroup]="registrationForm"
+        [formGroup]="registrationStartForm"
         class="col-md-10 offset-md-1"
-        (ngSubmit)="validateRegistrationInformation()"
+        (submit)="registrationStartForm.valid && submit()"
       >
         <div class="row mb-3">
-          <mat-form-field class="col-md-12">
-            <input
-              matInput
-              type="text"
-              id="accountNumber"
-              formControlName="accountNumber"
-              label="Account number"
-              placeholder="Enter your account number"
-            />
-          </mat-form-field>
+          <app-input
+            [parentForm]="registrationStartForm"
+            label="Account Number"
+            fieldName="accountNumber"
+            placeholder="Enter your account number"
+            formControlName="accountNumber"
+          ></app-input>
         </div>
         <div class="row mb-3">
-          <mat-form-field class="col-md-12">
-            <input
-              matInput
-              type="text"
-              id="registrationNumber"
-              formControlName="registrationNumber"
-              label="Company registration number"
-              placeholder="Enter your registration number"
-            />
-          </mat-form-field>
+          <app-input
+            [parentForm]="registrationStartForm"
+            label="Company Registration Number"
+            fieldName="registrationNumber"
+            placeholder="Enter your registration number"
+            formControlName="registrationNumber"
+          ></app-input>
         </div>
         <div class="row mb-3">
           <div class="col-sm-5 pr-sm-0 mb-3 mb-sm-0">
@@ -61,7 +55,7 @@
               color="primary"
               type="submit"
               class="col-12"
-              [disabled]="registrationForm.invalid"
+              [disabled]="registrationStartForm.invalid"
             >
               Continue
             </button>

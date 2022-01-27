@@ -13,32 +13,32 @@
   <mat-card-content class="p-4">
     <div class="row">
       <div class="col-md-6">
-        <p class="text-muted text-grey">Company name</p>
-        <p class="">{{ data.name }}</p>
+        <p class="text-muted text-grey">Company Name</p>
+        <p class="">{{ data?.companyName }}</p>
       </div>
       <div class="col-md-6">
-        <p class="text-muted text-grey">Company registration number</p>
-        <p class="">{{ data.registrationNumber }}</p>
+        <p class="text-muted text-grey">Company Registration Number</p>
+        <p class="">{{ data?.registrationNumber }}</p>
       </div>
     </div>
     <div class="row">
       <div class="col-md-6">
         <p class="text-muted text-grey">Country</p>
-        <p class="">{{ data.country }}</p>
+        <p class="">{{ data?.country?.countryName }}</p>
       </div>
       <div class="col-md-6">
-        <p class="text-muted text-grey">Mobile number</p>
-        <p class="">{{ data.mobile }}</p>
+        <p class="text-muted text-grey">Mobile Number</p>
+        <p class="">{{ data?.phoneNumber }}</p>
       </div>
     </div>
     <div class="row">
       <div class="col-md-6">
         <p class="text-muted text-grey">Email address</p>
-        <p class="">{{ data.email }}</p>
+        <p class="">{{ data?.emailAddress }}</p>
       </div>
       <div class="col-md-6">
         <p class="text-muted text-grey">Physical address</p>
-        <p class="">{{ data.address }}</p>
+        <p class="">{{ data?.address }}</p>
       </div>
     </div>
     <button

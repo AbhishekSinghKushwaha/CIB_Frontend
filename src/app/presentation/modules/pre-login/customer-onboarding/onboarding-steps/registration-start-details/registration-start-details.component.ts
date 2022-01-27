@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder,
+} from '@angular/forms';
 import { Router } from '@angular/router';
+import { CustomerOnboardingService } from 'src/app/core/services/customer-onboarding/customer-onboarding.service';
 
 @Component({
   selector: 'app-registration-start-details',
@@ -8,19 +14,35 @@ import { Router } from '@angular/router';
   styleUrls: ['./registration-start-details.component.scss'],
 })
 export class RegistrationStartDetailsComponent implements OnInit {
-  registrationForm: FormGroup = new FormGroup({
-    accountNumber: new FormControl(null, [Validators.required]),
-    registrationNumber: new FormControl(null, [Validators.required]),
-  });
+  registrationStartForm: FormGroup;
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private readonly onboardingService: CustomerOnboardingService
+  ) {}
 
-  constructor(private router: Router) {}
+  ngOnInit(): void {
+    this.initForm();
+  }
 
-  ngOnInit(): void {}
+  // Initialize form
+  initForm() {
+    this.registrationStartForm = this.fb.group({
+      accountNumber: ['', [Validators.required]],
+      registrationNumber: ['', [Validators.required]],
+    });
+  }
 
-  validateRegistrationInformation() {
-    if (this.registrationForm.invalid) {
-      return;
-    }
-    this.router.navigate(['/auth/customer-onboarding/register']);
+  submit() {
+    this.onboardingService
+      .verifyCorporate(this.registrationStartForm.getRawValue())
+      .subscribe((res) => {
+        if (res.isSuccessful) {
+          this.router.navigate([
+            '/auth/customer-onboarding/register/company-details',
+          ]);
+        } else {
+        }
+      });
   }
 }

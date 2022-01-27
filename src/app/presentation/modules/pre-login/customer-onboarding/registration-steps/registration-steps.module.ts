@@ -22,6 +22,7 @@ import { RegistrationSummaryConfirmationComponent } from './registration-summary
 import { RegistrationSummaryDownloadComponent } from './registration-summary-download/registration-summary-download.component';
 import { SubmissionSuccessfulComponent } from './submission-successful/submission-successful.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { SharedModalsModule } from 'src/app/presentation/shared/modals/shared-modals.module';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     FormElementsModule,
     CustomerOnboardingModalsModule,
     PdfViewerModule,
+    SharedModalsModule,
   ],
   providers: [NotificationConstants],
 })

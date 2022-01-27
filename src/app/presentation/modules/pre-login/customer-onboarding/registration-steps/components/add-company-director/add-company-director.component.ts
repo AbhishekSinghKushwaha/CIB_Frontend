@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import {
+  FormGroup,
+  FormControl,
+  FormBuilder,
+  Validators,
+} from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CustomerOnboardingService } from 'src/app/core/services/customer-onboarding/customer-onboarding.service';
 
 @Component({
   selector: 'app-add-company-director',
@@ -12,7 +18,12 @@ export class AddCompanyDirectorComponent implements OnInit {
   editMode: boolean;
   index: number;
 
-  constructor(private readonly route: ActivatedRoute) {}
+  constructor(
+    private readonly route: ActivatedRoute,
+    private onboardingService: CustomerOnboardingService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loadFormState();
@@ -35,16 +46,25 @@ export class AddCompanyDirectorComponent implements OnInit {
   }
 
   private initForm(data?: any): void {
-    console.log(this.index, data);
-    this.addDirectorForm = new FormGroup({
-      fullname: new FormControl(data?.fullname || null),
-      email: new FormControl(data?.email || null),
-      officePhone: new FormControl(data?.officePhone),
-      officePhoneCode: new FormControl(data?.officePhoneCode || '000'),
-      mobilePhone: new FormControl(data?.mobilePhoneCode || null),
-      mobilePhoneCode: new FormControl(data?.mobilePhoneCode || '000'),
+    this.addDirectorForm = this.fb.group({
+      name: ['', [Validators.required]],
+      officeNumber: ['', [Validators.required]],
+      phoneNumber: ['', [Validators.required]],
+      emailAddress: ['', [Validators.required]],
     });
   }
 
-  submit() {}
+  submit() {
+    const corporateId = '';
+    this.onboardingService
+      .addDirector(this.addDirectorForm.getRawValue(), corporateId)
+      .subscribe((res) => {
+        if (res.isSuccessful) {
+          // TODO:: Notify success
+          this.router.navigate([
+            '/auth/customer-onboarding/register/company-directors',
+          ]);
+        }
+      });
+  }
 }

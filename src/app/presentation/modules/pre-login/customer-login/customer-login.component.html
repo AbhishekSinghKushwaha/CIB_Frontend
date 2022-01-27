@@ -1,4 +1,7 @@
 <div class="row h-100">
+  <div *ngIf="loading" class="loader-container">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
   <div class="col-lg-8 px-0">
     <app-welcome-info></app-welcome-info>
   </div>

@@ -23,7 +23,7 @@ export class CustomerOnboardingModalsService {
 
   constructor(private readonly dialog: MatDialog) {}
 
-  openRegistrationModal() {
+  openRegistrationRequirementModal() {
     this.registrationModalRef = this.dialog.open<
       RegistrationRequirementsModalComponent,
       any
@@ -44,7 +44,7 @@ export class CustomerOnboardingModalsService {
       any
     >(CompanyDetailsModalComponent, {
       data,
-      maxWidth: '900px',
+      maxWidth: '60vw',
       disableClose: true,
     });
     return this.companyDetailsModalRef;

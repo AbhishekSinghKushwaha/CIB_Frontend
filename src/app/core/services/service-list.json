@@ -1,4 +1,11 @@
 {
+  "customerOnboarding": {
+    "verifyCorporate": "/cibonboarding-v1/api/Registration/verify-corporate",
+    "getRequiredDocuments": "/cibonboarding-v1/api/Registration/get-required-documents",
+    "getCorporateRegistrationStage": "/cibonboarding-v1/api/Registration/get-corporate-registration-stage/",
+    "addCorporateDetails": "/cibonboarding-v1/api/Registration/add-corporate-detail/",
+    "addDirectorDetails": "/cibonboarding-v1/api/Registration/add-director-detail/"
+  },
   "accounts": {
     "getUserAccounts": "/cibaccountservice-v1/api/v1/Accounts/GetUserMappedAccounts"
   },
