@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AirtimeFailedService } from 'src/app/core/services/airtime-failed/airtime-failed.service';
 import { AirtimeSuccessService } from 'src/app/core/services/airtime-success/airtime-success.service';
+import { TransactionTypeConstants } from 'src/app/core/utils/constants/transaction-type.constants';
 
 @Component({
   selector: 'app-buy-airtime',
@@ -23,6 +24,8 @@ export class BuyAirtimeComponent extends BaseTransactComponent implements OnInit
   airTimeForm: FormGroup;
   aboveTransactionTypeLimit: boolean = false;
   loading: boolean = false;
+  transferType = TransactionTypeConstants.TransferType;
+
 
   constructor(
     private readonly supportingDocumentsUploadService: SupportingDocumentsUploadService,

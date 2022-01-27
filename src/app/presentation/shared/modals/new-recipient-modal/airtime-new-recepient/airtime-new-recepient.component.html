@@ -7,10 +7,11 @@
     </div>
     <h3 class="strong-text pt-4 pb-3">Please select an operator</h3>
   
-    <mat-form-field appearance="standard" style="width: 100%" floatLabel="always" (click)="openSubsidiaries()">
+    <mat-form-field appearance="standard" style="width: 100%" floatLabel="always" (click)="openCountry()">
         <mat-label>Country</mat-label>
         <input matInput type="text" class="strong-text" id="country" name="country" 
-        value="{{ (selectedCountry | async)?.countryName || subsidiaries[0].countryName }}"/>
+        [value]="country?.countryName ? country?.countryName : ''"
+        [placeholder]="country?.countryName || '' || 'Kenya'"/>
         <button type="button" mat-icon-button matSuffix>
             <mat-icon svgIcon="caret_down"></mat-icon>
         </button>
@@ -21,4 +22,8 @@
         [data]="account"
         [isChecked]="selected && selected.name === account.name">
     </app-mobile-operators>
+
+    <!-- <app-mobile-operators-modal
+    [transferType]="data"
+  ></app-mobile-operators-modal> -->
 </div>

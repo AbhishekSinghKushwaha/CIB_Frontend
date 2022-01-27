@@ -3,11 +3,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { AirtimeMobileNumberModel } from 'src/app/core/domain/airtime-mobile-number.model';
 import { AirtimeMobileNumberService } from 'src/app/core/services/airtime-mobile-number/airtime-mobile-number.service';
-import { NewRecipientService } from 'src/app/core/services/new-recipient/new-recipient.service';
-import { FavouritesModalService } from 'src/app/core/services/favourites-modal/favourites-modal.service';
 import { InternationalAirtimeAmountRangeService } from 'src/app/core/services/international-airtime-amount-range/international-airtime-amount-range.service';
 import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
-import {CountryMobileCodeModal} from 'src/app/core/domain/countryCode.model';
+import { CountryMobileCodeModal } from 'src/app/core/domain/countryCode.model';
 
 @Component({
   selector: 'app-airtime-mobile-number',
@@ -25,8 +23,6 @@ export class AirtimeMobileNumberComponent implements OnInit {
   constructor(
     readonly dialogRef: MatDialogRef<AirtimeMobileNumberComponent>,
     private readonly airtimeMobileNumberService: AirtimeMobileNumberService,
-    private readonly newRecipientService: NewRecipientService,
-    private readonly favouritesModalService: FavouritesModalService,
     private readonly internationalAirtimeAmountRangeService: InternationalAirtimeAmountRangeService
   ) { 
     this.data = airtimeMobileNumberService.default;
@@ -44,8 +40,7 @@ export class AirtimeMobileNumberComponent implements OnInit {
 
   initForm() {
     this.airtimeMobileNumberForm = new FormGroup({
-      code: new FormControl(this.data?.code, [Validators.required]),
-      mobileNumber: new FormControl(this.data?.mobileNumber, [Validators.required]),
+      phoneNumber: new FormControl(this.data?.mobileNumber, [Validators.required]),
     });
   }
 
@@ -57,8 +52,6 @@ export class AirtimeMobileNumberComponent implements OnInit {
     modal.afterClosed().subscribe(() => {
       this.visibility = true;
       this.airtimeMobileNumberService.close();
-      this.newRecipientService.close();
-      this.favouritesModalService.close();
     });
   }
 

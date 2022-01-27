@@ -5,7 +5,7 @@ import { MatStyleModule } from './../../../../mat-style.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AirtimeMobileNumberService } from 'src/app/core/services/airtime-mobile-number/airtime-mobile-number.service';
 import { InternationalAirtimeAmountRangeModule } from '../international-airtime-amount-range/international-airtime-amount-range.module';
-
+import { FormElementsModule } from 'src/app/presentation/shared/form-elements/form-elements.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,8 @@ import { InternationalAirtimeAmountRangeModule } from '../international-airtime-
     MatStyleModule,
     FormsModule,
     ReactiveFormsModule,
-    InternationalAirtimeAmountRangeModule
+    InternationalAirtimeAmountRangeModule,
+    FormElementsModule
   ],
   exports: [
     AirtimeMobileNumberComponent
