@@ -8,3 +8,5 @@ export interface companyDetails {
   emailAddress?: string;
   address?: string;
 }
+
+export interface Director {}
