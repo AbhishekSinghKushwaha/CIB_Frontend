@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/core/services/login/login.service';
-import { NotificationModalService } from 'src/app/core/services/notification-modal/notification-modal.service';
+import { NotificationModalService } from 'src/app/core/services/modal-services/notification-modal/notification-modal.service';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import LOGIN_CONSTANTS from 'src/app/core/utils/constants/pre-login.constants';
 import { SharedUtils } from './../../../../core/utils/shared.util';
@@ -10,7 +10,7 @@ import { SharedUtils } from './../../../../core/utils/shared.util';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
   loginPasswordForm: FormGroup = new FormGroup({});
@@ -22,7 +22,8 @@ export class LoginComponent implements OnInit {
     private readonly notificationModalService: NotificationModalService,
     private readonly storageService: StorageService,
     private loginService: LoginService,
-    private readonly router: Router) { }
+    private readonly router: Router
+  ) {}
 
   async ngOnInit(): Promise<void> {
     this.initForm();
@@ -33,14 +34,14 @@ export class LoginComponent implements OnInit {
   }
 
   private async checkLoginStatus(): Promise<void> {
-    const user = this.loginService.getUserData().then(
-      response => {
+    const user = this.loginService
+      .getUserData()
+      .then((response) => {
         if (response) {
           this.router.navigate(['/dashboard']);
         }
-      }
-    ).catch(e => console.log(e))
-
+      })
+      .catch((e) => console.log(e));
   }
 
   private initForm(): void {
@@ -52,22 +53,22 @@ export class LoginComponent implements OnInit {
 
   submit() {
     const payload = this.loginPasswordForm.getRawValue();
-    this.loginService
-      .userLogin(payload)
-      .subscribe(
-        user => {
-          console.log({ user })
-          const { access_token, ...mainUser } = user;
-          this.storageService.setData('loginState', { stage: LOGIN_CONSTANTS.LOGIN_STAGES.SMS_VERIFICATION });
-          this.storageService.setData('accessToken', { access_token });
-          this.storageService.setData('loginCred', mainUser);
-          this.router.navigate(['/auth/sms-verification']);
-        },
-        error => {
-          this.modalTakeAnotherLook();
-          console.log({ error })
-        }
-      )
+    this.loginService.userLogin(payload).subscribe(
+      (user) => {
+        console.log({ user });
+        const { access_token, ...mainUser } = user;
+        this.storageService.setData('loginState', {
+          stage: LOGIN_CONSTANTS.LOGIN_STAGES.SMS_VERIFICATION,
+        });
+        this.storageService.setData('accessToken', { access_token });
+        this.storageService.setData('loginCred', mainUser);
+        this.router.navigate(['/auth/sms-verification']);
+      },
+      (error) => {
+        this.modalTakeAnotherLook();
+        console.log({ error });
+      }
+    );
   }
 
   // TODO: The modal services here are for examples only. These would be taken out
@@ -75,18 +76,20 @@ export class LoginComponent implements OnInit {
     const message = SharedUtils.getNotificationModalParam({
       image: './assets/images/Illustrations/Illustrations_VerificationCode.svg',
       title: 'Take another look',
-      message: 'The details you entered aren\'t familiar to us. Please try again or register to create your profile',
-      buttonText: 'Try again'
-    })
+      message:
+        "The details you entered aren't familiar to us. Please try again or register to create your profile",
+      buttonText: 'Try again',
+    });
     this.notificationModalService.open(message);
   }
   modalTryAgain(): void {
     const message = SharedUtils.getNotificationModalParam({
       title: 'Lets try this again',
-      message: 'The details you entered aren\'t familiar to us. Please try again or register to create your profile',
+      message:
+        "The details you entered aren't familiar to us. Please try again or register to create your profile",
       registerButtonEnabled: true,
-      buttonText: 'Try again'
-    })
+      buttonText: 'Try again',
+    });
     this.notificationModalService.open(message);
   }
 
@@ -99,7 +102,7 @@ export class LoginComponent implements OnInit {
       title: 'Are you sure you want to sign out?',
       message: '',
       logoutButtonEnabled: true,
-    })
+    });
     this.notificationModalService.open(message);
     this.isloggedOut = true;
   }
@@ -109,9 +112,7 @@ export class LoginComponent implements OnInit {
       title: 'Are you stil there?',
       message: `You've been quiet. To keep your details safe, you will be automatically signed out in 00:59 seconds`,
       logoutButtonEnabled: true,
-    })
+    });
     this.notificationModalService.open(message);
   }
-
-
 }

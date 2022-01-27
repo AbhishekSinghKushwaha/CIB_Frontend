@@ -4,10 +4,11 @@
   </button>
   <p class="text-center fw-bold pt-2">Send to someone new</p>
   <h3 class="m-4 ms-2">Please enter the recipient's details</h3>
-  <app-subsidiary-select
+
+  <app-country-select
     [category]="countrySelectType"
-    (selected)="setSubsidiary($event)"
-  ></app-subsidiary-select>
+    (selectedCountry)="setCountry($event)"
+  ></app-country-select>
 
   <form
     [formGroup]="newRecipientForm"
@@ -15,20 +16,14 @@
     class="d-flex flex-column"
     autocomplete="off"
   >
-    <div class="row">
-      <mat-form-field
-        appearance="standard"
-        style="width: 100%"
-        floatLabel="always"
-      >
-        <mat-label>Account or mobile number</mat-label>
-        <input
-          matInput
-          type="text"
-          placeholder="Enter an account number"
-          formControlName="accountNumber"
-        />
-      </mat-form-field>
+    <div class="row gx-0 m-3">
+      <app-input
+        [parentForm]="newRecipientForm"
+        label="Account or Mobile number"
+        placeholder="Enter account or mobile number"
+        fieldName="accountNumber"
+        formControlName="accountNumber"
+      ></app-input>
     </div>
     <div class="p-2">
       <button

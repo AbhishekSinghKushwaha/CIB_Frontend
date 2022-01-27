@@ -1,0 +1,135 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="row mb-4 justify-content-md-center">
+      <div class="col-md-11">
+        <div class="mb-3">
+          <button
+            mat-icon-button
+            aria-label="Back"
+            class="back-icon"
+            routerLink="/transact/"
+          >
+            <div class="strong-text">
+              <mat-icon svgIcon="caret_left"></mat-icon>
+              <span>Send money via SWIFT</span>
+            </div>
+          </button>
+        </div>
+        <h3 class="strong-text">Please enter the payment details</h3>
+        <form
+          [formGroup]="swiftTransferForm"
+          (submit)="getTransferCharges()"
+          class="d-flex flex-column"
+          autocomplete="off"
+        >
+          <div class="row">
+            <!-- Send From -->
+            <div class="col-md-6">
+              <app-transfer-from
+                [parentForm]="swiftTransferForm"
+                label="Send From"
+                placeholder="Send From"
+                formControlName="sendFrom"
+                fieldName="sendFrom"
+              >
+              </app-transfer-from>
+            </div>
+            <!-- Send To -->
+            <div class="col-md-6 align-self-end">
+              <app-transfer-to
+                [parentForm]="swiftTransferForm"
+                label="Send To"
+                formControlName="sendTo"
+                fieldName="sendTo"
+                placeholder="Select the recipient"
+                transactionType="{{ transferType?.SWIFT }}"
+              >
+              </app-transfer-to>
+            </div>
+            <!-- FX Reference ID -->
+            <div class="col-md-6">
+              <app-input
+                [parentForm]="swiftTransferForm"
+                label="Fx Reference ID"
+                fieldName="fxReferenceId"
+                formControlName="fxReferenceId"
+                placeholder="Enter FX reference ID"
+              ></app-input>
+            </div>
+            <!-- Transfer Amount -->
+            <div class="col-md-6">
+              <app-transfer-amount
+                [parentForm]="swiftTransferForm"
+                label="Amount"
+                fieldName="amount"
+                placeholder="Enter an amount"
+                formControlName="amount"
+              ></app-transfer-amount>
+            </div>
+            <!-- Schedule Payment -->
+            <div class="col-md-6">
+              <app-schedule-payment-input
+                [parentForm]="swiftTransferForm"
+                label="Schedule Payment"
+                fieldName="schedulePayment"
+                placeholder="Select a payment date"
+                transactionType="interBankTransfer"
+              ></app-schedule-payment-input>
+            </div>
+            <!-- License -->
+            <div class="col-md-6">
+              <app-input
+                [parentForm]="swiftTransferForm"
+                label="License"
+                placeholder="Enter License"
+                formControlName="license"
+                fieldName="license"
+              >
+              </app-input>
+            </div>
+            <!-- Foreign Charges -->
+            <div class="col-md-6">
+              <app-swift-charges
+                [parentForm]="swiftTransferForm"
+                label="Charges"
+                formControlName="charges"
+                fieldName="charges"
+                placeholder="Select an option"
+              ></app-swift-charges>
+            </div>
+            <!-- Payment Category -->
+            <div class="col-md-6">
+              <app-payment-category
+                [parentForm]="swiftTransferForm"
+                label="Payment Category"
+                fieldName="paymentCategory"
+                formControlName="paymentCategory"
+                placeholder="Select a Payment Category"
+              ></app-payment-category>
+            </div>
+            <!-- Payment Reason -->
+            <div class="col-md-6">
+              <app-input
+                [parentForm]="swiftTransferForm"
+                label="Payment Reason"
+                fieldName="reason"
+                formControlName="reason"
+                placeholder="Optional"
+              ></app-input>
+            </div>
+          </div>
+          <div class="mt-4">
+            <button
+              mat-raised-button
+              [disabled]="swiftTransferForm.invalid"
+              color="primary"
+              disabled
+            >
+              Send money
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

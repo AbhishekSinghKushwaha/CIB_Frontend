@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CountryModel } from 'src/app/core/domain/country.model';
-import { CountryService } from 'src/app/core/services/country/country.service';
+import { CountryModel } from 'src/app/core/domain/bank.model';
+import { CountryService } from 'src/app/core/services/modal-services/country.service';
 
 @Component({
   selector: 'app-country-list-item',

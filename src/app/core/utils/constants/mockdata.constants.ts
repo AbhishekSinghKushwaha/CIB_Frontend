@@ -1,10 +1,11 @@
 import { BankModel } from '../../domain/bank.model';
-import { CountryModel } from '../../domain/country.model';
+import { CountryModel } from '../../domain/bank.model';
 import { StatementListModel } from '../../domain/statement-list.model';
 import { FavouriteBeneficiaryModel } from './../../domain/favourites-beneficiary.model';
 import { SelectAccountModel } from './../../domain/select-account.model';
 import { BuyGoodsFavouriteModel } from './../../domain/buy-goods-favourites.model';
 import { UserModel } from '../../domain/user.model';
+import { MobileOperator } from '../../domain/transfer.models';
 import { AirtimeAmountRangeModel } from '../../domain/international-airtime-amount-range.model';
 import { CountryMobileCodeModal } from 'src/app/core/domain/countryCode.model';
 
@@ -44,11 +45,10 @@ const users: UserModel[] = [
     securityQuestions: [
       { question: 'What village were you born in?', answer: 'aaa' },
       { question: 'What was the last city you visited?', answer: 'bbb' },
-      { question: 'At what age did you start working', answer: 'ccc' }
-    ]
+      { question: 'At what age did you start working', answer: 'ccc' },
+    ],
   },
 ];
-
 
 const favourites: FavouriteBeneficiaryModel[] = [
   {
@@ -110,14 +110,61 @@ const banks: BankModel[] = [
 ];
 
 const countries: CountryModel[] = [
-  { name: 'Kenya', flag: 'https://flagcdn.com/h60/ke.png' },
   {
-    name: 'Democratic Republic of Congo',
-    flag: 'https://flagcdn.com/h60/cd.png',
+    flagPath: 'https://flagcdn.com/h60/ke.png',
+    countryCode: 'KE',
+    countryName: 'Kenya',
+    currency: 'KES',
+    currencySymbol: 'KES',
+    nationality: 'Kenyan',
+    dialCode: '254',
+    operatingCountry: true,
+    countryCode3Chars: null,
   },
-  { name: 'Rwanda', flag: 'https://flagcdn.com/h60/rw.png' },
-  { name: 'South Sudan', flag: 'https://flagcdn.com/h60/ss.png' },
-  { name: 'Tanzania', flag: 'https://flagcdn.com/h60/tz.png' },
+  {
+    flagPath: 'https://flagcdn.com/h60/cd.png',
+    countryCode: 'CD',
+    countryName: 'Democratic Republic of Congo',
+    currency: 'CDF',
+    currencySymbol: 'CDF',
+    nationality: 'Congolese',
+    dialCode: '242',
+    operatingCountry: true,
+    countryCode3Chars: null,
+  },
+  {
+    flagPath: 'https://flagcdn.com/h60/rw.png',
+    countryCode: 'CD',
+    countryName: 'Rwanda',
+    currency: 'RWF',
+    currencySymbol: 'RF',
+    nationality: 'Rwandese',
+    dialCode: '250',
+    operatingCountry: true,
+    countryCode3Chars: null,
+  },
+  {
+    flagPath: 'https://flagcdn.com/h60/ss.png',
+    countryCode: 'CD',
+    countryName: 'South Sudan',
+    currency: 'RWF',
+    currencySymbol: 'RF',
+    nationality: 'Rwandese',
+    dialCode: '250',
+    operatingCountry: true,
+    countryCode3Chars: null,
+  },
+  {
+    flagPath: 'https://flagcdn.com/h60/tz.png',
+    countryCode: 'CD',
+    countryName: 'Tanzania',
+    currency: 'RWF',
+    currencySymbol: 'RF',
+    nationality: 'Rwandese',
+    dialCode: '250',
+    operatingCountry: true,
+    countryCode3Chars: null,
+  },
 ];
 
 const statementList: StatementListModel[] = [
@@ -621,7 +668,42 @@ const buyGoodsFavourites: BuyGoodsFavouriteModel[] = [
   },
 ];
 
-const accountNumber: string = "2837181638719349"
+const accountNumber: string = '2837181638719349';
+
+const mobileOperators: MobileOperator[] = [
+  {
+    id: '1',
+    operatorName: 'Airtel',
+    operatorIconPath: 'assets/images/icons/airtel.svg',
+    serviceName: 'Airtel Money',
+    serviceIconPath: '',
+    operatorCountry: 'Kenya',
+  },
+  {
+    id: '2',
+    operatorName: 'Equitel',
+    operatorIconPath: 'assets/images/icons/equitel.svg',
+    serviceName: 'Equitel',
+    serviceIconPath: '',
+    operatorCountry: 'Kenya',
+  },
+  {
+    id: '3',
+    operatorName: 'Safaricom',
+    operatorIconPath: 'assets/images/icons/safaricom.svg',
+    serviceName: 'MPESA',
+    serviceIconPath: '',
+    operatorCountry: 'Kenya',
+  },
+  {
+    id: '4',
+    operatorName: 'Telkom',
+    operatorIconPath: 'assets/images/icons/telkom.svg',
+    serviceName: 'T-Kash',
+    serviceIconPath: '',
+    operatorCountry: 'Kenya',
+  },
+];
 
 const airtimeAmountRange: AirtimeAmountRangeModel[] = [
   {
@@ -659,6 +741,7 @@ export const mockData = {
   buyGoodsFavourites,
   accountNumber,
   users,
+  mobileOperators,
   airtimeAmountRange,
   mobileCodes
 };
