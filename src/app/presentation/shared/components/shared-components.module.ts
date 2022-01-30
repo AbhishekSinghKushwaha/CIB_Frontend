@@ -11,9 +11,12 @@ import { LogoutButtonFooterComponent } from './logout-button-footer/logout-butto
 import { TransactMenuItemComponent } from './transact-menu-item/transact-menu-item.component';
 import { EmailVerificationComponent } from './email-verification/email-verification.component';
 import { SmsVerificationComponent } from './sms-verification/sms-verification.component';
+import { AccountDropdownItemComponent } from './account-dropdown-item/account-dropdown-item.component';
+import { BeneficiaryListItemComponent } from './beneficiary-list-item/beneficiary-list-item.component';
 import { NotificationMenuItemComponent } from './notification-menu-item/notification-menu-item.component';
 
 const components = [
+  AccountDropdownItemComponent,
   LanguageInputComponent,
   CustomerSupportComponent,
   RegisterButtonFooterComponent,
@@ -22,7 +25,9 @@ const components = [
   SmsVerificationComponent,
   EmailVerificationComponent,
   NotificationMenuItemComponent,
-  CardComponentComponent
+  CardComponentComponent,
+  BeneficiaryListItemComponent,
+  NotificationMenuItemComponent,
 ];
 
 @NgModule({

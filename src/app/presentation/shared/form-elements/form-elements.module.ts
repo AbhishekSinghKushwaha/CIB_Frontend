@@ -5,12 +5,14 @@ import { PasswordInputComponent } from './password-input/password-input.componen
 import { FieldErrorsComponent } from './field-errors/field-errors.component';
 import { MatStyleModule } from 'src/app/mat-style.module';
 import { TransferAmountComponent } from './transfer-amount/transfer-amount.component';
-import { TransferFromComponent } from './transfer-from/transfer-from.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TransferToComponent } from './transfer-to/transfer-to.component';
 import { SchedulePaymentInputComponent } from './schedule-payment-input/schedule-payment-input.component';
 import { SelectBankComponent } from './select-bank/select-bank.component';
-import { SelectAccountModalModule } from '../modals/select-account-modal/select-account-modal.module';
+import { PhoneNumberInputComponent } from './phone-number-input/phone-number-input.component';
+import { SwiftChargesComponent } from './swift-charges/swift-charges.component';
+import { PaymentCategoryComponent } from './payment-category/payment-category.component';
+import { TransferFromComponent } from './transfer-from/transfer-from.component';
 
 @NgModule({
   declarations: [
@@ -22,9 +24,14 @@ import { SelectAccountModalModule } from '../modals/select-account-modal/select-
     TransferToComponent,
     SchedulePaymentInputComponent,
     SelectBankComponent,
+    PhoneNumberInputComponent,
+    SwiftChargesComponent,
+    PaymentCategoryComponent,
   ],
-  imports: [CommonModule, MatStyleModule, FormsModule, SelectAccountModalModule],
+  imports: [CommonModule, MatStyleModule, FormsModule, ReactiveFormsModule],
   exports: [
+    FormsModule,
+    ReactiveFormsModule,
     InputComponent,
     PasswordInputComponent,
     FieldErrorsComponent,
@@ -33,6 +40,9 @@ import { SelectAccountModalModule } from '../modals/select-account-modal/select-
     TransferToComponent,
     SchedulePaymentInputComponent,
     SelectBankComponent,
+    PhoneNumberInputComponent,
+    SwiftChargesComponent,
+    PaymentCategoryComponent,
   ],
 })
 export class FormElementsModule { }

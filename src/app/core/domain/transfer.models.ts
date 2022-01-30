@@ -29,7 +29,6 @@ export interface LimitModel {
   minAmount?: number;
 }
 
-
 export interface CurrencyModel {
   id?: any;
   currencyCode: string;
@@ -40,4 +39,18 @@ export interface TransferAmount {
   amount: number;
   currency: string;
   isWithinLimit?: boolean;
+}
+
+export interface TransactionTypeModel {
+  id?: string;
+  name?: string;
+}
+
+export interface MobileOperator {
+  id?: string;
+  operatorName?: string;
+  operatorIconPath?: string;
+  serviceName?: string; // i.e MPESA, Equitel Money
+  serviceIconPath?: string; // i.e Mpesa Icon logo
+  operatorCountry?: string;
 }

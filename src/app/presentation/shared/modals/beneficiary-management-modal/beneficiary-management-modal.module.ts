@@ -3,30 +3,24 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BeneficiaryManagementModalComponent } from './beneficiary-management-modal.component';
 import { MatStyleModule } from 'src/app/mat-style.module';
-import { BeneficiaryListItemModule } from '../../components/beneficiary-list-item/beneficiary-list-item.module';
 import { BeneficiaryManagementModalService } from 'src/app/core/services/beneficiary-management-modal/beneficiary-management-modal.service';
-import { FavouriteSearchPipeModule } from '../../pipes/favourites-search/favourite-search-pipe.module';
 import { ConfirmDialogModule } from '../confirm-dialog/confirm-dialog.module';
 import { BeneficiaryManagementFormModalModule } from '../beneficiary-management-form-modal/beneficiary-management-form-modal.module';
+import { PipesModule } from '../../pipes/pipes.module';
+import { SharedComponentsModule } from '../../components/shared-components.module';
 
 @NgModule({
-  declarations: [
-    BeneficiaryManagementModalComponent,
-  ],
+  declarations: [BeneficiaryManagementModalComponent],
   imports: [
     CommonModule,
     FormsModule,
-    BeneficiaryListItemModule,
-    FavouriteSearchPipeModule,
+    SharedComponentsModule,
+    PipesModule,
     MatStyleModule,
     ConfirmDialogModule,
-    BeneficiaryManagementFormModalModule
+    BeneficiaryManagementFormModalModule,
   ],
-  exports: [
-    BeneficiaryManagementModalComponent
-  ],
-  providers: [
-    BeneficiaryManagementModalService
-  ]
+  exports: [BeneficiaryManagementModalComponent],
+  providers: [BeneficiaryManagementModalService],
 })
-export class BeneficiaryManagementModalModule { }
+export class BeneficiaryManagementModalModule {}

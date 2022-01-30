@@ -1,11 +1,4 @@
-import {
-  Component,
-  forwardRef,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import {
   ControlValueAccessor,
   FormControl,
@@ -14,10 +7,8 @@ import {
 } from '@angular/forms';
 import { FromAccount } from 'src/app/core/domain/transfer.models';
 import { AccountsService } from 'src/app/core/services/accounts/accounts.service';
-import { SelectAccountModalService } from 'src/app/core/services/select-account-modal/select-account-modal.service';
+import { TransferFromService } from 'src/app/core/services/modal-services/transfer-from.service';
 import { SharedDataService } from 'src/app/core/services/shared-data/shared-data.service';
-import { SelectAccountConstants } from 'src/app/data/repository/select-account-mock-repository/select-account.constants';
-import { BaseTransactComponent } from 'src/app/presentation/modules/post-login/transact/base-transact.component';
 
 @Component({
   selector: 'app-transfer-from',
@@ -58,9 +49,9 @@ export class TransferFromComponent implements ControlValueAccessor, OnInit {
     return this.parentForm?.get(this.fieldName) as FormControl;
   }
   constructor(
-    private readonly selectAccountService: SelectAccountModalService,
     private readonly sharedDataService: SharedDataService,
-    private readonly accountsService: AccountsService
+    private readonly accountsService: AccountsService,
+    private readonly transferFromAccountService: TransferFromService,
   ) { }
 
   ngOnInit(): void {
@@ -75,7 +66,7 @@ export class TransferFromComponent implements ControlValueAccessor, OnInit {
     this.sharedDataService.userAccounts.subscribe((res) => {
       this.sourceAccounts = res;
     });
-    this.selectAccountService.selected.subscribe((x) => {
+    this.transferFromAccountService.selectedTransferFromAccount.subscribe((x) => {
       this.parentForm.controls[this.fieldName].setValue(x);
     });
   }
@@ -106,10 +97,11 @@ export class TransferFromComponent implements ControlValueAccessor, OnInit {
     console.log('this.sourceAccounts', this.sourceAccounts)
     const accounts = this.sourceAccounts.filter((el) => {
       return (
-        el.accountNumber !== this.parentForm.controls[this.fieldName].value.accountNumber
+        el.accountNumber !==
+        this.parentForm.controls?.sendTo.value.accountNumber
       );
     });
-    this.selectAccountService.open(accounts);
+    this.transferFromAccountService.openTransferFromModal(accounts);
   }
 
   // Subscribe to Account Selection Event
