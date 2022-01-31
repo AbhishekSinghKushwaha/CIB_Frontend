@@ -1,14 +1,24 @@
-<div class="p-2">
+<div class="own-equity-modal-screen p-0">
   <button mat-icon-button matSuffix class="close-button" (click)="close()">
     <mat-icon>close</mat-icon>
   </button>
-  <p class="text-center fw-bold pt-2">Number of Cheque book</p>
-
-  <div class="row align-items-stretch align-items-center mb-2 pb-2">
-    <div class="col-md-8">01</div>
-    <div class="col-md-1 mt-4">
-      <mat-icon color="primary" svgIcon="square-check-off"></mat-icon>
+  <p class="text-center fw-bold pt-2">Number of cheque book?</p>
+  <div class="row gx-0 p-3">
+    <div
+      *ngFor="let item of data; let isLast = last; let i = index"
+      class="row cursor-pointer"
+      (click)="select(item)"
+    >
+      <div class="col-md-10">
+        {{ item }}
+      </div>
+      <div class="col-md-2">
+        <mat-icon
+          color="primary"
+          [svgIcon]="selected === item ? 'check_round' : 'radio_button_off'"
+        ></mat-icon>
+      </div>
+      <mat-divider *ngIf="!isLast" class="m-3"></mat-divider>
     </div>
-    <mat-divider class="mt-2 mb-2"></mat-divider>
   </div>
 </div>

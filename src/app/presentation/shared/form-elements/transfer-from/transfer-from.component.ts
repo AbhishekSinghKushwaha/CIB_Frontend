@@ -94,11 +94,12 @@ export class TransferFromComponent implements ControlValueAccessor, OnInit {
 
   openTransferFromModal() {
     // Remove accounts that have been selected under sendTo
-    console.log('this.sourceAccounts', this.sourceAccounts)
+    console.log('this.sourceAccounts', this.sourceAccounts);
+    console.log(this.parentForm.controls)
     const accounts = this.sourceAccounts.filter((el) => {
       return (
         el.accountNumber !==
-        this.parentForm.controls?.sendTo.value.accountNumber
+        this.parentForm.controls?.accountNumber?.value
       );
     });
     this.transferFromAccountService.openTransferFromModal(accounts);

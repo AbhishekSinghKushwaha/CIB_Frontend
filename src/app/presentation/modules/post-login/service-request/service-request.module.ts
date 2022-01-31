@@ -7,6 +7,7 @@ import { SharedComponentsModule } from 'src/app/presentation/shared/components/s
 import { ChequebookRequestComponent } from './chequebook-request/chequebook-request.component';
 import { FormElementsModule } from 'src/app/presentation/shared/form-elements/form-elements.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModalsModule } from 'src/app/presentation/shared/modals/shared-modals.module';
 
 
 @NgModule({

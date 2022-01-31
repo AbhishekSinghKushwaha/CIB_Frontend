@@ -34,6 +34,28 @@
               >
               </app-transfer-from>
             </div>
+            <div class="col-md-6">
+              <app-select-number
+                [parentForm]="chequebookRequestForm"
+                [total]="4"
+                label="Number of chequebook"
+                placeholder="Enter number"
+                formControlName="chequeBookQuantity"
+                fieldName="chequeBookQuantity"
+                r
+              ></app-select-number>
+            </div>
+            <div class="col-md-6">
+              <app-select-number
+                [parentForm]="chequebookRequestForm"
+                [total]="4"
+                label="Number of leaves"
+                placeholder="Enter number"
+                formControlName="chequeBookLeaves"
+                fieldName="chequeBookLeaves"
+                r
+              ></app-select-number>
+            </div>
           </div>
           <div class="mt-4">
             <button

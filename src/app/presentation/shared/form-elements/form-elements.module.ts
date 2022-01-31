@@ -13,6 +13,9 @@ import { PhoneNumberInputComponent } from './phone-number-input/phone-number-inp
 import { SwiftChargesComponent } from './swift-charges/swift-charges.component';
 import { PaymentCategoryComponent } from './payment-category/payment-category.component';
 import { TransferFromComponent } from './transfer-from/transfer-from.component';
+import { TransferFromModalModule } from '../modals/transfer-from-modal/transfer-from-modal.module';
+import { SelectNumberComponent } from './select-number/select-number.component';
+import { NumberSelectModalModule } from '../modals/number-select-modal/number-select-modal.module';
 
 @NgModule({
   declarations: [
@@ -27,8 +30,9 @@ import { TransferFromComponent } from './transfer-from/transfer-from.component';
     PhoneNumberInputComponent,
     SwiftChargesComponent,
     PaymentCategoryComponent,
+    SelectNumberComponent,
   ],
-  imports: [CommonModule, MatStyleModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, MatStyleModule, FormsModule, ReactiveFormsModule, TransferFromModalModule, NumberSelectModalModule],
   exports: [
     FormsModule,
     ReactiveFormsModule,
@@ -43,6 +47,7 @@ import { TransferFromComponent } from './transfer-from/transfer-from.component';
     PhoneNumberInputComponent,
     SwiftChargesComponent,
     PaymentCategoryComponent,
+    SelectNumberComponent
   ],
 })
 export class FormElementsModule { }
