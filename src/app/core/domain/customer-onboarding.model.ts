@@ -15,6 +15,7 @@ export interface companyDetails {
 }
 
 export interface Director {
+  referenceId?: string;
   emailAddress?: string;
   phoneNumber?: string;
   name?: string;
@@ -40,4 +41,6 @@ export interface TeamMember {
   idNumber?: string;
   officePhoneNumber?: string;
   roles: Role[];
+  transactionLimit?: string;
+  corporateUserId?: string;
 }

@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CustomerOnboardingService } from 'src/app/core/services/customer-onboarding/customer-onboarding.service';
+import { DirectorsService } from 'src/app/core/services/customer-onboarding/directors.service';
 
 @Component({
   selector: 'app-add-company-director',
@@ -20,7 +21,7 @@ export class AddCompanyDirectorComponent implements OnInit {
 
   constructor(
     private readonly route: ActivatedRoute,
-    private onboardingService: CustomerOnboardingService,
+    private directorsService: DirectorsService,
     private fb: FormBuilder,
     private router: Router
   ) {}
@@ -55,8 +56,8 @@ export class AddCompanyDirectorComponent implements OnInit {
   }
 
   submit() {
-    const corporateId = '';
-    this.onboardingService
+    const corporateId = '6ad4291b1fa24d1e878f110d988f46db';
+    this.directorsService
       .addDirector(this.addDirectorForm.getRawValue(), corporateId)
       .subscribe((res) => {
         if (res.isSuccessful) {

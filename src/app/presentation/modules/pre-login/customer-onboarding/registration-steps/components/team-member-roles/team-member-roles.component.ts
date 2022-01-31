@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import {
+  Permission,
+  Role,
+  TeamMember,
+} from 'src/app/core/domain/customer-onboarding.model';
+import { TeamMembersService } from 'src/app/core/services/customer-onboarding/team-members.service';
+import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { RolesConstants } from 'src/app/core/utils/constants/roles.constants';
 
 @Component({
@@ -8,41 +15,100 @@ import { RolesConstants } from 'src/app/core/utils/constants/roles.constants';
   styleUrls: ['./team-member-roles.component.scss'],
 })
 export class TeamMemberRolesComponent implements OnInit {
-  activeRoles: string[];
+  activeRoles: any[];
   redirectTo: string;
+  roles: Role[];
 
   constructor(
-    public readonly roleList: RolesConstants,
     private readonly router: Router,
-    private readonly activeRoute: ActivatedRoute
+    private readonly teamMembersService: TeamMembersService,
+    private storageService: StorageService
   ) {
     this.activeRoles = [];
   }
 
   ngOnInit(): void {
-    this.redirectTo = this.activeRoute.snapshot.data.redirectTo;
+    this.roles = this.storageService.getData('onboarding-roles');
+
+    this.activeRoles = this.storageService.getData('selected-roles');
   }
 
-  toggle(roleId: string): void {
-    if (this.isRoleActive(roleId)) {
-      this.activeRoles.splice(
-        this.activeRoles.findIndex((index) => roleId == index),
-        1
+  toggle(roleId: any, permissionId: any): void {
+    const selectedRole = this.activeRoles.find((role) => {
+      return role.id === roleId;
+    });
+
+    const role = this.roles.find((role) => {
+      return role.id === roleId;
+    });
+
+    const permission = role?.permissions.find((permission: Permission) => {
+      return permission.id === permissionId;
+    });
+
+    if (selectedRole) {
+      const selectedPermission = selectedRole?.permissions.find(
+        (permission: Permission) => {
+          return permission.id === permissionId;
+        }
       );
+
+      const selectedRoleIndex = this.activeRoles.findIndex((role) => {
+        return role.id === roleId;
+      });
+
+      if (selectedPermission) {
+        const selectedPermissionIndex = selectedRole.permissions.findIndex(
+          (permission: Permission) => permission.id === permissionId
+        );
+
+        selectedRole.permissions.splice(selectedPermissionIndex, 1);
+
+        if (selectedRole.permissions.length === 0) {
+          this.activeRoles.splice(selectedRoleIndex, 1);
+        } else {
+          this.activeRoles[selectedRoleIndex] = selectedRole;
+        }
+      } else {
+        selectedRole.permissions.push(permission);
+
+        this.activeRoles[selectedRoleIndex] = selectedRole;
+      }
     } else {
-      this.activeRoles.push(roleId);
+      this.activeRoles.push({
+        ...role,
+        ...{ permissions: [permission] },
+      });
     }
+
+    console.log(this.activeRoles);
   }
 
-  isRoleActive(roleId: string): boolean {
-    return this.activeRoles.indexOf(roleId) > -1;
+  isRoleActive(roleId: any, permissionId: any): boolean {
+    const selectedRole = this.activeRoles.find((role) => {
+      return role.id === roleId;
+    });
+
+    let isActive: boolean = false;
+    if (selectedRole) {
+      const selectedPermission = selectedRole.permissions.find(
+        (permission: any) => {
+          return permission.id === permissionId;
+        }
+      );
+
+      if (selectedPermission) {
+        isActive = true;
+      }
+    }
+
+    return isActive;
   }
 
-  save(): void {
-    this.goBack();
-  }
-
-  goBack(): void {
-    this.router.navigate([this.redirectTo]);
+  saveRoles(): void {
+    this.storageService.setData('selected-roles', this.activeRoles);
+    this.router.navigate([
+      '/auth/customer-onboarding/register/add-team-member',
+    ]);
   }
 }

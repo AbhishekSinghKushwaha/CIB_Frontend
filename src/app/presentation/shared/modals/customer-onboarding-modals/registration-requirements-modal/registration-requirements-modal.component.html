@@ -9,31 +9,32 @@
   >
     <img src="./assets/images/Illustrations/Frame.svg" height="100px" />
   </div>
-  <mat-card-content class="p-4" style="font-size: 10px">
+  <mat-card-content class="p-4">
     <h3 class="card-title fw-bold">Online registration</h3>
-    <p class="text-muted text-grey">
+    <small class="text-muted text-grey">
       Registering for corporate internet banking will make it easier for you to
       perform and approve transactions for your business. Once you have
       registered for corporate internet banking, we will contact you to verify
       your application and complete the registration process.
-    </p>
+    </small>
 
     <h3 class="card-title fw-bold">The following documents are required:</h3>
-    <p class="text-muted text-grey">1 Document X</p>
-    <p class="text-muted text-grey">2 Document Y</p>
-    <p class="text-muted text-grey">3 Document Z</p>
+    <p class="text-muted text-grey" *ngFor="let doc of data">
+      {{ doc?.documentName }}
+    </p>
 
     <h3 class="card-title fw-bold">Continuing the registration process</h3>
-    <p class="text-muted text-grey">
+    <small class="text-muted text-grey">
       If you started the registration process and didn’t complete it, you can
       continue from where you left off by clicking on register, and entering
       your account and company registration number.
-    </p>
+    </small>
+    <br />
     <button
       mat-flat-button
       color="primary"
       type="submit"
-      class="col-2"
+      class="col-2 mt-3"
       (click)="close()"
     >
       Close

@@ -23,13 +23,14 @@ export class CustomerOnboardingModalsService {
 
   constructor(private readonly dialog: MatDialog) {}
 
-  openRegistrationRequirementModal() {
+  openRegistrationRequirementModal(requiredDocs: any) {
     this.registrationModalRef = this.dialog.open<
       RegistrationRequirementsModalComponent,
       any
     >(RegistrationRequirementsModalComponent, {
       maxWidth: '900px',
       disableClose: true,
+      data: requiredDocs,
     });
     return this.registrationModalRef;
   }

@@ -87,6 +87,6 @@ export class CountrySelectInputComponent implements OnInit {
   }
 
   openCountrySelectionModal() {
-    this.countryService.openCountry(mockData.countries, '');
+    this.countryService.openCountry(this.countries, '');
   }
 }

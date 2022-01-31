@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Director } from 'src/app/core/domain/customer-onboarding.model';
 
 @Component({
   selector: 'app-director-confirmation-modal',
@@ -10,7 +11,8 @@ import { Router } from '@angular/router';
 export class DirectorConfirmationModalComponent implements OnInit {
   constructor(
     private readonly router: Router,
-    private readonly dialogRef: MatDialogRef<DirectorConfirmationModalComponent>
+    private readonly dialogRef: MatDialogRef<DirectorConfirmationModalComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Director[]
   ) {}
 
   ngOnInit(): void {}
@@ -21,8 +23,6 @@ export class DirectorConfirmationModalComponent implements OnInit {
 
   submitReview() {
     this.close();
-    setTimeout(() => {
-      this.router.navigate(['/auth/customer-onboarding/register/team-members']);
-    }, 0);
+    this.router.navigate(['/auth/customer-onboarding/register/team-members']);
   }
 }

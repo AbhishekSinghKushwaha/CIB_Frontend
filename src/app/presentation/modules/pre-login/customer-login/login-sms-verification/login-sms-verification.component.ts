@@ -10,7 +10,7 @@ import LOGIN_CONSTANTS from 'src/app/core/utils/constants/pre-login.constants';
 @Component({
   selector: 'app-login-sms-verification',
   templateUrl: './login-sms-verification.component.html',
-  styleUrls: ['./login-sms-verification.component.scss']
+  styleUrls: ['./login-sms-verification.component.scss'],
 })
 export class LoginSmsVerificationComponent implements OnInit {
   @ViewChildren('inputs') inputs: QueryList<any>;
@@ -22,11 +22,13 @@ export class LoginSmsVerificationComponent implements OnInit {
   user: UserModel;
   otpError: boolean;
 
-  constructor(private readonly fb: FormBuilder,
+  constructor(
+    private readonly fb: FormBuilder,
     private readonly loginSmsVerificationService: LoginSmsVerificationService,
     private readonly router: Router,
     private readonly storageService: StorageService,
-    private readonly loginService: LoginService) {
+    private readonly loginService: LoginService
+  ) {
     this.initOtpForm();
   }
 
@@ -36,17 +38,16 @@ export class LoginSmsVerificationComponent implements OnInit {
   }
 
   private async checkLoginStatus(): Promise<void> {
-    this.loginService.getUserData().then(
-      (data: UserModel) => {
+    this.loginService
+      .getUserData()
+      .then((data: UserModel) => {
         if (!data) {
           this.router.navigate(['/auth/login']);
         }
         this.user = data;
-      }
-    ).catch(e => console.log(e))
-
+      })
+      .catch((e) => console.log(e));
   }
-
 
   get f(): any {
     return this.verifyOtpForm.controls;
@@ -92,17 +93,18 @@ export class LoginSmsVerificationComponent implements OnInit {
     this.otpError = false;
     if (otp) {
       this.loginSmsVerificationService.submitOTP(otp, this.user).subscribe(
-        response => {
-          this.storageService.setData('loginState', { stage: LOGIN_CONSTANTS.LOGIN_STAGES.SECURITY_VERIFICATION });
+        (response) => {
+          this.storageService.setData('loginState', {
+            stage: LOGIN_CONSTANTS.LOGIN_STAGES.SECURITY_VERIFICATION,
+          });
           this.storageService.setData('otpToken', { otp });
-          this.router.navigate(['/auth/security-verification']);
+          this.router.navigate(['/auth/login/security-verification']);
         },
-        error => {
+        (error) => {
           this.otpError = true;
           console.log({ error });
         }
-      )
+      );
     }
   }
-
 }

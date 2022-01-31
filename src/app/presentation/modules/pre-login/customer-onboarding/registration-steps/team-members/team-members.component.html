@@ -71,26 +71,28 @@
             </mat-card>
           </div>
         </div>
-        <div class="mt-5">
+        <div class="mt-5" *ngIf="members.length > 0">
           <h3 class="title">List of team members</h3>
 
           <div class="row">
             <div
-              *ngFor="let item of members; let i = index"
+              *ngFor="let member of members; let i = index"
               class="col-md-6 align-items-stretch align-items-center mb-2 pb-2"
             >
               <div class="col-md-2">
-                <img
-                  class="rounded-circle img-fluid"
-                  src="assets/images/icons/visual-support-icons-BM-image-placeholder.svg"
-                  alt="Generic placeholder image"
-                />
+                <div class="circle">
+                  <div class="initials">
+                    {{ generateInitials(member?.name || "") }}
+                  </div>
+                </div>
               </div>
               <div class="col-md-8">
                 <div class="row">
                   <div class="col-md-10">
-                    <h4>Name and last name</h4>
-                    <small class="mb-1 text-grey">email address</small>
+                    <h4>{{ member?.name }}</h4>
+                    <small class="mb-1 text-grey">{{
+                      member?.emailAddress
+                    }}</small>
                   </div>
                   <div class="col-md-2">
                     <mat-icon
@@ -111,7 +113,10 @@
                         <mat-icon svgIcon="edit"></mat-icon>
                         <span>Edit</span>
                       </button>
-                      <button mat-menu-item (click)="delete()">
+                      <button
+                        mat-menu-item
+                        (click)="delete(member?.corporateUserId || '')"
+                      >
                         <mat-icon svgIcon="delete-documents"></mat-icon>
                         <span>Delete</span>
                       </button>

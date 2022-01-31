@@ -9,36 +9,38 @@ import LOGIN_CONSTANTS from 'src/app/core/utils/constants/pre-login.constants';
 @Component({
   selector: 'app-security-challenge',
   templateUrl: './security-challenge.component.html',
-  styleUrls: ['./security-challenge.component.scss']
+  styleUrls: ['./security-challenge.component.scss'],
 })
 export class SecurityChallengeComponent implements OnInit {
   securityChallengeForm: FormGroup = new FormGroup({});
   securityQuestions: string[] = [
     'What village were you born in?',
     'What was the last city you visited?',
-    'At what age did you start working'
+    'At what age did you start working',
   ];
   submitted = false;
   user: UserModel;
 
-  constructor(private readonly fb: FormBuilder,
+  constructor(
+    private readonly fb: FormBuilder,
     private readonly storageService: StorageService,
     private readonly router: Router,
-    private readonly securityChallengeService: SecurityChallengeService) {
+    private readonly securityChallengeService: SecurityChallengeService
+  ) {
     this.initOtpForm();
   }
 
   async ngOnInit(): Promise<void> {
     this.user = await this.storageService.getData('loginCred');
     this.securityChallengeService.getSecurityQuestions(this.user).subscribe(
-      response => {
+      (response) => {
         this.securityQuestions = response;
       },
-      error => {
+      (error) => {
         console.log({ error });
       }
-    )
-    this.initForm()
+    );
+    this.initForm();
   }
 
   get f(): any {
@@ -64,29 +66,32 @@ export class SecurityChallengeComponent implements OnInit {
   }
 
   back() {
-    this.storageService.setData('loginState', { stage: LOGIN_CONSTANTS.LOGIN_STAGES.SECURITY_VERIFICATION });
-    this.router.navigate(['/auth/security-verification']);
+    this.storageService.setData('loginState', {
+      stage: LOGIN_CONSTANTS.LOGIN_STAGES.SECURITY_VERIFICATION,
+    });
+    this.router.navigate(['/auth/login/security-verification']);
   }
-
 
   submit(): void {
     const answers = this.securityChallengeFormArray.getRawValue();
     if (answers?.length === this.securityQuestions.length) {
-      this.securityChallengeService.submitSecurityAnswers(answers, this.user).subscribe(
-        response => {
-          console.log(response);
-          if (response) {
-            this.storageService.setData('loginState', { stage: LOGIN_CONSTANTS.LOGIN_STAGES.LOGIN_SUCCESS });
-            this.router.navigate(['/dashboard']);
-          } else {
-
+      this.securityChallengeService
+        .submitSecurityAnswers(answers, this.user)
+        .subscribe(
+          (response) => {
+            console.log(response);
+            if (response) {
+              this.storageService.setData('loginState', {
+                stage: LOGIN_CONSTANTS.LOGIN_STAGES.LOGIN_SUCCESS,
+              });
+              this.router.navigate(['/dashboard']);
+            } else {
+            }
+          },
+          (error) => {
+            console.log({ error });
           }
-        },
-        error => {
-          console.log({ error });
-        }
-      )
+        );
     }
   }
-
 }

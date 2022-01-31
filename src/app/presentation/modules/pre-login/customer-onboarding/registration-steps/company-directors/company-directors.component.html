@@ -79,21 +79,23 @@
           <h3 class="title">List of Directors</h3>
           <div class="row">
             <div
-              *ngFor="let item of directors; let i = index"
+              *ngFor="let director of directors; let i = index"
               class="col-md-6 align-items-stretch align-items-center mb-2 pb-2"
             >
               <div class="col-md-2">
-                <img
-                  class="rounded-circle img-fluid"
-                  src="assets/images/icons/visual-support-icons-BM-image-placeholder.svg"
-                  alt="Generic placeholder image"
-                />
+                <div class="circle">
+                  <div class="initials">
+                    {{ generateInitials(director?.name || "") }}
+                  </div>
+                </div>
               </div>
               <div class="col-md-8">
                 <div class="row">
                   <div class="col-md-10">
-                    <h4>Name and last name</h4>
-                    <small class="mb-1 text-grey">email address</small>
+                    <h4>{{ director?.name }}</h4>
+                    <small class="mb-1 text-grey">{{
+                      director?.emailAddress
+                    }}</small>
                   </div>
                   <div class="col-md-2">
                     <mat-icon
@@ -106,13 +108,18 @@
                       <button
                         mat-menu-item
                         [routerLink]="
-                          '/customer-onboarding/company-directors/edit/' + i + 1
+                          '/auth/customer-onboarding/register/edit-company-director/' +
+                          i +
+                          1
                         "
                       >
                         <mat-icon svgIcon="edit"></mat-icon>
                         <span>Edit</span>
                       </button>
-                      <button mat-menu-item (click)="delete()">
+                      <button
+                        mat-menu-item
+                        (click)="delete(director?.referenceId || '')"
+                      >
                         <mat-icon svgIcon="delete-documents"></mat-icon>
                         <span>Delete</span>
                       </button>

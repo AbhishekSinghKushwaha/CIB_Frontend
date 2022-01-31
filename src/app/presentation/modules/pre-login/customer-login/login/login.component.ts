@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
         });
         this.storageService.setData('accessToken', { access_token });
         this.storageService.setData('loginCred', mainUser);
-        this.router.navigate(['/auth/sms-verification']);
+        this.router.navigate(['/auth/login/sms-verification']);
       },
       (error) => {
         this.modalTakeAnotherLook();

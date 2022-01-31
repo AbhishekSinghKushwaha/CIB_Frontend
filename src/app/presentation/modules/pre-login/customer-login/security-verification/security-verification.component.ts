@@ -43,7 +43,7 @@ export class SecurityVerificationComponent implements OnInit {
     this.storageService.setData('loginState', {
       stage: LOGIN_CONSTANTS.LOGIN_STAGES.SMS_VERIFICATION,
     });
-    this.router.navigate(['/auth/sms-verification']);
+    this.router.navigate(['/auth/login/sms-verification']);
   }
 
   isChecked(product: UserVerifyProduct): boolean {
@@ -56,7 +56,7 @@ export class SecurityVerificationComponent implements OnInit {
       this.storageService.setData('loginState', {
         stage: LOGIN_CONSTANTS.LOGIN_STAGES.SECURITY_CHALLENGE,
       });
-      this.router.navigate(['/auth/security-challenge']);
+      this.router.navigate(['/auth/login/security-challenge']);
     }
   }
 }

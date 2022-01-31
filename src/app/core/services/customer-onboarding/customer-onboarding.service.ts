@@ -45,14 +45,4 @@ export class CustomerOnboardingService {
       payload
     );
   }
-
-  // Add Director details
-  addDirector(payload: Director, corporateId: string): Observable<any> {
-    return this.http.post(
-      environment.apiUrl +
-        urlList.customerOnboarding.addDirectorDetails +
-        corporateId,
-      payload
-    );
-  }
 }

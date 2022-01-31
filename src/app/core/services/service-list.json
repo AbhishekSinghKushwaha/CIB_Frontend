@@ -4,7 +4,13 @@
     "getRequiredDocuments": "/cibonboarding-v1/api/Registration/get-required-documents",
     "getCorporateRegistrationStage": "/cibonboarding-v1/api/Registration/get-corporate-registration-stage/",
     "addCorporateDetails": "/cibonboarding-v1/api/Registration/add-corporate-detail/",
-    "addDirectorDetails": "/cibonboarding-v1/api/Registration/add-director-detail/"
+    "addDirectorDetails": "/cibonboarding-v1/api/Registration/add-director-detail/",
+    "getCompanyDirectors": "/cibonboarding-v1/api/Registration/get-corporate-directors/",
+    "deleteCompanyDirector": "/cibonboarding-v1/api/Registration/remove-director/",
+    "getRoles": "/cibonboarding-v1/api/Registration/get-roles/",
+    "addCorporateUser": "/cibonboarding-v1/api/Registration/add-corporate-user/",
+    "removeCorporateUser": "/cibonboarding-v1/api/Registration/remove-corporate-user/",
+    "getCorporateUsers": "/cibonboarding-v1/api/Registration/get-corporate-users/"
   },
   "accounts": {
     "getUserAccounts": "/cibaccountservice-v1/api/v1/Accounts/GetUserMappedAccounts"
@@ -20,7 +26,7 @@
     "getAccountDetails": "/cibpaymentservice-v1/api/v1/Transfer/NameEnquiry"
   },
   "dataLookUp": {
-    "getCountries": "/cibpaymentservice-v1/api/v1/Transfer/GetCountries",
+    "getCountries": "/cibonboarding-v1/api/Registration/get-countries",
     "getBanks": "/cibpaymentservice-v1/api/v1/Transfer/GetBanks/",
     "getCurrencies": "/cibpaymentservice-v1/api/v1/Transfer/GetCurrencies",
     "getSubsidiaries": "/cibpaymentservice-v1/api/v1/Transfer/GetSubsidiaries"

@@ -15,13 +15,14 @@
             </div>
           </button>
         </div>
-        <div class="row mt-3">
+        <div class="row mt-3" *ngFor="let role of roles; let i = index">
           <div class="d-flex justify-content-between">
-            <h3>Initiator</h3>
+            <h3>{{ role?.description }}</h3>
           </div>
           <div
             class="row product-list-item col-md-6 mt-3"
-            (click)="toggle(roleList.ROLES.INITIATOR.TRANSACTIONS)"
+            *ngFor="let permission of role?.permissions; let j = index"
+            (click)="toggle(role?.id, permission?.id)"
           >
             <div class="col-1 my-auto">
               <div class="icon-container">
@@ -31,268 +32,13 @@
             <div class="col-10 offset-1 product-list-item-label">
               <div class="row h-100 justify-content-around align-items-center">
                 <div class="col-10 float-left text-truncate">
-                  <h4>Payments</h4>
-                  <p class="text-grey text-sm">0810174008113 • Savings</p>
+                  <h4>{{ permission?.description }}</h4>
+                  <!-- <p class="text-grey text-sm">0810174008113 • Savings</p> -->
                 </div>
                 <div class="col-2 float-right toggle-container">
                   <mat-icon
                     [svgIcon]="
-                      isRoleActive(roleList.ROLES.INITIATOR.TRANSACTIONS)
-                        ? 'toggle_button_on'
-                        : 'toggle_button_off'
-                    "
-                  ></mat-icon>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="row product-list-item col-md-6 mt-3"
-            (click)="toggle(roleList.ROLES.INITIATOR.UPLOAD_PAYMENT_FILE)"
-          >
-            <div class="col-1 my-auto">
-              <div class="icon-container">
-                <mat-icon [svgIcon]="'withdraw'" color="primary"></mat-icon>
-              </div>
-            </div>
-            <div class="col-10 offset-1 product-list-item-label">
-              <div class="row h-100 justify-content-around align-items-center">
-                <div class="col-10 float-left text-truncate">
-                  <h4>Transfers</h4>
-                  <p class="text-grey text-sm">0810174008113 • Savings</p>
-                </div>
-                <div class="col-2 float-right toggle-container">
-                  <mat-icon
-                    [svgIcon]="
-                      isRoleActive(roleList.ROLES.INITIATOR.UPLOAD_PAYMENT_FILE)
-                        ? 'toggle_button_on'
-                        : 'toggle_button_off'
-                    "
-                  ></mat-icon>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row mt-5">
-          <div class="d-flex justify-content-between">
-            <h3>Approvers</h3>
-          </div>
-          <div
-            class="row product-list-item col-md-6 mt-3"
-            (click)="toggle(roleList.ROLES.APPROVER.APPROVE_PAYMENTS)"
-          >
-            <div class="col-1 my-auto">
-              <div class="icon-container">
-                <mat-icon color="primary">mail</mat-icon>
-              </div>
-            </div>
-            <div class="col-10 offset-1 product-list-item-label">
-              <div class="row h-100 justify-content-around align-items-center">
-                <div class="col-10 float-left text-truncate">
-                  <h4>Approve/Reject</h4>
-                  <p class="text-grey text-sm">Notification enabled</p>
-                </div>
-                <div class="col-2 float-right toggle-container">
-                  <mat-icon
-                    [svgIcon]="
-                      isRoleActive(roleList.ROLES.APPROVER.APPROVE_PAYMENTS)
-                        ? 'toggle_button_on'
-                        : 'toggle_button_off'
-                    "
-                  ></mat-icon>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="row product-list-item col-md-6 mt-3"
-            (click)="toggle(roleList.ROLES.APPROVER.VIEW_BALANCES)"
-          >
-            <div class="col-1 my-auto">
-              <div class="icon-container">
-                <mat-icon color="primary">desktop_windows</mat-icon>
-              </div>
-            </div>
-            <div class="col-10 offset-1 product-list-item-label">
-              <div class="row h-100 justify-content-around align-items-center">
-                <div class="col-10 float-left text-truncate">
-                  <h4>Payments</h4>
-                  <p class="text-grey text-sm">For Equity online</p>
-                </div>
-                <div class="col-2 float-right toggle-container">
-                  <mat-icon
-                    [svgIcon]="
-                      isRoleActive(roleList.ROLES.APPROVER.VIEW_BALANCES)
-                        ? 'toggle_button_on'
-                        : 'toggle_button_off'
-                    "
-                  ></mat-icon>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="row product-list-item col-md-6 mt-3"
-            (click)="toggle(roleList.ROLES.APPROVER.RECEIVE_NOTIFICATIONS)"
-          >
-            <div class="col-1 my-auto">
-              <div class="icon-container">
-                <mat-icon color="primary">stay_primary_portrait</mat-icon>
-              </div>
-            </div>
-            <div class="col-10 offset-1 product-list-item-label">
-              <div class="row h-100 justify-content-around align-items-center">
-                <div class="col-10 float-left text-truncate">
-                  <h4>Push Notifications</h4>
-                  <p class="text-grey text-sm">For Equity mobile</p>
-                </div>
-                <div class="col-2 float-right toggle-container">
-                  <mat-icon
-                    [svgIcon]="
-                      isRoleActive(
-                        roleList.ROLES.APPROVER.RECEIVE_NOTIFICATIONS
-                      )
-                        ? 'toggle_button_on'
-                        : 'toggle_button_off'
-                    "
-                  ></mat-icon>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="row product-list-item col-md-6 mt-3"
-            (click)="toggle(roleList.ROLES.APPROVER.GENERATE_STATEMENTS)"
-          >
-            <div class="col-1 my-auto">
-              <div class="icon-container">
-                <mat-icon color="primary">stay_primary_portrait</mat-icon>
-              </div>
-            </div>
-            <div class="col-10 offset-1 product-list-item-label">
-              <div class="row h-100 justify-content-around align-items-center">
-                <div class="col-10 float-left text-truncate">
-                  <h4>Push Notifications</h4>
-                  <p class="text-grey text-sm">For Equity mobile</p>
-                </div>
-                <div class="col-2 float-right toggle-container">
-                  <mat-icon
-                    [svgIcon]="
-                      isRoleActive(roleList.ROLES.APPROVER.GENERATE_STATEMENTS)
-                        ? 'toggle_button_on'
-                        : 'toggle_button_off'
-                    "
-                  ></mat-icon>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row mt-5">
-          <div class="d-flex justify-content-between">
-            <h3>Super Admin</h3>
-          </div>
-          <div
-            class="row product-list-item col-md-6 mt-3"
-            (click)="toggle(roleList.ROLES.SUPER_ADMIN.CREATE_USERS)"
-          >
-            <div class="col-1 my-auto">
-              <div class="icon-container">
-                <mat-icon color="primary">mail</mat-icon>
-              </div>
-            </div>
-            <div class="col-10 offset-1 product-list-item-label">
-              <div class="row h-100 justify-content-around align-items-center">
-                <div class="col-10 float-left text-truncate">
-                  <h4>Approve/Reject</h4>
-                  <p class="text-grey text-sm">Notification enabled</p>
-                </div>
-                <div class="col-2 float-right toggle-container">
-                  <mat-icon
-                    [svgIcon]="
-                      isRoleActive(roleList.ROLES.SUPER_ADMIN.CREATE_USERS)
-                        ? 'toggle_button_on'
-                        : 'toggle_button_off'
-                    "
-                  ></mat-icon>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="row product-list-item col-md-6 mt-3"
-            (click)="toggle(roleList.ROLES.SUPER_ADMIN.MODIFY_USERS)"
-          >
-            <div class="col-1 my-auto">
-              <div class="icon-container">
-                <mat-icon color="primary">desktop_windows</mat-icon>
-              </div>
-            </div>
-            <div class="col-10 offset-1 product-list-item-label">
-              <div class="row h-100 justify-content-around align-items-center">
-                <div class="col-10 float-left text-truncate">
-                  <h4>Payments</h4>
-                  <p class="text-grey text-sm">For Equity online</p>
-                </div>
-                <div class="col-2 float-right toggle-container">
-                  <mat-icon
-                    [svgIcon]="
-                      isRoleActive(roleList.ROLES.SUPER_ADMIN.MODIFY_USERS)
-                        ? 'toggle_button_on'
-                        : 'toggle_button_off'
-                    "
-                  ></mat-icon>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="row product-list-item col-md-6 mt-3"
-            (click)="toggle(roleList.ROLES.SUPER_ADMIN.DELETE_USERS)"
-          >
-            <div class="col-1 my-auto">
-              <div class="icon-container">
-                <mat-icon color="primary">stay_primary_portrait</mat-icon>
-              </div>
-            </div>
-            <div class="col-10 offset-1 product-list-item-label">
-              <div class="row h-100 justify-content-around align-items-center">
-                <div class="col-10 float-left text-truncate">
-                  <h4>Push Notifications</h4>
-                  <p class="text-grey text-sm">For Equity mobile</p>
-                </div>
-                <div class="col-2 float-right toggle-container">
-                  <mat-icon
-                    [svgIcon]="
-                      isRoleActive(roleList.ROLES.SUPER_ADMIN.DELETE_USERS)
-                        ? 'toggle_button_on'
-                        : 'toggle_button_off'
-                    "
-                  ></mat-icon>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="row product-list-item col-md-6 mt-3"
-            (click)="toggle(roleList.ROLES.SUPER_ADMIN.BLOCK_USERS)"
-          >
-            <div class="col-1 my-auto">
-              <div class="icon-container">
-                <mat-icon color="primary">stay_primary_portrait</mat-icon>
-              </div>
-            </div>
-            <div class="col-10 offset-1 product-list-item-label">
-              <div class="row h-100 justify-content-around align-items-center">
-                <div class="col-10 float-left text-truncate">
-                  <h4>Push Notifications</h4>
-                  <p class="text-grey text-sm">For Equity mobile</p>
-                </div>
-                <div class="col-2 float-right toggle-container">
-                  <mat-icon
-                    [svgIcon]="
-                      isRoleActive(roleList.ROLES.SUPER_ADMIN.BLOCK_USERS)
+                      isRoleActive(role?.id, permission?.id)
                         ? 'toggle_button_on'
                         : 'toggle_button_off'
                     "
@@ -308,7 +54,7 @@
             mat-raised-button
             color="primary"
             class="mt-5 col-md-3"
-            [routerLink]="'/auth/customer-onboarding/register/add-team-member'"
+            (click)="saveRoles()"
           >
             Save
           </button>

@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  FormControl,
+  Validators,
+} from '@angular/forms';
+import { Router } from '@angular/router';
+import { TeamMembersService } from 'src/app/core/services/customer-onboarding/team-members.service';
+import { StorageService } from 'src/app/core/services/storage/storage.service';
 
 @Component({
   selector: 'app-add-team-member',
@@ -9,16 +17,54 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 export class AddTeamMemberComponent implements OnInit {
   teamMemberDetailsForm: FormGroup;
 
-  constructor(private readonly fb: FormBuilder) {}
+  rolesAdded: boolean = false;
+
+  constructor(
+    private readonly fb: FormBuilder,
+    private storageService: StorageService,
+    private teamMembersService: TeamMembersService,
+    private readonly router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.teamMemberDetailsForm = new FormGroup({
-      fullName: new FormControl(''),
-      email: new FormControl(''),
-      idpp: new FormControl(''),
-      mobileNumber: new FormControl(''),
-      transactionLimit: new FormControl(''),
-      officePhoneNumber: new FormControl(''),
+    this.initForm();
+
+    this.checkRoles();
+  }
+
+  initForm() {
+    this.teamMemberDetailsForm = this.fb.group({
+      name: ['', [Validators.required]],
+      phoneNumber: ['', [Validators.required]],
+      emailAddress: ['', [Validators.required, Validators.email]],
+      idNumber: ['', [Validators.required]],
+      officePhoneNumber: ['', [Validators.required]],
+      transactionLimit: ['', [Validators.required]],
+      roles: [[]],
     });
+  }
+
+  checkRoles() {
+    let roles: any[] = this.storageService.getData('selected-roles');
+    roles?.length > 0
+      ? ((this.rolesAdded = true),
+        this.teamMemberDetailsForm.controls.roles.setValue(roles))
+      : (this.rolesAdded = false);
+  }
+
+  addTeamMember() {
+    this.teamMembersService
+      .addTeamMember(
+        this.teamMemberDetailsForm.getRawValue(),
+        this.storageService.getData('corporateId')
+      )
+      .subscribe((res) => {
+        if (res.isSuccessful) {
+          this.storageService.removeData('selected-roles');
+          this.router.navigate([
+            '/auth/customer-onboarding/register/team-members',
+          ]);
+        }
+      });
   }
 }
