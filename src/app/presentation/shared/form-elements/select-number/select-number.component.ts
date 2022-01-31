@@ -40,6 +40,8 @@ export class SelectNumberComponent implements ControlValueAccessor, OnInit {
 
   public value: string;
 
+  private _value: string;
+
   public changed!: (value: string) => void;
 
   public touched!: () => void;
@@ -55,7 +57,7 @@ export class SelectNumberComponent implements ControlValueAccessor, OnInit {
 
   ngOnInit(): void {
     this.numberSelectService.selected.subscribe((x) => {
-      this.parentForm.controls[this.fieldName].setValue(x);
+      this._value = x;
     });
   }
 
@@ -82,7 +84,9 @@ export class SelectNumberComponent implements ControlValueAccessor, OnInit {
 
   openModal() {
     // Remove accounts that have been selected under sendTo
-    this.numberSelectService.open(this.total).afterClosed().subscribe(() => { });
+    this.numberSelectService.open(this.total).afterClosed().subscribe(() => {
+      this.parentForm.controls[this.fieldName].setValue(this._value);
+    });
   }
 
   // Subscribe to Account Selection Event
