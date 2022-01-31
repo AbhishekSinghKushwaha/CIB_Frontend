@@ -16,6 +16,8 @@ import { TransferFromComponent } from './transfer-from/transfer-from.component';
 import { TransferFromModalModule } from '../modals/transfer-from-modal/transfer-from-modal.module';
 import { SelectNumberComponent } from './select-number/select-number.component';
 import { NumberSelectModalModule } from '../modals/number-select-modal/number-select-modal.module';
+import { CollectionOptionModalModule } from '../modals/collection-option-modal/collection-option-modal.module';
+import { CollectionOptionComponent } from './collection-option/collection-option.component';
 
 @NgModule({
   declarations: [
@@ -31,8 +33,16 @@ import { NumberSelectModalModule } from '../modals/number-select-modal/number-se
     SwiftChargesComponent,
     PaymentCategoryComponent,
     SelectNumberComponent,
+    CollectionOptionComponent,
   ],
-  imports: [CommonModule, MatStyleModule, FormsModule, ReactiveFormsModule, TransferFromModalModule, NumberSelectModalModule],
+  imports: [
+    CommonModule,
+    MatStyleModule,
+    FormsModule,
+    ReactiveFormsModule,
+    TransferFromModalModule,
+    NumberSelectModalModule,
+    CollectionOptionModalModule],
   exports: [
     FormsModule,
     ReactiveFormsModule,
@@ -47,7 +57,8 @@ import { NumberSelectModalModule } from '../modals/number-select-modal/number-se
     PhoneNumberInputComponent,
     SwiftChargesComponent,
     PaymentCategoryComponent,
-    SelectNumberComponent
+    SelectNumberComponent,
+    CollectionOptionComponent
   ],
 })
 export class FormElementsModule { }

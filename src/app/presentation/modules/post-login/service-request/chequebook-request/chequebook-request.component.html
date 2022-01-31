@@ -42,7 +42,6 @@
                 placeholder="Enter number"
                 formControlName="chequeBookQuantity"
                 fieldName="chequeBookQuantity"
-                r
               ></app-select-number>
             </div>
             <div class="col-md-6">
@@ -53,8 +52,16 @@
                 placeholder="Enter number"
                 formControlName="chequeBookLeaves"
                 fieldName="chequeBookLeaves"
-                r
               ></app-select-number>
+            </div>
+            <div class="col-md-6">
+              <app-collection-option
+                [parentForm]="chequebookRequestForm"
+                label="Collection option"
+                placeholder="Select the branch"
+                formControlName="chequeBookLeaves"
+                fieldName="branch"
+              ></app-collection-option>
             </div>
           </div>
           <div class="mt-4">
