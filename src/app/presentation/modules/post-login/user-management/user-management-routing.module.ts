@@ -6,8 +6,8 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: (): Promise<any> =>
-      import('./user-management-success/user-management-success.module').then(
-        (m) => m.UserManagementSuccessModule
+      import('./user-list/user-list.module').then(
+        (m) => m.UserListModule
       ),
   },{
     path:'add',
