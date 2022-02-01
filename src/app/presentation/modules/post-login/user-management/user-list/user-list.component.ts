@@ -57,7 +57,14 @@ export class UserListComponent implements AfterViewInit {
     },
   ];
 
-  displayedColumns: string[] = ['id', 'name', 'phone', 'email', 'status'];
+  displayedColumns: string[] = [
+    'id',
+    'name',
+    'phone',
+    'email',
+    'status',
+    'actions',
+  ];
   dataSource: MatTableDataSource<User>;
 
   @ViewChild(MatSort) sort: MatSort;
