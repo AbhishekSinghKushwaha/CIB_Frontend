@@ -1,0 +1,118 @@
+<div class="row gx-0">
+  <div class="col-md-12">
+    <div class="row gx-0 mb-4 justify-content-md-center">
+      <div class="col-md-11">
+        <div class="mb-3">
+          <button
+            mat-icon-button
+            aria-label="Back"
+            class="back-icon"
+            [routerLink]="[
+              '/auth/customer-onboarding/register/registration-summary-confirmation'
+            ]"
+          >
+            <div class="strong-text">
+              <mat-icon svgIcon="caret_left"></mat-icon>
+              <span>Register</span>
+            </div>
+          </button>
+        </div>
+        <div class="mb-3">
+          <mat-icon
+            aria-hidden="false"
+            svgIcon="wizard_progress_primary"
+            class="mat-icon-custom"
+          ></mat-icon>
+          <mat-icon
+            aria-hidden="false"
+            svgIcon="wizard_progress_primary"
+            class="mat-icon-custom"
+          ></mat-icon>
+          <mat-icon
+            aria-hidden="false"
+            svgIcon="wizard_progress_primary"
+            class="mat-icon-custom"
+          ></mat-icon>
+          <mat-icon
+            aria-hidden="false"
+            svgIcon="wizard_progress_primary"
+            class="mat-icon-custom"
+          ></mat-icon>
+          <mat-icon
+            aria-hidden="false"
+            svgIcon="wizard_progress_primary"
+            class="mat-icon-custom"
+          ></mat-icon>
+          <mat-icon
+            aria-hidden="false"
+            svgIcon="wizard_progress_grey"
+            class="mat-icon-custom"
+          ></mat-icon>
+        </div>
+        <div class="row mt-5">
+          <div class="col-md-6">
+            <h3 class="title mb-3">
+              Download and sign the completed registration form
+            </h3>
+            <img
+              class="img-fluid mt-3"
+              src="assets/images/icons/visual-support-icons-onboarding-registration.svg"
+              alt="Generic placeholder image"
+            />
+          </div>
+
+          <div class="col-md-6">
+            <mat-card
+              class="cursor-pointer p-3 mb-3 download-contract-title-card"
+              routerLink="/customer-onboarding/team-members/add"
+            >
+              <mat-card-content>
+                <div class="row">
+                  <div class="col-md-8">
+                    <p class="mb-0">
+                      CORPORATE INTERNET BANKING APPLIATION.PDF
+                    </p>
+                  </div>
+                  <div class="col-md-1 justify-content-center">
+                    <mat-icon color="primary"
+                      ><span class="material-icons"> note_add </span></mat-icon
+                    >
+                  </div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+
+            <pdf-viewer
+              [src]="pdfSrc"
+              [rotation]="0"
+              [original-size]="false"
+              [show-all]="true"
+              [fit-to-page]="false"
+              [zoom]="1"
+              [zoom-scale]="'page-width'"
+              [stick-to-page]="false"
+              [render-text]="true"
+              [external-link-target]="'blank'"
+              [autoresize]="true"
+              [show-borders]="false"
+              style="width: 100%; height: 500px"
+            ></pdf-viewer>
+            <div class="mt-5 w-100">
+              <button
+                class="w-100"
+                type="submit"
+                mat-raised-button
+                color="primary"
+                [routerLink]="
+                  '/auth/customer-onboarding/register/upload-documents'
+                "
+              >
+                Download & Continue
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

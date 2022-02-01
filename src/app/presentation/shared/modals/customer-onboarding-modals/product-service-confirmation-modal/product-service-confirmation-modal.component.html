@@ -1,0 +1,42 @@
+<mat-card class="notification-modal-screen p-0 cursor-pointer">
+  <button mat-icon-button matSuffix class="close-button" (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <div
+    class="d-none d-sm-flex justify-content-center align-items-center img-bg p-2"
+  >
+    <h3>Products & services confirmation</h3>
+  </div>
+  <div class="d-none d-sm-flex align-items-center img-bg p-4">
+    <h2 class="fw-bold">
+      To continue, please confirm the selected products & services
+    </h2>
+  </div>
+  <mat-card-content class="p-4">
+    <div class="row" *ngFor="let product of products">
+      <div class="col-md-6">
+        <p class="text-muted fw-bold text-grey">Product</p>
+        <p class="">{{ product?.productName }}</p>
+        <p class="text-muted text-sm text-grey">{{ product?.description }}</p>
+      </div>
+      <div class="col-md-6">
+        <p class="text-muted fw-bold text-grey">Services</p>
+        <p class="" *ngFor="let service of product?.services">
+          {{ service?.serviceName }}
+        </p>
+      </div>
+      <br />
+      <hr />
+    </div>
+
+    <button
+      mat-flat-button
+      color="primary"
+      type="submit"
+      class="col-4"
+      (click)="confirm()"
+    >
+      Confirm
+    </button>
+  </mat-card-content>
+</mat-card>

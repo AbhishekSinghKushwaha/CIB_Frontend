@@ -13,6 +13,7 @@ import { SelectBankComponent } from './select-bank/select-bank.component';
 import { PhoneNumberInputComponent } from './phone-number-input/phone-number-input.component';
 import { SwiftChargesComponent } from './swift-charges/swift-charges.component';
 import { PaymentCategoryComponent } from './payment-category/payment-category.component';
+import { CountrySelectInputComponent } from './country-select-input/country-select-input.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { PaymentCategoryComponent } from './payment-category/payment-category.co
     PhoneNumberInputComponent,
     SwiftChargesComponent,
     PaymentCategoryComponent,
+    CountrySelectInputComponent,
   ],
   imports: [CommonModule, MatStyleModule, FormsModule, ReactiveFormsModule],
   exports: [
@@ -43,6 +45,8 @@ import { PaymentCategoryComponent } from './payment-category/payment-category.co
     PhoneNumberInputComponent,
     SwiftChargesComponent,
     PaymentCategoryComponent,
+    CountrySelectInputComponent,
   ],
+  providers: [],
 })
 export class FormElementsModule {}
