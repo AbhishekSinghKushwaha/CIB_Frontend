@@ -29,6 +29,23 @@ export class TeamMembersService {
     );
   }
 
+  // Get A team member details
+  getTeamMemberDetails(userId: string): Observable<any> {
+    return this.http.get(
+      environment.apiUrl + urlList.customerOnboarding.getCorporateUser + userId
+    );
+  }
+
+  // Update Director Details
+  updateTeamMemberDetails(payload: any, userId: string): Observable<any> {
+    return this.http.post(
+      environment.apiUrl +
+        urlList.customerOnboarding.updateCorporateUserDetails +
+        userId,
+      payload
+    );
+  }
+
   // Delete Corporate User
   deleteTeamMember(referenceId: string): Observable<any> {
     return this.http.post(

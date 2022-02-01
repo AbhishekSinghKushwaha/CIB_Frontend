@@ -30,11 +30,20 @@ export class TeamMemberRolesComponent implements OnInit {
   ngOnInit(): void {
     this.roles = this.storageService.getData('onboarding-roles');
 
-    this.activeRoles = this.storageService.getData('selected-roles');
+    this.setAlreadySelectedRoles();
+  }
+
+  setAlreadySelectedRoles() {
+    const roles = this.storageService.getData('selected-roles');
+    if (this.activeRoles.length === 0 && roles !== null) {
+      this.activeRoles = roles;
+    } else {
+      this.activeRoles = [];
+    }
   }
 
   toggle(roleId: any, permissionId: any): void {
-    const selectedRole = this.activeRoles.find((role) => {
+    const selectedRole = this.activeRoles?.find((role) => {
       return role.id === roleId;
     });
 
@@ -85,7 +94,7 @@ export class TeamMemberRolesComponent implements OnInit {
   }
 
   isRoleActive(roleId: any, permissionId: any): boolean {
-    const selectedRole = this.activeRoles.find((role) => {
+    const selectedRole = this.activeRoles?.find((role) => {
       return role.id === roleId;
     });
 

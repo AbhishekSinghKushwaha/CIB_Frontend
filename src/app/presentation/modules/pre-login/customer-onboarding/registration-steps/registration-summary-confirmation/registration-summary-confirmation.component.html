@@ -7,7 +7,9 @@
             mat-icon-button
             aria-label="Back"
             class="back-icon"
-            [routerLink]="['../register/company-details']"
+            [routerLink]="[
+              '/auth/customer-onboarding/register/product-services'
+            ]"
           >
             <div class="strong-text">
               <mat-icon svgIcon="caret_left"></mat-icon>
@@ -48,7 +50,7 @@
           ></mat-icon>
         </div>
         <div class="row mt-5">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <h3 class="title mb-3">Registration confirmation</h3>
             <img
               class="img-fluid mt-3"
@@ -57,38 +59,107 @@
             />
           </div>
 
-          <div class="col-md-6">
+          <div class="col-md-8" *ngIf="summary">
             <h3 class="title mb-3">
               To continue, please confirm the registration details
             </h3>
             <div class="row mb-4">
-              <p>Company details</p>
-              <p class="text-grey mb-0">XX</p>
-              <p class="text-grey mb-0">XX</p>
-              <p class="text-grey mb-0">XX</p>
-            </div>
-            <div class="row mb-4">
-              <p>Directors added</p>
-              <p class="text-grey mb-0">XX</p>
-              <p class="text-grey mb-0">XX</p>
-            </div>
-            <div class="row mb-4">
-              <p>Users added</p>
-              <p class="text-grey mb-0">XX</p>
-              <p class="text-grey mb-0">XX</p>
-            </div>
-            <div class="row mb-4">
-              <p class="text-grey fw-bold">
-                Products and sub products selected
+              <h4 class="fw-bold">COMPANY DETAILS</h4>
+              <p class="text-grey mb-0">
+                <span class="fw-bold">Company Name: </span>
+                {{ summary?.corporateName }}
               </p>
-              <p class="text-grey mb-0">Product 1</p>
-              <p class="text-grey mb-0 ps-3">Sub-product</p>
-              <p class="text-grey mb-0 ps-3">Sub-product</p>
             </div>
+            <!-- Directors -->
             <div class="row mb-4">
-              <p class="text-grey mb-0">Product 2</p>
-              <p class="text-grey mb-0 ps-3">Sub-product</p>
-              <p class="text-grey mb-0 ps-3">Sub-product</p>
+              <h4 class="fw-bold">DIRECTROS</h4>
+              <div>
+                <div class="d-flex flex-row">
+                  <div class="row flex-fill">
+                    <div
+                      class="col-md-6 col-lg-6"
+                      *ngFor="let director of summary?.directors"
+                    >
+                      <p class="text-grey mb-0">
+                        <span class="fw-bold">Name: </span> {{ director?.name }}
+                      </p>
+                      <p class="text-grey mb-0">
+                        <span class="fw-bold">Email: </span
+                        >{{ director?.emailAddress }}
+                      </p>
+                      <p class="text-grey mb-0">
+                        <span class="fw-bold">Phone/Tel: </span>
+                        {{ director?.phoneNumber }} /
+                        {{ director?.officePhoneNumber }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Users -->
+            <div class="row mb-4">
+              <h4 class="fw-bold">USERS</h4>
+              <div>
+                <div class="d-flex flex-row">
+                  <div class="row">
+                    <div
+                      class="col-md-6"
+                      *ngFor="let user of summary?.corporateUsers"
+                    >
+                      <p class="text-grey mb-0">
+                        <span class="fw-bold">Name: </span> {{ user?.name }}
+                      </p>
+                      <p class="text-grey mb-0">
+                        <span class="fw-bold">ID: </span>
+                        {{ user?.identityNumber }}
+                      </p>
+                      <p class="text-grey mb-0">
+                        <span class="fw-bold">Limit: </span
+                        >{{ user?.transactionLimit }}
+                      </p>
+                      <p class="text-grey mb-0">
+                        <span class="fw-bold">Email: </span
+                        >{{ user?.emailAddress }}
+                      </p>
+                      <p class="text-grey mb-0">
+                        <span class="fw-bold">Phone/Tel: </span>
+                        {{ user?.phoneNumber }} /
+                        {{ user?.officePhoneNumber }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Products & Services -->
+            <div class="row mb-4">
+              <h4 class="fw-bold">PRODUCTS & SERVICES</h4>
+              <div>
+                <div class="d-flex flex-row">
+                  <div class="row flex-fill">
+                    <div
+                      class="col-md-6 col-lg-6"
+                      *ngFor="let product of summary?.products"
+                    >
+                      <p class="text-grey mb-0">
+                        <span class="fw-bold">Product: </span>
+                        {{ product?.productName }}
+                      </p>
+                      <p class="text-grey mb-0">
+                        <span class="fw-bold">Services: </span>
+                      </p>
+                      <p
+                        class="mb-0 text-grey"
+                        style="margin-left: 1.5rem !important"
+                        *ngFor="let service of product?.productServices"
+                      >
+                        - {{ service?.serviceName }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div class="mt-1">

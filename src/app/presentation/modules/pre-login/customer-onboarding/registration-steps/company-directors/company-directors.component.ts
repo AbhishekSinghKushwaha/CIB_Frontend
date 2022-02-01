@@ -12,7 +12,7 @@ import { DirectorConfirmationModalComponent } from 'src/app/presentation/shared/
   styleUrls: ['./company-directors.component.scss'],
 })
 export class CompanyDirectorsComponent implements OnInit {
-  directors: Director[];
+  directors: Director[] = [];
 
   constructor(
     private readonly dialog: MatDialog,

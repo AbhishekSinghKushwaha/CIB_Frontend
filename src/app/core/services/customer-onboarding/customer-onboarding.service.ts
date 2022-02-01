@@ -45,4 +45,23 @@ export class CustomerOnboardingService {
       payload
     );
   }
+
+  // Get Registration Summary
+  getRegistrationSummary(corporateId: string): Observable<any> {
+    return this.http.get(
+      environment.apiUrl +
+        urlList.customerOnboarding.getRegistrationSummary +
+        corporateId
+    );
+  }
+
+  // Upload corporate documents
+  uploadCorporateDocuments(payload: any, corporateId: string): Observable<any> {
+    return this.http.post(
+      environment.apiUrl +
+        urlList.customerOnboarding.uploadCorporateDocuments +
+        corporateId,
+      payload
+    );
+  }
 }

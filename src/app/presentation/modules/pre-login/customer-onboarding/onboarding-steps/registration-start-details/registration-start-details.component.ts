@@ -78,7 +78,7 @@ export class RegistrationStartDetailsComponent implements OnInit {
         break;
       case RegistrationStages.CORPORATE_USER_ADDED:
         this.router.navigate([
-          '/auth/customer-onboarding/register/team-members',
+          '/auth/customer-onboarding/register/product-services',
         ]);
         break;
 

@@ -20,6 +20,8 @@ export class OnboardingStepsComponent implements OnInit {
   ngOnInit(): void {
     this.loadingListener();
     this.getRoles();
+    this.getCountries();
+    this.getProductsAndServices();
   }
 
   loadingListener(): void {
@@ -44,6 +46,14 @@ export class OnboardingStepsComponent implements OnInit {
     this.dataLookup.getCountries().subscribe((res) => {
       if (res.isSuccessful) {
         this.storageService.setData('countries', res.data);
+      }
+    });
+  }
+
+  getProductsAndServices() {
+    this.dataLookup.getProductsAndServices().subscribe((res) => {
+      if (res.isSuccessful) {
+        this.storageService.setData('products-and-services', res.data);
       }
     });
   }

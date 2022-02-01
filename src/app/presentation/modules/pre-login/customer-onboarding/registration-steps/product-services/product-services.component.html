@@ -75,11 +75,11 @@
             </mat-card>
           </div>
         </div>
-        <div class="mt-5">
+        <div class="mt-5" *ngIf="products.length > 0">
           <h3 class="title">List of products and services</h3>
           <div class="row">
             <div
-              *ngFor="let item of products; let i = index"
+              *ngFor="let product of products; let i = index"
               class="col-md-6 align-items-stretch align-items-center mb-2 mt-4 pb-2"
             >
               <div class="col-md-2">
@@ -92,8 +92,10 @@
               <div class="col-md-8">
                 <div class="row">
                   <div class="col-md-10">
-                    <h4>Payments</h4>
-                    <small class="mb-1 text-grey">Secondary label</small>
+                    <h4>{{ product?.productName }}</h4>
+                    <small class="mb-1 text-grey">{{
+                      product?.description
+                    }}</small>
                   </div>
                   <div class="col-md-2">
                     <mat-icon
@@ -105,16 +107,19 @@
                     <mat-menu #menu="matMenu">
                       <button
                         mat-menu-item
-                        [routerLink]="
-                          '/auth/customer-onboarding/register/edit-product-service/' +
-                          i +
-                          1
-                        "
+                        [routerLink]="[
+                          '/auth/customer-onboarding/register/add-product-service'
+                        ]"
+                        [queryParams]="{ id: product?.productId }"
+                        routerLinkActive="router-link-active"
                       >
                         <mat-icon svgIcon="edit"></mat-icon>
                         <span>Edit</span>
                       </button>
-                      <button mat-menu-item (click)="delete()">
+                      <button
+                        mat-menu-item
+                        (click)="delete(product?.productId)"
+                      >
                         <mat-icon svgIcon="delete-documents"></mat-icon>
                         <span>Delete</span>
                       </button>
@@ -125,19 +130,19 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="row mt-5 mb-3">
-          <div class="col-sm-5 pr-sm-0 mb-3 mb-sm-0">
-            <button
-              mat-flat-button
-              color="primary"
-              type="submit"
-              class="col-8"
-              [disabled]="false"
-              (click)="confirmTeamProductAndServices()"
-            >
-              Save & continue
-            </button>
+          <div class="row mt-5 mb-3">
+            <div class="col-sm-5 pr-sm-0 mb-3 mb-sm-0">
+              <button
+                mat-flat-button
+                color="primary"
+                type="submit"
+                class="col-8"
+                [disabled]="false"
+                (click)="confirmTeamProductAndServices()"
+              >
+                Save & continue
+              </button>
+            </div>
           </div>
         </div>
       </div>

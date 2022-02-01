@@ -7,7 +7,9 @@
             mat-icon-button
             aria-label="Back"
             class="back-icon"
-            [routerLink]="['../register/company-details']"
+            [routerLink]="[
+              '/auth/customer-onboarding/register/registration-summary-download'
+            ]"
           >
             <div class="strong-text">
               <mat-icon svgIcon="caret_left"></mat-icon>
@@ -81,14 +83,14 @@
           </div>
 
           <div class="col-md-6 mt-4">
-            <div *ngIf="fileName">
-              <div *ngFor="let data of files; let i = index">
+            <div>
+              <div *ngFor="let data of progressFiles; let i = index">
                 <div class="progress-container mb-2">
                   <div class="mx-4 py-2">
                     <div class="flex-align">
-                      <small>{{ data }}</small>
+                      <small>{{ data.documentName }}</small>
                       <mat-icon
-                        *ngIf="progress < 100"
+                        *ngIf="data.progress < 100"
                         color="primary"
                         class="icon-close cursor-pointer"
                         aria-hidden="false"
@@ -96,7 +98,7 @@
                         >close</mat-icon
                       >
                       <mat-icon
-                        *ngIf="progress === 100"
+                        *ngIf="data.progress === 100"
                         style="color: #2f9803"
                         class="icon-close cursor-pointer"
                         aria-hidden="false"
@@ -104,17 +106,17 @@
                       >
                     </div>
                     <mat-progress-bar
-                      *ngIf="progress < 100"
+                      *ngIf="data.progress < 100"
                       color="#2f9803"
-                      [value]="progress"
+                      [value]="data.progress"
                       class="mt-2"
                     ></mat-progress-bar>
-                    <mat-progress-bar
+                    <!-- <mat-progress-bar
                       *ngIf="message === 'Completed'"
                       class="green-progress mt-2"
                       mode="determinate"
-                      [value]="progress"
-                    ></mat-progress-bar>
+                      [value]="data.progress"
+                    ></mat-progress-bar> -->
                     <small class="progress-pre">{{
                       progress === 100 ? message : progress + "%"
                     }}</small>
@@ -123,34 +125,12 @@
               </div>
             </div>
 
-            <div class="progress-container mb-2">
+            <div class="progress-container mb-2" *ngFor="let data of files">
               <div class="row gx-0 m-4 py-3">
                 <div class="col-9">
-                  <p class="mb-0"><strong>Signedapplication.pdf</strong></p>
-                  <small>1.2mb</small>
-                </div>
-                <div class="col-3">
-                  <div class="d-flex flex-row mt-1">
-                    <mat-icon
-                      color="primary"
-                      class="icon-close cursor-pointer m-2"
-                      aria-hidden="false"
-                      >visibility</mat-icon
-                    >
-                    <mat-icon
-                      color="primary"
-                      class="icon-close cursor-pointer m-2"
-                      aria-hidden="false"
-                      >delete</mat-icon
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="progress-container mb-2">
-              <div class="row gx-0 m-4 py-3">
-                <div class="col-9">
-                  <p class="mb-0"><strong>Signedapplication.pdf</strong></p>
+                  <p class="mb-0">
+                    <strong>{{ data?.documentName }}</strong>
+                  </p>
                   <small>1.2mb</small>
                 </div>
                 <div class="col-3">
@@ -177,14 +157,11 @@
         <div class="py-4">
           <button
             type="submit"
-            [disabled]="progress !== 100"
+            [disabled]="this.files.length < 0"
             mat-raised-button
             color="primary"
             class="px-5"
-            [routerLink]="[
-              '/auth/customer-onboarding/register/submission-successful'
-            ]"
-            routerLinkActive="router-link-active"
+            (click)="upload()"
           >
             Upload
           </button>

@@ -6,11 +6,21 @@
     "addCorporateDetails": "/cibonboarding-v1/api/Registration/add-corporate-detail/",
     "addDirectorDetails": "/cibonboarding-v1/api/Registration/add-director-detail/",
     "getCompanyDirectors": "/cibonboarding-v1/api/Registration/get-corporate-directors/",
+    "getCorporateDirector": "/cibonboarding-v1/api/Registration/get-single-directors/",
     "deleteCompanyDirector": "/cibonboarding-v1/api/Registration/remove-director/",
     "getRoles": "/cibonboarding-v1/api/Registration/get-roles/",
     "addCorporateUser": "/cibonboarding-v1/api/Registration/add-corporate-user/",
     "removeCorporateUser": "/cibonboarding-v1/api/Registration/remove-corporate-user/",
-    "getCorporateUsers": "/cibonboarding-v1/api/Registration/get-corporate-users/"
+    "removeCorporateProduct": "/cibonboarding-v1/api/Registration/remove-corporate-products/",
+    "getCorporateUsers": "/cibonboarding-v1/api/Registration/get-corporate-users/",
+    "getCorporateUser": "/cibonboarding-v1/api/Registration/get-single-corporate-user/",
+    "getProductsAndServices": "/cibonboarding-v1/api/Registration/get-products-and-services",
+    "addCorporateProduct": "/cibonboarding-v1/api/Registration/add-corporate-products/",
+    "getCorporateProducts": "/cibonboarding-v1/api/Registration/get-corporate-products/",
+    "updateDirectorDetails": "/cibonboarding-v1/api/Registration/update-director-detail/",
+    "updateCorporateUserDetails": "/cibonboarding-v1/api/Registration/update-corporate-user/",
+    "getRegistrationSummary": "/cibonboarding-v1/api/Registration/preview-corporate-detail/",
+    "uploadCorporateDocuments": "/cibonboarding-v1/api/Registration/updload-corporate-documents/"
   },
   "accounts": {
     "getUserAccounts": "/cibaccountservice-v1/api/v1/Accounts/GetUserMappedAccounts"

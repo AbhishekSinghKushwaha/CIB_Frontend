@@ -11,12 +11,13 @@
           >
             <div class="strong-text">
               <mat-icon svgIcon="caret_left"></mat-icon>
-              <span> {{ index ? "Edit" : "Add" }} Director</span>
+              <span> {{ directorReferenceId ? "Edit" : "Add" }} Director</span>
             </div>
           </button>
         </div>
         <h3 class="title">
-          Please {{ index ? "update" : "enter" }} the director's details
+          Please {{ directorReferenceId ? "update" : "enter" }} the director's
+          details
         </h3>
         <div class="row">
           <form
@@ -50,8 +51,8 @@
                 <app-phone-number-input
                   [parentForm]="addDirectorForm"
                   label="Office Number"
-                  fieldName="officeNumber"
-                  formControlName="officeNumber"
+                  fieldName="officePhoneNumber"
+                  formControlName="officePhoneNumber"
                   placeholder="Enter their office number"
                 >
                 </app-phone-number-input>
@@ -75,7 +76,7 @@
                 color="primary"
                 [disabled]="addDirectorForm.invalid"
               >
-                {{ index ? "Update" : "Add" }}
+                {{ directorReferenceId ? "Update" : "Add" }}
               </button>
             </div>
           </form>

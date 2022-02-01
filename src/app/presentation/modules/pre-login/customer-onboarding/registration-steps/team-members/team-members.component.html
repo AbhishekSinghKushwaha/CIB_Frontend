@@ -3,7 +3,12 @@
     <div class="row gx-0 mb-4 justify-content-md-center">
       <div class="col-md-11">
         <div class="mb-3">
-          <button mat-icon-button aria-label="Back" class="back-icon">
+          <button
+            mat-icon-button
+            aria-label="Back"
+            class="back-icon"
+            routerLink="/auth/customer-onboarding/register/company-directors"
+          >
             <div class="strong-text">
               <mat-icon svgIcon="caret_left"></mat-icon>
               <span>Register</span>
@@ -104,11 +109,11 @@
                     <mat-menu #menu="matMenu">
                       <button
                         mat-menu-item
-                        [routerLink]="
-                          '/auth/customer-onboarding/register/edit-team-member/' +
-                          i +
-                          1
-                        "
+                        [routerLink]="[
+                          '/auth/customer-onboarding/register/edit-team-member'
+                        ]"
+                        [queryParams]="{ id: member?.corporateUserId }"
+                        routerLinkActive="router-link-active"
                       >
                         <mat-icon svgIcon="edit"></mat-icon>
                         <span>Edit</span>

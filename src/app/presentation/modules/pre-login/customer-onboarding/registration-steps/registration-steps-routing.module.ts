@@ -38,7 +38,7 @@ const routes: Routes = [
         component: AddCompanyDirectorComponent,
       },
       {
-        path: 'edit-company-director/:id',
+        path: 'edit-company-director',
         component: AddCompanyDirectorComponent,
       },
       {
@@ -50,7 +50,7 @@ const routes: Routes = [
         component: AddTeamMemberComponent,
       },
       {
-        path: 'edit-team-member/:id',
+        path: 'edit-team-member',
         component: AddTeamMemberComponent,
       },
       {
@@ -66,7 +66,7 @@ const routes: Routes = [
         component: AddProductServiceComponent,
       },
       {
-        path: 'edit-product-service/:id',
+        path: 'edit-product-service',
         component: AddProductServiceComponent,
       },
       {

@@ -29,6 +29,24 @@ export class DirectorsService {
     );
   }
 
+  getCompanyDirectorDetails(referenceId: string): Observable<any> {
+    return this.http.get(
+      environment.apiUrl +
+        urlList.customerOnboarding.getCorporateDirector +
+        referenceId
+    );
+  }
+
+  // Update Director Details
+  updateDirectorDetails(payload: any, referenceId: string): Observable<any> {
+    return this.http.post(
+      environment.apiUrl +
+        urlList.customerOnboarding.updateDirectorDetails +
+        referenceId,
+      payload
+    );
+  }
+
   // Delete Director
   deleteDirector(referenceId: string): Observable<any> {
     return this.http.post(

@@ -13,14 +13,11 @@ export class ProductServiceConfirmationModalComponent implements OnInit {
   constructor(
     private customerOnboardingService: CustomerOnboardingModalsService,
     private router: Router,
-    private readonly dialogRef: MatDialogRef<ProductServiceConfirmationModalComponent>
+    private readonly dialogRef: MatDialogRef<ProductServiceConfirmationModalComponent>,
+    @Inject(MAT_DIALOG_DATA) public products: any
   ) {}
 
   ngOnInit() {}
-
-  // close() {
-  //   this.customerOnboardingService.closeServiceAndProducstModal();
-  // }
 
   confirm() {
     // this.customerOnboardingService.closeServiceAndProducstModal();

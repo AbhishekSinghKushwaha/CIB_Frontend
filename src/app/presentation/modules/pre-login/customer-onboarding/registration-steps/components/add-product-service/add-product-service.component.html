@@ -7,7 +7,7 @@
             mat-icon-button
             aria-label="Back"
             class="back-icon"
-            routerLink="/"
+            routerLink="/auth/customer-onboarding/register/product-services"
           >
             <div class="strong-text">
               <mat-icon svgIcon="caret_left"></mat-icon>
@@ -52,24 +52,43 @@
         <div class="row mt-3">
           <div
             class="col-md-6 mt-5"
-            *ngFor="let item of options; let i = index"
+            *ngFor="let product of products; let i = index"
           >
             <div
-              class="row product-list-item"
-              routerLink="/auth/customer-onboarding/register/product-service-options"
+              class="product-list-item d-flex bd-highlight mb-2"
+              (click)="selectProduct(product)"
             >
-              <div class="col-md-2">
+              <div class="p-2 bd-highlight">
                 <button mat-fab class="text-primary">
                   <mat-icon>person</mat-icon>
                 </button>
               </div>
-              <div class="col-md-7 product-list-item-label">
-                <p class="mb-0">Payment</p>
-                <small class="text-grey">Secondary label</small>
+              <div class="p-2 bd-highlight">
+                <h3 class="pt-3">{{ product?.productName }}</h3>
               </div>
-              <div class="col-1 text-grey pt-4">off</div>
-              <div class="col-md-2 card card-block justify-content-center">
-                <mat-icon color="primary" svgIcon="caret_right"></mat-icon>
+              <div class="ms-auto p-2 bd-highlight">
+                <div class="d-flex bd-highlight">
+                  <div class="p-2 bd-highlight">
+                    <span
+                      *ngFor="let sp of selectedProducts; let isLast = last"
+                    >
+                      <div
+                        class="col-1 text-primary pt-2"
+                        *ngIf="product?.id === sp?.productId"
+                      >
+                        <strong>On</strong>
+                      </div>
+                    </span>
+                  </div>
+
+                  <div class="pt-3 bd-highlight">
+                    <mat-icon
+                      class=""
+                      color="primary"
+                      svgIcon="caret_right"
+                    ></mat-icon>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -82,7 +101,7 @@
               type="submit"
               class="col-8"
               [disabled]="false"
-              routerLink="/auth/customer-onboarding/register/product-services"
+              (click)="saveAndContinue()"
             >
               Save & continue
             </button>

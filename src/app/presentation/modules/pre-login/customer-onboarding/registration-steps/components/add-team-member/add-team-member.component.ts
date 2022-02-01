@@ -5,7 +5,8 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Role } from 'src/app/core/domain/customer-onboarding.model';
 import { TeamMembersService } from 'src/app/core/services/customer-onboarding/team-members.service';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 
@@ -19,17 +20,40 @@ export class AddTeamMemberComponent implements OnInit {
 
   rolesAdded: boolean = false;
 
+  memberId: any;
+
   constructor(
     private readonly fb: FormBuilder,
     private storageService: StorageService,
     private teamMembersService: TeamMembersService,
-    private readonly router: Router
-  ) {}
+    private readonly router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.memberId = this.activatedRoute.snapshot.queryParamMap.get('id');
+  }
 
   ngOnInit(): void {
     this.initForm();
 
     this.checkRoles();
+
+    this.getUser();
+  }
+
+  getUser() {
+    if (this.memberId) {
+      this.teamMembersService
+        .getTeamMemberDetails(this.memberId)
+        .subscribe((res) => {
+          if (res.isSuccessful) {
+            this.teamMemberDetailsForm.controls.idNumber.patchValue(
+              res.data.identityNumber
+            );
+            this.teamMemberDetailsForm.patchValue(res.data);
+            console.log(res);
+          }
+        });
+    }
   }
 
   initForm() {
@@ -47,9 +71,28 @@ export class AddTeamMemberComponent implements OnInit {
   checkRoles() {
     let roles: any[] = this.storageService.getData('selected-roles');
     roles?.length > 0
-      ? ((this.rolesAdded = true),
-        this.teamMemberDetailsForm.controls.roles.setValue(roles))
+      ? ((this.rolesAdded = true), this.formatRolesPayload(roles))
       : (this.rolesAdded = false);
+  }
+
+  addRoles() {
+    // this.teamMemberDetailsForm.valid ? this.storageService.setData('team-member', this.teamMemberDetailsForm.getRawValue)
+    this.router.navigate([
+      '/auth/customer-onboarding/register/team-member-roles',
+    ]);
+  }
+
+  formatRolesPayload(roles: any[]) {
+    let permissions = [];
+
+    for (let i = 0; i < roles.length; i++) {
+      let rol = roles[i].permissions;
+
+      for (let j = 0; j < rol.length; j++) {
+        permissions.push(rol[j].id);
+      }
+    }
+    this.teamMemberDetailsForm.controls.roles.setValue(permissions);
   }
 
   addTeamMember() {
@@ -57,6 +100,26 @@ export class AddTeamMemberComponent implements OnInit {
       .addTeamMember(
         this.teamMemberDetailsForm.getRawValue(),
         this.storageService.getData('corporateId')
+      )
+      .subscribe((res) => {
+        if (res.isSuccessful) {
+          this.storageService.removeData('selected-roles');
+          this.router.navigate([
+            '/auth/customer-onboarding/register/team-members',
+          ]);
+        }
+      });
+  }
+
+  submit() {
+    this.memberId ? this.updateTeamMember() : this.addTeamMember();
+  }
+
+  updateTeamMember() {
+    this.teamMembersService
+      .updateTeamMemberDetails(
+        this.teamMemberDetailsForm.getRawValue(),
+        this.memberId
       )
       .subscribe((res) => {
         if (res.isSuccessful) {
