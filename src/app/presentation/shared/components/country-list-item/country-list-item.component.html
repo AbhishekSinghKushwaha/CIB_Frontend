@@ -4,12 +4,19 @@
 >
   <div class="col-md-2">
     <img
+      *ngIf="data?.flagPath"
       class="rounded-circle img-d"
-      [src]="data.flagPath"
+      [src]="data?.flagPath"
       width="60px"
       height="60px"
       alt=""
     />
+
+    <div class="circle">
+      <div class="initials">
+        {{ generateInitials(data?.countryName || "") }}
+      </div>
+    </div>
   </div>
   <div class="col-md-9">
     <div class="row user-list-item" style="height: 60px">

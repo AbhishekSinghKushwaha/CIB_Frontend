@@ -1,4 +1,3 @@
-import { LayoutModule } from 'src/app/presentation/layout/layout.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CustomerOnboardingRoutingModule } from './customer-onboarding-routing.module';
@@ -21,11 +20,9 @@ export function playerFactory(): Promise<any> {
     ReactiveFormsModule,
     CustomerOnboardingRoutingModule,
     ConfirmDialogModule,
-    LayoutModule,
     MatStyleModule,
     LottieModule.forRoot({ player: playerFactory }),
     FormElementsModule,
-    LayoutModule,
     SharedComponentsModule,
     DeleteTeamMemberModule,
   ],

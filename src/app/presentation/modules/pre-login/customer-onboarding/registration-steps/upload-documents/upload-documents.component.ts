@@ -70,7 +70,7 @@ export class UploadDocumentsComponent implements OnInit {
   // Temporary fix to simulate the upload process
   updateUpload() {
     const uploadInterval = setInterval(() => {
-      this.progressFiles[0].progress += 50;
+      this.progressFiles[0].progress += 20;
 
       if (this.progressFiles[0].progress === 100) {
         this.progressFiles.pop();
@@ -82,6 +82,9 @@ export class UploadDocumentsComponent implements OnInit {
   }
 
   upload() {
+    // this.router.navigate([
+    //   '/auth/customer-onboarding/register/submission-successful',
+    // ]);
     this.onboardingService
       .uploadCorporateDocuments(
         { documents: this.files },
@@ -94,5 +97,9 @@ export class UploadDocumentsComponent implements OnInit {
           ]);
         }
       });
+  }
+
+  delete(i: number) {
+    this.files.splice(i, 1);
   }
 }

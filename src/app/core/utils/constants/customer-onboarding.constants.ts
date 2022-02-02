@@ -8,6 +8,8 @@ const RegistrationStages = {
   MANDATE_CREATED: 'MandateCreated',
   CORPORATE_USER_ADDED: 'CorporateUsersAdded',
   USER_TRANSACTION_LIMIT_CREATED: 'UserTransactionLimitCreated',
+  DOCUMENT_CREATED: 'DocumentCreated',
+  CORPORATE_PRODUCTS_ADDED: 'CorporateProductsAdded',
 };
 
 export default RegistrationStages;

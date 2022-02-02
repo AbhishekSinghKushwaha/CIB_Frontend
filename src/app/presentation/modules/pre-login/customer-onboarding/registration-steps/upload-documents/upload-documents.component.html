@@ -125,7 +125,10 @@
               </div>
             </div>
 
-            <div class="progress-container mb-2" *ngFor="let data of files">
+            <div
+              class="progress-container mb-2"
+              *ngFor="let data of files; let i = index"
+            >
               <div class="row gx-0 m-4 py-3">
                 <div class="col-9">
                   <p class="mb-0">
@@ -145,6 +148,7 @@
                       color="primary"
                       class="icon-close cursor-pointer m-2"
                       aria-hidden="false"
+                      (click)="delete(i)"
                       >delete</mat-icon
                     >
                   </div>

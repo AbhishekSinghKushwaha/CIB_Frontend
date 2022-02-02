@@ -30,6 +30,8 @@ export class RegistrationStartDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    this.storageService.removeData('selected-service');
+    this.storageService.removeData('corporateId');
   }
 
   // Initialize form
@@ -79,6 +81,16 @@ export class RegistrationStartDetailsComponent implements OnInit {
       case RegistrationStages.CORPORATE_USER_ADDED:
         this.router.navigate([
           '/auth/customer-onboarding/register/product-services',
+        ]);
+        break;
+      case RegistrationStages.CORPORATE_PRODUCTS_ADDED:
+        this.router.navigate([
+          '/auth/customer-onboarding/register/registration-summary-confirmation',
+        ]);
+        break;
+      case RegistrationStages.DOCUMENT_CREATED:
+        this.router.navigate([
+          '/auth/customer-onboarding/register/submission-successful',
         ]);
         break;
 
