@@ -12,6 +12,7 @@ import { SmsVerificationComponent } from './sms-verification/sms-verification.co
 import { AccountDropdownItemComponent } from './account-dropdown-item/account-dropdown-item.component';
 import { BeneficiaryListItemComponent } from './beneficiary-list-item/beneficiary-list-item.component';
 import { NotificationMenuItemComponent } from './notification-menu-item/notification-menu-item.component';
+import { WelcomeInfoComponent } from './welcome-info/welcome-info.component';
 
 const components = [
   AccountDropdownItemComponent,
@@ -24,6 +25,7 @@ const components = [
   EmailVerificationComponent,
   BeneficiaryListItemComponent,
   NotificationMenuItemComponent,
+  WelcomeInfoComponent,
 ];
 
 @NgModule({

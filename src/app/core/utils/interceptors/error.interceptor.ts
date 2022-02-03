@@ -42,6 +42,13 @@ export class ErrorIntercept
       tap((event) => {
         if (event instanceof HttpResponse) {
           this.spinnerService.setLoading(false, request.url);
+          if (request.method === 'POST' && event?.body?.isSuccessful) {
+            this.notifyError({
+              error: false,
+              errorStatus: event.statusText,
+              message: event?.body?.Message || event?.body?.message,
+            });
+          }
         }
       }),
       catchError((error: HttpErrorResponse) => {

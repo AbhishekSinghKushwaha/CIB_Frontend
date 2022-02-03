@@ -4,14 +4,13 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-sidebar-menu',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
+  styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit {
   @Output() ToggleSideMenu = new EventEmitter();
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   toggleSideMenu(): void {
     this.ToggleSideMenu.emit();
@@ -20,5 +19,4 @@ export class SidebarComponent implements OnInit {
   returnLogoUrl(): string {
     return `assets/images/logos/${environment.appInstance}/Primary.svg`;
   }
-
 }
