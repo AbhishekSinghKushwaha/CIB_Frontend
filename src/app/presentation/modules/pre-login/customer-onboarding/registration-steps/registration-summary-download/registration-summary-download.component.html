@@ -103,9 +103,7 @@
                 type="submit"
                 mat-raised-button
                 color="primary"
-                [routerLink]="
-                  '/auth/customer-onboarding/register/upload-documents'
-                "
+                (click)="download()"
               >
                 Download & Continue
               </button>
