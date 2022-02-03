@@ -40,6 +40,7 @@ const TransferType = {
   MOBILE_MONEY: '8',
   BUY_AIRTIME: '9',
   PESALINK: '10',
+  INTER_COUNTRY_TRANSFER: '11',
 };
 
 const SwiftChargesOptions = [

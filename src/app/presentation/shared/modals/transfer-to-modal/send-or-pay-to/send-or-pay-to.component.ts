@@ -95,6 +95,13 @@ export class SendOrPayToComponent implements OnInit {
       this.purposeText.navigationSubheading = `Enter account details`;
       this.purposeText.navigationIcon =
         './assets/images/icons/visual-support-icon-other-bank.svg';
+    } else if (this.transactionType === this.transferType.INTER_COUNTRY_TRANSFER) {
+      this.purposeText.heading = 'Send To';
+      this.purposeText.subheading = 'Who are you sending money to?';
+      this.purposeText.navigationHeading = 'Send to someone new';
+      this.purposeText.navigationSubheading = `Enter account details`;
+      this.purposeText.navigationIcon =
+        './assets/images/icons/Visual support_Icon_with_container.svg';
     }
   }
 }
