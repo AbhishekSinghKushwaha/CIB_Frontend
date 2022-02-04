@@ -14,7 +14,12 @@ export class GenerateOtpService {
   constructor(private http: HttpClient) { }
 
   // Generate OTP
-  generateOtp(payload: any):void{
-    console.log(payload, 'Generate OTP');
+  generateOtp(payload: any): Observable<any> {
+    return this.http.post(environment.apiUrl + urlList.otp.generateOtp, payload);
+  }
+
+  // Regenerate OTP
+  regenerateOtp(payload: any): Observable<any> {
+    return this.http.post(environment.apiUrl + urlList.otp.regenerateOtp, payload);
   }
 }

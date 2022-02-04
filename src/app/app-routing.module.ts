@@ -10,7 +10,7 @@ const routes: Routes = [
       import('./presentation/modules/post-login/post-login.module').then(
         (m) => m.PostLoginModule
       ),
-    canActivate: [PostLoginGuard],
+    // canActivate: [PostLoginGuard],
   },
   {
     path: 'auth',

@@ -21,10 +21,18 @@ export class BuyGoodsService {
   }
 
   sendToBuyGoods(payload: any): Observable<any> {
-    return this.http.post(environment.apiUrl + urlList.transfers.sendOwnEquityAccount, payload);
+    return this.http.post(environment.apiUrl + urlList.transfers.buyGoodsTransfer, payload);
   }
 
   getTransferCharges(payload: any): Observable<any> {
     return this.http.post(environment.apiUrl + urlList.transfers.getTransferCharges, payload);
+  }
+
+  getMerchants(): Observable<any> {
+    return this.http.get(environment.apiUrl + urlList.dataLookUp.getMerchants);
+  }
+
+  getFavouriteMerchants(): Observable<any> {
+    return this.http.get(environment.apiUrl + urlList.dataLookUp.getFavouriteMerchants);
   }
 }
