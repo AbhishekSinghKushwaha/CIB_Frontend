@@ -1,7 +1,6 @@
 .own-equity-modal-screen {
-  width: 400px;
-  margin: 0;
-  padding: 0;
+  width: 22vw;
+  position: relative;
 }
 
 .s-padding {
@@ -11,4 +10,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.close-button {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 1000;
 }

@@ -1,0 +1,16 @@
+.row {
+  margin: 0;
+}
+
+.bottom-panel-selections {
+  position: fixed;
+  width: calc(100vw * 0.333333);
+  bottom: 0;
+  height: 4rem;
+  overflow: hidden;
+  padding: 0.5rem;
+  @media (max-width: 991px) {
+    width: calc(100vw);
+    max-width: 100vw;
+  }
+}

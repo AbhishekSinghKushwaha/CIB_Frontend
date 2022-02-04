@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountsService } from 'src/app/core/services/accounts/accounts.service';
 import { DataLookupService } from 'src/app/core/services/data-lookup/data-lookup.service';
-import { SelectAccountModalService } from 'src/app/core/services/select-account-modal/select-account-modal.service';
 import { SharedDataService } from 'src/app/core/services/shared-data/shared-data.service';
 import { MoreConstants } from '../../../../core/utils/constants/more.constants';
 import { Router } from '@angular/router';
@@ -9,10 +8,9 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-more',
   templateUrl: './more.component.html',
-  styleUrls: ['./more.component.scss']
+  styleUrls: ['./more.component.scss'],
 })
 export class MoreComponent implements OnInit {
-
   constructor(
     public readonly moreDashboardList: MoreConstants,
     private dataLookUpService: DataLookupService,
@@ -26,7 +24,6 @@ export class MoreComponent implements OnInit {
     this.getBanks();
     this.getSubsidiaries();
   }
-
 
   interCountryFundTransfer() {
     this.router.navigate(['/more/intercountry-fund-transfer']);
@@ -55,7 +52,7 @@ export class MoreComponent implements OnInit {
   getSubsidiaries() {
     this.dataLookUpService.getSubsidiaries().subscribe((res) => {
       if (res.status) {
-        this.sharedDataService.subsidiaries.next(res.data);
+        this.sharedDataService.countries.next(res.data);
       } else {
         // TODO:: Notify error
       }

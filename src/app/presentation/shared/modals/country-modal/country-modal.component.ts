@@ -1,7 +1,7 @@
-import { CountryModel } from 'src/app/core/domain/country.model';
+import { CountryModel } from 'src/app/core/domain/bank.model';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CountryService } from 'src/app/core/services/country/country.service';
+import { CountryService } from 'src/app/core/services/modal-services/country.service';
 import { countrySettings } from 'src/app/core/utils/constants/country.settings';
 
 interface IData {
@@ -23,7 +23,7 @@ export class CountryModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: IData
   ) {
     this.selected = countryService.defaultCountry;
-    this.countryService.selected.subscribe(
+    this.countryService.selectedCountry.subscribe(
       (response) => (this.selected = response)
     );
   }

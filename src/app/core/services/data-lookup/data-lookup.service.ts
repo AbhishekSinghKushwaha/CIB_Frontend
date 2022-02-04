@@ -24,4 +24,22 @@ export class DataLookupService {
       environment.apiUrl + urlList.dataLookUp.getSubsidiaries
     );
   }
+
+  getCountries(): Observable<any> {
+    return this.http.get(environment.apiUrl + urlList.dataLookUp.getCountries);
+  }
+
+  // Get Roles for customer onboarding
+  getRoles(): Observable<any> {
+    return this.http.get(
+      environment.apiUrl + urlList.customerOnboarding.getRoles
+    );
+  }
+
+  // Get Products and services for onboarding
+  getProductsAndServices(): Observable<any> {
+    return this.http.get(
+      environment.apiUrl + urlList.customerOnboarding.getProductsAndServices
+    );
+  }
 }
