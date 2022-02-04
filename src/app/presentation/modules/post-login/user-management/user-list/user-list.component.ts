@@ -1,11 +1,16 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { take } from 'rxjs/operators';
+import { UserListSearchModalComponent } from './components/user-list-search-modal/user-list-search-modal.component';
+import { UserListService } from './services/user-list.service';
 
-type UserStatus = 'enabled' | 'disabled';
+export type UserStatus = 'enabled' | 'disabled';
 
-interface User {
+export interface User {
   id: number;
   name: string;
   phone: string;
@@ -18,44 +23,11 @@ interface User {
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss'],
 })
-export class UserListComponent implements AfterViewInit {
-  private readonly users: User[] = [
-    {
-      id: 134312,
-      name: 'Michael Scott',
-      phone: '0712345678',
-      email: 'scott@dmi.com',
-      status: 'enabled',
-    },
-    {
-      id: 133827,
-      name: 'Jim Halpert',
-      phone: '0723456789',
-      email: 'j.hal@dmi.com',
-      status: 'enabled',
-    },
-    {
-      id: 381746,
-      name: 'Dwight Schrute',
-      phone: '0734567890',
-      email: 'd.sch@dmi.com',
-      status: 'enabled',
-    },
-    {
-      id: 938273,
-      name: 'Andy Benard',
-      phone: '0745678901',
-      email: 'a.ben@dmi.com',
-      status: 'disabled',
-    },
-    {
-      id: 291847,
-      name: 'Phyllis Vance',
-      phone: '0756789012',
-      email: 'p.van@dmi.com',
-      status: 'disabled',
-    },
-  ];
+export class UserListComponent implements OnInit, AfterViewInit {
+  private users: User[];
+
+  @ViewChild(MatSort)
+  private sort: MatSort;
 
   displayedColumns: string[] = [
     'id',
@@ -67,9 +39,17 @@ export class UserListComponent implements AfterViewInit {
   ];
   dataSource: MatTableDataSource<User>;
 
-  @ViewChild(MatSort) sort: MatSort;
+  searchControl: FormControl = new FormControl({ value: '', disabled: true });
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private readonly dialog: MatDialog,
+    private readonly userListService: UserListService
+  ) {}
+
+  ngOnInit(): void {
+    this.users = this.userListService.getUserList();
     this.dataSource = new MatTableDataSource(this.users);
   }
 
@@ -77,12 +57,23 @@ export class UserListComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
   addUser() {
     this.router.navigate(['add'], { relativeTo: this.activatedRoute });
+  }
+
+  openFilterModal() {
+    this.dialog
+      .open<UserListSearchModalComponent>(UserListSearchModalComponent, {
+        data: { users: this.users },
+      })
+      .afterClosed()
+      .pipe(take(1))
+      .subscribe((filter: any) => {
+        if (filter) {
+          this.dataSource.data = filter.selectedData;
+        } else {
+          this.dataSource.data = this.users;
+        }
+      });
   }
 }

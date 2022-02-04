@@ -7,16 +7,20 @@ import { ProductsConstants } from 'src/app/core/utils/constants/products.constan
 import { UserSearchModule } from 'src/app/presentation/shared/modals/user-search/user-search.module';
 import { RolesConstants } from 'src/app/core/utils/constants/roles.constants';
 import { UserListComponent } from './user-list.component';
+import { UserListSearchModalComponent } from './components/user-list-search-modal/user-list-search-modal.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { UserListService } from './services/user-list.service';
 
 @NgModule({
-  declarations: [UserListComponent],
+  declarations: [UserListComponent, UserListSearchModalComponent],
   imports: [
     UserListRoutingModule,
     CommonModule,
     SharedComponentsModule,
     MatStyleModule,
-    UserSearchModule
+    UserSearchModule,
+    ReactiveFormsModule,
   ],
-  providers: [RolesConstants, ProductsConstants],
+  providers: [RolesConstants, ProductsConstants, UserListService],
 })
 export class UserListModule {}
