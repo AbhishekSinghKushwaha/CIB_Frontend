@@ -1,8 +1,8 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CurrencySelectionService } from 'src/app/core/services/currency-selection/currency-selection.service';
 import { LimitEditorService } from 'src/app/core/services/limit-editor/limit-editor.service';
+import { CurrencySelectionService } from 'src/app/core/services/modal-services/currency-selection.service';
 import { CurrencySelectionConstants } from 'src/app/core/utils/constants/currency-selection.constants';
 
 @Component({
