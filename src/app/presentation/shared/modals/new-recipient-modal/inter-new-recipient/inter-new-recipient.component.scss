@@ -1,7 +1,6 @@
 .new-recipient-modal-screen {
-  width: 400px;
-  margin: 0;
-  padding: 0;
+  width: 22vw;
+  position: relative;
 }
 
 .mat-dialog-container {
@@ -9,9 +8,10 @@
   padding: 0;
 }
 .close-button {
-  float: left;
+  position: absolute;
   top: 0px;
-  right: 0px;
+  left: 0px;
+  z-index: 1000;
 }
 
 .img-d {

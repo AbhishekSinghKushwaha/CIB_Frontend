@@ -1,25 +1,23 @@
-<div class="container new-recipient-modal-screen p-1">
+<div class="new-recipient-modal-screen p-1">
   <button mat-icon-button matSuffix class="close-button" (click)="close()">
     <mat-icon>close</mat-icon>
   </button>
   <p class="text-center fw-bold pt-2">Send to someone new</p>
-  <h4 class="mt-2">
-    <strong>Please enter the recipient's details</strong>
-  </h4>
+  <h3 class="m-4 ms-2">Please enter the recipient's details</h3>
   <form
     [formGroup]="interBankTransferNewRecipientForm"
     (submit)="submit()"
-    class="d-flex flex-column"
+    class="m-3 d-flex flex-column"
     autocomplete="off"
   >
-    <div class="row pt-3">
+    <div class="row gx-0 pt-3">
       <div class="col-md-6 col-lg-12">
         <app-select-bank
           [parentForm]="interBankTransferNewRecipientForm"
           fieldName="bank"
           formControlName="bank"
           label="Select Bank"
-          placeholder=""
+          placeholder="Select their bank"
         ></app-select-bank>
       </div>
       <div class="col-md-6 col-lg-12">

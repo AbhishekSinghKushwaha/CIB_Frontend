@@ -681,6 +681,18 @@ export class CustomIconService {
         'assets/images/icons/wizard-progress-primary.svg'
       )
     );
+    this.matIconRegistry.addSvgIcon(
+      'toggle_button_on',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/toggle-button-selected.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'toggle_button_off',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/toggle-button-idle.svg'
+      )
+    );
 
   }
 }

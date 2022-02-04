@@ -42,7 +42,7 @@ export class StatementComponent implements OnInit {
   }
 
   loadPDFList() {
-    this.statementListService.open()
+    this.statementListService.open([this.statementForm])
   }
 
   submit() {

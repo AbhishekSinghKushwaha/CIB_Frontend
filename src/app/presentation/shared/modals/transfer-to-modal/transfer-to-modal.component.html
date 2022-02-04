@@ -1,0 +1,31 @@
+<!-- Based on transaction type, display the modal accordingly -->
+
+<div class="transfer-to-modal-screen">
+  <button mat-icon-button matSuffix class="close-button" (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <!-- Transfer to Own Equity Account -->
+  <div *ngIf="data.transactionType === transferType.OWN_EQUITY">
+    <app-account-send-to [accounts]="data.favourites"></app-account-send-to>
+  </div>
+
+  <!-- Any other transaction type  -->
+  <div
+    *ngIf="
+      data.transactionType === transferType.INTER_BANK ||
+      data.transactionType === transferType.INTRA_BANK ||
+      data.transactionType === transferType.EFT ||
+      data.transactionType === transferType.RTGS ||
+      data.transactionType === transferType.BUY_GOODS ||
+      data.transactionType === transferType.MOBILE_MONEY ||
+      data.transactionType === transferType.BUY_AIRTIME ||
+      data.transactionType === transferType.SWIFT ||
+      data.transactionType === transferType.PESALINK
+    "
+  >
+    <app-send-or-pay-to
+      [favourites]="data?.favourites"
+      [transactionType]="data?.transactionType"
+    ></app-send-or-pay-to>
+  </div>
+</div>

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { InterbankService } from 'src/app/core/services/transfers/interbank/interbank.service';
+import { TransactionTypeConstants } from 'src/app/core/utils/constants/transaction-type.constants';
 import { accountLimitValidator } from 'src/app/core/utils/validators/limits.validators';
 import { ConfirmPaymentComponent } from 'src/app/presentation/shared/modals/confirm-payment/confirm-payment.component';
 
@@ -13,7 +14,7 @@ import { ConfirmPaymentComponent } from 'src/app/presentation/shared/modals/conf
 })
 export class OtherBanksComponent implements OnInit {
   interBankTransferForm: FormGroup;
-
+  transferType = TransactionTypeConstants.TransferType;
   get getForm() {
     return this.interBankTransferForm.controls;
   }
@@ -26,6 +27,7 @@ export class OtherBanksComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    this.getForm.transactionType.patchValue(this.transferType.RTGS);
   }
 
   initForm() {

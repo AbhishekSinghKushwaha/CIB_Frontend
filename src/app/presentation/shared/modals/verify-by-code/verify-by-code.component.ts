@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, Inject, ViewChildren, ElementRef  } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Inject,
+  ViewChildren,
+  ElementRef,
+} from '@angular/core';
 import { otpCodeModel } from 'src/app/core/domain/otp-code.model';
 import { OtpCodeService } from 'src/app/core/services/otp-code/otp-code.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -9,17 +16,15 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-verify-by-code',
   templateUrl: './verify-by-code.component.html',
-  styleUrls: ['./verify-by-code.component.scss']
+  styleUrls: ['./verify-by-code.component.scss'],
 })
 export class VerifyByCodeComponent implements OnInit {
-
   timeLeft: number = 60;
-  interval:any;
+  interval: any;
   alertVisible: boolean;
   alertMessage: string;
   @Input() data: any;
   payload: any;
-
 
   form: FormGroup;
   formInput = ['input1', 'input2', 'input3', 'input4', 'input5', 'input6'];
@@ -27,24 +32,23 @@ export class VerifyByCodeComponent implements OnInit {
 
   constructor(
     private readonly otpCodeService: OtpCodeService,
-    private readonly generateOtpService: GenerateOtpService,
-    private readonly buyGoodsService: BuyGoodsService,
-    private readonly router: Router,
-  ) { 
+      private readonly generateOtpService: GenerateOtpService,
+      private readonly buyGoodsService: BuyGoodsService,
+      private readonly router: Router,
+    ) {
     this.form = this.toFormGroup(this.formInput);
   }
 
-  toFormGroup(elements:any[]) {
+  toFormGroup(elements: any[]) {
     const group: any = {};
 
-    elements.forEach(key => {
+    elements.forEach((key) => {
       group[key] = new FormControl('', Validators.required);
     });
     return new FormGroup(group);
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   submit(): void {
     this.otpCodeService.set(this.form.value);
@@ -56,7 +60,7 @@ export class VerifyByCodeComponent implements OnInit {
     }
     this.alertVisible = true;
     this.alertMessage = message;
-    setTimeout(() => this.alertVisible = false, 2500)
+    setTimeout(() => (this.alertVisible = false), 2500);
   }
 
   resendOtp() {
@@ -72,7 +76,7 @@ export class VerifyByCodeComponent implements OnInit {
     this.buyGoodsService.currentData.subscribe(data => {
       this.payload = data;
       if(data) {
-        this.generateOtpService.generateOtp(this.payload);
+        this.generateOtpService.regenerateOtp(this.payload);
       }
     });
   }
@@ -93,5 +97,4 @@ export class VerifyByCodeComponent implements OnInit {
   pauseTimer() {
     clearInterval(this.interval);
   }
-
 }

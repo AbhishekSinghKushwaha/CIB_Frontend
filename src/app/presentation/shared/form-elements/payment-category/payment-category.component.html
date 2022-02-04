@@ -1,0 +1,22 @@
+<mat-form-field
+  appearance="standard"
+  style="width: 100%"
+  floatLabel="always"
+  (click)="openPaymentCategoryModal()"
+>
+  <mat-label>{{ label }}</mat-label>
+  <input
+    type="text"
+    class="strong-text"
+    matInput
+    [id]="fieldName"
+    [name]="fieldName"
+    [value]="value?.name || ''"
+    (input)="onChange($event)"
+    (blur)="touched()"
+    [placeholder]="placeholder"
+  />
+  <button type="button" mat-icon-button matSuffix>
+    <mat-icon svgIcon="caret_down"></mat-icon>
+  </button>
+</mat-form-field>

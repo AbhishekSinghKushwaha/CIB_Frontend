@@ -1,4 +1,4 @@
-<div class="p-0" [hidden]="!visibility">
+<div class="p-4" [hidden]="!visibility">
   <div class="row">
     <div class="col-md-4">
       <mat-icon (click)="close()" class="cursor-pointer">close</mat-icon>
@@ -8,7 +8,7 @@
   </div>
   <app-country-select
     [category]="countrySelectType"
-    (selected)="setCountry($event)"
+    (selectedCountry)="setCountry($event)"
   ></app-country-select>
   <mat-divider class="m-2"></mat-divider>
   <div class="row">

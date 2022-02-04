@@ -1,15 +1,15 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BankModel } from 'src/app/core/domain/bank.model';
 import { BeneficiaryModel } from 'src/app/core/domain/beneficiary.model';
-import { TransactionTypeModel } from 'src/app/core/domain/transaction-type.model';
-import { BankService } from 'src/app/core/services/bank/bank.service';
+import { BankService } from 'src/app/core/services/modal-services/bank.service';
 import { BeneficiaryManagementService } from 'src/app/core/services/beneficiary-management/beneficiary-management.service';
 import { TransactionTypeModalService } from 'src/app/core/services/transaction-type-modal/transaction-type-modal.service';
 import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
-import TRANSACT_TYPE from 'src/app/core/utils/constants/transaction-type.constants';
+import { SharedUtils } from 'src/app/core/utils/shared.util';
+import { TransactionTypeConstants } from 'src/app/core/utils/constants/transaction-type.constants';
 
 @Component({
   selector: 'app-beneficiary-management-form',
@@ -20,10 +20,11 @@ export class BeneficiaryManagementFormComponent implements OnInit {
   equityForm: FormGroup;
   visibility = true;
   bank: BankModel;
-  transactionType: TransactionTypeModel;
+  transactionType: any;
   editMode: boolean;
   id: number;
   editData: BeneficiaryModel;
+  subscriptions: Subscription[] = [];
   @Input() modalMode = false;
   private _modalData: BeneficiaryModel;
   @Input()
@@ -62,14 +63,18 @@ export class BeneficiaryManagementFormComponent implements OnInit {
   }
 
   private eventsSubscriptions(): void {
-    this.bankService.selected.subscribe((response) => {
-      this.bank = response;
-      this.equityForm.controls.bank.setValue(response.bankName);
-    });
-    this.transactionTypeModalService.selected.subscribe((response) => {
-      this.equityForm.controls.transactionType.setValue(response.name);
-      this.transactionType = response;
-    });
+    this.subscriptions.push(
+      this.bankService.selected.subscribe((response) => {
+        this.bank = response;
+        this.equityForm.controls.bank.setValue(response.bankName);
+      })
+    );
+    this.subscriptions.push(
+      this.transactionTypeModalService.selected.subscribe((response) => {
+        this.equityForm.controls.transactionType.setValue(response.name);
+        this.transactionType = response;
+      })
+    );
   }
 
   private initForm(): void {
@@ -86,6 +91,7 @@ export class BeneficiaryManagementFormComponent implements OnInit {
   }
 
   submit() {
+    console.log({ editMode: this.editMode, modalMode: this.modalMode });
     if (!this.editMode) {
       if (this.modalMode) {
         this.formSubmitted.next(this.equityForm.value);
@@ -94,15 +100,16 @@ export class BeneficiaryManagementFormComponent implements OnInit {
         this.router.navigate(['/transact/beneficiary-management']);
       }
     } else {
-      this.modalMode
-        ? this.formSubmitted.next({ ...this.equityForm.value, id: this.id })
-        : this.beneficiaryManagementService.updateForm(
-            this.equityForm.value,
-            this.id
-          );
+      if (this.modalMode) {
+        this.formSubmitted.next({ ...this.equityForm.value, id: this.id });
+      } else {
+        this.beneficiaryManagementService.updateForm(
+          this.equityForm.value,
+          this.id
+        );
+        this.router.navigate(['/transact/beneficiary-management']);
+      }
     }
-
-    this.equityForm.reset();
   }
 
   openBanks() {
@@ -116,12 +123,19 @@ export class BeneficiaryManagementFormComponent implements OnInit {
   }
 
   openTransactions() {
-    const modal = this.transactionTypeModalService.open(TRANSACT_TYPE);
+    const modal = this.transactionTypeModalService.open(
+      TransactionTypeConstants.TRANSACT_TYPE
+    );
     if (this.modalMode) {
       this.visibility = false;
       modal.afterClosed().subscribe(() => {
         this.visibility = true;
       });
     }
+  }
+
+  ngOnDestroy(): void {
+    this.equityForm.reset();
+    SharedUtils.unSubscribe(this.subscriptions);
   }
 }

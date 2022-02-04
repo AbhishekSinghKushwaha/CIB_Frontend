@@ -34,7 +34,7 @@ import { confirmModal } from 'src/app/presentation/shared/decorators/confirm-dia
 export class BeneficiaryManagementComponent implements OnInit {
   displayedColumns: string[] = ['select', 'name', 'transactionType', 'accountNumber', 'bank', 'edit'];
   dataSource = new MatTableDataSource<BeneficiaryModel>([]);
-  beneficiaries: BeneficiaryModel[];
+  beneficiaries: BeneficiaryModel[] = [];
   selection = new SelectionModel<BeneficiaryModel>(true, []);
   alertVisible: boolean;
   alertMessage: string;
@@ -43,11 +43,11 @@ export class BeneficiaryManagementComponent implements OnInit {
     private readonly beneficiaryManagementService: BeneficiaryManagementService,
     private readonly dialogService: ConfirmDialogService,
     private readonly router: Router) {
-    this.subscribeEvents();
   }
 
   ngOnInit(): void {
     this.loadBeneficiaries();
+    this.subscribeEvents();
   }
 
   subscribeEvents(): void {
@@ -108,6 +108,6 @@ export class BeneficiaryManagementComponent implements OnInit {
   }
 
   loadBeneficiaries() {
-    this.beneficiaries = [];
+    // this.beneficiaries = [];
   }
 }

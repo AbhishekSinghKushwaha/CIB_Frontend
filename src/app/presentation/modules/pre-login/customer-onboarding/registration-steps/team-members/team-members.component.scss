@@ -1,0 +1,34 @@
+.mat-icon-custom {
+  width: 60px;
+  padding-right: 7px;
+}
+
+.mat-flat-button.mat-accent,
+.mat-raised-button.mat-accent,
+.mat-fab.mat-accent,
+.mat-mini-fab.mat-accent {
+  background-color: var(--cool-grey-40);
+}
+
+.card {
+  background-color: inherit;
+  border: none !important;
+  border-radius: none !important;
+}
+
+.circle {
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #a32a29;
+
+  .initials {
+    color: white;
+    font-size: 20px;
+    line-height: 19px;
+    letter-spacing: 0.2625px;
+  }
+}
