@@ -31,9 +31,6 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   @Input()
   placeholder!: string;
 
-  @Input()
-  type!: string;
-
   public value!: string;
 
   public changed!: (value: string) => void;
