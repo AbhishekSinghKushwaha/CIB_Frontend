@@ -1,3 +1,5 @@
+import { RouterModule } from '@angular/router';
+import { CardComponentComponent } from './card-component/card-component.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -23,6 +25,8 @@ const components = [
   TransactMenuItemComponent,
   SmsVerificationComponent,
   EmailVerificationComponent,
+  NotificationMenuItemComponent,
+  CardComponentComponent,
   BeneficiaryListItemComponent,
   NotificationMenuItemComponent,
   WelcomeInfoComponent,
@@ -30,7 +34,12 @@ const components = [
 
 @NgModule({
   declarations: components,
-  imports: [CommonModule, MatStyleModule, ReactiveFormsModule],
-  exports: components,
+  imports: [
+    CommonModule,
+    MatStyleModule,
+    ReactiveFormsModule,
+    RouterModule
+  ],
+  exports: components
 })
-export class SharedComponentsModule {}
+export class SharedComponentsModule { }
