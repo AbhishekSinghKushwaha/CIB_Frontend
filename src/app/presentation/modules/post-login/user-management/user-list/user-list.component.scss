@@ -1,0 +1,29 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+}
+
+td,
+th {
+  color: var(--black);
+  font-size: 12px;
+}
+
+th {
+  font-weight: 600;
+  background-color: #e9eaea;
+}
+
+.status {
+  text-transform: capitalize;
+
+  &.enabled {
+    color: var(--green);
+  }
+  &.disabled {
+    color: var(--orange);
+  }
+}
