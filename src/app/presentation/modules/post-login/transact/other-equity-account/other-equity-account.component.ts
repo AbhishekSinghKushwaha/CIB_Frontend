@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ScheduledPaymentModel } from 'src/app/core/domain/scheduled-payment.model';
 import { AccountsService } from 'src/app/core/services/accounts/accounts.service';
 import { IntrabankService } from 'src/app/core/services/transfers/intrabank/intrabank.service';
+import { TransactionTypeConstants } from 'src/app/core/utils/constants/transaction-type.constants';
 import { accountLimitValidator } from 'src/app/core/utils/validators/limits.validators';
 import { ConfirmPaymentComponent } from 'src/app/presentation/shared/modals/confirm-payment/confirm-payment.component';
 import { BaseTransactComponent } from '../base-transact.component';
@@ -21,7 +22,8 @@ export class OtherEquityAccountComponent
   intraBankTransferForm: FormGroup;
   paymentDate: ScheduledPaymentModel;
   schedulePaymentData: ScheduledPaymentModel;
-  loading: boolean = false;
+
+  transferType = TransactionTypeConstants.TransferType;
   get getForm() {
     return this.intraBankTransferForm.controls;
   }
@@ -53,7 +55,6 @@ export class OtherEquityAccountComponent
 
   // Get Transfer charges, then confirm payment.
   getTransferCharges() {
-    this.loading = true;
     const payload = {
       amount: this.getForm.amount.value.amount,
       currency: this.getForm.amount.value.currency,
@@ -65,10 +66,8 @@ export class OtherEquityAccountComponent
       .getTransferCharges(payload)
       .subscribe((res) => {
         if (res.status) {
-          this.loading = false;
           this.confirmPayment(res.data);
         } else {
-          this.loading = false;
           // TODO:: Notify error
         }
       });
@@ -81,7 +80,7 @@ export class OtherEquityAccountComponent
         from: this.getForm.sendFrom.value,
         to: this.getForm.sendTo.value,
         amount: this.getForm.amount.value,
-        transactionType: 'Send to another Equity account',
+        transactionType: this.transferType.INTRA_BANK,
         paymentReason: this.getForm.reason.value,
         fxReferenceId: this.getForm.fxReferenceId.value,
         schedulePayment: this.getForm.schedulePayment.value,
@@ -102,7 +101,6 @@ export class OtherEquityAccountComponent
 
   // Initiate fund transfer to another equity account
   sendMoney() {
-    this.loading = true;
     const payload = {
       amount: this.getForm.amount.value.amount,
       beneficiaryAccount: this.getForm.sendTo.value.accountNumber,
@@ -120,7 +118,7 @@ export class OtherEquityAccountComponent
         endDate: this.getForm.schedulePayment.value.endDate.toISOString(),
       },
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
-      transferType: 2, // Intrabank transfer
+      transferType: this.transferType.INTRA_BANK,
     };
 
     if (this.intraBankTransferForm.valid) {
@@ -129,21 +127,16 @@ export class OtherEquityAccountComponent
         .subscribe(
           (res) => {
             if (res.status) {
-              this.loading = false;
               this.router.navigate([
                 '/transact/other-equity-account/submit-transfer',
               ]);
             } else {
-              this.loading = false;
-              alert(res.message);
+              console.log(res.message);
               // TODO:: Notify error
             }
           },
           (err) => {
-            this.loading = false;
-            alert(
-              `Sorry, we're unable to complete your transaction. Please give us some time to fix the problem and try again later.`
-            );
+            console.log(err);
           }
         );
     }

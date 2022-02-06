@@ -1,0 +1,87 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="row mb-4 justify-content-md-center">
+      <div class="col-md-11">
+        <div class="mb-3">
+          <button
+            mat-icon-button
+            aria-label="Back"
+            class="back-icon"
+            routerLink="/auth/customer-onboarding/register/company-directors"
+          >
+            <div class="strong-text">
+              <mat-icon svgIcon="caret_left"></mat-icon>
+              <span> {{ directorReferenceId ? "Edit" : "Add" }} Director</span>
+            </div>
+          </button>
+        </div>
+        <h3 class="title">
+          Please {{ directorReferenceId ? "update" : "enter" }} the director's
+          details
+        </h3>
+        <div class="row">
+          <form
+            [formGroup]="addDirectorForm"
+            (ngSubmit)="addDirectorForm.valid && submit()"
+            class="d-flex flex-column"
+            autocomplete="off"
+          >
+            <div class="row pt-4">
+              <div class="col-md-6">
+                <app-input
+                  [parentForm]="addDirectorForm"
+                  label="Full Name"
+                  placeholder="Enter their full name"
+                  fieldName="name"
+                  formControlName="name"
+                ></app-input>
+              </div>
+              <div class="col-md-6">
+                <app-input
+                  [parentForm]="addDirectorForm"
+                  label="Email Address"
+                  placeholder="Enter their email address"
+                  fieldName="emailAddress"
+                  formControlName="emailAddress"
+                ></app-input>
+              </div>
+            </div>
+            <div class="row pt-4">
+              <div class="col-md-6">
+                <app-phone-number-input
+                  [parentForm]="addDirectorForm"
+                  label="Office Number"
+                  fieldName="officePhoneNumber"
+                  formControlName="officePhoneNumber"
+                  placeholder="Enter their office number"
+                >
+                </app-phone-number-input>
+              </div>
+              <div class="col-md-6">
+                <app-phone-number-input
+                  [parentForm]="addDirectorForm"
+                  label="Office Number"
+                  fieldName="phoneNumber"
+                  formControlName="phoneNumber"
+                  placeholder="Enter their mobile number"
+                >
+                </app-phone-number-input>
+              </div>
+            </div>
+            <div class="mt-5">
+              <button
+                class="px-5"
+                type="submit"
+                mat-raised-button
+                color="primary"
+                [disabled]="addDirectorForm.invalid"
+              >
+                {{ directorReferenceId ? "Update" : "Add" }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

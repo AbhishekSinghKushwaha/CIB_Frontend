@@ -1,0 +1,143 @@
+<div class="row gx-0">
+  <div class="col-md-12">
+    <div class="row gx-0 mb-4 justify-content-md-center">
+      <div class="col-md-11">
+        <div class="mb-3">
+          <button
+            mat-icon-button
+            aria-label="Back"
+            class="back-icon"
+            routerLink="/auth/customer-onboarding/onboard/registration-start-details"
+          >
+            <div class="strong-text">
+              <mat-icon svgIcon="caret_left"></mat-icon>
+              <span>Register</span>
+            </div>
+          </button>
+        </div>
+        <div class="mb-3">
+          <mat-icon
+            aria-hidden="false"
+            svgIcon="wizard_progress_primary"
+            class="mat-icon-custom"
+          ></mat-icon>
+          <mat-icon
+            aria-hidden="false"
+            svgIcon="wizard_progress_grey"
+            class="mat-icon-custom"
+          ></mat-icon>
+          <mat-icon
+            aria-hidden="false"
+            svgIcon="wizard_progress_grey"
+            class="mat-icon-custom"
+          ></mat-icon>
+          <mat-icon
+            aria-hidden="false"
+            svgIcon="wizard_progress_grey"
+            class="mat-icon-custom"
+          ></mat-icon>
+          <mat-icon
+            aria-hidden="false"
+            svgIcon="wizard_progress_grey"
+            class="mat-icon-custom"
+          ></mat-icon>
+          <mat-icon
+            aria-hidden="false"
+            svgIcon="wizard_progress_grey"
+            class="mat-icon-custom"
+          ></mat-icon>
+        </div>
+        <h3 class="title">Please enter your company details</h3>
+        <div class="row">
+          <form
+            [formGroup]="companyDetailsForm"
+            (ngSubmit)="saveAndContinue()"
+            class="d-flex flex-column"
+            autocomplete="off"
+          >
+            <div class="row pt-4">
+              <div class="col-md-6">
+                <app-input
+                  [parentForm]="companyDetailsForm"
+                  label="Company Name"
+                  placeholder="Enter your company name"
+                  fieldName="companyName"
+                  formControlName="companyName"
+                ></app-input>
+              </div>
+              <div class="col-md-6">
+                <app-input
+                  [parentForm]="companyDetailsForm"
+                  label="Company Registration Number"
+                  placeholder="Enter your registration number"
+                  fieldName="registrationNumber"
+                  formControlName="registrationNumber"
+                ></app-input>
+              </div>
+            </div>
+            <div class="row pt-4">
+              <div class="col-md-6">
+                <app-input
+                  [parentForm]="companyDetailsForm"
+                  label="Email Address"
+                  placeholder="Enter your email address"
+                  fieldName="emailAddress"
+                  formControlName="emailAddress"
+                ></app-input>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field
+                  appearance="standard"
+                  style="width: 100%"
+                  floatLabel="always"
+                >
+                  <mat-label>Physical address</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    placeholder="Enter your company's address"
+                    formControlName="address"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row pt-4">
+              <div class="col-md-6">
+                <app-country-select-input
+                  [parentForm]="companyDetailsForm"
+                  label="Country"
+                  fieldName="country"
+                  formControlName="country"
+                  placeholder="Select a country"
+                ></app-country-select-input>
+              </div>
+              <div class="col-md-6">
+                <div class="row d-flex justify-content-between">
+                  <app-phone-number-input
+                    [parentForm]="companyDetailsForm"
+                    label="Mobile Number"
+                    fieldName="phoneNumber"
+                    formControlName="phoneNumber"
+                  ></app-phone-number-input>
+                </div>
+              </div>
+            </div>
+            <div class="row pt-4 mb-3">
+              <div class="col-sm-5 pr-sm-0 mb-3 mb-sm-0">
+                <button
+                  mat-flat-button
+                  color="primary"
+                  type="submit"
+                  class="col-8"
+                  [disabled]="companyDetailsForm.invalid"
+                >
+                  Save & continue
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<mat-form-field
+  appearance="standard"
+  style="width: 100%"
+  floatLabel="always"
+  (click)="openForeignBankChargesModal()"
+>
+  <mat-label>{{ label }}</mat-label>
+  <input
+    type="text"
+    class="strong-text"
+    matInput
+    [id]="fieldName"
+    [name]="fieldName"
+    [value]="value?.option || ''"
+    (input)="onChange($event)"
+    (blur)="touched()"
+    [placeholder]="placeholder"
+  />
+  <button type="button" mat-icon-button matSuffix>
+    <mat-icon svgIcon="caret_down"></mat-icon>
+  </button>
+  <small class="text-grey text-sm-start mt-2 mb-0">{{
+    value?.description || ""
+  }}</small>
+</mat-form-field>

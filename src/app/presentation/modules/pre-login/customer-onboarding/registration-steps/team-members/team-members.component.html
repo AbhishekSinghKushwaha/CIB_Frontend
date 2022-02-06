@@ -1,0 +1,149 @@
+<div class="row gx-0">
+  <div class="col-md-12">
+    <div class="row gx-0 mb-4 justify-content-md-center">
+      <div class="col-md-11">
+        <div class="mb-3">
+          <button
+            mat-icon-button
+            aria-label="Back"
+            class="back-icon"
+            routerLink="/auth/customer-onboarding/register/company-directors"
+          >
+            <div class="strong-text">
+              <mat-icon svgIcon="caret_left"></mat-icon>
+              <span>Register</span>
+            </div>
+          </button>
+        </div>
+        <div class="mb-3">
+          <mat-icon
+            aria-hidden="false"
+            svgIcon="wizard_progress_primary"
+            class="mat-icon-custom"
+          ></mat-icon>
+          <mat-icon
+            aria-hidden="false"
+            svgIcon="wizard_progress_primary"
+            class="mat-icon-custom"
+          ></mat-icon>
+          <mat-icon
+            aria-hidden="false"
+            svgIcon="wizard_progress_primary"
+            class="mat-icon-custom"
+          ></mat-icon>
+          <mat-icon
+            aria-hidden="false"
+            svgIcon="wizard_progress_grey"
+            class="mat-icon-custom"
+          ></mat-icon>
+          <mat-icon
+            aria-hidden="false"
+            svgIcon="wizard_progress_grey"
+            class="mat-icon-custom"
+          ></mat-icon>
+          <mat-icon
+            aria-hidden="false"
+            svgIcon="wizard_progress_grey"
+            class="mat-icon-custom"
+          ></mat-icon>
+        </div>
+        <h3 class="title mb-3">Please add the team members in your company</h3>
+        <div class="row">
+          <div class="col-md-6">
+            <mat-card
+              class="cursor-pointer p-3"
+              routerLink="/auth/customer-onboarding/register/add-team-member"
+            >
+              <mat-card-content>
+                <div class="row">
+                  <div class="col-md-3">
+                    <button mat-fab>
+                      <mat-icon svgIcon="withdraw"></mat-icon>
+                    </button>
+                  </div>
+                  <div class="col-md-7">
+                    <p class="mb-0">Add Team members</p>
+                    <small class="text-grey"
+                      >Team members have access to various permissions and
+                      roles</small
+                    >
+                  </div>
+                  <div class="col-md-2 card card-block justify-content-center">
+                    <mat-icon color="primary" svgIcon="caret_right"></mat-icon>
+                  </div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+        <div class="mt-5" *ngIf="members.length > 0">
+          <h3 class="title">List of team members</h3>
+
+          <div class="row">
+            <div
+              *ngFor="let member of members; let i = index"
+              class="col-md-6 align-items-stretch align-items-center mb-2 pb-2"
+            >
+              <div class="col-md-2">
+                <div class="circle">
+                  <div class="initials">
+                    {{ generateInitials(member?.name || "") }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="row">
+                  <div class="col-md-10">
+                    <h4>{{ member?.name }}</h4>
+                    <small class="mb-1 text-grey">{{
+                      member?.emailAddress
+                    }}</small>
+                  </div>
+                  <div class="col-md-2">
+                    <mat-icon
+                      color="primary"
+                      svgIcon="three_dots_on_grey"
+                      [matMenuTriggerFor]="menu"
+                    ></mat-icon>
+
+                    <mat-menu #menu="matMenu">
+                      <button
+                        mat-menu-item
+                        [routerLink]="[
+                          '/auth/customer-onboarding/register/edit-team-member'
+                        ]"
+                        [queryParams]="{ id: member?.corporateUserId }"
+                        routerLinkActive="router-link-active"
+                      >
+                        <mat-icon svgIcon="edit"></mat-icon>
+                        <span>Edit</span>
+                      </button>
+                      <button
+                        mat-menu-item
+                        (click)="delete(member?.corporateUserId || '')"
+                      >
+                        <mat-icon svgIcon="delete-documents"></mat-icon>
+                        <span>Delete</span>
+                      </button>
+                    </mat-menu>
+                  </div>
+                </div>
+                <mat-divider class="mt-2 mb-2"></mat-divider>
+              </div>
+            </div>
+            <div class="row">
+              <button
+                mat-raised-button
+                color="primary"
+                class="mt-5 col-md-4"
+                (click)="confirmTeamMembers()"
+              >
+                Save & continue
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

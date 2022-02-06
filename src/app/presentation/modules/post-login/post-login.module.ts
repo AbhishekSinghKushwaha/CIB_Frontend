@@ -4,20 +4,17 @@ import { CommonModule } from '@angular/common';
 import { PostLoginRoutingModule } from './post-login-routing.module';
 import { PostLoginComponent } from './post-login.component';
 import { MatStyleModule } from 'src/app/mat-style.module';
-import { LayoutModule } from 'src/app/presentation/layout/layout.module';
 import { FormElementsModule } from '../../shared/form-elements/form-elements.module';
-
+import { SidebarModule } from '../../layout/sidebar/sidebar.module';
 
 @NgModule({
-  declarations: [
-    PostLoginComponent
-  ],
+  declarations: [PostLoginComponent],
   imports: [
     CommonModule,
     PostLoginRoutingModule,
     MatStyleModule,
-    LayoutModule,
-    FormElementsModule
-  ]
+    SidebarModule,
+    FormElementsModule,
+  ],
 })
-export class PostLoginModule { }
+export class PostLoginModule {}

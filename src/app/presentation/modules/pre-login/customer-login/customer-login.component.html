@@ -1,0 +1,19 @@
+<div class="row h-100">
+  <div *ngIf="loading" class="loader-container">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+  <div class="col-lg-8 px-0">
+    <app-welcome-info></app-welcome-info>
+  </div>
+  <div class="col-lg-4 pt-4 access-panel">
+    <router-outlet></router-outlet>
+    <div class="row gx-0 bottom-panel-selections">
+      <div class="col">
+        <app-language-input></app-language-input>
+      </div>
+      <div class="col">
+        <app-customer-support></app-customer-support>
+      </div>
+    </div>
+  </div>
+</div>

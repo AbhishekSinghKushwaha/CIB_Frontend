@@ -5,7 +5,7 @@ import { TransactComponent } from './transact.component';
 const routes: Routes = [
   {
     path: '',
-    component: TransactComponent
+    component: TransactComponent,
   },
   {
     path: 'own-equity-account',
@@ -38,16 +38,12 @@ const routes: Routes = [
   {
     path: 'pay-bills',
     loadChildren: (): Promise<any> =>
-      import('./pay-bills/pay-bills.module').then(
-        (m) => m.PayBillsModule
-      ),
+      import('./pay-bills/pay-bills.module').then((m) => m.PayBillsModule),
   },
   {
     path: 'buy-goods',
     loadChildren: (): Promise<any> =>
-      import('./buy-goods/buy-goods.module').then(
-        (m) => m.BuyGoodsModule
-      ),
+      import('./buy-goods/buy-goods.module').then((m) => m.BuyGoodsModule),
   },
   {
     path: 'buy-airtime',
@@ -59,16 +55,12 @@ const routes: Routes = [
   {
     path: 'withdraw',
     loadChildren: (): Promise<any> =>
-      import('./withdraw/withdraw.module').then(
-        (m) => m.WithdrawModule
-      ),
+      import('./withdraw/withdraw.module').then((m) => m.WithdrawModule),
   },
   {
     path: 'pay-to-card',
     loadChildren: (): Promise<any> =>
-      import('./pay-to-card/pay-to-card.module').then(
-        (m) => m.PayToCardModule
-      ),
+      import('./pay-to-card/pay-to-card.module').then((m) => m.PayToCardModule),
   },
   {
     path: 'beneficiary-management',
@@ -80,25 +72,26 @@ const routes: Routes = [
   {
     path: 'pesa-link',
     loadChildren: (): Promise<any> =>
-      import('./pesa-link/pesa-link.module').then(
-        (m) => m.PesaLinkModule
-      ),
+      import('./pesa-link/pesa-link.module').then((m) => m.PesaLinkModule),
   },
   {
     path: 'statement',
     loadChildren: (): Promise<any> =>
-      import('./statement/statement.module').then(
-        (m) => m.StatementModule
-      ),
+      import('./statement/statement.module').then((m) => m.StatementModule),
+  },
+  {
+    path: 'swift',
+    loadChildren: (): Promise<any> =>
+      import('./swift/swift.module').then((m) => m.SwiftModule),
   },
   {
     path: '**',
-    redirectTo: ''
-  }
+    redirectTo: '',
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class TransactRoutingModule { }
+export class TransactRoutingModule {}
