@@ -59,17 +59,17 @@
                 [parentForm]="chequebookRequestForm"
                 label="Collection option"
                 placeholder="Select the branch"
-                formControlName="chequeBookLeaves"
+                formControlName="branch"
                 fieldName="branch"
               ></app-collection-option>
             </div>
           </div>
+          {{ chequebookRequestForm.value | json }}
           <div class="mt-4">
             <button
               mat-raised-button
               [disabled]="chequebookRequestForm.invalid"
               color="primary"
-              disabled
             >
               Submit
             </button>

@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CollectionOptionService } from 'src/app/core/services/collection-option/collection-option.service';
-import { CollectionDeliveryOption } from 'src/app/core/utils/constants/collection-delivery-option.settings';
+import { Router } from '@angular/router';
+import { BranchService } from 'src/app/core/services/modal-services/branch.service';
+import { BRANCHCONSTANTS } from 'src/app/core/utils/constants/branch.constants';
 
 @Component({
   selector: 'app-collection-option-modal',
@@ -10,17 +11,24 @@ import { CollectionDeliveryOption } from 'src/app/core/utils/constants/collectio
 })
 export class CollectionOptionModalComponent implements OnInit {
   constructor(
-    private readonly collectionOptionService: CollectionOptionService,
-    @Inject(MAT_DIALOG_DATA) public options: string[]) { }
+    private readonly branchService: BranchService,
+    @Inject(MAT_DIALOG_DATA) public options: string[],
+    private router: Router) { }
 
   ngOnInit(): void {
   }
 
   select(item: string) {
-
+    if (item === BRANCHCONSTANTS.deliveryOption.BRANCH) {
+      this.branchService.selectCollectionBranch(item);
+      this.branchService.closeCollectionBranch();
+      this.branchService.openBranch([]);
+    } else {
+      this.router.navigate(['/access/reset-temporary-password']);
+    }
   }
 
   close() {
-
+    this.branchService.closeCollectionBranch()
   }
 }

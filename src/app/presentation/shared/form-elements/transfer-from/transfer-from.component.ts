@@ -68,6 +68,7 @@ export class TransferFromComponent implements ControlValueAccessor, OnInit {
     });
     this.transferFromAccountService.selectedTransferFromAccount.subscribe((x) => {
       this.parentForm.controls[this.fieldName].setValue(x);
+      this.writeValue(x);
     });
   }
 

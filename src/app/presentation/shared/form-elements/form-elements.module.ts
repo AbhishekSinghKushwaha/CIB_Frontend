@@ -19,6 +19,7 @@ import { SelectNumberComponent } from './select-number/select-number.component';
 import { NumberSelectModalModule } from '../modals/number-select-modal/number-select-modal.module';
 import { CollectionOptionModalModule } from '../modals/collection-option-modal/collection-option-modal.module';
 import { CollectionOptionComponent } from './collection-option/collection-option.component';
+import { BranchModalModule } from '../modals/branch-modal/branch-modal.module';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { CollectionOptionComponent } from './collection-option/collection-option
     ReactiveFormsModule,
     TransferFromModalModule,
     NumberSelectModalModule,
-    CollectionOptionModalModule],
+    CollectionOptionModalModule,
+    BranchModalModule],
   exports: [
     FormsModule,
     ReactiveFormsModule,
