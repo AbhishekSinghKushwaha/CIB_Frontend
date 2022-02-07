@@ -19,11 +19,11 @@ export class ConfirmationModalComponent implements OnInit {
   }
 
   close() {
-    this.confirmationModalService.close();
+    this.confirmationModalService.close(false);
   }
 
   confirmationClicked() {
-
+    this.confirmationModalService.close(true);
   }
 
 }

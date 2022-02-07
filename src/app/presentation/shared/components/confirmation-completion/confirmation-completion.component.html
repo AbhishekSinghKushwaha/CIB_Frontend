@@ -1,1 +1,17 @@
-<p>confirmation-completion works!</p>
+<h3 class="strong-text">{{ data.title }}</h3>
+
+<div class="row mt-5">
+  <div class="col-md-6">
+    <img class="img-fluid mt-4 mb-4" [src]="data.icon" />
+  </div>
+  <div class="col-md-6 pt-3">
+    <h3>{{ data.message }}</h3>
+    <small class="text-grey">{{ data.subMessage }}</small>
+
+    <div class="pt-5">
+      <button mat-raised-button color="primary" (click)="done()">
+        {{ data.buttonText }}
+      </button>
+    </div>
+  </div>
+</div>

@@ -23,7 +23,7 @@ export class ConfirmationModalService {
     return this.modalRef;
   }
 
-  close(): void {
-    this.modalRef.close()
+  close(data: boolean): void {
+    this.modalRef.close(data)
   }
 }

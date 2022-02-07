@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="!completed">
   <div class="col-md-12">
     <div class="row mb-4 justify-content-md-center">
       <div class="col-md-11">
@@ -64,7 +64,6 @@
               ></app-collection-option>
             </div>
           </div>
-          {{ chequebookRequestForm.value | json }}
           <div class="mt-4">
             <button
               mat-raised-button
@@ -78,4 +77,11 @@
       </div>
     </div>
   </div>
+</div>
+
+<div class="row" *ngIf="completed">
+  <app-confirmation-completion
+    [data]="completionData"
+    (confirmationDone)="confirmationDone($event)"
+  ></app-confirmation-completion>
 </div>
