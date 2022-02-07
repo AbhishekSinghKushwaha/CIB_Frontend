@@ -8,6 +8,7 @@ import { ChequebookRequestComponent } from './chequebook-request/chequebook-requ
 import { FormElementsModule } from 'src/app/presentation/shared/form-elements/form-elements.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModalsModule } from 'src/app/presentation/shared/modals/shared-modals.module';
+import { ConfirmationModalModule } from 'src/app/presentation/shared/modals/confirmation-modal/confirmation-modal.module';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { SharedModalsModule } from 'src/app/presentation/shared/modals/shared-mo
     MatStyleModule,
     SharedComponentsModule,
     FormElementsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ConfirmationModalModule
   ],
   providers: []
 })
