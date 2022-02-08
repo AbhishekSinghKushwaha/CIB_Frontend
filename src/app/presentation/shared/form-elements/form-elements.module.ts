@@ -26,6 +26,7 @@ import { UserListModalModule } from '../modals/user-list-modal/user-list-modal.m
 import { TransactionLimitComponent } from './transaction-limit/transaction-limit.component';
 import { CompanyListComponent } from './company-list/company-list.component';
 import { CompanyListModalModule } from '../modals/company-list-modal/company-list-modal.module';
+import { EmailInputComponent } from './email-input/email-input.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { CompanyListModalModule } from '../modals/company-list-modal/company-lis
     UserListComponent,
     TransactionLimitComponent,
     CompanyListComponent,
+    EmailInputComponent,
   ],
   imports: [
     CommonModule,
@@ -78,7 +80,8 @@ import { CompanyListModalModule } from '../modals/company-list-modal/company-lis
     CollectionOptionComponent,
     UserListComponent,
     TransactionLimitComponent,
-    CompanyListComponent
+    CompanyListComponent,
+    EmailInputComponent
   ],
   providers: [],
 })

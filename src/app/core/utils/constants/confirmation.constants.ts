@@ -24,4 +24,12 @@ const editCompanyLimit: ConfirmationCompletionModel = {
   icon: 'assets/images/icons/visual-support-icons-virtual-account-submission-avatar.svg'
 };
 
-export const CONFIRMATIONCOMPLETION = { chequeBook, editUserLimit, editCompanyLimit };
+const staticUserData: ConfirmationCompletionModel = {
+  title: 'Confirmation',
+  buttonText: 'Done',
+  message: 'Service request submitted for approval',
+  subMessage: 'Static user data updated',
+  icon: 'assets/images/icons/visual-support-icons-virtual-account-submission-avatar.svg'
+};
+
+export const CONFIRMATIONCOMPLETION = { chequeBook, editUserLimit, editCompanyLimit, staticUserData };
