@@ -11,3 +11,11 @@ export interface UserModel {
   username: string;
   securityQuestions: { question: string; answer: string }[];
 }
+
+export interface UserListModel {
+  id: number;
+  name: string;
+  profileType: string;
+  status: boolean;
+  lastViewed: string;
+}

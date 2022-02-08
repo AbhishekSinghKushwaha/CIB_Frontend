@@ -22,6 +22,7 @@ import { CollectionOptionComponent } from './collection-option/collection-option
 import { BranchModalModule } from '../modals/branch-modal/branch-modal.module';
 import { UserListComponent } from './user-list/user-list.component';
 import { CurrencySelectionModule } from '../modals/currency-selection/currency-selection.module';
+import { UserListModalModule } from '../modals/user-list-modal/user-list-modal.module';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { CurrencySelectionModule } from '../modals/currency-selection/currency-s
     NumberSelectModalModule,
     CollectionOptionModalModule,
     BranchModalModule,
-    CurrencySelectionModule],
+    CurrencySelectionModule,
+    UserListModalModule],
   exports: [
     FormsModule,
     ReactiveFormsModule,
