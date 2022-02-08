@@ -24,6 +24,16 @@
         >
           <div class="row">
             <div class="col-md-6">
+              <app-user-list
+                [parentForm]="editUserDataForm"
+                currencyFieldName="user"
+                label="User"
+                placeholder="Select user"
+                fieldName="user"
+                formControlName="user"
+              ></app-user-list>
+            </div>
+            <div class="col-md-6">
               <app-transfer-amount
                 [parentForm]="editUserDataForm"
                 currencyFieldName="currency"

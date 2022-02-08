@@ -1,1 +1,23 @@
-<p>user-list works!</p>
+<mat-form-field
+  appearance="standard"
+  style="width: 100%"
+  floatLabel="always"
+  (click)="openModal()"
+>
+  <mat-label>{{ label }}</mat-label>
+  <input
+    matInput
+    type="text"
+    class="strong-text"
+    [id]="fieldName"
+    [name]="fieldName"
+    [value]="value?.name || ''"
+    [disabled]="isDisabled"
+    (input)="onChange($event)"
+    (blur)="touched()"
+    [placeholder]="placeholder"
+  />
+  <button type="button" mat-icon-button matSuffix>
+    <mat-icon svgIcon="caret_down"></mat-icon>
+  </button>
+</mat-form-field>

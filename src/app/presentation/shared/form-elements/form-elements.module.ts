@@ -69,7 +69,8 @@ import { UserListModalModule } from '../modals/user-list-modal/user-list-modal.m
     PaymentCategoryComponent,
     CountrySelectInputComponent,
     SelectNumberComponent,
-    CollectionOptionComponent
+    CollectionOptionComponent,
+    UserListComponent
   ],
   providers: [],
 })

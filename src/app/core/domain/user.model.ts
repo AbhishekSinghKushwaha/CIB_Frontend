@@ -13,9 +13,9 @@ export interface UserModel {
 }
 
 export interface UserListModel {
-  id: number;
+  id: string;
   name: string;
   profileType: string;
-  status: boolean;
+  status: string;
   lastViewed: string;
 }

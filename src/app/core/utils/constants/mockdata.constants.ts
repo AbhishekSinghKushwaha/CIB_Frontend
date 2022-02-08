@@ -4,7 +4,7 @@ import { StatementListModel } from '../../domain/statement-list.model';
 import { FavouriteBeneficiaryModel } from './../../domain/favourites-beneficiary.model';
 import { SelectAccountModel } from './../../domain/select-account.model';
 import { BuyGoodsFavouriteModel } from './../../domain/buy-goods-favourites.model';
-import { UserModel } from '../../domain/user.model';
+import { UserListModel, UserModel } from '../../domain/user.model';
 import { MobileOperator } from '../../domain/transfer.models';
 
 const accounts: SelectAccountModel[] = [
@@ -28,6 +28,13 @@ const accounts: SelectAccountModel[] = [
   },
 ];
 
+const userList: UserListModel[] = [
+  { name: 'Michael Scott', id: '134312', profileType: 'Individual', status: 'Active', lastViewed: '12/02/20' },
+  { name: 'Moussa Doumbia', id: '8937393', profileType: 'Individual', status: 'Active', lastViewed: '09/06/22' },
+  { name: 'David Pastor', id: '8479393', profileType: 'Individual', status: 'Active', lastViewed: '10/10/21' },
+  { name: 'Jerry Odhiambo', id: '0837484', profileType: 'Individual', status: 'Active', lastViewed: '30/03/22' },
+];
+
 const users: UserModel[] = [
   {
     id: 1,
@@ -47,6 +54,7 @@ const users: UserModel[] = [
     ],
   },
 ];
+
 
 const favourites: FavouriteBeneficiaryModel[] = [
   {
@@ -718,4 +726,5 @@ export const mockData = {
   accountNumber,
   users,
   mobileOperators,
+  userList
 };
