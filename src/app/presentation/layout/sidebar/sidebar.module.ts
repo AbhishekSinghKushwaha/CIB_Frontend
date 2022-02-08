@@ -7,18 +7,16 @@ import { SidebarComponent } from './sidebar.component';
 import { MatStyleModule } from 'src/app/mat-style.module';
 import { SignoutModalModule } from '../../shared/modals/signout-modal/signout-modal.module';
 
-
 @NgModule({
-  declarations: [
-    SidebarComponent
-  ],
+  declarations: [SidebarComponent],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MatStyleModule,
     SignoutModalModule,
-    SidebarRoutingModule
-  ]
+    SidebarRoutingModule,
+  ],
+  exports: [SidebarComponent],
 })
-export class SidebarModule { }
+export class SidebarModule {}

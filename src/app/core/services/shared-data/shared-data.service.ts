@@ -23,4 +23,8 @@ export class SharedDataService {
   setSubsidiaries(countries: CountryModel[]) {
     this.countries.next(countries);
   }
+
+  setCountries(countries: CountryModel[]) {
+    this.countries.next(countries);
+  }
 }

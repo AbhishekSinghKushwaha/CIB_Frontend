@@ -109,6 +109,7 @@ const banks: BankModel[] = [
 
 const countries: CountryModel[] = [
   {
+    id: '1',
     flagPath: 'https://flagcdn.com/h60/ke.png',
     countryCode: 'KE',
     countryName: 'Kenya',
@@ -120,6 +121,7 @@ const countries: CountryModel[] = [
     countryCode3Chars: null,
   },
   {
+    id: '2',
     flagPath: 'https://flagcdn.com/h60/cd.png',
     countryCode: 'CD',
     countryName: 'Democratic Republic of Congo',
@@ -131,6 +133,7 @@ const countries: CountryModel[] = [
     countryCode3Chars: null,
   },
   {
+    id: '3',
     flagPath: 'https://flagcdn.com/h60/rw.png',
     countryCode: 'CD',
     countryName: 'Rwanda',
@@ -142,6 +145,7 @@ const countries: CountryModel[] = [
     countryCode3Chars: null,
   },
   {
+    id: '4',
     flagPath: 'https://flagcdn.com/h60/ss.png',
     countryCode: 'CD',
     countryName: 'South Sudan',
@@ -153,6 +157,7 @@ const countries: CountryModel[] = [
     countryCode3Chars: null,
   },
   {
+    id: '5',
     flagPath: 'https://flagcdn.com/h60/tz.png',
     countryCode: 'CD',
     countryName: 'Tanzania',

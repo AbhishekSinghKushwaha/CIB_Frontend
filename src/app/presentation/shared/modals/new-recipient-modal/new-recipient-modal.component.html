@@ -30,6 +30,6 @@
   <app-pesalink-new-recipient [mode]="data"></app-pesalink-new-recipient>
 </div>
 
-<div *ngIf="data === 'intercountryFundTransfer'">
+<div *ngIf="data === transferType.INTER_COUNTRY_TRANSFER">
   <app-intercountry-new-recipient></app-intercountry-new-recipient>
 </div>

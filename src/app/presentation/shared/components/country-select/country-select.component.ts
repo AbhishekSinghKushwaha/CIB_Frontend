@@ -11,6 +11,7 @@ import { Subject, Subscription } from 'rxjs';
 import { CountryModel } from 'src/app/core/domain/bank.model';
 import { recipientModel } from 'src/app/core/domain/recipient.model';
 import { CountryService } from 'src/app/core/services/modal-services/country.service';
+import { SharedDataService } from 'src/app/core/services/shared-data/shared-data.service';
 import { countrySettings } from 'src/app/core/utils/constants/country.settings';
 import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
 
@@ -21,7 +22,7 @@ import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
 })
 export class CountrySelectComponent implements OnInit, OnDestroy {
   visibility = true;
-  countries = mockData.countries;
+  countries: CountryModel[];
   viewTypes = countrySettings.viewTypes;
   subscriptions: Subscription[] = [];
   @Input() category: string;
@@ -30,10 +31,15 @@ export class CountrySelectComponent implements OnInit, OnDestroy {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: recipientModel,
-    private readonly countryService: CountryService
+    private readonly countryService: CountryService,
+    private readonly sharedDataService: SharedDataService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.sharedDataService.countries.subscribe((x) => {
+      this.countries = x;
+    });
+  }
 
   openCountries(): void {
     const modal = this.countryService.openCountry(

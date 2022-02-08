@@ -1,0 +1,113 @@
+<div class="row gx-0">
+  <div class="col-md-12">
+    <div class="row gx-0 mb-4 justify-content-md-center">
+      <div class="col-md-11">
+        <div class="mb-3">
+          <button
+            mat-icon-button
+            aria-label="Back"
+            class="back-icon"
+            routerLink="/auth/customer-onboarding/register/product-services"
+          >
+            <div class="strong-text">
+              <mat-icon svgIcon="caret_left"></mat-icon>
+              <span>Register</span>
+            </div>
+          </button>
+        </div>
+        <div class="mb-3">
+          <mat-icon
+            aria-hidden="false"
+            svgIcon="wizard_progress_primary"
+            class="mat-icon-custom"
+          ></mat-icon>
+          <mat-icon
+            aria-hidden="false"
+            svgIcon="wizard_progress_primary"
+            class="mat-icon-custom"
+          ></mat-icon>
+          <mat-icon
+            aria-hidden="false"
+            svgIcon="wizard_progress_primary"
+            class="mat-icon-custom"
+          ></mat-icon>
+          <mat-icon
+            aria-hidden="false"
+            svgIcon="wizard_progress_primary"
+            class="mat-icon-custom"
+          ></mat-icon>
+          <mat-icon
+            aria-hidden="false"
+            svgIcon="wizard_progress_grey"
+            class="mat-icon-custom"
+          ></mat-icon>
+          <mat-icon
+            aria-hidden="false"
+            svgIcon="wizard_progress_grey"
+            class="mat-icon-custom"
+          ></mat-icon>
+        </div>
+        <h3 class="title mb-3">Please Select products and services</h3>
+
+        <div class="row mt-3">
+          <div
+            class="col-md-6 mt-5"
+            *ngFor="let product of products; let i = index"
+          >
+            <div
+              class="product-list-item d-flex bd-highlight mb-2"
+              (click)="selectProduct(product)"
+            >
+              <div class="p-2 bd-highlight">
+                <button mat-fab class="text-primary">
+                  <mat-icon>person</mat-icon>
+                </button>
+              </div>
+              <div class="p-2 bd-highlight">
+                <h3 class="pt-3">{{ product?.productName }}</h3>
+              </div>
+              <div class="ms-auto p-2 bd-highlight">
+                <div class="d-flex bd-highlight">
+                  <div class="p-2 bd-highlight">
+                    <span
+                      *ngFor="let sp of selectedProducts; let isLast = last"
+                    >
+                      <div
+                        class="col-1 text-primary pt-2"
+                        *ngIf="product?.id === sp?.productId"
+                      >
+                        <strong>On</strong>
+                      </div>
+                    </span>
+                  </div>
+
+                  <div class="pt-3 bd-highlight">
+                    <mat-icon
+                      class=""
+                      color="primary"
+                      svgIcon="caret_right"
+                    ></mat-icon>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-5 mb-3">
+          <div class="col-sm-5 pr-sm-0 mb-3 mb-sm-0">
+            <button
+              mat-flat-button
+              color="primary"
+              type="submit"
+              class="col-8"
+              [disabled]="false"
+              (click)="saveAndContinue()"
+            >
+              Save & continue
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

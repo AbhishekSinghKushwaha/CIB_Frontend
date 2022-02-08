@@ -5,6 +5,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { CountryModel } from 'src/app/core/domain/bank.model';
 import { CountryService } from 'src/app/core/services/modal-services/country.service';
 import { NewRecipientService } from 'src/app/core/services/modal-services/new-recipient.service';
+import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { countrySettings } from 'src/app/core/utils/constants/country.settings';
 import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
 
@@ -50,7 +51,8 @@ export class PhoneNumberInputComponent implements OnInit {
 
   constructor(
     private countryService: CountryService,
-    private newRecipientService: NewRecipientService
+    private newRecipientService: NewRecipientService,
+    private storageService: StorageService
   ) {}
 
   ngOnInit(): void {
@@ -80,7 +82,7 @@ export class PhoneNumberInputComponent implements OnInit {
 
   openDialCodeModal() {
     this.countryService.openCountry(
-      mockData.countries,
+      this.storageService.getData('countries'),
       countrySettings.viewTypes.NAME_ONLY
     );
   }
@@ -90,6 +92,7 @@ export class PhoneNumberInputComponent implements OnInit {
       .pipe(debounceTime(1000), distinctUntilChanged())
       .subscribe((res) => {
         this.value = res.toString();
+        console.log(this.value);
         this.changed(this.country.dialCode + this.value);
       });
   }
