@@ -43,6 +43,46 @@
               >
               </app-transfer-amount>
             </div>
+            <div class="col-md-6">
+              <app-transaction-limit
+                [parentForm]="editUserDataForm"
+                label="Transaction limit"
+                placeholder="Enter transaction limit"
+                formControlName="transactionLimit"
+                fieldName="transactionLimit"
+              >
+              </app-transaction-limit>
+            </div>
+            <div class="col-md-6">
+              <app-transaction-limit
+                [parentForm]="editUserDataForm"
+                label="Daily limit"
+                placeholder="Enter daily limit"
+                formControlName="dailyLimit"
+                fieldName="dailyLimit"
+              >
+              </app-transaction-limit>
+            </div>
+            <div class="col-md-6">
+              <app-transaction-limit
+                [parentForm]="editUserDataForm"
+                label="Weekly limit"
+                placeholder="Enter weekly limit"
+                formControlName="weeklyLimit"
+                fieldName="weeklyLimit"
+              >
+              </app-transaction-limit>
+            </div>
+            <div class="col-md-6">
+              <app-transaction-limit
+                [parentForm]="editUserDataForm"
+                label="Monthly limit"
+                placeholder="Enter monthly limit"
+                formControlName="monthlyLimit"
+                fieldName="monthlyLimit"
+              >
+              </app-transaction-limit>
+            </div>
           </div>
           <div class="mt-4">
             <button
@@ -58,7 +98,6 @@
     </div>
   </div>
 </div>
-{{ editUserDataForm.value | json }}
 <div class="row" *ngIf="completed">
   <app-confirmation-completion
     [data]="completionData"

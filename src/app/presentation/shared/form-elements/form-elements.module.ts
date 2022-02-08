@@ -23,6 +23,7 @@ import { BranchModalModule } from '../modals/branch-modal/branch-modal.module';
 import { UserListComponent } from './user-list/user-list.component';
 import { CurrencySelectionModule } from '../modals/currency-selection/currency-selection.module';
 import { UserListModalModule } from '../modals/user-list-modal/user-list-modal.module';
+import { TransactionLimitComponent } from './transaction-limit/transaction-limit.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { UserListModalModule } from '../modals/user-list-modal/user-list-modal.m
     SelectNumberComponent,
     CollectionOptionComponent,
     UserListComponent,
+    TransactionLimitComponent,
   ],
   imports: [
     CommonModule,
@@ -70,7 +72,8 @@ import { UserListModalModule } from '../modals/user-list-modal/user-list-modal.m
     CountrySelectInputComponent,
     SelectNumberComponent,
     CollectionOptionComponent,
-    UserListComponent
+    UserListComponent,
+    TransactionLimitComponent
   ],
   providers: [],
 })

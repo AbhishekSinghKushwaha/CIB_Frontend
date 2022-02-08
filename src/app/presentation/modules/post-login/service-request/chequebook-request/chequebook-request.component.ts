@@ -64,6 +64,9 @@ export class ChequebookRequestComponent implements OnInit {
   }
 
   confirmationDone(event: boolean) {
-    event && (this.completed = false) && this.chequebookRequestForm.reset();
+    if (event) {
+      this.completed = false;
+      this.chequebookRequestForm.reset();
+    }
   }
 }
