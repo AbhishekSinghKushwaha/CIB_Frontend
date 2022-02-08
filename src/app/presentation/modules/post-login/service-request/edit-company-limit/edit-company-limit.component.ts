@@ -5,14 +5,14 @@ import { ConfirmationModalService } from 'src/app/core/services/modal-services/c
 import { CONFIRMATIONCOMPLETION } from 'src/app/core/utils/constants/confirmation.constants';
 
 @Component({
-  selector: 'app-edit-user-limit',
-  templateUrl: './edit-user-limit.component.html',
-  styleUrls: ['./edit-user-limit.component.scss']
+  selector: 'app-edit-company-limit',
+  templateUrl: './edit-company-limit.component.html',
+  styleUrls: ['./edit-company-limit.component.scss']
 })
-export class EditUserLimitComponent implements OnInit {
-  editUserDataForm: FormGroup;
+export class EditCompanyLimitComponent implements OnInit {
+  editCompanyDataForm: FormGroup;
   data: ConfirmationModel;
-  completionData = CONFIRMATIONCOMPLETION.editUserLimit;
+  completionData = CONFIRMATIONCOMPLETION.editCompanyLimit;
   completed: boolean;
 
   constructor(
@@ -29,24 +29,24 @@ export class EditUserLimitComponent implements OnInit {
       subtitle: 'Confirm the following details',
       submitButtonText: 'Submit',
       content: [{
-        key: 'User',
-        value: this.editUserDataForm.value.user.name
+        key: 'Company',
+        value: this.editCompanyDataForm.value.company.name
       }, {
         key: 'Currency',
-        value: this.editUserDataForm.value.currency.currencyCode
+        value: this.editCompanyDataForm.value.currency.currencyCode
       }, {
         key: 'Transaction limit',
-        value: this.editUserDataForm.value.transactionLimit
+        value: this.editCompanyDataForm.value.transactionLimit
       }, {
         key: 'Daily Limit',
-        value: this.editUserDataForm.value.dailyLimit
+        value: this.editCompanyDataForm.value.dailyLimit
       }
         , {
         key: 'Weekly Limit',
-        value: this.editUserDataForm.value.weeklyLimit
+        value: this.editCompanyDataForm.value.weeklyLimit
       }, {
         key: 'Monthly Limit',
-        value: this.editUserDataForm.value.monthlyLimit
+        value: this.editCompanyDataForm.value.monthlyLimit
       }]
     }
     this.confirmationModalService.open(this.data).afterClosed().subscribe((data: boolean) => {
@@ -56,14 +56,14 @@ export class EditUserLimitComponent implements OnInit {
 
   confirmationDone(event: boolean) {
     if (event) {
-      this.editUserDataForm.reset();
+      this.editCompanyDataForm.reset();
       this.completed = false;
     }
   }
 
   initForm(): void {
-    this.editUserDataForm = this.fb.group({
-      user: ['', [Validators.required]],
+    this.editCompanyDataForm = this.fb.group({
+      company: ['', [Validators.required]],
       currency: ['', [Validators.required]],
       transactionLimit: ['', [Validators.required]],
       dailyLimit: ['', [Validators.required]],

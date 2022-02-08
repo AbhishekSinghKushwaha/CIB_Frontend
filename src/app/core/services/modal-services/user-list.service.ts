@@ -6,7 +6,6 @@ import { UserListModel } from '../../domain/user.model';
 
 @Injectable()
 export class UserListService {
-  selectedUsers = new Subject<UserListModel>();
   modalRef: MatDialogRef<UserListModalComponent, any>;
 
   constructor(private readonly dialog: MatDialog) { }

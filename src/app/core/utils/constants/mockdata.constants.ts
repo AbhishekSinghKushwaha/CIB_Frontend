@@ -6,6 +6,7 @@ import { SelectAccountModel } from './../../domain/select-account.model';
 import { BuyGoodsFavouriteModel } from './../../domain/buy-goods-favourites.model';
 import { UserListModel, UserModel } from '../../domain/user.model';
 import { MobileOperator } from '../../domain/transfer.models';
+import { CompanyListModel } from '../../domain/company.model';
 
 const accounts: SelectAccountModel[] = [
   {
@@ -34,6 +35,9 @@ const userList: UserListModel[] = [
   { name: 'David Pastor', id: '8479393', profileType: 'Individual', status: 'Active', lastViewed: '10/10/21' },
   { name: 'Jerry Odhiambo', id: '0837484', profileType: 'Individual', status: 'Active', lastViewed: '30/03/22' },
 ];
+
+const companyList: CompanyListModel[] = [
+  { name: 'Apple' }, { name: 'Microsoft' }, { name: 'Equity Bank' }, { name: 'Netflix' },];
 
 const users: UserModel[] = [
   {
@@ -726,5 +730,6 @@ export const mockData = {
   accountNumber,
   users,
   mobileOperators,
-  userList
+  userList,
+  companyList
 };

@@ -17,25 +17,25 @@
         </div>
         <h3 class="strong-text">Please enter details</h3>
         <form
-          [formGroup]="editUserDataForm"
+          [formGroup]="editCompanyDataForm"
           (submit)="submit()"
           class="d-flex flex-column"
           autocomplete="off"
         >
           <div class="row">
             <div class="col-md-6">
-              <app-user-list
-                [parentForm]="editUserDataForm"
-                currencyFieldName="user"
-                label="User"
-                placeholder="Select user"
-                fieldName="user"
-                formControlName="user"
-              ></app-user-list>
+              <app-company-list
+                [parentForm]="editCompanyDataForm"
+                currencyFieldName="company"
+                label="Company"
+                placeholder="Select company"
+                fieldName="company"
+                formControlName="company"
+              ></app-company-list>
             </div>
             <div class="col-md-6">
               <app-transfer-amount
-                [parentForm]="editUserDataForm"
+                [parentForm]="editCompanyDataForm"
                 currencyFieldName="currency"
                 label="Currency"
                 placeholder="Enter an amount"
@@ -45,7 +45,7 @@
             </div>
             <div class="col-md-6">
               <app-transaction-limit
-                [parentForm]="editUserDataForm"
+                [parentForm]="editCompanyDataForm"
                 label="Transaction limit"
                 placeholder="Enter transaction limit"
                 formControlName="transactionLimit"
@@ -55,7 +55,7 @@
             </div>
             <div class="col-md-6">
               <app-transaction-limit
-                [parentForm]="editUserDataForm"
+                [parentForm]="editCompanyDataForm"
                 label="Daily limit"
                 placeholder="Enter daily limit"
                 formControlName="dailyLimit"
@@ -65,7 +65,7 @@
             </div>
             <div class="col-md-6">
               <app-transaction-limit
-                [parentForm]="editUserDataForm"
+                [parentForm]="editCompanyDataForm"
                 label="Weekly limit"
                 placeholder="Enter weekly limit"
                 formControlName="weeklyLimit"
@@ -75,7 +75,7 @@
             </div>
             <div class="col-md-6">
               <app-transaction-limit
-                [parentForm]="editUserDataForm"
+                [parentForm]="editCompanyDataForm"
                 label="Monthly limit"
                 placeholder="Enter monthly limit"
                 formControlName="monthlyLimit"
@@ -87,7 +87,7 @@
           <div class="mt-4">
             <button
               mat-raised-button
-              [disabled]="editUserDataForm.invalid"
+              [disabled]="editCompanyDataForm.invalid"
               color="primary"
             >
               Submit

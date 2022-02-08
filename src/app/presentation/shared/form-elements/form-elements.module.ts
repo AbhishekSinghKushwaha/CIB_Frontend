@@ -24,6 +24,8 @@ import { UserListComponent } from './user-list/user-list.component';
 import { CurrencySelectionModule } from '../modals/currency-selection/currency-selection.module';
 import { UserListModalModule } from '../modals/user-list-modal/user-list-modal.module';
 import { TransactionLimitComponent } from './transaction-limit/transaction-limit.component';
+import { CompanyListComponent } from './company-list/company-list.component';
+import { CompanyListModalModule } from '../modals/company-list-modal/company-list-modal.module';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,7 @@ import { TransactionLimitComponent } from './transaction-limit/transaction-limit
     CollectionOptionComponent,
     UserListComponent,
     TransactionLimitComponent,
+    CompanyListComponent,
   ],
   imports: [
     CommonModule,
@@ -54,7 +57,8 @@ import { TransactionLimitComponent } from './transaction-limit/transaction-limit
     CollectionOptionModalModule,
     BranchModalModule,
     CurrencySelectionModule,
-    UserListModalModule],
+    UserListModalModule,
+    CompanyListModalModule],
   exports: [
     FormsModule,
     ReactiveFormsModule,
@@ -73,7 +77,8 @@ import { TransactionLimitComponent } from './transaction-limit/transaction-limit
     SelectNumberComponent,
     CollectionOptionComponent,
     UserListComponent,
-    TransactionLimitComponent
+    TransactionLimitComponent,
+    CompanyListComponent
   ],
   providers: [],
 })
