@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
@@ -32,18 +32,20 @@ export class LoginService {
     const tokenData = this.storageService.getData('tokenState');
 
     const payload = new URLSearchParams();
-    payload.append('username', data.username);
-    payload.append('password', data.password);
-    payload.append('grant_type', 'password');
-    payload.append('client_id', 'onboarding');
-    payload.append('client_secret', 'postman-secret');
-    payload.append('scope', 'offline_access');
+    payload.set('username', 'TestUser');
+    payload.set('password', 'Test@134');
+    payload.set('grant_type', 'password');
+    payload.set('client_id', 'onboarding');
+    payload.set('client_secret', 'postman-secret');
+    payload.set('scope', 'offline_access');
+
 
     const headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
 
     const url = environment.apiUrl + urlList.login.loginUser;
     return this.http
-      .post<TokenResponseModel>(url, data, { headers });
+      .post<TokenResponseModel>(url, payload, { headers });
+
   }
 
   private resetTempPassword(verifyToken: string, password: string): void {
