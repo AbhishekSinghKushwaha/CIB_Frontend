@@ -28,5 +28,9 @@
     "validateOtp": "/authorization/user/validateOTPReset",
     "securityQuestions": "/authorization/user/securityQuestions",
     "securityAnswers": "/authorization/user/securityAnswers"
+  },
+  "beneficiary": {
+    "add": "/cibpaymentservice-v1/api/v1/Beneficiary/AddBeneficiary"
   }
+
 }

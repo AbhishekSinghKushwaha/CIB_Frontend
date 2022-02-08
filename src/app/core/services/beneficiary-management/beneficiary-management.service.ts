@@ -1,7 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { BeneficiaryModel } from '../../domain/beneficiary.model';
 
+import urlList from '../service-list.json';
 @Injectable({
   providedIn: 'root'
 })
@@ -10,13 +13,13 @@ export class BeneficiaryManagementService {
   beneficiaries: BeneficiaryModel[] = [];
   beneficiaryEdit: BeneficiaryModel;
 
-  constructor() { }
+  constructor(private readonly http: HttpClient) { }
 
   submitForm(data: BeneficiaryModel) {
     this.beneficiaries = data && [...this.beneficiaries, data];
-    setTimeout(() => {
-      this.formData.next(this.beneficiaries)
-    }, 0);
+    this.http.post(environment.apiUrl + urlList.beneficiary.add, data).subscribe( () => {
+        this.formData.next(this.beneficiaries)
+    }) 
   }
 
   updateForm(data: BeneficiaryModel, id: number) {

@@ -66,7 +66,8 @@ export class BeneficiaryManagementFormComponent implements OnInit {
     this.subscriptions.push(
       this.bankService.selected.subscribe((response) => {
         this.bank = response;
-        this.equityForm.controls.bank.setValue(response.bankName);
+        this.equityForm.controls.beneficiaryBank.setValue(response.bankName);
+        this.equityForm.controls.beneficiaryBankCode.setValue(response.bankCode);
       })
     );
     this.subscriptions.push(
@@ -79,12 +80,13 @@ export class BeneficiaryManagementFormComponent implements OnInit {
 
   private initForm(): void {
     this.equityForm = new FormGroup({
-      name: new FormControl(this.editData?.name, [Validators.required]),
-      bank: new FormControl(this.editData?.bank, [Validators.required]),
-      accountNumber: new FormControl(this.editData?.accountNumber, [
+      beneficiaryName: new FormControl(this.editData?.beneficiaryName, [Validators.required]),
+      beneficiaryBank: new FormControl(this.editData?.beneficiaryBank, [Validators.required]),
+      beneficiaryBankCode: new FormControl(this.editData?.beneficiaryBankCode, [Validators.required]),
+      beneficiaryAccount: new FormControl(this.editData?.beneficiaryAccount, [
         Validators.required,
       ]),
-      transactionType: new FormControl(this.editData?.transactionType, [
+      entityType: new FormControl(this.editData?.entityType, [
         Validators.required,
       ]),
     });
