@@ -27,6 +27,7 @@ import { TransactionLimitComponent } from './transaction-limit/transaction-limit
 import { CompanyListComponent } from './company-list/company-list.component';
 import { CompanyListModalModule } from '../modals/company-list-modal/company-list-modal.module';
 import { EmailInputComponent } from './email-input/email-input.component';
+import { CountryModalModule } from '../modals/country-modal/country-modal.module';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { EmailInputComponent } from './email-input/email-input.component';
     BranchModalModule,
     CurrencySelectionModule,
     UserListModalModule,
-    CompanyListModalModule],
+    CompanyListModalModule,
+    CountryModalModule],
   exports: [
     FormsModule,
     ReactiveFormsModule,

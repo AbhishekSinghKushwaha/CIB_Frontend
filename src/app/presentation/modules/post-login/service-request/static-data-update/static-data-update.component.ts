@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfirmationModel } from 'src/app/core/domain/confirmation.model';
 import { ConfirmationModalService } from 'src/app/core/services/modal-services/confirmation-modal.service';
 import { CONFIRMATIONCOMPLETION } from 'src/app/core/utils/constants/confirmation.constants';
+import { ServiceRequestSettings } from 'src/app/core/utils/constants/service-request.constant';
 
 @Component({
   selector: 'app-static-data-update',
@@ -14,6 +15,7 @@ export class StaticDataUpdateComponent implements OnInit {
   data: ConfirmationModel;
   completionData = CONFIRMATIONCOMPLETION.staticUserData;
   completed: boolean;
+  moreLinks = ServiceRequestSettings.rolesLinks;
 
   constructor(
     private readonly fb: FormBuilder,
@@ -35,7 +37,7 @@ export class StaticDataUpdateComponent implements OnInit {
         key: 'Currency',
         value: this.dataUpdateForm.value.phoneNumber
       }, {
-        key: 'Transaction limit',
+        key: 'Email',
         value: this.dataUpdateForm.value.email
       }]
     }
