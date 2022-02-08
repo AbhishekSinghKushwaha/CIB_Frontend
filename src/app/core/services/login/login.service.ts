@@ -29,10 +29,18 @@ export class LoginService {
   }
 
   public userLogin(data: any) {
+    const tokenData = this.storageService.getData('tokenState');
+
     const payload = new URLSearchParams();
-    Object.keys(data).forEach(key => payload.set(key, data[key]));
+    payload.append('username', data.username);
+    payload.append('password', data.password);
+    payload.append('grant_type', 'password');
+    payload.append('client_id', 'onboarding');
+    payload.append('client_secret', 'postman-secret');
+    payload.append('scope', 'offline_access');
 
     const headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
+
     const url = environment.apiUrl + urlList.login.loginUser;
     return this.http
       .post<TokenResponseModel>(url, data, { headers });

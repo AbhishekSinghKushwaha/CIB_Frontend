@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
     this.loginService.userLogin(payload).subscribe(
       (authData) => {
         console.log(authData)
-        this.storageService.setData('loginState', {
+        this.storageService.setData('tokenState', {
           ...authData,
           stage: LOGIN_CONSTANTS.LOGIN_STAGES.SMS_VERIFICATION,
         });
