@@ -20,6 +20,8 @@ import { NumberSelectModalModule } from '../modals/number-select-modal/number-se
 import { CollectionOptionModalModule } from '../modals/collection-option-modal/collection-option-modal.module';
 import { CollectionOptionComponent } from './collection-option/collection-option.component';
 import { BranchModalModule } from '../modals/branch-modal/branch-modal.module';
+import { UserListComponent } from './user-list/user-list.component';
+import { CurrencySelectionModule } from '../modals/currency-selection/currency-selection.module';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import { BranchModalModule } from '../modals/branch-modal/branch-modal.module';
     CountrySelectInputComponent,
     SelectNumberComponent,
     CollectionOptionComponent,
+    UserListComponent,
   ],
   imports: [
     CommonModule,
@@ -46,7 +49,8 @@ import { BranchModalModule } from '../modals/branch-modal/branch-modal.module';
     TransferFromModalModule,
     NumberSelectModalModule,
     CollectionOptionModalModule,
-    BranchModalModule],
+    BranchModalModule,
+    CurrencySelectionModule],
   exports: [
     FormsModule,
     ReactiveFormsModule,

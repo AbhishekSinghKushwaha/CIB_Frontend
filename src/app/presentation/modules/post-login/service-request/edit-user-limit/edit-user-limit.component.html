@@ -1,0 +1,57 @@
+<div class="row" *ngIf="!completed">
+  <div class="col-md-12">
+    <div class="row mb-4 justify-content-md-center">
+      <div class="col-md-11">
+        <div class="mb-3">
+          <button
+            mat-icon-button
+            aria-label="Back"
+            class="back-icon"
+            routerLink="/transact/"
+          >
+            <div class="strong-text">
+              <mat-icon svgIcon="caret_left"></mat-icon>
+              <span>Edit User Limit</span>
+            </div>
+          </button>
+        </div>
+        <h3 class="strong-text">Please enter details</h3>
+        <form
+          [formGroup]="editUserDataForm"
+          (submit)="submit()"
+          class="d-flex flex-column"
+          autocomplete="off"
+        >
+          <div class="row">
+            <div class="col-md-6">
+              <app-transfer-amount
+                [parentForm]="editUserDataForm"
+                currencyFieldName="currency"
+                label="Currency"
+                placeholder="Enter an amount"
+                formControlName="currency"
+              >
+              </app-transfer-amount>
+            </div>
+          </div>
+          <div class="mt-4">
+            <button
+              mat-raised-button
+              [disabled]="editUserDataForm.invalid"
+              color="primary"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{ editUserDataForm.value | json }}
+<div class="row" *ngIf="completed">
+  <app-confirmation-completion
+    [data]="completionData"
+    (confirmationDone)="confirmationDone($event)"
+  ></app-confirmation-completion>
+</div>

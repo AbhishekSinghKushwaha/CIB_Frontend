@@ -8,4 +8,12 @@ const chequeBook: ConfirmationCompletionModel = {
   icon: 'assets/images/icons/visual-support-icons-virtual-account-submission-avatar.svg'
 };
 
-export const CONFIRMATIONCOMPLETION = { chequeBook };
+const userLimit: ConfirmationCompletionModel = {
+  title: 'Confirmation',
+  buttonText: 'Done',
+  message: 'Service request submitted for approval',
+  subMessage: 'User Limit updated',
+  icon: 'assets/images/icons/visual-support-icons-virtual-account-submission-avatar.svg'
+};
+
+export const CONFIRMATIONCOMPLETION = { chequeBook, userLimit };

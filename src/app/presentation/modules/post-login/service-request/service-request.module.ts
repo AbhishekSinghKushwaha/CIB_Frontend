@@ -9,12 +9,14 @@ import { FormElementsModule } from 'src/app/presentation/shared/form-elements/fo
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModalsModule } from 'src/app/presentation/shared/modals/shared-modals.module';
 import { ConfirmationModalModule } from 'src/app/presentation/shared/modals/confirmation-modal/confirmation-modal.module';
+import { EditUserLimitComponent } from './edit-user-limit/edit-user-limit.component';
 
 
 @NgModule({
   declarations: [
     ServiceRequestComponent,
     ChequebookRequestComponent,
+    EditUserLimitComponent,
   ],
   imports: [
     CommonModule,

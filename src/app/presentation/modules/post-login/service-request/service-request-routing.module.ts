@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ChequebookRequestComponent } from './chequebook-request/chequebook-request.component';
+import { EditUserLimitComponent } from './edit-user-limit/edit-user-limit.component';
 import { ServiceRequestComponent } from './service-request.component';
 
 const routes: Routes = [{
@@ -9,6 +10,9 @@ const routes: Routes = [{
 }, {
   path: 'chequebook-request',
   component: ChequebookRequestComponent
+}, {
+  path: 'user-limit/edit',
+  component: EditUserLimitComponent
 }];
 
 @NgModule({

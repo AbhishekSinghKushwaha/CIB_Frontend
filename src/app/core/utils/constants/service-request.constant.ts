@@ -9,7 +9,7 @@ const dashboardLinks: CardModel[] = [{
   text: 'Edit User Limit',
   prefixIcon: 'assets/images/icons/visual-support-icons-sr-edit-user-limit.svg',
   suffixIcon: 'caret_right',
-  route: '/service-request/user-limit'
+  route: '/service-request/user-limit/edit'
 }, {
   text: 'Edit Company Limit',
   prefixIcon: 'assets/images/icons/visual-support-icons-sr-edit-company-limit.svg',
