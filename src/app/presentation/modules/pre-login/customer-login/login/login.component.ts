@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     private readonly storageService: StorageService,
     private loginService: LoginService,
     private readonly router: Router
-  ) {}
+  ) { }
 
   async ngOnInit(): Promise<void> {
     this.initForm();
@@ -52,16 +52,24 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-    const payload = this.loginPasswordForm.getRawValue();
+    const payload = {
+      ...this.loginPasswordForm.value,
+      grant_type: 'password',
+      // deepcode ignore HardcodedNonClientId: <please specify a reason of ignoring this>
+      client_id: 'onboarding',
+      // deepcode ignore HardcodedNonCryptoSecret: <please specify a reason of ignoring this>
+      client_secret: 'postman-secret',
+      scope: 'offline_access'
+    };
     this.loginService.userLogin(payload).subscribe(
-      (user) => {
-        console.log({ user });
-        const { access_token, ...mainUser } = user;
+      (authData) => {
+        console.log(authData)
         this.storageService.setData('loginState', {
+          ...authData,
           stage: LOGIN_CONSTANTS.LOGIN_STAGES.SMS_VERIFICATION,
         });
-        this.storageService.setData('accessToken', { access_token });
-        this.storageService.setData('loginCred', mainUser);
+        // this.storageService.setData('accessToken', { access_token });
+        // this.storageService.setData('loginCred', mainUser);
         this.router.navigate(['/auth/login/sms-verification']);
       },
       (error) => {

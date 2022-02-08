@@ -11,9 +11,7 @@ export class LoginGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const data = this.storageService.getData('loginState');
-    const loginDataSet = !!this.storageService.getData('loginCred');
-    if (data?.stage === LOGIN_CONSTANTS.LOGIN_STAGES.LOGIN_SUCCESS && loginDataSet) {
-      console.log(data, loginDataSet)
+    if (data?.stage === LOGIN_CONSTANTS.LOGIN_STAGES.LOGIN_SUCCESS) {
       this.router.navigate(['/dashboard']);
       return false
     }

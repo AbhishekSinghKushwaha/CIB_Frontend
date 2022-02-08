@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { TokenResponseModel } from '../../domain/user-auth.model';
 import { UserModel } from '../../domain/user.model';
 import urlList from '../service-list.json';
 import { StorageService } from '../storage/storage.service';
@@ -10,16 +11,6 @@ import { StorageService } from '../storage/storage.service';
 interface Userdata {
   username: string;
   password: string;
-}
-
-interface TokenResponse {
-  access_token: string;
-  token_type: string;
-  expires_in: number;
-  refresh_token: string;
-  verification_token?: string;
-  response_code?: string;
-  error_code?: string;
 }
 
 @Injectable({
@@ -37,10 +28,14 @@ export class LoginService {
     return await this.storageService.getData('loginCred');
   }
 
-  public userLogin(data: Userdata) {
+  public userLogin(data: any) {
+    const payload = new URLSearchParams();
+    Object.keys(data).forEach(key => payload.set(key, data[key]));
+
+    const headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
     const url = environment.apiUrl + urlList.login.loginUser;
     return this.http
-      .post<UserModel>(url, data);
+      .post<TokenResponseModel>(url, data, { headers });
   }
 
   private resetTempPassword(verifyToken: string, password: string): void {

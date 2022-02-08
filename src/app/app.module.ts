@@ -32,10 +32,9 @@ import { LoginGuard } from './core/utils/guards/login/login.guard';
   providers: [
     { provide: UserRepository, useClass: UserMockRepository },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorIntercept, multi: true },
-    fakeBackendProvider,
     PostLoginGuard,
     LoginGuard,
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

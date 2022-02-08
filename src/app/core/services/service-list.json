@@ -45,7 +45,7 @@
     "getPdf": "/v1/generatepdf/statement"
   },
   "login": {
-    "loginUser": "/users/authorization/login",
+    "loginUser": "/cibuseraccess-v1/api/Auth/oauth/token",
     "verifyOtp": "/authorization/login/verifyOtp",
     "resendOtp": "/authorization/oauth/regenerateOtp",
     "validateOtp": "/authorization/user/validateOTPReset",
