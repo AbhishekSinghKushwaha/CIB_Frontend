@@ -55,8 +55,8 @@ export class AddProductServiceComponent implements OnInit {
         const product: Product = this.selectedProducts[i];
         let serviceArray = [];
 
-        for (let j = 0; j < product.productServices.length; j++) {
-          const service: ProductService = product.productServices[j];
+        for (let j = 0; j < product?.productServices?.length; j++) {
+          const service: ProductService = product?.productServices[j];
           serviceArray.push(service.id);
           if (j + 1 == product.productServices.length) {
             let payload = {

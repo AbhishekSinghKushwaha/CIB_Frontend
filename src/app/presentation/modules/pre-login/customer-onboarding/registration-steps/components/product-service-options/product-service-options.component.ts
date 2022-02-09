@@ -39,9 +39,6 @@ export class ProductServiceOptionsComponent implements OnInit {
   listenToDataStreams() {
     this.productsServices.selectedProduct$.subscribe((x) => {
       this.product = x;
-
-      console.log(this.productId);
-
       this.productId !== null ? this.mapEditProduct() : this.product;
     });
 
@@ -58,9 +55,7 @@ export class ProductServiceOptionsComponent implements OnInit {
       return product.id === this.productId;
     });
 
-    this.productsServices.selectedProducts([
-      this.renameObjectKeys(this.product),
-    ]);
+    this.productsServices.selectProducts([this.product]);
 
     this.product = selectedProduct;
   }
@@ -80,6 +75,7 @@ export class ProductServiceOptionsComponent implements OnInit {
     }
   }
 
+  // Unused function
   renameObjectKeys(product: any): Product {
     let isDone = false;
     product.id = product.productId;
@@ -170,14 +166,14 @@ export class ProductServiceOptionsComponent implements OnInit {
         }
       });
 
-      this.productsServices.selectedProducts(newArr);
+      this.productsServices.selectProducts(newArr);
     } else {
       if (this.alreadySelectedProducts.length > 0) {
         newArrayOfServices = [...this.alreadySelectedProducts, selectedProduct];
-        this.productsServices.selectedProducts(newArrayOfServices);
+        this.productsServices.selectProducts(newArrayOfServices);
       } else {
         newArrayOfServices = [selectedProduct];
-        this.productsServices.selectedProducts(newArrayOfServices);
+        this.productsServices.selectProducts(newArrayOfServices);
       }
     }
 
@@ -210,5 +206,17 @@ export class ProductServiceOptionsComponent implements OnInit {
           ]);
         }
       });
+  }
+
+  goBack() {
+    if (this.productId === null) {
+      this.router.navigate([
+        '/auth/customer-onboarding/register/add-product-service',
+      ]);
+    } else {
+      this.router.navigate([
+        '/auth/customer-onboarding/register/product-services',
+      ]);
+    }
   }
 }

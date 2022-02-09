@@ -44,7 +44,7 @@ export class ProductsAndServicesService extends StateService<ProductsState> {
     this.setState({ selectedProduct: product });
   }
 
-  selectedProducts(selectedProducts: Product[]) {
+  selectProducts(selectedProducts: Product[]) {
     this.setState({ selectedProducts: selectedProducts });
   }
 

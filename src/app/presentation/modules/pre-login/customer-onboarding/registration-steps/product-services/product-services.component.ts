@@ -46,10 +46,12 @@ export class ProductServicesComponent implements OnInit {
   }
 
   edit(product: any) {
-    this.productsService.selectProduct(product);
+    const formattedProduct = this.renameObjectKeys(product);
+
+    this.productsService.selectProduct(formattedProduct);
     this.router.navigate(
       ['/auth/customer-onboarding/register/product-service-options'],
-      { queryParams: { id: product.productId } }
+      { queryParams: { id: formattedProduct.id } }
     );
   }
 
@@ -59,6 +61,7 @@ export class ProductServicesComponent implements OnInit {
       .subscribe((res) => {
         if (res.isSuccessful) {
           this.products = res.data;
+          this.setSelectedProducts();
         }
       });
   }
@@ -68,5 +71,42 @@ export class ProductServicesComponent implements OnInit {
       ProductServiceConfirmationModalComponent,
       { disableClose: true, data: this.products }
     );
+  }
+
+  renameObjectKeys(product: any): Product {
+    let isDone = false;
+    product.id = product.productId;
+    product.productServices = product.services;
+
+    delete product.productId;
+    product.services.forEach((service: any, i: number) => {
+      service.id = service.serviceId;
+      delete service.serviceid;
+
+      if (i + 1 === product.services.length) {
+        service.id = service.serviceId;
+        delete service.serviceid;
+        delete product.services;
+        isDone = true;
+      }
+    });
+
+    if (isDone) {
+      // this.productsServices.selectedProduct$ = product;
+      return product;
+    } else {
+      return product;
+    }
+  }
+
+  setSelectedProducts() {
+    let newProdArray: Product[] = [];
+    this.products.forEach((product: any, i: number) => {
+      newProdArray.push(this.renameObjectKeys(product));
+
+      if (i + 1 === this.products.length) {
+        this.productsService.selectProducts(newProdArray);
+      }
+    });
   }
 }
