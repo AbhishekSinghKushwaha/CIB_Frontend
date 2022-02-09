@@ -1,3 +1,5 @@
+import { RouterModule } from '@angular/router';
+import { CardComponentComponent } from './card-component/card-component.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -13,6 +15,7 @@ import { AccountDropdownItemComponent } from './account-dropdown-item/account-dr
 import { BeneficiaryListItemComponent } from './beneficiary-list-item/beneficiary-list-item.component';
 import { NotificationMenuItemComponent } from './notification-menu-item/notification-menu-item.component';
 import { WelcomeInfoComponent } from './welcome-info/welcome-info.component';
+import { ConfirmationCompletionComponent } from './confirmation-completion/confirmation-completion.component';
 
 const components = [
   AccountDropdownItemComponent,
@@ -23,14 +26,22 @@ const components = [
   TransactMenuItemComponent,
   SmsVerificationComponent,
   EmailVerificationComponent,
+  NotificationMenuItemComponent,
+  CardComponentComponent,
   BeneficiaryListItemComponent,
   NotificationMenuItemComponent,
   WelcomeInfoComponent,
+  ConfirmationCompletionComponent
 ];
 
 @NgModule({
   declarations: components,
-  imports: [CommonModule, MatStyleModule, ReactiveFormsModule],
-  exports: components,
+  imports: [
+    CommonModule,
+    MatStyleModule,
+    ReactiveFormsModule,
+    RouterModule
+  ],
+  exports: components
 })
-export class SharedComponentsModule {}
+export class SharedComponentsModule { }
