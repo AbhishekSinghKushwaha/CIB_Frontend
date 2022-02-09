@@ -66,7 +66,7 @@ export class OwnEquityAccountComponent
       currency: this.getForm.amount.value.currency,
       destinationAccount: this.getForm.sendTo.value.accountNumber,
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
-      transferType: this.transferType.OWN_EQUITY,
+      transferType: Number(this.transferType.OWN_EQUITY),
     };
     this.ownEquityAccountService
       .getTransferCharges(payload)

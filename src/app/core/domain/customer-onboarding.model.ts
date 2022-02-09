@@ -44,3 +44,15 @@ export interface TeamMember {
   transactionLimit?: string;
   corporateUserId?: string;
 }
+
+export interface Product {
+  description?: string;
+  id: string;
+  productName: string;
+  productServices: ProductService[];
+}
+export interface ProductService {
+  id?: string;
+  description?: string;
+  serviceName?: string;
+}

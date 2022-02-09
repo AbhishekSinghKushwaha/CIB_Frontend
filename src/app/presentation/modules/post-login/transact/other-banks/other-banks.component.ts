@@ -52,7 +52,7 @@ export class OtherBanksComponent implements OnInit {
       destinationCountryCode: 'KE', // Default have it as kenya, then change to pick the user's country
       countryCode: 'KE', //TODO:: Default have it as kenya, then change to pick the user's country
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
-      transferType: Number(this.getForm.transactionType.value), // For Another Bank Transfer Type
+      transferType: this.getForm.transactionType.value, // For Another Bank Transfer Type
     };
     this.interBankTransferService
       .getTransferCharges(payload)
@@ -72,9 +72,7 @@ export class OtherBanksComponent implements OnInit {
         from: this.getForm.sendFrom.value,
         to: this.getForm.sendTo.value,
         amount: this.getForm.amount.value,
-        transactionType: `Send to another bank via ${
-          this.getForm.transactionType.value === '4' ? 'EFT' : 'RTGS'
-        }`,
+        transactionType: Number(this.getForm.transactionType.value),
         paymentReason: this.getForm.reason.value,
         fxReferenceId: this.getForm.fxReferenceId.value,
         schedulePayment: this.getForm.schedulePayment.value,

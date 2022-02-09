@@ -1,5 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { forEach } from 'lodash';
+import {
+  Product,
+  ProductService,
+} from 'src/app/core/domain/customer-onboarding.model';
+import { ProductsAndServicesService } from 'src/app/core/services/customer-onboarding/products-and-services.service';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { NotificationConstants } from 'src/app/core/utils/constants/notification-menu.constants';
 
@@ -9,29 +15,64 @@ import { NotificationConstants } from 'src/app/core/utils/constants/notification
   styleUrls: ['./product-service-options.component.scss'],
 })
 export class ProductServiceOptionsComponent implements OnInit {
-  product: any;
+  product: Product;
 
-  selectedServices: any[];
+  selectedServices: ProductService[] = [];
+
+  alreadySelectedProducts: Product[];
+
+  productId: any;
   constructor(
     public readonly notificationDashboardList: NotificationConstants,
     private readonly router: Router,
-    private readonly storageService: StorageService
+    private readonly storageService: StorageService,
+    private productsServices: ProductsAndServicesService,
+    private route: ActivatedRoute
   ) {
-    this.selectedServices = [];
+    this.productId = route.snapshot.queryParamMap.get('id');
   }
 
   ngOnInit(): void {
-    this.product = this.storageService.getData('product-services');
-    this.setAlreadySelectedServices();
+    this.listenToDataStreams();
+  }
+
+  listenToDataStreams() {
+    this.productsServices.selectedProduct$.subscribe((x) => {
+      this.product = x;
+
+      console.log(this.productId);
+
+      this.productId !== null ? this.mapEditProduct() : this.product;
+    });
+
+    this.productsServices.selectedProducts$.subscribe((x) => {
+      this.alreadySelectedProducts = x;
+      this.setAlreadySelectedServices();
+    });
+  }
+
+  mapEditProduct() {
+    const allProducts = this.storageService.getData('products-and-services');
+
+    const selectedProduct = allProducts?.find((product: Product) => {
+      return product.id === this.productId;
+    });
+
+    this.productsServices.selectedProducts([
+      this.renameObjectKeys(this.product),
+    ]);
+
+    this.product = selectedProduct;
   }
 
   setAlreadySelectedServices() {
-    const myservice = this.storageService.getData('selected-service');
-
-    if (myservice && this.selectedServices.length === 0) {
-      myservice.forEach((service: any) => {
-        if (service.productId === this.product.id) {
-          this.selectedServices = service.services;
+    if (
+      this.alreadySelectedProducts?.length > 0 &&
+      this.selectedServices?.length === 0
+    ) {
+      this.alreadySelectedProducts.forEach((service: Product) => {
+        if (service.id === this.product.id) {
+          this.selectedServices = service.productServices;
         }
       });
     } else {
@@ -39,43 +80,105 @@ export class ProductServiceOptionsComponent implements OnInit {
     }
   }
 
-  submit() {
-    // Update only services if the product already exists
-    const myservice = this.storageService.getData('selected-service');
+  renameObjectKeys(product: any): Product {
+    let isDone = false;
+    product.id = product.productId;
+    product.productServices = product.services;
 
-    const existingProduct = myservice?.find((product: any) => {
-      return product.productId === this.product.id;
+    delete product.productId;
+    product.services.forEach((service: any, i: number) => {
+      service.id = service.serviceId;
+      delete service.serviceid;
+
+      if (i + 1 === product.services.length) {
+        service.id = service.serviceId;
+        delete service.serviceid;
+        delete product.services;
+        isDone = true;
+      }
     });
 
-    let selectedService = {
-      productId: this.product.id,
-      services: this.selectedServices,
+    if (isDone) {
+      this.productsServices.selectedProduct$ = product;
+      return product;
+    } else {
+      return product;
+    }
+  }
+
+  submit() {
+    this.productId === null ? this.addProduct() : this.updateProduct();
+  }
+
+  toggle(serviceId: string) {
+    if (this.isServiceActive(serviceId)) {
+      const selectedServiceIndex = this.selectedServices.findIndex(
+        (service: ProductService) => service.id === serviceId
+      );
+      this.selectedServices.splice(selectedServiceIndex, 1);
+    } else {
+      // Add the service to selected services array
+      const selectedService = this.product?.productServices?.find(
+        (service: ProductService) => {
+          return service.id === serviceId;
+        }
+      );
+
+      this.selectedServices.push(selectedService || {});
+    }
+  }
+
+  isServiceActive(serviceId: string): boolean {
+    const selectedService = this.selectedServices?.find(
+      (service: ProductService) => {
+        return service.id === serviceId;
+      }
+    );
+
+    return selectedService ? true : false;
+  }
+
+  addProduct() {
+    const existingProduct = this.alreadySelectedProducts.find(
+      (product: Product) => {
+        return product.id === this.product.id;
+      }
+    );
+
+    let selectedProduct: Product = {
+      productName: this.product.productName,
+      id: this.product.id,
+      description: this.product.description,
+      productServices: this.selectedServices,
     };
 
     let newArrayOfServices = [];
 
     if (existingProduct) {
-      const newArr: any[] = myservice.map((element: any) => {
-        console.log(element);
-        if (element.productId === this.product.id) {
-          return selectedService;
+      const newArr: any[] = this.alreadySelectedProducts.map(
+        (element: Product) => {
+          if (element.id === this.product.id) {
+            return selectedProduct;
+          }
+          return element;
         }
-        return element;
-      });
+      );
 
-      newArr.forEach((prod: any, i: number) => {
-        if (prod.services.length === 0) {
+      newArr.forEach((prod: Product, i: number) => {
+        if (prod.productServices.length === 0) {
           newArr.splice(i, 1);
         }
       });
 
-      this.storageService.setData('selected-service', newArr);
+      this.productsServices.selectedProducts(newArr);
     } else {
-      myservice !== null
-        ? (newArrayOfServices = [...myservice, selectedService])
-        : (newArrayOfServices = [selectedService]);
-      this.storageService.removeData('selected-service');
-      this.storageService.setData('selected-service', newArrayOfServices);
+      if (this.alreadySelectedProducts.length > 0) {
+        newArrayOfServices = [...this.alreadySelectedProducts, selectedProduct];
+        this.productsServices.selectedProducts(newArrayOfServices);
+      } else {
+        newArrayOfServices = [selectedProduct];
+        this.productsServices.selectedProducts(newArrayOfServices);
+      }
     }
 
     this.router.navigate([
@@ -83,29 +186,29 @@ export class ProductServiceOptionsComponent implements OnInit {
     ]);
   }
 
-  toggle(serviceId: string) {
-    if (this.isServiceActive(serviceId)) {
-      const selectedServiceIndex = this.selectedServices.findIndex(
-        (service: any) => service.id === serviceId
-      );
-      this.selectedServices.splice(selectedServiceIndex, 1);
-    } else {
-      // Add the service to selected services array
-      const selectedService = this.product.productServices.find(
-        (service: any) => {
-          return service.id === serviceId;
-        }
-      );
+  updateProduct() {
+    this.productId = null;
+    let newArray = [];
 
-      this.selectedServices.push(selectedService);
+    for (let i = 0; i < this.selectedServices.length; i++) {
+      const element = this.selectedServices[i];
+      newArray.push(element.id);
     }
-  }
+    const payload = {
+      productId: this.product.id,
+      services: newArray,
+    };
 
-  isServiceActive(serviceId: string): boolean {
-    const selectedService = this.selectedServices.find((service: any) => {
-      return service.id === serviceId;
-    });
-
-    return selectedService ? true : false;
+    this.productsServices
+      .updateProductAndService(this.storageService.getData('corporateId'), {
+        products: [payload],
+      })
+      .subscribe((res) => {
+        if (res.isSuccessful) {
+          this.router.navigate([
+            '/auth/customer-onboarding/register/product-services',
+          ]);
+        }
+      });
   }
 }

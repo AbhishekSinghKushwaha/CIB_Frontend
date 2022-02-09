@@ -90,16 +90,26 @@
               </app-transfer-to>
             </div>
             <!-- Transfer Amount -->
-            <!-- <div class="col-md-6">
-              <app-transfer-amount [parentForm]="interBankTransferForm" label="Amount" fieldName="amount"
-                placeholder="Enter an amount" formControlName="amount"></app-transfer-amount>
-            </div> -->
+            <div class="col-md-6">
+              <app-transfer-amount
+                [parentForm]="interBankTransferForm"
+                label="Amount"
+                fieldName="amount"
+                placeholder="Enter an amount"
+                formControlName="amount"
+              ></app-transfer-amount>
+            </div>
             <!-- Schedule Payment -->
-            <!-- <div class="col-md-6">
-              <app-schedule-payment-input [parentForm]="interBankTransferForm" label="Schedule Payment"
-                fieldName="schedulePayment" placeholder="Select a payment date" transactionType="interBankTransfer">
+            <div class="col-md-6">
+              <app-schedule-payment-input
+                [parentForm]="interBankTransferForm"
+                label="Schedule Payment"
+                fieldName="schedulePayment"
+                placeholder="Select a payment date"
+                transactionType="interBankTransfer"
+              >
               </app-schedule-payment-input>
-            </div> -->
+            </div>
             <!-- FX Reference ID -->
             <div class="col-md-6">
               <app-input
