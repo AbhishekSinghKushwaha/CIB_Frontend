@@ -1,6 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { confirmModal } from 'src/app/presentation/shared/decorators/confirm-dialog.decorator';
+
+export type UserListAction = 'enable' | 'disable' | 'edit' | 'remove';
 
 @Component({
   selector: 'app-user-list-actions-modal',
@@ -8,24 +10,55 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-list-actions-modal.component.scss'],
 })
 export class UserListActionsModalComponent implements OnInit {
+  userEnabled: boolean;
+
   constructor(
     private readonly dialogRef: MatDialogRef<UserListActionsModalComponent>,
-    @Inject(MAT_DIALOG_DATA) private readonly data: any,
-    private readonly router: Router
-  ) {}
+    @Inject(MAT_DIALOG_DATA) private readonly data: any
+  ) {
+    this.userEnabled = this.data.userEnabled;
+  }
 
   ngOnInit(): void {}
 
-  close(): void {
-    this.dialogRef.close();
+  close(result: UserListAction | undefined = undefined): void {
+    this.dialogRef.close(result);
   }
 
-  disable(): void {}
+  @confirmModal({
+    title: 'Do you want to enable this user?',
+    message:
+      'Once you enable a user, they will have access to key roles and responsibilities',
+    cancelText: 'No',
+    confirmText: 'Yes',
+  })
+  enable(): void {
+    this.close('enable');
+  }
 
-  remove(): void {}
+  @confirmModal({
+    title: 'Do you want to disable this user?',
+    message:
+      'Once you disable a user, they will lose access to key roles and responsibilities',
+    cancelText: 'No',
+    confirmText: 'Yes',
+  })
+  disable(): void {
+    this.close('disable');
+  }
+
+  @confirmModal({
+    title: 'Are you sure',
+    message:
+      'Once you remove a user, all their details will be deleted. You can add them again anytime.',
+    cancelText: "No, I'm not",
+    confirmText: "Yes, I'm sure",
+  })
+  remove() {
+    this.close('remove');
+  }
 
   edit(): void {
-    this.close();
-    this.router.navigate(['user-management/edit', this.data.userId]);
+    this.close('edit');
   }
 }
