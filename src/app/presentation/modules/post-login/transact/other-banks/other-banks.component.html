@@ -1,0 +1,138 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="row mb-4 justify-content-md-center">
+      <div class="col-md-11">
+        <div class="mb-3">
+          <button
+            mat-icon-button
+            aria-label="Back"
+            class="back-icon"
+            routerLink="/transact/"
+          >
+            <div class="strong-text">
+              <mat-icon svgIcon="caret_left"></mat-icon>
+              <span>Send to an equity account</span>
+            </div>
+          </button>
+        </div>
+        <h3 class="strong-text">Please enter the payment details</h3>
+        <form
+          [formGroup]="interBankTransferForm"
+          (submit)="getTransferCharges()"
+          class="d-flex flex-column"
+          autocomplete="off"
+        >
+          <mat-radio-group class="pt-4" formControlName="transactionType">
+            <div class="row">
+              <div class="col-md-6">
+                <mat-form-field
+                  appearance="standard"
+                  style="width: 100%"
+                  floatLabel="always"
+                >
+                  <input
+                    matInput
+                    type="text"
+                    class="strong-text"
+                    disabled
+                    placeholder="Transfer Via RTGS"
+                  />
+                  <mat-radio-button
+                    matSuffix
+                    value="{{ transferType.RTGS }}"
+                  ></mat-radio-button>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-6">
+                <mat-form-field
+                  appearance="standard"
+                  style="width: 100%"
+                  floatLabel="always"
+                >
+                  <input
+                    matInput
+                    type="text"
+                    class="strong-text"
+                    disabled
+                    placeholder="Transfer Via EFT"
+                  />
+                  <mat-radio-button
+                    matSuffix
+                    value="{{ transferType.EFT }}"
+                  ></mat-radio-button>
+                </mat-form-field>
+              </div>
+            </div>
+          </mat-radio-group>
+          <div class="row">
+            <!-- Send From -->
+            <div class="col-md-6">
+              <app-transfer-from
+                [parentForm]="interBankTransferForm"
+                label="Send From"
+                placeholder="Send From"
+                formControlName="sendFrom"
+                fieldName="sendFrom"
+              >
+              </app-transfer-from>
+            </div>
+            <!-- Send To -->
+            <div class="col-md-6 align-self-end">
+              <app-transfer-to
+                [parentForm]="interBankTransferForm"
+                label="Send To"
+                formControlName="sendTo"
+                fieldName="sendTo"
+                placeholder="Select the recipient"
+                [transactionType]="getForm.transactionType.value"
+              >
+              </app-transfer-to>
+            </div>
+            <!-- Transfer Amount -->
+            <!-- <div class="col-md-6">
+              <app-transfer-amount [parentForm]="interBankTransferForm" label="Amount" fieldName="amount"
+                placeholder="Enter an amount" formControlName="amount"></app-transfer-amount>
+            </div> -->
+            <!-- Schedule Payment -->
+            <!-- <div class="col-md-6">
+              <app-schedule-payment-input [parentForm]="interBankTransferForm" label="Schedule Payment"
+                fieldName="schedulePayment" placeholder="Select a payment date" transactionType="interBankTransfer">
+              </app-schedule-payment-input>
+            </div> -->
+            <!-- FX Reference ID -->
+            <div class="col-md-6">
+              <app-input
+                [parentForm]="interBankTransferForm"
+                label="Fx Reference ID"
+                fieldName="fxReferenceId"
+                formControlName="fxReferenceId"
+                placeholder="Enter FX reference ID"
+              ></app-input>
+            </div>
+            <!-- Payment Reason -->
+            <div class="col-md-6">
+              <app-input
+                [parentForm]="interBankTransferForm"
+                label="Payment Reason"
+                fieldName="reason"
+                formControlName="reason"
+                placeholder="Optional"
+              ></app-input>
+            </div>
+          </div>
+          <div class="mt-4">
+            <button
+              mat-raised-button
+              [disabled]="interBankTransferForm.invalid"
+              color="primary"
+              disabled
+            >
+              Send money
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

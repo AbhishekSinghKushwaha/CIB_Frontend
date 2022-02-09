@@ -1,0 +1,436 @@
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  min-height: 100vh;
+}
+
+/* You can add global styles to this file, and also import other style files */
+@import "./assets/scss/theme";
+@import "./assets/scss/base";
+.otp-input {
+  width: 36px;
+  height: 36px;
+  margin-bottom: 16px;
+  text-align: center;
+  border-radius: 8px;
+  border: 1px solid var(--cool-grey-20);
+  font-size: 20px;
+  background-color: var(--cool-grey-20);
+  margin-right: 16px;
+  outline-color: var(--equity);
+  &:focus {
+    border: 1px solid var(--equity);
+  }
+}
+
+.country-item {
+  height: 80px !important;
+}
+
+.country-select-input {
+  font-size: 16px !important;
+  cursor: pointer;
+  text-overflow: ellipsis !important;
+}
+
+.password-match-color {
+  color: var(--green) !important;
+}
+
+.text-primary {
+  color: #a32a29 !important;
+}
+
+button {
+  &.mat-button {
+    border-radius: 8px !important;
+    min-height: 48px;
+  }
+  &.mat-flat-button {
+    border-radius: 8px !important;
+    min-height: 48px;
+    &:disabled {
+      color: var(--cool-grey) !important;
+      background-color: var(--cool-grey-40) !important;
+    }
+  }
+  &.mat-raised-button {
+    border-radius: 8px !important;
+    min-height: 48px;
+    &:disabled {
+      color: var(--cool-grey) !important;
+      background-color: var(--cool-grey-40) !important;
+    }
+  }
+  &.mat-stroked-button {
+    border-radius: 8px !important;
+    min-height: 48px;
+    background-color: var(--white);
+  }
+}
+
+.back-icon {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 0 !important;
+  margin-left: -6px !important;
+  .mat-icon {
+    margin-right: 8px !important;
+  }
+}
+
+.password-icon {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  .mat-icon {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 30px !important;
+    width: 30px !important;
+  }
+}
+
+.access-panel {
+  background-color: var(--white);
+  height: 100vh;
+  overflow-y: scroll;
+  .access-panel-content {
+    padding-bottom: 40px;
+  }
+  .access-language-selection {
+    background-color: var(--white);
+    position: fixed;
+    width: calc(100vw * 0.333333);
+    bottom: 0;
+    height: 4rem;
+    overflow: hidden;
+    padding-left: 44px;
+    padding-top: 16px;
+    @media (max-width: 991px) {
+      width: calc(100vw);
+      max-width: 100vw;
+    }
+  }
+}
+
+.eq-error-snackbar {
+  background-color: var(--red) !important;
+  span {
+    color: white;
+    padding: 0 !important;
+  }
+}
+
+// slider styling
+.mat-slide-toggle-thumb {
+  width: 20px !important;
+  height: 20px !important;
+  transform: translate(0%, 50%);
+}
+
+.mat-slide-toggle-bar {
+  border-radius: 15px !important;
+  height: 20px !important;
+}
+
+.mat-slide-toggle-thumb-container {
+  top: -10px !important;
+}
+
+.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+  background-color: var(--equity);
+}
+
+.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+  background-color: #fff;
+}
+
+.mat-slide-toggle-label {
+  flex-direction: row-reverse !important;
+  justify-content: space-between !important;
+}
+
+// for radio buttons
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: var(--equity);
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle {
+  color: var(--equity);
+  background-color: var(--equity);
+}
+
+.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+  background-color: var(--equity);
+}
+
+// mat-list cards -- source and destination components
+.account-information {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  .mat-list-item-content {
+    padding: 0 !important;
+  }
+}
+
+.favourites-list-item {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  .mat-list-item-content {
+    padding-right: 0 !important;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.bank-list-item {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  .mat-list-item-content {
+    padding-left: 0 !important;
+  }
+}
+
+.destination-item-content {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  .mat-list-item-content {
+    padding-left: 0;
+  }
+}
+
+.no-pad-item-content {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  .mat-list-item-content {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+.mat-list-safari {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+}
+
+.accounts-card-list {
+  padding: 0;
+}
+
+.modal-card-content {
+  padding: 0;
+  margin: 0;
+}
+
+// modal styles
+.recipient-modal,
+.source-account-modal {
+  .modal-dialog {
+    width: 375px;
+    @media (min-width: 320px) and (max-width: 500px) {
+      width: 100%;
+      margin-left: 0;
+    }
+  }
+  .modal-content {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+    padding: 0;
+    // overflow-y: scroll;
+  }
+}
+
+// review modal
+.review-modal {
+  .modal-dialog {
+    width: 738px;
+    max-width: 738px;
+    @media (min-width: 320px) and (max-width: 500px) {
+      width: 100%;
+      margin-left: 0;
+    }
+  }
+}
+
+// mat list review modal
+.review-modal-lists {
+  margin-bottom: 0;
+}
+
+.review-actions {
+  margin: 0;
+}
+
+.review-mat-card-modal {
+  margin: 0;
+  padding: 0 30px 30px 30px !important;
+}
+
+.mat-list-item-class {
+  .mat-list-item-content {
+    padding-left: 0 !important;
+  }
+}
+
+// form field
+.branch-form-field {
+  padding: 0;
+}
+
+// select box
+.mat-select-arrow-wrapper {
+  background-image: url("./assets/images/icons/chevron-down.svg");
+  background-repeat: no-repeat;
+}
+
+.mat-select-arrow {
+  opacity: 0;
+}
+
+.quickselect-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid var(--cool-grey-40);
+  border-radius: 4px;
+  background-color: var(--pearl);
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &.selected {
+    background-color: var(--white);
+    border: 1px solid var(--equity);
+    color: var(--equity);
+  }
+}
+
+// search text - highlighted style
+.highlighted-text {
+  color: var(--equity);
+}
+
+// snackbars
+.default-snackbar {
+  @media (min-width: 1280px) {
+    min-width: 705px !important;
+    max-width: 705px !important;
+    position: relative !important;
+    left: 11.5% !important;
+  }
+}
+
+.access-module-snackbar {
+  max-width: 33vw;
+}
+.favourites-modal .modal-dialog {
+  max-width: 375px !important;
+}
+.add-favourite-modal .modal-dialog,
+.add-favourite-modal#sm .modal-dialog {
+  max-width: 375px !important;
+}
+.add-favourite-modal#md .modal-dialog {
+  max-width: 520px !important;
+}
+.add-favourite-modal#lg .modal-dialog {
+  max-width: 738px !important;
+}
+.view-favourite .modal-dialog {
+  max-width: 738px !important;
+}
+.delete-favourite-confirm .modal-dialog {
+  max-width: 375px !important;
+}
+
+/* custom scrollbar, for modal */
+.custom-scroll::-webkit-scrollbar {
+  width: 8px;
+  background: rgba(0, 0, 0, 0);
+}
+.custom-scroll::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0);
+  margin: 4px 2px;
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: var(--cool-grey);
+  border-radius: 12px;
+}
+
+.product-list-item {
+  height: 80px !important;
+  border-bottom: 1px solid var(--cool-grey-20);
+  &:hover {
+    cursor: pointer;
+    background-color: var(--pearl);
+  }
+  .icon-container {
+    background-color: var(--cool-grey-20);
+    height: 48px;
+    width: 48px;
+    border-radius: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .product-list-item-label {
+    height: 100%;
+
+    &.is-last {
+      border-bottom: none;
+    }
+  }
+}
+
+// Removing dotted underline on disabled form fields
+.mat-form-field-disabled .mat-form-field-underline {
+  background-image: unset !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+}
+
+.mat-dialog-container {
+  padding: 0 !important;
+}
+
+.align-items-stretch.align-items-center {
+  display: flex;
+}
+
+// Update progress bar color once completed
+.green-progress .mat-progress-bar-fill::after {
+  background-color: #2f9803 !important;
+}

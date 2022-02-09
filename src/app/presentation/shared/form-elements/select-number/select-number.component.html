@@ -1,0 +1,26 @@
+<mat-form-field
+  appearance="standard"
+  style="width: 100%"
+  floatLabel="always"
+  (click)="openModal()"
+>
+  <mat-label>{{ label }}</mat-label>
+  <input
+    matInput
+    type="text"
+    class="strong-text"
+    [id]="fieldName"
+    [name]="fieldName"
+    [value]="value"
+    [disabled]="isDisabled"
+    (input)="onChange($event)"
+    (blur)="touched()"
+    [placeholder]="placeholder"
+  />
+  <button type="button" mat-icon-button matSuffix>
+    <mat-icon svgIcon="caret_down"></mat-icon>
+  </button>
+  <!-- <small *ngIf="value" class="text-grey text-sm-start mt-2 mb-0">{{
+    value
+  }}</small> -->
+</mat-form-field>

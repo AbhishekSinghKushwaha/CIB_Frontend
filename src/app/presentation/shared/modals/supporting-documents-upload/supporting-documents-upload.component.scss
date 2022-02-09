@@ -1,0 +1,73 @@
+.own-equity-modal-screen {
+    width: 675px;
+    margin: 0;
+    padding: 0;
+    max-height: 543px;
+  }
+
+.upload{
+    background: #F7F7F7;
+    border: 1.5px dashed #929497;
+    box-sizing: border-box;
+    border-radius: 8px;
+    width: 335px;
+    height: 286px;
+}
+
+.icon {
+  background-color: var(--cool-grey-20);
+  height: 48px;
+  width: 48px;
+  border-radius: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-close {
+  background-color: var(--cool-grey-20);
+  height: 30px;
+  width: 30px;
+  border-radius: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-align{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon-alignment{
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 80px;
+}
+
+.text-center{
+  text-align: center;
+}
+
+.browse {
+  color: #A32A29 !important;
+}
+
+.mat-progress-bar {
+  height: 10px !important;
+  border-radius: 6px !important;
+}
+
+.progress-container {
+  background-color: #F7F7F7;;
+}
+
+.progress-pre{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.align-upload{
+  padding-left: 15px !important;
+}

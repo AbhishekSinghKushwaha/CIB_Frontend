@@ -1,0 +1,11 @@
+<div class="radio-container" (click)="selectReminder()">
+  <div>
+    <h4 class="strong-text">{{ data?.reminder }}</h4>
+  </div>
+  <div>
+    <mat-icon
+      color="primary"
+      [svgIcon]="isChecked ? 'check_round' : 'radio_button_off'"
+    ></mat-icon>
+  </div>
+</div>

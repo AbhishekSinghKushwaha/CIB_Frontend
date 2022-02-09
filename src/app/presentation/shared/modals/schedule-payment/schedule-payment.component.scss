@@ -1,0 +1,29 @@
+.own-equity-payment-modal-screen {
+  width: 22vw;
+  position: relative;
+}
+
+.s-padding {
+  padding: 28px;
+}
+.radio-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mat-datepicker-toggle {
+  color: #a32a29 !important;
+}
+
+.divider-radio {
+  width: 90%;
+  margin-left: 15px;
+}
+
+.close-button {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 1000;
+}

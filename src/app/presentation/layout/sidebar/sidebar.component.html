@@ -1,0 +1,73 @@
+<mat-nav-list>
+  <a routerLink="/home">
+    <img class="logo_img" [src]="returnLogoUrl()" alt="" />
+  </a>
+
+  <!-- Dashboard/Home -->
+  <a mat-list-item class="text-grey text-sm" (click)="toggleSideMenu()" [routerLink]="['/dashboard']" routerLinkActive="router-link-active" >
+    <div class="row pl-3">
+      <div class="col-12">
+        <mat-icon svgIcon="home"></mat-icon>
+        <span class="pl-2" i18n="@@loco:5f4e2bbdd941a14c484b2fe4">Home</span>
+      </div>
+    </div>
+  </a>
+
+  <!-- Transact -->
+  <a mat-list-item class="text-grey text-sm" [routerLink]="['/transact']" routerLinkActive="router-link-active" >
+    <div class="row pl-3">
+      <div class="col-12">
+        <mat-icon class="menu-icon" svgIcon="transact"></mat-icon>
+        <span class="pl-2" i18n="@@loco:5e73216ec38e0f0c8a705b42">
+          Transact
+        </span>
+      </div>
+    </div>
+  </a>
+
+  <!-- Borrow -->
+  <a mat-list-item class="text-grey text-sm" [routerLink]="['/borrow']" routerLinkActive="router-link-active" >
+    <div class="row pl-3">
+      <div class="col-12">
+        <mat-icon class="menu-icon" svgIcon="borrow-unselected"> </mat-icon>
+        <span class="pl-2" i18n="@@loco:60cc69138e242b09a24eb47d">
+          Borrow
+        </span>
+      </div>
+    </div>
+  </a>
+
+  <mat-divider class="ml-4"></mat-divider>
+
+  <!-- More -->
+  <a mat-list-item class="text-grey text-sm" [routerLink]="['/more']" routerLinkActive="router-link-active" (click)="toggleSideMenu()">
+    <div class="row pl-3">
+      <div class="col-12">
+        <mat-icon svgIcon="nav_more"></mat-icon>
+        <span class="pl-2" i18n="@@loco:5f4e2d1236d5dd2df417d522">More</span>
+      </div>
+    </div>
+  </a>
+
+  <!-- Language -->
+  <a mat-list-item class="text-grey text-sm">
+    <div class="row pl-3">
+      <div class="col-12">
+        <mat-icon svgIcon="localization"></mat-icon>
+        <span class="pl-2 text-truncate">English</span>
+      </div>
+    </div>
+  </a>
+
+  <!-- Sign Out -->
+  <a mat-list-item class="text-grey text-sm">
+    <div class="row pl-3">
+      <div class="col-12">
+        <mat-icon svgIcon="logout"></mat-icon>
+        <span class="pl-2" i18n="@@loco:5f4e2d81b69f8d4b54523f34"
+          >Sign out</span
+        >
+      </div>
+    </div>
+  </a>
+</mat-nav-list>

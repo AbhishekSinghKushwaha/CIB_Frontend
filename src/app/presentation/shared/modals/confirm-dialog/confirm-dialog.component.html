@@ -1,0 +1,21 @@
+<div class="p-4">
+  <div class="row">
+    <div class="col-md-11">
+      <h3 class="card-title">{{ data.title }}</h3>
+    </div>
+    <div class="col-md-1">
+      <mat-icon (click)="cancel()" class="cursor-pointer">close</mat-icon>
+    </div>
+  </div>
+  <p class="text-muted">
+    {{ data.message }}
+  </p>
+  <p class="cursor-pointer">
+    <span class="mt-3 text text-danger cursor-pointer" (click)="cancel()">
+      {{ data.cancelText }}
+    </span>
+    <span class="ms-4 mt-3 text text-danger" (click)="confirm()">{{
+      data.confirmText
+    }}</span>
+  </p>
+</div>

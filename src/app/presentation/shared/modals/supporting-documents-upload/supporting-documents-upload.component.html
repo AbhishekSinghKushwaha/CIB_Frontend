@@ -1,0 +1,44 @@
+<div class="own-equity-modal-screen p-0 mat-elevation-z0">
+    <div class="row">
+        <div class="col-md-4">
+            <mat-icon (click)="close()" class="cursor-pointer">close</mat-icon>
+        </div>
+        <h4 class="strong-text col-md-8">Supporting documents</h4>
+    </div>
+    <h3 class="strong-text pt-4">Upload documents</h3>
+    <small class="text-grey">Please upload supporting documents in PDF or Jpeg format. The maximum size allowed is 20mb.</small><br>
+        <div class="row align-upload">
+        <div class="col-md-6 upload my-4">
+            <div class="icon icon-alignment">
+                <mat-icon color="primary" aria-hidden="false">file_upload</mat-icon>
+            </div>
+            <div class="text-center">
+                <small>Upload your documents</small><br>
+                <small class="text-grey">Drag & drop or <label for="input-file-id" class="browse strong-text">browse</label> files here</small>
+                <input class="ng-hide" id="input-file-id" (change)="uploadFiles($event)" multiple="multiple" type="file" style="display: none;"/>
+            </div>
+        </div>
+
+        <div class="col-md-6 mt-4" *ngIf="fileName">
+            <div *ngFor='let data of files; let i=index;'>
+            <div class="progress-container mb-2">
+                <div class="mx-4 py-2">
+                    <div class="flex-align">
+                    <small>{{data}}</small>
+                    <mat-icon color="primary" class="icon-close cursor-pointer" aria-hidden="false" (click)="cancelUpload(i)">close</mat-icon>
+                    </div>
+                    <mat-progress-bar color="#A32A29" [value]="progress" class="mt-2"></mat-progress-bar>
+                    <small class="progress-pre">{{progress === 100 ? message : progress + '%'}}</small>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    <small class="text-grey">Additional information if required</small>    
+    <div class="py-4">
+        <button mat-flat-button disabled class="px-5">Upload</button>
+    </div>
+</div>
+  
+
+  

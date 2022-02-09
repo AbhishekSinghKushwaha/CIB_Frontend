@@ -1,0 +1,55 @@
+{
+  "customerOnboarding": {
+    "verifyCorporate": "/cibonboarding-v1/api/Registration/verify-corporate",
+    "getRequiredDocuments": "/cibonboarding-v1/api/Registration/get-required-documents",
+    "getCorporateRegistrationStage": "/cibonboarding-v1/api/Registration/get-corporate-registration-stage/",
+    "addCorporateDetails": "/cibonboarding-v1/api/Registration/add-corporate-detail/",
+    "addDirectorDetails": "/cibonboarding-v1/api/Registration/add-director-detail/",
+    "getCompanyDirectors": "/cibonboarding-v1/api/Registration/get-corporate-directors/",
+    "getCorporateDirector": "/cibonboarding-v1/api/Registration/get-single-directors/",
+    "deleteCompanyDirector": "/cibonboarding-v1/api/Registration/remove-director/",
+    "getRoles": "/cibonboarding-v1/api/Registration/get-roles/",
+    "addCorporateUser": "/cibonboarding-v1/api/Registration/add-corporate-user/",
+    "removeCorporateUser": "/cibonboarding-v1/api/Registration/remove-corporate-user/",
+    "removeCorporateProduct": "/cibonboarding-v1/api/Registration/remove-corporate-products/",
+    "getCorporateUsers": "/cibonboarding-v1/api/Registration/get-corporate-users/",
+    "getCorporateUser": "/cibonboarding-v1/api/Registration/get-single-corporate-user/",
+    "getProductsAndServices": "/cibonboarding-v1/api/Registration/get-products-and-services",
+    "addCorporateProduct": "/cibonboarding-v1/api/Registration/add-corporate-products/",
+    "getCorporateProducts": "/cibonboarding-v1/api/Registration/get-corporate-products/",
+    "updateDirectorDetails": "/cibonboarding-v1/api/Registration/update-director-detail/",
+    "updateCorporateUserDetails": "/cibonboarding-v1/api/Registration/update-corporate-user/",
+    "getRegistrationSummary": "/cibonboarding-v1/api/Registration/preview-corporate-detail/",
+    "uploadCorporateDocuments": "/cibonboarding-v1/api/Registration/updload-corporate-documents/"
+  },
+  "accounts": {
+    "getUserAccounts": "/cibaccountservice-v1/api/v1/Accounts/GetUserMappedAccounts"
+  },
+  "transfers": {
+    "sendOwnEquityAccount": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+    "intraBankTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+    "swiftTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+    "mobileMoneyTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+    "buyAirtimeTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+    "buyGoodsTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+    "getTransferCharges": "/cibpaymentservice-v1/api/v1/Transfer/GetTransferCharge",
+    "getAccountDetails": "/cibpaymentservice-v1/api/v1/Transfer/NameEnquiry"
+  },
+  "dataLookUp": {
+    "getCountries": "/cibonboarding-v1/api/Registration/get-countries",
+    "getBanks": "/cibpaymentservice-v1/api/v1/Transfer/GetBanks/",
+    "getCurrencies": "/cibpaymentservice-v1/api/v1/Transfer/GetCurrencies",
+    "getSubsidiaries": "/cibpaymentservice-v1/api/v1/Transfer/GetSubsidiaries"
+  },
+  "statement": {
+    "getPdf": "/v1/generatepdf/statement"
+  },
+  "login": {
+    "loginUser": "/users/authorization/login",
+    "verifyOtp": "/authorization/login/verifyOtp",
+    "resendOtp": "/authorization/oauth/regenerateOtp",
+    "validateOtp": "/authorization/user/validateOTPReset",
+    "securityQuestions": "/authorization/user/securityQuestions",
+    "securityAnswers": "/authorization/user/securityAnswers"
+  }
+}

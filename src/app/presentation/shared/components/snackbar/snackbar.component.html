@@ -1,0 +1,16 @@
+<div
+  class="snackbar-container"
+  [ngClass]="{ unhappy: data.error, happy: !data.error }"
+>
+  <div *ngIf="!data.error" class="text-center icon">
+    <mat-icon svgIcon="check_round" color="success"></mat-icon>
+  </div>
+  <div *ngIf="data.error" class="text-center icon pr-3">
+    <mat-icon svgIcon="error-icon" color="success"></mat-icon>
+  </div>
+  <div class="text-left">
+    <span class="pl-3">
+      {{ data.message }}
+    </span>
+  </div>
+</div>

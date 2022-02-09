@@ -1,0 +1,11 @@
+<div class="row align-items-stretch cursor-pointer" (click)="select()">
+  <div class="col-md-11">
+    <h4 class="strong-text">{{ data.bankName }}</h4>
+  </div>
+  <div class="col-md-1">
+    <mat-icon
+      color="primary"
+      [svgIcon]="isChecked ? 'check_round' : 'radio_button_off'"
+    ></mat-icon>
+  </div>
+</div>

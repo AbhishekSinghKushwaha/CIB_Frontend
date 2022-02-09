@@ -1,0 +1,32 @@
+<div
+  class="row gx-0 align-items-stretch m-3 mb-2 pb-2 cursor-pointer"
+  (click)="openCountries()"
+>
+  <div *ngIf="category === viewTypes?.FLAG_AND_NAME" class="col-md-2">
+    <img
+      class="rounded-circle img-d"
+      [src]="(selectedCountry | async)?.flagPath || countries[0].flagPath"
+      width="60px"
+      height="60px"
+      alt="Generic placeholder image"
+    />
+  </div>
+  <div
+    [ngClass]="category === viewTypes?.FLAG_AND_NAME ? 'col-md-9' : 'col-md-12'"
+  >
+    <div class="row gx-0 user-list-item" style="height: 60px">
+      <div class="col-md-10 d-flex">
+        <div class="align-self-center" style="margin-left: 10px !important">
+          {{
+            (selectedCountry | async)?.countryName || countries[0].countryName
+          }}
+        </div>
+      </div>
+      <div class="col-md-2 d-flex">
+        <div class="align-self-center">
+          <mat-icon color="primary" svgIcon="caret_right"></mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

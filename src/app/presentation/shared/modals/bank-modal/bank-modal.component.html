@@ -1,0 +1,46 @@
+<div class="p-4" [hidden]="!visibility">
+  <div class="row">
+    <div class="col-md-4">
+      <mat-icon (click)="close()" class="cursor-pointer">close</mat-icon>
+    </div>
+    <h4 class="strong-text col-md-8">Select a bank</h4>
+    <h3 class="strong-text pt-4 mb-4">Please select the beneficiary's bank</h3>
+  </div>
+  <app-country-select
+    [category]="countrySelectType"
+    (selectedCountry)="setCountry($event)"
+  ></app-country-select>
+  <mat-divider class="m-2"></mat-divider>
+  <div class="row">
+    <mat-form-field appearance="outline">
+      <input
+        matInput
+        [(ngModel)]="searchText"
+        placeholder="Search for a bank"
+      />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+  <div class="row p-3">
+    <h3
+      class="strong-text p-3"
+      *ngIf="(data | bankSearch: searchText).length as results"
+    >
+      {{ results }} result{{ results ? "s" : "" }}
+    </h3>
+    <div
+      *ngFor="
+        let item of data | bankSearch: searchText;
+        let isLast = last;
+        let i = index
+      "
+    >
+      <app-bank-list-item
+        [data]="item"
+        [isChecked]="selected?.bankCode === item.bankCode"
+      >
+      </app-bank-list-item>
+      <mat-divider *ngIf="!isLast" class="pt-3 mt-3"></mat-divider>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+.card {
+  background-color: inherit;
+  border: none !important;
+  border-radius: none !important;
+}
+
+.account-card {
+  color: #ffffff;
+  border-radius: 8px;
+  box-shadow: none !important;
+  height: 62px;
+  position: relative;
+  background: linear-gradient(135deg, #a32a29 0%, #791716 100%);
+  // background-image: url("../../../../../assets/images/Pattern.svg");
+  &:hover {
+    cursor: pointer;
+  }
+
+  &-black {
+    background: linear-gradient(135deg, #666 0%, #000 100%);
+  }
+  img {
+    border-radius: 8px;
+  }
+
+  .bottom-left {
+    position: absolute;
+    bottom: 12px;
+    width: 100%;
+    left: 10px;
+    text-align: left;
+  }
+
+  .bottom-right {
+    position: absolute;
+    bottom: 16px;
+    width: 100%;
+    right: 10px;
+    text-align: right;
+  }
+}
+
+.main-card {
+  border-radius: 10px;
+}

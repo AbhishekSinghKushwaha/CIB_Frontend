@@ -1,0 +1,55 @@
+<div class="new-recipient-modal-screen p-1">
+  <button mat-icon-button matSuffix class="close-button" (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <p class="text-center fw-bold pt-2">Send to someone new</p>
+  <h3 class="m-4 ms-2">Please enter the recipient's details</h3>
+  <form
+    [formGroup]="interBankTransferNewRecipientForm"
+    (submit)="submit()"
+    class="m-3 d-flex flex-column"
+    autocomplete="off"
+  >
+    <div class="row gx-0 pt-3">
+      <div class="col-md-6 col-lg-12">
+        <app-select-bank
+          [parentForm]="interBankTransferNewRecipientForm"
+          fieldName="bank"
+          formControlName="bank"
+          label="Select Bank"
+          placeholder="Select their bank"
+        ></app-select-bank>
+      </div>
+      <div class="col-md-6 col-lg-12">
+        <app-input
+          [parentForm]="interBankTransferNewRecipientForm"
+          fieldName="accountName"
+          placeholder="Enter their account name"
+          formControlName="accountName"
+          label="Account Name"
+        ></app-input>
+      </div>
+
+      <div class="col-md-6 col-lg-12">
+        <app-input
+          [parentForm]="interBankTransferNewRecipientForm"
+          fieldName="accountNumber"
+          placeholder="Enter their account number"
+          formControlName="accountNumber"
+          label="Account Number"
+        ></app-input>
+      </div>
+      <div class="col-md-6 col-lg-12"></div>
+    </div>
+    <div class="mt-4">
+      <button
+        type="submit"
+        mat-raised-button
+        color="primary"
+        [disabled]="interBankTransferNewRecipientForm.invalid"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</div>

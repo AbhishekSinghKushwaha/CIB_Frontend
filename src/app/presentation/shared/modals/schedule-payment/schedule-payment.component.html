@@ -1,0 +1,133 @@
+<div class="own-equity-payment-modal-screen p-0 mat-elevation-z0">
+  <mat-icon class="close-button mt-1" (click)="close()"
+    >arrow_back_ios_new</mat-icon
+  >
+  <h4 class="text-center fw-bold pt-3">Schedule Payment</h4>
+  <h3 class="m-4 ms-2">Please enter the recipient's details</h3>
+  <form
+    [formGroup]="paymentScheduleForm"
+    (ngSubmit)="submit()"
+    class="d-flex flex-column m-3"
+    autocomplete="off"
+  >
+    <!-- Frequency -->
+    <div>
+      <mat-form-field
+        appearance="standard"
+        style="width: 100%"
+        floatLabel="always"
+      >
+        <mat-label class="strong-text">Frequency</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="Select the frequency"
+          formControlName="frequency"
+          [readonly]="true"
+        />
+        <button
+          type="button"
+          mat-icon-button
+          matSuffix
+          (click)="openFrequencyModal()"
+        >
+          <mat-icon svgIcon="caret_down"></mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field
+        class="d-flex flex-column"
+        appearance="standard"
+        floatLabel="always"
+      >
+        <mat-label class="strong-text">First payment date</mat-label>
+        <input
+          placeholder="Enter the start date"
+          matInput
+          [min]="minDate"
+          class="pb-2"
+          [matDatepicker]="startdatePicker"
+          formControlName="startDate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="startdatePicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #startdatePicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field
+        class="d-flex flex-column"
+        appearance="standard"
+        floatLabel="always"
+      >
+        <mat-label class="strong-text">Last payment date</mat-label>
+        <input
+          matInput
+          class="pb-2"
+          [min]="minDate"
+          [matDatepicker]="enddatePicker"
+          formControlName="endDate"
+          placeholder="Enter the end date"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="enddatePicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #enddatePicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field
+        appearance="standard"
+        style="width: 100%"
+        floatLabel="always"
+      >
+        <mat-label class="strong-text">Remind me</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="Select the reminder"
+          formControlName="reminder"
+          [readonly]="true"
+        />
+        <button
+          type="button"
+          mat-icon-button
+          matSuffix
+          (click)="openReminderModal()"
+        >
+          <mat-icon svgIcon="caret_down"></mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <div class="col-1 pt-2">
+        <mat-icon>info_outline</mat-icon>
+      </div>
+      <div class="col-11">
+        <small class="text-grey">
+          You will be notified on the date that your payment is scheduled to
+          take place
+        </small>
+      </div>
+    </div>
+    <div class="pt-4">
+      <button
+        [disabled]="paymentScheduleForm.invalid"
+        color="primary"
+        type="submit"
+        mat-flat-button
+        class="px-5"
+      >
+        Continue
+      </button>
+    </div>
+  </form>
+</div>

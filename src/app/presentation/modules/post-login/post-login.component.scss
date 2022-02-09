@@ -1,0 +1,27 @@
+html {
+  background-color: red;
+}
+mat-sidenav {
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.16);
+  background: #ffffff;
+}
+
+.content {
+  background-color: #e5e5e5;
+}
+
+.mat-drawer-inner-container {
+  scrollbar-width: none;
+}
+
+.toolbar {
+  position: fixed;
+  z-index: 1;
+  background-color: #e5e5e5;
+}
+
+.loader-container {
+  position: fixed;
+  width: 100%;
+  z-index: 99;
+}

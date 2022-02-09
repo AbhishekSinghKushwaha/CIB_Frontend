@@ -1,0 +1,86 @@
+.signout-modal-screen {
+  max-width: 400px;
+  margin: 0;
+  padding: 0;
+}
+
+.signout-modal-screen div {
+  background-color: #ebebeb;
+}
+
+.mat-dialog-container {
+  margin: 0 !important;
+  padding: 0px !important;
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+.card-title{
+    position: static;
+    width: 295px;
+    height: 24px;
+    left: 20px;
+    top: 0px;
+    font-family: Open Sans !important;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px !important;
+    line-height: 24px !important;
+    color: #221F1F !important;
+    flex: none;
+    order: 0;
+    align-self: center;
+    flex-grow: 0;
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
+  position: static;
+  width: 76px;
+  height: 20px;
+  left: 0px;
+  top: 20px;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  margin: 0px 8px;
+  margin-left: 0px;
+}
+
+.text-muted{
+  position: static;
+width: 295px;
+left: 20px;
+top: 28px;
+
+/* Size 5 */
+
+font-family: Open Sans;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 20px;
+/* or 143% */
+
+
+/* Grayscale/Cool Grey - 500 */
+
+color: #929497;
+
+
+/* Inside Auto Layout */
+
+flex: none;
+order: 2;
+align-self: center;
+flex-grow: 0;
+margin: 4px 0px;
+}

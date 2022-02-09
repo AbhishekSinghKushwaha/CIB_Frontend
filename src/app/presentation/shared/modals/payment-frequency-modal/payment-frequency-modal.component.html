@@ -1,0 +1,11 @@
+<div
+  class="row payment-frequency-modal-screen"
+  *ngFor="let frequency of data; let isLast = last"
+>
+  <app-payment-frequency-list-item
+    [data]="frequency"
+    [isChecked]="selected?.value === frequency.value"
+  >
+  </app-payment-frequency-list-item>
+  <mat-divider class="p-2" *ngIf="!isLast"></mat-divider>
+</div>

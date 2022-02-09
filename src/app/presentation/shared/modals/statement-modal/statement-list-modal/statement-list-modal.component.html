@@ -1,0 +1,113 @@
+<div class="container p-0">
+  <div class="d-flex justify-content-between">
+    <button mat-icon-button matSuffix class="close-button" (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+    <p class="text-center fw-bold pt-2">Document name.pdf</p>
+    <div class="d-flex justify-content-end">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon svgIcon="download_grey"></mat-icon>
+      </button>
+      <button mat-icon-button [matMenuTriggerFor]="menu1">
+        <mat-icon svgIcon="share"></mat-icon>
+      </button>
+
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="downloadPdf()">
+          <mat-icon svgIcon="download"></mat-icon>
+          <span>Download PDF</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon svgIcon="download"></mat-icon>
+          <span>Download CSV</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon svgIcon="download"></mat-icon>
+          <span>Download MT940</span>
+        </button>
+      </mat-menu>
+
+      <mat-menu #menu1="matMenu">
+        <button mat-menu-item (click)="sendEmail()">
+          <mat-icon svgIcon="email"></mat-icon>
+          <span>Send to my email address</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+  <div class="row m-2">
+    <p class="fw-bold">JOHNDOE HOLDINGS</p>
+    <p><span class="fw-bold">A/C No.</span> 0810267588021 (USD)</p>
+    <p>
+      <span class="fw-bold">From Date</span> 23/01/2019
+      <span class="fw-bold">To</span> 23/04/2019
+    </p>
+  </div>
+  <div class="row m-3 listTable">
+    <table mat-table [dataSource]="dataSource" cdk-virtual-scroll-viewport>
+      <ng-container matColumnDef="transactionDate">
+        <th mat-header-cell *matHeaderCellDef class="text-white">
+          TRANSACTION DATE
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.transactionDate }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="valueDate">
+        <th mat-header-cell *matHeaderCellDef class="text-white">VALUE DATE</th>
+        <td mat-cell *matCellDef="let element">{{ element.valueDate }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="narrative">
+        <th mat-header-cell *matHeaderCellDef class="text-white">NARRATIVE</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.narrative }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="transactionReference">
+        <th mat-header-cell *matHeaderCellDef class="text-white">
+          TRANSACTION REFERENCE
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.transactionReference }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="debit">
+        <th mat-header-cell *matHeaderCellDef class="text-white">DEBIT</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.debit }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="credit">
+        <th mat-header-cell *matHeaderCellDef class="text-white">CREDIT</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.credit }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="runningBalance">
+        <th mat-header-cell *matHeaderCellDef class="text-white">
+          RUNNING BALANCE
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.runningBalance }}
+        </td>
+      </ng-container>
+
+      <tr
+        mat-header-row
+        *matHeaderRowDef="displayedColumns"
+        class="table-header-primary"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        class="cursor-pointer"
+      ></tr>
+    </table>
+  </div>
+</div>
