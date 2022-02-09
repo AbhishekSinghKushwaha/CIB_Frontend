@@ -1,0 +1,59 @@
+<div class="row p-4 m-0">
+  <div class="row d-flex justify-content-between align-items-center">
+    <div class="col-md-2">
+      <mat-icon svgIcon="caret_left" (click)="close()"></mat-icon>
+    </div>
+    <span class="col-md-10 strong-text">Select an action</span>
+  </div>
+  <div class="row m-0 product-list-item" (click)="disable()" matRipple>
+    <div class="col-1 my-auto">
+      <div class="icon-container">
+        <mat-icon color="primary" [svgIcon]="'withdraw'"></mat-icon>
+      </div>
+    </div>
+    <div class="col-9 offset-1 product-list-item-label">
+      <div class="row h-100 justify-content-around align-items-center">
+        <div class="col-10 float-left text-truncate">
+          <h4>Disable</h4>
+        </div>
+        <div class="col-2 float-right">
+          <mat-icon color="primary" svgIcon="caret_right"></mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row m-0 product-list-item" (click)="remove()" matRipple>
+    <div class="col-1 my-auto">
+      <div class="icon-container">
+        <mat-icon color="primary" [svgIcon]="'withdraw'"></mat-icon>
+      </div>
+    </div>
+    <div class="col-9 offset-1 product-list-item-label">
+      <div class="row h-100 justify-content-around align-items-center">
+        <div class="col-10 float-left text-truncate">
+          <h4>Remove</h4>
+        </div>
+        <div class="col-2 float-right">
+          <mat-icon color="primary" svgIcon="caret_right"></mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row m-0 product-list-item" (click)="edit()" matRipple>
+    <div class="col-1 my-auto">
+      <div class="icon-container">
+        <mat-icon color="primary" [svgIcon]="'withdraw'"></mat-icon>
+      </div>
+    </div>
+    <div class="col-9 offset-1 product-list-item-label">
+      <div class="row h-100 justify-content-around align-items-center">
+        <div class="col-10 float-left text-truncate">
+          <h4>Edit</h4>
+        </div>
+        <div class="col-2 float-right">
+          <mat-icon color="primary" svgIcon="caret_right"></mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
