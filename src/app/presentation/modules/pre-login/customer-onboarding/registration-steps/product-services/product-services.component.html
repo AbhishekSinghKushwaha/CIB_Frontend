@@ -105,21 +105,11 @@
                     ></mat-icon>
 
                     <mat-menu #menu="matMenu">
-                      <button
-                        mat-menu-item
-                        [routerLink]="[
-                          '/auth/customer-onboarding/register/add-product-service'
-                        ]"
-                        [queryParams]="{ id: product?.productId }"
-                        routerLinkActive="router-link-active"
-                      >
+                      <button mat-menu-item (click)="edit(product)">
                         <mat-icon svgIcon="edit"></mat-icon>
                         <span>Edit</span>
                       </button>
-                      <button
-                        mat-menu-item
-                        (click)="delete(product?.productId)"
-                      >
+                      <button mat-menu-item (click)="delete(product)">
                         <mat-icon svgIcon="delete-documents"></mat-icon>
                         <span>Delete</span>
                       </button>

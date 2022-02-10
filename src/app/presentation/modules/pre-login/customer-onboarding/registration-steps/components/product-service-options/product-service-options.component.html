@@ -7,7 +7,7 @@
             mat-icon-button
             aria-label="Back"
             class="back-icon"
-            routerLink="/auth/customer-onboarding/register/add-product-service"
+            (click)="goBack()"
           >
             <div class="strong-text">
               <mat-icon svgIcon="caret_left"></mat-icon>
@@ -22,7 +22,7 @@
         >
           <div
             class="row product-list-item col-md-6 mt-3"
-            (click)="toggle(service?.id)"
+            (click)="toggle(service?.id || '')"
           >
             <div class="col-1 my-auto">
               <div class="icon-container">
@@ -38,7 +38,7 @@
                 <div class="col-2 float-right toggle-container">
                   <mat-icon
                     [svgIcon]="
-                      isServiceActive(service?.id)
+                      isServiceActive(service?.id || '')
                         ? 'toggle_button_on'
                         : 'toggle_button_off'
                     "
