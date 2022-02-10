@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import {
+  Product,
+  ProductService,
+} from 'src/app/core/domain/customer-onboarding.model';
 import { ProductsAndServicesService } from 'src/app/core/services/customer-onboarding/products-and-services.service';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 
@@ -11,45 +15,52 @@ import { StorageService } from 'src/app/core/services/storage/storage.service';
 export class AddProductServiceComponent implements OnInit {
   products: any[];
 
-  selectedProducts: any = [];
+  selectedProducts: Product[];
 
   payload: any[] = [];
+
+  productId: any; // For edit purposes
 
   constructor(
     private storageService: StorageService,
     private router: Router,
-    private productsService: ProductsAndServicesService
-  ) {}
+    private productsService: ProductsAndServicesService,
+    private route: ActivatedRoute
+  ) {
+    this.productId = this.route.snapshot.queryParamMap.get('id');
+  }
 
   ngOnInit() {
     this.products = this.storageService.getData('products-and-services');
-
-    this.selectedProducts = this.storageService.getData('selected-service');
-
-    console.log(this.selectedProducts);
-
-    this.preparePayload();
+    this.listenToDataStreams();
   }
 
-  selectProduct(product: any[]) {
-    this.storageService.setData('product-services', product);
+  listenToDataStreams() {
+    this.productsService.selectedProducts$.subscribe((x) => {
+      this.selectedProducts = x;
+      this.preparePayload();
+    });
+  }
+
+  selectProduct(product: Product) {
+    this.productsService.selectProduct(product);
     this.router.navigate([
       '/auth/customer-onboarding/register/product-service-options',
     ]);
   }
 
   preparePayload() {
-    if (this.selectedProducts && this.selectedProducts.length > 0) {
+    if (this.selectedProducts?.length > 0) {
       for (let i = 0; i < this.selectedProducts.length; i++) {
-        const product = this.selectedProducts[i];
+        const product: Product = this.selectedProducts[i];
         let serviceArray = [];
 
-        for (let j = 0; j < product?.services.length; j++) {
-          const service = product?.services[j];
+        for (let j = 0; j < product?.productServices?.length; j++) {
+          const service: ProductService = product?.productServices[j];
           serviceArray.push(service.id);
-          if (j + 1 == product?.services.length) {
+          if (j + 1 == product.productServices.length) {
             let payload = {
-              productId: product.productId,
+              productId: product.id,
               services: serviceArray,
             };
             this.payload.push(payload);
@@ -61,6 +72,10 @@ export class AddProductServiceComponent implements OnInit {
   }
 
   saveAndContinue() {
+    this.addProducts();
+  }
+
+  addProducts() {
     this.productsService
       .addProductAndServiceToCorporate(
         { products: this.payload },

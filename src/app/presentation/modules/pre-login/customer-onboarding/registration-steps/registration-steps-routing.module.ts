@@ -66,8 +66,8 @@ const routes: Routes = [
         component: AddProductServiceComponent,
       },
       {
-        path: 'edit-product-service',
-        component: AddProductServiceComponent,
+        path: 'edit-product-service/:id',
+        component: ProductServiceOptionsComponent,
       },
       {
         path: 'product-service-options',
