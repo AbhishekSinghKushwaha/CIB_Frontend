@@ -10,6 +10,7 @@ import { UserListSearchModalComponent } from './components/user-list-search-moda
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserListActionsModalComponent } from './components/user-list-actions-modal/user-list-actions-modal.component';
 import { ConfirmDialogModule } from 'src/app/presentation/shared/modals/confirm-dialog/confirm-dialog.module';
+import { PromptModalModule } from 'src/app/presentation/shared/modals/prompt-modal/prompt-modal.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ConfirmDialogModule } from 'src/app/presentation/shared/modals/confirm-
     MatStyleModule,
     ReactiveFormsModule,
     ConfirmDialogModule,
+    PromptModalModule
   ],
   providers: [RolesConstants, ProductsConstants],
 })

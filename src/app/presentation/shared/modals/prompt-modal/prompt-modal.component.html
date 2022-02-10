@@ -1,0 +1,47 @@
+<div class="confirm-payment py-2 px-4">
+  <div class="row gx-0">
+    <div class="col-md-12 pt-4">
+      <h3 class="strong-text col-md-12">{{ data.title }}</h3>
+    </div>
+  </div>
+  <div class="row gx-0 m-4">
+    <form
+      class="col ml-4"
+      autocomplete="off"
+      [formGroup]="promptForm"
+      (submit)="confirmationClicked()"
+    >
+      <app-input
+        [parentForm]="promptForm"
+        fieldName="promptField"
+        [label]="data.inputLabel"
+        formControlName="promptField"
+        [placeholder]="data.inputPlaceholder"
+      ></app-input>
+    </form>
+  </div>
+  <div class="row gx-0 m-3">
+    <div class="col mx-3" style="margin-left: 0 !important">
+      <button
+        mat-raised-button
+        type="button"
+        color="primary"
+        class="px-5 mt-4"
+        [disabled]="promptForm.invalid"
+        (click)="confirmationClicked()"
+      >
+        {{ data.submitButtonText }}
+      </button>
+    </div>
+    <div class="col">
+      <button
+        mat-button
+        type="button"
+        class="px-5 mt-4"
+        (click)="refusalClicked()"
+      >
+        {{ data.refuseButtonText }}
+      </button>
+    </div>
+  </div>
+</div>
