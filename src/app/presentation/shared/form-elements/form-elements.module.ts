@@ -14,6 +14,20 @@ import { PhoneNumberInputComponent } from './phone-number-input/phone-number-inp
 import { SwiftChargesComponent } from './swift-charges/swift-charges.component';
 import { PaymentCategoryComponent } from './payment-category/payment-category.component';
 import { CountrySelectInputComponent } from './country-select-input/country-select-input.component';
+import { TransferFromModalModule } from '../modals/transfer-from-modal/transfer-from-modal.module';
+import { SelectNumberComponent } from './select-number/select-number.component';
+import { NumberSelectModalModule } from '../modals/number-select-modal/number-select-modal.module';
+import { CollectionOptionModalModule } from '../modals/collection-option-modal/collection-option-modal.module';
+import { CollectionOptionComponent } from './collection-option/collection-option.component';
+import { BranchModalModule } from '../modals/branch-modal/branch-modal.module';
+import { UserListComponent } from './user-list/user-list.component';
+import { CurrencySelectionModule } from '../modals/currency-selection/currency-selection.module';
+import { UserListModalModule } from '../modals/user-list-modal/user-list-modal.module';
+import { TransactionLimitComponent } from './transaction-limit/transaction-limit.component';
+import { CompanyListComponent } from './company-list/company-list.component';
+import { CompanyListModalModule } from '../modals/company-list-modal/company-list-modal.module';
+import { EmailInputComponent } from './email-input/email-input.component';
+import { CountryModalModule } from '../modals/country-modal/country-modal.module';
 
 @NgModule({
   declarations: [
@@ -29,8 +43,26 @@ import { CountrySelectInputComponent } from './country-select-input/country-sele
     SwiftChargesComponent,
     PaymentCategoryComponent,
     CountrySelectInputComponent,
+    SelectNumberComponent,
+    CollectionOptionComponent,
+    UserListComponent,
+    TransactionLimitComponent,
+    CompanyListComponent,
+    EmailInputComponent,
   ],
-  imports: [CommonModule, MatStyleModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    MatStyleModule,
+    FormsModule,
+    ReactiveFormsModule,
+    TransferFromModalModule,
+    NumberSelectModalModule,
+    CollectionOptionModalModule,
+    BranchModalModule,
+    CurrencySelectionModule,
+    UserListModalModule,
+    CompanyListModalModule,
+    CountryModalModule],
   exports: [
     FormsModule,
     ReactiveFormsModule,
@@ -46,6 +78,12 @@ import { CountrySelectInputComponent } from './country-select-input/country-sele
     SwiftChargesComponent,
     PaymentCategoryComponent,
     CountrySelectInputComponent,
+    SelectNumberComponent,
+    CollectionOptionComponent,
+    UserListComponent,
+    TransactionLimitComponent,
+    CompanyListComponent,
+    EmailInputComponent
   ],
   providers: [],
 })

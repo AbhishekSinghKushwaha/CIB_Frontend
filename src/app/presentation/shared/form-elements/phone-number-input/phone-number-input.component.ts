@@ -53,7 +53,7 @@ export class PhoneNumberInputComponent implements OnInit {
     private countryService: CountryService,
     private newRecipientService: NewRecipientService,
     private storageService: StorageService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.listenToDataStreams();
@@ -93,7 +93,7 @@ export class PhoneNumberInputComponent implements OnInit {
       .subscribe((res) => {
         this.value = res.toString();
         console.log(this.value);
-        this.changed(this.country.dialCode + this.value);
+        this.changed((this.country?.dialCode || '') + this.value);
       });
   }
 

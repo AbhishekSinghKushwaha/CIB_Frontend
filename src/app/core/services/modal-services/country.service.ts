@@ -11,7 +11,7 @@ export class CountryService {
   countryData: CountryModel;
   countryModalRef: MatDialogRef<CountryModalComponent, any>;
 
-  constructor(private readonly dialog: MatDialog) {}
+  constructor(private readonly dialog: MatDialog) { }
 
   openCountry(country: CountryModel[], category: string) {
     this.openedStatus.next(true);

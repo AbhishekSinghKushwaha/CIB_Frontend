@@ -1,0 +1,106 @@
+<div class="row" *ngIf="!completed">
+  <div class="col-md-12">
+    <div class="row mb-4 justify-content-md-center">
+      <div class="col-md-11">
+        <div class="mb-3">
+          <button
+            mat-icon-button
+            aria-label="Back"
+            class="back-icon"
+            routerLink="/service-request/"
+          >
+            <div class="strong-text">
+              <mat-icon svgIcon="caret_left"></mat-icon>
+              <span>Edit User Limit</span>
+            </div>
+          </button>
+        </div>
+        <h3 class="strong-text">Please enter details</h3>
+        <form
+          [formGroup]="editUserDataForm"
+          (submit)="submit()"
+          class="d-flex flex-column"
+          autocomplete="off"
+        >
+          <div class="row">
+            <div class="col-md-6">
+              <app-user-list
+                [parentForm]="editUserDataForm"
+                currencyFieldName="user"
+                label="User"
+                placeholder="Select user"
+                fieldName="user"
+                formControlName="user"
+              ></app-user-list>
+            </div>
+            <div class="col-md-6">
+              <app-transfer-amount
+                [parentForm]="editUserDataForm"
+                currencyFieldName="currency"
+                label="Currency"
+                placeholder="Enter an amount"
+                formControlName="currency"
+              >
+              </app-transfer-amount>
+            </div>
+            <div class="col-md-6">
+              <app-transaction-limit
+                [parentForm]="editUserDataForm"
+                label="Transaction limit"
+                placeholder="Enter transaction limit"
+                formControlName="transactionLimit"
+                fieldName="transactionLimit"
+              >
+              </app-transaction-limit>
+            </div>
+            <div class="col-md-6">
+              <app-transaction-limit
+                [parentForm]="editUserDataForm"
+                label="Daily limit"
+                placeholder="Enter daily limit"
+                formControlName="dailyLimit"
+                fieldName="dailyLimit"
+              >
+              </app-transaction-limit>
+            </div>
+            <div class="col-md-6">
+              <app-transaction-limit
+                [parentForm]="editUserDataForm"
+                label="Weekly limit"
+                placeholder="Enter weekly limit"
+                formControlName="weeklyLimit"
+                fieldName="weeklyLimit"
+              >
+              </app-transaction-limit>
+            </div>
+            <div class="col-md-6">
+              <app-transaction-limit
+                [parentForm]="editUserDataForm"
+                label="Monthly limit"
+                placeholder="Enter monthly limit"
+                formControlName="monthlyLimit"
+                fieldName="monthlyLimit"
+              >
+              </app-transaction-limit>
+            </div>
+          </div>
+          <div class="mt-4">
+            <button
+              mat-raised-button
+              [disabled]="editUserDataForm.invalid"
+              color="primary"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row" *ngIf="completed">
+  <app-confirmation-completion
+    [data]="completionData"
+    (confirmationDone)="confirmationDone($event)"
+  ></app-confirmation-completion>
+</div>
