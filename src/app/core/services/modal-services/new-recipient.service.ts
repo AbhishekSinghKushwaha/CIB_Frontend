@@ -4,13 +4,15 @@ import { Subject } from 'rxjs';
 import { recipientModel } from '../../domain/recipient.model';
 import { NewRecipientModalComponent } from '../../../presentation/shared/modals/new-recipient-modal/new-recipient-modal.component';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class NewRecipientService {
   data = new Subject<recipientModel>();
   dialogRef: any;
   private defaultData: recipientModel;
 
-  constructor(private readonly dialog: MatDialog) {}
+  constructor(private readonly dialog: MatDialog) { }
 
   // Open New Recipient Form Based on transaction type
   open(transactionType: string) {

@@ -7,18 +7,18 @@ import {
 } from '@angular/forms';
 
 @Component({
-  selector: 'app-input',
-  templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss'],
+  selector: 'app-email-input',
+  templateUrl: './email-input.component.html',
+  styleUrls: ['./email-input.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => InputComponent),
+      useExisting: forwardRef(() => EmailInputComponent),
       multi: true,
     },
   ],
 })
-export class InputComponent implements ControlValueAccessor, OnInit {
+export class EmailInputComponent implements ControlValueAccessor, OnInit {
   @Input()
   public parentForm!: FormGroup;
 

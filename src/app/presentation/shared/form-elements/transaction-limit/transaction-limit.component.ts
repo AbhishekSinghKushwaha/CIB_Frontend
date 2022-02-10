@@ -1,24 +1,19 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
-import {
-  ControlValueAccessor,
-  FormControl,
-  FormGroup,
-  NG_VALUE_ACCESSOR,
-} from '@angular/forms';
+import { Component, forwardRef, OnInit, Input } from '@angular/core';
+import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
-  selector: 'app-input',
-  templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss'],
+  selector: 'app-transaction-limit',
+  templateUrl: './transaction-limit.component.html',
+  styleUrls: ['./transaction-limit.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => InputComponent),
+      useExisting: forwardRef(() => TransactionLimitComponent),
       multi: true,
     },
   ],
 })
-export class InputComponent implements ControlValueAccessor, OnInit {
+export class TransactionLimitComponent implements ControlValueAccessor, OnInit {
   @Input()
   public parentForm!: FormGroup;
 
