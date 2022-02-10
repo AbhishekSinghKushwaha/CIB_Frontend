@@ -1,15 +1,18 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
-import { FormGroup, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BankModel } from 'src/app/core/domain/bank.model';
-import { FromAccount } from 'src/app/core/domain/transfer.models';
-import { BankService } from 'src/app/core/services/modal-services/bank.service';
-import { SharedDataService } from 'src/app/core/services/shared-data/shared-data.service';
-import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
+import { Component, forwardRef, Input, OnInit } from "@angular/core";
+import { FormGroup, FormControl, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { BankModel } from "src/app/core/domain/bank.model";
+import { FromAccount } from "src/app/core/domain/transfer.models";
+import { DataLookupService } from "src/app/core/services/data-lookup/data-lookup.service";
+import { BankService } from "src/app/core/services/modal-services/bank.service";
+import { CountryService } from "src/app/core/services/modal-services/country.service";
+import { SharedDataService } from "src/app/core/services/shared-data/shared-data.service";
+import { StorageService } from "src/app/core/services/storage/storage.service";
+import { mockData } from "src/app/core/utils/constants/mockdata.constants";
 
 @Component({
-  selector: 'app-select-bank',
-  templateUrl: './select-bank.component.html',
-  styleUrls: ['./select-bank.component.scss'],
+  selector: "app-select-bank",
+  templateUrl: "./select-bank.component.html",
+  styleUrls: ["./select-bank.component.scss"],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -48,16 +51,22 @@ export class SelectBankComponent implements OnInit {
   }
   constructor(
     private readonly selectBankService: BankService,
-    private sharedDataService: SharedDataService
+    private readonly countryService: CountryService,
+    private sharedDataService: SharedDataService,
+    private storageService: StorageService,
+    private dataLookupService: DataLookupService
   ) {}
 
   ngOnInit(): void {
+    this.banks = this.storageService.getData("banks");
     this.eventsSubscriptions();
   }
 
   private eventsSubscriptions(): void {
-    this.sharedDataService.banks.subscribe((res) => {
-      this.banks = res;
+    this.countryService.selectedCountry.subscribe((x) => {
+      const country = x;
+
+      this.updateBanks(country.countryCode);
     });
     this.selectBankService.selected.subscribe((response) => {
       this.parentForm.controls.bank.setValue(response);
@@ -86,6 +95,15 @@ export class SelectBankComponent implements OnInit {
   }
 
   openBankSelectionModal() {
-    this.selectBankService.open(this.banks);
+    this.selectBankService.open(this.storageService.getData("banks"));
+  }
+
+  updateBanks(countryCode: string) {
+    this.dataLookupService.getBanks(countryCode).subscribe((res) => {
+      if (res.status) {
+        this.storageService.setData("banks", res.data);
+        // this.banks = res.data;
+      }
+    });
   }
 }
