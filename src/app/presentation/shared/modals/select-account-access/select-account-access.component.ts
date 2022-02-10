@@ -23,6 +23,11 @@ export class SelectAccountAccessComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  save(): void {
+    this.selectAccountAccessService.selected.next(this.selected);
+    this.close();
+  }
+  
   close(): void {
     this.dialogRef.close(true);
   }

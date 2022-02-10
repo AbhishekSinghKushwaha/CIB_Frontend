@@ -41,22 +41,30 @@ export class UserDetailsComponent implements OnInit {
       userId: new FormControl(null, [Validators.required,]),
       phoneNumber: new FormControl(null, [Validators.required,]),
       limits:  this.fb.group({
-        userName: new FormControl(null, [Validators.required]),
-        currency: new FormControl(null, [Validators.required,]),
-        transactionLimit: new FormControl(null, [Validators.required,]),
-        dailyLimit: new FormControl(null, [Validators.required,]),
-        weeklyLimit: new FormControl(null, [Validators.required,]),
-        monthlyLimit: new FormControl(null, [Validators.required,]),
+        userName: new FormControl(null, []),
+        currency: new FormControl(null, []),
+        transactionLimit: new FormControl(null, []),
+        dailyLimit: new FormControl(null, []),
+        weeklyLimit: new FormControl(null, []),
+        monthlyLimit: new FormControl(null, []),
       }),
-      accounts: new FormControl(null, [Validators.required,]),
-      productModules: new FormControl(null, [/*Validators.required,*/]),
+      accounts: new FormControl(null, []),
+      productModules: new FormControl(null, []),
     });
     
     this.limitsService.save(this.userDetailsForm.get('limits') as FormGroup);
 
-    this.sharedDataService.userAccounts.subscribe((res) => {
-      this.sourceAccounts = res;
-    });
+    this.sourceAccounts = [{
+        accountNumber: 30982398,
+        balance: 0,
+        currency: 'EUR',
+        transactionLimit: 100
+    }, {
+      accountNumber: 73271827,
+      balance: 0,
+      currency: 'EUR',
+      transactionLimit: 100}]
+
     this.accountAccessService.selected.subscribe((rs) => {
       this.userDetailsForm.get("accounts")?.setValue(rs);
     });
