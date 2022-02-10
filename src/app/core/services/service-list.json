@@ -37,7 +37,7 @@
     "getAccountDetails": "/cibpaymentservice-v1/api/v1/Transfer/NameEnquiry"
   },
   "dataLookUp": {
-    "getCountries": "/cibonboarding-v1/api/Registration/get-countries",
+    "getCountries": "/cibonboarding-v1/api/v1/Transfer/GetCountries/",
     "getBanks": "/cibpaymentservice-v1/api/v1/Transfer/GetBanks/",
     "getCurrencies": "/cibpaymentservice-v1/api/v1/Transfer/GetCurrencies",
     "getSubsidiaries": "/cibpaymentservice-v1/api/v1/Transfer/GetSubsidiaries"
