@@ -4,10 +4,12 @@ import { CommonModule } from '@angular/common';
 import { IntercountryFundTransferRoutingModule } from './intercountry-fund-transfer-routing.module';
 import { IntercountryFundTransferComponent } from './intercountry-fund-transfer.component';
 
-import { MatStyleModule } from 'src/app/mat-style.module';
+import { ReactiveFormsModule } from '@angular/forms';
 import { SharedComponentsModule } from 'src/app/presentation/shared/components/shared-components.module';
+import { MatStyleModule } from 'src/app/mat-style.module';
+import { CurrencySelectionModule } from 'src/app/presentation/shared/modals/currency-selection/currency-selection.module';
+import { SchedulePaymentModule } from 'src/app/presentation/shared/modals/schedule-payment/schedule-payment.module';
 import { FormElementsModule } from 'src/app/presentation/shared/form-elements/form-elements.module';
-import { SharedModalsModule } from 'src/app/presentation/shared/modals/shared-modals.module';
 
 @NgModule({
   declarations: [IntercountryFundTransferComponent],
@@ -16,8 +18,10 @@ import { SharedModalsModule } from 'src/app/presentation/shared/modals/shared-mo
     IntercountryFundTransferRoutingModule,
     SharedComponentsModule,
     MatStyleModule,
+    ReactiveFormsModule,
+    CurrencySelectionModule,
+    SchedulePaymentModule,
     FormElementsModule,
-    SharedModalsModule
   ],
   providers: [],
 })

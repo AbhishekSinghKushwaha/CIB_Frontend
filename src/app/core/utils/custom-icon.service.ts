@@ -674,11 +674,23 @@ export class CustomIconService {
       this.domSanitizer.bypassSecurityTrustResourceUrl(
         'assets/images/icons/wizard-progress-grey.svg'
       )
-    );
+    ); 
     this.matIconRegistry.addSvgIcon(
       'wizard_progress_primary',
       this.domSanitizer.bypassSecurityTrustResourceUrl(
         'assets/images/icons/wizard-progress-primary.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'user_profile',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/visual-support-icons-user.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'user_limit',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/visual-support-icons-user-limit.svg'
       )
     );
     this.matIconRegistry.addSvgIcon(
@@ -694,27 +706,21 @@ export class CustomIconService {
       )
     );
     this.matIconRegistry.addSvgIcon(
-      'service_request_chequebook',
+      'notification',
       this.domSanitizer.bypassSecurityTrustResourceUrl(
-        'assets/images/icons/visual-support-icons-sr-chequebook.svg'
+        'assets/images/icons/visual-support-icons-notification.svg'
       )
     );
     this.matIconRegistry.addSvgIcon(
-      'service_request_edit_company',
+      'pay',
       this.domSanitizer.bypassSecurityTrustResourceUrl(
-        'assets/images/icons/visual-support-icons-sr-edit-company-limit.svg'
+        'assets/images/icons/visual-support-icons-pay.svg'
       )
     );
     this.matIconRegistry.addSvgIcon(
-      'service_request_edit_user_limit',
+      'create_user',
       this.domSanitizer.bypassSecurityTrustResourceUrl(
-        'assets/images/icons/visual-support-icons-sr-edit-user-limit.svg'
-      )
-    );
-    this.matIconRegistry.addSvgIcon(
-      'service_request_static_data_update',
-      this.domSanitizer.bypassSecurityTrustResourceUrl(
-        'assets/images/icons/visual-support-icons-sr-static-data-update.svg'
+        'assets/images/icons/visual-support-icons-create_user.svg'
       )
     );
 

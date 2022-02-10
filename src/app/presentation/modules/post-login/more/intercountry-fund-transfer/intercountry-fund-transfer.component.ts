@@ -9,7 +9,6 @@ import { accountLimitValidator } from 'src/app/core/utils/validators/limits.vali
 import { ConfirmPaymentComponent } from 'src/app/presentation/shared/modals/confirm-payment/confirm-payment.component';
 import { BaseTransactComponent } from '../../transact/base-transact.component';
 import { SupportingDocumentsUploadService } from 'src/app/core/services/supporting-documents-upload/supporting-documents-upload.service';
-import { TransactionTypeConstants } from 'src/app/core/utils/constants/transaction-type.constants';
 
 @Component({
   selector: 'app-intercountry-fund-transfer',
@@ -21,7 +20,6 @@ export class IntercountryFundTransferComponent extends BaseTransactComponent imp
   intercountryFundTransfer: FormGroup;
   aboveTransactionTypeLimit: boolean = false;
   loading: boolean = false;
-  transferType = TransactionTypeConstants.TransferType;
 
   constructor(
     private readonly supportingDocumentsUploadService: SupportingDocumentsUploadService,
