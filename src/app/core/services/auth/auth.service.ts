@@ -1,14 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject, Subscription } from 'rxjs';
 import { filter, map, switchMap, take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { TokenResponseModel } from '../../domain/user-auth.model';
-import { DeviceManagementService } from '../deviceManagement/device-management.service';
 import { LogoutService } from '../modal-services/logout.service';
 import urlList from '../service-list.json';
 import { StorageService } from '../storage/storage.service';
+import { UserModel } from '../../domain/user.model';
 
 interface LogoutData {
   username: string;
@@ -27,6 +27,7 @@ export class AuthService implements OnDestroy {
   private logoutForcedTimeMinutes = 5;
   private logoutForcedTime = this.logoutForcedTimeMinutes * 60 * 1000; // minutes * seconds * milliseconds
   private watchRouteChange: Subscription;
+  loginState = new BehaviorSubject<string | null>(null);
 
   get IsLoggedIn(): Observable<boolean> {
     return this.isLoggedIn.asObservable();
@@ -36,7 +37,6 @@ export class AuthService implements OnDestroy {
     private router: Router,
     private storageService: StorageService,
     private http: HttpClient,
-    private dmService: DeviceManagementService,
     private readonly logoutService: LogoutService
   ) { }
 
@@ -47,6 +47,51 @@ export class AuthService implements OnDestroy {
     }
   }
 
+  public async getUserData(): Promise<UserModel> {
+    return await this.storageService.getData('loginCred');
+  }
+
+  public userLogin(data: any) {
+    const tokenData = this.storageService.getData('tokenState');
+    const payload = new URLSearchParams();
+    payload.set('username', data.username);
+    payload.set('password', data.password);
+    payload.set('grant_type', data.grant_type);
+    payload.set('client_id', data.client_id);
+    payload.set('client_secret', data.client_secret);
+    payload.set('scope', data.scope);
+
+    const headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
+
+    const url = environment.apiUrl + urlList.login.loginUser;
+    return this.http
+      .post<TokenResponseModel>(url, payload, { headers });
+
+  }
+
+
+  public verifyToken(data: any) {
+    const url = environment.apiUrl + urlList.login.loginUser;
+    return this.http
+      .post<TokenResponseModel>(url, data);
+
+  }
+
+  public submitOTP(otp: string, user: UserModel) {
+    console.log(otp, user);
+    const url = environment.apiUrl + urlList.login.verifyOtp;
+    user.smsToken = otp;
+    return this.http
+      .post<UserModel>(url, user);
+  }
+
+  resendOTP() {
+    const url = environment.apiUrl + urlList.login.resendOtp;
+    return this.http
+      .get<UserModel>(url);
+  }
+
+
   loginUser(authToken: TokenResponseModel): void {
     this.clearUserData();
     this.setToken(authToken);
@@ -54,19 +99,40 @@ export class AuthService implements OnDestroy {
     this.idleWarning();
   }
 
-  setToken(authToken: TokenResponseModel): void {
-    const accessToken = authToken;
-    if (!accessToken.tokenExpirationDate) {
+  setToken(accessToken: TokenResponseModel): void {
+    if (!accessToken?.tokenExpirationDate) {
       accessToken.tokenExpirationDate = new Date(
         new Date().getTime() + accessToken.expires_in * 1000
       );
     }
     this.storageService.setData('access_token', accessToken);
-    this.autoRefreshToken();
+    // this.autoRefreshToken(accessToken);
   }
 
-  getToken(): any {
-    return this.storageService.getData('access_token');
+  setLoginState(state: string) {
+    this.storageService.setData('login_state', { state });
+    this.loginState.next(state)
+  }
+
+  getLoginState(): string | null {
+    const value = this.storageService.getData('login_state');
+    if (value) {
+      return value.state;
+    }
+    return null
+  }
+
+  get accessToken(): TokenResponseModel | null {
+    const token = this.storageService.getData('access_token');
+
+    // const currentTime = new Date().getTime();
+    // const expired = this.accessToken && new Date(this.accessToken?.tokenExpirationDate).getTime() > currentTime;
+    // console.log('expired', expired)
+    // if (expired) {
+    //   return null;
+    // }
+
+    return token;
   }
 
   doLogout(): void {
@@ -77,9 +143,8 @@ export class AuthService implements OnDestroy {
 
   autoLogin(): boolean {
     const currentTime = new Date().getTime();
-    const accessToken = this.getToken();
-    if (accessToken && new Date(accessToken.tokenExpirationDate).getTime() > currentTime) {
-      this.loginUser(accessToken);
+    if (this.accessToken && new Date(this.accessToken?.tokenExpirationDate).getTime() > currentTime) {
+      this.loginUser(this.accessToken);
       return true;
     } else {
       this.isLoggedIn.next(false);
@@ -105,67 +170,13 @@ export class AuthService implements OnDestroy {
 
   setIdleTimers(): void {
     this.logoutWarningTimer = setTimeout(() => {
-      this.autoLogoutWarning();
+      // this.autoLogoutWarning();
     }, this.logoutWarningTime);
 
     this.activeLogoutTimer = setTimeout(() => {
       this.logoutService.closeLogoutWarning()
       this.doLogout();
     }, this.logoutForcedTime);
-  }
-  autoLogoutWarning(): void {
-    this.logoutService.openLogoutWarning().componentInstance.msTillLogout =
-      this.logoutForcedTime - this.logoutWarningTime;
-    // this.logoutWarningModal.componentInstance.userResponse.subscribe((logoutNow: boolean) => {
-    //   if (logoutNow) {
-    //     this.doLogout();
-    //   } else {
-    //     this.clearIdleWarningTimers();
-    //     this.setIdleTimers();
-    //   }
-    // });
-  }
-
-  refreshAccessToken(): Observable<any> {
-    return this.dmService.fetchServerTimestamp().pipe(
-      switchMap((timestamp) => {
-        const url = environment.apiUrl + 'urlList.deviceManagement.refreshToken';
-        const accessToken = this.getToken();
-        const timeNow = timestamp;
-        const deviceToken = this.dmService.generateDeviceToken(timeNow);
-
-        const payload = new URLSearchParams();
-        payload.set('refresh_token', accessToken.refresh_token);
-        payload.set('access_token', accessToken.access_token);
-        payload.set('client_id', environment.clientId);
-        payload.set('grant_type', 'refresh_token');
-        payload.set('device_token', deviceToken);
-        // payload.set('unix_timestamp', timeNow.toString());
-
-        const headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
-        return this.http.post<any>(url, payload.toString(), { headers }).pipe(
-          take(1),
-          map((token) => {
-            const newAccessToken = token;
-            newAccessToken.refresh_token = accessToken.refresh_token; // eslint-disable-line
-            this.setToken(newAccessToken);
-          })
-        );
-      })
-    );
-  }
-
-  private autoRefreshToken(): void {
-    if (this.autoRefreshTokenTimer) {
-      clearTimeout(this.autoRefreshTokenTimer);
-    }
-    const currentTime = new Date().getTime();
-    const accessToken = this.getToken();
-    const expireDateTime = new Date(accessToken.tokenExpirationDate).getTime();
-    const tokenTimeLeft = Math.floor((expireDateTime - currentTime) * 0.8);
-    this.autoRefreshTokenTimer = setTimeout(() => {
-      this.refreshAccessToken().pipe(take(1)).subscribe();
-    }, tokenTimeLeft);
   }
 
   private clearIdleWarningTimers(): void {

@@ -47,7 +47,7 @@
   "login": {
     "loginUser": "/cibuseraccess-v1/api/Auth/oauth/token",
     "verifyOtp": "/authorization/login/verifyOtp",
-    "resendOtp": "/authorization/oauth/regenerateOtp",
+    "resendOtp": "/cibuseraccess-v1/api/Auth/generateOtp",
     "validateOtp": "/authorization/user/validateOTPReset",
     "securityQuestions": "/authorization/user/securityQuestions",
     "securityAnswers": "/authorization/user/securityAnswers"

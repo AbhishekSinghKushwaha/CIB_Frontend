@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginService } from 'src/app/core/services/login/login.service';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { NotificationModalService } from 'src/app/core/services/modal-services/notification-modal/notification-modal.service';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import LOGIN_CONSTANTS from 'src/app/core/utils/constants/pre-login.constants';
@@ -20,8 +20,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private readonly notificationModalService: NotificationModalService,
-    private readonly storageService: StorageService,
-    private loginService: LoginService,
+    private readonly authService: AuthService,
     private readonly router: Router
   ) { }
 
@@ -34,7 +33,7 @@ export class LoginComponent implements OnInit {
   }
 
   private async checkLoginStatus(): Promise<void> {
-    const user = this.loginService
+    const user = this.authService
       .getUserData()
       .then((response) => {
         if (response) {
@@ -61,16 +60,17 @@ export class LoginComponent implements OnInit {
       client_secret: 'postman-secret',
       scope: 'offline_access'
     };
-    this.loginService.userLogin(payload).subscribe(
+    this.authService.userLogin(payload).subscribe(
       (authData) => {
-        console.log(authData)
-        this.storageService.setData('tokenState', {
-          ...authData,
-          stage: LOGIN_CONSTANTS.LOGIN_STAGES.SMS_VERIFICATION,
-        });
-        // this.storageService.setData('accessToken', { access_token });
-        // this.storageService.setData('loginCred', mainUser);
-        this.router.navigate(['/auth/login/sms-verification']);
+        console.log(authData);
+        try {
+          this.authService.setToken(authData);
+          this.authService.setLoginState(LOGIN_CONSTANTS.LOGIN_STAGES.SMS_VERIFICATION);
+          setTimeout(() => {
+            this.router.navigate(['/auth/login/sms-verification']);
+          }, 1000);
+
+        } catch (error) { console.log('Login error', error) }
       },
       (error) => {
         this.modalTakeAnotherLook();

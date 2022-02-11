@@ -18,8 +18,12 @@ export class StorageService {
 
   getData(key: string) {
     try {
+      let result = null;
       const encryption = sessionStorage.getItem(CryptoUtils.b64EncodeData(key));
-      return encryption ? JSON.parse(CryptoUtils.decrypt(encryption)) : null;
+      if (encryption) {
+        result = JSON.parse(CryptoUtils.decrypt(encryption))
+      }
+      return result;
     } catch (error) {
       console.error(error);
       return null;

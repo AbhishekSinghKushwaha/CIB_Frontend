@@ -10,10 +10,11 @@ export class AuthTokenInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
     const currentLocale = this.localeId.split('-')[0];
-    const authToken = this.authService.getToken();
+    const authToken = this.authService.accessToken;
     const clientId = environment.clientId;
 
     if (authToken) {
+      console.log(authToken);
       request = request.clone({
         headers: request.headers.set(
           'Authorization',

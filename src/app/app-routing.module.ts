@@ -18,7 +18,7 @@ const routes: Routes = [
       import('./presentation/modules/pre-login/pre-login.module').then(
         (m) => m.PreLoginModule
       ),
-    canActivate: [LoginGuard],
+    canActivate: [LoginGuard]
   },
   {
     path: '**',
@@ -37,4 +37,4 @@ const routerOptions: ExtraOptions = {
   imports: [RouterModule.forRoot(routes, routerOptions)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
