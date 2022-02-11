@@ -1,0 +1,15 @@
+<div class="row align-items-stretch pb-2 cursor-pointer" (click)="select()">
+  <div class="row user-list-item" style="height: 60px">
+    <div class="col-md-11 p-3 d-flex">
+      <div class="align-self-center pl-2">{{ data }}</div>
+    </div>
+    <div class="col-md-1 d-flex">
+      <div class="align-self-center">
+        <mat-icon
+          color="primary"
+          [svgIcon]="isChecked ? 'check_round' : 'radio_button_off'"
+        ></mat-icon>
+      </div>
+    </div>
+  </div>
+</div>
