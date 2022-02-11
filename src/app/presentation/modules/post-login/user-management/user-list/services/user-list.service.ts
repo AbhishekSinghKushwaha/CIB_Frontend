@@ -64,4 +64,29 @@ export class UserListService {
       })
     );
   }
+
+  addUser(user: User): Observable<User> {
+    this.users = [...this.users, user];
+
+    return of(user);
+  }
+
+  updateUser(id: number, user: User): Observable<User | undefined> {
+    const index: number = this.users.findIndex((user: User) => user.id === id);
+
+    if (index === -1) {
+      return of(undefined);
+    }
+
+    const oldUser: User = this.users[index];
+    const updatedUser: User = { ...oldUser, ...user };
+
+    this.users = [
+      ...this.users.slice(0, index),
+      updatedUser,
+      ...this.users.slice(index + 1),
+    ];
+
+    return of(updatedUser);
+  }
 }
