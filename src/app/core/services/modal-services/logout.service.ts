@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Subject } from 'rxjs';
 import { LogoutConfirmationModalComponent } from 'src/app/presentation/shared/components/logout-confirmation-modal/logout-confirmation-modal.component';
 import { LogoutWarningModalComponent } from 'src/app/presentation/shared/components/logout-warning-modal/logout-warning-modal.component';
 
@@ -12,7 +13,7 @@ export class LogoutService {
 
   constructor(private readonly dialog: MatDialog) { }
 
-  openLogoutWarning() {
+  openLogoutWarning(): MatDialogRef<LogoutWarningModalComponent, any> {
     this.logoutWarningModalRef = this.dialog.open<LogoutWarningModalComponent, any>(
       LogoutWarningModalComponent,
       {
@@ -34,8 +35,8 @@ export class LogoutService {
     return this.logoutConfirmationModalRef;
   }
 
-  closeLogoutWarning() {
-    this.logoutWarningModalRef.close();
+  closeLogoutWarning(status: boolean) {
+    this.logoutWarningModalRef.close(status);
   }
 
 

@@ -9,6 +9,9 @@ import { LogoutService } from '../modal-services/logout.service';
 import urlList from '../service-list.json';
 import { StorageService } from '../storage/storage.service';
 import { UserModel } from '../../domain/user.model';
+import LOGIN_CONSTANTS from '../../utils/constants/pre-login.constants';
+import { BaseTransactComponent } from 'src/app/presentation/modules/post-login/transact/base-transact.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface LogoutData {
   username: string;
@@ -17,14 +20,14 @@ interface LogoutData {
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService implements OnDestroy {
+export class AuthService extends BaseTransactComponent implements OnDestroy {
   private isLoggedIn = new BehaviorSubject<boolean>(false);
   private activeLogoutTimer: any;
   private logoutWarningTimer: any;
   private autoRefreshTokenTimer: any;
-  private logoutWarningTimeMinutes = 4;
+  private logoutWarningTimeMinutes = environment.logoutWarningTimeMinutes;
   private logoutWarningTime = this.logoutWarningTimeMinutes * 60 * 1000; // minutes * seconds * milliseconds
-  private logoutForcedTimeMinutes = 5;
+  private logoutForcedTimeMinutes = environment.logoutForcedTimeMinutes;
   private logoutForcedTime = this.logoutForcedTimeMinutes * 60 * 1000; // minutes * seconds * milliseconds
   private watchRouteChange: Subscription;
   loginState = new BehaviorSubject<string | null>(null);
@@ -37,8 +40,11 @@ export class AuthService implements OnDestroy {
     private router: Router,
     private storageService: StorageService,
     private http: HttpClient,
-    private readonly logoutService: LogoutService
-  ) { }
+    private readonly logoutService: LogoutService,
+    private readonly snackBar: MatSnackBar
+  ) {
+    super(snackBar);
+  }
 
   ngOnDestroy(): void {
     this.clearTimers();
@@ -49,24 +55,6 @@ export class AuthService implements OnDestroy {
 
   public async getUserData(): Promise<UserModel> {
     return await this.storageService.getData('loginCred');
-  }
-
-  public userLogin(data: any) {
-    const tokenData = this.storageService.getData('tokenState');
-    const payload = new URLSearchParams();
-    payload.set('username', data.username);
-    payload.set('password', data.password);
-    payload.set('grant_type', data.grant_type);
-    payload.set('client_id', data.client_id);
-    payload.set('client_secret', data.client_secret);
-    payload.set('scope', data.scope);
-
-    const headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
-
-    const url = environment.apiUrl + urlList.login.loginUser;
-    return this.http
-      .post<TokenResponseModel>(url, payload, { headers });
-
   }
 
 
@@ -89,12 +77,21 @@ export class AuthService implements OnDestroy {
       .get<UserModel>(url);
   }
 
+  userLogin(data: any) {
+    const payload = new URLSearchParams();
+    payload.set('username', data.username);
+    payload.set('password', data.password);
+    payload.set('grant_type', data.grant_type);
+    payload.set('client_id', data.client_id);
+    payload.set('client_secret', data.client_secret);
+    payload.set('scope', data.scope);
 
-  loginUser(authToken: TokenResponseModel): void {
-    this.clearUserData();
-    this.setToken(authToken);
-    this.isLoggedIn.next(true);
-    this.idleWarning();
+    const headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
+
+    const url = environment.apiUrl + urlList.login.loginUser;
+    return this.http
+      .post<TokenResponseModel>(url, payload, { headers });
+
   }
 
   setToken(accessToken: TokenResponseModel): void {
@@ -110,6 +107,12 @@ export class AuthService implements OnDestroy {
   setLoginState(state: string) {
     this.storageService.setData('login_state', { state });
     this.loginState.next(state)
+  }
+
+  loginSuccess() {
+    this.setLoginState(LOGIN_CONSTANTS.LOGIN_STAGES.LOGIN_SUCCESS);
+    this.router.navigate(['/dashboard']);
+    this.autoLogin();
   }
 
   getLoginState(): string | null {
@@ -135,17 +138,24 @@ export class AuthService implements OnDestroy {
 
   doLogout(): void {
     this.clearTimers();
-    this.logout();
+    // this.logout();
     this.completeLogout();
+    this.notifyError({
+      error: false,
+      errorStatus: '',
+      message: 'You have been signed out successfully',
+    });
   }
 
   autoLogin(): boolean {
     const currentTime = new Date().getTime();
     if (this.accessToken && new Date(this.accessToken?.tokenExpirationDate).getTime() > currentTime) {
-      this.loginUser(this.accessToken);
+      this.isLoggedIn.next(true);
+      this.idleWarning();
       return true;
     } else {
       this.isLoggedIn.next(false);
+      this.doLogout();
       return false;
     }
   }
@@ -168,13 +178,25 @@ export class AuthService implements OnDestroy {
 
   setIdleTimers(): void {
     this.logoutWarningTimer = setTimeout(() => {
-      // this.autoLogoutWarning();
+      this.autoLogoutWarning();
     }, this.logoutWarningTime);
 
     this.activeLogoutTimer = setTimeout(() => {
-      this.logoutService.closeLogoutWarning()
-      this.doLogout();
+      this.logoutService.closeLogoutWarning(true);
     }, this.logoutForcedTime);
+  }
+
+  autoLogoutWarning(): void {
+    const logoutWarningModal = this.logoutService.openLogoutWarning();
+    logoutWarningModal.componentInstance.msTillLogout = this.logoutForcedTime - this.logoutWarningTime;
+    logoutWarningModal.afterClosed().subscribe((logoutNow: boolean) => {
+      if (logoutNow) {
+        this.doLogout();
+      } else {
+        this.clearIdleWarningTimers();
+        this.setIdleTimers();
+      }
+    });
   }
 
   private clearIdleWarningTimers(): void {
@@ -198,7 +220,7 @@ export class AuthService implements OnDestroy {
     this.http.get<any>(url);
   }
 
-  private clearUserData(): void {
+  clearUserData(): void {
     this.storageService.clearData();
   }
 
@@ -209,6 +231,6 @@ export class AuthService implements OnDestroy {
     if (this.watchRouteChange) {
       this.watchRouteChange.unsubscribe();
     }
-    window.location.reload();
+    this.router.navigate(['/auth/login']);
   }
 }

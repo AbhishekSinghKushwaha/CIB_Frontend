@@ -3,7 +3,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { NotificationModalService } from 'src/app/core/services/modal-services/notification-modal/notification-modal.service';
-import { StorageService } from 'src/app/core/services/storage/storage.service';
 import LOGIN_CONSTANTS from 'src/app/core/utils/constants/pre-login.constants';
 import { SharedUtils } from '../../../../../core/utils/shared.util';
 
@@ -60,6 +59,7 @@ export class LoginComponent implements OnInit {
       client_secret: 'postman-secret',
       scope: 'offline_access'
     };
+    this.authService.clearUserData();
     this.authService.userLogin(payload).subscribe(
       (authData) => {
         console.log(authData);

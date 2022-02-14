@@ -14,7 +14,6 @@ export class AuthTokenInterceptor implements HttpInterceptor {
     const clientId = environment.clientId;
 
     if (authToken) {
-      console.log(authToken);
       request = request.clone({
         headers: request.headers.set(
           'Authorization',

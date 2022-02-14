@@ -91,8 +91,7 @@ export class LoginSmsVerificationComponent implements OnInit {
       this.authService.submitOTP(otp).subscribe(
         (response) => {
           if (response) {
-            this.authService.setLoginState(LOGIN_CONSTANTS.LOGIN_STAGES.LOGIN_SUCCESS);
-            this.router.navigate(['/dashboard']);
+            this.authService.loginSuccess();
           } else {
             this.otpError = true;
           }

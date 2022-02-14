@@ -1,6 +1,10 @@
 import { LogoutService } from './../../../../core/services/modal-services/logout.service';
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Subject } from 'rxjs';
+import { SharedUtils } from 'src/app/core/utils/shared.util';
 
 @Component({
   selector: 'app-logout-warning-modal',
@@ -8,21 +12,19 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   styleUrls: ['./logout-warning-modal.component.scss'],
 })
 export class LogoutWarningModalComponent implements OnInit, OnDestroy {
-  @Input() msTillLogout: number;
-  @Output() userResponse = new EventEmitter<boolean>();
   logOut = false;
+  @Input() msTillLogout: number;
   logoutTimer: any;
   timeTillLogout: number;
+  logoutResponse = new Subject<boolean>();
 
-  constructor(private readonly domSanitizer: DomSanitizer, private readonly logoutService: LogoutService) { }
+  constructor(
+    private readonly domSanitizer: DomSanitizer,
+    private readonly logoutService: LogoutService,
+    private readonly authService: AuthService) { }
 
   ngOnInit(): void {
     this.calculateLogoutTime();
-  }
-
-  ngOnDestroy(): void {
-    this.userResponse.emit(this.logOut);
-    clearInterval(this.logoutTimer);
   }
 
   createImageUrl(): SafeResourceUrl {
@@ -32,7 +34,7 @@ export class LogoutWarningModalComponent implements OnInit, OnDestroy {
   }
 
   returnLogoutWarning(): string {
-    return $localize`:@@loco\:5f81abf84af7147cd45aeed2:You’ve been quiet. To keep your details safe, you will be automatically signed out in ${this.timeTillLogout} seconds.`;
+    return `You've been quiet. To keep your details safe, you will be automatically signed out in ${SharedUtils.formatSeconds(this.timeTillLogout)} seconds.`;
   }
 
   calculateLogoutTime(): void {
@@ -46,11 +48,15 @@ export class LogoutWarningModalComponent implements OnInit, OnDestroy {
 
   logoutNow(): void {
     this.logOut = true;
-    this.userResponse.emit(this.logOut);
+    this.authService.doLogout();
     this.closeModal();
   }
 
   closeModal(): void {
-    this.logoutService.closeLogoutWarning();
+    this.logoutService.closeLogoutWarning(this.logOut);
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.logoutTimer);
   }
 }
