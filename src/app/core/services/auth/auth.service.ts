@@ -77,12 +77,10 @@ export class AuthService implements OnDestroy {
 
   }
 
-  public submitOTP(otp: string, user: UserModel) {
-    console.log(otp, user);
-    const url = environment.apiUrl + urlList.login.verifyOtp;
-    user.smsToken = otp;
+  public submitOTP(otp: string) {
+    const url = `${environment.apiUrl}${urlList.login.verifyOtp}?reference=ref&otp=${otp}`;
     return this.http
-      .post<UserModel>(url, user);
+      .get<UserModel>(url);
   }
 
   resendOTP() {

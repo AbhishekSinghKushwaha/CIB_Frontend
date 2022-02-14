@@ -66,10 +66,7 @@ export class LoginComponent implements OnInit {
         try {
           this.authService.setToken(authData);
           this.authService.setLoginState(LOGIN_CONSTANTS.LOGIN_STAGES.SMS_VERIFICATION);
-          setTimeout(() => {
-            this.router.navigate(['/auth/login/sms-verification']);
-          }, 1000);
-
+          this.router.navigate(['/auth/login/sms-verification']);
         } catch (error) { console.log('Login error', error) }
       },
       (error) => {

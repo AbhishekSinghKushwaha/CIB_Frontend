@@ -3,7 +3,6 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserModel } from 'src/app/core/domain/user.model';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
-import { StorageService } from 'src/app/core/services/storage/storage.service';
 import LOGIN_CONSTANTS from 'src/app/core/utils/constants/pre-login.constants';
 
 @Component({
@@ -24,7 +23,6 @@ export class LoginSmsVerificationComponent implements OnInit {
   constructor(
     private readonly fb: FormBuilder,
     private readonly router: Router,
-    private readonly storageService: StorageService,
     private readonly authService: AuthService,
   ) {
     this.initOtpForm();
@@ -90,13 +88,14 @@ export class LoginSmsVerificationComponent implements OnInit {
   submit(otp: string) {
     this.otpError = false;
     if (otp) {
-      this.authService.submitOTP(otp, this.user).subscribe(
+      this.authService.submitOTP(otp).subscribe(
         (response) => {
-          this.storageService.setData('loginState', {
-            stage: LOGIN_CONSTANTS.LOGIN_STAGES.SECURITY_VERIFICATION,
-          });
-          this.storageService.setData('otpToken', { otp });
-          this.router.navigate(['/auth/login/security-verification']);
+          if (response) {
+            this.authService.setLoginState(LOGIN_CONSTANTS.LOGIN_STAGES.LOGIN_SUCCESS);
+            this.router.navigate(['/dashboard']);
+          } else {
+            this.otpError = true;
+          }
         },
         (error) => {
           this.otpError = true;
