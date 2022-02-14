@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
@@ -12,7 +13,9 @@ import LOGIN_CONSTANTS from '../../constants/pre-login.constants';
 
 @Injectable()
 export class PostLoginGuard implements CanActivate {
-  constructor(private storageService: StorageService, private router: Router) {}
+  constructor(private storageService: StorageService,
+    private readonly authService: AuthService,
+    private router: Router) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -22,11 +25,9 @@ export class PostLoginGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    const data = this.storageService.getData('loginState');
-    const loginDataSet = !!this.storageService.getData('loginCred');
+    const stage = this.authService.getLoginState();
     if (
-      data?.stage === LOGIN_CONSTANTS.LOGIN_STAGES.LOGIN_SUCCESS &&
-      loginDataSet
+      stage === LOGIN_CONSTANTS.LOGIN_STAGES.LOGIN_SUCCESS
     ) {
       return true;
     }

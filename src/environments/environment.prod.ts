@@ -4,4 +4,6 @@ export const environment = {
   clientId: 'FAC1D96F0E0A44E',
   appInstance: 'one-equity',
   appName: 'Corporate Internet Banking',
+  logoutWarningTimeMinutes: 4,
+  logoutForcedTimeMinutes: 5
 };
