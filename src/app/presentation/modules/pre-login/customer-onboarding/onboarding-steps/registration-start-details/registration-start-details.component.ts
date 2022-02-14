@@ -49,6 +49,10 @@ export class RegistrationStartDetailsComponent implements OnInit {
         if (res.isSuccessful) {
           // Save the corporate ID in storage
           this.storageService.setData('corporateId', res.data.corporateId);
+          this.storageService.setData(
+            'registrationNumber',
+            this.registrationStartForm.controls.registrationNumber.value
+          );
           // check registration stage
           this.checkRegistrationStage(res.data.registrationStage);
         } else {

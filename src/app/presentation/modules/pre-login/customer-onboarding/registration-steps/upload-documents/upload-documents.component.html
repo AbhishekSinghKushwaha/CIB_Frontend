@@ -53,8 +53,11 @@
         <h3 class="strong-text pt-4">Upload documents</h3>
         <small class="text-grey"
           >Please upload supporting documents in PDF or Jpeg format. The maximum
-          size allowed is 20mb.</small
+          size allowed is 5mb.</small
         ><br />
+        <small (click)="getRegistrationRequirements()"
+          ><em><strong>Click to view required documents</strong> </em></small
+        >
         <div class="row align-upload">
           <div class="col-md-6 upload my-4">
             <div class="icon icon-alignment">
@@ -134,7 +137,7 @@
                   <p class="mb-0">
                     <strong>{{ data?.documentName }}</strong>
                   </p>
-                  <small>1.2mb</small>
+                  <small>543kb</small>
                 </div>
                 <div class="col-3">
                   <div class="d-flex flex-row mt-1">

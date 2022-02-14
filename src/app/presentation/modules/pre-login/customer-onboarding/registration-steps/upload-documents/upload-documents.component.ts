@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CustomerOnboardingService } from 'src/app/core/services/customer-onboarding/customer-onboarding.service';
+import { CustomerOnboardingModalsService } from 'src/app/core/services/modal-services/customer-onboarding-modals.service';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 
 @Component({
@@ -19,10 +20,13 @@ export class UploadDocumentsComponent implements OnInit {
   constructor(
     private router: Router,
     private onboardingService: CustomerOnboardingService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private onboardingModalService: CustomerOnboardingModalsService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getRegistrationRequirements();
+  }
 
   uploadFiles(event: any) {
     const file: File = event.dataTransfer
@@ -101,5 +105,17 @@ export class UploadDocumentsComponent implements OnInit {
 
   delete(i: number) {
     this.files.splice(i, 1);
+  }
+
+  getRegistrationRequirements() {
+    // TODO:: Check for the process, if is first time reg, display, if not, ignore
+    this.onboardingService.getRegistrationRequirements().subscribe((res) => {
+      if (res.isSuccessful) {
+        const requiredDocs = res.data;
+        this.onboardingModalService.openRegistrationRequirementModal(
+          requiredDocs
+        );
+      }
+    });
   }
 }

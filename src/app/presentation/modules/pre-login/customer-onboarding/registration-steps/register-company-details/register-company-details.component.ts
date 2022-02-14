@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import {
   FormGroup,
   FormControl,
@@ -9,29 +9,37 @@ import { CustomerOnboardingService } from 'src/app/core/services/customer-onboar
 import { DataLookupService } from 'src/app/core/services/data-lookup/data-lookup.service';
 import { CustomerOnboardingModalsService } from 'src/app/core/services/modal-services/customer-onboarding-modals.service';
 import { SharedDataService } from 'src/app/core/services/shared-data/shared-data.service';
+import { StorageService } from 'src/app/core/services/storage/storage.service';
 
 @Component({
   selector: 'app-register-company-details',
   templateUrl: './register-company-details.component.html',
   styleUrls: ['./register-company-details.component.scss'],
 })
-export class RegisterCompanyDetailsComponent implements OnInit {
+export class RegisterCompanyDetailsComponent implements OnInit, AfterViewInit {
   companyDetailsForm: FormGroup;
+
+  disableRegNumber = true;
 
   constructor(
     private fb: FormBuilder,
     private onboardingModalService: CustomerOnboardingModalsService,
     private onboardingService: CustomerOnboardingService,
     private dataLookupService: DataLookupService,
-    private sharedService: SharedDataService
+    private sharedService: SharedDataService,
+    private storageService: StorageService
   ) {}
 
   ngOnInit(): void {
     // Initialize form
     this.initForm();
-    this.getCountries(); // Temporary solution
     // Get registration requirements & pass to modal
-    this.getRegistrationRequirements();
+    // this.getRegistrationRequirements();
+  }
+
+  ngAfterViewInit(): void {
+    const regNumber = this.storageService.getData('registrationNumber');
+    this.companyDetailsForm.controls.registrationNumber.setValue(regNumber);
   }
 
   getRegistrationRequirements() {
