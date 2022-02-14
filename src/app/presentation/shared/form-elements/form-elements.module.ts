@@ -20,6 +20,14 @@ import { NumberSelectModalModule } from '../modals/number-select-modal/number-se
 import { CollectionOptionModalModule } from '../modals/collection-option-modal/collection-option-modal.module';
 import { CollectionOptionComponent } from './collection-option/collection-option.component';
 import { BranchModalModule } from '../modals/branch-modal/branch-modal.module';
+import { UserListComponent } from './user-list/user-list.component';
+import { CurrencySelectionModule } from '../modals/currency-selection/currency-selection.module';
+import { UserListModalModule } from '../modals/user-list-modal/user-list-modal.module';
+import { TransactionLimitComponent } from './transaction-limit/transaction-limit.component';
+import { CompanyListComponent } from './company-list/company-list.component';
+import { CompanyListModalModule } from '../modals/company-list-modal/company-list-modal.module';
+import { EmailInputComponent } from './email-input/email-input.component';
+import { CountryModalModule } from '../modals/country-modal/country-modal.module';
 
 @NgModule({
   declarations: [
@@ -37,6 +45,10 @@ import { BranchModalModule } from '../modals/branch-modal/branch-modal.module';
     CountrySelectInputComponent,
     SelectNumberComponent,
     CollectionOptionComponent,
+    UserListComponent,
+    TransactionLimitComponent,
+    CompanyListComponent,
+    EmailInputComponent,
   ],
   imports: [
     CommonModule,
@@ -46,7 +58,11 @@ import { BranchModalModule } from '../modals/branch-modal/branch-modal.module';
     TransferFromModalModule,
     NumberSelectModalModule,
     CollectionOptionModalModule,
-    BranchModalModule],
+    BranchModalModule,
+    CurrencySelectionModule,
+    UserListModalModule,
+    CompanyListModalModule,
+    CountryModalModule],
   exports: [
     FormsModule,
     ReactiveFormsModule,
@@ -63,7 +79,11 @@ import { BranchModalModule } from '../modals/branch-modal/branch-modal.module';
     PaymentCategoryComponent,
     CountrySelectInputComponent,
     SelectNumberComponent,
-    CollectionOptionComponent
+    CollectionOptionComponent,
+    UserListComponent,
+    TransactionLimitComponent,
+    CompanyListComponent,
+    EmailInputComponent
   ],
   providers: [],
 })

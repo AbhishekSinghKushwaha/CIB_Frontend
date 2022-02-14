@@ -45,9 +45,9 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   get formField(): FormControl {
     return this.parentForm?.get(this.fieldName) as FormControl;
   }
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   public writeValue(value: string): void {
     this.value = value;
