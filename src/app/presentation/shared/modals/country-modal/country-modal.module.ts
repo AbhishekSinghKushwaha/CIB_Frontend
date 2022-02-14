@@ -6,6 +6,7 @@ import { MatStyleModule } from 'src/app/mat-style.module';
 import { CountryService } from 'src/app/core/services/modal-services/country.service';
 import { CountrySelectComponent } from '../../components/country-select/country-select.component';
 import { FormElementsModule } from '../../form-elements/form-elements.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,8 +14,8 @@ import { FormElementsModule } from '../../form-elements/form-elements.module';
     CountryListItemComponent,
     CountrySelectComponent,
   ],
-  imports: [CommonModule, MatStyleModule, FormElementsModule],
+  imports: [CommonModule, MatStyleModule, FormsModule],
   exports: [CountrySelectComponent],
   providers: [CountryService],
 })
-export class CountryModalModule {}
+export class CountryModalModule { }

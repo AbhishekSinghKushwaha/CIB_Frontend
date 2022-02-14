@@ -34,6 +34,9 @@ export class TransferAmountComponent implements ControlValueAccessor, OnInit {
   public fieldName!: string;
 
   @Input()
+  public currencyFieldName!: string;
+
+  @Input()
   public label!: string;
 
   @Input()
@@ -66,7 +69,7 @@ export class TransferAmountComponent implements ControlValueAccessor, OnInit {
     private readonly currencySelectionService: CurrencySelectionService,
     private readonly currencySelectionConstants: CurrencySelectionConstants,
     private readonly transferFromService: TransferFromService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.listenToDataEvents();
@@ -83,6 +86,7 @@ export class TransferAmountComponent implements ControlValueAccessor, OnInit {
     // Get Selected Currency
     this.currencySelectionService.selected.subscribe((x) => {
       this.currency = x;
+      this.currencyFieldName && this.parentForm.controls[this.currencyFieldName].setValue(this.currency);
     });
 
     this.onAmountEntered();
