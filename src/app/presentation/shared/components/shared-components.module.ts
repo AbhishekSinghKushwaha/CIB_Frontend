@@ -16,6 +16,8 @@ import { BeneficiaryListItemComponent } from './beneficiary-list-item/beneficiar
 import { NotificationMenuItemComponent } from './notification-menu-item/notification-menu-item.component';
 import { WelcomeInfoComponent } from './welcome-info/welcome-info.component';
 import { ConfirmationCompletionComponent } from './confirmation-completion/confirmation-completion.component';
+import { LogoutWarningModalComponent } from './logout-warning-modal/logout-warning-modal.component';
+import { LogoutConfirmationModalComponent } from './logout-confirmation-modal/logout-confirmation-modal.component';
 
 const components = [
   AccountDropdownItemComponent,
@@ -31,7 +33,9 @@ const components = [
   BeneficiaryListItemComponent,
   NotificationMenuItemComponent,
   WelcomeInfoComponent,
-  ConfirmationCompletionComponent
+  ConfirmationCompletionComponent,
+  LogoutWarningModalComponent,
+  LogoutConfirmationModalComponent
 ];
 
 @NgModule({

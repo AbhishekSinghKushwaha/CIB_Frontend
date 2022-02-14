@@ -73,8 +73,10 @@ const users: UserModel[] = [
     name: "Oluwatosin Iyiola",
     family: "Father",
     username: "olu.iyiola1@gmail.com",
+    // deepcode ignore NoHardcodedPasswords: <please specify a reason of ignoring this>
     password: "Temmanuel2",
     transactionType: "Login",
+    // deepcode ignore HardcodedNonCryptoSecret: <please specify a reason of ignoring this>
     access_token: "BEARER AUTHCODE",
     newLogin: false,
     smsToken: "666666",
