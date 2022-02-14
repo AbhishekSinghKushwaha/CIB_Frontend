@@ -1,19 +1,19 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { Component, forwardRef, Input, OnInit } from "@angular/core";
 import {
   ControlValueAccessor,
   FormControl,
   FormGroup,
   NG_VALUE_ACCESSOR,
-} from '@angular/forms';
-import { FromAccount } from 'src/app/core/domain/transfer.models';
-import { AccountsService } from 'src/app/core/services/accounts/accounts.service';
-import { TransferFromService } from 'src/app/core/services/modal-services/transfer-from.service';
-import { SharedDataService } from 'src/app/core/services/shared-data/shared-data.service';
+} from "@angular/forms";
+import { FromAccount } from "src/app/core/domain/transfer.models";
+import { AccountsService } from "src/app/core/services/accounts/accounts.service";
+import { TransferFromService } from "src/app/core/services/modal-services/transfer-from.service";
+import { SharedDataService } from "src/app/core/services/shared-data/shared-data.service";
 
 @Component({
-  selector: 'app-transfer-from',
-  templateUrl: './transfer-from.component.html',
-  styleUrls: ['./transfer-from.component.scss'],
+  selector: "app-transfer-from",
+  templateUrl: "./transfer-from.component.html",
+  styleUrls: ["./transfer-from.component.scss"],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -51,25 +51,20 @@ export class TransferFromComponent implements ControlValueAccessor, OnInit {
   constructor(
     private readonly sharedDataService: SharedDataService,
     private readonly accountsService: AccountsService,
-    private readonly transferFromAccountService: TransferFromService,
-  ) { }
+    private readonly transferFromAccountService: TransferFromService
+  ) {}
 
   ngOnInit(): void {
-    this.accountsService.getUserAccounts().subscribe((res) => {
-      if (res.status) {
-        this.sharedDataService.setUserAccounts(res.data);
-      } else {
-        // TODO:: Notify error
-      }
-    });
-
     this.sharedDataService.userAccounts.subscribe((res) => {
       this.sourceAccounts = res;
     });
-    this.transferFromAccountService.selectedTransferFromAccount.subscribe((x) => {
-      this.parentForm.controls[this.fieldName].setValue(x);
-      this.writeValue(x);
-    });
+
+    this.transferFromAccountService.selectedTransferFromAccount.subscribe(
+      (x) => {
+        this.parentForm.controls[this.fieldName].setValue(x);
+        this.writeValue(x);
+      }
+    );
   }
 
   public writeValue(value: FromAccount): void {
@@ -95,12 +90,11 @@ export class TransferFromComponent implements ControlValueAccessor, OnInit {
 
   openTransferFromModal() {
     // Remove accounts that have been selected under sendTo
-    console.log('this.sourceAccounts', this.sourceAccounts);
-    console.log(this.parentForm.controls)
+    console.log("this.sourceAccounts", this.sourceAccounts);
+    console.log(this.parentForm.controls);
     const accounts = this.sourceAccounts.filter((el) => {
       return (
-        el.accountNumber !==
-        this.parentForm.controls?.accountNumber?.value
+        el.accountNumber !== this.parentForm.controls?.accountNumber?.value
       );
     });
     this.transferFromAccountService.openTransferFromModal(accounts);
