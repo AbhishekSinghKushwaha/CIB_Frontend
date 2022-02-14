@@ -13,7 +13,7 @@ export class ConfirmDialogService {
 
   public open(options: ConfirmDialogModel) {
     this.dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      maxWidth: '400px',
+      width: '22vw',
       disableClose: true,
       data: {
         title: options.title,

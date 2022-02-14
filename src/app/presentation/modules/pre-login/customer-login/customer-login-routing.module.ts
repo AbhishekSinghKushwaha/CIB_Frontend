@@ -1,3 +1,4 @@
+import { LoginGuard } from 'src/app/core/utils/guards/login/login.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SecurityChallengeGuard } from 'src/app/core/utils/guards/security-challenge/security-challenge.guard';
@@ -37,7 +38,7 @@ const routes: Routes = [
           import('./security-challenge/security-challenge.module').then(
             (m) => m.SecurityChallengeModule
           ),
-        canActivate: [SecurityChallengeGuard],
+        // canActivate: [SecurityChallengeGuard],
       },
       {
         path: 'forgot-password',
@@ -54,4 +55,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class CustomerLoginRoutingModule {}
+export class CustomerLoginRoutingModule { }

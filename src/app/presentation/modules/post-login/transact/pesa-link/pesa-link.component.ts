@@ -1,24 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { SupportingDocumentsUploadService } from 'src/app/core/services/supporting-documents-upload/supporting-documents-upload.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BaseTransactComponent } from '../base-transact.component';
-import { accountLimitValidator } from 'src/app/core/utils/validators/limits.validators';
-import { UniversalValidators } from 'ngx-validators';
-import { OwnAccountService } from 'src/app/core/services/transfers/own-account/own-account.service';
-import { MatDialog } from '@angular/material/dialog';
-import { ConfirmPaymentComponent } from 'src/app/presentation/shared/modals/confirm-payment/confirm-payment.component';
-import { Router } from '@angular/router';
-import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
-import { FavouriteBeneficiaryModel } from 'src/app/core/domain/favourites-beneficiary.model';
-import { phoneLinkedModel } from 'src/app/core/domain/phone-linked.modal';
+import { Component, OnInit } from "@angular/core";
+import { SupportingDocumentsUploadService } from "src/app/core/services/supporting-documents-upload/supporting-documents-upload.service";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { BaseTransactComponent } from "../base-transact.component";
+import { accountLimitValidator } from "src/app/core/utils/validators/limits.validators";
+import { UniversalValidators } from "ngx-validators";
+import { OwnAccountService } from "src/app/core/services/transfers/own-account/own-account.service";
+import { MatDialog } from "@angular/material/dialog";
+import { ConfirmPaymentComponent } from "src/app/presentation/shared/modals/confirm-payment/confirm-payment.component";
+import { Router } from "@angular/router";
+import { mockData } from "src/app/core/utils/constants/mockdata.constants";
+import { FavouriteBeneficiaryModel } from "src/app/core/domain/favourites-beneficiary.model";
+import { phoneLinkedModel } from "src/app/core/domain/phone-linked.modal";
 
-import { recipientBankDetailsModel } from 'src/app/core/domain/recepient-bank-details.model';
-import { TransactionTypeConstants } from 'src/app/core/utils/constants/transaction-type.constants';
+import { recipientBankDetailsModel } from "src/app/core/domain/recepient-bank-details.model";
+import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
 
 @Component({
-  selector: 'app-pesa-link',
-  templateUrl: './pesa-link.component.html',
-  styleUrls: ['./pesa-link.component.scss'],
+  selector: "app-pesa-link",
+  templateUrl: "./pesa-link.component.html",
+  styleUrls: ["./pesa-link.component.scss"],
 })
 export class PesaLinkComponent implements OnInit {
   pesalinkTransferForm: FormGroup;
@@ -35,10 +35,8 @@ export class PesaLinkComponent implements OnInit {
     private readonly fb: FormBuilder,
     private ownEquityAccountService: OwnAccountService,
     public dialog: MatDialog,
-    private readonly router: Router // private readonly pesaLinkSendToService: PesaLinkSendToService,
-  ) // private readonly favouritesModalService: FavouritesModalService,
-
-  {}
+    private readonly router: Router // private readonly pesaLinkSendToService: PesaLinkSendToService, // private readonly favouritesModalService: FavouritesModalService,
+  ) {}
 
   get getForm() {
     return this.pesalinkTransferForm.controls;
@@ -66,12 +64,12 @@ export class PesaLinkComponent implements OnInit {
 
   initForm(): void {
     this.pesalinkTransferForm = this.fb.group({
-      sendFrom: ['', [Validators.required]],
-      sendTo: ['', [Validators.required]],
+      sendFrom: ["", [Validators.required]],
+      sendTo: ["", [Validators.required]],
       amount: [{}, [Validators.required, accountLimitValidator]],
-      reason: [''],
-      fxReferenceId: ['', [Validators.required]],
-      schedulePayment: ['', [Validators.required]],
+      reason: [""],
+      fxReferenceId: ["", [Validators.required]],
+      schedulePayment: ["", [Validators.required]],
     });
   }
 
@@ -109,7 +107,7 @@ export class PesaLinkComponent implements OnInit {
         from: this.getForm.sendFrom.value,
         to: this.getForm.sendTo.value,
         amount: this.getForm.amount.value,
-        transactionType: 'Send to your own Equity account',
+        transactionType: "Send to your own Equity account",
         paymentReason: this.getForm.reason.value,
         fxReferenceId: this.getForm.fxReferenceId.value,
         schedulePayment: this.getForm.schedulePayment.value,
@@ -136,7 +134,7 @@ export class PesaLinkComponent implements OnInit {
 
   // Initiate fund transfer to own equity account
   sendMoney() {
-    this.router.navigate(['/transact/other-equity-account/submit-transfer']);
+    this.router.navigate(["/transact/transfer-submitted"]);
     // this.loading = true;
     // const payload = {
     //   amount: this.getForm.amount.value.amount,

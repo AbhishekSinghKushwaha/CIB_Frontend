@@ -22,5 +22,5 @@ export interface CountryModel {
   dialCode: string;
   flagPath: string;
   operatingCountry: boolean;
-  countryCode3Chars: null;
+  countryCode3Chars: string;
 }
