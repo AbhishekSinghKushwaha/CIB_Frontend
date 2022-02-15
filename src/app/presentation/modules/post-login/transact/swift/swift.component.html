@@ -92,8 +92,8 @@
               <app-swift-charges
                 [parentForm]="swiftTransferForm"
                 label="Charges"
-                formControlName="charges"
-                fieldName="charges"
+                formControlName="chargeOption"
+                fieldName="chargeOption"
                 placeholder="Select an option"
               ></app-swift-charges>
             </div>
@@ -119,14 +119,7 @@
             </div>
           </div>
           <div class="mt-4">
-            <button
-              mat-raised-button
-              [disabled]="swiftTransferForm.invalid"
-              color="primary"
-              disabled
-            >
-              Send money
-            </button>
+            <button mat-raised-button color="primary">Send money</button>
           </div>
         </form>
       </div>

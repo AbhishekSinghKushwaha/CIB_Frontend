@@ -1,11 +1,11 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { SwiftModalsService } from 'src/app/core/services/modal-services/swift-modals.service';
+import { Component, forwardRef, Input, OnInit } from "@angular/core";
+import { FormControl, FormGroup, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { SwiftModalsService } from "src/app/core/services/modal-services/swift-modals.service";
 
 @Component({
-  selector: 'app-swift-charges',
-  templateUrl: './swift-charges.component.html',
-  styleUrls: ['./swift-charges.component.scss'],
+  selector: "app-swift-charges",
+  templateUrl: "./swift-charges.component.html",
+  styleUrls: ["./swift-charges.component.scss"],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -68,7 +68,7 @@ export class SwiftChargesComponent implements OnInit {
 
   listenToDataStreams() {
     this.swiftModalsService.selectedCharge.subscribe((x) => {
-      this.parentForm.controls.charges.setValue(x);
+      this.parentForm.controls.chargeOption.setValue(x);
     });
   }
 }

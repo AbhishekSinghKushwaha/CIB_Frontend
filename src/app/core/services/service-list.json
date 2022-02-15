@@ -37,7 +37,7 @@
     "getAccountDetails": "/cibpaymentservice-v1/api/v1/Transfer/NameEnquiry"
   },
   "dataLookUp": {
-    "getCountries": "/cibonboarding-v1/api/v1/Transfer/GetCountries/",
+    "getCountries": "/cibpaymentservice-v1/api/v1/Transfer/GetCountries",
     "getBanks": "/cibpaymentservice-v1/api/v1/Transfer/GetBanks/",
     "getCurrencies": "/cibpaymentservice-v1/api/v1/Transfer/GetCurrencies",
     "getSubsidiaries": "/cibpaymentservice-v1/api/v1/Transfer/GetSubsidiaries"
@@ -46,9 +46,9 @@
     "getPdf": "/v1/generatepdf/statement"
   },
   "login": {
-    "loginUser": "/users/authorization/login",
-    "verifyOtp": "/authorization/login/verifyOtp",
-    "resendOtp": "/authorization/oauth/regenerateOtp",
+    "loginUser": "/cibuseraccess-v1/api/Auth/oauth/token",
+    "verifyOtp": "/cibuseraccess-v1/api/Auth/login/verifyOtp",
+    "resendOtp": "/cibuseraccess-v1/api/Auth/generateOtp",
     "validateOtp": "/authorization/user/validateOTPReset",
     "securityQuestions": "/authorization/user/securityQuestions",
     "securityAnswers": "/authorization/user/securityAnswers"

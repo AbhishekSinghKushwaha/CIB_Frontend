@@ -19,9 +19,7 @@
       class="col-lg-6 col-md-6 col-sm-12 mb-3"
     >
       <span class="text-grey text-sm">{{ item.key }}</span>
-      <p class="mb-0 text-sm pb-0">
-        {{ item.value }}
-      </p>
+      <p class="mb-0 text-sm pb-0" [innerHTML]="item.value"></p>
     </div>
   </div>
 
