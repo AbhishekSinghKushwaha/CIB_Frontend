@@ -674,23 +674,11 @@ export class CustomIconService {
       this.domSanitizer.bypassSecurityTrustResourceUrl(
         'assets/images/icons/wizard-progress-grey.svg'
       )
-    ); 
+    );
     this.matIconRegistry.addSvgIcon(
       'wizard_progress_primary',
       this.domSanitizer.bypassSecurityTrustResourceUrl(
         'assets/images/icons/wizard-progress-primary.svg'
-      )
-    );
-    this.matIconRegistry.addSvgIcon(
-      'user_profile',
-      this.domSanitizer.bypassSecurityTrustResourceUrl(
-        'assets/images/icons/visual-support-icons-user.svg'
-      )
-    );
-    this.matIconRegistry.addSvgIcon(
-      'user_limit',
-      this.domSanitizer.bypassSecurityTrustResourceUrl(
-        'assets/images/icons/visual-support-icons-user-limit.svg'
       )
     );
     this.matIconRegistry.addSvgIcon(
@@ -706,24 +694,29 @@ export class CustomIconService {
       )
     );
     this.matIconRegistry.addSvgIcon(
-      'notification',
+      'service_request_chequebook',
       this.domSanitizer.bypassSecurityTrustResourceUrl(
-        'assets/images/icons/visual-support-icons-notification.svg'
+        'assets/images/icons/visual-support-icons-sr-chequebook.svg'
       )
     );
     this.matIconRegistry.addSvgIcon(
-      'pay',
+      'service_request_edit_company',
       this.domSanitizer.bypassSecurityTrustResourceUrl(
-        'assets/images/icons/visual-support-icons-pay.svg'
+        'assets/images/icons/visual-support-icons-sr-edit-company-limit.svg'
       )
     );
     this.matIconRegistry.addSvgIcon(
-      'create_user',
+      'service_request_edit_user_limit',
       this.domSanitizer.bypassSecurityTrustResourceUrl(
-        'assets/images/icons/visual-support-icons-create_user.svg'
+        'assets/images/icons/visual-support-icons-sr-edit-user-limit.svg'
       )
     );
-
+    this.matIconRegistry.addSvgIcon(
+      'service_request_static_data_update',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/visual-support-icons-sr-static-data-update.svg'
+      )
+    );
     this.matIconRegistry.addSvgIcon(
       'user_profile',
       this.domSanitizer.bypassSecurityTrustResourceUrl(
