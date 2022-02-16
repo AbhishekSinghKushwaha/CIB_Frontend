@@ -11,7 +11,7 @@
         matInput
         type="text"
         class="strong-text"
-        [value]="'+' + country?.dialCode || ''"
+        [value]="country?.dialCode ? '+' + country?.dialCode : '' || ''"
         [placeholder]="country?.dialCode || '' || '+254'"
       />
       <button type="button" mat-icon-button matSuffix>
