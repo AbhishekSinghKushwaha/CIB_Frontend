@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UserListActionsModalComponent } from './components/user-list-actions-modal/user-list-actions-modal.component';
 import { ConfirmDialogModule } from 'src/app/presentation/shared/modals/confirm-dialog/confirm-dialog.module';
 import { PromptModalModule } from 'src/app/presentation/shared/modals/prompt-modal/prompt-modal.module';
+import { ConfirmationModalModule } from 'src/app/presentation/shared/modals/confirmation-modal/confirmation-modal.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { PromptModalModule } from 'src/app/presentation/shared/modals/prompt-mod
     MatStyleModule,
     ReactiveFormsModule,
     ConfirmDialogModule,
-    PromptModalModule
+    PromptModalModule,
+    ConfirmationModalModule
   ],
   providers: [RolesConstants, ProductsConstants],
 })
