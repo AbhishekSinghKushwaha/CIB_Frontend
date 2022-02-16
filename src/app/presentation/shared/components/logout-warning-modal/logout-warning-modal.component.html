@@ -1,0 +1,41 @@
+<mat-card class="p-0 pb-3">
+  <mat-card-content class="container" ngbAutofocus>
+    <div class="row">
+      <div
+        class="col-sm-12 d-flex justify-content-center align-items-center img-bg"
+      >
+        <img [src]="createImageUrl()" height="125px" />
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-12">
+        <h3 class="strong-text">Are you still there?</h3>
+        <p class="text-sm text-grey">
+          {{ returnLogoutWarning() }}
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <button
+          mat-button
+          color="primary"
+          class="strong-text"
+          (click)="closeModal()"
+        >
+          Keep me in
+        </button>
+      </div>
+      <div class="col">
+        <button
+          mat-flat-button
+          color="primary"
+          class="strong-text"
+          (click)="logoutNow()"
+        >
+          Sign me out
+        </button>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

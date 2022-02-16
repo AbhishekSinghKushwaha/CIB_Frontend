@@ -2,9 +2,7 @@ import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserModel } from 'src/app/core/domain/user.model';
-import { LoginSmsVerificationService } from 'src/app/core/services/login-sms-verification/login-sms-verification.service';
-import { LoginService } from 'src/app/core/services/login/login.service';
-import { StorageService } from 'src/app/core/services/storage/storage.service';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 import LOGIN_CONSTANTS from 'src/app/core/utils/constants/pre-login.constants';
 
 @Component({
@@ -24,21 +22,19 @@ export class LoginSmsVerificationComponent implements OnInit {
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly loginSmsVerificationService: LoginSmsVerificationService,
     private readonly router: Router,
-    private readonly storageService: StorageService,
-    private readonly loginService: LoginService
+    private readonly authService: AuthService,
   ) {
     this.initOtpForm();
   }
 
   async ngOnInit(): Promise<void> {
     this.initForm();
-    this.checkLoginStatus();
+    // this.checkLoginStatus();
   }
 
   private async checkLoginStatus(): Promise<void> {
-    this.loginService
+    this.authService
       .getUserData()
       .then((data: UserModel) => {
         if (!data) {
@@ -92,13 +88,13 @@ export class LoginSmsVerificationComponent implements OnInit {
   submit(otp: string) {
     this.otpError = false;
     if (otp) {
-      this.loginSmsVerificationService.submitOTP(otp, this.user).subscribe(
+      this.authService.submitOTP(otp).subscribe(
         (response) => {
-          this.storageService.setData('loginState', {
-            stage: LOGIN_CONSTANTS.LOGIN_STAGES.SECURITY_VERIFICATION,
-          });
-          this.storageService.setData('otpToken', { otp });
-          this.router.navigate(['/auth/login/security-verification']);
+          if (response) {
+            this.authService.loginSuccess();
+          } else {
+            this.otpError = true;
+          }
         },
         (error) => {
           this.otpError = true;

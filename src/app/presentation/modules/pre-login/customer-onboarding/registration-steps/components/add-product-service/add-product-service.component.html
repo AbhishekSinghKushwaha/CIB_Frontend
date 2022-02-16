@@ -74,7 +74,7 @@
                     >
                       <div
                         class="col-1 text-primary pt-2"
-                        *ngIf="product?.id === sp?.productId"
+                        *ngIf="product?.id === sp?.id"
                       >
                         <strong>On</strong>
                       </div>
@@ -100,7 +100,7 @@
               color="primary"
               type="submit"
               class="col-8"
-              [disabled]="false"
+              [disabled]="selectedProducts.length === 0"
               (click)="saveAndContinue()"
             >
               Save & continue
