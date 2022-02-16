@@ -1,21 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { CustomerOnboardingService } from 'src/app/core/services/customer-onboarding/customer-onboarding.service';
-import { CustomerOnboardingModalsService } from 'src/app/core/services/modal-services/customer-onboarding-modals.service';
-import { StorageService } from 'src/app/core/services/storage/storage.service';
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { CustomerOnboardingService } from "src/app/core/services/customer-onboarding/customer-onboarding.service";
+import { CustomerOnboardingModalsService } from "src/app/core/services/modal-services/customer-onboarding-modals.service";
+import { StorageService } from "src/app/core/services/storage/storage.service";
 
 @Component({
-  selector: 'app-upload-documents',
-  templateUrl: './upload-documents.component.html',
-  styleUrls: ['./upload-documents.component.scss'],
+  selector: "app-upload-documents",
+  templateUrl: "./upload-documents.component.html",
+  styleUrls: ["./upload-documents.component.scss"],
 })
 export class UploadDocumentsComponent implements OnInit {
   currentFile?: File;
-  fileName = '';
+  fileName = "";
   files: any = [];
   progress = 20;
   progressFiles: any[] = [];
-  message = '';
+  message = "";
   test: any;
   constructor(
     private router: Router,
@@ -45,7 +45,6 @@ export class UploadDocumentsComponent implements OnInit {
   }
 
   _handleReaderLoaded(e: any) {
-    console.log('_handleReaderLoaded');
     var reader = e.target;
     const base64Image = reader.result;
     this.files.push({
@@ -74,12 +73,12 @@ export class UploadDocumentsComponent implements OnInit {
   // Temporary fix to simulate the upload process
   updateUpload() {
     const uploadInterval = setInterval(() => {
-      this.progressFiles[0].progress += 20;
+      this.progressFiles[0].progress += 50;
 
       if (this.progressFiles[0].progress === 100) {
         this.progressFiles.pop();
         console.log(this.progressFiles);
-        this.message = 'Completed';
+        this.message = "Completed";
         clearInterval(uploadInterval);
       }
     }, 2000);
@@ -92,12 +91,12 @@ export class UploadDocumentsComponent implements OnInit {
     this.onboardingService
       .uploadCorporateDocuments(
         { documents: this.files },
-        this.storageService.getData('corporateId')
+        this.storageService.getData("corporateId")
       )
       .subscribe((res) => {
         if (res.isSuccessful) {
           this.router.navigate([
-            '/auth/customer-onboarding/register/submission-successful',
+            "/auth/customer-onboarding/register/submission-successful",
           ]);
         }
       });

@@ -1,22 +1,22 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from "@angular/core";
 import {
   FormGroup,
   FormControl,
   Validators,
   FormBuilder,
-} from '@angular/forms';
-import { CustomerOnboardingService } from 'src/app/core/services/customer-onboarding/customer-onboarding.service';
-import { DataLookupService } from 'src/app/core/services/data-lookup/data-lookup.service';
-import { CustomerOnboardingModalsService } from 'src/app/core/services/modal-services/customer-onboarding-modals.service';
-import { SharedDataService } from 'src/app/core/services/shared-data/shared-data.service';
-import { StorageService } from 'src/app/core/services/storage/storage.service';
+} from "@angular/forms";
+import { CustomerOnboardingService } from "src/app/core/services/customer-onboarding/customer-onboarding.service";
+import { DataLookupService } from "src/app/core/services/data-lookup/data-lookup.service";
+import { CustomerOnboardingModalsService } from "src/app/core/services/modal-services/customer-onboarding-modals.service";
+import { SharedDataService } from "src/app/core/services/shared-data/shared-data.service";
+import { StorageService } from "src/app/core/services/storage/storage.service";
 
 @Component({
-  selector: 'app-register-company-details',
-  templateUrl: './register-company-details.component.html',
-  styleUrls: ['./register-company-details.component.scss'],
+  selector: "app-register-company-details",
+  templateUrl: "./register-company-details.component.html",
+  styleUrls: ["./register-company-details.component.scss"],
 })
-export class RegisterCompanyDetailsComponent implements OnInit, AfterViewInit {
+export class RegisterCompanyDetailsComponent implements OnInit {
   companyDetailsForm: FormGroup;
 
   disableRegNumber = true;
@@ -33,13 +33,11 @@ export class RegisterCompanyDetailsComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     // Initialize form
     this.initForm();
+
+    const regNumber = this.storageService.getData("registrationNumber");
+    this.companyDetailsForm.controls.registrationNumber.setValue(regNumber);
     // Get registration requirements & pass to modal
     // this.getRegistrationRequirements();
-  }
-
-  ngAfterViewInit(): void {
-    const regNumber = this.storageService.getData('registrationNumber');
-    this.companyDetailsForm.controls.registrationNumber.setValue(regNumber);
   }
 
   getRegistrationRequirements() {
@@ -56,12 +54,12 @@ export class RegisterCompanyDetailsComponent implements OnInit, AfterViewInit {
 
   initForm() {
     this.companyDetailsForm = this.fb.group({
-      registrationNumber: ['', [Validators.required]],
-      companyName: ['', [Validators.required]],
-      country: ['', [Validators.required]], // Replace with countryId in the payload
-      phoneNumber: ['', [Validators.required]],
-      emailAddress: ['', [Validators.required]],
-      address: ['', [Validators.required]],
+      registrationNumber: ["", [Validators.required]],
+      companyName: ["", [Validators.required]],
+      country: ["", [Validators.required]], // Replace with countryId in the payload
+      phoneNumber: ["", [Validators.required]],
+      emailAddress: ["", [Validators.required]],
+      address: ["", [Validators.required]],
     });
   }
 
