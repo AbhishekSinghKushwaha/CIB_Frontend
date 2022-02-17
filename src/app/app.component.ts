@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject, LOCALE_ID } from '@angular/core';
 import { CustomIconService } from './core/utils/custom-icon.service';
 
 @Component({
@@ -8,7 +8,8 @@ import { CustomIconService } from './core/utils/custom-icon.service';
 })
 export class AppComponent {
   title = 'Corporate Internet Banking';
-  constructor(private customIconService: CustomIconService) {
+  constructor(private customIconService: CustomIconService, @Inject(LOCALE_ID) private localeId: string) {
+    console.log('AppComponent', localeId);
     this.customIconService.init();
   }
 }

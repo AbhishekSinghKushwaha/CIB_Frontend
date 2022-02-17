@@ -1,0 +1,23 @@
+<div class="p-3 pb-2">
+  <button mat-icon-button matSuffix class="close-button" (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <p class="text-center fw-bold pt-2">Language</p>
+  <h3 class="m-4 ms-2">Chose your language</h3>
+  <div
+    class="row cursor-pointer"
+    *ngFor="let language of languages; let isLast = last; let i = index"
+    (click)="onSelect(language)"
+  >
+    <div class="col-md-2">
+      <mat-icon
+        color="primary"
+        [svgIcon]="
+          selected?.id === language?.id ? 'check_round' : 'radio_button_off'
+        "
+      ></mat-icon>
+    </div>
+    <div class="col-md-10">{{ language?.langDesc }}</div>
+    <mat-divider *ngIf="!isLast" class="m-2"></mat-divider>
+  </div>
+</div>

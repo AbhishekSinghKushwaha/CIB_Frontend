@@ -6,7 +6,8 @@ import { AuthService } from '../../services/auth/auth.service';
 
 @Injectable()
 export class AuthTokenInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthService, @Inject(LOCALE_ID) private localeId: string) { }
+  constructor(private authService: AuthService, @Inject(LOCALE_ID) private localeId: string) {
+  }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
     const currentLocale = this.localeId.split('-')[0];
@@ -14,6 +15,10 @@ export class AuthTokenInterceptor implements HttpInterceptor {
     const clientId = environment.clientId;
 
     if (authToken) {
+
+      console.log('localeId', this.localeId);
+      const newURL = window.location.href.replace(this.localeId, 'fr-FR');
+      window.location.href = newURL;
       request = request.clone({
         headers: request.headers.set(
           'Authorization',
