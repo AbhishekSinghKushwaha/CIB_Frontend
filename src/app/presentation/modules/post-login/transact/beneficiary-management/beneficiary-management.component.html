@@ -82,6 +82,7 @@
             color="primary"
             type="button"
             class="col-6"
+            routerLink="new"
           >
             Add a beneficiary
           </button>
@@ -114,20 +115,20 @@
             <!-- Position Column -->
             <ng-container matColumnDef="name">
               <th mat-header-cell *matHeaderCellDef>Name</th>
-              <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+              <td mat-cell *matCellDef="let element">{{ element.beneficiaryName }}</td>
             </ng-container>
 
             <!-- Name Column -->
             <ng-container matColumnDef="bank">
               <th mat-header-cell *matHeaderCellDef>Bank</th>
-              <td mat-cell *matCellDef="let element">{{ element.bank }}</td>
+              <td mat-cell *matCellDef="let element">{{ element.beneficiaryBank }}</td>
             </ng-container>
 
             <!-- Weight Column -->
             <ng-container matColumnDef="accountNumber">
               <th mat-header-cell *matHeaderCellDef>Account No</th>
               <td mat-cell *matCellDef="let element">
-                {{ element.accountNumber }}
+                {{ element.beneficiaryAccount }}
               </td>
             </ng-container>
 

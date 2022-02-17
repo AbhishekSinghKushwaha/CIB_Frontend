@@ -72,6 +72,7 @@ export class BeneficiaryManagementFormComponent implements OnInit {
     );
     this.subscriptions.push(
       this.transactionTypeModalService.selected.subscribe((response) => {
+        console.log("response,", response)
         this.equityForm.controls.transactionType.setValue(response.name);
         this.transactionType = response;
       })
@@ -86,7 +87,7 @@ export class BeneficiaryManagementFormComponent implements OnInit {
       beneficiaryAccount: new FormControl(this.editData?.beneficiaryAccount, [
         Validators.required,
       ]),
-      entityType: new FormControl(this.editData?.entityType, [
+      transactionType: new FormControl(this.editData?.transactionType, [
         Validators.required,
       ]),
     });
@@ -96,6 +97,9 @@ export class BeneficiaryManagementFormComponent implements OnInit {
     console.log({ editMode: this.editMode, modalMode: this.modalMode });
     if (!this.editMode) {
       if (this.modalMode) {
+        const updatedBeneficiary = this.equityForm.value;
+              updatedBeneficiary.id = this.editData.id;
+              
         this.formSubmitted.next(this.equityForm.value);
       } else {
         this.beneficiaryManagementService.submitForm(this.equityForm.value);

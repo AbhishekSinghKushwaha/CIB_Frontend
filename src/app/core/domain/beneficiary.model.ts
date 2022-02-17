@@ -4,5 +4,5 @@ export interface BeneficiaryModel {
   beneficiaryBank: string;
   beneficiaryBankCode: string;
   beneficiaryAccount: string;
-  entityType: string;
+  transactionType: string;
 }
