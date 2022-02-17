@@ -87,7 +87,8 @@ export class CountrySelectInputComponent implements OnInit {
   openCountrySelectionModal() {
     this.countryService.openCountry(
       this.storageService.getData("countries"),
-      ""
+      "",
+      {}
     );
   }
 }

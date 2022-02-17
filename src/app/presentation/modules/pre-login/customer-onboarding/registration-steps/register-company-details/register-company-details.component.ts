@@ -58,7 +58,7 @@ export class RegisterCompanyDetailsComponent implements OnInit {
       companyName: ["", [Validators.required]],
       country: ["", [Validators.required]], // Replace with countryId in the payload
       phoneNumber: ["", [Validators.required]],
-      emailAddress: ["", [Validators.required]],
+      emailAddress: ["", [Validators.required, Validators.email]],
       address: ["", [Validators.required]],
     });
   }
