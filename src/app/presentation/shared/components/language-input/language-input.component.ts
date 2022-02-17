@@ -26,9 +26,9 @@ export class LanguageInputComponent implements OnInit {
       (selected: LanguageModel) => {
         if (selected) {
           this.language = selected;
+          this.languageService.setCurrentLanguage(selected);
           this.translate.use(selected.langCode)
         }
-
       }
 
     );

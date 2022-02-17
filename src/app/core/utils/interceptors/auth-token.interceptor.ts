@@ -3,22 +3,18 @@ import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../../services/auth/auth.service';
+import { LanguageService } from './../../services/language/language.service';
 
 @Injectable()
 export class AuthTokenInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthService, @Inject(LOCALE_ID) private localeId: string) {
+  constructor(private authService: AuthService, private readonly languageService: LanguageService) {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
-    const currentLocale = this.localeId.split('-')[0];
     const authToken = this.authService.accessToken;
     const clientId = environment.clientId;
 
     if (authToken) {
-
-      console.log('localeId', this.localeId);
-      const newURL = window.location.href.replace(this.localeId, 'fr-FR');
-      window.location.href = newURL;
       request = request.clone({
         headers: request.headers.set(
           'Authorization',
@@ -40,7 +36,7 @@ export class AuthTokenInterceptor implements HttpInterceptor {
     }
     if (!request.headers.has('Accept-Language')) {
       request = request.clone({
-        headers: request.headers.set('Accept-Language', currentLocale),
+        headers: request.headers.set('Accept-Language', this.languageService.defaultLanguage.langCode),
       });
     }
 
