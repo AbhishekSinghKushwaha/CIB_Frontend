@@ -1,92 +1,99 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { TransactComponent } from './transact.component';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { TransactComponent } from "./transact.component";
 
 const routes: Routes = [
   {
-    path: '',
+    path: "",
     component: TransactComponent,
   },
   {
-    path: 'own-equity-account',
+    path: "own-equity-account",
     loadChildren: (): Promise<any> =>
-      import('./own-equity-account/own-equity-account.module').then(
+      import("./own-equity-account/own-equity-account.module").then(
         (m) => m.OwnEquityAccountModule
       ),
   },
   {
-    path: 'other-equity-account',
+    path: "other-equity-account",
     loadChildren: (): Promise<any> =>
-      import('./other-equity-account/other-equity-account.module').then(
+      import("./other-equity-account/other-equity-account.module").then(
         (m) => m.OtherEquityAccountModule
       ),
   },
   {
-    path: 'mobile-money',
+    path: "mobile-money",
     loadChildren: (): Promise<any> =>
-      import('./mobile-money/mobile-money.module').then(
+      import("./mobile-money/mobile-money.module").then(
         (m) => m.MobileMoneyModule
       ),
   },
   {
-    path: 'other-banks',
+    path: "other-banks",
     loadChildren: (): Promise<any> =>
-      import('./other-banks/other-banks.module').then(
+      import("./other-banks/other-banks.module").then(
         (m) => m.OtherBanksModule
       ),
   },
   {
-    path: 'pay-bills',
+    path: "pay-bills",
     loadChildren: (): Promise<any> =>
-      import('./pay-bills/pay-bills.module').then((m) => m.PayBillsModule),
+      import("./pay-bills/pay-bills.module").then((m) => m.PayBillsModule),
   },
   {
-    path: 'buy-goods',
+    path: "buy-goods",
     loadChildren: (): Promise<any> =>
-      import('./buy-goods/buy-goods.module').then((m) => m.BuyGoodsModule),
+      import("./buy-goods/buy-goods.module").then((m) => m.BuyGoodsModule),
   },
   {
-    path: 'buy-airtime',
+    path: "buy-airtime",
     loadChildren: (): Promise<any> =>
-      import('./buy-airtime/buy-airtime.module').then(
+      import("./buy-airtime/buy-airtime.module").then(
         (m) => m.BuyAirtimeModule
       ),
   },
   {
-    path: 'withdraw',
+    path: "withdraw",
     loadChildren: (): Promise<any> =>
-      import('./withdraw/withdraw.module').then((m) => m.WithdrawModule),
+      import("./withdraw/withdraw.module").then((m) => m.WithdrawModule),
   },
   {
-    path: 'pay-to-card',
+    path: "pay-to-card",
     loadChildren: (): Promise<any> =>
-      import('./pay-to-card/pay-to-card.module').then((m) => m.PayToCardModule),
+      import("./pay-to-card/pay-to-card.module").then((m) => m.PayToCardModule),
   },
   {
-    path: 'beneficiary-management',
+    path: "beneficiary-management",
     loadChildren: (): Promise<any> =>
-      import('./beneficiary-management/beneficiary-management.module').then(
+      import("./beneficiary-management/beneficiary-management.module").then(
         (m) => m.BeneficiaryManagementModule
       ),
   },
   {
-    path: 'pesa-link',
+    path: "pesa-link",
     loadChildren: (): Promise<any> =>
-      import('./pesa-link/pesa-link.module').then((m) => m.PesaLinkModule),
+      import("./pesa-link/pesa-link.module").then((m) => m.PesaLinkModule),
   },
   {
-    path: 'statement',
+    path: "statement",
     loadChildren: (): Promise<any> =>
-      import('./statement/statement.module').then((m) => m.StatementModule),
+      import("./statement/statement.module").then((m) => m.StatementModule),
   },
   {
-    path: 'swift',
+    path: "swift",
     loadChildren: (): Promise<any> =>
-      import('./swift/swift.module').then((m) => m.SwiftModule),
+      import("./swift/swift.module").then((m) => m.SwiftModule),
   },
   {
-    path: '**',
-    redirectTo: '',
+    path: "transfer-submitted",
+    loadChildren: () =>
+      import("./complete-transfer/complete-transfer.module").then(
+        (m) => m.CompleteTransferModule
+      ),
+  },
+  {
+    path: "**",
+    redirectTo: "",
   },
 ];
 

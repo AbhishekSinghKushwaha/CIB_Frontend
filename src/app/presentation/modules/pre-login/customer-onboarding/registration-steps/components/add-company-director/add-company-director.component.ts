@@ -1,19 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import {
   FormGroup,
   FormControl,
   FormBuilder,
   Validators,
-} from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CustomerOnboardingService } from 'src/app/core/services/customer-onboarding/customer-onboarding.service';
-import { DirectorsService } from 'src/app/core/services/customer-onboarding/directors.service';
-import { StorageService } from 'src/app/core/services/storage/storage.service';
-
+} from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { UniversalValidators } from "ngx-validators";
+import { CustomerOnboardingService } from "src/app/core/services/customer-onboarding/customer-onboarding.service";
+import { DirectorsService } from "src/app/core/services/customer-onboarding/directors.service";
+import { StorageService } from "src/app/core/services/storage/storage.service";
+import { PhoneNumberUtil } from "google-libphonenumber";
 @Component({
-  selector: 'app-add-company-director',
-  templateUrl: './add-company-director.component.html',
-  styleUrls: ['./add-company-director.component.scss'],
+  selector: "app-add-company-director",
+  templateUrl: "./add-company-director.component.html",
+  styleUrls: ["./add-company-director.component.scss"],
 })
 export class AddCompanyDirectorComponent implements OnInit {
   addDirectorForm: FormGroup;
@@ -21,6 +22,7 @@ export class AddCompanyDirectorComponent implements OnInit {
   index: number;
 
   directorReferenceId: any;
+  phoneUtil: any;
   constructor(
     private readonly route: ActivatedRoute,
     private directorsService: DirectorsService,
@@ -28,7 +30,8 @@ export class AddCompanyDirectorComponent implements OnInit {
     private router: Router,
     private storageService: StorageService
   ) {
-    this.directorReferenceId = route.snapshot.queryParamMap.get('id');
+    this.directorReferenceId = route.snapshot.queryParamMap.get("id");
+    this.phoneUtil = PhoneNumberUtil.getInstance();
   }
 
   ngOnInit(): void {
@@ -44,24 +47,26 @@ export class AddCompanyDirectorComponent implements OnInit {
           if (res.isSuccessful) {
             this.addDirectorForm.patchValue(res.data);
             this.addDirectorForm.controls.phoneNumber.patchValue(
-              res.data.phoneNumber.replace('+', '')
+              res.data.phoneNumber.replace("+", "")
             );
             this.addDirectorForm.controls.officePhoneNumber.patchValue(
-              res.data?.officePhoneNumber?.replace('+', '')
+              res.data?.officePhoneNumber?.replace("+", "")
             );
-
-            console.log(res);
           }
         });
     }
   }
 
+  editPhoneNumber(phoneNo: any) {
+    console.log(this.phoneUtil.getRegionCodeForNumber(phoneNo));
+  }
+
   private initForm(data?: any): void {
     this.addDirectorForm = this.fb.group({
-      name: ['', [Validators.required]],
-      officePhoneNumber: ['', [Validators.required]],
-      phoneNumber: ['', [Validators.required]],
-      emailAddress: ['', [Validators.required]],
+      name: ["", [Validators.required]],
+      officePhoneNumber: ["", [Validators.required]],
+      phoneNumber: ["", [Validators.required]],
+      emailAddress: ["", [Validators.required, Validators.email]],
     });
   }
 
@@ -76,13 +81,13 @@ export class AddCompanyDirectorComponent implements OnInit {
     this.directorsService
       .addDirector(
         this.addDirectorForm.getRawValue(),
-        this.storageService.getData('corporateId')
+        this.storageService.getData("corporateId")
       )
       .subscribe((res) => {
         if (res.isSuccessful) {
           // TODO:: Notify success
           this.router.navigate([
-            '/auth/customer-onboarding/register/company-directors',
+            "/auth/customer-onboarding/register/company-directors",
           ]);
         }
       });
@@ -97,7 +102,7 @@ export class AddCompanyDirectorComponent implements OnInit {
       .subscribe((res) => {
         if (res.isSuccessful) {
           this.router.navigate([
-            '/auth/customer-onboarding/register/company-directors',
+            "/auth/customer-onboarding/register/company-directors",
           ]);
         }
       });

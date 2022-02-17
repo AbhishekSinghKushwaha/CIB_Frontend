@@ -31,20 +31,23 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   @Input()
   placeholder!: string;
 
+  @Input()
+  isDisabled!: boolean;
+
   public value!: string;
 
   public changed!: (value: string) => void;
 
   public touched!: () => void;
 
-  public isDisabled!: boolean;
+  // public isDisabled!: boolean;
 
   get formField(): FormControl {
     return this.parentForm?.get(this.fieldName) as FormControl;
   }
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   public writeValue(value: string): void {
     this.value = value;

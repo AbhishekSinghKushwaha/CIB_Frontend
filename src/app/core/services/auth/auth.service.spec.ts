@@ -1,20 +1,20 @@
 import { TestBed } from '@angular/core/testing';
 
-import { LoginService } from './login.service';
+import { AuthService } from './auth.service';
+import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { RouterTestingModule } from '@angular/router/testing';
 
-describe('LoginService', () => {
-  let service: LoginService;
+describe('AuthService', () => {
+  let service: AuthService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatDialogModule, MatSnackBarModule, RouterTestingModule],
+      imports: [RouterTestingModule, HttpClientTestingModule, MatDialogModule, MatSnackBarModule],
     });
-    service = TestBed.inject(LoginService);
+    service = TestBed.inject(AuthService);
   });
 
   it('should be created', () => {

@@ -44,7 +44,8 @@ export class OnboardingStepsComponent implements OnInit {
   // Get Countries
   getCountries() {
     this.dataLookup.getCountries().subscribe((res) => {
-      if (res.isSuccessful) {
+      console.log(res);
+      if (res.status) {
         this.storageService.setData('countries', res.data);
       }
     });

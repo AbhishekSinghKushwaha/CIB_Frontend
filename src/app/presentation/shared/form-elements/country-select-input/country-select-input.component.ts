@@ -1,14 +1,14 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
-import { FormGroup, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BankModel, CountryModel } from 'src/app/core/domain/bank.model';
-import { CountryService } from 'src/app/core/services/modal-services/country.service';
-import { SharedDataService } from 'src/app/core/services/shared-data/shared-data.service';
-import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
+import { Component, forwardRef, Input, OnInit } from "@angular/core";
+import { FormGroup, FormControl, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { BankModel, CountryModel } from "src/app/core/domain/bank.model";
+import { CountryService } from "src/app/core/services/modal-services/country.service";
+import { SharedDataService } from "src/app/core/services/shared-data/shared-data.service";
+import { StorageService } from "src/app/core/services/storage/storage.service";
 
 @Component({
-  selector: 'app-country-select-input',
-  templateUrl: './country-select-input.component.html',
-  styleUrls: ['./country-select-input.component.scss'],
+  selector: "app-country-select-input",
+  templateUrl: "./country-select-input.component.html",
+  styleUrls: ["./country-select-input.component.scss"],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -49,7 +49,8 @@ export class CountrySelectInputComponent implements OnInit {
   }
   constructor(
     private readonly countryService: CountryService,
-    private sharedDataService: SharedDataService
+    private sharedDataService: SharedDataService,
+    private storageService: StorageService
   ) {}
 
   ngOnInit(): void {
@@ -57,9 +58,6 @@ export class CountrySelectInputComponent implements OnInit {
   }
 
   private eventsSubscriptions(): void {
-    this.sharedDataService.countries.subscribe((res) => {
-      this.countries = res;
-    });
     this.countryService.selectedCountry.subscribe((response) => {
       this.parentForm.controls.country.setValue(response);
     });
@@ -87,6 +85,9 @@ export class CountrySelectInputComponent implements OnInit {
   }
 
   openCountrySelectionModal() {
-    this.countryService.openCountry(this.countries, '');
+    this.countryService.openCountry(
+      this.storageService.getData("countries"),
+      ""
+    );
   }
 }
