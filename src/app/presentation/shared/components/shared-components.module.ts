@@ -19,6 +19,10 @@ import { ConfirmationCompletionComponent } from './confirmation-completion/confi
 import { LogoutWarningModalComponent } from './logout-warning-modal/logout-warning-modal.component';
 import { LogoutConfirmationModalComponent } from './logout-confirmation-modal/logout-confirmation-modal.component';
 import { LanguageModalModule } from '../modals/language-modal/language-modal.module';
+import { HttpClient } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { LanguageTranslateModule } from 'src/app/translate.module';
 
 const components = [
   AccountDropdownItemComponent,
@@ -46,7 +50,8 @@ const components = [
     MatStyleModule,
     ReactiveFormsModule,
     RouterModule,
-    LanguageModalModule
+    LanguageModalModule,
+    LanguageTranslateModule.forRoot()
   ],
   exports: components
 })

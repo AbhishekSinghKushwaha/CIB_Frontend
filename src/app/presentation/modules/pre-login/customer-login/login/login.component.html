@@ -8,7 +8,7 @@
 </div>
 <div class="card border-0 login-screen">
   <div class="card-body ps-4">
-    <h3 class="card-title">Hello there</h3>
+    <h3 class="strong-text">{{ "login_hello" | translate }}</h3>
     <div class="row text-muted">
       <p>
         Sign in to continue. Remember, your password is yours, do not share it
@@ -94,7 +94,7 @@
               class="col-12"
               [disabled]="submitted"
             >
-              Sign in
+              {{ "button_signin" | translate }}
             </button>
           </div>
           <div class="col">
@@ -106,7 +106,7 @@
               [routerLink]="['/auth/customer-onboarding']"
               routerLinkActive="router-link-active"
             >
-              Register
+              {{ "button_register" | translate }}
             </button>
           </div>
         </div>

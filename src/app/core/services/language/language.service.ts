@@ -21,7 +21,7 @@ export class LanguageService {
     this.countryModalRef = this.dialog.open<LanguageModalComponent, any>(
       LanguageModalComponent,
       {
-        maxWidth: '40vw',
+        maxWidth: '30vw',
         disableClose: true,
         data,
       }

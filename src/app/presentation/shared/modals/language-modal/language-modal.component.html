@@ -1,9 +1,15 @@
-<div class="p-3 pb-2">
+<div class="m-3 pb-3">
   <button mat-icon-button matSuffix class="close-button" (click)="close()">
     <mat-icon>close</mat-icon>
   </button>
   <p class="text-center fw-bold pt-2">Language</p>
-  <h3 class="m-4 ms-2">Chose your language</h3>
+  <h3 class="m-4 ms-2 mb-2">Chose your language</h3>
+  <div class="row p-2">
+    <small class="text-grey">
+      Chagua lugha / Hitamo nururimi / Sélectionnez la langue / 玄折国家和于言
+    </small>
+  </div>
+
   <div
     class="row cursor-pointer"
     *ngFor="let language of languages; let isLast = last; let i = index"
