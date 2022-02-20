@@ -23,7 +23,7 @@ export class BeneficiaryManagementFormComponent implements OnInit {
   transactionType: any;
   editMode: boolean;
   id: number;
-  editData: BeneficiaryModel;
+  editData: BeneficiaryModel | null;
   subscriptions: Subscription[] = [];
   @Input() modalMode = false;
   private _modalData: BeneficiaryModel;
@@ -73,7 +73,7 @@ export class BeneficiaryManagementFormComponent implements OnInit {
     this.subscriptions.push(
       this.transactionTypeModalService.selected.subscribe((response) => {
         console.log("response,", response)
-        this.equityForm.controls.transactionType.setValue(response.name);
+        this.equityForm.controls.transactionType.setValue(response.id);
         this.transactionType = response;
       })
     );
@@ -81,6 +81,7 @@ export class BeneficiaryManagementFormComponent implements OnInit {
 
   private initForm(): void {
     this.equityForm = new FormGroup({
+      id: new FormControl(this.editData?.id),
       beneficiaryName: new FormControl(this.editData?.beneficiaryName, [Validators.required]),
       beneficiaryBank: new FormControl(this.editData?.beneficiaryBank, [Validators.required]),
       beneficiaryBankCode: new FormControl(this.editData?.beneficiaryBankCode, [Validators.required]),
@@ -97,9 +98,6 @@ export class BeneficiaryManagementFormComponent implements OnInit {
     console.log({ editMode: this.editMode, modalMode: this.modalMode });
     if (!this.editMode) {
       if (this.modalMode) {
-        const updatedBeneficiary = this.equityForm.value;
-              updatedBeneficiary.id = this.editData.id;
-              
         this.formSubmitted.next(this.equityForm.value);
       } else {
         this.beneficiaryManagementService.submitForm(this.equityForm.value);
@@ -140,6 +138,9 @@ export class BeneficiaryManagementFormComponent implements OnInit {
     }
   }
 
+  getTransactionTypeLabel(id: number): string | undefined{
+    return TransactionTypeConstants.TRANSACT_TYPE.find( (item) => item.id === id )?.name;
+  }
   ngOnDestroy(): void {
     this.equityForm.reset();
     SharedUtils.unSubscribe(this.subscriptions);

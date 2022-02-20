@@ -8,7 +8,7 @@ import { BeneficiaryActionResultType, BeneficiaryManagementService } from 'src/a
 import { Router } from '@angular/router';
 import { ConfirmDialogService } from 'src/app/core/services/confirm-dialog/confirm-dialog.service';
 import { confirmModal } from 'src/app/presentation/shared/decorators/confirm-dialog.decorator';
-
+import { TransactionTypeConstants } from 'src/app/core/utils/constants/transaction-type.constants';
 @Component({
   selector: 'app-beneficiary-management',
   templateUrl: './beneficiary-management.component.html',
@@ -38,6 +38,7 @@ export class BeneficiaryManagementComponent implements OnInit {
   selection = new SelectionModel<BeneficiaryModel>(true, []);
   alertVisible: boolean;
   alertMessage: string | undefined;
+  loaded: boolean;
 
   constructor(
     private readonly beneficiaryManagementService: BeneficiaryManagementService,
@@ -48,10 +49,12 @@ export class BeneficiaryManagementComponent implements OnInit {
   ngOnInit(): void {
     this.subscribeEvents();
     this.loadBeneficiaries();
+    this.cleanEditData();
   }
 
   subscribeEvents(): void {
     this.beneficiaryManagementService.formData.subscribe(value => {
+      this.loaded = true;
       this.showAlert(value.type);
       this.beneficiaries = value.data;
       this.dataSource = new MatTableDataSource<BeneficiaryModel>(this.beneficiaries);
@@ -120,8 +123,13 @@ export class BeneficiaryManagementComponent implements OnInit {
     this.beneficiaryManagementService.beneficiaries = this.dataSource.data;
     
   }
-
-  loadBeneficiaries() {
+  getTransactionTypeLabel(id: number): string | undefined{
+    return TransactionTypeConstants.TRANSACT_TYPE.find( (item) => item.id === id )?.name;
+  }
+  loadBeneficiaries(): void {
     this.beneficiaryManagementService.getAll();
+  }
+  cleanEditData(): void {
+    this.beneficiaryManagementService.beneficiaryEdit = null;
   }
 }

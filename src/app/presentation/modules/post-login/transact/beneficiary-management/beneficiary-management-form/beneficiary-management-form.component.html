@@ -84,6 +84,7 @@
                   placeholder="Select a transaction type"
                   [readonly]="true"
                   formControlName="transactionType"
+                  [value]="equityForm.get('transactionType')?.value | transactionTypePipe"
                   placeholder="Select a transaction type"
                 />
                 <button
