@@ -1,8 +1,8 @@
-import { TillNumberSearchPipe } from './till-number-search.pipe';
+import { TransactionTypePipe } from './transaction-type.pipe';
 
-describe('TillNumberSearchPipe', () => {
+describe('TransactionTypePipe', () => {
   it('create an instance', () => {
-    const pipe = new TillNumberSearchPipe();
+    const pipe = new TransactionTypePipe();
     expect(pipe).toBeTruthy();
   });
 });
