@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { TeamMember } from 'src/app/core/domain/customer-onboarding.model';
-import { TeamMembersService } from 'src/app/core/services/customer-onboarding/team-members.service';
-import { StorageService } from 'src/app/core/services/storage/storage.service';
-import { confirmModal } from 'src/app/presentation/shared/decorators/confirm-dialog.decorator';
-import { TeamMembersConfirmationModalComponent } from 'src/app/presentation/shared/modals/customer-onboarding-modals/team-members-confirmation-modal/team-members-confirmation-modal.component';
+import { Component, OnInit } from "@angular/core";
+import { FormGroup } from "@angular/forms";
+import { MatDialog } from "@angular/material/dialog";
+import { TeamMember } from "src/app/core/domain/customer-onboarding.model";
+import { TeamMembersService } from "src/app/core/services/customer-onboarding/team-members.service";
+import { StorageService } from "src/app/core/services/storage/storage.service";
+import { confirmModal } from "src/app/presentation/shared/decorators/confirm-dialog.decorator";
+import { TeamMembersConfirmationModalComponent } from "src/app/presentation/shared/modals/customer-onboarding-modals/team-members-confirmation-modal/team-members-confirmation-modal.component";
 
 @Component({
-  selector: 'app-team-members',
-  templateUrl: './team-members.component.html',
-  styleUrls: ['./team-members.component.scss'],
+  selector: "app-team-members",
+  templateUrl: "./team-members.component.html",
+  styleUrls: ["./team-members.component.scss"],
 })
 export class TeamMembersComponent implements OnInit {
   members: TeamMember[] = [];
@@ -28,9 +28,9 @@ export class TeamMembersComponent implements OnInit {
   }
 
   @confirmModal({
-    title: 'Are you sure',
+    title: "Are you sure",
     message:
-      'Once you remove a team member, all their details will be deleted. You can add them again anytime.',
+      "Once you remove a team member, all their details will be deleted. You can add them again anytime.",
     cancelText: "No, I'm not",
     confirmText: "Yes, I'm sure",
   })
@@ -46,7 +46,7 @@ export class TeamMembersComponent implements OnInit {
 
   getTeamMembers() {
     this.teamMemberService
-      .getTeamMembers(this.storageService.getData('corporateId'))
+      .getTeamMembers(this.storageService.getData("corporateId"))
       .subscribe((res) => {
         if (res.isSuccessful) {
           this.members = res.data;
@@ -62,10 +62,10 @@ export class TeamMembersComponent implements OnInit {
   }
 
   generateInitials(name: string): string {
-    let initials = '';
+    let initials = "";
 
     for (let i = 0; i < name.length; i++) {
-      if (name.charAt(i) === ' ') {
+      if (name.charAt(i) === " ") {
         continue;
       }
 

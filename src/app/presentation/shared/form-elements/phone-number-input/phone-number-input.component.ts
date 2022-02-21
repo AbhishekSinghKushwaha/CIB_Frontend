@@ -35,6 +35,17 @@ export class PhoneNumberInputComponent implements OnInit {
   @Input()
   placeholder!: string;
 
+  _selectedCountry: CountryModel;
+
+  @Input() set selectedCountry(data: CountryModel) {
+    if (data) {
+      // do something
+      this.country = data;
+
+      this.formField.setValue(this.formField.value);
+    }
+  }
+
   country!: CountryModel;
 
   phoneNumberEntered = new Subject<number>();
@@ -81,10 +92,19 @@ export class PhoneNumberInputComponent implements OnInit {
   }
 
   openDialCodeModal() {
-    this.countryService.openCountry(
-      this.storageService.getData("countries"),
-      countrySettings.viewTypes.NAME_ONLY
-    );
+    this.countryService
+      .openCountry(
+        this.storageService.getData("countries"),
+        countrySettings.viewTypes.NAME_ONLY,
+        {}
+      )
+      .afterClosed()
+      .subscribe((res) => {
+        this.country = res;
+
+        this.country?.dialCode &&
+          this.changed(this.country?.dialCode + this.value);
+      });
   }
 
   onPhoneNumberEntered() {
@@ -92,15 +112,14 @@ export class PhoneNumberInputComponent implements OnInit {
       .pipe(debounceTime(1000), distinctUntilChanged())
       .subscribe((res) => {
         this.value = res.toString();
-        console.log(this.value);
         this.changed((this.country?.dialCode || "") + this.value);
       });
   }
 
   listenToDataStreams() {
-    this.countryService.selectedCountry.subscribe((x) => {
-      this.country = x;
-    });
+    // this.countryService.selectedCountry.subscribe((x) => {
+    //   this.country = x;
+    // });
 
     this.onPhoneNumberEntered();
   }

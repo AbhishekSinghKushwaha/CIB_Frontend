@@ -53,15 +53,7 @@ export class CountrySelectInputComponent implements OnInit {
     private storageService: StorageService
   ) {}
 
-  ngOnInit(): void {
-    this.eventsSubscriptions();
-  }
-
-  private eventsSubscriptions(): void {
-    this.countryService.selectedCountry.subscribe((response) => {
-      this.parentForm.controls.country.setValue(response);
-    });
-  }
+  ngOnInit(): void {}
 
   public writeValue(value: CountryModel): void {
     this.value = value;
@@ -85,9 +77,11 @@ export class CountrySelectInputComponent implements OnInit {
   }
 
   openCountrySelectionModal() {
-    this.countryService.openCountry(
-      this.storageService.getData("countries"),
-      ""
-    );
+    this.countryService
+      .openCountry(this.storageService.getData("countries"), "", {})
+      .afterClosed()
+      .subscribe((res) => {
+        this.parentForm.controls.country.setValue(res);
+      });
   }
 }

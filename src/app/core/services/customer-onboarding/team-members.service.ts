@@ -1,14 +1,33 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { TeamMember } from '../../domain/customer-onboarding.model';
-import urlList from '../service-list.json';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { environment } from "src/environments/environment";
+import { TeamMember } from "../../domain/customer-onboarding.model";
+import urlList from "../service-list.json";
+import { StateService } from "../state/state.service";
+
+interface UserState {
+  user: TeamMember;
+}
+
+const initialState: UserState = {
+  user: {},
+};
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
-export class TeamMembersService {
-  constructor(private http: HttpClient) {}
+export class TeamMembersService extends StateService<UserState> {
+  selectedUser$: Observable<TeamMember> = this.select((state) => state.user);
+  constructor(private http: HttpClient) {
+    super(initialState);
+  }
+
+  /*********STATE MANAGEMENT****************/
+  setUser(user: TeamMember) {
+    this.setState({ user });
+  }
+
+  /*********API ENDPOINTS****************/
 
   // Add User details
   addTeamMember(payload: TeamMember, corporateId: string): Observable<any> {

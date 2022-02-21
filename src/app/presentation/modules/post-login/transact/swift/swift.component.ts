@@ -132,7 +132,6 @@ export class SwiftComponent implements OnInit {
       ],
     };
 
-    console.log(data);
     this.confirmationModalService
       .open(data)
       .afterClosed()
@@ -166,7 +165,6 @@ export class SwiftComponent implements OnInit {
       physicalAddress: this.getForm.sendTo.value.streetAddress,
       chargeOption: this.getForm.chargeOption.value.charge,
     };
-    console.log(payload);
     if (this.swiftTransferForm.valid) {
       this.swiftTransferService.sendViaSwift(payload).subscribe((res) => {
         if (res.status) {

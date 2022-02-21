@@ -17,9 +17,7 @@ export class ConfirmPaymentComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public paymentData: any,
     private dialogRef: MatDialogRef<ConfirmPaymentComponent>
-  ) {
-    console.log(paymentData);
-  }
+  ) {}
 
   ngOnInit(): void {
     this.formatTransactionType();

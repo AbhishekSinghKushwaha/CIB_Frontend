@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { delay } from 'rxjs/operators';
-import { DataLookupService } from 'src/app/core/services/data-lookup/data-lookup.service';
-import { SpinnerService } from 'src/app/core/services/spinner/spinner.service';
-import { StorageService } from 'src/app/core/services/storage/storage.service';
+import { Component, OnInit } from "@angular/core";
+import { delay } from "rxjs/operators";
+import { DataLookupService } from "src/app/core/services/data-lookup/data-lookup.service";
+import { SpinnerService } from "src/app/core/services/spinner/spinner.service";
+import { StorageService } from "src/app/core/services/storage/storage.service";
 
 @Component({
-  selector: 'app-onboarding-steps',
-  templateUrl: './onboarding-steps.component.html',
-  styleUrls: ['./onboarding-steps.component.scss'],
+  selector: "app-onboarding-steps",
+  templateUrl: "./onboarding-steps.component.html",
+  styleUrls: ["./onboarding-steps.component.scss"],
 })
 export class OnboardingStepsComponent implements OnInit {
   loading: boolean = false;
@@ -36,7 +36,7 @@ export class OnboardingStepsComponent implements OnInit {
   getRoles() {
     this.dataLookup.getRoles().subscribe((res) => {
       if (res.isSuccessful) {
-        this.storageService.setData('onboarding-roles', res.data);
+        this.storageService.setData("onboarding-roles", res.data);
       }
     });
   }
@@ -44,9 +44,8 @@ export class OnboardingStepsComponent implements OnInit {
   // Get Countries
   getCountries() {
     this.dataLookup.getCountries().subscribe((res) => {
-      console.log(res);
       if (res.status) {
-        this.storageService.setData('countries', res.data);
+        this.storageService.setData("countries", res.data);
       }
     });
   }
@@ -54,7 +53,7 @@ export class OnboardingStepsComponent implements OnInit {
   getProductsAndServices() {
     this.dataLookup.getProductsAndServices().subscribe((res) => {
       if (res.isSuccessful) {
-        this.storageService.setData('products-and-services', res.data);
+        this.storageService.setData("products-and-services", res.data);
       }
     });
   }

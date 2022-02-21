@@ -43,7 +43,8 @@ export class CountrySelectComponent implements OnInit, OnDestroy {
   openCountries(): void {
     const modal = this.countryService.openCountry(
       this.countries,
-      this.category
+      this.category,
+      {}
     );
     this.subscriptions.push(
       modal.afterClosed().subscribe((data: CountryModel) => {
