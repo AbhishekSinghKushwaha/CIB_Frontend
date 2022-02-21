@@ -77,7 +77,6 @@ export class UploadDocumentsComponent implements OnInit {
 
       if (this.progressFiles[0].progress === 100) {
         this.progressFiles.pop();
-        console.log(this.progressFiles);
         this.message = "Completed";
         clearInterval(uploadInterval);
       }

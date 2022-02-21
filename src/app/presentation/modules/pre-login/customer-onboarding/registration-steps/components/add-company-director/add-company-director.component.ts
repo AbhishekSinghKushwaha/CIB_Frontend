@@ -85,10 +85,6 @@ export class AddCompanyDirectorComponent implements OnInit {
     return number.replace(countryCode, "").trim();
   }
 
-  editPhoneNumber(phoneNo: any) {
-    console.log(this.phoneUtil.getRegionCodeForNumber(phoneNo));
-  }
-
   private initForm(): void {
     this.addDirectorForm = this.fb.group({
       name: ["", [Validators.required]],
@@ -99,7 +95,6 @@ export class AddCompanyDirectorComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.directorReferenceId);
     this.directorReferenceId !== null
       ? this.updateDirector()
       : this.addDirector();

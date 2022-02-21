@@ -113,7 +113,6 @@ export class OtherBanksComponent implements OnInit {
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
       transferType: Number(this.getForm.transactionType.value), // RTGS or EFT
     };
-    console.log(payload);
     if (this.interBankTransferForm.valid) {
       this.interBankTransferService
         .sendToOtherBanks(payload)

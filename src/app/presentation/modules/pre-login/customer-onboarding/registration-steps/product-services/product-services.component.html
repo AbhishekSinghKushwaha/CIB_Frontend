@@ -47,7 +47,7 @@
             class="mat-icon-custom"
           ></mat-icon>
         </div>
-        <h3 class="title mb-3">Please Select products and services</h3>
+        <h3 class="title mb-3">Please Select products and sub-products</h3>
         <div class="row">
           <div class="col-md-6 mt-2">
             <mat-card
@@ -62,9 +62,9 @@
                     </button>
                   </div>
                   <div class="col-md-7">
-                    <p class="mb-0">Product & services</p>
+                    <p class="mb-0">Products & sub-products</p>
                     <small class="text-grey"
-                      >Add the details of your company's directors</small
+                      >Choose the relevant options for your company</small
                     >
                   </div>
                   <div class="col-md-2 card card-block justify-content-center">
@@ -76,7 +76,7 @@
           </div>
         </div>
         <div class="mt-5" *ngIf="products.length > 0">
-          <h3 class="title">List of products and services</h3>
+          <h3 class="title">List of products and sub-products</h3>
           <div class="row">
             <div
               *ngFor="let product of products; let i = index"
