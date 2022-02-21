@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { NotificationModalService } from 'src/app/core/services/modal-services/notification-modal/notification-modal.service';
 import LOGIN_CONSTANTS from 'src/app/core/utils/constants/pre-login.constants';
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private readonly notificationModalService: NotificationModalService,
     private readonly authService: AuthService,
-    private readonly router: Router
+    private readonly router: Router,
+    public translate: TranslateService
   ) { }
 
   async ngOnInit(): Promise<void> {
