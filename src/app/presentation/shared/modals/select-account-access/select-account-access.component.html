@@ -1,0 +1,21 @@
+<div class="container select-account-modal-screen">
+  <button mat-icon-button matSuffix class="close-button" (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <p class="text-center fw-bold pt-2">Accounts with access</p>
+  <mat-card class="m-2 mb-3 cursor-pointer mat-elevation-z0" *ngFor="let account of data" (click)="toggle(account)">
+    <div class="row align-items-stretch">
+      <div class="col-md-1">
+        <mat-icon color="primary" [svgIcon]="isChecked(account) ? 'check_round' : 'radio_button_off'"></mat-icon>
+      </div>
+      <div class="col-md-11">
+        <h4>{{account.accountNumber}}</h4>
+      </div>
+    </div>
+  </mat-card>
+  <div class="row justify-content-center">
+    <button mat-raised-button color="primary" class="col-md-3" (click)="save()">
+      Select
+    </button>
+  </div>
+</div>

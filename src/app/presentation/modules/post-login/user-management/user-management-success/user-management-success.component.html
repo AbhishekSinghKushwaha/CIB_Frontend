@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-md-12">
+      <div class="row mb-4 justify-content-md-center">
+        <div class="col-md-11">
+          <div class="mb-3">
+            <button
+              mat-icon-button
+              aria-label="Back"
+              class="back-icon"
+              routerLink="/user-management"
+            >
+              <div class="strong-text">
+                <mat-icon svgIcon="caret_left"></mat-icon>
+                <span>{{ backButtonText }}</span>
+              </div>
+            </button>
+          </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-md-5">
+            <div class="">
+              <img src="assets/images/Illustrations/Group 29.svg" alt="Request submitted for approval">  
+            </div>
+            
+        </div>
+        <div class="col-md-7">
+          <div class="row">
+            <h4 class="mt-5">Your request has been submitted</h4>
+            <span class="text-sm text-grey">We’ll let you know the status of your request once it has been reviewed</span>
+          </div>
+          <div class="row col-md-3">
+            <button mat-raised-button type="button" color="primary" class="px-5 mt-4" routerLink="/user-management">Done</button>
+          </div>
+        </div>
+    </div>
+    </div>
+  </div>
+  
