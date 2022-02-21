@@ -11,10 +11,10 @@
                 >
                 <div class="strong-text">
                     <mat-icon svgIcon="caret_left"></mat-icon>
-                    <span>Edit User Limits</span>
+                    <span>Edit User Limit</span>
                 </div>
                 </button>
-            </div>
+            </div>                    
             <div class="row mt-3">
                 <h3>Please enter details</h3>
             </div>
@@ -27,9 +27,9 @@
                         <app-input [parentForm]="userLimitsForm" fieldName="userName" label="User Name"
                         placeholder="Enter full user name" formControlName="userName"></app-input>
                     </div>
-                    <div class="col-md-6" (click)="openCurrencyModal()">
+                    <div class="col-md-6" (click)="openCurrencyModal()">                        
                         <app-input [parentForm]="userLimitsForm" fieldName="currency" label="Currency"
-                        formControlName="currency" placeholder="Optional"
+                        formControlName="currency" placeholder="Optional" 
                         ></app-input>
                     </div>
                     <div class="col-md-6">

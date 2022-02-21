@@ -34,6 +34,9 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   @Input()
   isDisabled!: boolean;
 
+  @Input()
+  type!: string;
+
   public value!: string;
 
   public changed!: (value: string) => void;

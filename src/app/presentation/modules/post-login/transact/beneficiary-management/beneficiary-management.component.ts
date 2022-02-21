@@ -4,11 +4,11 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { animate, group, style, transition, trigger } from '@angular/animations';
 import * as  _ from 'lodash';
 import { BeneficiaryModel } from 'src/app/core/domain/beneficiary.model';
-import { BeneficiaryManagementService } from 'src/app/core/services/beneficiary-management/beneficiary-management.service';
+import { BeneficiaryActionResultType, BeneficiaryManagementService } from 'src/app/core/services/beneficiary-management/beneficiary-management.service';
 import { Router } from '@angular/router';
 import { ConfirmDialogService } from 'src/app/core/services/confirm-dialog/confirm-dialog.service';
 import { confirmModal } from 'src/app/presentation/shared/decorators/confirm-dialog.decorator';
-
+import { TransactionTypeConstants } from 'src/app/core/utils/constants/transaction-type.constants';
 @Component({
   selector: 'app-beneficiary-management',
   templateUrl: './beneficiary-management.component.html',
@@ -37,7 +37,8 @@ export class BeneficiaryManagementComponent implements OnInit {
   beneficiaries: BeneficiaryModel[] = [];
   selection = new SelectionModel<BeneficiaryModel>(true, []);
   alertVisible: boolean;
-  alertMessage: string;
+  alertMessage: string | undefined;
+  loaded: boolean;
 
   constructor(
     private readonly beneficiaryManagementService: BeneficiaryManagementService,
@@ -46,16 +47,19 @@ export class BeneficiaryManagementComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadBeneficiaries();
     this.subscribeEvents();
+    this.loadBeneficiaries();
+    this.cleanEditData();
   }
 
   subscribeEvents(): void {
     this.beneficiaryManagementService.formData.subscribe(value => {
-      this.showAlert('Your beneficiary has been added successfully');
-      this.beneficiaries = [...this.beneficiaries, ...value];
+      this.loaded = true;
+      this.showAlert(value.type);
+      this.beneficiaries = value.data;
       this.dataSource = new MatTableDataSource<BeneficiaryModel>(this.beneficiaries);
     })
+
   }
 
   isAllSelected() {
@@ -70,13 +74,24 @@ export class BeneficiaryManagementComponent implements OnInit {
       this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
-  showAlert(message: string): void {
+  showAlert(type: BeneficiaryActionResultType): void {
+
+    const messages: {type:BeneficiaryActionResultType, message:string}[] = [
+                      {type: BeneficiaryActionResultType.ADD, message: 'Your beneficiary has been added successfully'},
+                      {type: BeneficiaryActionResultType.DELETE, message: 'Your beneficiary has been removed successfully'},
+                      {type: BeneficiaryActionResultType.EDIT, message: 'Your beneficiary has been edited successfully'}
+                    ]
+
     if (this.alertVisible) {
       return;
     }
-    this.alertVisible = true;
-    this.alertMessage = message;
-    setTimeout(() => this.alertVisible = false, 2500)
+
+    this.alertMessage = messages.find( (item) => item.type === type)?.message;
+    
+    if (!!this.alertMessage) {
+      this.alertVisible = true;
+      setTimeout(() => this.alertVisible = false, 2500)
+    }
   }
 
   closeAlert() {
@@ -103,11 +118,18 @@ export class BeneficiaryManagementComponent implements OnInit {
       this.dataSource.data = this.dataSource.data
         .filter((value) => !_.isEqual(value, selected));
       selected && this.selection.deselect(selected);
+      this.beneficiaryManagementService.deleteById(selected.id as number);
     });
     this.beneficiaryManagementService.beneficiaries = this.dataSource.data;
+    
   }
-
-  loadBeneficiaries() {
-    // this.beneficiaries = [];
+  getTransactionTypeLabel(id: number): string | undefined{
+    return TransactionTypeConstants.TRANSACT_TYPE.find( (item) => item.id === id )?.name;
+  }
+  loadBeneficiaries(): void {
+    this.beneficiaryManagementService.getAll();
+  }
+  cleanEditData(): void {
+    this.beneficiaryManagementService.beneficiaryEdit = null;
   }
 }
