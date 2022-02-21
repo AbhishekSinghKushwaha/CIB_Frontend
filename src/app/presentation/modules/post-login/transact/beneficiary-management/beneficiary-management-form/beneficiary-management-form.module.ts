@@ -8,6 +8,7 @@ import { BeneficiaryManagementFormComponent } from './beneficiary-management-for
 import { BankModalModule } from 'src/app/presentation/shared/modals/bank-modal/bank-modal.module';
 import { TransactionTypeModalModule } from 'src/app/presentation/shared/modals/transaction-type-modal/transaction-type-modal.module';
 import { BeneficiaryManagementService } from 'src/app/core/services/beneficiary-management/beneficiary-management.service';
+import { PipesModule } from 'src/app/presentation/shared/pipes/pipes.module';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { BeneficiaryManagementService } from 'src/app/core/services/beneficiary-
     MatStyleModule,
     BankModalModule,
     ReactiveFormsModule,
-    TransactionTypeModalModule
+    TransactionTypeModalModule,
+    PipesModule
   ],
   exports: [
     BeneficiaryManagementFormComponent
