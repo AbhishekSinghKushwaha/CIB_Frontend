@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { TransferToService } from 'src/app/core/services/modal-services/transfer-to.service';
-import { NewRecipientService } from 'src/app/core/services/modal-services/new-recipient.service';
-import { TransactionTypeConstants } from 'src/app/core/utils/constants/transaction-type.constants';
+import { Component, Input, OnInit } from "@angular/core";
+import { TransferToService } from "src/app/core/services/modal-services/transfer-to.service";
+import { NewRecipientService } from "src/app/core/services/modal-services/new-recipient.service";
+import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
 
 export interface purposeText {
   heading?: string;
@@ -11,9 +11,9 @@ export interface purposeText {
   navigationIcon?: string;
 }
 @Component({
-  selector: 'app-send-or-pay-to',
-  templateUrl: './send-or-pay-to.component.html',
-  styleUrls: ['./send-or-pay-to.component.scss'],
+  selector: "app-send-or-pay-to",
+  templateUrl: "./send-or-pay-to.component.html",
+  styleUrls: ["./send-or-pay-to.component.scss"],
 })
 export class SendOrPayToComponent implements OnInit {
   visibility: boolean = false;
@@ -39,7 +39,6 @@ export class SendOrPayToComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log();
     this.visibility = true;
     this.formatPurposeText();
   }
@@ -63,7 +62,7 @@ export class SendOrPayToComponent implements OnInit {
   }
 
   resetBeneficiaries(): void {
-    this.searchText = '';
+    this.searchText = "";
   }
 
   formatPurposeText() {
@@ -75,33 +74,35 @@ export class SendOrPayToComponent implements OnInit {
       this.transactionType === this.transferType.EFT ||
       this.transactionType === this.transferType.SWIFT
     ) {
-      this.purposeText.heading = 'Send To';
-      this.purposeText.subheading = 'Who are you sending money to?';
-      this.purposeText.navigationHeading = 'Send to someone new';
+      this.purposeText.heading = "Send To";
+      this.purposeText.subheading = "Who are you sending money to?";
+      this.purposeText.navigationHeading = "Send to someone new";
       this.purposeText.navigationSubheading = `Enter account details`;
       this.purposeText.navigationIcon =
-        './assets/images/icons/Visual support_Icon_with_container.svg';
+        "./assets/images/icons/Visual support_Icon_with_container.svg";
     } else if (this.transactionType === this.transferType.BUY_GOODS) {
-      this.purposeText.heading = 'Pay To';
-      this.purposeText.subheading = 'Please select a merchant';
-      this.purposeText.navigationHeading = 'Till number';
+      this.purposeText.heading = "Pay To";
+      this.purposeText.subheading = "Please select a merchant";
+      this.purposeText.navigationHeading = "Till number";
       this.purposeText.navigationSubheading = `Enter merchant's till number`;
       this.purposeText.navigationIcon =
-        './assets/images/icons/visual-support-icon-till.svg';
+        "./assets/images/icons/visual-support-icon-till.svg";
     } else if (this.transactionType === this.transferType.PESALINK) {
-      this.purposeText.heading = 'Send To';
-      this.purposeText.subheading = 'Who are you sending money to?';
-      this.purposeText.navigationHeading = 'Send to a bank account';
+      this.purposeText.heading = "Send To";
+      this.purposeText.subheading = "Who are you sending money to?";
+      this.purposeText.navigationHeading = "Send to a bank account";
       this.purposeText.navigationSubheading = `Enter account details`;
       this.purposeText.navigationIcon =
-        './assets/images/icons/visual-support-icon-other-bank.svg';
-    } else if (this.transactionType === this.transferType.INTER_COUNTRY_TRANSFER) {
-      this.purposeText.heading = 'Send To';
-      this.purposeText.subheading = 'Who are you sending money to?';
-      this.purposeText.navigationHeading = 'Send to someone new';
+        "./assets/images/icons/visual-support-icon-other-bank.svg";
+    } else if (
+      this.transactionType === this.transferType.INTER_COUNTRY_TRANSFER
+    ) {
+      this.purposeText.heading = "Send To";
+      this.purposeText.subheading = "Who are you sending money to?";
+      this.purposeText.navigationHeading = "Send to someone new";
       this.purposeText.navigationSubheading = `Enter account details`;
       this.purposeText.navigationIcon =
-        './assets/images/icons/Visual support_Icon_with_container.svg';
+        "./assets/images/icons/Visual support_Icon_with_container.svg";
     }
   }
 }

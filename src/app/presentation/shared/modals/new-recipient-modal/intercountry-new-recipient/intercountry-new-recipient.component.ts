@@ -44,7 +44,8 @@ export class IntercountryNewRecipientComponent implements OnInit {
     this.visibility = false;
     const modal = this.countryService.openCountry(
       this.storageService.getData("countries"),
-      this.category
+      this.category,
+      {}
     );
     this.subscriptions.push(
       modal.afterClosed().subscribe((data: CountryModel) => {
@@ -59,7 +60,8 @@ export class IntercountryNewRecipientComponent implements OnInit {
   ngOnDestroy(): void {
     const modal = this.countryService.openCountry(
       this.storageService.getData("countries"),
-      this.category
+      this.category,
+      {}
     );
     this.subscriptions.push(
       modal.afterClosed().subscribe((data: CountryModel) => {

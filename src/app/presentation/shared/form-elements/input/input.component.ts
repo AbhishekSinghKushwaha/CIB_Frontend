@@ -31,13 +31,19 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   @Input()
   placeholder!: string;
 
+  @Input()
+  isDisabled!: boolean;
+
+  @Input()
+  type!: string;
+
   public value!: string;
 
   public changed!: (value: string) => void;
 
   public touched!: () => void;
 
-  public isDisabled!: boolean;
+  // public isDisabled!: boolean;
 
   get formField(): FormControl {
     return this.parentForm?.get(this.fieldName) as FormControl;

@@ -6,6 +6,7 @@ import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 import { MatStyleModule } from 'src/app/mat-style.module';
 import { NotificationModalModule } from '../../../../shared/modals/notification-modal/notification-modal.module';
+import { LanguageTranslateModule } from 'src/app/translate.module';
 
 @NgModule({
   declarations: [LoginComponent],
@@ -16,6 +17,7 @@ import { NotificationModalModule } from '../../../../shared/modals/notification-
     ReactiveFormsModule,
     MatStyleModule,
     NotificationModalModule,
+    LanguageTranslateModule.forRoot()
   ],
 })
-export class LoginModule {}
+export class LoginModule { }

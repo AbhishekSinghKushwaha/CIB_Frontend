@@ -133,13 +133,10 @@ export class OwnEquityAccountComponent
           if (res.status) {
             this.router.navigate(["/transact/transfer-submitted"]);
           } else {
-            console.log(res.message);
             // TODO:: Notify Error
           }
         },
-        (err) => {
-          console.log(err);
-        }
+        (err) => {}
       );
     }
   }

@@ -1,8 +1,8 @@
-import { BehaviorSubject, Subject } from 'rxjs';
-import { Injectable } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { CountryModalComponent } from 'src/app/presentation/shared/modals/country-modal/country-modal.component';
-import { CountryModel } from '../../domain/bank.model';
+import { BehaviorSubject, Subject } from "rxjs";
+import { Injectable } from "@angular/core";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { CountryModalComponent } from "src/app/presentation/shared/modals/country-modal/country-modal.component";
+import { CountryModel } from "../../domain/bank.model";
 
 @Injectable()
 export class CountryService {
@@ -11,16 +11,16 @@ export class CountryService {
   countryData: CountryModel;
   countryModalRef: MatDialogRef<CountryModalComponent, any>;
 
-  constructor(private readonly dialog: MatDialog) { }
+  constructor(private readonly dialog: MatDialog) {}
 
-  openCountry(country: CountryModel[], category: string) {
+  openCountry(country: CountryModel[], category: string, defaultCountry: any) {
     this.openedStatus.next(true);
     this.countryModalRef = this.dialog.open<CountryModalComponent, any>(
       CountryModalComponent,
       {
-        maxWidth: '22vw',
+        maxWidth: "22vw",
         disableClose: true,
-        data: { country, category },
+        data: { country, category, defaultCountry },
       }
     );
     return this.countryModalRef;
@@ -30,7 +30,7 @@ export class CountryService {
     return this.countryData;
   }
 
-  selectCountry(country: CountryModel): void {
+  selectCountry(country: any): void {
     this.countryData = country;
     this.selectedCountry.next(this.countryData);
   }

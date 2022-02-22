@@ -1,13 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { NewRecipientService } from 'src/app/core/services/modal-services/new-recipient.service';
-import { TransactionTypeConstants } from 'src/app/core/utils/constants/transaction-type.constants';
+import { Component, Input, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { NewRecipientService } from "src/app/core/services/modal-services/new-recipient.service";
+import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
 
 @Component({
-  selector: 'app-pesalink-new-recipient',
-  templateUrl: './pesalink-new-recipient.component.html',
-  styleUrls: ['./pesalink-new-recipient.component.scss'],
+  selector: "app-pesalink-new-recipient",
+  templateUrl: "./pesalink-new-recipient.component.html",
+  styleUrls: ["./pesalink-new-recipient.component.scss"],
 })
 export class PesalinkNewRecipientComponent implements OnInit {
   @Input() mode: string;
@@ -25,25 +25,24 @@ export class PesalinkNewRecipientComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.mode);
     this.initForms();
   }
 
   initForms() {
     this.selectBankForm = this.fb.group({
-      bank: ['', [Validators.required]],
-      accountName: ['', [Validators.required]],
-      accountNumber: ['', [Validators.required]],
+      bank: ["", [Validators.required]],
+      accountName: ["", [Validators.required]],
+      accountNumber: ["", [Validators.required]],
     });
 
     this.phoneLinkedForm = this.fb.group({
-      phoneNumber: ['', [Validators.required]],
-      bank: ['', [Validators.required]],
+      phoneNumber: ["", [Validators.required]],
+      bank: ["", [Validators.required]],
     });
   }
 
   submit() {
-    this.mode === 'bank'
+    this.mode === "bank"
       ? this.newRecipientService.set(this.selectBankForm.getRawValue())
       : this.newRecipientService.set(this.phoneLinkedForm.getRawValue());
     this.dialog.closeAll();

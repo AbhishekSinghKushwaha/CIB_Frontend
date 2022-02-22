@@ -60,6 +60,12 @@
     "securityQuestions": "/authorization/user/securityQuestions",
     "securityAnswers": "/authorization/user/securityAnswers"
   },
+  "beneficiary": {
+    "add": "/cibpaymentservice-v1/api/v1/Beneficiary/AddBeneficiary",
+    "edit": "/cibpaymentservice-v1/api/v1/Beneficiary/EditBeneficiary",
+    "remove": "/cibpaymentservice-v1/api/v1/Beneficiary/RemoveBeneficiary",    
+    "getAll": "/cibpaymentservice-v1/api/v1/Beneficiary/GetBeneficiaries"
+  },
   "otp": {
     "generateOtp": "/cibpaymentservice-v1/api/v1/BuyGoods/GenerateOtp",
     "regenerateOtp":"/cibpaymentservice-v1/api/v1/BuyGoods/RegenerateOtp"
