@@ -72,11 +72,11 @@
   </a>
 
   <!-- Language -->
-  <a mat-list-item class="text-grey text-sm">
+  <a mat-list-item class="text-grey text-sm" (click)="openLanguageModal()">
     <div class="row pl-3">
       <div class="col-12">
         <mat-icon svgIcon="localization"></mat-icon>
-        <span class="pl-2 text-truncate">English</span>
+        <span class="pl-2 text-truncate">{{ language.langDesc }}</span>
       </div>
     </div>
   </a>

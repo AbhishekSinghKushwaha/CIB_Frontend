@@ -130,13 +130,13 @@ export class SmsVerificationComponent implements OnInit {
 
     this.authService.resendOTP().subscribe(
       (data) => {
-        console.log('resendOTP', data)
-        this.otpResent = true;
-        this.restartOTPTimer();
+        console.log('resendOTP', data);
       },
       (error) => {
         console.log(error);
       }
     );
+    this.otpResent = true;
+    this.restartOTPTimer();
   }
 }
