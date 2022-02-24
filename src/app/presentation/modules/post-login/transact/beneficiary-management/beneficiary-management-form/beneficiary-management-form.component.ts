@@ -23,7 +23,7 @@ export class BeneficiaryManagementFormComponent implements OnInit {
   transactionType: any;
   editMode: boolean;
   id: number;
-  editData: BeneficiaryModel;
+  editData: BeneficiaryModel | null;
   subscriptions: Subscription[] = [];
   @Input() modalMode = false;
   private _modalData: BeneficiaryModel;
@@ -66,12 +66,14 @@ export class BeneficiaryManagementFormComponent implements OnInit {
     this.subscriptions.push(
       this.bankService.selected.subscribe((response) => {
         this.bank = response;
-        this.equityForm.controls.bank.setValue(response.bankName);
+        this.equityForm.controls.beneficiaryBank.setValue(response.bankName);
+        this.equityForm.controls.beneficiaryBankCode.setValue(response.bankCode);
       })
     );
     this.subscriptions.push(
       this.transactionTypeModalService.selected.subscribe((response) => {
-        this.equityForm.controls.transactionType.setValue(response.name);
+        console.log("response,", response)
+        this.equityForm.controls.transactionType.setValue(response.id);
         this.transactionType = response;
       })
     );
@@ -79,9 +81,11 @@ export class BeneficiaryManagementFormComponent implements OnInit {
 
   private initForm(): void {
     this.equityForm = new FormGroup({
-      name: new FormControl(this.editData?.name, [Validators.required]),
-      bank: new FormControl(this.editData?.bank, [Validators.required]),
-      accountNumber: new FormControl(this.editData?.accountNumber, [
+      id: new FormControl(this.editData?.id),
+      beneficiaryName: new FormControl(this.editData?.beneficiaryName, [Validators.required]),
+      beneficiaryBank: new FormControl(this.editData?.beneficiaryBank, [Validators.required]),
+      beneficiaryBankCode: new FormControl(this.editData?.beneficiaryBankCode, [Validators.required]),
+      beneficiaryAccount: new FormControl(this.editData?.beneficiaryAccount, [
         Validators.required,
       ]),
       transactionType: new FormControl(this.editData?.transactionType, [
@@ -134,6 +138,9 @@ export class BeneficiaryManagementFormComponent implements OnInit {
     }
   }
 
+  getTransactionTypeLabel(id: number): string | undefined{
+    return TransactionTypeConstants.TRANSACT_TYPE.find( (item) => item.id === id )?.name;
+  }
   ngOnDestroy(): void {
     this.equityForm.reset();
     SharedUtils.unSubscribe(this.subscriptions);

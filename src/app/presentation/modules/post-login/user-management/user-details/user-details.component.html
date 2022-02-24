@@ -1,0 +1,121 @@
+<div class="row">
+    <div class="col-md-12">
+      <div class="row mb-4 justify-content-md-center">
+        <div class="col-md-11">
+          <div class="mb-3">
+            <button
+              mat-icon-button
+              aria-label="Back"
+              class="back-icon"
+              routerLink="/user-management"
+            >
+              <div class="strong-text">
+                <mat-icon svgIcon="caret_left"></mat-icon>
+                <span>User</span>
+              </div>
+            </button>
+          </div>          
+           <div class="row mt-3">
+                <h2>User details</h2>
+                <form
+                autocomplete="off"
+                [formGroup]="userDetailsForm"
+                (submit)="save()">
+                    <div class="row mt-2 col-md-6 product-list-item" routerLink="roles"  matRipple>
+                        <div class="col-1 my-auto">
+                            <div class="icon-container">
+                                <mat-icon color="primary" [svgIcon]="'user_profile'"></mat-icon>
+                            </div>
+                        </div>
+                        <div class="col-10 offset-1 product-list-item-label">
+                            <div class="row h-100 justify-content-around align-items-center">
+                                <div class="col-8 float-left text-truncate">
+                                    <h4>User roles</h4>
+                                </div>
+                                <div class="col-2 float-right">
+                                    {{ hasRoles ? 'on' : 'off'}}
+                                </div>
+                                <div class="col-2 float-right">
+                                    <mat-icon [svgIcon]="'caret_right'"></mat-icon>
+                                </div>
+                            </div>
+                        </div>    
+                    </div>    
+                    <div class="row mt-3">                
+                        <div class="col-md-6">
+                            <app-input [parentForm]="userDetailsForm" fieldName="userName" label="User Name"
+                            placeholder="Enter full user name" formControlName="userName"></app-input>
+                        </div>
+                        <div class="col-md-6">
+                            <app-input [parentForm]="userDetailsForm" fieldName="userId" label="User ID"
+                            formControlName="userId" placeholder="Optional"></app-input>
+                        </div>
+                        <div class="col-md-6">
+                            <app-input [parentForm]="userDetailsForm" fieldName="phoneNumber" label="Phone Number"
+                            formControlName="phoneNumber" placeholder="Optional"></app-input>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row product-list-item" routerLink="limits" matRipple>
+                                <div class="col-1 my-auto">
+                                    <div class="icon-container">
+                                        <mat-icon color="primary" [svgIcon]="'user_limit'"></mat-icon>
+                                    </div>
+                                </div>
+                                <div class="col-10 offset-1 product-list-item-label">
+                                    <div class="row h-100 justify-content-around align-items-center">
+                                        <div class="col-10 float-left text-truncate">
+                                            <h4>Edit User Limit</h4>
+                                        </div>
+                                        <div class="col-2 float-right">
+                                            <mat-icon [svgIcon]="'caret_right'"></mat-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>            
+                </form>
+            </div>
+        
+        <div class="row mt-5">        
+            <h2>Access details</h2>
+            <div class="row col-md-6 product-list-item" (click)="showAccounts()"  matRipple>
+                <div class="col-1 my-auto">
+                    <div class="icon-container">
+                    <mat-icon color="primary" [svgIcon]="'add-account'"></mat-icon>
+                    </div>
+                </div>
+                <div class="col-10 offset-1 product-list-item-label">
+                    <div class="row h-100 justify-content-around align-items-center">
+                        <div class="col-10 float-left text-truncate">
+                            <h4>Accounts to access</h4>
+                        </div>
+                        <div class="col-2 float-right">
+                            <mat-icon [svgIcon]="'caret_right'"></mat-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>       
+            <div class="row col-md-6 product-list-item" routerLink="products"  matRipple>
+                <div class="col-1 my-auto">
+                    <div class="icon-container">
+                    <mat-icon color="primary" [svgIcon]="'withdraw'"></mat-icon>
+                    </div>
+                </div>
+                <div class="col-10 offset-1 product-list-item-label">
+                    <div class="row h-100 justify-content-around align-items-center">
+                        <div class="col-10 float-left text-truncate">
+                            <h4>Product modules to access</h4>
+                        </div>
+                        <div class="col-2 float-right">
+                            <mat-icon [svgIcon]="'caret_right'"></mat-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+            <div class="row">
+            <button mat-raised-button color="primary" class="mt-5 col-md-3" [disabled]="userDetailsForm.invalid" (click)="save();">Save</button>
+            </div>
+        </div>
+  </div>
+  

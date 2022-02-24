@@ -33,6 +33,7 @@
       <app-country-list-item
         [data]="item"
         [isChecked]="selected?.countryName === item.countryName"
+        (selectedCountry)="onSelectedCountry($event)"
       ></app-country-list-item>
       <mat-divider *ngIf="!isLast" class="pt-3"></mat-divider>
     </div>

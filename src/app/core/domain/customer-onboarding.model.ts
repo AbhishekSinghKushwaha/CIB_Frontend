@@ -40,7 +40,7 @@ export interface TeamMember {
   name?: string;
   idNumber?: string;
   officePhoneNumber?: string;
-  roles: Role[];
+  roles?: Role[];
   transactionLimit?: string;
   corporateUserId?: string;
 }

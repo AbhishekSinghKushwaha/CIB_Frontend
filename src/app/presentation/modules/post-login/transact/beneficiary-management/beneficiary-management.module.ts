@@ -10,6 +10,7 @@ import { BankService } from 'src/app/core/services/modal-services/bank.service';
 import { CountryService } from 'src/app/core/services/modal-services/country.service';
 import { BeneficiaryManagementService } from 'src/app/core/services/beneficiary-management/beneficiary-management.service';
 import { ConfirmDialogModule } from 'src/app/presentation/shared/modals/confirm-dialog/confirm-dialog.module';
+import { PipesModule } from 'src/app/presentation/shared/pipes/pipes.module';
 
 @NgModule({
   declarations: [BeneficiaryManagementComponent],
@@ -19,6 +20,7 @@ import { ConfirmDialogModule } from 'src/app/presentation/shared/modals/confirm-
     MatStyleModule,
     ReactiveFormsModule,
     ConfirmDialogModule,
+    PipesModule
   ],
   providers: [
     CountryService,

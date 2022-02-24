@@ -5,16 +5,16 @@ import {
   HttpErrorResponse,
   HttpInterceptor,
   HttpResponse,
-} from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+} from "@angular/common/http";
+import { Observable, throwError } from "rxjs";
+import { catchError, tap } from "rxjs/operators";
 
-import { Injectable } from '@angular/core';
-import urlList from '../../services/service-list.json';
-import { environment } from 'src/environments/environment';
-import { SpinnerService } from '../../services/spinner/spinner.service';
-import { BaseTransactComponent } from 'src/app/presentation/modules/post-login/transact/base-transact.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Injectable } from "@angular/core";
+import urlList from "../../services/service-list.json";
+import { environment } from "src/environments/environment";
+import { SpinnerService } from "../../services/spinner/spinner.service";
+import { BaseTransactComponent } from "src/app/presentation/modules/post-login/transact/base-transact.component";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Injectable()
 export class ErrorIntercept
@@ -42,7 +42,7 @@ export class ErrorIntercept
       tap((event) => {
         if (event instanceof HttpResponse) {
           this.spinnerService.setLoading(false, request.url);
-          if (request.method === 'POST' && event?.body?.isSuccessful) {
+          if (request.method === "POST" && event?.body?.isSuccessful) {
             this.notifyError({
               error: false,
               errorStatus: event.statusText,
@@ -52,13 +52,12 @@ export class ErrorIntercept
         }
       }),
       catchError((error: HttpErrorResponse) => {
-        console.log(error);
         this.spinnerService.setLoading(false, request.url);
         const errorMessage = {
           error: false,
-          errorStatus: '',
-          message: '',
-          details: '',
+          errorStatus: "",
+          message: "",
+          details: "",
         };
         if (error.error instanceof ErrorEvent) {
           errorMessage.error = true;

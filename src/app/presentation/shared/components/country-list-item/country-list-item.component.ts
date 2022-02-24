@@ -1,29 +1,32 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { CountryModel } from 'src/app/core/domain/bank.model';
-import { CountryService } from 'src/app/core/services/modal-services/country.service';
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { Subject } from "rxjs";
+import { CountryModel } from "src/app/core/domain/bank.model";
+import { CountryService } from "src/app/core/services/modal-services/country.service";
 
 @Component({
-  selector: 'app-country-list-item',
-  templateUrl: './country-list-item.component.html',
-  styleUrls: ['./country-list-item.component.scss'],
+  selector: "app-country-list-item",
+  templateUrl: "./country-list-item.component.html",
+  styleUrls: ["./country-list-item.component.scss"],
 })
 export class CountryListItemComponent implements OnInit {
   @Input() isChecked: boolean;
   @Input() data: CountryModel;
+  @Output() selectedCountry = new EventEmitter<CountryModel>();
 
   constructor(private readonly countryService: CountryService) {}
 
   ngOnInit(): void {}
 
   select(): void {
-    this.countryService.selectCountry(this.data);
+    // this.countryService.selectCountry(this.data);
+    this.selectedCountry.emit(this.data);
   }
 
   generateInitials(name: string): string {
-    let initials = '';
+    let initials = "";
 
     for (let i = 0; i < name.length; i++) {
-      if (name.charAt(i) === ' ') {
+      if (name.charAt(i) === " ") {
         continue;
       }
 
