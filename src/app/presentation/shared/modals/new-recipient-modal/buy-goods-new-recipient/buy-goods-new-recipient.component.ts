@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { NewRecipientService } from 'src/app/core/services/modal-services/new-recipient.service';
+import { BuyGoodsService } from 'src/app/core/services/transfers/buy-goods/buy-goods.service';
 
 @Component({
   selector: 'app-buy-goods-new-recipient',
@@ -18,7 +19,8 @@ export class BuyGoodsNewRecipientComponent implements OnInit {
     private readonly fb: FormBuilder,
     private dialogRef: MatDialogRef<BuyGoodsNewRecipientComponent>,
     private readonly newRecipientService: NewRecipientService,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
+    private readonly buyGoodsService: BuyGoodsService
   ) {}
 
   ngOnInit(): void {
@@ -38,7 +40,22 @@ export class BuyGoodsNewRecipientComponent implements OnInit {
       const data = {
         tillNumber: this.getForm.tillNumber.value,
         tillName: 'Diners Grill', // TODO:: Get this from api after validation
+        accountNumber: '1120161406205'
       };
+      // this.buyGoodsService.getMerchantDetails(this.getForm.tillNumber.value).subscribe((res) => {
+      //   if(res.status) {
+      //     const data = {
+      //       tillNumber: res.data.till,
+      //       tillName: res.data.name, // TODO:: Get this from api after validation
+      //       accountNumber: res.data.account
+      //     };
+      //     this.newRecipientService.set(data);
+      //     console.log(res.data, 'res.data');
+      //   }
+      //   else{
+      //     console.log(res.message, 'res.message');
+      //   }
+      // });
       this.newRecipientService.set(data);
       this.dialog.closeAll();
     }, 2000);

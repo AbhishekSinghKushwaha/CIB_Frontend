@@ -15,11 +15,13 @@ export class GenerateOtpService {
 
   // Generate OTP
   generateOtp(payload: any): Observable<any> {
+    console.log(payload, "Generate payload");
     return this.http.post(environment.apiUrl + urlList.otp.generateOtp, payload);
   }
 
   // Regenerate OTP
   regenerateOtp(payload: any): Observable<any> {
+    console.log(payload, "Regenerate payload");
     return this.http.post(environment.apiUrl + urlList.otp.regenerateOtp, payload);
   }
 }

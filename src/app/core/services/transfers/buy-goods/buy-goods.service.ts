@@ -15,13 +15,16 @@ export class BuyGoodsService {
 
   constructor(private http: HttpClient) { }
   
-  buyGoods(payload: any) {
+  payBuyGoods(payload: any): Observable<any> {
     this.dataSource.next(payload);
     console.log(this.currentData,"Current Data");
+    return this.http.post(environment.apiUrl + urlList.transfers.payBuyGoods, payload);
   }
 
-  sendToBuyGoods(payload: any): Observable<any> {
-    return this.http.post(environment.apiUrl + urlList.transfers.buyGoodsTransfer, payload);
+  updateBuyGoods(payload: any): Observable<any> {
+    this.dataSource.next(payload);
+    console.log(this.currentData,"Current Data");
+    return this.http.put(environment.apiUrl + urlList.transfers.payBuyGoods, payload);
   }
 
   getTransferCharges(payload: any): Observable<any> {
@@ -34,5 +37,25 @@ export class BuyGoodsService {
 
   getFavouriteMerchants(): Observable<any> {
     return this.http.get(environment.apiUrl + urlList.dataLookUp.getFavouriteMerchants);
+  }
+
+  getMerchantDetails(tillNumber: string): Observable<any> {
+    return this.http.get(environment.apiUrl + urlList.dataLookUp.getMerchantDetails + tillNumber);
+  }
+
+  getFavouriteMerchantDetails(tillNumber: string): Observable<any> {
+    return this.http.post(environment.apiUrl + urlList.dataLookUp.getFavouriteMerchantDetails, tillNumber);
+  }
+
+  getTransactionStatus(referenceNumber: string): Observable<any> {
+    return this.http.get(environment.apiUrl + urlList.transactionStatus.getTransactionStatus + referenceNumber);
+  }
+
+  getLimit(): Observable<any> {
+    return this.http.get(environment.apiUrl + urlList.dataLookUp.getLimit);
+  }
+
+  getCharges(): Observable<any> {
+    return this.http.get(environment.apiUrl + urlList.transfers.getCharges);
   }
 }

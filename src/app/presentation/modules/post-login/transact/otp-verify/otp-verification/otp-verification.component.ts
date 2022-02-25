@@ -50,7 +50,11 @@ export class OtpVerificationComponent implements OnInit {
     this.buyGoodsService.currentData.subscribe(data => {
       this.payload = data;
       if(data) {
-        this.generateOtpService.generateOtp(this.payload);
+        this.generateOtpService.generateOtp(this.payload).subscribe((res) => {
+          if(res.status){
+            console.log(res.data, "otp generated");
+          }
+        });;
       }
     });
     console.log(this.payload,"1112");

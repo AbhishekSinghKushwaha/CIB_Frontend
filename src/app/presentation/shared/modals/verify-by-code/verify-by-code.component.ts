@@ -123,7 +123,11 @@ export class VerifyByCodeComponent implements OnInit {
     this.buyGoodsService.currentData.subscribe(data => {
       this.payload = data;
       if(data) {
-        this.generateOtpService.regenerateOtp(this.payload);
+        this.generateOtpService.regenerateOtp(this.payload).subscribe((res) => {
+          if(res.status){
+            console.log(res.data, "otp");
+          }
+        });
       }
     });
     this.verifyOtpFormArray.reset();
@@ -135,7 +139,7 @@ export class VerifyByCodeComponent implements OnInit {
       this.buyGoodsService.currentData.subscribe(data => {
         this.payload = data;
         if(data) {
-          this.buyGoodsService.sendToBuyGoods(this.payload).subscribe((res) => {
+          this.buyGoodsService.payBuyGoods(this.payload).subscribe((res) => {
             if(res.status){
               this.router.navigate(["/transact/buy-goods/submit-transfer"]);
             }

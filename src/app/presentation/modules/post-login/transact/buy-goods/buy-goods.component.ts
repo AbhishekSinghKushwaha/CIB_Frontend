@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TransactionTypeConstants } from 'src/app/core/utils/constants/transaction-type.constants';
 import { BuyGoodsService } from 'src/app/core/services/transfers/buy-goods/buy-goods.service';
+import { MerchantDetailsService } from 'src/app/core/services/merchant-details/merchant-details.service';
 
 @Component({
   selector: 'app-buy-goods',
@@ -27,6 +28,7 @@ export class BuyGoodsComponent extends BaseTransactComponent implements OnInit {
     private buyGoodsService: BuyGoodsService,
     public dialog: MatDialog,
     private readonly router: Router,
+    private readonly merchantDetailsService: MerchantDetailsService,
   ) {
     super(snackBar);
   }
@@ -37,8 +39,8 @@ export class BuyGoodsComponent extends BaseTransactComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.buyGoodsService.getMerchants();
-    this.buyGoodsService.getFavouriteMerchants();
+    this.getMerchants();
+    this.getFavouriteMerchants();   
   }
 
   initForm(): void {
@@ -52,6 +54,30 @@ export class BuyGoodsComponent extends BaseTransactComponent implements OnInit {
     });
   }
 
+  getMerchants(): void {
+    this.buyGoodsService.getMerchants().subscribe((res) => {
+      if (res.status) {
+        console.log(res.data, 'getMerchants');
+        this.merchantDetailsService.setMerchantDetails(res.data);
+      }
+      else{
+        console.log(res.message, 'getMerchants');
+      }
+    });
+  }
+
+  getFavouriteMerchants(): void {
+    this.buyGoodsService.getFavouriteMerchants().subscribe((res) => {
+      if (res.status) {
+        console.log(res.data, 'getFavouriteMerchants');
+        this.merchantDetailsService.setFavouriteMerchantDetails(res.data);
+      }
+      else{
+        console.log(res.message, 'getFavouriteMerchants');
+      }
+    });
+  }
+
   openSupportingDocuments(): void {}
 
   // Get Transfer charges, then confirm payment.
@@ -61,21 +87,26 @@ export class BuyGoodsComponent extends BaseTransactComponent implements OnInit {
       currency: this.getForm.amount.value.currency,
       destinationAccount: this.getForm.sendTo.value.accountNumber,
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
-      transferType: this.transferType.BUY_GOODS,
+      transferType: '1',
     };
-    this.buyGoodsService
-      .getTransferCharges(payload)
-      .subscribe((res) => {
-        if (res.status) {
-          this.confirmPayment(res.data);
-        } else {
-          // TODO:: Notify error
-        }
-      }); 
+    // this.buyGoodsService.getTransferCharges(payload).subscribe((res) => {
+    //     if (res.status) {
+    //       this.confirmPayment(res.data);
+    //     } else {
+    //       // TODO:: Notify error
+    //     }
+    //   }); 
+    this.buyGoodsService.getCharges().subscribe((res) => {
+      if (res.status) {
+        this.confirmPayment(res.data);
+      } else {
+        // TODO:: Notify error
+      }
+    }); 
   }
 
   // Confirm Payment and return the confirmation boolean before initiating payment.
-  confirmPayment(transferFee: string) {
+  confirmPayment(transcationStatus: string) {
     if (this.buyGoodsForm.valid) {
       const paymentData = {
         from: this.getForm.sendFrom.value,
@@ -85,7 +116,7 @@ export class BuyGoodsComponent extends BaseTransactComponent implements OnInit {
         paymentReason: this.getForm.reason.value,
         fxReferenceId: this.getForm.fxReferenceId.value,
         schedulePayment: this.getForm.schedulePayment.value,
-        transferFee,
+        transcationStatus,
       };
       const dialogRef = this.dialog.open(ConfirmPaymentComponent, {
         data: paymentData,
@@ -94,42 +125,47 @@ export class BuyGoodsComponent extends BaseTransactComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe((res) => {
         if (res.confirmed) {
-          // this.sendMoney();
-          this.otpVerification();
+          this.sendMoney();
+          console.log('Payment Data', paymentData);
         }
       });
     } else {
     }
   }
 
-  otpVerification() {
-    this.router.navigate(['/transact/buy-goods/otp-verification']);
-  }
-
 
   // Initiate fund transfer to buy goods.
   sendMoney() {
     const payload = {
+      // amount: this.getForm.amount.value.amount,
+      // beneficiaryAccount: this.getForm.sendTo.value.accountNumber,
+      // beneficiaryBank: this.getForm.sendTo.value.bank.bankName,
+      // beneficiaryBankCode: this.getForm.sendTo.value.bank.bankCode,
+      // beneficiaryCurrency: this.getForm.sendTo.value.currency,
+      // beneficiaryName: this.getForm.sendTo.value.accountName,
+      // currency: this.getForm.amount.value.currency,
+      // fxReferenceId: this.getForm.fxReferenceId.value,
+      // paymentReason: this.getForm.reason.value,
+      // schedulePayment: {
+      //   frequency: this.getForm.schedulePayment.value.frequency.value,
+      //   reminderDay: this.getForm.schedulePayment.value.reminderDay.value,
+      //   startDate: this.getForm.schedulePayment.value.startDate.toISOString(),
+      //   endDate: this.getForm.schedulePayment.value.endDate.toISOString(),
+      // },
+      // sourceAccount: this.getForm.sendFrom.value.accountNumber,
+      // transferType: this.transferType.BUY_GOODS,
+      reference: this.getForm.fxReferenceId.value,
+      accountNumber: this.getForm.sendTo.value.accountNumber,
+      tillNumber: this.getForm.sendTo.value.tillNumber,
       amount: this.getForm.amount.value.amount,
-      beneficiaryAccount: this.getForm.sendTo.value.accountNumber,
-      beneficiaryBank: this.getForm.sendTo.value.bank.bankName,
-      beneficiaryBankCode: this.getForm.sendTo.value.bank.bankCode,
-      beneficiaryCurrency: this.getForm.sendTo.value.currency,
-      beneficiaryName: this.getForm.sendTo.value.accountName,
       currency: this.getForm.amount.value.currency,
-      fxReferenceId: this.getForm.fxReferenceId.value,
-      paymentReason: this.getForm.reason.value,
-      schedulePayment: {
-        frequency: this.getForm.schedulePayment.value.frequency.value,
-        reminderDay: this.getForm.schedulePayment.value.reminderDay.value,
-        startDate: this.getForm.schedulePayment.value.startDate.toISOString(),
-        endDate: this.getForm.schedulePayment.value.endDate.toISOString(),
-      },
-      sourceAccount: this.getForm.sendFrom.value.accountNumber,
-      transferType: this.transferType.BUY_GOODS,
+      remarks: this.getForm.reason.value,
+      bankID: "1",
+      customerId: "1234",
+      countryCode: this.getForm.sendTo.value.countryCode
     };
     if (this.buyGoodsForm.valid) {
-      this.buyGoodsService.sendToBuyGoods(payload).subscribe(
+      this.buyGoodsService.payBuyGoods(payload).subscribe(
         (res) => {
           if (res.status) {
             this.router.navigate([

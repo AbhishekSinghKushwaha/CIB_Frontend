@@ -35,7 +35,8 @@
     "buyGoodsTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
     "getTransferCharges": "/cibpaymentservice-v1/api/v1/Transfer/GetTransferCharge",
     "getAccountDetails": "/cibpaymentservice-v1/api/v1/Transfer/NameEnquiry",
-    "payBuyGoods": "/cibpaymentservice-v1/api/v1/BuyGoods/Pay"
+    "payBuyGoods": "/cibpaymentservice-v1/api/v1/BuyGoods/Pay",
+    "getCharges": "/cibpaymentservice-v1/api/v1/BuyGoods/Charges"
   },
   "dataLookUp": {
     "getCountries": "/cibpaymentservice-v1/api/v1/Transfer/GetCountries",
@@ -46,8 +47,7 @@
     "getMerchants": "/cibpaymentservice-v1/api/v1/BuyGoods/Merchants",
     "getMerchantDetails": "/cibpaymentservice-v1/api/v1/BuyGoods/MerchantDetail/",
     "getFavouriteMerchantDetails": "/cibpaymentservice-v1/api/v1/BuyGoods/FavoriteMerchants/",
-    "getLimit": "/cibpaymentservice-v1/api/v1/BuyGoods/Limit",
-    "getCharges": "/cibpaymentservice-v1/api/v1/BuyGoods/Charges"
+    "getLimit": "/cibpaymentservice-v1/api/v1/BuyGoods/Limit"
   },
   "statement": {
     "getPdf": "/v1/generatepdf/statement"
