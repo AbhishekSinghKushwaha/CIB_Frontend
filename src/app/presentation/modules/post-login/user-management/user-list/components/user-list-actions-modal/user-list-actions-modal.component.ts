@@ -5,6 +5,11 @@ import { confirmModal } from 'src/app/presentation/shared/decorators/confirm-dia
 
 export type UserListAction = 'enable' | 'disable' | 'edit' | 'remove';
 
+export interface UserListActionResult {
+  action: UserListAction;
+  data?: any;
+}
+
 @Component({
   selector: 'app-user-list-actions-modal',
   templateUrl: './user-list-actions-modal.component.html',
@@ -23,7 +28,7 @@ export class UserListActionsModalComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  close(result: UserListAction | undefined = undefined): void {
+  close(result: UserListActionResult | undefined = undefined): void {
     this.dialogRef.close(result);
   }
 
@@ -35,7 +40,7 @@ export class UserListActionsModalComponent implements OnInit {
     confirmText: 'Yes',
   })
   enable(): void {
-    this.close('enable');
+    this.close({ action: 'enable' });
   }
 
   @confirmModal({
@@ -58,7 +63,7 @@ export class UserListActionsModalComponent implements OnInit {
       .afterClosed()
       .subscribe((result: any) => {
         if (result) {
-          this.close('disable');
+          this.close({ action: 'disable', data: result });
         }
       });
   }
@@ -67,14 +72,14 @@ export class UserListActionsModalComponent implements OnInit {
     title: 'Are you sure',
     message:
       'Once you remove a user, all their details will be deleted. You can add them again anytime.',
-    cancelText: 'No, I\'m not',
-    confirmText: 'Yes, I\'m sure',
+    cancelText: "No, I'm not",
+    confirmText: "Yes, I'm sure",
   })
   remove() {
-    this.close('remove');
+    this.close({ action: 'remove' });
   }
 
   edit(): void {
-    this.close('edit');
+    this.close({ action: 'edit' });
   }
 }

@@ -7,35 +7,35 @@ import { User, UserStatus } from '../user-list.component';
 export class UserListService {
   private users: User[] = [
     {
-      id: 134312,
+      id: '134312',
       name: 'Michael Scott',
       phone: '0712345678',
       email: 'scott@dmi.com',
       status: 'enabled',
     },
     {
-      id: 133827,
+      id: '133827',
       name: 'Jim Halpert',
       phone: '0723456789',
       email: 'j.hal@dmi.com',
       status: 'enabled',
     },
     {
-      id: 381746,
+      id: '381746',
       name: 'Dwight Schrute',
       phone: '0734567890',
       email: 'd.sch@dmi.com',
       status: 'enabled',
     },
     {
-      id: 938273,
+      id: '938273',
       name: 'Andy Benard',
       phone: '0745678901',
       email: 'a.ben@dmi.com',
       status: 'disabled',
     },
     {
-      id: 291847,
+      id: '291847',
       name: 'Phyllis Vance',
       phone: '0756789012',
       email: 'p.van@dmi.com',
@@ -47,14 +47,14 @@ export class UserListService {
     return [...this.users];
   }
 
-  getUserById(id: number): Observable<User | undefined> {
+  getUserById(id: string): Observable<User | undefined> {
     const result: User | undefined = this.users.find(
       (user: User) => user.id === id
     );
     return of(result);
   }
 
-  setUserStatus(id: number, status: UserStatus): Observable<User | undefined> {
+  setUserStatus(id: string, status: UserStatus): Observable<User | undefined> {
     return this.getUserById(id).pipe(
       switchMap((result: User | undefined) => {
         if (result) {
@@ -71,7 +71,7 @@ export class UserListService {
     return of(user);
   }
 
-  updateUser(id: number, user: User): Observable<User | undefined> {
+  updateUser(id: string, user: User): Observable<User | undefined> {
     const index: number = this.users.findIndex((user: User) => user.id === id);
 
     if (index === -1) {
