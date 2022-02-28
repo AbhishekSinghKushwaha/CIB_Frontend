@@ -36,20 +36,6 @@ export class RegisterCompanyDetailsComponent implements OnInit {
 
     const regNumber = this.storageService.getData("registrationNumber");
     this.companyDetailsForm.controls.registrationNumber.setValue(regNumber);
-    // Get registration requirements & pass to modal
-    // this.getRegistrationRequirements();
-  }
-
-  getRegistrationRequirements() {
-    // TODO:: Check for the process, if is first time reg, display, if not, ignore
-    this.onboardingService.getRegistrationRequirements().subscribe((res) => {
-      if (res.isSuccessful) {
-        const requiredDocs = res.data;
-        this.onboardingModalService.openRegistrationRequirementModal(
-          requiredDocs
-        );
-      }
-    });
   }
 
   initForm() {
@@ -58,7 +44,7 @@ export class RegisterCompanyDetailsComponent implements OnInit {
       companyName: ["", [Validators.required]],
       country: ["", [Validators.required]], // Replace with countryId in the payload
       phoneNumber: ["", [Validators.required]],
-      emailAddress: ["", [Validators.required]],
+      emailAddress: ["", [Validators.required, Validators.email]],
       address: ["", [Validators.required]],
     });
   }
@@ -67,13 +53,5 @@ export class RegisterCompanyDetailsComponent implements OnInit {
     this.onboardingModalService.openCompanyDetailsModal(
       this.companyDetailsForm.getRawValue()
     );
-  }
-
-  getCountries() {
-    this.dataLookupService.getCountries().subscribe((res) => {
-      if (res.isSuccessful) {
-        this.sharedService.setCountries(res.data);
-      }
-    });
   }
 }

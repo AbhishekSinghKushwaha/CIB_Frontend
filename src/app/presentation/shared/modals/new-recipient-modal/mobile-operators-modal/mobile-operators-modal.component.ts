@@ -1,12 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
-import { MobileMoneyNewRecipientComponent } from '../mobile-money-new-recipient/mobile-money-new-recipient.component';
+import { Component, Input, OnInit } from "@angular/core";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { mockData } from "src/app/core/utils/constants/mockdata.constants";
+import { MobileMoneyNewRecipientComponent } from "../mobile-money-new-recipient/mobile-money-new-recipient.component";
 
 @Component({
-  selector: 'app-mobile-operators-modal',
-  templateUrl: './mobile-operators-modal.component.html',
-  styleUrls: ['./mobile-operators-modal.component.scss'],
+  selector: "app-mobile-operators-modal",
+  templateUrl: "./mobile-operators-modal.component.html",
+  styleUrls: ["./mobile-operators-modal.component.scss"],
 })
 export class MobileOperatorsModalComponent implements OnInit {
   @Input() transferType: string;
@@ -42,8 +42,6 @@ export class MobileOperatorsModalComponent implements OnInit {
       data: this.selected,
     });
 
-    modal.afterClosed().subscribe((x) => {
-      console.log(x);
-    });
+    modal.afterClosed().subscribe((x) => {});
   }
 }

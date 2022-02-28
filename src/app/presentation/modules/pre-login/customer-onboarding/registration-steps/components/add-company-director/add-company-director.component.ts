@@ -11,6 +11,8 @@ import { CustomerOnboardingService } from "src/app/core/services/customer-onboar
 import { DirectorsService } from "src/app/core/services/customer-onboarding/directors.service";
 import { StorageService } from "src/app/core/services/storage/storage.service";
 import { PhoneNumberUtil } from "google-libphonenumber";
+import { CountryService } from "src/app/core/services/modal-services/country.service";
+import { CountryModel } from "src/app/core/domain/bank.model";
 @Component({
   selector: "app-add-company-director",
   templateUrl: "./add-company-director.component.html",
@@ -23,12 +25,18 @@ export class AddCompanyDirectorComponent implements OnInit {
 
   directorReferenceId: any;
   phoneUtil: any;
+
+  selectedCountry: CountryModel;
+
+  initialOfficeNumber: string;
+  initialPhoneNumber: string;
   constructor(
     private readonly route: ActivatedRoute,
     private directorsService: DirectorsService,
     private fb: FormBuilder,
     private router: Router,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private countryService: CountryService
   ) {
     this.directorReferenceId = route.snapshot.queryParamMap.get("id");
     this.phoneUtil = PhoneNumberUtil.getInstance();
@@ -45,23 +53,39 @@ export class AddCompanyDirectorComponent implements OnInit {
         .getCompanyDirectorDetails(this.directorReferenceId)
         .subscribe((res) => {
           if (res.isSuccessful) {
+            this.initialOfficeNumber = res.data?.officePhoneNumber;
+
+            this.initialPhoneNumber = res.data?.phoneNumber;
+
             this.addDirectorForm.patchValue(res.data);
+
+            // This is where i need to patch the phone numbers
             this.addDirectorForm.controls.phoneNumber.patchValue(
-              res.data.phoneNumber.replace("+", "")
+              this.formatPhoneNumber(res.data?.phoneNumber)
             );
             this.addDirectorForm.controls.officePhoneNumber.patchValue(
-              res.data?.officePhoneNumber?.replace("+", "")
+              this.formatPhoneNumber(res.data?.officePhoneNumber)
             );
           }
         });
     }
   }
 
-  editPhoneNumber(phoneNo: any) {
-    console.log(this.phoneUtil.getRegionCodeForNumber(phoneNo));
+  formatPhoneNumber(number: any): string {
+    const countries = this.storageService.getData("countries");
+    const countryCode = this.phoneUtil.parse("+" + number, "").getCountryCode();
+
+    const country = countries.filter((v: CountryModel) => {
+      return v.dialCode === countryCode.toString();
+    });
+
+    // this.countryService.selectCountry(country[0]);
+    this.selectedCountry = country[0];
+
+    return number.replace(countryCode, "").trim();
   }
 
-  private initForm(data?: any): void {
+  private initForm(): void {
     this.addDirectorForm = this.fb.group({
       name: ["", [Validators.required]],
       officePhoneNumber: ["", [Validators.required]],
@@ -71,7 +95,6 @@ export class AddCompanyDirectorComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.directorReferenceId);
     this.directorReferenceId !== null
       ? this.updateDirector()
       : this.addDirector();
@@ -94,6 +117,18 @@ export class AddCompanyDirectorComponent implements OnInit {
   }
 
   updateDirector() {
+    if (!this.addDirectorForm.get("phoneNumber")?.dirty) {
+      this.addDirectorForm.controls.phoneNumber.setValue(
+        this.initialPhoneNumber
+      );
+    }
+
+    if (!this.addDirectorForm.get("officePhoneNumber")?.dirty) {
+      this.addDirectorForm.controls.officePhoneNumber.setValue(
+        this.initialOfficeNumber
+      );
+    }
+
     this.directorsService
       .updateDirectorDetails(
         this.addDirectorForm.getRawValue(),

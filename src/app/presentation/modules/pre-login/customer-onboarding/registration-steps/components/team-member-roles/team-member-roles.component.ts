@@ -1,40 +1,43 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { Router, ActivatedRoute } from "@angular/router";
 import {
   Permission,
   Role,
   TeamMember,
-} from 'src/app/core/domain/customer-onboarding.model';
-import { TeamMembersService } from 'src/app/core/services/customer-onboarding/team-members.service';
-import { StorageService } from 'src/app/core/services/storage/storage.service';
-import { RolesConstants } from 'src/app/core/utils/constants/roles.constants';
+} from "src/app/core/domain/customer-onboarding.model";
+import { TeamMembersService } from "src/app/core/services/customer-onboarding/team-members.service";
+import { StorageService } from "src/app/core/services/storage/storage.service";
+import { RolesConstants } from "src/app/core/utils/constants/roles.constants";
 
 @Component({
-  selector: 'app-team-member-roles',
-  templateUrl: './team-member-roles.component.html',
-  styleUrls: ['./team-member-roles.component.scss'],
+  selector: "app-team-member-roles",
+  templateUrl: "./team-member-roles.component.html",
+  styleUrls: ["./team-member-roles.component.scss"],
 })
 export class TeamMemberRolesComponent implements OnInit {
   activeRoles: any[];
   redirectTo: string;
   roles: Role[];
+  memberId: any;
 
   constructor(
     private readonly router: Router,
     private readonly teamMembersService: TeamMembersService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private activatedRoute: ActivatedRoute
   ) {
     this.activeRoles = [];
+    this.memberId = this.activatedRoute.snapshot.queryParamMap.get("id");
   }
 
   ngOnInit(): void {
-    this.roles = this.storageService.getData('onboarding-roles');
+    this.roles = this.storageService.getData("onboarding-roles");
 
     this.setAlreadySelectedRoles();
   }
 
   setAlreadySelectedRoles() {
-    const roles = this.storageService.getData('selected-roles');
+    const roles = this.storageService.getData("selected-roles");
     if (this.activeRoles.length === 0 && roles !== null) {
       this.activeRoles = roles;
     } else {
@@ -89,8 +92,6 @@ export class TeamMemberRolesComponent implements OnInit {
         ...{ permissions: [permission] },
       });
     }
-
-    console.log(this.activeRoles);
   }
 
   isRoleActive(roleId: any, permissionId: any): boolean {
@@ -115,9 +116,11 @@ export class TeamMemberRolesComponent implements OnInit {
   }
 
   saveRoles(): void {
-    this.storageService.setData('selected-roles', this.activeRoles);
-    this.router.navigate([
-      '/auth/customer-onboarding/register/add-team-member',
-    ]);
+    this.storageService.setData("selected-roles", this.activeRoles);
+
+    this.router.navigate(
+      ["/auth/customer-onboarding/register/add-team-member"],
+      { queryParams: { id: this.memberId } }
+    );
   }
 }
