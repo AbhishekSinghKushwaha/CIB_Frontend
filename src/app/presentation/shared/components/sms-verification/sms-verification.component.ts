@@ -10,7 +10,6 @@ import {
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { SharedUtils } from './../../../../core/utils/shared.util';
 import { NotificationModalService } from 'src/app/core/services/modal-services/notification-modal/notification-modal.service';
-import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 @Component({
@@ -37,7 +36,6 @@ export class SmsVerificationComponent implements OnInit {
   constructor(
     private readonly fb: FormBuilder,
     private readonly notificationModalService: NotificationModalService,
-    private readonly storageService: StorageService,
     private readonly authService: AuthService
   ) {
     this.initOtpForm();

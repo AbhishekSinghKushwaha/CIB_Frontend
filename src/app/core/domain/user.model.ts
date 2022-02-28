@@ -1,3 +1,5 @@
+import { SecurityQuestion } from "./security-question.model";
+
 export interface UserModel {
   id: number;
   name: string;
@@ -9,8 +11,8 @@ export interface UserModel {
   family: 'Father' | 'Mother' | 'Baby';
   smsToken: string;
   username: string;
-  securityQuestions: { question: string; answer: string }[];
 }
+
 
 export interface UserListModel {
   id: string;

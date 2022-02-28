@@ -23,6 +23,9 @@ import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { LanguageTranslateModule } from 'src/app/translate.module';
+import { SecurityVerificationComponent } from './security-verification/security-verification.component';
+import { SecurityChallengeComponent } from './security-challenge/security-challenge.component';
+
 
 const components = [
   AccountDropdownItemComponent,
@@ -40,7 +43,9 @@ const components = [
   WelcomeInfoComponent,
   ConfirmationCompletionComponent,
   LogoutWarningModalComponent,
-  LogoutConfirmationModalComponent
+  LogoutConfirmationModalComponent,
+  SecurityVerificationComponent,
+  SecurityChallengeComponent
 ];
 
 @NgModule({
@@ -51,7 +56,8 @@ const components = [
     ReactiveFormsModule,
     RouterModule,
     LanguageModalModule,
-    LanguageTranslateModule.forRoot()
+    LanguageTranslateModule.forRoot(),
+
   ],
   exports: components
 })
