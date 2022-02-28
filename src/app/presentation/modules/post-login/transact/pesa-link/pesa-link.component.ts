@@ -14,6 +14,7 @@ import { phoneLinkedModel } from "src/app/core/domain/phone-linked.modal";
 
 import { recipientBankDetailsModel } from "src/app/core/domain/recepient-bank-details.model";
 import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
+import { PesalinkService } from "src/app/core/services/transfers/pesalink/pesalink.service";
 
 @Component({
   selector: "app-pesa-link",
@@ -33,7 +34,7 @@ export class PesaLinkComponent implements OnInit {
   constructor(
     private readonly supportingDocumentsUploadService: SupportingDocumentsUploadService,
     private readonly fb: FormBuilder,
-    private ownEquityAccountService: OwnAccountService,
+    private pesalinkService: PesalinkService,
     public dialog: MatDialog,
     private readonly router: Router // private readonly pesaLinkSendToService: PesaLinkSendToService, // private readonly favouritesModalService: FavouritesModalService,
   ) {}
@@ -83,21 +84,19 @@ export class PesaLinkComponent implements OnInit {
     const payload = {
       amount: this.getForm.amount.value.amount,
       currency: this.getForm.amount.value.currency,
-      destinationAccount: this.getForm.recipient.value.accountNumber,
+      destinationAccount: this.getForm.sendTo.value.accountNumber,
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
-      transferType: 1, // For Own Equity Account
+      transferType: '1',
     };
-    this.ownEquityAccountService
-      .getTransferCharges(payload)
-      .subscribe((res) => {
-        if (res.status) {
-          this.loading = false;
-          this.confirmPayment(res.data);
-        } else {
-          this.loading = false;
-          // TODO:: Notify error
-        }
-      });
+    this.pesalinkService
+    .getTransferCharges(payload)
+    .subscribe((res) => {
+      if (res.status) {
+        this.confirmPayment(res.data);
+      } else {
+        // TODO:: Notify error
+      }
+    });
   }
 
   // Confirm Payment and return the confirmation boolean before initiating payment.
@@ -107,7 +106,7 @@ export class PesaLinkComponent implements OnInit {
         from: this.getForm.sendFrom.value,
         to: this.getForm.sendTo.value,
         amount: this.getForm.amount.value,
-        transactionType: "Send to your own Equity account",
+        transactionType: this.transferType.PESALINK,
         paymentReason: this.getForm.reason.value,
         fxReferenceId: this.getForm.fxReferenceId.value,
         schedulePayment: this.getForm.schedulePayment.value,
@@ -128,48 +127,45 @@ export class PesaLinkComponent implements OnInit {
     }
   }
 
-  openFavourites(): void {
-    // this.pesaLinkSendToService.open(mockData.favourites);
-  }
-
   // Initiate fund transfer to own equity account
   sendMoney() {
-    this.router.navigate(["/transact/transfer-submitted"]);
-    // this.loading = true;
-    // const payload = {
-    //   amount: this.getForm.amount.value.amount,
-    //   beneficiaryAccount: this.getForm.sendTo.value.accountNumber,
-    //   beneficiaryBank: '',
-    //   beneficiaryBankCode: '',
-    //   // beneficiaryCurrency: this.getForm.sendTo.value.currency,
-    //   // beneficiaryName: this.getForm.sendTo.value.accountName,
-    //   currency: this.getForm.amount.value.currency,
-    //   fxReferenceId: this.getForm.fxReferenceId.value,
-    //   paymentReason: this.getForm.reason.value,
-    //   schedulePayment: {
-    //     frequency: this.getForm.schedulePayment.value.frequency.value,
-    //     reminderDay: this.getForm.schedulePayment.value.reminder.value,
-    //     startDate: this.getForm.schedulePayment.value.startDate.toISOString(),
-    //     endDate: this.getForm.schedulePayment.value.endDate.toISOString(),
-    //   },
-    //   sourceAccount: this.getForm.sendFrom.value.accountNumber,
-    //   transferType: 1, // Own Equity Account
-    // };
-    // if (this.ownEquityAccountTransferForm.valid) {
-    //   this.ownEquityAccountService
-    //     .sendToOwnEquityAccount(payload)
-    //     .subscribe((res) => {
-    //       if (res.status) {
-    //         this.loading = false;
-    //         this.router.navigate([
-    //           '/transact/other-equity-account/submit-transfer',
-    //         ]);
-    //       } else {
-    //         this.loading = false;
-    //         alert(res.message);
-    //         // TODO:: Notify Error
-    //       }
-    //     });
-    // }
+    const payload = {
+      amount: this.getForm.amount.value.amount,
+      beneficiaryAccount: this.getForm.sendTo.value.accountNumber,
+      beneficiaryBank: this.getForm.sendTo.value.bank.bankName,
+      beneficiaryBankCode: this.getForm.sendTo.value.bank.bankCode,
+      beneficiaryCurrency: this.getForm.sendTo.value.currency,
+      beneficiaryName: this.getForm.sendTo.value.accountName,
+      currency: this.getForm.amount.value.currency,
+      fxReferenceId: this.getForm.fxReferenceId.value,
+      paymentReason: this.getForm.reason.value,
+      schedulePayment: {
+        frequency: this.getForm.schedulePayment.value.frequency.value,
+        reminderDay: this.getForm.schedulePayment.value.reminderDay.value,
+        startDate: this.getForm.schedulePayment.value.startDate.toISOString(),
+        endDate: this.getForm.schedulePayment.value.endDate.toISOString(),
+      },
+      sourceAccount: this.getForm.sendFrom.value.accountNumber,
+      transferType: '1',
+    };
+    if (this.pesalinkTransferForm.valid) {
+      this.pesalinkService.sendViaPesalink(payload).subscribe(
+        (res) => {
+          if (res.status) {
+            this.router.navigate([
+              '/transact/transfer-submitted',
+            ]);
+          } else {
+            console.log(res.message);
+            // TODO:: Notify Error
+          }
+        },
+        (err) => {
+          alert(
+            `Sorry, we're unable to complete your transaction. Please give us some time to fix the problem and try again later.`
+          );
+        }
+      );
+    }
   }
 }

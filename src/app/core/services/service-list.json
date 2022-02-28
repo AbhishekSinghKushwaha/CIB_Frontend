@@ -34,7 +34,8 @@
     "buyAirtimeTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
     "buyGoodsTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
     "getTransferCharges": "/cibpaymentservice-v1/api/v1/Transfer/GetTransferCharge",
-    "getAccountDetails": "/cibpaymentservice-v1/api/v1/Transfer/NameEnquiry"
+    "getAccountDetails": "/cibpaymentservice-v1/api/v1/Transfer/NameEnquiry",
+    "pesalinkTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send"
   },
   "dataLookUp": {
     "getCountries": "/cibpaymentservice-v1/api/v1/Transfer/GetCountries",
@@ -58,6 +59,12 @@
     "edit": "/cibpaymentservice-v1/api/v1/Beneficiary/EditBeneficiary",
     "remove": "/cibpaymentservice-v1/api/v1/Beneficiary/RemoveBeneficiary",    
     "getAll": "/cibpaymentservice-v1/api/v1/Beneficiary/GetBeneficiaries"
+  },
+  "pesalink": {
+    "phoneNumber": "/cibpaymentservice-v1/api/v1/Transfer/PesalLink/",
+    "nameCheck": "/cibpaymentservice-v1/api/v1/Transfer/PesalLink/namecheck",
+    "phoneAccountsInquiry": "/cibpaymentservice-v1/api/v1/Transfer/PesalLink/phoneAccountsInquiry",
+    "register": "/cibpaymentservice-v1/api/v1/Transfer/PesalLink/register",
+    "transactionStatus": "/cibpaymentservice-v1/api/v1/Transfer/PesalLink/transactionStatus"
   }
-
 }
