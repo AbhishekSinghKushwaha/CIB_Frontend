@@ -32,7 +32,7 @@ export class LoginSecurityChallengeComponent implements OnInit {
 
   submit(answers: any[]): void {
     this.securityChallengeService
-      .submitSecurityAnswers(answers, this.user)
+      .submitSecurityAnswers(answers)
       .subscribe(
         (response) => {
           console.log(response);

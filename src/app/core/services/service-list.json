@@ -51,10 +51,11 @@
     "verifyForgetPasswordOtp": "/cibuseraccess-v1/api/Auth/user/verifyForgotPasswordOtp",
     "resendOtp": "/cibuseraccess-v1/api/Auth/generateOtp",
     "validateOtp": "/authorization/user/validateOTPReset",
-    "securityAnswers": "/authorization/user/securityAnswers",
+    "securityAnswers": "/cibuseraccess-v1/api/SecurityQuestion/user/verify-securityquestions",
     "validateUser":"/cibuseraccess-v1/api/Auth/user/initiatePasswordReset",
-    "getSecurityQuestions":"cibuseraccess-v1/api/SecurityQuestion/securityquestions",
-    "getMySecurityQuestions":"cibuseraccess-v1/api/SecurityQuestion/user/securityquestions"
+    "getSecurityQuestions":"/cibuseraccess-v1/api/SecurityQuestion/securityquestions",
+    "getMySecurityQuestions":"/cibuseraccess-v1/api/SecurityQuestion/user/securityquestions",
+    "resetPassword":"/cibuseraccess-v1/api/Auth/user/resetPassword"
   },
   "beneficiary": {
     "add": "/cibpaymentservice-v1/api/v1/Beneficiary/AddBeneficiary",

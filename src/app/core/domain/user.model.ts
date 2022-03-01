@@ -1,5 +1,3 @@
-import { SecurityQuestion } from "./security-question.model";
-
 export interface UserModel {
   id: number;
   name: string;

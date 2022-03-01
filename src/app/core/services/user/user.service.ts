@@ -14,4 +14,7 @@ export class UserService {
     return this.http.get(`${environment.apiUrl}${urlList.login.validateUser}?email=${value}`);
   }
 
+  resetPassword(data: any) {
+    return this.http.post(`${environment.apiUrl}${urlList.login.resetPassword}`, data);
+  }
 }

@@ -6,7 +6,7 @@ import { UserModel } from 'src/app/core/domain/user.model';
 import { SecurityChallengeService } from 'src/app/core/services/security-challenge/security-challenge.service';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import LOGIN_CONSTANTS from 'src/app/core/utils/constants/pre-login.constants';
-import { SecurityQuestion } from 'src/app/core/domain/security-question.model';
+import { SecurityQuestionModel } from 'src/app/core/domain/security-question.model';
 
 @Component({
   selector: 'app-security-challenge',
@@ -14,10 +14,11 @@ import { SecurityQuestion } from 'src/app/core/domain/security-question.model';
   styleUrls: ['./security-challenge.component.scss']
 })
 export class SecurityChallengeComponent implements OnInit {
-  @Output() onSubmit = new Subject<any[]>();
+  @Output() onSubmit = new Subject<any>();
   securityChallengeForm: FormGroup = new FormGroup({});
-  allSecurityQuestions: SecurityQuestion[];
-  mySecurityQuestions: SecurityQuestion[];
+  allSecurityQuestions: SecurityQuestionModel[] = [];
+  displayedSecurityQuestions: SecurityQuestionModel[] = [];
+  // mySecurityQuestions: SecurityQuestion[];
   submitted = false;
   user: UserModel;
   @Output() error = new Subject<boolean>();
@@ -36,22 +37,22 @@ export class SecurityChallengeComponent implements OnInit {
     this.securityChallengeService.getSecurityQuestions().subscribe(
       (response) => {
         this.allSecurityQuestions = response;
+        this.displayedSecurityQuestions = [response[0], response[1]]
+        this.initForm();
       },
       (error) => {
         this.error.next(true);
       }
     );
 
-    this.securityChallengeService.getMySecurityQuestions().subscribe(
-      (response) => {
-        this.mySecurityQuestions = response;
-      },
-      (error) => {
-        this.error.next(true);
-      }
-    );
-
-    this.initForm();
+    // this.securityChallengeService.getMySecurityQuestions().subscribe(
+    //   (response) => {
+    //     this.mySecurityQuestions = response;
+    //   },
+    //   (error) => {
+    //     this.error.next(true);
+    //   }
+    // );
   }
 
   get f(): any {
@@ -69,7 +70,7 @@ export class SecurityChallengeComponent implements OnInit {
   }
 
   initForm(): void {
-    for (let i = 0; i < this.allSecurityQuestions.length - 1; i++) {
+    for (let i = 0; i < this.displayedSecurityQuestions.length; i++) {
       this.securityChallengeFormArray.push(
         this.fb.control(null, Validators.required)
       );
@@ -79,8 +80,22 @@ export class SecurityChallengeComponent implements OnInit {
 
   submit(): void {
     const answers = this.securityChallengeFormArray.getRawValue();
-    if (answers?.length === this.allSecurityQuestions.length) {
-      this.onSubmit.next(answers);
+    if (answers?.length === this.displayedSecurityQuestions.length) {
+      const payload = {
+        userQuestionsDtos: this.displayedSecurityQuestions.map((x, i) => ({ questionId: x.id, answer: answers[i] }))
+      };
+      this.onSubmit.next(payload);
     }
+  }
+
+  openQuestions(selected: SecurityQuestionModel, index: number) {
+    this.securityChallengeService
+      .open(this.allSecurityQuestions, this.displayedSecurityQuestions, selected)
+      .afterClosed()
+      .subscribe(response => {
+        if (response.length) {
+          this.displayedSecurityQuestions = response;
+        }
+      })
   }
 }

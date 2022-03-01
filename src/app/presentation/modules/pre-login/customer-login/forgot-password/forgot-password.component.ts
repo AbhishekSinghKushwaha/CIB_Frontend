@@ -20,6 +20,9 @@ export class ForgotPasswordComponent implements OnInit {
   otpError: boolean;
   stage: string;
   user: UserModel;
+  securityToken: string;
+  submitted: boolean;
+
   credentialsForm: FormGroup = new FormGroup({
     credentials: new FormControl(null, [
       Validators.required,
@@ -41,6 +44,7 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   validateCredentials(): void {
+    this.submitted = true;
     if (this.credentialsForm.invalid) {
       return;
     }
@@ -49,10 +53,12 @@ export class ForgotPasswordComponent implements OnInit {
 
     this.userService.validateUsername(credential).subscribe(
       (response) => {
+        this.submitted = false;
         this.stage = 'sms-verification';
       },
       (error) => {
         this.otpError = true;
+        this.submitted = false;
         this.showInvalidCredentialsNotification();
       }
     );
@@ -101,12 +107,16 @@ export class ForgotPasswordComponent implements OnInit {
     }
   }
 
-  securityChallengeSubmit(answers: any[]) {
-    this.securityChallengeService
-      .submitSecurityAnswers(answers, this.user)
+  securityChallengeSubmit(answers: any) {
+    const result = { ...answers, userIdentifier: this.credentialsControls.credentials.value };
+    console.log(result);
+    this.securityChallengeService.submitSecurityAnswers(result)
       .subscribe(
         (response) => {
-          this.stage = 'change-password';
+          if (response && response?.token) {
+            this.securityToken = response.token;
+            this.stage = 'change-password';
+          }
         },
         (error) => {
           console.log({ error });
