@@ -15,7 +15,7 @@ export class TransferFromService {
   constructor(private readonly dialog: MatDialog) {}
 
   // Open Transfer From Modal
-  openTransferFromModal(data: FromAccount[]): void {
+  openTransferFromModal(data: FromAccount[]): MatDialogRef<TransferFromModalComponent> {
     this.transferFromModalRef = this.dialog.open<
       TransferFromModalComponent,
       FromAccount[]
@@ -23,6 +23,7 @@ export class TransferFromService {
       disableClose: true,
       data,
     });
+    return this.transferFromModalRef;
   }
 
   // Get the default data

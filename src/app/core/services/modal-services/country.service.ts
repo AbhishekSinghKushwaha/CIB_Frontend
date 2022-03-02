@@ -30,13 +30,13 @@ export class CountryService {
     return this.countryData;
   }
 
-  selectCountry(country: any): void {
+  selectCountry(country: CountryModel): void {
     this.countryData = country;
     this.selectedCountry.next(this.countryData);
   }
 
   closeCountryModal(data: CountryModel): void {
-    this.selectedCountry.next(this.countryData);
+    this.selectCountry(data);
     this.countryModalRef.close(data);
   }
 }

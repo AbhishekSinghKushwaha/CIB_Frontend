@@ -24,74 +24,138 @@
           class="d-flex flex-column"
           autocomplete="off"
         >
-          <div class="row pt-4">
-            <div class="col-md-6 col-lg-12">
-              <mat-form-field
-                appearance="standard"
-                style="width: 100%"
-                floatLabel="always"
-              >
-                <mat-label>Name</mat-label>
-                <input
-                  matInput
-                  type="text"
-                  placeholder="Enter their name"
-                  formControlName="beneficiaryName"
-                />
-              </mat-form-field>
-            </div>
-            <div class="col-md-6 col-lg-12">
+          <div class="row pt-4">    
+
+            <!-- transfer type field -->   
+            <div class="col-md-6">
               <mat-form-field appearance="standard" style="width: 100%">
-                <mat-label>Bank</mat-label>
+                <mat-label>Transfer type</mat-label>
                 <input
                   matInput
                   type="text"
+                  placeholder="Select a transfer type"
                   [readonly]="true"
-                  placeholder="Select their bank"
-                  formControlName="beneficiaryBank"
-                />
-                <button
-                  type="button"
-                  mat-icon-button
-                  matSuffix
-                  (click)="openBanks()"
-                >
-                  <mat-icon svgIcon="caret_down"></mat-icon>
-                </button>
-              </mat-form-field>
-            </div>
-            <div class="col-md-6 col-lg-12">
-              <mat-form-field
-                appearance="standard"
-                style="width: 100%"
-                floatLabel="always"
-              >
-                <mat-label>Account number</mat-label>
-                <input
-                  matInput
-                  type="text"
-                  formControlName="beneficiaryAccount"
-                  placeholder="Enter their account number"
-                />
-              </mat-form-field>
-            </div>
-            <div class="col-md-6 col-lg-12">
-              <mat-form-field appearance="standard" style="width: 100%">
-                <mat-label>Transaction type</mat-label>
-                <input
-                  matInput
-                  type="text"
-                  placeholder="Select a transaction type"
-                  [readonly]="true"
-                  formControlName="transactionType"
-                  [value]="equityForm.get('transactionType')?.value | transactionTypePipe"
-                  placeholder="Select a transaction type"
+                  formControlName="transferType"
+                  value="{{equityForm.get('transferType')?.value | transferTypeLabelPipe | translate}}"
+                  placeholder="Select a transfer type"
                 />
                 <button
                   type="button"
                   mat-icon-button
                   matSuffix
                   (click)="openTransactions()"
+                >
+                  <mat-icon svgIcon="caret_down"></mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+            
+            <!-- dynamic fields -->
+            <div class="col-md-6" *ngFor="let field of fields" [ngSwitch]="field.metadata.controlType">
+              <mat-form-field *ngSwitchCase="'input'"
+                appearance="standard"
+                style="width: 100%"
+                floatLabel="always"
+              >
+                <mat-label>{{field.metadata.label}}</mat-label>
+                <input
+                  matInput
+                  type="{{field.metadata.dataType}}"
+                  placeholder="Enter {{field.metadata.label}}"
+                  [formControlName]="field.metadata.formControlName"
+                />
+              </mat-form-field>
+              <mat-form-field *ngSwitchCase="'select'"
+                appearance="standard"
+                style="width: 100%"
+                floatLabel="always"
+                aria-readonly="true"
+              >
+                <mat-label>{{field.metadata.label}}</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  readonly
+                  placeholder="Select {{field.metadata.label}}"
+                  [formControlName]="field.metadata.formControlName"
+                  [value]="getFieldValue(field.metadata.formControlName, field.metadata.valueFromField)"
+                />
+                <button
+                  type="button"
+                  mat-icon-button
+                  matSuffix
+                  (click)="field.metadata.onclick ? field.metadata.onclick() : null"
+                >
+                  <mat-icon svgIcon="caret_down"></mat-icon>
+                </button>
+              </mat-form-field>
+              
+              <app-phone-number-input *ngSwitchCase="'mobile'"
+                [parentForm]="equityForm"
+                fieldName="phoneNumber"
+                formControlName="phoneNumber"
+                placeholder="Enter their mobile number"
+                label="Mobile Number"
+              ></app-phone-number-input>
+              
+              <mat-form-field *ngSwitchCase="'mobile--old'"
+                appearance="standard"
+                style="width: 100%"
+                floatLabel="always"
+              >
+                <mat-label>{{field.metadata.label}}</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  placeholder="Enter {{field.metadata.label}}"
+                  [formControlName]="field.metadata.formControlName"
+                />
+              </mat-form-field>
+            </div>    
+            
+            <div class="row divider"></div>
+
+            <!-- favourite, send from fields -->
+            <div class="col-sm-6 product-list-item">
+              <div class="col-12 product-list-item-label">
+                <div class="row h-100 justify-content-around align-items-center" (click)="toggleFav()">
+                  <div class="float-left label text-truncate">
+                    <h4>{{ editMode ? "Include at favourite list" : "Set as favourite" }}</h4>
+                  </div>
+                  <div class="float-right toggle toggle-container">
+                    <mat-icon
+                      [svgIcon]="
+                        equityForm.get('favourite')?.value
+                          ? 'toggle_button_on'
+                          : 'toggle_button_off'
+                      "
+                    ></mat-icon>
+                  </div>
+                </div>
+              </div>
+            </div>                
+            <div class="col-sm-6">        
+              <mat-form-field *ngIf="
+                equityForm.get('favourite')?.value"
+                appearance="standard"
+                style="width: 100%"
+                floatLabel="always"
+                aria-readonly="true"
+              >
+                <mat-label>Account From</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  readonly
+                  placeholder="Select an account"
+                  formControlName="fromAccount"
+                  [value]="getFieldValue('fromAccount', 'accountNumber')"
+                />
+                <button
+                  type="button"
+                  mat-icon-button
+                  matSuffix
+                  (click)="openAccounts()"
                 >
                   <mat-icon svgIcon="caret_down"></mat-icon>
                 </button>
@@ -105,7 +169,7 @@
               color="primary"
               [disabled]="equityForm.invalid"
             >
-              {{ editMode ? "Update" : "Add the beneficiary" }}
+              {{ editMode ? "Update beneficiary" : "Add beneficiary" }}
             </button>
           </div>
         </form>

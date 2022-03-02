@@ -24,7 +24,7 @@ export class BeneficiaryManagementService {
   formData = new Subject<BeneficiaryActionResult>();
 
   beneficiaries: BeneficiaryModel[] = [];
-  beneficiaryEdit: BeneficiaryModel | null;
+  beneficiaryEdit: BeneficiaryModel | undefined;
 
   constructor(private readonly http: HttpClient, private readonly authService: AuthService) {
     this.authService.IsLoggedIn.subscribe( (loggedIn) => {
@@ -58,6 +58,18 @@ export class BeneficiaryManagementService {
         this.formData.next({type: BeneficiaryActionResultType.GET, data: this.beneficiaries})
       })
     }
+  }
+
+  getFavourites(): void {
+    if (this.beneficiaries.length>0) {
+      this.formData.next({type: BeneficiaryActionResultType.GET, data: this.beneficiaries.filter( (item) => item.favourite === true )})
+    } else {
+      this.http.get<BeneficiaryModel[]>(environment.apiUrl + urlList.beneficiary.getAll).subscribe( (rs: any) => {
+        this.beneficiaries = [...rs.data];
+        this.formData.next({type: BeneficiaryActionResultType.GET, data: this.beneficiaries})
+      })
+    }
+    
   }
   
   deleteById(id: number): void {

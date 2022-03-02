@@ -1,35 +1,6 @@
-const TRANSACT_TYPE = [
-  {
-    id: 1,
-    name: "Money in",
-  },
-  {
-    id: 2,
-    name: "Money out",
-  },
-  {
-    id: 3,
-    name: "Bill payment",
-  },
-  {
-    id: 4,
-    name: "Bank Transfer",
-  },
-  {
-    id: 5,
-    name: "Mobile payment",
-  },
-  {
-    id: 6,
-    name: "Pesalink",
-  },
-  {
-    id: 7,
-    name: "RTGS",
-  },
-];
+import { TransferTypeDTO } from "../../domain/transfer.models";
 
-const TransferType = {
+export const TransferType: TransferTypeDTO = {
   OWN_EQUITY: "1",
   INTRA_BANK: "2",
   INTER_BANK: "3",
@@ -66,7 +37,6 @@ const PaymentCategories = [
 ];
 
 export const TransactionTypeConstants = {
-  TRANSACT_TYPE,
   TransferType,
   SwiftChargesOptions,
   PaymentCategories,

@@ -1,8 +1,12 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { Component, Inject, Input, OnInit } from "@angular/core";
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MobileOperatorService } from "src/app/core/services/modal-services/mobile-operator.service";
 import { mockData } from "src/app/core/utils/constants/mockdata.constants";
 import { MobileMoneyNewRecipientComponent } from "../mobile-money-new-recipient/mobile-money-new-recipient.component";
 
+export interface MobileOperatorsModalData {
+  hideRecipient: boolean;
+}
 @Component({
   selector: "app-mobile-operators-modal",
   templateUrl: "./mobile-operators-modal.component.html",
@@ -21,10 +25,14 @@ export class MobileOperatorsModalComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<MobileOperatorsModalComponent>,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,    
+    @Inject(MAT_DIALOG_DATA) public data: MobileOperatorsModalData,
+    private mobileOperatorService: MobileOperatorService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('init');
+  }
 
   close() {
     this.dialogRef.close();
@@ -33,7 +41,10 @@ export class MobileOperatorsModalComponent implements OnInit {
   select(i: number) {
     this.selected = this.operators[i];
     this.visibility = false;
-    this.openMobileMoneyNewRecipientModal();
+    this.mobileOperatorService.closeMobileOperatorModal(this.selected);
+    if (this.data.hideRecipient) {
+      this.openMobileMoneyNewRecipientModal();
+    }
   }
 
   openMobileMoneyNewRecipientModal() {

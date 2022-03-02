@@ -49,6 +49,7 @@ export class UserListSearchModalComponent
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.dataSource = new MatTableDataSource<User>(data.users);
+    this.displayedColumns = Object.keys(data.users);
   }
 
   ngOnInit(): void {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
-import { animate, group, style, transition, trigger } from '@angular/animations';
+import { animate, style, transition, trigger } from '@angular/animations';
 import * as  _ from 'lodash';
 import { BeneficiaryModel } from 'src/app/core/domain/beneficiary.model';
 import { BeneficiaryActionResultType, BeneficiaryManagementService } from 'src/app/core/services/beneficiary-management/beneficiary-management.service';
@@ -9,6 +9,9 @@ import { Router } from '@angular/router';
 import { ConfirmDialogService } from 'src/app/core/services/confirm-dialog/confirm-dialog.service';
 import { confirmModal } from 'src/app/presentation/shared/decorators/confirm-dialog.decorator';
 import { TransactionTypeConstants } from 'src/app/core/utils/constants/transaction-type.constants';
+import { MatDialog } from '@angular/material/dialog';
+import { UserListSearchModalComponent } from '../../user-management/user-list/components/user-list-search-modal/user-list-search-modal.component';
+import { take } from 'rxjs/operators';
 @Component({
   selector: 'app-beneficiary-management',
   templateUrl: './beneficiary-management.component.html',
@@ -42,7 +45,8 @@ export class BeneficiaryManagementComponent implements OnInit {
 
   constructor(
     private readonly beneficiaryManagementService: BeneficiaryManagementService,
-    private readonly dialogService: ConfirmDialogService,
+    private readonly dialogService: ConfirmDialogService,    
+    private readonly dialog: MatDialog,
     private readonly router: Router) {
   }
 
@@ -107,6 +111,22 @@ export class BeneficiaryManagementComponent implements OnInit {
     }
   }
 
+  openFilterModal() {
+    this.dialog
+      .open<UserListSearchModalComponent>(UserListSearchModalComponent, {
+        data: { users: this.beneficiaryManagementService.beneficiaries },
+      })
+      .afterClosed()
+      .pipe(take(1))
+      .subscribe((filter: any) => {
+        if (filter) {
+          this.dataSource.data = filter.selectedData;
+        } else {
+          this.dataSource.data = this.beneficiaryManagementService.beneficiaries;
+        }
+      });
+  }
+
   @confirmModal({
     title: 'Are you sure',
     message: 'Once you remove a beneficiary, all their details will be deleted. You can add them again anytime.',
@@ -123,13 +143,10 @@ export class BeneficiaryManagementComponent implements OnInit {
     this.beneficiaryManagementService.beneficiaries = this.dataSource.data;
     
   }
-  getTransactionTypeLabel(id: number): string | undefined{
-    return TransactionTypeConstants.TRANSACT_TYPE.find( (item) => item.id === id )?.name;
-  }
   loadBeneficiaries(): void {
     this.beneficiaryManagementService.getAll();
   }
   cleanEditData(): void {
-    this.beneficiaryManagementService.beneficiaryEdit = null;
+    this.beneficiaryManagementService.beneficiaryEdit = undefined;
   }
 }

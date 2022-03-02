@@ -1,5 +1,16 @@
 {
     "login_hello": "Hello there",
     "button_signin":"Sign in",
-    "button_register":"Register"
+    "button_register":"Register",
+    "OWN_EQUITY": "Own Equity",
+    "INTRA_BANK": "Intra Bank",
+    "INTER_BANK": "Inter Bank",
+    "EFT": "EFT",
+    "SWIFT": "SWIFT",
+    "RTGS": "RTGS",
+    "BUY_GOODS": "Buy Goods",
+    "MOBILE_MONEY": "Mobile Money",
+    "BUY_AIRTIME": "Buy Airtime",
+    "PESALINK": "Pesalink",
+    "INTER_COUNTRY_TRANSFER": "Inter Country Transfer"
 }

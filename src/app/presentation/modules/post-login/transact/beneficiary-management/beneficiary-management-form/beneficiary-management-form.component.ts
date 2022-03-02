@@ -2,14 +2,22 @@ import { Component, OnInit, Input, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BankModel } from 'src/app/core/domain/bank.model';
 import { BeneficiaryModel } from 'src/app/core/domain/beneficiary.model';
 import { BankService } from 'src/app/core/services/modal-services/bank.service';
 import { BeneficiaryManagementService } from 'src/app/core/services/beneficiary-management/beneficiary-management.service';
-import { TransactionTypeModalService } from 'src/app/core/services/transaction-type-modal/transaction-type-modal.service';
+import { TransferTypeModalService } from 'src/app/core/services/transaction-type-modal/transaction-type-modal.service';
 import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
 import { SharedUtils } from 'src/app/core/utils/shared.util';
 import { TransactionTypeConstants } from 'src/app/core/utils/constants/transaction-type.constants';
+import { BeneficiaryManagementFieldService } from 'src/app/core/services/beneficiary-management-field/beneficiary-management-field.service';
+import { BeneficiaryField, BeneficiaryTypeFieldsDict } from 'src/app/core/utils/constants/beneficiary-fields.constants';
+import { CountryService } from 'src/app/core/services/modal-services/country.service';
+import { StorageService } from 'src/app/core/services/storage/storage.service';
+import { countrySettings } from "src/app/core/utils/constants/country.settings";
+import { MobileOperatorService } from 'src/app/core/services/modal-services/mobile-operator.service';
+import { TransferFromService } from 'src/app/core/services/modal-services/transfer-from.service';
+import { SharedDataService } from 'src/app/core/services/shared-data/shared-data.service';
+import { FromAccount } from 'src/app/core/domain/transfer.models';
 
 @Component({
   selector: 'app-beneficiary-management-form',
@@ -19,11 +27,11 @@ import { TransactionTypeConstants } from 'src/app/core/utils/constants/transacti
 export class BeneficiaryManagementFormComponent implements OnInit {
   equityForm: FormGroup;
   visibility = true;
-  bank: BankModel;
-  transactionType: any;
   editMode: boolean;
   id: number;
-  editData: BeneficiaryModel | null;
+  editData: BeneficiaryModel | undefined;
+  fields: BeneficiaryField[] | undefined;
+  userAccounts: FromAccount[];
   subscriptions: Subscription[] = [];
   @Input() modalMode = false;
   private _modalData: BeneficiaryModel;
@@ -39,9 +47,15 @@ export class BeneficiaryManagementFormComponent implements OnInit {
   @Output() formSubmitted = new Subject<BeneficiaryModel>();
 
   constructor(
+    private readonly storageService: StorageService,
     private readonly bankService: BankService,
-    private readonly transactionTypeModalService: TransactionTypeModalService,
+    private readonly countryService: CountryService,
+    private readonly transactionTypeModalService: TransferTypeModalService,
     private readonly beneficiaryManagementService: BeneficiaryManagementService,
+    private readonly beneficiaryFieldService: BeneficiaryManagementFieldService,
+    private readonly mobileOperatorService: MobileOperatorService,    
+    private readonly transferFromAccountService: TransferFromService,
+    private readonly sharedDataService: SharedDataService,
     private readonly router: Router,
     private readonly route: ActivatedRoute
   ) {}
@@ -50,6 +64,7 @@ export class BeneficiaryManagementFormComponent implements OnInit {
     this.formMode();
     this.getEditData();
     this.initForm();
+    this.populateForm();
     this.eventsSubscriptions();
   }
 
@@ -63,18 +78,35 @@ export class BeneficiaryManagementFormComponent implements OnInit {
   }
 
   private eventsSubscriptions(): void {
-    this.subscriptions.push(
-      this.bankService.selected.subscribe((response) => {
-        this.bank = response;
-        this.equityForm.controls.beneficiaryBank.setValue(response.bankName);
-        this.equityForm.controls.beneficiaryBankCode.setValue(response.bankCode);
-      })
-    );
+
     this.subscriptions.push(
       this.transactionTypeModalService.selected.subscribe((response) => {
-        console.log("response,", response)
-        this.equityForm.controls.transactionType.setValue(response.id);
-        this.transactionType = response;
+        this.equityForm.controls.transferType.setValue(response.value);
+        this.populateForm();
+      })
+    );
+
+    this.subscriptions.push(
+      this.bankService.selected.subscribe((response) => {
+        this.equityForm.controls.bank.setValue(response);
+      })
+    );
+    
+    this.subscriptions.push(
+      this.countryService.selectedCountry.subscribe((response) => {
+        this.equityForm.get('country')?.setValue(response);
+      })
+    );
+    
+    this.subscriptions.push(
+      this.transferFromAccountService.selectedTransferFromAccount.subscribe((response) => {
+        this.equityForm.get('fromAccount')?.setValue(response);
+      })
+    );
+
+    this.subscriptions.push(
+      this.sharedDataService.userAccounts.subscribe((res) => {
+        this.userAccounts = res;
       })
     );
   }
@@ -82,20 +114,41 @@ export class BeneficiaryManagementFormComponent implements OnInit {
   private initForm(): void {
     this.equityForm = new FormGroup({
       id: new FormControl(this.editData?.id),
-      beneficiaryName: new FormControl(this.editData?.beneficiaryName, [Validators.required]),
-      beneficiaryBank: new FormControl(this.editData?.beneficiaryBank, [Validators.required]),
-      beneficiaryBankCode: new FormControl(this.editData?.beneficiaryBankCode, [Validators.required]),
-      beneficiaryAccount: new FormControl(this.editData?.beneficiaryAccount, [
-        Validators.required,
-      ]),
-      transactionType: new FormControl(this.editData?.transactionType, [
-        Validators.required,
-      ]),
+      favourite: new FormControl(this.editData?.favourite || false),
+      fromAccount: new FormControl(this.editData?.fromAccount),
+      transferType: new FormControl(this.editData?.transferType || "2", [Validators.required]),    
+      country: new FormControl(this.editData?.country)
     });
+
+  }
+
+  private populateForm(): void {
+    this.clearForm();
+    this.fields = BeneficiaryTypeFieldsDict.get(this.equityForm.controls.transferType.value.toString());
+    this.fields?.find( (field) => field.fieldType==="bank") ? this.beneficiaryFieldService.assignClickAction(this.fields, "bank", this.openBanks.bind(this)) : null;
+    this.fields?.find( (field) => field.fieldType==="country") ? this.beneficiaryFieldService.assignClickAction(this.fields, "country", this.openCountry.bind(this)) : null;
+    this.fields?.find( (field) => field.fieldType==="mobileOperator") ? this.beneficiaryFieldService.assignClickAction(this.fields, "mobileOperator", this.openOperator.bind(this)) : null;
+
+    this.fields?.forEach( (field) => {
+      if (field.metadata.required) {
+        this.equityForm.addControl(field.fieldType, new FormControl(this.editData ? this.editData[field.fieldType] : '', Validators.required))
+      } else {
+        this.equityForm.addControl(field.fieldType, new FormControl(this.editData ? this.editData[field.fieldType] : ''))
+      }
+    }) 
+  }
+
+  private clearForm(): void {
+    this.beneficiaryFieldService.clearAllClickActions();
+    Object.keys(this.equityForm.controls).forEach( (key) => {
+      if (key!=='id' && key!=='transferType' && key!=='favourite' && key!=='fromAccount') {
+        this.equityForm.removeControl(key);
+      }
+    })
   }
 
   submit() {
-    console.log({ editMode: this.editMode, modalMode: this.modalMode });
+    console.log({ editMode: this.editMode, modalMode: this.modalMode,form: this.equityForm.value, controls:  this.equityForm.controls });
     if (!this.editMode) {
       if (this.modalMode) {
         this.formSubmitted.next(this.equityForm.value);
@@ -126,9 +179,11 @@ export class BeneficiaryManagementFormComponent implements OnInit {
     }
   }
 
-  openTransactions() {
-    const modal = this.transactionTypeModalService.open(
-      TransactionTypeConstants.TRANSACT_TYPE
+  openCountry() {    
+    const modal = this.countryService.openCountry(
+      this.storageService.getData("countries"),
+      countrySettings.viewTypes.NAME_ONLY,
+      {}
     );
     if (this.modalMode) {
       this.visibility = false;
@@ -138,9 +193,56 @@ export class BeneficiaryManagementFormComponent implements OnInit {
     }
   }
 
-  getTransactionTypeLabel(id: number): string | undefined{
-    return TransactionTypeConstants.TRANSACT_TYPE.find( (item) => item.id === id )?.name;
+  openOperator() {
+    const hideRecipient = true;
+    const modal = this.mobileOperatorService.open(
+      this.equityForm.get('mobileOperator')?.value,
+      hideRecipient
+    );
+    if (this.modalMode) {
+      this.visibility = false;
+      modal.afterClosed().subscribe(() => {
+        this.visibility = true;
+      });
+    }}
+
+  openTransactions() {
+    const modal = this.transactionTypeModalService.open(
+      TransactionTypeConstants.TransferType
+    );
+    if (this.modalMode) {
+      this.visibility = false;
+      modal.afterClosed().subscribe(() => {
+        this.visibility = true;
+      });
+    }
   }
+
+  openAccounts() {
+    const modal = this.transferFromAccountService.openTransferFromModal(
+      this.userAccounts
+    );
+    if (this.modalMode) {
+      this.visibility = false;
+      modal.afterClosed().subscribe(() => {
+        this.visibility = true;
+      });
+    }
+
+  }
+
+  toggleFav(): void {
+    this.equityForm.get('favourite')?.setValue(!this.equityForm.get('favourite')?.value);
+    this.equityForm.get('fromAccount')?.setValue(null)
+  }
+
+  getFieldValue(controlName: string, property: string | undefined): string {
+    if (!property)
+      return "";
+      const ctr = this.equityForm.get(controlName);
+    return ctr && ctr.value ? ctr.value[property] : '';
+  }
+
   ngOnDestroy(): void {
     this.equityForm.reset();
     SharedUtils.unSubscribe(this.subscriptions);

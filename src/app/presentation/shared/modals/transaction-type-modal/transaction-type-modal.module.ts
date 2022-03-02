@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { TransactionTypeModalComponent } from './transaction-type-modal.component';
 import { MatStyleModule } from 'src/app/mat-style.module';
 import { TransactionTypeListItemComponent } from './transaction-type-list-item/transaction-type-list-item.component';
-import { TransactionTypeModalService } from 'src/app/core/services/transaction-type-modal/transaction-type-modal.service';
+import { TransferTypeModalService } from 'src/app/core/services/transaction-type-modal/transaction-type-modal.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -14,13 +15,14 @@ import { TransactionTypeModalService } from 'src/app/core/services/transaction-t
   ],
   imports: [
     CommonModule,
-    MatStyleModule
+    MatStyleModule,
+    TranslateModule.forRoot()
   ],
   exports: [
     TransactionTypeModalComponent
   ],
   providers: [
-    TransactionTypeModalService
+    TransferTypeModalService
   ]
 })
 export class TransactionTypeModalModule { }
