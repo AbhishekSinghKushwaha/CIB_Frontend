@@ -225,8 +225,9 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
   }
 
   private completeLogout(): void {
+    const lang = this.storageService.getData('currentLanguage');
     this.clearUserData();
-    this.storageService.clearData();
+    this.storageService.setData('currentLanguage', lang);
     this.isLoggedIn.next(false);
     if (this.watchRouteChange) {
       this.watchRouteChange.unsubscribe();
