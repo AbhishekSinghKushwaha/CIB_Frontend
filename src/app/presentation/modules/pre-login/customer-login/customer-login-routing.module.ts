@@ -1,7 +1,6 @@
 import { LoginGuard } from 'src/app/core/utils/guards/login/login.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SecurityChallengeGuard } from 'src/app/core/utils/guards/security-challenge/security-challenge.guard';
 import { SecurityVerificationGuard } from 'src/app/core/utils/guards/security-verification/security-verification.guard';
 import { SmsVerificationGuard } from 'src/app/core/utils/guards/sms-verification/sms-verification.guard';
 import { CustomerLoginComponent } from './customer-login.component';
@@ -27,16 +26,16 @@ const routes: Routes = [
       {
         path: 'security-verification',
         loadChildren: (): Promise<any> =>
-          import('./security-verification/security-verification.module').then(
-            (m) => m.SecurityVerificationModule
+          import('./login-security-verification/login-security-verification.module').then(
+            (m) => m.LoginSecurityVerificationModule
           ),
         canActivate: [SecurityVerificationGuard],
       },
       {
         path: 'security-challenge',
         loadChildren: (): Promise<any> =>
-          import('./security-challenge/security-challenge.module').then(
-            (m) => m.SecurityChallengeModule
+          import('./login-security-challenge/login-security-challenge.module').then(
+            (m) => m.LoginSecurityChallengeModule
           ),
         // canActivate: [SecurityChallengeGuard],
       },
