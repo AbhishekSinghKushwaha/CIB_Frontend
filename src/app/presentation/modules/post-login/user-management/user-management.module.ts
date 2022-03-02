@@ -8,6 +8,7 @@ import { RolesConstants } from 'src/app/core/utils/constants/roles.constants';
 import { UserResolver } from './resolvers/user.resolver';
 import { UserListService } from './user-list/services/user-list.service';
 import { UserManagementSuccessService } from './services/user-management-success.service';
+import { UserAdministrationService } from './services/user-administration.service';
 
 @NgModule({
   declarations: [],
@@ -17,6 +18,13 @@ import { UserManagementSuccessService } from './services/user-management-success
     SharedComponentsModule,
     MatStyleModule,
   ],
-  providers: [RolesConstants, ProductsConstants, UserListService, UserResolver, UserManagementSuccessService],
+  providers: [
+    RolesConstants,
+    ProductsConstants,
+    UserListService,
+    UserResolver,
+    UserManagementSuccessService,
+    UserAdministrationService,
+  ],
 })
 export class UserManagementModule {}

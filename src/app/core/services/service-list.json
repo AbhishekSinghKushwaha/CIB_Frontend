@@ -58,6 +58,12 @@
     "edit": "/cibpaymentservice-v1/api/v1/Beneficiary/EditBeneficiary",
     "remove": "/cibpaymentservice-v1/api/v1/Beneficiary/RemoveBeneficiary",    
     "getAll": "/cibpaymentservice-v1/api/v1/Beneficiary/GetBeneficiaries"
+  },
+  "userAdministration": {
+    "getUsers": "/cibuseraccess-v1/api/UserAdministration/users",
+    "changeStatus": "/cibuseraccess-v1/api/UserAdministration/disable-enable",
+    "delete": "/cibuseraccess-v1/api/UserAdministration/delete",
+    "getUserById": "/cibuseraccess-v1/api/Auth/user/single-user"
   }
 
 }
