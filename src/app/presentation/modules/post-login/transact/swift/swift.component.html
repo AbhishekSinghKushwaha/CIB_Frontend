@@ -101,7 +101,7 @@
             <div class="col-md-6">
               <app-payment-category
                 [parentForm]="swiftTransferForm"
-                label="Payment Category"
+                label="Transaction BCC Code"
                 fieldName="paymentCategory"
                 formControlName="paymentCategory"
                 placeholder="Select a Payment Category"
@@ -119,7 +119,13 @@
             </div>
           </div>
           <div class="mt-4">
-            <button mat-raised-button color="primary">Send money</button>
+            <button
+              mat-raised-button
+              color="primary"
+              [disabled]="swiftTransferForm.invalid"
+            >
+              Send money
+            </button>
           </div>
         </form>
       </div>
