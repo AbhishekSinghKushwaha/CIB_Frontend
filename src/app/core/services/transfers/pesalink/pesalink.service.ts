@@ -25,8 +25,8 @@ export class PesalinkService {
     );
   }
 
-  nameCheck(bankPayload: any): Observable<any> {
-    return this.http.post(environment.apiUrl + urlList.pesalink.nameCheck, bankPayload);
+  nameEnquiry(bankPayload: any): Observable<any> {
+    return this.http.post(environment.apiUrl + urlList.transfers.getAccountDetails, bankPayload);
   }
 
   phoneAccountsInquiry(phonePayload: any): Observable<any> {

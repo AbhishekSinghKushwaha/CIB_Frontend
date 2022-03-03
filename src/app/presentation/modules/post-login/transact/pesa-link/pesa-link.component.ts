@@ -86,7 +86,7 @@ export class PesaLinkComponent implements OnInit {
       currency: this.getForm.amount.value.currency,
       destinationAccount: this.getForm.sendTo.value.accountNumber,
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
-      transferType: '1',
+      transferType: '7',
     };
     this.pesalinkService
     .getTransferCharges(payload)
@@ -146,7 +146,7 @@ export class PesaLinkComponent implements OnInit {
         endDate: this.getForm.schedulePayment.value.endDate.toISOString(),
       },
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
-      transferType: '1',
+      transferType: '7',
     };
     if (this.pesalinkTransferForm.valid) {
       this.pesalinkService.sendViaPesalink(payload).subscribe(

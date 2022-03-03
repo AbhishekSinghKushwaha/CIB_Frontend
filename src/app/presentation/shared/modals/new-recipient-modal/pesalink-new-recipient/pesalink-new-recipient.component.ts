@@ -24,7 +24,7 @@ export class PesalinkNewRecipientComponent implements OnInit {
     private readonly newRecipientService: NewRecipientService,
     private readonly dialogRef: MatDialogRef<PesalinkNewRecipientComponent>,
     private dialog: MatDialog,
-    private readonly pesalinkService: PesalinkService
+    private readonly pesalinkService: PesalinkService,
   ) {
     this.setAccount = this.newRecipientService.default;
     this.newRecipientService.data.subscribe((x) => (this.setAccount = x));
@@ -47,40 +47,29 @@ export class PesalinkNewRecipientComponent implements OnInit {
     });
   }
 
-  // submit() {
-  //   this.mode === "bank"
-  //     ?this.newRecipientService.set(this.selectBankForm.getRawValue())
-  //     : this.newRecipientService.set(this.phoneLinkedForm.getRawValue());
-  //     this.dialog.closeAll();
-  // }
   submit() {
-    const bankPayload = {
-      reference: "5B67CC0380",
-      destinationAccount: this.selectBankForm.controls.accountNumber.value,
-      destinationBankCode: "54",
-      countryCode: "KE",
-      customerId: "1234",
-      bankId: "54"
-    };
-
     const phonePayload = {
       receiverPhone: this.phoneLinkedForm.controls.phoneNumber.value,
-      reference: "5B67CC0380",
-      customerId: "1234",
+      reference: "string",
+      customerId: "string",
       countryCode: "KE",
-      destinationBankCode:"54",
+      destinationBankCode: this.phoneLinkedForm.controls.bank.value.bankCode,
     }
+    const payload = {
+      accountNumber: this.selectBankForm.controls.accountNumber.value,
+      bankCode: '54',
+    };
     this.mode === "bank"
       ? 
-      this.pesalinkService.nameCheck(bankPayload).subscribe((res) => {
+      this.pesalinkService.nameEnquiry(payload).subscribe((res) => {
         if (res.status) {
           this.setAccount = {
-            accountNumber: this.selectBankForm.controls.accountNumber.value,
-            balance: 1000000, // TODO:: Work on the balance
-            accountName: res.data.receiverName,
+            accountNumber: res.data.accountNumber,
+            accountName: res.data.accountName,
+            currency: res.data.currency,
+            bank: this.selectBankForm.controls.bank.value,
           };
           this.newRecipientService.set(this.setAccount);
-          // this.newRecipientService.set(this.selectBankForm.getRawValue())
           this.dialog.closeAll();
         } else {
           alert(res.message);
@@ -90,13 +79,15 @@ export class PesalinkNewRecipientComponent implements OnInit {
       : this.pesalinkService.phoneAccountsInquiry(phonePayload).subscribe((res) => {
         if (res.status) {
           this.setAccount = {
-            accountNumber: this.phoneLinkedForm.controls.phoneNumber.value,
-            balance: 1000000, // TODO:: Work on the balance
-            currency: res.data.currency,
-            accountName: res.data.accountName,
+            accountName: res.data.receiverBanks[0].accountAlias,
+            // accountNumber: res.data.accountNumber,
+            // currency: res.data.currency,
+            accountNumber: "1120161406205", // TODO:: Work on the accountNumber
+            currency: "KES", // TODO:: Work on the currency
+            phoneNumber: res.data.receiverPhone,
+            bank: this.phoneLinkedForm.controls.bank.value
           };
           this.newRecipientService.set(this.setAccount);
-          // this.newRecipientService.set(this.phoneLinkedForm.getRawValue());
           this.dialog.closeAll();
         } else {
           alert(res.message);

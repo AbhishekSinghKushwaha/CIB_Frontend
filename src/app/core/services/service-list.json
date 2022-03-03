@@ -62,9 +62,6 @@
   },
   "pesalink": {
     "phoneNumber": "/cibpaymentservice-v1/api/v1/Transfer/PesalLink/",
-    "nameCheck": "/cibpaymentservice-v1/api/v1/Transfer/PesalLink/namecheck",
-    "phoneAccountsInquiry": "/cibpaymentservice-v1/api/v1/Transfer/PesalLink/phoneAccountsInquiry",
-    "register": "/cibpaymentservice-v1/api/v1/Transfer/PesalLink/register",
-    "transactionStatus": "/cibpaymentservice-v1/api/v1/Transfer/PesalLink/transactionStatus"
+    "phoneAccountsInquiry": "/cibpaymentservice-v1/api/v1/Transfer/PesalLink/phoneAccountsInquiry"
   }
 }

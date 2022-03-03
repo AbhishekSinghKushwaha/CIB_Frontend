@@ -36,6 +36,7 @@ export class CountryService {
   }
 
   closeCountryModal(data: CountryModel): void {
+    this.countryData = data;
     this.selectedCountry.next(this.countryData);
     this.countryModalRef.close(data);
   }
