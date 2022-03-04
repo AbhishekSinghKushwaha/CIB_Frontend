@@ -12,6 +12,7 @@ import { UserListActionsModalComponent } from './components/user-list-actions-mo
 import { ConfirmDialogModule } from 'src/app/presentation/shared/modals/confirm-dialog/confirm-dialog.module';
 import { PromptModalModule } from 'src/app/presentation/shared/modals/prompt-modal/prompt-modal.module';
 import { ConfirmationModalModule } from 'src/app/presentation/shared/modals/confirmation-modal/confirmation-modal.module';
+import { LanguageTranslateModule } from 'src/app/translate.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ConfirmationModalModule } from 'src/app/presentation/shared/modals/conf
     ReactiveFormsModule,
     ConfirmDialogModule,
     PromptModalModule,
-    ConfirmationModalModule
+    ConfirmationModalModule,
+    LanguageTranslateModule.forRoot()
   ],
   providers: [RolesConstants, ProductsConstants],
 })

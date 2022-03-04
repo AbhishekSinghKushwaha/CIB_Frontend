@@ -12,6 +12,7 @@ import { TransactionTypeConstants } from 'src/app/core/utils/constants/transacti
 import { MatDialog } from '@angular/material/dialog';
 import { UserListSearchModalComponent } from '../../user-management/user-list/components/user-list-search-modal/user-list-search-modal.component';
 import { take } from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-beneficiary-management',
   templateUrl: './beneficiary-management.component.html',
@@ -35,13 +36,17 @@ import { take } from 'rxjs/operators';
   ]
 })
 export class BeneficiaryManagementComponent implements OnInit {
+  
   displayedColumns: string[] = ['select', 'name', 'transactionType', 'accountNumber', 'bank', 'edit'];
+  filterByColumns: string[] = ['name', 'accountNumber', 'transferType'];
+
   dataSource = new MatTableDataSource<BeneficiaryModel>([]);
   beneficiaries: BeneficiaryModel[] = [];
   selection = new SelectionModel<BeneficiaryModel>(true, []);
   alertVisible: boolean;
   alertMessage: string | undefined;
   loaded: boolean;
+  searchControl: FormControl = new FormControl({ value: '', disabled: true });
 
   constructor(
     private readonly beneficiaryManagementService: BeneficiaryManagementService,
@@ -114,8 +119,17 @@ export class BeneficiaryManagementComponent implements OnInit {
   openFilterModal() {
     this.dialog
       .open<UserListSearchModalComponent>(UserListSearchModalComponent, {
-        data: { users: this.beneficiaryManagementService.beneficiaries },
-      })
+        data: { collection: this.beneficiaryManagementService.beneficiaries, 
+          title: 'Beneficiary search',
+          copy: 'Search for a beneficiary by Name, Account number, or Transfer Type.',
+          displayedColumns: [
+              'name',
+              'accountNumber',
+              'transferType',
+              'favourite',
+            ],
+          filterByColumns: this.filterByColumns
+          }})
       .afterClosed()
       .pipe(take(1))
       .subscribe((filter: any) => {

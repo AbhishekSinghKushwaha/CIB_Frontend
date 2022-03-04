@@ -12,5 +12,15 @@
     "MOBILE_MONEY": "Mobile Money",
     "BUY_AIRTIME": "Buy Airtime",
     "PESALINK": "Pesalink",
-    "INTER_COUNTRY_TRANSFER": "Inter Country Transfer"
+    "INTER_COUNTRY_TRANSFER": "Inter Country Transfer",
+    "SEARCH_MODAL": {
+        "ID": "ID number",
+        "NAME": "Name",
+        "PHONE": "Phone",
+        "EMAIL": "Email",
+        "ACCOUNTNUMBER": "Account number",
+        "STATUS": "Status",
+        "TRANSFERTYPE": "Transfer type",
+        "FAVOURITE": "Favourite"
+    }
 }
