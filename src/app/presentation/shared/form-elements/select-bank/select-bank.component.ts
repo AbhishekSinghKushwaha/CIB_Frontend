@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input, OnInit } from "@angular/core";
 import { FormGroup, FormControl, NG_VALUE_ACCESSOR } from "@angular/forms";
-import { BankModel } from "src/app/core/domain/bank.model";
+import { BankModel, CountryModel } from "src/app/core/domain/bank.model";
 import { FromAccount } from "src/app/core/domain/transfer.models";
 import { DataLookupService } from "src/app/core/services/data-lookup/data-lookup.service";
 import { BankService } from "src/app/core/services/modal-services/bank.service";
@@ -49,6 +49,7 @@ export class SelectBankComponent implements OnInit {
   get formField(): FormControl {
     return this.parentForm?.get(this.fieldName) as FormControl;
   }
+
   constructor(
     private readonly selectBankService: BankService,
     private readonly countryService: CountryService,
@@ -63,11 +64,6 @@ export class SelectBankComponent implements OnInit {
   }
 
   private eventsSubscriptions(): void {
-    this.countryService.selectedCountry.subscribe((x) => {
-      const country = x;
-
-      this.updateBanks(country.countryCode);
-    });
     this.selectBankService.selected.subscribe((response) => {
       this.parentForm.controls.bank.setValue(response);
     });
@@ -95,15 +91,6 @@ export class SelectBankComponent implements OnInit {
   }
 
   openBankSelectionModal() {
-    this.selectBankService.open(this.storageService.getData("banks"));
-  }
-
-  updateBanks(countryCode: string) {
-    this.dataLookupService.getBanks(countryCode).subscribe((res) => {
-      if (res.status) {
-        this.storageService.setData("banks", res.data);
-        // this.banks = res.data;
-      }
-    });
+    this.selectBankService.open(this.parentForm.controls.country.value);
   }
 }

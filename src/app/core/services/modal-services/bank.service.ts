@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { Observable, Subject } from 'rxjs';
-import { BankModel } from '../../domain/bank.model';
-import { BankModalComponent } from '../../../presentation/shared/modals/bank-modal/bank-modal.component';
+import { Injectable } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
+import { Observable, Subject } from "rxjs";
+import { BankModel, CountryModel } from "../../domain/bank.model";
+import { BankModalComponent } from "../../../presentation/shared/modals/bank-modal/bank-modal.component";
 
 @Injectable()
 export class BankService {
@@ -11,11 +11,11 @@ export class BankService {
 
   constructor(private readonly dialog: MatDialog) {}
 
-  open(data: BankModel[]) {
-    return this.dialog.open<BankModalComponent, BankModel[]>(
+  open(data: CountryModel) {
+    return this.dialog.open<BankModalComponent, CountryModel>(
       BankModalComponent,
       {
-        maxWidth: '22vw',
+        maxWidth: "22vw",
         disableClose: true,
         data,
       }

@@ -1,11 +1,11 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { SwiftModalsService } from 'src/app/core/services/modal-services/swift-modals.service';
+import { Component, forwardRef, Input, OnInit } from "@angular/core";
+import { FormControl, FormGroup, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { SwiftModalsService } from "src/app/core/services/modal-services/swift-modals.service";
 
 @Component({
-  selector: 'app-payment-category',
-  templateUrl: './payment-category.component.html',
-  styleUrls: ['./payment-category.component.scss'],
+  selector: "app-payment-category",
+  templateUrl: "./payment-category.component.html",
+  styleUrls: ["./payment-category.component.scss"],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
