@@ -58,6 +58,8 @@ export class BeneficiaryManagementComponent implements OnInit {
   searchControl: FormControl = new FormControl({ value: "", disabled: true });
   transferType = TransactionTypeConstants.TransferType;
 
+  favouriteMode: boolean;
+
   constructor(
     private readonly beneficiaryManagementService: BeneficiaryManagementService,
     private readonly dialogService: ConfirmDialogService,
@@ -162,6 +164,15 @@ export class BeneficiaryManagementComponent implements OnInit {
             this.beneficiaryManagementService.beneficiaries;
         }
       });
+  }
+
+  toggleFavourites() {
+    this.favouriteMode = !this.favouriteMode;
+    if (this.favouriteMode) {
+      this.beneficiaryManagementService.getFavourites();
+    } else {
+      this.beneficiaryManagementService.getAll();
+    }
   }
 
   @confirmModal({

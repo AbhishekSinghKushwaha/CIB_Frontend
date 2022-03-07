@@ -13,6 +13,7 @@ import { ConfirmDialogModule } from 'src/app/presentation/shared/modals/confirm-
 import { PromptModalModule } from 'src/app/presentation/shared/modals/prompt-modal/prompt-modal.module';
 import { ConfirmationModalModule } from 'src/app/presentation/shared/modals/confirmation-modal/confirmation-modal.module';
 import { LanguageTranslateModule } from 'src/app/translate.module';
+import { PipesModule } from 'src/app/presentation/shared/pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { LanguageTranslateModule } from 'src/app/translate.module';
     ConfirmDialogModule,
     PromptModalModule,
     ConfirmationModalModule,
-    LanguageTranslateModule.forRoot()
+    LanguageTranslateModule.forRoot(),
+    PipesModule
   ],
   providers: [RolesConstants, ProductsConstants],
 })

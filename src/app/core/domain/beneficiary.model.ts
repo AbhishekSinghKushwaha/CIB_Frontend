@@ -19,7 +19,7 @@ export interface BeneficiaryModel {
   postalAddress?: string;
   transferType: string;
   favourite: boolean;
-  fromAccount: FromAccount;
+  fromAccount?: FromAccount;
 }
 
 export interface BenefiaryTypeFieldMetadataInterface {
@@ -30,6 +30,7 @@ export interface BenefiaryTypeFieldMetadataInterface {
   valueFromField?: string;
   onclick?: () => void | null;
   required?: boolean;
+  acceptSearch?: boolean;
 }
 
 export interface BeneficiaryTypeFieldInterface {

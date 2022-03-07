@@ -22,7 +22,7 @@ export class TransferTypeModalService {
     );
   }
 
-  get default(): TransferTypeDTO {
+  get default(): any {
     return this.data;
   }
 

@@ -37,11 +37,15 @@ export class UserListSearchModalComponent
 
   displayedColumns: string[];
   filterByColumns: string[];
+  alternativeColumns: Map<string,string[]>;
+
   title: string;
+  copy: string;
 
-  dataSource: MatTableDataSource<User>;
-  selection = new SelectionModel<User>(true, []);
+  dataSource: MatTableDataSource<any>;
+  selection = new SelectionModel<any>(true, []);
 
+  // this dictionary includes a reference to each foreign key dictionary 
   dictionary: Map<string,any> = new Map([ ['transferType', TransferType]]);
   
   constructor(
@@ -52,7 +56,9 @@ export class UserListSearchModalComponent
     this.dataSource = new MatTableDataSource<User>(data.collection);
     this.displayedColumns = data.displayedColumns;
     this.filterByColumns = data.filterByColumns
+    this.alternativeColumns = data.alternativeColumns;
     this.title = data.title;
+    this.copy = data.copy;
   }
 
   ngOnInit(): void {
@@ -94,8 +100,10 @@ export class UserListSearchModalComponent
     const searchTerm = this.searchForm.controls['term'].value
       .trim()
       .toLowerCase();
-    const searchCriteriaAndTerm = `${searchCriteria}:${searchTerm}`;
-
+      
+    let searchCriteriaAndTerm = `${searchCriteria}:${searchTerm}`;
+    
+    this.dataSource.filterPredicate = this.getFilterPredicate(this.alternativeColumns?.get(searchCriteria));
     this.dataSource.filter = searchCriteriaAndTerm;
   }
 
@@ -127,6 +135,12 @@ export class UserListSearchModalComponent
     }
   }
 
+  setTerm(criteria: string): void {
+    setTimeout(() => {
+      this.searchForm.get('term')?.setValue(criteria);
+    }, 0)    
+  }
+
   getTranslation(key: string | unknown): string {
     return this.translateService.instant(key as string);
   }
@@ -149,8 +163,8 @@ export class UserListSearchModalComponent
     );
   }
 
-  private getFilterPredicate(): (user: any, filter: string) => boolean {
-    return (user: any, filter: string) => {
+  private getFilterPredicate(multipleSearchCriteria?: string[]): (item: any, filter: string) => boolean {
+    return (item: any, filter: string) => {
       const parts: string[] = filter.split(':');
       const searchCriteria: string = parts.shift() || '';
       const searchTerm: string = parts.join(':');
@@ -159,13 +173,21 @@ export class UserListSearchModalComponent
         return false;
       }
 
-      if (Object.getOwnPropertyNames(user).includes(searchCriteria)) {
-        const propertyValue: string = user[searchCriteria] + '';
+      let propertyValue: string = item[searchCriteria] + '';
 
-        return propertyValue.toLowerCase().includes(searchTerm);
+      let rs = false;
+          rs = propertyValue.toLowerCase().includes(searchTerm);
+
+      if (multipleSearchCriteria) {
+        multipleSearchCriteria.forEach( (additionalSearchCriteria) => {
+          propertyValue = item[additionalSearchCriteria] + '';
+          if (propertyValue.toLowerCase().includes(searchTerm)) {
+            rs = true;
+          }
+        })
       }
 
-      return false;
+      return rs;
     };
   }
 }

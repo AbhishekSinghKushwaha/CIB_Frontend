@@ -6,6 +6,8 @@ import { SelectAccountModel } from "./../../domain/select-account.model";
 import { BuyGoodsFavouriteModel } from "./../../domain/buy-goods-favourites.model";
 import { UserListModel, UserModel } from "../../domain/user.model";
 import { CompanyListModel } from "../../domain/company.model";
+import { BeneficiaryModel } from "../../domain/beneficiary.model";
+import { TransferType } from "./transaction-type.constants";
 
 const accounts: SelectAccountModel[] = [
   {

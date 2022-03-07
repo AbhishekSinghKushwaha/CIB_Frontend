@@ -25,7 +25,7 @@ export interface BeneficiaryActionResult {
 export class BeneficiaryManagementService {
   formData = new Subject<BeneficiaryActionResult>();
 
-  beneficiaries: BeneficiaryModel[] = [];
+  beneficiaries: BeneficiaryModel[];
   beneficiaryEdit: BeneficiaryModel | undefined;
 
   constructor(
@@ -36,7 +36,7 @@ export class BeneficiaryManagementService {
   ) {
     this.authService.IsLoggedIn.subscribe((loggedIn) => {
       if (!loggedIn) {
-        this.beneficiaries.splice(0);
+        //  this.beneficiaries.splice(0);
       }
     });
   }
