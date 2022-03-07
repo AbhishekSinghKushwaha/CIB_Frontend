@@ -54,17 +54,3 @@ export interface MobileOperator {
   serviceIconPath?: string; // i.e Mpesa Icon logo
   operatorCountry?: string;
 }
-
-export interface TransferTypeDTO {
-  OWN_EQUITY: string,
-  INTRA_BANK: string,
-  INTER_BANK: string,
-  EFT: string,
-  SWIFT: string,
-  RTGS: string,
-  BUY_GOODS: string,
-  MOBILE_MONEY: string,
-  BUY_AIRTIME: string,
-  PESALINK: string,
-  INTER_COUNTRY_TRANSFER: string
-}

@@ -8,11 +8,11 @@ import { BeneficiaryActionResultType, BeneficiaryManagementService } from 'src/a
 import { Router } from '@angular/router';
 import { ConfirmDialogService } from 'src/app/core/services/confirm-dialog/confirm-dialog.service';
 import { confirmModal } from 'src/app/presentation/shared/decorators/confirm-dialog.decorator';
-import { TransactionTypeConstants } from 'src/app/core/utils/constants/transaction-type.constants';
 import { MatDialog } from '@angular/material/dialog';
 import { UserListSearchModalComponent } from '../../user-management/user-list/components/user-list-search-modal/user-list-search-modal.component';
 import { take } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-beneficiary-management',
   templateUrl: './beneficiary-management.component.html',
@@ -37,8 +37,9 @@ import { FormControl } from '@angular/forms';
 })
 export class BeneficiaryManagementComponent implements OnInit {
   
-  displayedColumns: string[] = ['select', 'name', 'transactionType', 'accountNumber', 'bank', 'edit'];
-  filterByColumns: string[] = ['name', 'accountNumber', 'transferType'];
+  displayedColumns: string[] = ['select', 'fullName', 'transferType', 'accountNumber', 'favourite', 'edit'];
+  filterByColumns: string[] = ['fullName', 'accountNumber', 'transferType'];
+  alternativeColumns: Map<string,string[]> = new Map([['fullName', ['accountName','firstName','secondName']]]);
 
   dataSource = new MatTableDataSource<BeneficiaryModel>([]);
   beneficiaries: BeneficiaryModel[] = [];
@@ -48,9 +49,12 @@ export class BeneficiaryManagementComponent implements OnInit {
   loaded: boolean;
   searchControl: FormControl = new FormControl({ value: '', disabled: true });
 
+  favouriteMode: boolean;
+
   constructor(
     private readonly beneficiaryManagementService: BeneficiaryManagementService,
     private readonly dialogService: ConfirmDialogService,    
+    private readonly translateService: TranslateService,
     private readonly dialog: MatDialog,
     private readonly router: Router) {
   }
@@ -86,17 +90,15 @@ export class BeneficiaryManagementComponent implements OnInit {
   showAlert(type: BeneficiaryActionResultType): void {
 
     const messages: {type:BeneficiaryActionResultType, message:string}[] = [
-                      {type: BeneficiaryActionResultType.ADD, message: 'Your beneficiary has been added successfully'},
-                      {type: BeneficiaryActionResultType.DELETE, message: 'Your beneficiary has been removed successfully'},
-                      {type: BeneficiaryActionResultType.EDIT, message: 'Your beneficiary has been edited successfully'}
+                      {type: BeneficiaryActionResultType.ADD, message: this.translateService.instant('SUCCESS_MESSAGE_ADD')},
+                      {type: BeneficiaryActionResultType.DELETE, message: this.translateService.instant('SUCCESS_MESSAGE_DELETE')},
+                      {type: BeneficiaryActionResultType.EDIT, message: this.translateService.instant('SUCCESS_MESSAGE_EDIT')}
                     ]
 
     if (this.alertVisible) {
       return;
     }
-
-    this.alertMessage = messages.find( (item) => item.type === type)?.message;
-    
+    console.log('alert',type)
     if (!!this.alertMessage) {
       this.alertVisible = true;
       setTimeout(() => this.alertVisible = false, 2500)
@@ -119,16 +121,18 @@ export class BeneficiaryManagementComponent implements OnInit {
   openFilterModal() {
     this.dialog
       .open<UserListSearchModalComponent>(UserListSearchModalComponent, {
-        data: { collection: this.beneficiaryManagementService.beneficiaries, 
-          title: 'Beneficiary search',
-          copy: 'Search for a beneficiary by Name, Account number, or Transfer Type.',
+        data: { collection: this.dataSource.data, 
+          title: this.translateService.instant('SEARCH_TITLE'),
+          copy: this.translateService.instant('SEARCH_COPY'),
           displayedColumns: [
-              'name',
+              'select',
+              'fullName',
               'accountNumber',
               'transferType',
-              'favourite',
+              
             ],
-          filterByColumns: this.filterByColumns
+          filterByColumns: this.filterByColumns,
+          alternativeColumns: this.alternativeColumns
           }})
       .afterClosed()
       .pipe(take(1))
@@ -139,6 +143,15 @@ export class BeneficiaryManagementComponent implements OnInit {
           this.dataSource.data = this.beneficiaryManagementService.beneficiaries;
         }
       });
+  }
+
+  toggleFavourites() {
+    this.favouriteMode = !this.favouriteMode;
+    if (this.favouriteMode) {
+      this.beneficiaryManagementService.getFavourites();
+    } else {
+      this.beneficiaryManagementService.getAll();
+    }
   }
 
   @confirmModal({

@@ -18,6 +18,7 @@ import { MobileOperatorService } from 'src/app/core/services/modal-services/mobi
 import { TransferFromService } from 'src/app/core/services/modal-services/transfer-from.service';
 import { SharedDataService } from 'src/app/core/services/shared-data/shared-data.service';
 import { FromAccount } from 'src/app/core/domain/transfer.models';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-beneficiary-management-form',
@@ -74,7 +75,15 @@ export class BeneficiaryManagementFormComponent implements OnInit {
   }
 
   getEditData() {
-    this.editData = this.beneficiaryManagementService.beneficiaryEdit;
+    if (this.beneficiaryManagementService.beneficiaryEdit) {
+      this.editData = this.beneficiaryManagementService.beneficiaryEdit;
+    } else {
+      const sub = this.beneficiaryManagementService.formData.pipe(take(1)).subscribe(
+        (beneficiaryList) => {
+          this.editData = beneficiaryList.data.find( (item) => item.id === this.id);
+        })      
+      this.beneficiaryManagementService.getAll()
+    }
   }
 
   private eventsSubscriptions(): void {
@@ -115,11 +124,12 @@ export class BeneficiaryManagementFormComponent implements OnInit {
     this.equityForm = new FormGroup({
       id: new FormControl(this.editData?.id),
       favourite: new FormControl(this.editData?.favourite || false),
-      fromAccount: new FormControl(this.editData?.fromAccount),
       transferType: new FormControl(this.editData?.transferType || "2", [Validators.required]),    
       country: new FormControl(this.editData?.country)
     });
-
+    if (this.editData?.favourite) {
+      this.addFromAccountControl();
+    }
   }
 
   private populateForm(): void {
@@ -231,15 +241,29 @@ export class BeneficiaryManagementFormComponent implements OnInit {
 
   }
 
+  addFromAccountControl(): void {
+    this.equityForm.addControl('fromAccount', new FormControl(this.editData ? this.editData.fromAccount : '', Validators.required))
+  }
+  removeFromAccountControl(): void {
+    this.equityForm.removeControl('fromAccount');
+  }
+
   toggleFav(): void {
     this.equityForm.get('favourite')?.setValue(!this.equityForm.get('favourite')?.value);
-    this.equityForm.get('fromAccount')?.setValue(null)
+
+    if (this.equityForm.get('favourite')?.value) {
+      this.addFromAccountControl();
+    } else {
+      this.removeFromAccountControl();
+    }
+    //this.equityForm.get('fromAccount')?.setValue(null)
   }
 
   getFieldValue(controlName: string, property: string | undefined): string {
     if (!property)
       return "";
       const ctr = this.equityForm.get(controlName);
+      
     return ctr && ctr.value ? ctr.value[property] : '';
   }
 

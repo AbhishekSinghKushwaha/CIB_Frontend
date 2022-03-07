@@ -1,6 +1,5 @@
-import { TransferTypeDTO } from "../../domain/transfer.models";
 
-export const TransferType: TransferTypeDTO = {
+export const TransferType = {
   OWN_EQUITY: "1",
   INTRA_BANK: "2",
   INTER_BANK: "3",

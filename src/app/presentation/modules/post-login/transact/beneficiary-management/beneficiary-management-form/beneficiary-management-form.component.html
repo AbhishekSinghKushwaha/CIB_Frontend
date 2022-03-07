@@ -35,7 +35,6 @@
                   type="text"
                   placeholder="Select a transfer type"
                   [readonly]="true"
-                  formControlName="transferType"
                   value="{{equityForm.get('transferType')?.value | transferTypeLabelPipe | translate}}"
                   placeholder="Select a transfer type"
                 />
@@ -76,8 +75,7 @@
                   matInput
                   type="text"
                   readonly
-                  placeholder="Select {{field.metadata.label}}"
-                  [formControlName]="field.metadata.formControlName"
+                  placeholder="Select {{field.metadata.label}}"                  
                   [value]="getFieldValue(field.metadata.formControlName, field.metadata.valueFromField)"
                 />
                 <button
@@ -98,19 +96,6 @@
                 label="Mobile Number"
               ></app-phone-number-input>
               
-              <mat-form-field *ngSwitchCase="'mobile--old'"
-                appearance="standard"
-                style="width: 100%"
-                floatLabel="always"
-              >
-                <mat-label>{{field.metadata.label}}</mat-label>
-                <input
-                  matInput
-                  type="text"
-                  placeholder="Enter {{field.metadata.label}}"
-                  [formControlName]="field.metadata.formControlName"
-                />
-              </mat-form-field>
             </div>    
             
             <div class="row divider"></div>

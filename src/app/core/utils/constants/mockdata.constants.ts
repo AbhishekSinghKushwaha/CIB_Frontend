@@ -7,6 +7,8 @@ import { BuyGoodsFavouriteModel } from "./../../domain/buy-goods-favourites.mode
 import { UserListModel, UserModel } from "../../domain/user.model";
 import { MobileOperator } from "../../domain/transfer.models";
 import { CompanyListModel } from "../../domain/company.model";
+import { BeneficiaryModel } from "../../domain/beneficiary.model";
+import { TransferType } from "./transaction-type.constants";
 
 const accounts: SelectAccountModel[] = [
   {
@@ -686,6 +688,53 @@ const mobileOperators: MobileOperator[] = [
   },
 ];
 
+const beneficiaryList: BeneficiaryModel[] = [
+  {
+    id: 1,
+    accountNumber: "32323232",
+    favourite: false,
+    transferType: TransferType.INTRA_BANK,
+    fullName: "Test user 1",
+    country: {
+        "countryCode": "KE",
+        "countryName": "Kenya",
+        "currency": "KES",
+        "currencySymbol": "Sh",
+        "nationality": "Kenyan",
+        "dialCode": "254",
+        "flagPath": "https://oneequity.blob.core.windows.net/assets/visuals/flags/kenya.svg",
+        "operatingCountry": true,
+        "countryCode3Chars": "KEN"
+    }
+  },
+  {
+    id: 2,
+    accountNumber: "44444432",
+    favourite: false,
+    transferType: TransferType.INTRA_BANK,
+    fullName: "Test user 2",
+    country: {
+        "countryCode": "KE",
+        "countryName": "Kenya",
+        "currency": "KES",
+        "currencySymbol": "Sh",
+        "nationality": "Kenyan",
+        "dialCode": "254",
+        "flagPath": "https://oneequity.blob.core.windows.net/assets/visuals/flags/kenya.svg",
+        "operatingCountry": true,
+        "countryCode3Chars": "KEN"
+    }
+  },
+  {
+    id: 3,
+    accountNumber: "44444432",
+    favourite: false,
+    transferType: TransferType.RTGS,
+    accountName: "Test user 3",
+    bank: banks[0]
+  },
+]
+
 export const mockData = {
   accounts,
   favourites,
@@ -697,4 +746,5 @@ export const mockData = {
   mobileOperators,
   userList,
   companyList,
+  beneficiaryList
 };

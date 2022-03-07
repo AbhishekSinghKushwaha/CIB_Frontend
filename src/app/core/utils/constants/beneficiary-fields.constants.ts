@@ -18,6 +18,11 @@ export class BeneficiaryField implements BeneficiaryTypeFieldInterface {
         return this;
     }
 
+    canSearchBy(bool: any): BeneficiaryField {
+        this.metadata.acceptSearch = bool;
+        return this;
+    }
+
 }
 
 export class BeneficiaryFieldFullName extends BeneficiaryField {
@@ -324,8 +329,8 @@ export class BeneficiaryFieldTillName extends BeneficiaryField {
 
     constructor(){
         super({
-            controlType:"select",
-            dataType:"object",
+            controlType:"input",
+            dataType:"string",
             formControlName:"tillName",
             label: "Till name",
         });
@@ -372,14 +377,14 @@ export const BeneficiaryTypeFieldsDict: Map<string,BeneficiaryField[]> = new Map
     [
         TransactionTypeConstants.TransferType.INTRA_BANK,
         [
-            new BeneficiaryFieldFullName().setRequired(true), 
+            new BeneficiaryFieldFullName().setRequired(true).canSearchBy(true), 
             new BeneficiaryFieldCountry().setRequired(true), 
-            new BeneficiaryFieldAccountNumber().setRequired(true)]
+            new BeneficiaryFieldAccountNumber().setRequired(true).canSearchBy(true)]
     ],
     [
         TransactionTypeConstants.TransferType.EFT,
         [
-            new BeneficiaryFieldFullName().setRequired(true), 
+            new BeneficiaryFieldFullName().setRequired(true).canSearchBy(true), 
             new BeneficiaryFieldBank().setRequired(true), 
             new BeneficiaryFieldAccountName().setRequired(true)]
     ],
@@ -388,9 +393,9 @@ export const BeneficiaryTypeFieldsDict: Map<string,BeneficiaryField[]> = new Map
         [
             new BeneficiaryFieldCountry().setRequired(true), 
             new BeneficiaryFieldBank().setRequired(true), 
-            new BeneficiaryFieldFirstName().setRequired(true), 
-            new BeneficiaryFieldLastName().setRequired(true), 
-            new BeneficiaryFieldAccountNumber().setRequired(true), 
+            new BeneficiaryFieldFirstName().setRequired(true).canSearchBy(true), 
+            new BeneficiaryFieldLastName().setRequired(true).canSearchBy(true), 
+            new BeneficiaryFieldAccountNumber().setRequired(true).canSearchBy(true), 
             new BeneficiaryFieldMobilePhone().setRequired(true), 
             new BeneficiaryFieldIBAN().setRequired(true), 
             new BeneficiaryFieldStreetAddress().setRequired(true), 
@@ -401,43 +406,43 @@ export const BeneficiaryTypeFieldsDict: Map<string,BeneficiaryField[]> = new Map
         TransactionTypeConstants.TransferType.RTGS,
         [
             new BeneficiaryFieldBank().setRequired(true), 
-            new BeneficiaryFieldAccountName().setRequired(true),    
-            new BeneficiaryFieldAccountNumber().setRequired(true) ]
+            new BeneficiaryFieldAccountName().setRequired(true).canSearchBy(true),    
+            new BeneficiaryFieldAccountNumber().setRequired(true).canSearchBy(true) ]
     ],
     [
         TransactionTypeConstants.TransferType.BUY_GOODS,
         [
-            new BeneficiaryFieldTillName().setRequired(true), 
-            new BeneficiaryFieldTillNumber().setRequired(true) ]
+            new BeneficiaryFieldTillName().setRequired(true).canSearchBy(true), 
+            new BeneficiaryFieldTillNumber().setRequired(true).canSearchBy(true) ]
     ],
     [
         TransactionTypeConstants.TransferType.BUY_AIRTIME,
         [
-            new BeneficiaryFieldFullName().setRequired(true), 
+            new BeneficiaryFieldFullName().setRequired(true).canSearchBy(true), 
             new BeneficiaryFieldOperator().setRequired(true),    
             new BeneficiaryFieldMobilePhone().setRequired(true) ]
     ],
     [
         TransactionTypeConstants.TransferType.MOBILE_MONEY,
         [
-            new BeneficiaryFieldFullName().setRequired(true), 
+            new BeneficiaryFieldFullName().setRequired(true).canSearchBy(true), 
             new BeneficiaryFieldOperator().setRequired(true),    
             new BeneficiaryFieldMobilePhone().setRequired(true) ]
     ],
     [
         TransactionTypeConstants.TransferType.PESALINK,
         [
-            new BeneficiaryFieldFullName().setRequired(true), 
+            new BeneficiaryFieldFullName().setRequired(true).canSearchBy(true), 
             new BeneficiaryFieldBank().setRequired(true),    
-            new BeneficiaryFieldMobilePhone().setRequired(true) ]
+            new BeneficiaryFieldMobilePhone().setRequired(true).canSearchBy(true) ]
     ],
     [
         TransactionTypeConstants.TransferType.INTER_COUNTRY_TRANSFER,
         [
-            new BeneficiaryFieldFullName().setRequired(true),    
+            new BeneficiaryFieldFullName().setRequired(true).canSearchBy(true),    
             new BeneficiaryFieldCountry().setRequired(true),
             new BeneficiaryFieldBank().setRequired(true),    
-            new BeneficiaryFieldAccountNumber().setRequired(true) ]
+            new BeneficiaryFieldAccountNumber().setRequired(true).canSearchBy(true) ]
     ]
 
 ])

@@ -7,7 +7,7 @@
   </div>
   <div class="row">
     <h4 class="text-grey col-md-12">
-      Search for a user by entering their ID number, user ID, and phone number
+      {{ copy }}
     </h4>
   </div>
   <form
@@ -23,9 +23,13 @@
     </mat-form-field>
     <mat-form-field class="col-md-8" appearance="legacy">
       <ng-container [ngSwitch]="searchForm.get('criteria')?.value">
-        <mat-select *ngSwitchCase="'transferType'" formControlName="term" [value]="dictionary.get('transferType').INTRA_BANK">
+        <!-- transfer type dropdown (search by id) -->
+        <mat-select *ngSwitchCase="'transferType'" 
+          formControlName="term">          
           <mat-option *ngFor="let item of $any(dictionary.get('transferType')) | keyvalue; let i=index;" [value]="item.value" [attr.aria-selected]="i===0"> {{ getTranslation(item.key) }} </mat-option>
         </mat-select>
+
+        <!-- default input field (search by string)-->
         <input *ngSwitchDefault
           matInput
           [placeholder]="($searchTermPlaceholder | async) || ''"
@@ -82,11 +86,19 @@
               </mat-checkbox>
             </td>            
           </ng-container>
+          <ng-container *ngSwitchCase="'transferType'">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'SEARCH_MODAL.'+columnName.toUpperCase() | translate}}</th>
+            <td 
+              mat-cell *matCellDef="let row">
+              {{ row[columnName] | transferTypeLabelPipe | translate  }}
+            </td>
+          </ng-container>          
           <ng-container *ngSwitchDefault>
             <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'SEARCH_MODAL.'+columnName.toUpperCase() | translate}}</th>
             <td 
               mat-cell *matCellDef="let row">
-              {{ row[columnName] }}
+              {{ row[columnName] }} 
+              <span *ngFor="let altColumnName of alternativeColumns.get(columnName)">{{ row[altColumnName] }}</span>
             </td>
           </ng-container>
         </ng-container>

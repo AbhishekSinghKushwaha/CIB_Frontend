@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { BeneficiaryModel } from '../../domain/beneficiary.model';
+import { mockData } from '../../utils/constants/mockdata.constants';
 import { AuthService } from '../auth/auth.service';
 
 import urlList from '../service-list.json';
@@ -23,30 +24,38 @@ export interface BeneficiaryActionResult {
 export class BeneficiaryManagementService {
   formData = new Subject<BeneficiaryActionResult>();
 
-  beneficiaries: BeneficiaryModel[] = [];
+  beneficiaries: BeneficiaryModel[] =  mockData.beneficiaryList//[];
   beneficiaryEdit: BeneficiaryModel | undefined;
 
   constructor(private readonly http: HttpClient, private readonly authService: AuthService) {
     this.authService.IsLoggedIn.subscribe( (loggedIn) => {
       if (!loggedIn) {
-        this.beneficiaries.splice(0);
+        //  this.beneficiaries.splice(0);
       }
     })
    }
 
   submitForm(data: BeneficiaryModel): void {
+    this.beneficiaries.push(data)
+    this.formData.next({type: BeneficiaryActionResultType.ADD, data: this.beneficiaries})
+    /*
     this.http.post(environment.apiUrl + urlList.beneficiary.add, data).subscribe( () => {
         this.formData.next({type: BeneficiaryActionResultType.ADD, data: this.beneficiaries})
         this.beneficiaries.splice(0);
         this.getAll();
-    }) 
+    })
+    */ 
   }
 
   updateForm(data: BeneficiaryModel, id: number): void {
+    this.beneficiaries = [...this.beneficiaries.map((value, index) => index + 1 === id ? data : value)];
+    this.formData.next({type: BeneficiaryActionResultType.EDIT, data: this.beneficiaries})
+   /*
     this.http.put(environment.apiUrl + urlList.beneficiary.edit, data).subscribe( () => {
         this.beneficiaries = [...this.beneficiaries.map((value, index) => index + 1 === id ? data : value)];
         this.formData.next({type: BeneficiaryActionResultType.EDIT, data: this.beneficiaries})
     })   
+    */
   }
   
   getAll(): void {

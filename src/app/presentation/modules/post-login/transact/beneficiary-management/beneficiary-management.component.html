@@ -11,20 +11,20 @@
           >
             <div class="strong-text">
               <mat-icon svgIcon="caret_left"></mat-icon>
-              <span>Beneficiary management</span>
+              <span>{{ 'BENEFICIARY_MANAGEMENT.TITLE' | translate }}</span>
             </div>
           </button>
         </div>
-
-        <mat-form-field appearance="outline" class="col-md-6 col-lg-4" (click)="openFilterModal()">
-          <input
-            matInput
-            placeholder="Search for a beneficiary"
-            [formControl]="searchControl"
-          />
-          <mat-icon matSuffix>search</mat-icon>
-        </mat-form-field>
-
+        <div class="row">
+          <mat-form-field appearance="outline" class="col-md-6 col-lg-4" (click)="openFilterModal()">
+            <input
+              matInput
+              placeholder="{{ 'BENEFICIARY_MANAGEMENT.SEARCH_PLACEHOLDER' | translate }}"
+              [formControl]="searchControl"
+            />
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+        </div>
         <div
           *ngIf="alertVisible"
           class="
@@ -36,20 +36,20 @@
           [@itemAnim]
         >
           <mat-icon class="text-success">check_circle</mat-icon>
-          <p>{{ alertMessage }}</p>
+          <p>aaaa {{ alertMessage }}</p>
           <mat-icon (click)="closeAlert()">close</mat-icon>
         </div>
         <div
-          *ngIf="selection.selected.length"
-          class="text-grey mt-2 mb-2 d-flex justify-content-end"
-        >
-          {{ selection.selected.length }} selected |
-          <span
-            (click)="deleteBeneficiary(selection.selected)"
-            class="cursor-pointer"
-            ><mat-icon svgIcon="delete-documents"></mat-icon> Delete</span
+            *ngIf="selection.selected.length"
+            class="text-grey mt-2 mb-2 d-flex justify-content-end"
           >
-        </div>
+            {{ selection.selected.length }} {{ 'BENEFICIARY_MANAGEMENT.SELECTED' | translate }} |
+            <span
+              (click)="deleteBeneficiary(selection.selected)"
+              class="cursor-pointer"
+              ><mat-icon svgIcon="delete-documents"></mat-icon>  {{ 'BENEFICIARY_MANAGEMENT.DELETE' | translate }} </span
+            >
+          </div>
         <div
           class="
             d-flex
@@ -60,13 +60,13 @@
           matRipple
           routerLink="new"
         >
-          <div *ngIf="!dataSource.data.length && loaded">Add Beneficiary</div>
+          <div *ngIf="!dataSource.data.length && loaded"> {{ 'BENEFICIARY_MANAGEMENT.ADD_BENEFICIARY' | translate }} </div>
           <div *ngIf="dataSource.data.length && loaded">
-            Here's a list of your beneficiaries
+            {{ 'BENEFICIARY_MANAGEMENT.LIST_TITLE' | translate }}
           </div>
           <div class="d-flex justify-content-between text-danger">
             <mat-icon>add</mat-icon>
-            <span>Add</span>
+            <span>{{ 'BENEFICIARY_MANAGEMENT.ADD' | translate }}</span>
           </div>
         </div>
         <div
@@ -83,10 +83,7 @@
             style="width: 400px"
             src="assets/images/icons/visual-support-icon-empty-beneficiary.svg"
           />
-          <p class="pb-3 justify-content-center">
-            You currently don't have any saved beneficiary. lets start by adding
-            a new one.
-          </p>
+          <p class="pb-3 justify-content-center">{{ 'BENEFICIARY_MANAGEMENT.EMPTY_LIST' | translate }}</p>
           <button
             mat-stroked-button
             color="primary"
@@ -94,11 +91,11 @@
             class="col-6"
             routerLink="new"
           >
-            Add a beneficiary
+          {{ 'BENEFICIARY_MANAGEMENT.ADD_BENEFICIARY' | translate }}
           </button>
         </div>
         <div class="row" *ngIf="dataSource.data.length">
-          <table mat-table [dataSource]="dataSource">
+          <table mat-table [dataSource]="dataSource" matSort>
             <!-- Position Column -->
             <ng-container matColumnDef="select">
               <mat-header-cell *matHeaderCellDef>
@@ -122,46 +119,32 @@
                 </mat-checkbox>
               </mat-cell>
             </ng-container>
-            <!-- Position Column -->
-            <ng-container matColumnDef="name">
-              <th mat-header-cell *matHeaderCellDef>Name</th>
-              <td mat-cell *matCellDef="let element">{{ element.beneficiaryName }}</td>
+
+            <ng-container matColumnDef="fullName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'BENEFICIARY_MANAGEMENT.LIST_HEADER_NAME' | translate }}</th>
+              <td mat-cell *matCellDef="let element">{{ element.fullName || element.accountName || element.firstName + ' ' +element.lastName}}</td>
             </ng-container>
 
-            <!-- Name Column -->
-            <ng-container matColumnDef="bank">
-              <th mat-header-cell *matHeaderCellDef>Bank</th>
-              <td mat-cell *matCellDef="let element">{{ element.beneficiaryBank }}</td>
-            </ng-container>
-
-            <!-- Weight Column -->
             <ng-container matColumnDef="accountNumber">
-              <th mat-header-cell *matHeaderCellDef>Account No</th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'BENEFICIARY_MANAGEMENT.LIST_HEADER_ACCOUNTORMOBILE' | translate }}</th>
               <td mat-cell *matCellDef="let element">
-                {{ element.beneficiaryAccount }}
+                {{ element.accountNumber }}
               </td>
             </ng-container>
 
-            <!-- Weight Column -->
             <ng-container matColumnDef="favourite">
-              <th mat-header-cell *matHeaderCellDef>Favourite</th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'BENEFICIARY_MANAGEMENT.LIST_HEADER_FAVOURITE' | translate }}</th>
               <td mat-cell *matCellDef="let element">
-                <mat-checkbox
-                  color="primary"
-                  style="margin-top: 10px"
-                  (click)="$event.stopPropagation()"
-                  (change)="$event ? element.favourite = !element.favourite : null"
-                  [checked]="element.favourite"
-                >
-                </mat-checkbox>
+                <span *ngIf="element.favourite">{{ 'BENEFICIARY_MANAGEMENT.YES' | translate }}</span>
+                <span *ngIf="!element.favourite">{{ 'BENEFICIARY_MANAGEMENT.NO' | translate }}</span>
               </td>
             </ng-container>
             
             <!-- Symbol Column -->
-            <ng-container matColumnDef="transactionType">
-              <th mat-header-cell *matHeaderCellDef>Trsa Type</th>
+            <ng-container matColumnDef="transferType">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'BENEFICIARY_MANAGEMENT.LIST_HEADER_TRANSFER_TYPE' | translate }}</th>
               <td mat-cell *matCellDef="let element">
-                {{ element.transactionType | transferTypeLabelPipe | translate }}
+                {{ element.transferType | transferTypeLabelPipe | translate }}
               </td>
             </ng-container>
 
