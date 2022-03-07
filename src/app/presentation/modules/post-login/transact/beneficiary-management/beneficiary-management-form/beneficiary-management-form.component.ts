@@ -1,250 +1,211 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Subject, Subscription } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BeneficiaryModel } from 'src/app/core/domain/beneficiary.model';
-import { BankService } from 'src/app/core/services/modal-services/bank.service';
-import { BeneficiaryManagementService } from 'src/app/core/services/beneficiary-management/beneficiary-management.service';
-import { TransferTypeModalService } from 'src/app/core/services/transaction-type-modal/transaction-type-modal.service';
-import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
-import { SharedUtils } from 'src/app/core/utils/shared.util';
-import { TransactionTypeConstants } from 'src/app/core/utils/constants/transaction-type.constants';
-import { BeneficiaryManagementFieldService } from 'src/app/core/services/beneficiary-management-field/beneficiary-management-field.service';
-import { BeneficiaryField, BeneficiaryTypeFieldsDict } from 'src/app/core/utils/constants/beneficiary-fields.constants';
-import { CountryService } from 'src/app/core/services/modal-services/country.service';
-import { StorageService } from 'src/app/core/services/storage/storage.service';
-import { countrySettings } from "src/app/core/utils/constants/country.settings";
-import { MobileOperatorService } from 'src/app/core/services/modal-services/mobile-operator.service';
-import { TransferFromService } from 'src/app/core/services/modal-services/transfer-from.service';
-import { SharedDataService } from 'src/app/core/services/shared-data/shared-data.service';
-import { FromAccount } from 'src/app/core/domain/transfer.models';
-
+import { Component, OnInit, Input, Output } from "@angular/core";
+import { FormGroup, Validators, FormBuilder } from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
+import { BeneficiaryManagementService } from "src/app/core/services/beneficiary-management/beneficiary-management.service";
+import { StorageService } from "src/app/core/services/storage/storage.service";
+import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
+import { PhoneNumberUtil } from "google-libphonenumber";
+import { CountryModel } from "src/app/core/domain/bank.model";
+import { MobileWalletsService } from "src/app/core/services/modal-services/mobile-wallets.service";
 @Component({
-  selector: 'app-beneficiary-management-form',
-  templateUrl: './beneficiary-management-form.component.html',
-  styleUrls: ['./beneficiary-management-form.component.scss'],
+  selector: "app-beneficiary-management-form",
+  templateUrl: "./beneficiary-management-form.component.html",
+  styleUrls: ["./beneficiary-management-form.component.scss"],
 })
 export class BeneficiaryManagementFormComponent implements OnInit {
-  equityForm: FormGroup;
-  visibility = true;
-  editMode: boolean;
-  id: number;
-  editData: BeneficiaryModel | undefined;
-  fields: BeneficiaryField[] | undefined;
-  userAccounts: FromAccount[];
-  subscriptions: Subscription[] = [];
-  @Input() modalMode = false;
-  private _modalData: BeneficiaryModel;
-  @Input()
-  set modalData(value: BeneficiaryModel) {
-    this._modalData = value;
-    this.editData = value;
-    this.initForm();
+  beneficiaryForm: FormGroup;
+  editMode: boolean = false;
+  transferType = TransactionTypeConstants.TransferType;
+  beneficiaryId: any;
+  phoneUtil: any;
+  selectedCountry: CountryModel;
+  get getFormFields() {
+    return this.beneficiaryForm.controls;
   }
-  get modalData(): BeneficiaryModel {
-    return this._modalData;
-  }
-  @Output() formSubmitted = new Subject<BeneficiaryModel>();
-
   constructor(
-    private readonly storageService: StorageService,
-    private readonly bankService: BankService,
-    private readonly countryService: CountryService,
-    private readonly transactionTypeModalService: TransferTypeModalService,
     private readonly beneficiaryManagementService: BeneficiaryManagementService,
-    private readonly beneficiaryFieldService: BeneficiaryManagementFieldService,
-    private readonly mobileOperatorService: MobileOperatorService,    
-    private readonly transferFromAccountService: TransferFromService,
-    private readonly sharedDataService: SharedDataService,
-    private readonly router: Router,
-    private readonly route: ActivatedRoute
-  ) {}
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private storageService: StorageService,
+    private mobileWalletService: MobileWalletsService
+  ) {
+    this.beneficiaryId = route.snapshot.paramMap.get("id");
+    this.phoneUtil = PhoneNumberUtil.getInstance();
+  }
 
   ngOnInit(): void {
-    this.formMode();
-    this.getEditData();
     this.initForm();
     this.populateForm();
-    this.eventsSubscriptions();
-  }
-
-  formMode(): void {
-    this.id = +this.route.snapshot.params['id'];
-    this.editMode = !!this.id;
-  }
-
-  getEditData() {
-    this.editData = this.beneficiaryManagementService.beneficiaryEdit;
-  }
-
-  private eventsSubscriptions(): void {
-
-    this.subscriptions.push(
-      this.transactionTypeModalService.selected.subscribe((response) => {
-        this.equityForm.controls.transferType.setValue(response.value);
-        this.populateForm();
-      })
-    );
-
-    this.subscriptions.push(
-      this.bankService.selected.subscribe((response) => {
-        this.equityForm.controls.bank.setValue(response);
-      })
-    );
-    
-    this.subscriptions.push(
-      this.countryService.selectedCountry.subscribe((response) => {
-        this.equityForm.get('country')?.setValue(response);
-      })
-    );
-    
-    this.subscriptions.push(
-      this.transferFromAccountService.selectedTransferFromAccount.subscribe((response) => {
-        this.equityForm.get('fromAccount')?.setValue(response);
-      })
-    );
-
-    this.subscriptions.push(
-      this.sharedDataService.userAccounts.subscribe((res) => {
-        this.userAccounts = res;
-      })
-    );
   }
 
   private initForm(): void {
-    this.equityForm = new FormGroup({
-      id: new FormControl(this.editData?.id),
-      favourite: new FormControl(this.editData?.favourite || false),
-      fromAccount: new FormControl(this.editData?.fromAccount),
-      transferType: new FormControl(this.editData?.transferType || "2", [Validators.required]),    
-      country: new FormControl(this.editData?.country)
+    this.beneficiaryForm = this.fb.group({
+      transferType: ["", [Validators.required]],
+      country: [""],
+      bank: [""],
+      firstName: [""],
+      lastName: [""],
+      accountNumber: [""],
+      phoneNumber: [""],
+      IBANNumber: [""],
+      streetAddress: [""],
+      postalAddress: [""],
+      accountName: [""],
+      telco: [""],
+      mobileWallet: [""],
+      till: [""],
+      favourite: [false],
+      sendFrom: [""],
+    });
+  }
+
+  populateForm() {
+    if (this.beneficiaryId) {
+      this.editMode = true;
+      this.beneficiaryManagementService
+        .getBeneficiary(this.beneficiaryId)
+        .subscribe((res) => {
+          if (res.status) {
+            // Populate form
+            this.beneficiaryForm.controls.transferType.setValue(
+              this.setTransferType(
+                this.transferType,
+                res.data.transferTypes.toString()
+              )
+            );
+
+            this.beneficiaryForm.controls.country.setValue(
+              res.data?.country || ""
+            );
+            this.beneficiaryForm.controls.bank.setValue(res.data.bank || "");
+            this.beneficiaryForm.controls.firstName.setValue(
+              res.data.firstName
+            );
+            this.beneficiaryForm.controls.lastName.setValue(res.data.lastName);
+            this.beneficiaryForm.controls.accountNumber.setValue(
+              res.data.accountNumber
+            );
+            this.beneficiaryForm.controls.phoneNumber.setValue(
+              this.formatPhoneNumber(res.data.phoneNumber)
+            );
+            this.beneficiaryForm.controls.postalAddress.setValue(
+              res.data.postalAddress
+            );
+            this.beneficiaryForm.controls.streetAddress.setValue(
+              res.data.streetAddress
+            );
+            this.beneficiaryForm.controls.accountName.setValue(
+              res.data.fullName
+            );
+            this.beneficiaryForm.controls.telco.setValue(res.data.telco || "");
+            this.mobileWalletService.selectWallet(res.data?.mobileWallet || "");
+            this.beneficiaryForm.controls.IBANNumber.setValue(
+              res.data.ibanNumber
+            );
+            this.beneficiaryForm.controls.favourite.setValue(
+              res.data.isFavourite
+            );
+            console.log(res.data);
+          }
+        });
+    } else {
+      this.beneficiaryForm.controls.transferType.setValue({
+        key: "EFT",
+        value: "4",
+      });
+    }
+  }
+
+  formatPhoneNumber(number: any): string {
+    const countries = this.storageService.getData("countries");
+    const countryCode = this.phoneUtil.parse("+" + number, "").getCountryCode();
+
+    const country = countries.filter((v: CountryModel) => {
+      return v.dialCode === countryCode.toString();
     });
 
+    // this.countryService.selectCountry(country[0]);
+    this.selectedCountry = country[0];
+
+    return number.replace(countryCode, "").trim();
   }
 
-  private populateForm(): void {
-    this.clearForm();
-    this.fields = BeneficiaryTypeFieldsDict.get(this.equityForm.controls.transferType.value.toString());
-    this.fields?.find( (field) => field.fieldType==="bank") ? this.beneficiaryFieldService.assignClickAction(this.fields, "bank", this.openBanks.bind(this)) : null;
-    this.fields?.find( (field) => field.fieldType==="country") ? this.beneficiaryFieldService.assignClickAction(this.fields, "country", this.openCountry.bind(this)) : null;
-    this.fields?.find( (field) => field.fieldType==="mobileOperator") ? this.beneficiaryFieldService.assignClickAction(this.fields, "mobileOperator", this.openOperator.bind(this)) : null;
-
-    this.fields?.forEach( (field) => {
-      if (field.metadata.required) {
-        this.equityForm.addControl(field.fieldType, new FormControl(this.editData ? this.editData[field.fieldType] : '', Validators.required))
-      } else {
-        this.equityForm.addControl(field.fieldType, new FormControl(this.editData ? this.editData[field.fieldType] : ''))
-      }
-    }) 
+  setTransferType(object: any, value: string) {
+    const key = Object.keys(object).find((key) => object[key] === value);
+    return { key, value };
   }
 
-  private clearForm(): void {
-    this.beneficiaryFieldService.clearAllClickActions();
-    Object.keys(this.equityForm.controls).forEach( (key) => {
-      if (key!=='id' && key!=='transferType' && key!=='favourite' && key!=='fromAccount') {
-        this.equityForm.removeControl(key);
-      }
-    })
+  createBeneficiary() {
+    const payload = {
+      countryCode: this.getFormFields.country.value.countryCode,
+      bankCode: this.getFormFields.bank.value.bankCode,
+      branchCode: this.getFormFields.bank.value.branchCode,
+      fullName: this.getFormFields.accountName.value,
+      firstName: this.getFormFields.firstName.value,
+      lastName: this.getFormFields.lastName.value,
+      accountNumber: this.setAccountNumber(
+        this.getFormFields.transferType.value.value
+      ),
+      fromAccount: this.getFormFields.sendFrom.value.accountNumber,
+      phoneNumber: this.getFormFields.phoneNumber.value,
+      ibanNumber: this.getFormFields.IBANNumber.value,
+      streetAddress: this.getFormFields.streetAddress.value,
+      postalAddress: this.getFormFields.postalAddress.value,
+      transferTypes: this.getFormFields.transferType.value.value,
+      isFavourite: this.getFormFields.favourite.value,
+      productName: this.setProductName(
+        this.getFormFields.transferType.value.value
+      ),
+    };
+
+    this.editMode
+      ? this.beneficiaryManagementService.updateForm(
+          payload,
+          this.beneficiaryId
+        )
+      : this.beneficiaryManagementService.submitForm(payload);
   }
 
-  submit() {
-    console.log({ editMode: this.editMode, modalMode: this.modalMode,form: this.equityForm.value, controls:  this.equityForm.controls });
-    if (!this.editMode) {
-      if (this.modalMode) {
-        this.formSubmitted.next(this.equityForm.value);
-      } else {
-        this.beneficiaryManagementService.submitForm(this.equityForm.value);
-        this.router.navigate(['/transact/beneficiary-management']);
-      }
-    } else {
-      if (this.modalMode) {
-        this.formSubmitted.next({ ...this.equityForm.value, id: this.id });
-      } else {
-        this.beneficiaryManagementService.updateForm(
-          this.equityForm.value,
-          this.id
-        );
-        this.router.navigate(['/transact/beneficiary-management']);
-      }
-    }
+  setAccountNumber(transferType: string): string {
+    console.log(transferType);
+    let accountNumber = "";
+
+    transferType === this.transferType.MOBILE_MONEY ||
+    transferType === this.transferType.BUY_AIRTIME
+      ? (accountNumber = this.getFormFields.phoneNumber.value)
+      : (accountNumber = this.getFormFields.accountNumber.value);
+
+    return accountNumber;
   }
 
-  openBanks() {
-    const modal = this.bankService.open(mockData.banks);
-    if (this.modalMode) {
-      this.visibility = false;
-      modal.afterClosed().subscribe(() => {
-        this.visibility = true;
-      });
-    }
-  }
+  setProductName(transferType: string): string {
+    let productName = "";
 
-  openCountry() {    
-    const modal = this.countryService.openCountry(
-      this.storageService.getData("countries"),
-      countrySettings.viewTypes.NAME_ONLY,
-      {}
-    );
-    if (this.modalMode) {
-      this.visibility = false;
-      modal.afterClosed().subscribe(() => {
-        this.visibility = true;
-      });
-    }
-  }
+    transferType === this.transferType.SWIFT ||
+    transferType === this.transferType.EFT ||
+    transferType === this.transferType.INTER_COUNTRY_TRANSFER ||
+    transferType === this.transferType.RTGS
+      ? (productName = this.getFormFields.bank.value.bankCode)
+      : transferType === this.transferType.BUY_AIRTIME
+      ? (productName = this.getFormFields.telco.value.telco)
+      : transferType === this.transferType.MOBILE_MONEY
+      ? (productName = this.getFormFields.mobileWallet.value.wallet)
+      : transferType === this.transferType.INTRA_BANK
+      ? (productName = "Equity")
+      : transferType === this.transferType.BUY_GOODS
+      ? (productName = "BuyGoods")
+      : transferType === this.transferType.INTRA_BANK
+      ? (productName = "Equity")
+      : "";
 
-  openOperator() {
-    const hideRecipient = true;
-    const modal = this.mobileOperatorService.open(
-      this.equityForm.get('mobileOperator')?.value,
-      hideRecipient
-    );
-    if (this.modalMode) {
-      this.visibility = false;
-      modal.afterClosed().subscribe(() => {
-        this.visibility = true;
-      });
-    }}
+    // TODO:: Do product selction for bill payments
 
-  openTransactions() {
-    const modal = this.transactionTypeModalService.open(
-      TransactionTypeConstants.TransferType
-    );
-    if (this.modalMode) {
-      this.visibility = false;
-      modal.afterClosed().subscribe(() => {
-        this.visibility = true;
-      });
-    }
-  }
-
-  openAccounts() {
-    const modal = this.transferFromAccountService.openTransferFromModal(
-      this.userAccounts
-    );
-    if (this.modalMode) {
-      this.visibility = false;
-      modal.afterClosed().subscribe(() => {
-        this.visibility = true;
-      });
-    }
-
+    return productName;
   }
 
   toggleFav(): void {
-    this.equityForm.get('favourite')?.setValue(!this.equityForm.get('favourite')?.value);
-    this.equityForm.get('fromAccount')?.setValue(null)
-  }
-
-  getFieldValue(controlName: string, property: string | undefined): string {
-    if (!property)
-      return "";
-      const ctr = this.equityForm.get(controlName);
-    return ctr && ctr.value ? ctr.value[property] : '';
-  }
-
-  ngOnDestroy(): void {
-    this.equityForm.reset();
-    SharedUtils.unSubscribe(this.subscriptions);
+    this.beneficiaryForm
+      .get("favourite")
+      ?.setValue(!this.beneficiaryForm.get("favourite")?.value);
   }
 }

@@ -11,6 +11,7 @@ import { MatSidenav } from "@angular/material/sidenav";
 import { Router } from "@angular/router";
 import { delay } from "rxjs/operators";
 import { AccountsService } from "src/app/core/services/accounts/accounts.service";
+import { BeneficiaryManagementService } from "src/app/core/services/beneficiary-management/beneficiary-management.service";
 import { DataLookupService } from "src/app/core/services/data-lookup/data-lookup.service";
 import { SharedDataService } from "src/app/core/services/shared-data/shared-data.service";
 import { SpinnerService } from "src/app/core/services/spinner/spinner.service";
@@ -37,7 +38,8 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     private dataLookupService: DataLookupService,
     private storageService: StorageService,
     private accountsService: AccountsService,
-    private sharedDataService: SharedDataService
+    private sharedDataService: SharedDataService,
+    private beneficiaryService: BeneficiaryManagementService
   ) {
     this.getMobileQuery();
     this.mobileQueryListener = (): void => changeDetectorRef.detectChanges();
@@ -49,6 +51,9 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getCountries();
     this.getUserAccounts();
     this.loadingListener();
+    this.getBeneficiaries();
+    this.getTelcos();
+    this.getMobileWallets();
   }
 
   ngAfterViewInit() {}
@@ -98,6 +103,26 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     this.accountsService.getUserAccounts().subscribe((res) => {
       if (res.status) {
         this.sharedDataService.setUserAccounts(res.data);
+      }
+    });
+  }
+
+  getBeneficiaries() {
+    this.beneficiaryService.getAll();
+  }
+
+  getTelcos() {
+    this.dataLookupService.getTelcos("KE").subscribe((res) => {
+      if (res.status) {
+        this.storageService.setData("telcos", res.data);
+      }
+    });
+  }
+
+  getMobileWallets() {
+    this.dataLookupService.getMobileWallets("KE").subscribe((res) => {
+      if (res.status) {
+        this.storageService.setData("wallets", res.data);
       }
     });
   }

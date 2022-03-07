@@ -1,5 +1,5 @@
 import { BankModel, CountryModel } from "./bank.model";
-import { FromAccount, MobileOperator } from "./transfer.models";
+import { FromAccount, MobileWallet } from "./transfer.models";
 
 export interface BeneficiaryModel {
   id?: number;
@@ -7,7 +7,7 @@ export interface BeneficiaryModel {
   accountNumber: string;
   accountName?: string;
   bank?: BankModel;
-  mobileOperator?: MobileOperator;
+  mobileWallet?: MobileWallet;
   phoneNumber?: any;
   tillNumber?: any;
   tillName?: any;

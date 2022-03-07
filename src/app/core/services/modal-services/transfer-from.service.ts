@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Subject } from 'rxjs';
-import { TransferFromModalComponent } from 'src/app/presentation/shared/modals/transfer-from-modal/transfer-from-modal.component';
-import { FromAccount } from '../../domain/transfer.models';
+import { Injectable } from "@angular/core";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { Subject } from "rxjs";
+import { TransferFromModalComponent } from "src/app/presentation/shared/modals/transfer-from-modal/transfer-from-modal.component";
+import { FromAccount } from "../../domain/transfer.models";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class TransferFromService {
   selectedTransferFromAccount = new Subject<FromAccount>();
@@ -15,7 +15,9 @@ export class TransferFromService {
   constructor(private readonly dialog: MatDialog) {}
 
   // Open Transfer From Modal
-  openTransferFromModal(data: FromAccount[]): MatDialogRef<TransferFromModalComponent> {
+  openTransferFromModal(
+    data: FromAccount[]
+  ): MatDialogRef<TransferFromModalComponent> {
     this.transferFromModalRef = this.dialog.open<
       TransferFromModalComponent,
       FromAccount[]
@@ -32,7 +34,7 @@ export class TransferFromService {
   }
 
   // Select account to transfer from
-  selectTransferFromAccount(account: FromAccount): void {
+  selectTransferFromAccount(account: any): void {
     this.transferFromData = account;
     this.selectedTransferFromAccount.next(account);
   }

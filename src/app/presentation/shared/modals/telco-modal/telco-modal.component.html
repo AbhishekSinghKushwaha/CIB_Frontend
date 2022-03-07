@@ -22,16 +22,14 @@
     <div class="col-md-9 mx-2">
       <div class="row gx-0 user-list-item" style="height: 60px">
         <div class="col-md-10 d-flex">
-          <div class="align-self-center">{{ item.walletDescription }}</div>
+          <div class="align-self-center">{{ item.telco }}</div>
         </div>
         <div class="col-md-2 d-flex">
           <div class="align-self-center">
             <mat-icon
               color="primary"
               [svgIcon]="
-                selected?.wallet === item?.wallet
-                  ? 'check_round'
-                  : 'radio_button_off'
+                selected?.id === item?.id ? 'check_round' : 'radio_button_off'
               "
             ></mat-icon>
           </div>

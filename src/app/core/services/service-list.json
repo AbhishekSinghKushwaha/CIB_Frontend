@@ -40,7 +40,9 @@
     "getCountries": "/cibpaymentservice-v1/api/v1/Transfer/GetCountries",
     "getBanks": "/cibpaymentservice-v1/api/v1/Transfer/GetBanks/",
     "getCurrencies": "/cibpaymentservice-v1/api/v1/Transfer/GetCurrencies",
-    "getSubsidiaries": "/cibpaymentservice-v1/api/v1/Transfer/GetSubsidiaries"
+    "getSubsidiaries": "/cibpaymentservice-v1/api/v1/Transfer/GetSubsidiaries",
+    "getTelcos": "/cibpaymentservice-v1/api/v1/Transfer/GetTelcos",
+    "getMobileWallets": "/cibpaymentservice-v1/api/v1/Transfer/GetMobileWallets"
   },
   "statement": {
     "getPdf": "/v1/generatepdf/statement"
@@ -56,8 +58,8 @@
   "beneficiary": {
     "add": "/cibpaymentservice-v1/api/v1/Beneficiary/AddBeneficiary",
     "edit": "/cibpaymentservice-v1/api/v1/Beneficiary/EditBeneficiary",
-    "remove": "/cibpaymentservice-v1/api/v1/Beneficiary/RemoveBeneficiary",    
-    "getAll": "/cibpaymentservice-v1/api/v1/Beneficiary/GetBeneficiaries"
+    "remove": "/cibpaymentservice-v1/api/v1/Beneficiary/RemoveBeneficiary",
+    "getAll": "/cibpaymentservice-v1/api/v1/Beneficiary/GetBeneficiaries",
+    "getBeneficiary": "/cibpaymentservice-v1/api/v1/Beneficiary/GetBeneficiary"
   }
-
 }

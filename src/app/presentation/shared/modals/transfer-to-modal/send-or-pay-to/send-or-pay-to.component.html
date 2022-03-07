@@ -98,7 +98,9 @@
   <app-beneficiary-list-item
     *ngFor="let account of favourites | favouriteSearch: searchText"
     [data]="account"
-    [isChecked]="selectedFavourite && selectedFavourite.name === account.name"
+    [isChecked]="
+      selectedFavourite && selectedFavourite.fullName === account.name
+    "
   >
   </app-beneficiary-list-item>
   <div

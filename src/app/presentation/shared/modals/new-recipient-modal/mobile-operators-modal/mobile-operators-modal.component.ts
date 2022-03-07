@@ -1,6 +1,11 @@
 import { Component, Inject, Input, OnInit } from "@angular/core";
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { MobileOperatorService } from "src/app/core/services/modal-services/mobile-operator.service";
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from "@angular/material/dialog";
+import { MobileWallet } from "src/app/core/domain/transfer.models";
+import { MobileWalletsService } from "src/app/core/services/modal-services/mobile-wallets.service";
 import { mockData } from "src/app/core/utils/constants/mockdata.constants";
 import { MobileMoneyNewRecipientComponent } from "../mobile-money-new-recipient/mobile-money-new-recipient.component";
 
@@ -15,8 +20,6 @@ export interface MobileOperatorsModalData {
 export class MobileOperatorsModalComponent implements OnInit {
   @Input() transferType: string;
 
-  operators = mockData.mobileOperators;
-
   isChecked: boolean = false;
 
   selected: any;
@@ -25,26 +28,20 @@ export class MobileOperatorsModalComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<MobileOperatorsModalComponent>,
-    private readonly dialog: MatDialog,    
-    @Inject(MAT_DIALOG_DATA) public data: MobileOperatorsModalData,
-    private mobileOperatorService: MobileOperatorService
+    private readonly dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: MobileWallet[],
+    private mobileWalletsService: MobileWalletsService
   ) {}
 
-  ngOnInit(): void {
-    console.log('init');
-  }
+  ngOnInit(): void {}
 
   close() {
     this.dialogRef.close();
   }
 
   select(i: number) {
-    this.selected = this.operators[i];
-    this.visibility = false;
-    this.mobileOperatorService.closeMobileOperatorModal(this.selected);
-    if (this.data.hideRecipient) {
-      this.openMobileMoneyNewRecipientModal();
-    }
+    this.selected = this.data[i];
+    this.mobileWalletsService.selectWallet(this.selected);
   }
 
   openMobileMoneyNewRecipientModal() {

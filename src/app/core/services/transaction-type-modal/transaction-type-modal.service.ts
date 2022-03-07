@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { Subject } from 'rxjs';
-import { TransactionTypeModalComponent } from 'src/app/presentation/shared/modals/transaction-type-modal/transaction-type-modal.component';
-import { TransferTypeDTO } from '../../domain/transfer.models';
+import { Injectable } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
+import { Subject } from "rxjs";
+import { TransactionTypeModalComponent } from "src/app/presentation/shared/modals/transaction-type-modal/transaction-type-modal.component";
+import { TransferTypeDTO } from "../../domain/transfer.models";
 
 @Injectable()
 export class TransferTypeModalService {
-  selected = new Subject<{key:string, value:string}>();
+  selected = new Subject<{ key: string; value: string }>();
   private data: TransferTypeDTO;
 
   constructor(private readonly dialog: MatDialog) {}
@@ -15,7 +15,7 @@ export class TransferTypeModalService {
     return this.dialog.open<TransactionTypeModalComponent>(
       TransactionTypeModalComponent,
       {
-        maxWidth: '500px',
+        maxWidth: "22vw",
         disableClose: true,
         data,
       }

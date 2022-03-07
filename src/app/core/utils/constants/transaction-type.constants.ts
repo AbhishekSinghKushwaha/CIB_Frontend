@@ -3,15 +3,16 @@ import { TransferTypeDTO } from "../../domain/transfer.models";
 export const TransferType: TransferTypeDTO = {
   OWN_EQUITY: "1",
   INTRA_BANK: "2",
-  INTER_BANK: "3",
+  INTER_BANK: "3001",
   EFT: "4",
   SWIFT: "5",
   RTGS: "6",
-  BUY_GOODS: "7",
-  MOBILE_MONEY: "8",
-  BUY_AIRTIME: "9",
-  PESALINK: "10",
-  INTER_COUNTRY_TRANSFER: "11",
+  BUY_GOODS: "11",
+  MOBILE_MONEY: "9",
+  BUY_AIRTIME: "10",
+  PESALINK: "7",
+  INTER_COUNTRY_TRANSFER: "",
+  SUBSIDIARY: "8",
 };
 
 const SwiftChargesOptions = [
