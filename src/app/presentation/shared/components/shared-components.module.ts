@@ -27,6 +27,7 @@ import { SecurityVerificationComponent } from './security-verification/security-
 import { SecurityChallengeComponent } from './security-challenge/security-challenge.component';
 import { SecurityQuestionsModalModule } from '../modals/security-questions-modal/security-questions-modal.module';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { TransactionsListComponent } from './transactions-list/transactions-list.component';
 
 
 const components = [
@@ -48,7 +49,8 @@ const components = [
   LogoutConfirmationModalComponent,
   SecurityVerificationComponent,
   SecurityChallengeComponent,
-  ResetPasswordComponent
+  ResetPasswordComponent,
+  TransactionsListComponent
 ];
 
 @NgModule({

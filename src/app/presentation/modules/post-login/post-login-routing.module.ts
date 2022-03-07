@@ -39,6 +39,14 @@ const routes: Routes = [
       {
         path: 'more',
         loadChildren: (): Promise<any> => import('./more/more.module').then(m => m.MoreModule)
+      },
+      {
+        path: 'activities',
+        loadChildren: (): Promise<any> => import('./activities/activities.module').then(m => m.ActivitiesModule)
+      },
+      {
+        path: 'service-request',
+        loadChildren: (): Promise<any> => import('./service-request/service-request.module').then(m => m.ServiceRequestModule)
       }
     ]
   }

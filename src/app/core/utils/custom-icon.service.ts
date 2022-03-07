@@ -759,6 +759,19 @@ export class CustomIconService {
         'assets/images/icons/visual-support-icons-create_user.svg'
       )
     );
+    this.matIconRegistry.addSvgIcon(
+      'transaction_approved',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/visual-support-icons-approved.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'transaction_rejected',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/visual-support-icons-rejected.svg'
+      )
+    );
+
   }
 }
 
