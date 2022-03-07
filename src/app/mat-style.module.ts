@@ -26,6 +26,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 const MatImports = [
   MatSidenavModule,
@@ -54,7 +55,8 @@ const MatImports = [
   MatDividerModule,
   MatProgressSpinnerModule,
   MatSlideToggleModule,
-  MatTabsModule
+  MatTabsModule,
+  MatButtonToggleModule,
 ];
 
 

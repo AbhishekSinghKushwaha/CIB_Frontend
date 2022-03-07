@@ -28,6 +28,7 @@ import { SecurityChallengeComponent } from './security-challenge/security-challe
 import { SecurityQuestionsModalModule } from '../modals/security-questions-modal/security-questions-modal.module';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { TransactionsListComponent } from './transactions-list/transactions-list.component';
+import { PaginatorComponent } from './paginator/paginator.component';
 
 
 const components = [
@@ -50,7 +51,8 @@ const components = [
   SecurityVerificationComponent,
   SecurityChallengeComponent,
   ResetPasswordComponent,
-  TransactionsListComponent
+  TransactionsListComponent,
+  PaginatorComponent
 ];
 
 @NgModule({
