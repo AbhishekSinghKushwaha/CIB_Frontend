@@ -9,6 +9,7 @@ import { CountryModel } from "src/app/core/domain/bank.model";
 import { MobileWalletsService } from "src/app/core/services/modal-services/mobile-wallets.service";
 import { SharedDataService } from "src/app/core/services/shared-data/shared-data.service";
 import { TransferFromService } from "src/app/core/services/modal-services/transfer-from.service";
+import { TelcoService } from "src/app/core/services/modal-services/telco.service";
 @Component({
   selector: "app-beneficiary-management-form",
   templateUrl: "./beneficiary-management-form.component.html",
@@ -33,7 +34,8 @@ export class BeneficiaryManagementFormComponent implements OnInit {
     private storageService: StorageService,
     private mobileWalletService: MobileWalletsService,
     private sharedDataService: SharedDataService,
-    private transferFromService: TransferFromService
+    private transferFromService: TransferFromService,
+    private telcoService: TelcoService
   ) {
     this.beneficiaryId = route.snapshot.paramMap.get("id");
     this.phoneUtil = PhoneNumberUtil.getInstance();
@@ -104,7 +106,7 @@ export class BeneficiaryManagementFormComponent implements OnInit {
             this.beneficiaryForm.controls.accountName.setValue(
               res.data.fullName
             );
-            this.beneficiaryForm.controls.telco.setValue(res.data.telco || "");
+            this.telcoService.selectTelco(res.data?.telcoOperator || "");
             this.mobileWalletService.selectWallet(res.data?.mobileWallet || "");
             this.beneficiaryForm.controls.IBANNumber.setValue(
               res.data.ibanNumber
