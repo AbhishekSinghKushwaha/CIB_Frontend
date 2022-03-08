@@ -1,6 +1,8 @@
 import { PaginationModel } from './../../../../core/domain/pagination.model';
 import { Component, OnInit, Input } from '@angular/core';
 import { TransactionListmodel } from 'src/app/core/domain/transaction-list.model';
+import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-transactions-list',
@@ -42,29 +44,20 @@ export class TransactionsListComponent implements OnInit {
     this.loadTransactions();
   };
 
-  constructor() { }
+  constructor(private readonly router: Router) { }
 
   ngOnInit(): void {
   }
 
   loadTransactions() {
     this.category === 'history' ?
-      this.originalTransactions = Array(35).fill(0).map((x, i) => ({
-        title: 'Reference C38437393944034',
-        description: 'MOBILE WALLET TRANSFER TO LESLIE ISAH',
-        amount: '000,000.00 KES',
-        date: 'Thu,23 Aug',
-        status: i % 2 === 0 ? 'Approved' : 'Rejected'
-      })) :
-      this.originalTransactions = Array(32).fill(0).map((x, i) => ({
-        title: 'Reference C38437393944034',
-        description: 'MOBILE WALLET TRANSFER TO LESLIE ISAH',
-        amount: '000,000.00 KES',
-        date: 'Thu,23 Aug',
-        status: 'Pending'
-      }));
+      this.originalTransactions = mockData.histororicalTransactions : this.originalTransactions = mockData.pendingTransactions;
     this.transactions = [...this.originalTransactions];
     this.paginationData = new PaginationModel(10, [10, 25, 40, 60], this.transactions.length);
+  }
+
+  openTransaction(data: TransactionListmodel, index: number) {
+    this.router.navigate([`activities/detail/${index}/${this.category}`])
   }
 
 }

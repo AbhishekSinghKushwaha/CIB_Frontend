@@ -4,7 +4,7 @@
       mat-icon-button
       aria-label="Back"
       class="back-icon"
-      routerLink="/transact/"
+      routerLink="/activities/"
     >
       <div class="strong-text">
         <mat-icon svgIcon="caret_left"></mat-icon>
@@ -12,15 +12,31 @@
     </button>
   </div>
   <div class="row-fluid mb-4">
-    <h3 class="strong-text">Transaction detail</h3>
+    <div class="row">
+      <div class="col-8">
+        <h3 class="strong-text">Transaction detail</h3>
+      </div>
+      <div class="col-4" *ngIf="data.status === 'Approved'">
+        <app-card-component
+          [data]="{ text: 'View or download receipt', suffixIcon: 'eyes_view' }"
+          (click)="openUploadModal()"
+        ></app-card-component>
+      </div>
+    </div>
   </div>
-  <div class="row-fluid text-danger fs-4 mb-3">33,000 KES</div>
+  <div class="row-fluid text-danger fs-4 mb-3">
+    33,000 KES
+    <mat-icon svgIcon="question_mark"></mat-icon>
+  </div>
   <div class="row-fluid">
     <div class="row">
       <div class="col-6">
         <a mat-button href="https://www.google.com/" class="bg-light">
-          <mat-icon svgIcon="transaction_rejected" mat-raised-button></mat-icon>
-          Rejected
+          <mat-icon
+            [svgIcon]="transactionIcon[data.status]"
+            mat-raised-button
+          ></mat-icon>
+          {{ data.status }}
         </a>
         <a mat-button href="https://www.google.com/">
           <mat-icon svgIcon="edit"></mat-icon>
@@ -28,10 +44,19 @@
         </a>
       </div>
       <div class="col-6 d-flex justify-content-end">
-        <button mat-raised-button class="me-3" color="primary">
+        <button
+          mat-raised-button
+          class="me-3"
+          color="primary"
+          [disabled]="data.status !== 'Rejected'"
+        >
           <span class="pe-3 ps-3">Reinitiate</span>
         </button>
-        <button mat-stroked-button color="primary">
+        <button
+          mat-stroked-button
+          color="primary"
+          [disabled]="data.status !== 'Rejected'"
+        >
           <span class="pe-3 ps-3">Delete</span>
         </button>
       </div>
@@ -39,7 +64,11 @@
   </div>
 </div>
 <div class="row pe-5 ps-5">
-  <div class="alert alert-danger" role="alert">
+  <div
+    class="alert alert-danger"
+    role="alert"
+    *ngIf="data.status === 'Rejected'"
+  >
     <span class="text-danger strong-text">
       <mat-icon svgIcon="exclamation"></mat-icon> Reason for rejection
     </span>

@@ -8,6 +8,7 @@ import { UserListModel, UserModel } from "../../domain/user.model";
 import { MobileOperator } from "../../domain/transfer.models";
 import { CompanyListModel } from "../../domain/company.model";
 import { ConfirmationModel } from "../../domain/confirmation.model";
+import { TransactionListmodel } from "../../domain/transaction-list.model";
 
 const accounts: SelectAccountModel[] = [
   {
@@ -742,6 +743,21 @@ const transactionDetail: ConfirmationModel[] = [
   },
 ];
 
+const histororicalTransactions: TransactionListmodel[] = Array(35).fill(0).map((x, i) => ({
+  title: 'Reference C38437393944034',
+  description: 'MOBILE WALLET TRANSFER TO LESLIE ISAH',
+  amount: '000,000.00 KES',
+  date: 'Thu,23 Aug',
+  status: i % 2 === 0 ? 'Approved' : 'Rejected'
+}));
+const pendingTransactions: TransactionListmodel[] = Array(32).fill(0).map((x, i) => ({
+  title: 'Reference C38437393944034',
+  description: 'MOBILE WALLET TRANSFER TO LESLIE ISAH',
+  amount: '000,000.00 KES',
+  date: 'Thu,23 Aug',
+  status: 'Pending'
+}));
+
 export const mockData = {
   accounts,
   favourites,
@@ -753,5 +769,7 @@ export const mockData = {
   mobileOperators,
   userList,
   companyList,
-  transactionDetail
+  transactionDetail,
+  histororicalTransactions,
+  pendingTransactions
 };

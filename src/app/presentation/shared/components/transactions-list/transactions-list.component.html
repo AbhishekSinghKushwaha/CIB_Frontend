@@ -15,7 +15,8 @@
 </div>
 <div
   class="row mt-1 mb-1 p-2 trans-card cursor-pointer"
-  *ngFor="let transaction of transactions"
+  *ngFor="let transaction of transactions; let i = index"
+  (click)="openTransaction(transaction, i)"
 >
   <div class="strong-text">{{ transaction.title }}</div>
   <div class="d-flex justify-content-between">

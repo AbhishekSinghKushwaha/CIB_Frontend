@@ -8,7 +8,7 @@ const routes: Routes = [{
   component: ActivitiesComponent
 },
 {
-  path: 'detail/:id',
+  path: 'detail/:id/:type',
   component: ActivityDetailComponent
 }];
 
