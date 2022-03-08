@@ -25,9 +25,7 @@ export class BeneficiaryListItemComponent implements OnInit {
     private transferFromService: TransferFromService
   ) {}
 
-  ngOnInit(): void {
-    console.log(this.data);
-  }
+  ngOnInit(): void {}
 
   selectSingle(): void {
     const recipientFormat: recipientModel = {

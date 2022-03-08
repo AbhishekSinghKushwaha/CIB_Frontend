@@ -25,7 +25,7 @@ export interface BeneficiaryActionResult {
 export class BeneficiaryManagementService {
   formData = new Subject<BeneficiaryActionResult>();
 
-  beneficiaries: BeneficiaryModel[];
+  beneficiaries: BeneficiaryModel[] = [];
   beneficiaryEdit: BeneficiaryModel | undefined;
 
   constructor(
@@ -69,6 +69,8 @@ export class BeneficiaryManagementService {
           type: BeneficiaryActionResultType.EDIT,
           data: this.beneficiaries,
         });
+        this.getAll();
+        this.router.navigate(["/transact/beneficiary-management"]);
       });
   }
 

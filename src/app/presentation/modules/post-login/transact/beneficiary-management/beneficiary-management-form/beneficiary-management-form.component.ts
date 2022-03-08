@@ -7,6 +7,8 @@ import { TransactionTypeConstants } from "src/app/core/utils/constants/transacti
 import { PhoneNumberUtil } from "google-libphonenumber";
 import { CountryModel } from "src/app/core/domain/bank.model";
 import { MobileWalletsService } from "src/app/core/services/modal-services/mobile-wallets.service";
+import { SharedDataService } from "src/app/core/services/shared-data/shared-data.service";
+import { TransferFromService } from "src/app/core/services/modal-services/transfer-from.service";
 @Component({
   selector: "app-beneficiary-management-form",
   templateUrl: "./beneficiary-management-form.component.html",
@@ -22,12 +24,16 @@ export class BeneficiaryManagementFormComponent implements OnInit {
   get getFormFields() {
     return this.beneficiaryForm.controls;
   }
+
+  initialPhoneNumber: string;
   constructor(
     private readonly beneficiaryManagementService: BeneficiaryManagementService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private storageService: StorageService,
-    private mobileWalletService: MobileWalletsService
+    private mobileWalletService: MobileWalletsService,
+    private sharedDataService: SharedDataService,
+    private transferFromService: TransferFromService
   ) {
     this.beneficiaryId = route.snapshot.paramMap.get("id");
     this.phoneUtil = PhoneNumberUtil.getInstance();
@@ -66,6 +72,7 @@ export class BeneficiaryManagementFormComponent implements OnInit {
         .getBeneficiary(this.beneficiaryId)
         .subscribe((res) => {
           if (res.status) {
+            this.initialPhoneNumber = res.data?.phoneNumber;
             // Populate form
             this.beneficiaryForm.controls.transferType.setValue(
               this.setTransferType(
@@ -105,7 +112,8 @@ export class BeneficiaryManagementFormComponent implements OnInit {
             this.beneficiaryForm.controls.favourite.setValue(
               res.data.isFavourite
             );
-            console.log(res.data);
+
+            this.setFromAccount(res.data.fromAccount);
           }
         });
     } else {
@@ -135,7 +143,21 @@ export class BeneficiaryManagementFormComponent implements OnInit {
     return { key, value };
   }
 
+  setFromAccount(fromAccount: string) {
+    this.sharedDataService.userAccounts.subscribe((x) => {
+      const account = x.find((el) => {
+        return (el.accountNumber = Number(fromAccount));
+      });
+      this.beneficiaryForm.controls.sendFrom.setValue(account || "");
+    });
+  }
+
   createBeneficiary() {
+    if (!this.beneficiaryForm.get("phoneNumber")?.dirty) {
+      this.beneficiaryForm.controls.phoneNumber.setValue(
+        this.initialPhoneNumber
+      );
+    }
     const payload = {
       countryCode: this.getFormFields.country.value.countryCode,
       bankCode: this.getFormFields.bank.value.bankCode,
@@ -160,14 +182,13 @@ export class BeneficiaryManagementFormComponent implements OnInit {
 
     this.editMode
       ? this.beneficiaryManagementService.updateForm(
-          payload,
+          { ...payload, ...{ id: this.beneficiaryId } },
           this.beneficiaryId
         )
       : this.beneficiaryManagementService.submitForm(payload);
   }
 
   setAccountNumber(transferType: string): string {
-    console.log(transferType);
     let accountNumber = "";
 
     transferType === this.transferType.MOBILE_MONEY ||

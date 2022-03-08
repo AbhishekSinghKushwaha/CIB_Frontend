@@ -101,7 +101,6 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
           beneficiary.transferTypeId === Number(this.transactionType)
         );
       });
-    console.log(this.beneficiaries);
   }
 
   // Open transfer to modal based on transaction type and pass the required paramenters
