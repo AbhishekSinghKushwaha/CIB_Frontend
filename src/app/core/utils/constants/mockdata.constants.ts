@@ -7,6 +7,7 @@ import { BuyGoodsFavouriteModel } from "./../../domain/buy-goods-favourites.mode
 import { UserListModel, UserModel } from "../../domain/user.model";
 import { MobileOperator } from "../../domain/transfer.models";
 import { CompanyListModel } from "../../domain/company.model";
+import { ConfirmationModel } from "../../domain/confirmation.model";
 
 const accounts: SelectAccountModel[] = [
   {
@@ -681,6 +682,66 @@ const mobileOperators: MobileOperator[] = [
   },
 ];
 
+const transactionDetail: ConfirmationModel[] = [
+  {
+    content: [
+      {
+        key: 'Payment date',
+        value: '01 January 2021'
+      },
+      {
+        key: 'From',
+        value: 'Loot<br>0810174008113 • Savings'
+      },
+      {
+        key: 'Narration',
+        value: 'Payment to IdeaHub vendor'
+      }
+    ]
+  },
+  {
+    title: 'Beneficiary details',
+    content: [
+      {
+        key: 'Beneficiary name',
+        value: 'Isah Uche Olusegun'
+      },
+      {
+        key: 'Account number',
+        value: '00113577162'
+      },
+      {
+        key: 'IBAN number',
+        value: '2085252042'
+      },
+      {
+        key: 'Beneficiary bank',
+        value: 'HSBC Group'
+      },
+      {
+        key: 'Bank code',
+        value: '06454'
+      }
+    ]
+  }, {
+    title: 'Conversion rate',
+    content: [
+      {
+        key: 'Rate',
+        value: '12.43%'
+      },
+      {
+        key: 'Source amount',
+        value: '34,239,812,398.00 KES'
+      },
+      {
+        key: 'Converted amount',
+        value: '301,406,799.23 USD'
+      }
+    ]
+  },
+];
+
 export const mockData = {
   accounts,
   favourites,
@@ -692,4 +753,5 @@ export const mockData = {
   mobileOperators,
   userList,
   companyList,
+  transactionDetail
 };

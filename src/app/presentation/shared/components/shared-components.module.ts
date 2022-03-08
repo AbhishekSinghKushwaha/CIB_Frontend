@@ -29,6 +29,7 @@ import { SecurityQuestionsModalModule } from '../modals/security-questions-modal
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { TransactionsListComponent } from './transactions-list/transactions-list.component';
 import { PaginatorComponent } from './paginator/paginator.component';
+import { ListItemsComponent } from './list-items/list-items.component';
 
 
 const components = [
@@ -52,7 +53,8 @@ const components = [
   SecurityChallengeComponent,
   ResetPasswordComponent,
   TransactionsListComponent,
-  PaginatorComponent
+  PaginatorComponent,
+  ListItemsComponent
 ];
 
 @NgModule({

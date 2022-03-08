@@ -771,6 +771,24 @@ export class CustomIconService {
         'assets/images/icons/visual-support-icons-rejected.svg'
       )
     );
+    this.matIconRegistry.addSvgIcon(
+      'transaction_pending',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/visual-support-icons-pending.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'question_mark',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/visual-support-icons-question-mark.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'exclamation',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/visual-support-icons-exclamation.svg'
+      )
+    );
 
   }
 }

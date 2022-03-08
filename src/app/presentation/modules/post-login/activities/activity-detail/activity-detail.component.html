@@ -1,0 +1,60 @@
+<div class="activity-detail p-3">
+  <div class="mb-3">
+    <button
+      mat-icon-button
+      aria-label="Back"
+      class="back-icon"
+      routerLink="/transact/"
+    >
+      <div class="strong-text">
+        <mat-icon svgIcon="caret_left"></mat-icon>
+      </div>
+    </button>
+  </div>
+  <div class="row-fluid mb-4">
+    <h3 class="strong-text">Transaction detail</h3>
+  </div>
+  <div class="row-fluid text-danger fs-4 mb-3">33,000 KES</div>
+  <div class="row-fluid">
+    <div class="row">
+      <div class="col-6">
+        <a mat-button href="https://www.google.com/" class="bg-light">
+          <mat-icon svgIcon="transaction_rejected" mat-raised-button></mat-icon>
+          Rejected
+        </a>
+        <a mat-button href="https://www.google.com/">
+          <mat-icon svgIcon="edit"></mat-icon>
+          Edit
+        </a>
+      </div>
+      <div class="col-6 d-flex justify-content-end">
+        <button mat-raised-button class="me-3" color="primary">
+          <span class="pe-3 ps-3">Reinitiate</span>
+        </button>
+        <button mat-stroked-button color="primary">
+          <span class="pe-3 ps-3">Delete</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row pe-5 ps-5">
+  <div class="alert alert-danger" role="alert">
+    <span class="text-danger strong-text">
+      <mat-icon svgIcon="exclamation"></mat-icon> Reason for rejection
+    </span>
+    <br />
+    <span class="error-description">Missing the appropriate documentation</span>
+  </div>
+  <div class="row">
+    <app-list-items [data]="transactionDetail"></app-list-items>
+  </div>
+  <div class="row p-5">
+    <h4 class="strong-text">Supporting documents</h4>
+    <app-card-component
+      class="row col-4"
+      [data]="{ text: 'Upload documents', subText: '3 Documents' }"
+      (click)="openUploadModal()"
+    ></app-card-component>
+  </div>
+</div>
