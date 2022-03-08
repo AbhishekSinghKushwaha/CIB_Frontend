@@ -57,11 +57,11 @@ export class BuyGoodsComponent extends BaseTransactComponent implements OnInit {
   getMerchants(): void {
     this.buyGoodsService.getMerchants().subscribe((res) => {
       if (res.status) {
-        console.log(res.data, 'getMerchants');
         this.merchantDetailsService.setMerchantDetails(res.data);
       }
       else{
-        console.log(res.message, 'getMerchants');
+        console.log(res.message);
+        // TODO:: Notify Error
       }
     });
   }
@@ -69,11 +69,11 @@ export class BuyGoodsComponent extends BaseTransactComponent implements OnInit {
   getFavouriteMerchants(): void {
     this.buyGoodsService.getFavouriteMerchants().subscribe((res) => {
       if (res.status) {
-        console.log(res.data, 'getFavouriteMerchants');
         this.merchantDetailsService.setFavouriteMerchantDetails(res.data);
       }
       else{
-        console.log(res.message, 'getFavouriteMerchants');
+        console.log(res.message);
+        // TODO:: Notify Error
       }
     });
   }
@@ -82,23 +82,9 @@ export class BuyGoodsComponent extends BaseTransactComponent implements OnInit {
 
   // Get Transfer charges, then confirm payment.
   getTransferCharges() {
-    const payload = {
-      amount: this.getForm.amount.value.amount,
-      currency: this.getForm.amount.value.currency,
-      destinationAccount: this.getForm.sendTo.value.accountNumber,
-      sourceAccount: this.getForm.sendFrom.value.accountNumber,
-      transferType: '1',
-    };
-    // this.buyGoodsService.getTransferCharges(payload).subscribe((res) => {
-    //     if (res.status) {
-    //       this.confirmPayment(res.data);
-    //     } else {
-    //       // TODO:: Notify error
-    //     }
-    //   }); 
     this.buyGoodsService.getCharges().subscribe((res) => {
       if (res.status) {
-        this.confirmPayment(res.data);
+        this.confirmPayment(res.data.charge);
       } else {
         // TODO:: Notify error
       }
@@ -106,7 +92,7 @@ export class BuyGoodsComponent extends BaseTransactComponent implements OnInit {
   }
 
   // Confirm Payment and return the confirmation boolean before initiating payment.
-  confirmPayment(transcationStatus: string) {
+  confirmPayment(transferFee: string) {
     if (this.buyGoodsForm.valid) {
       const paymentData = {
         from: this.getForm.sendFrom.value,
@@ -116,7 +102,7 @@ export class BuyGoodsComponent extends BaseTransactComponent implements OnInit {
         paymentReason: this.getForm.reason.value,
         fxReferenceId: this.getForm.fxReferenceId.value,
         schedulePayment: this.getForm.schedulePayment.value,
-        transcationStatus,
+        transferFee,
       };
       const dialogRef = this.dialog.open(ConfirmPaymentComponent, {
         data: paymentData,
@@ -125,8 +111,7 @@ export class BuyGoodsComponent extends BaseTransactComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe((res) => {
         if (res.confirmed) {
-          this.sendMoney();
-          console.log('Payment Data', paymentData);
+          this.buyGoods();
         }
       });
     } else {
@@ -135,53 +120,33 @@ export class BuyGoodsComponent extends BaseTransactComponent implements OnInit {
 
 
   // Initiate fund transfer to buy goods.
-  sendMoney() {
+  buyGoods() {
     const payload = {
-      // amount: this.getForm.amount.value.amount,
-      // beneficiaryAccount: this.getForm.sendTo.value.accountNumber,
-      // beneficiaryBank: this.getForm.sendTo.value.bank.bankName,
-      // beneficiaryBankCode: this.getForm.sendTo.value.bank.bankCode,
-      // beneficiaryCurrency: this.getForm.sendTo.value.currency,
-      // beneficiaryName: this.getForm.sendTo.value.accountName,
-      // currency: this.getForm.amount.value.currency,
-      // fxReferenceId: this.getForm.fxReferenceId.value,
-      // paymentReason: this.getForm.reason.value,
-      // schedulePayment: {
-      //   frequency: this.getForm.schedulePayment.value.frequency.value,
-      //   reminderDay: this.getForm.schedulePayment.value.reminderDay.value,
-      //   startDate: this.getForm.schedulePayment.value.startDate.toISOString(),
-      //   endDate: this.getForm.schedulePayment.value.endDate.toISOString(),
-      // },
-      // sourceAccount: this.getForm.sendFrom.value.accountNumber,
-      // transferType: this.transferType.BUY_GOODS,
-      reference: this.getForm.fxReferenceId.value,
-      accountNumber: this.getForm.sendTo.value.accountNumber,
-      tillNumber: this.getForm.sendTo.value.tillNumber,
       amount: this.getForm.amount.value.amount,
+      beneficiaryAccount: this.getForm.sendTo.value.accountNumber,
+      beneficiaryBank: "",
+      beneficiaryBankCode: "",
+      beneficiaryCurrency: this.getForm.sendTo.value.currency,
+      beneficiaryName: this.getForm.sendTo.value.accountName,
       currency: this.getForm.amount.value.currency,
-      remarks: this.getForm.reason.value,
-      bankID: "1",
-      customerId: "1234",
-      countryCode: this.getForm.sendTo.value.countryCode
+      fxReferenceId: this.getForm.fxReferenceId.value,
+      paymentReason: this.getForm.reason.value,
+      schedulePayment: {
+        frequency: this.getForm.schedulePayment.value.frequency.value,
+        reminderDay: this.getForm.schedulePayment.value.reminderDay.value,
+        startDate: this.getForm.schedulePayment.value.startDate.toISOString(),
+        endDate: this.getForm.schedulePayment.value.endDate.toISOString(),
+      },
+      sourceAccount: this.getForm.sendFrom.value.accountNumber,
+      transferType: this.transferType.BUY_GOODS,
     };
+    const tillNumber = {
+      tillNumber: this.getForm.sendTo.value.tillNumber,
+    }
     if (this.buyGoodsForm.valid) {
-      this.buyGoodsService.payBuyGoods(payload).subscribe(
-        (res) => {
-          if (res.status) {
-            this.router.navigate([
-              '/transact/buy-goods/otp-verification',
-            ]);
-          } else {
-            console.log(res.message);
-            // TODO:: Notify Error
-          }
-        },
-        (err) => {
-          alert(
-            `Sorry, we're unable to complete your transaction. Please give us some time to fix the problem and try again later.`
-          );
-        }
-      );
+      this.buyGoodsService.getTillNumber(tillNumber);
+      this.buyGoodsService.payBuyGoods(payload);
+      this.router.navigate(['/transact/buy-goods/otp-verification']);
     }
   }
 }

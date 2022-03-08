@@ -13,22 +13,25 @@ export class BuyGoodsService {
   private dataSource = new BehaviorSubject<string>('service');
   currentData = this.dataSource.asObservable();
 
+  private tillNumber = new BehaviorSubject<string>('service');
+  currentTillNUmber = this.tillNumber.asObservable();
+
   constructor(private http: HttpClient) { }
+
+  payBuyGoods(payload: any): void {
+    this.dataSource.next(payload);
+  }
+
+  getTillNumber(tillNumber: any): void {
+    this.tillNumber.next(tillNumber);
+  }
   
-  payBuyGoods(payload: any): Observable<any> {
-    this.dataSource.next(payload);
-    console.log(this.currentData,"Current Data");
-    return this.http.post(environment.apiUrl + urlList.transfers.payBuyGoods, payload);
+  buyGoodsTransfer(payload: any): Observable<any> {
+    return this.http.post(environment.apiUrl + urlList.transfers.buyGoodsTransfer, payload);
   }
 
-  updateBuyGoods(payload: any): Observable<any> {
-    this.dataSource.next(payload);
-    console.log(this.currentData,"Current Data");
-    return this.http.put(environment.apiUrl + urlList.transfers.payBuyGoods, payload);
-  }
-
-  getTransferCharges(payload: any): Observable<any> {
-    return this.http.post(environment.apiUrl + urlList.transfers.getTransferCharges, payload);
+  getCharges(): Observable<any> {
+    return this.http.get(environment.apiUrl + urlList.transfers.getCharges);
   }
 
   getMerchants(): Observable<any> {
@@ -44,18 +47,6 @@ export class BuyGoodsService {
   }
 
   getFavouriteMerchantDetails(tillNumber: string): Observable<any> {
-    return this.http.post(environment.apiUrl + urlList.dataLookUp.getFavouriteMerchantDetails, tillNumber);
-  }
-
-  getTransactionStatus(referenceNumber: string): Observable<any> {
-    return this.http.get(environment.apiUrl + urlList.transactionStatus.getTransactionStatus + referenceNumber);
-  }
-
-  getLimit(): Observable<any> {
-    return this.http.get(environment.apiUrl + urlList.dataLookUp.getLimit);
-  }
-
-  getCharges(): Observable<any> {
-    return this.http.get(environment.apiUrl + urlList.transfers.getCharges);
+    return this.http.post(environment.apiUrl + urlList.dataLookUp.getFavouriteMerchantDetails + tillNumber, null);
   }
 }

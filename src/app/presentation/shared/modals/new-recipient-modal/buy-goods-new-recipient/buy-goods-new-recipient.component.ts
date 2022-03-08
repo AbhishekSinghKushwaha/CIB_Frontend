@@ -37,26 +37,20 @@ export class BuyGoodsNewRecipientComponent implements OnInit {
   submit() {
     // Simulate api fetch for number validation with a 2 seconds delay
     setTimeout(() => {
-      const data = {
-        tillNumber: this.getForm.tillNumber.value,
-        tillName: 'Diners Grill', // TODO:: Get this from api after validation
-        accountNumber: '1120161406205'
-      };
-      // this.buyGoodsService.getMerchantDetails(this.getForm.tillNumber.value).subscribe((res) => {
-      //   if(res.status) {
-      //     const data = {
-      //       tillNumber: res.data.till,
-      //       tillName: res.data.name, // TODO:: Get this from api after validation
-      //       accountNumber: res.data.account
-      //     };
-      //     this.newRecipientService.set(data);
-      //     console.log(res.data, 'res.data');
-      //   }
-      //   else{
-      //     console.log(res.message, 'res.message');
-      //   }
-      // });
-      this.newRecipientService.set(data);
+      this.buyGoodsService.getMerchantDetails(this.getForm.tillNumber.value).subscribe((res) => {
+        if(res.status) {
+          const data = {
+            tillNumber: res.data.till,
+            accountName: res.data.name,
+            accountNumber: res.data.account,
+            countryCode: res.data.countryCode
+          };
+          this.newRecipientService.set(data);
+        }
+        else{
+          console.log(res.message);
+        }
+      });
       this.dialog.closeAll();
     }, 2000);
   }

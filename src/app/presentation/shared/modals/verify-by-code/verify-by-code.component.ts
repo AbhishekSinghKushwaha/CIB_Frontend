@@ -11,12 +11,12 @@ import {
 import { otpCodeModel } from 'src/app/core/domain/otp-code.model';
 import { OtpCodeService } from 'src/app/core/services/otp-code/otp-code.service';
 import { FormControl, FormGroup, FormArray, Validators, FormBuilder } from '@angular/forms';
-import { GenerateOtpService } from 'src/app/core/services/generate-otp/generate-otp.service';
 import { BuyGoodsService } from 'src/app/core/services/transfers/buy-goods/buy-goods.service';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { SharedUtils } from './../../../../core/utils/shared.util';
 import { NotificationModalService } from 'src/app/core/services/modal-services/notification-modal/notification-modal.service';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 
 @Component({
@@ -52,19 +52,19 @@ export class VerifyByCodeComponent implements OnInit {
 
   constructor(
     private readonly otpCodeService: OtpCodeService,
-      private readonly generateOtpService: GenerateOtpService,
       private readonly buyGoodsService: BuyGoodsService,
       private readonly router: Router,
       private readonly fb: FormBuilder,
       private readonly notificationModalService: NotificationModalService,
+      private readonly authService: AuthService
     ) {
     this.initOtpForm();
   }
 
-    ngOnInit(): void {
-      this.initForm();
-    }
-
+  ngOnInit(): void {
+    this.initForm();
+    this.initOTPTimer();
+  }
     get f(): any {
       return this.verifyOtpForm.controls;
     }
@@ -77,6 +77,23 @@ export class VerifyByCodeComponent implements OnInit {
       this.verifyOtpForm = this.fb.group({
         digits: this.fb.array([]),
       });
+    }
+
+    initOTPTimer(seconds: number = 60): void {
+      this.timeToResend = seconds;
+      const intervalId = setInterval(() => {
+        this.timeToResend = this.timeToResend - 1;
+        if (this.timeToResend === 0) {
+          clearInterval(intervalId);
+        }
+      }, 1000);
+    }
+    restartOTPTimer(): void {
+      const intervalId = setInterval(() => {
+        this.otpResent = false;
+        this.initOTPTimer();
+        clearInterval(intervalId);
+      }, 5000);
     }
 
     modalIncorectVerification(): void {
@@ -110,47 +127,62 @@ export class VerifyByCodeComponent implements OnInit {
     setTimeout(() => (this.alertVisible = false), 2500);
   }
 
-  resendOtp() {
-    this.interval = setInterval(() => {
-      if(this.timeLeft > 0) {
-        this.timeLeft--;
-      } else {
-        this.timeLeft = 60;
-        this.pauseTimer();
-      }
-    },1000)
-    this.showAlert("We’ve sent you another code");
-    this.buyGoodsService.currentData.subscribe(data => {
-      this.payload = data;
-      if(data) {
-        this.generateOtpService.regenerateOtp(this.payload).subscribe((res) => {
-          if(res.status){
-            console.log(res.data, "otp");
-          }
-        });
-      }
-    });
+  public async resendOTPCode(): Promise<void> {
     this.verifyOtpFormArray.reset();
+    this.showAlert("We’ve sent you another code");
+    this.authService.resendOTP().subscribe(
+      (data) => {
+        this.otpResent = true;
+        this.restartOTPTimer();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   verify() {
     if (this.verifyOtpFormArray.valid) {
       this.onOTPVerified.next(this.verifyOtpFormArray.getRawValue().join(''));
-      this.buyGoodsService.currentData.subscribe(data => {
-        this.payload = data;
-        if(data) {
-          this.buyGoodsService.payBuyGoods(this.payload).subscribe((res) => {
-            if(res.status){
-              this.router.navigate(["/transact/buy-goods/submit-transfer"]);
-            }
-          });
-        }
-      });
     }
+    this.submitOtp(this.verifyOtpFormArray.getRawValue().join(''));
   }
 
-  pauseTimer() {
-    clearInterval(this.interval);
+  submitOtp(otp: string) {
+    this.buyGoodsService.currentData.subscribe(data => {
+      this.payload = data;
+    });
+    this.otpError = false;
+    if (otp) {
+      this.authService.submitOTP(otp).subscribe(
+        (response) => {
+          if (response) {
+
+            this.buyGoodsService.buyGoodsTransfer(this.payload).subscribe(
+              (res) => {
+                if (res.status) {
+                  this.router.navigate(["/transact/buy-goods/submit-transfer"]);
+                } else {
+                  console.log(res.message);
+                  // TODO:: Notify Error
+                }
+              },
+              (err) => {
+                alert(
+                  `Sorry, we're unable to complete your transaction. Please give us some time to fix the problem and try again later.`
+                );
+              }
+            );
+          } else {
+            this.otpError = true;
+          }
+        },
+        (error) => {
+          this.otpError = true;
+          console.log({ error });
+        }
+      );
+    }
   }
 
   check(index: number, field: any, event: any): void {

@@ -35,7 +35,6 @@
     "buyGoodsTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
     "getTransferCharges": "/cibpaymentservice-v1/api/v1/Transfer/GetTransferCharge",
     "getAccountDetails": "/cibpaymentservice-v1/api/v1/Transfer/NameEnquiry",
-    "payBuyGoods": "/cibpaymentservice-v1/api/v1/BuyGoods/Pay",
     "getCharges": "/cibpaymentservice-v1/api/v1/BuyGoods/Charges"
   },
   "dataLookUp": {
@@ -46,8 +45,7 @@
     "getFavouriteMerchants": "/cibpaymentservice-v1/api/v1/BuyGoods/FavoriteMerchants",
     "getMerchants": "/cibpaymentservice-v1/api/v1/BuyGoods/Merchants",
     "getMerchantDetails": "/cibpaymentservice-v1/api/v1/BuyGoods/MerchantDetail/",
-    "getFavouriteMerchantDetails": "/cibpaymentservice-v1/api/v1/BuyGoods/FavoriteMerchants/",
-    "getLimit": "/cibpaymentservice-v1/api/v1/BuyGoods/Limit"
+    "getFavouriteMerchantDetails": "/cibpaymentservice-v1/api/v1/BuyGoods/FavoriteMerchants/"
   },
   "statement": {
     "getPdf": "/v1/generatepdf/statement"
@@ -65,12 +63,5 @@
     "edit": "/cibpaymentservice-v1/api/v1/Beneficiary/EditBeneficiary",
     "remove": "/cibpaymentservice-v1/api/v1/Beneficiary/RemoveBeneficiary",    
     "getAll": "/cibpaymentservice-v1/api/v1/Beneficiary/GetBeneficiaries"
-  },
-  "otp": {
-    "generateOtp": "/cibpaymentservice-v1/api/v1/BuyGoods/GenerateOtp",
-    "regenerateOtp":"/cibpaymentservice-v1/api/v1/BuyGoods/RegenerateOtp"
-  },
-  "transactionStatus": {
-    "getTransactionStatus": "/cibpaymentservice-v1/api/v1/BuyGoods/TransactionStatus/"
   }
 }
