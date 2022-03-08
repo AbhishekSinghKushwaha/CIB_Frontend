@@ -2,7 +2,7 @@ import { RouterModule } from '@angular/router';
 import { CardComponentComponent } from './card-component/card-component.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LanguageInputComponent } from './language-input/language-input.component';
 import { CustomerSupportComponent } from './customer-support/customer-support.component';
 import { MatStyleModule } from 'src/app/mat-style.module';
@@ -23,6 +23,11 @@ import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { LanguageTranslateModule } from 'src/app/translate.module';
+import { SecurityVerificationComponent } from './security-verification/security-verification.component';
+import { SecurityChallengeComponent } from './security-challenge/security-challenge.component';
+import { SecurityQuestionsModalModule } from '../modals/security-questions-modal/security-questions-modal.module';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+
 
 const components = [
   AccountDropdownItemComponent,
@@ -40,7 +45,10 @@ const components = [
   WelcomeInfoComponent,
   ConfirmationCompletionComponent,
   LogoutWarningModalComponent,
-  LogoutConfirmationModalComponent
+  LogoutConfirmationModalComponent,
+  SecurityVerificationComponent,
+  SecurityChallengeComponent,
+  ResetPasswordComponent
 ];
 
 @NgModule({
@@ -50,8 +58,12 @@ const components = [
     MatStyleModule,
     ReactiveFormsModule,
     RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
     LanguageModalModule,
-    LanguageTranslateModule.forRoot()
+    LanguageTranslateModule.forRoot(),
+    SecurityQuestionsModalModule
+
   ],
   exports: components
 })

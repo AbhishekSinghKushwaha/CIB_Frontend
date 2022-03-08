@@ -100,10 +100,6 @@ export class LoginComponent implements OnInit {
     this.notificationModalService.open(message);
   }
 
-  navigateToForgotPasswordSection(): void {
-    this.router.navigate(['forgot-password']);
-  }
-
   modalLogout(): void {
     const message = SharedUtils.getNotificationModalParam({
       title: 'Are you sure you want to sign out?',

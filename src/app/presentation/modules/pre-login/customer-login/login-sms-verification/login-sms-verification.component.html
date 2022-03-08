@@ -1,12 +1,7 @@
 <div class="card border-0 sms-verification pt-2">
   <div class="row ps-5">
     <div class="col-md-12">
-      <button
-        mat-button
-        aria-label="Back"
-        class="back-icon"
-        routerLink="/auth/login"
-      >
+      <button mat-button aria-label="Back" class="back-icon">
         <div class="strong-text">
           <mat-icon svgIcon="chevron-left" class="chevron"></mat-icon>
           <span> Verify </span>
@@ -14,8 +9,10 @@
       </button>
     </div>
   </div>
-  <app-sms-verification
-    (onOTPVerified)="submit($event)"
-    [otpError]="otpError"
-  ></app-sms-verification>
+  <div class="card-body ps-5">
+    <app-sms-verification
+      (onOTPVerified)="submit($event)"
+      [otpError]="otpError"
+    ></app-sms-verification>
+  </div>
 </div>

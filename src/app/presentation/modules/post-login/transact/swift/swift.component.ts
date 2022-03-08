@@ -21,7 +21,7 @@ export class SwiftComponent implements OnInit {
   get getForm() {
     return this.swiftTransferForm.controls;
   }
-
+  userCountry = "KE";
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -43,30 +43,36 @@ export class SwiftComponent implements OnInit {
       schedulePayment: ["", [Validators.required]],
       license: ["", [Validators.required]],
       chargeOption: ["", [Validators.required]],
-      paymentCategory: ["", [Validators.required]],
+      paymentCategory: [
+        "",
+        [
+          this.userCountry === "CD"
+            ? Validators.required
+            : Validators.nullValidator,
+        ],
+      ],
       reason: [""],
     });
   }
 
   getTransferCharges() {
-    this.confirmPayment("100");
-    // const payload = {
-    //   amount: this.getForm.amount.value.amount,
-    //   currency: this.getForm.amount.value.currency,
-    //   destinationAccount: this.getForm.sendTo.value.accountNumber,
-    //   destinationBankCode: this.getForm.sendTo.value.bank.bic,
-    //   destinationCountryCode: this.getForm.sendTo.value.country.countryCode, // Default have it as kenya, then change to pick the user's country
-    //   countryCode: "KE", //TODO:: Default have it as kenya, then change to pick the user's country
-    //   sourceAccount: this.getForm.sendFrom.value.accountNumber,
-    //   transferType: this.transferType.SWIFT, // For Another Bank Transfer Type
-    // };
-    // this.swiftTransferService.getTransferCharges(payload).subscribe((res) => {
-    //   if (res.status) {
-    //     this.confirmPayment(res.data);
-    //   } else {
-    //     // TODO:: Notify error
-    //   }
-    // });
+    const payload = {
+      amount: this.getForm.amount.value.amount,
+      currency: this.getForm.amount.value.currency,
+      destinationAccount: this.getForm.sendTo.value.accountNumber,
+      destinationBankCode: this.getForm.sendTo.value.bank.bic,
+      destinationCountryCode: this.getForm.sendTo.value.country.countryCode,
+      countryCode: "KE", //TODO:: Default have it as kenya, then change to pick the user's country
+      sourceAccount: this.getForm.sendFrom.value.accountNumber,
+      transferType: this.transferType.SWIFT, // For Another Bank Transfer Type
+    };
+    this.swiftTransferService.getTransferCharges(payload).subscribe((res) => {
+      if (res.status) {
+        this.confirmPayment(res.data);
+      } else {
+        // TODO:: Notify error
+      }
+    });
   }
 
   // Confirm Payment and return the confirmation boolean before initiating payment.
@@ -164,6 +170,8 @@ export class SwiftComponent implements OnInit {
       transferType: Number(this.transferType.SWIFT), // SWIFT
       physicalAddress: this.getForm.sendTo.value.streetAddress,
       chargeOption: this.getForm.chargeOption.value.charge,
+      beneficiaryBankBranchCode: this.getForm.sendTo.value.bank.branchCode,
+      sectorCode: this.getForm.paymentCategory.value.sectorCode,
     };
     if (this.swiftTransferForm.valid) {
       this.swiftTransferService.sendViaSwift(payload).subscribe((res) => {
