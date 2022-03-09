@@ -1,12 +1,12 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { BankModel } from '../../domain/bank.model';
-import urlList from '../service-list.json';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { environment } from "src/environments/environment";
+import { BankModel } from "../../domain/bank.model";
+import urlList from "../service-list.json";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class DataLookupService {
   constructor(private http: HttpClient) {}
@@ -41,5 +41,10 @@ export class DataLookupService {
     return this.http.get(
       environment.apiUrl + urlList.customerOnboarding.getProductsAndServices
     );
+  }
+
+  // Get sectors / Transaction BCC Code for swift/ Payment Category
+  getSectors(): Observable<any> {
+    return this.http.get(environment.apiUrl + urlList.dataLookUp.getSectors);
   }
 }

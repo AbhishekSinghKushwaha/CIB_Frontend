@@ -48,6 +48,7 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getBanks();
     this.getCountries();
     this.getUserAccounts();
+    this.getSectors();
     this.loadingListener();
   }
 
@@ -98,6 +99,14 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     this.accountsService.getUserAccounts().subscribe((res) => {
       if (res.status) {
         this.sharedDataService.setUserAccounts(res.data);
+      }
+    });
+  }
+
+  getSectors() {
+    this.dataLookupService.getSectors().subscribe((res) => {
+      if (res.status) {
+        this.storageService.setData("sectors", res.data);
       }
     });
   }

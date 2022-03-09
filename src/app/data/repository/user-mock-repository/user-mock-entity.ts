@@ -9,5 +9,4 @@ export interface UserMockEntity {
   response_code: number;
   smsToken: string;
   username: string;
-  securityQuestions: { question: string; answer: string }[];
 }

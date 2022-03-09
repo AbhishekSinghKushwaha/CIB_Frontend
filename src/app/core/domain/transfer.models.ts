@@ -3,7 +3,7 @@ export interface FromAccount {
   currency: string;
   accountName?: string;
   accountNumber: number;
-  accountType?: 'Savings' | 'Current' | 'Mobile account';
+  accountType?: "Savings" | "Current" | "Mobile account";
   transactionLimit: number;
   balanceHidden?: false;
   bankId?: string;
@@ -53,4 +53,9 @@ export interface MobileOperator {
   serviceName?: string; // i.e MPESA, Equitel Money
   serviceIconPath?: string; // i.e Mpesa Icon logo
   operatorCountry?: string;
+}
+
+export interface Sector {
+  sectorCode?: string;
+  sectorDescription?: string;
 }

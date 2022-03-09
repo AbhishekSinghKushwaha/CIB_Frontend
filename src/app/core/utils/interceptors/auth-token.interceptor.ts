@@ -18,7 +18,7 @@ export class AuthTokenInterceptor implements HttpInterceptor {
       request = request.clone({
         headers: request.headers.set(
           'Authorization',
-          `${authToken.token_type} ${authToken.access_token}`
+          `Bearer ${authToken.access_token}`
         ),
       });
     }

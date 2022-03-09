@@ -8,6 +8,7 @@ import { MatStyleModule } from 'src/app/mat-style.module';
 import { SmsVerificationGuard } from 'src/app/core/utils/guards/sms-verification/sms-verification.guard';
 import { SecurityVerificationGuard } from 'src/app/core/utils/guards/security-verification/security-verification.guard';
 import { SecurityChallengeGuard } from 'src/app/core/utils/guards/security-challenge/security-challenge.guard';
+import { LanguageTranslateModule } from 'src/app/translate.module';
 
 @NgModule({
   declarations: [CustomerLoginComponent],
@@ -16,6 +17,7 @@ import { SecurityChallengeGuard } from 'src/app/core/utils/guards/security-chall
     CustomerLoginRoutingModule,
     SharedComponentsModule,
     MatStyleModule,
+    LanguageTranslateModule.forRoot()
   ],
   providers: [
     SmsVerificationGuard,
@@ -23,4 +25,4 @@ import { SecurityChallengeGuard } from 'src/app/core/utils/guards/security-chall
     SecurityChallengeGuard,
   ],
 })
-export class CustomerLoginModule {}
+export class CustomerLoginModule { }

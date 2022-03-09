@@ -41,7 +41,8 @@
     "getCountries": "/cibpaymentservice-v1/api/v1/Transfer/GetCountries",
     "getBanks": "/cibpaymentservice-v1/api/v1/Transfer/GetBanks/",
     "getCurrencies": "/cibpaymentservice-v1/api/v1/Transfer/GetCurrencies",
-    "getSubsidiaries": "/cibpaymentservice-v1/api/v1/Transfer/GetSubsidiaries"
+    "getSubsidiaries": "/cibpaymentservice-v1/api/v1/Transfer/GetSubsidiaries",
+    "getSectors": "/cibpaymentservice-v1/api/v1/Transfer/GetSectors"
   },
   "statement": {
     "getPdf": "/v1/generatepdf/statement"
@@ -49,16 +50,26 @@
   "login": {
     "loginUser": "/cibuseraccess-v1/api/Auth/oauth/token",
     "verifyOtp": "/cibuseraccess-v1/api/Auth/login/verifyOtp",
+    "verifyForgetPasswordOtp": "/cibuseraccess-v1/api/Auth/user/verifyForgotPasswordOtp",
     "resendOtp": "/cibuseraccess-v1/api/Auth/generateOtp",
     "validateOtp": "/authorization/user/validateOTPReset",
-    "securityQuestions": "/authorization/user/securityQuestions",
-    "securityAnswers": "/authorization/user/securityAnswers"
+    "securityAnswers": "/cibuseraccess-v1/api/SecurityQuestion/user/verify-securityquestions",
+    "validateUser": "/cibuseraccess-v1/api/Auth/user/initiatePasswordReset",
+    "getSecurityQuestions": "/cibuseraccess-v1/api/SecurityQuestion/securityquestions",
+    "getMySecurityQuestions": "/cibuseraccess-v1/api/SecurityQuestion/user/securityquestions",
+    "resetPassword": "/cibuseraccess-v1/api/Auth/user/resetPassword"
   },
   "beneficiary": {
     "add": "/cibpaymentservice-v1/api/v1/Beneficiary/AddBeneficiary",
     "edit": "/cibpaymentservice-v1/api/v1/Beneficiary/EditBeneficiary",
-    "remove": "/cibpaymentservice-v1/api/v1/Beneficiary/RemoveBeneficiary",    
+    "remove": "/cibpaymentservice-v1/api/v1/Beneficiary/RemoveBeneficiary",
     "getAll": "/cibpaymentservice-v1/api/v1/Beneficiary/GetBeneficiaries"
+  },
+  "userAdministration": {
+    "getUsers": "/cibuseraccess-v1/api/UserAdministration/users",
+    "changeStatus": "/cibuseraccess-v1/api/UserAdministration/disable-enable",
+    "delete": "/cibuseraccess-v1/api/UserAdministration/delete",
+    "getUserById": "/cibuseraccess-v1/api/Auth/user/single-user"
   },
   "pesalink": {
     "phoneNumber": "/cibpaymentservice-v1/api/v1/Transfer/PesalLink/",
