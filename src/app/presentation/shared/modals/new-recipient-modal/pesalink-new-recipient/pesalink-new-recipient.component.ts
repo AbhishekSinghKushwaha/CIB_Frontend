@@ -56,7 +56,6 @@ export class PesalinkNewRecipientComponent implements OnInit {
     }
     const payload = {
       accountNumber: this.selectBankForm.controls.accountNumber.value,
-      bankCode: '54',
     };
     this.mode === "bank"
       ? 
