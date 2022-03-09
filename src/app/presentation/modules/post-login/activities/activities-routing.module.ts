@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ActivitiesComponent } from './activities.component';
 import { ActivityDetailComponent } from './activity-detail/activity-detail.component';
+import { ActivityOtpVerificationComponent } from './activity-otp-verification/activity-otp-verification.component';
 
 const routes: Routes = [{
   path: '',
@@ -10,6 +11,10 @@ const routes: Routes = [{
 {
   path: 'detail/:id/:type',
   component: ActivityDetailComponent
+},
+{
+  path: 'verifyOTP',
+  component: ActivityOtpVerificationComponent
 }];
 
 @NgModule({

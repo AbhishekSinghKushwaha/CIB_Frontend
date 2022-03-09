@@ -8,12 +8,16 @@ import { MatStyleModule } from 'src/app/mat-style.module';
 import { FormsModule } from '@angular/forms';
 import { ActivityDetailComponent } from './activity-detail/activity-detail.component';
 import { TransactionReceiptModalModule } from 'src/app/presentation/shared/modals/transaction-receipt-modal/transaction-receipt-modal.module';
+import { ConfirmationModalModule } from 'src/app/presentation/shared/modals/confirmation-modal/confirmation-modal.module';
+import { ConfirmDialogModule } from 'src/app/presentation/shared/modals/confirm-dialog/confirm-dialog.module';
+import { ActivityOtpVerificationComponent } from './activity-otp-verification/activity-otp-verification.component';
 
 
 @NgModule({
   declarations: [
     ActivitiesComponent,
-    ActivityDetailComponent
+    ActivityDetailComponent,
+    ActivityOtpVerificationComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +25,9 @@ import { TransactionReceiptModalModule } from 'src/app/presentation/shared/modal
     SharedComponentsModule,
     MatStyleModule,
     FormsModule,
-    TransactionReceiptModalModule
+    TransactionReceiptModalModule,
+    ConfirmationModalModule,
+    ConfirmDialogModule
   ]
 })
 export class ActivitiesModule { }
