@@ -14,6 +14,7 @@ import { SupportingDocumentsUploadService } from './../../../../../core/services
   styleUrls: ['./activity-detail.component.scss']
 })
 export class ActivityDetailComponent implements OnInit {
+  show = true;
   id: number;
   status: string;
   category: string;

@@ -55,7 +55,7 @@ export class MobileMoneyComponent implements OnInit {
       currency: this.getForm.amount.value.currency,
       destinationAccount: this.getForm.sendTo.value.accountNumber,
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
-      transferType: this.transferType.MOBILE_MONEY,
+      transferType: Number(this.transferType.MOBILE_MONEY),
       countryCode: "KE", //TODO:: Default have it as kenya, then change to pick the user's country
     };
     this.swiftTransferService.getTransferCharges(payload).subscribe((res) => {
@@ -97,7 +97,6 @@ export class MobileMoneyComponent implements OnInit {
           value: `${this.getForm.sendTo.value.firstName} ${this.getForm.sendTo.value.lastName}<br>
             <span><strong>Bank:</strong></span> ${this.getForm.sendTo.value.bank.bankName}<br>
             <span><strong>Ac/No:</strong></span> ${this.getForm.sendTo.value.accountNumber}<br>
-            <span><strong>SWIFT Code:</strong></span>  ${this.getForm.sendTo.value.bank.bic}<br>
             ${this.getForm.sendTo.value.country.countryName}
           `,
         },
@@ -110,14 +109,6 @@ export class MobileMoneyComponent implements OnInit {
           value: `${this.getForm.schedulePayment.value.frequency.frequency}<br>
             ${this.getForm.schedulePayment.value.reminderDay.reminder}
           `,
-        },
-        {
-          key: "IBAN Number",
-          value: `${this.getForm.sendTo.value.IBANNumber}`,
-        },
-        {
-          key: "Payment Category",
-          value: `${this.getForm.paymentCategory.value.name}`,
         },
         {
           key: "FX Reference ID",
@@ -187,7 +178,7 @@ export class MobileMoneyComponent implements OnInit {
         endDate: this.getForm.schedulePayment.value.endDate.toISOString(),
       },
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
-      transferType: this.transferType.MOBILE_MONEY,
+      transferType: Number(this.transferType.MOBILE_MONEY),
     };
 
     if (this.mobileMoneyTransferForm.valid) {

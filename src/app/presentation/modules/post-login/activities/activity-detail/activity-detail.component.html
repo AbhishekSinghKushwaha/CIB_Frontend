@@ -1,4 +1,4 @@
-<div class="activity-detail p-3" *ngIf="status !== 'Reinitiated'">
+<div class="activity-detail p-3" *ngIf="status !== 'Reinitiated' || !show">
   <div class="mb-3">
     <button
       mat-icon-button
@@ -31,14 +31,14 @@
   <div class="row-fluid">
     <div class="row">
       <div class="col-6">
-        <a mat-button href="https://www.google.com/" class="bg-light">
+        <a mat-button href="" class="bg-light">
           <mat-icon
             [svgIcon]="transactionIcon[data.status]"
             mat-raised-button
           ></mat-icon>
           {{ data.status }}
         </a>
-        <a mat-button href="https://www.google.com/">
+        <a mat-button href="">
           <mat-icon svgIcon="edit"></mat-icon>
           Edit
         </a>
@@ -83,6 +83,24 @@
     </div>
   </div>
 </div>
+<mat-card *ngIf="show">
+  <mat-card-content>
+    <div class="row">
+      <div class="col-4">
+        <small class="strong-text"> Pending Requests </small>
+        <h3 class="strong-text">12</h3>
+      </div>
+      <div class="col-4">
+        <small class="strong-text"> Approved Transactions </small>
+        <h3 class="strong-text">253</h3>
+      </div>
+      <div class="col-4">
+        <small class="strong-text"> Rejected Transactions </small>
+        <h3 class="strong-text">253</h3>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
 <div class="row pe-5 ps-5" *ngIf="status !== 'Reinitiated'">
   <div
     class="alert alert-danger"
