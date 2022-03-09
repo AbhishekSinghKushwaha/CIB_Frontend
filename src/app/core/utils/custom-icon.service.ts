@@ -789,6 +789,12 @@ export class CustomIconService {
         'assets/images/icons/visual-support-icons-exclamation.svg'
       )
     );
+    this.matIconRegistry.addSvgIcon(
+      'equity_primary_logo',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/logos/one-equity/Primary.svg'
+      )
+    );
 
   }
 }

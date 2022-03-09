@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ConfirmationModel } from 'src/app/core/domain/confirmation.model';
 import { TransactionListmodel } from 'src/app/core/domain/transaction-list.model';
+import { TransactionReceiptModalService } from 'src/app/core/services/modal-services/transaction-receipt-modal/transaction-receipt-modal.service';
 import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
 import { SupportingDocumentsUploadService } from './../../../../../core/services/supporting-documents-upload/supporting-documents-upload.service';
 
@@ -18,7 +19,8 @@ export class ActivityDetailComponent implements OnInit {
   transactionIcon = { Approved: 'transaction_approved', Rejected: 'transaction_rejected', Pending: 'transaction_pending' };
 
   constructor(private readonly supportingDocumentsUploadService: SupportingDocumentsUploadService,
-    private readonly route: ActivatedRoute) {
+    private readonly route: ActivatedRoute,
+    private readonly transactionReceiptModalService: TransactionReceiptModalService) {
     this.id = route.snapshot.params['id'];
     this.category = route.snapshot.params['type'];
     this.data = (this.category === 'history' ? mockData.histororicalTransactions.find((_, i) => i === +this.id) : mockData.pendingTransactions.find((_, i) => i === this.id)) || mockData.pendingTransactions[0];
@@ -30,5 +32,9 @@ export class ActivityDetailComponent implements OnInit {
 
   openUploadModal() {
     this.supportingDocumentsUploadService.open()
+  }
+
+  openReceipt() {
+    this.transactionReceiptModalService.open()
   }
 }

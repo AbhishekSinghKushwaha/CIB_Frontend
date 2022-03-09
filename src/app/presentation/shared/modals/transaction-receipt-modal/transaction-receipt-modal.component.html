@@ -1,0 +1,145 @@
+<div class="receipt-screen p-0">
+  <button mat-icon-button matSuffix class="close-button" (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <div *ngIf="view === 'main'">
+    <p class="text-center fw-bold pt-2">Transaction receipt</p>
+    <div class="p-3 main-div">
+      <mat-card>
+        <mat-card-content>
+          <div
+            class="h-100 justify-content-center align-items-center upper-layer"
+          >
+            <div class="d-flex justify-content-center mb-3">
+              <mat-icon
+                svgIcon="equity_primary_logo"
+                style="transform: scale(2)"
+              ></mat-icon>
+            </div>
+            <div class="d-flex justify-content-center">
+              <small class="strong-text">
+                Thank you for paying with Equity online
+              </small>
+            </div>
+            <div class="d-flex justify-content-center">
+              <small class="text-grey"
+                >Hello Emmanuel, here is your receipt
+              </small>
+            </div>
+          </div>
+          <div
+            class="h-100 justify-content-center align-items-center lower-layer mb-3"
+          >
+            <small class="d-flex justify-content-center text-grey mt-2"
+              >Amount</small
+            >
+            <h2 class="d-flex justify-content-center text-danger strong-text">
+              33,000.00 KES
+            </h2>
+
+            <small class="d-flex justify-content-center strong-text">
+              September 2020 rent for
+            </small>
+            <small class="d-flex justify-content-center strong-text">
+              Babylon Gardens A13
+            </small>
+
+            <small class="d-flex justify-content-center text-grey mt-2"
+              >Payment reason
+            </small>
+
+            <small class="d-flex justify-content-center text-grey mt-3"
+              >Payment to
+            </small>
+            <small class="d-flex justify-content-center strong-text"
+              >Kevin Lubega M-PESA</small
+            >
+            <small class="d-flex justify-content-center strong-text"
+              >254700027233444 MPESA</small
+            >
+            <small class="d-flex justify-content-center strong-text"
+              >Ref. WIH3YEUEUE8</small
+            >
+
+            <small class="d-flex justify-content-center text-grey mt-3"
+              >Sent from
+            </small>
+            <small class="d-flex justify-content-center strong-text"
+              >Emmanuel Machara</small
+            >
+            <small class="d-flex justify-content-center strong-text"
+              >Savings - 009999</small
+            >
+
+            <small class="text-grey d-flex justify-content-center mt-3"
+              >Ref. 42094823742039</small
+            >
+            <small class="text-grey d-flex justify-content-center">
+              21 August 2020 11:59:08 EAT</small
+            >
+          </div>
+          <div class="h-100 justify-content-center align-items-center mb-3">
+            <div class="row">
+              <div class="col-2">
+                <img
+                  class="img-fluid"
+                  src="assets/images/icons/visual-support-icons-barcode.svg"
+                />
+              </div>
+              <div class="col-10">
+                <small class="text-grey">
+                  Scan this code to download One Equity from Google Play or
+                  Apple App Store
+                  <span class="text-primary">
+                    https://online.equitygroup.com</span
+                  >
+                </small>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="row d-flex flex-column p-4">
+      <button mat-stroked-button color="primary" (click)="close()">
+        Send to my email
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="setView()"
+        class="mt-2"
+      >
+        Download
+      </button>
+    </div>
+  </div>
+  <div *ngIf="view === 'download'">
+    <p class="text-center fw-bold pt-2">Download as</p>
+    <div class="row gx-0 p-3">
+      <div
+        *ngFor="let item of downloadOptions; let isLast = last; let i = index"
+        class="row cursor-pointer align-items-stretch"
+        (click)="close()"
+      >
+        <div class="col-md-2">
+          <img
+            class="img-fluid"
+            src="./assets/images/icons/visual-support-icon-card-insertion-with-grey-bg.svg"
+            height="200px"
+            width="200px"
+          />
+        </div>
+        <div class="col-md-8">
+          {{ item }}
+        </div>
+        <div class="col-md-2">
+          <mat-icon color="primary" svgIcon="caret_right"></mat-icon>
+        </div>
+        <mat-divider *ngIf="!isLast" class="m-3"></mat-divider>
+      </div>
+    </div>
+  </div>
+</div>

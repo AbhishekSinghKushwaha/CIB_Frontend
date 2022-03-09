@@ -19,7 +19,7 @@
       <div class="col-4" *ngIf="data.status === 'Approved'">
         <app-card-component
           [data]="{ text: 'View or download receipt', suffixIcon: 'eyes_view' }"
-          (click)="openUploadModal()"
+          (click)="openReceipt()"
         ></app-card-component>
       </div>
     </div>

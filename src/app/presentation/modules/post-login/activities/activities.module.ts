@@ -7,6 +7,7 @@ import { SharedComponentsModule } from 'src/app/presentation/shared/components/s
 import { MatStyleModule } from 'src/app/mat-style.module';
 import { FormsModule } from '@angular/forms';
 import { ActivityDetailComponent } from './activity-detail/activity-detail.component';
+import { TransactionReceiptModalModule } from 'src/app/presentation/shared/modals/transaction-receipt-modal/transaction-receipt-modal.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ActivityDetailComponent } from './activity-detail/activity-detail.compo
     ActivitiesRoutingModule,
     SharedComponentsModule,
     MatStyleModule,
-    FormsModule
+    FormsModule,
+    TransactionReceiptModalModule
   ]
 })
 export class ActivitiesModule { }
