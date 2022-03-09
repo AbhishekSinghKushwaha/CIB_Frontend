@@ -36,11 +36,11 @@ const TransferType = {
   EFT: "4",
   SWIFT: "5",
   RTGS: "6",
-  BUY_GOODS: "7",
+  BUY_GOODS: "11",
   MOBILE_MONEY: "8",
   BUY_AIRTIME: "9",
-  PESALINK: "10",
-  INTER_COUNTRY_TRANSFER: "11",
+  PESALINK: "7",
+  INTER_COUNTRY_TRANSFER: "10",
 };
 
 const SwiftChargesOptions = [

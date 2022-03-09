@@ -86,7 +86,7 @@ export class PesaLinkComponent implements OnInit {
       currency: this.getForm.amount.value.currency,
       destinationAccount: this.getForm.sendTo.value.accountNumber,
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
-      transferType: '7',
+      transferType: '1',
     };
     this.pesalinkService
     .getTransferCharges(payload)
@@ -127,7 +127,7 @@ export class PesaLinkComponent implements OnInit {
     }
   }
 
-  // Initiate fund transfer to own equity account
+  // Initiate fund transfer via pesalink.
   sendMoney() {
     const payload = {
       amount: this.getForm.amount.value.amount,
@@ -146,15 +146,13 @@ export class PesaLinkComponent implements OnInit {
         endDate: this.getForm.schedulePayment.value.endDate.toISOString(),
       },
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
-      transferType: '7',
+      transferType: '11',
     };
     if (this.pesalinkTransferForm.valid) {
       this.pesalinkService.sendViaPesalink(payload).subscribe(
         (res) => {
           if (res.status) {
-            this.router.navigate([
-              '/transact/transfer-submitted',
-            ]);
+            this.router.navigate(['/transact/transfer-submitted']);
           } else {
             console.log(res.message);
             // TODO:: Notify Error

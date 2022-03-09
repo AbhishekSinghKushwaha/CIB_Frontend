@@ -51,7 +51,6 @@ export class PesalinkNewRecipientComponent implements OnInit {
     const phonePayload = {
       receiverPhone: this.phoneLinkedForm.controls.phoneNumber.value,
       reference: "string",
-      customerId: "string",
       countryCode: "KE",
       destinationBankCode: this.phoneLinkedForm.controls.bank.value.bankCode,
     }
@@ -79,12 +78,9 @@ export class PesalinkNewRecipientComponent implements OnInit {
       : this.pesalinkService.phoneAccountsInquiry(phonePayload).subscribe((res) => {
         if (res.status) {
           this.setAccount = {
-            accountName: res.data.receiverBanks[0].accountAlias,
-            // accountNumber: res.data.accountNumber,
-            // currency: res.data.currency,
-            accountNumber: "1120161406205", // TODO:: Work on the accountNumber
-            currency: "KES", // TODO:: Work on the currency
-            phoneNumber: res.data.receiverPhone,
+            accountNumber: res.data.accountNumber,
+            accountName: res.data.accountName,
+            currency: res.data.currency,
             bank: this.phoneLinkedForm.controls.bank.value
           };
           this.newRecipientService.set(this.setAccount);
