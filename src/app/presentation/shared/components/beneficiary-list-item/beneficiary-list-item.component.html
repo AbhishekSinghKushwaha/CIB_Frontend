@@ -14,23 +14,31 @@
   </div>
   <div class="col-md-3">
     <img
-      class="rounded-circle img-fluid"
-      [src]="
-        data.imageLink ||
-        'https://images.pexels.com/photos/1317712/pexels-photo-1317712.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=750'
+      *ngIf="
+        data?.telcoOperator?.iconUrl || data?.mobileWallet?.iconUrl;
+        else noPath
       "
+      class="rounded-circle img-fluid"
+      [src]="data?.telcoOperator?.iconUrl || data?.mobileWallet?.iconUrl"
       alt="Generic placeholder image"
     />
+    <ng-template #noPath>
+      <div class="circle">
+        <div class="initials">
+          {{ generateInitials(data?.fullName || "") }}
+        </div>
+      </div>
+    </ng-template>
   </div>
   <div class="col-md-8">
     <div class="row">
       <div class="col-md-10">
-        <h4>{{ data.name }}</h4>
+        <h4>{{ data.fullName }}</h4>
+        <small class="mb-1 text-grey">{{ data?.accountNumber }} </small><br />
         <small class="mb-1 text-grey"
-          >{{ data?.phoneNumber || data?.accountName }} </small
-        ><br />
-        <small class="mb-1 text-grey"
-          >{{ data?.channel || data?.accountNumber }} &#183; {{ data?.country }}
+          >{{ data?.bank?.bankName }}
+          {{ data?.mobileWallet?.walletDescription }} &#183;
+          {{ data?.country?.countryName }}
         </small>
       </div>
       <div

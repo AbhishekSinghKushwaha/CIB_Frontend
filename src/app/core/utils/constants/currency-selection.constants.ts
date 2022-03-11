@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { CurrencySelectionModal } from '../../domain/currency-selection.model';
 import { CurrencyModel } from '../../domain/transfer.models';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class CurrencySelectionConstants {
   constructor() { }
   CURRENCY_LISTINGS: CurrencyModel[] = [{

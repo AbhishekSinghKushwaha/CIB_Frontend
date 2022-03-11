@@ -1,0 +1,14 @@
+.toggle-container {
+  text-align: right;
+  margin-right: 1em;
+}
+
+.align-items-center {
+  display: flex;
+  > .label {
+    flex: 1;
+  }
+  > .toggle {
+    flex: 0;
+  }
+}

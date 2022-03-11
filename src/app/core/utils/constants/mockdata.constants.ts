@@ -5,10 +5,13 @@ import { FavouriteBeneficiaryModel } from "./../../domain/favourites-beneficiary
 import { SelectAccountModel } from "./../../domain/select-account.model";
 import { BuyGoodsFavouriteModel } from "./../../domain/buy-goods-favourites.model";
 import { UserListModel, UserModel } from "../../domain/user.model";
-import { MobileOperator } from "../../domain/transfer.models";
 import { CompanyListModel } from "../../domain/company.model";
 import { ConfirmationModel } from "../../domain/confirmation.model";
 import { TransactionListmodel } from "../../domain/transaction-list.model";
+import { BeneficiaryModel } from "../../domain/beneficiary.model";
+import { TransferType } from "./transaction-type.constants";
+import { AirtimeAmountRangeModel } from '../../domain/international-airtime-amount-range.model';
+import { CountryMobileCodeModal } from 'src/app/core/domain/countryCode.model';
 
 const accounts: SelectAccountModel[] = [
   {
@@ -648,39 +651,31 @@ const buyGoodsFavourites: BuyGoodsFavouriteModel[] = [
 
 const accountNumber: string = "2837181638719349";
 
-const mobileOperators: MobileOperator[] = [
+const airtimeAmountRange: AirtimeAmountRangeModel[] = [
   {
-    id: "1",
-    operatorName: "Airtel",
-    operatorIconPath: "assets/images/icons/airtel.svg",
-    serviceName: "Airtel Money",
-    serviceIconPath: "",
-    operatorCountry: "Kenya",
+    amountRangeType: 'Amount range'
   },
   {
-    id: "2",
-    operatorName: "Equitel",
-    operatorIconPath: "assets/images/icons/equitel.svg",
-    serviceName: "Equitel",
-    serviceIconPath: "",
-    operatorCountry: "Kenya",
+    amountRangeType: 'Fixed bundles'
+  }
+];
+
+const mobileCodes: CountryMobileCodeModal[] = [
+  {
+    mobileCode: '+254',
   },
   {
-    id: "3",
-    operatorName: "Safaricom",
-    operatorIconPath: "assets/images/icons/safaricom.svg",
-    serviceName: "MPESA",
-    serviceIconPath: "",
-    operatorCountry: "Kenya",
+    mobileCode: '+256',
   },
   {
-    id: "4",
-    operatorName: "Telkom",
-    operatorIconPath: "assets/images/icons/telkom.svg",
-    serviceName: "T-Kash",
-    serviceIconPath: "",
-    operatorCountry: "Kenya",
+    mobileCode: '+255',
   },
+  {
+    mobileCode: '+249',
+  },
+  {
+    mobileCode: '+250',
+  }
 ];
 
 const transactionDetail: ConfirmationModel[] = [
@@ -766,10 +761,11 @@ export const mockData = {
   buyGoodsFavourites,
   accountNumber,
   users,
-  mobileOperators,
   userList,
   companyList,
   transactionDetail,
   histororicalTransactions,
-  pendingTransactions
+  pendingTransactions,
+  airtimeAmountRange,
+  mobileCodes
 };

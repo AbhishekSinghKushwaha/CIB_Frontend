@@ -1,0 +1,9 @@
+<div class="row align-items-stretch cursor-pointer pb-2" (click)="select()">
+    <div class="col-md-11">
+      <h4 class="strong-text">{{data.text}} {{data.currency}}</h4>
+      <small class="text-grey">{{data.subtext}} {{data.currencyCode}}</small>
+    </div>
+    <div class="col-md-1 p-0">
+      <mat-icon color="primary" [svgIcon]="isChecked ? 'check_round' : 'radio_button_off'"></mat-icon>
+    </div>
+  </div>  

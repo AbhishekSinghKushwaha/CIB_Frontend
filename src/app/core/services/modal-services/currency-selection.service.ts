@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CurrencySelectionComponent } from 'src/app/presentation/shared/modals/currency-selection/currency-selection.component';
 import { CurrencyModel } from '../../domain/transfer.models';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class CurrencySelectionService {
   selected = new Subject<CurrencyModel>();
   private data: CurrencyModel;

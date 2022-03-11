@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TransactionTypeModalService } from './transaction-type-modal.service';
+import { TransferTypeModalService } from './transaction-type-modal.service';
 
-describe('TransactionTypeModalService', () => {
-  let service: TransactionTypeModalService;
+describe('TransferTypeModalService', () => {
+  let service: TransferTypeModalService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(TransactionTypeModalService);
+    service = TestBed.inject(TransferTypeModalService);
   });
 
   it('should be created', () => {
