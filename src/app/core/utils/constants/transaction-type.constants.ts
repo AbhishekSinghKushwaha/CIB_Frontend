@@ -7,18 +7,11 @@ export const TransferType = {
   SWIFT: "5",
   RTGS: "6",
   BUY_GOODS: "11",
-<<<<<<< HEAD
-  MOBILE_MONEY: "8",
-  BUY_AIRTIME: "9",
-  PESALINK: "7",
-  INTER_COUNTRY_TRANSFER: "10",
-=======
   MOBILE_MONEY: "9",
   BUY_AIRTIME: "10",
   PESALINK: "7",
   INTER_COUNTRY_TRANSFER: "",
   SUBSIDIARY: "8",
->>>>>>> c331547a4cebd6aaae2000acc6f1ac46bb6639d1
 };
 
 const SwiftChargesOptions = [
