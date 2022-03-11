@@ -25,6 +25,8 @@ import { SharedDataService } from "src/app/core/services/shared-data/shared-data
 export class TransferFromComponent implements ControlValueAccessor, OnInit {
   sourceAccounts: FromAccount[];
 
+  @Input() transactionType: string;
+
   @Input()
   parentForm!: FormGroup;
 

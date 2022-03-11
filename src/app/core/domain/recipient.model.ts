@@ -1,12 +1,12 @@
-import { BankModel } from './bank.model';
-import { CountryModel } from './bank.model';
-import { MobileOperator } from './transfer.models';
+import { BankModel } from "./bank.model";
+import { CountryModel } from "./bank.model";
+import { MobileWallet, Telco } from "./transfer.models";
 export interface recipientModel {
   country?: CountryModel;
   accountNumber: string;
   accountName?: string;
   bank?: BankModel;
-  mobileOperator?: MobileOperator;
+  mobileWallet?: MobileWallet;
   phoneNumber?: any;
   tillNumber?: any;
   tillName?: any;
@@ -15,4 +15,5 @@ export interface recipientModel {
   IBANNumber?: string;
   streetAddress?: string;
   postalAddress?: string;
+  telco?: Telco;
 }

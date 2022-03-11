@@ -32,10 +32,10 @@ export class SendOrPayToComponent implements OnInit {
     private readonly transferToService: TransferToService,
     private readonly newRecipientService: NewRecipientService
   ) {
-    this.selectedFavourite = transferToService.defaultFavourite;
-    this.transferToService.selectedFavourite.subscribe(
-      (x) => (this.selectedFavourite = x)
-    );
+    this.selectedFavourite = newRecipientService.default;
+    this.newRecipientService.data.subscribe((x) => {
+      this.selectedFavourite = x;
+    });
   }
 
   ngOnInit(): void {
@@ -103,6 +103,16 @@ export class SendOrPayToComponent implements OnInit {
       this.purposeText.navigationSubheading = `Enter account details`;
       this.purposeText.navigationIcon =
         "./assets/images/icons/Visual support_Icon_with_container.svg";
+    }
+    else if (
+      this.transactionType === this.transferType.BUY_AIRTIME
+    ) {
+      this.purposeText.heading = 'Buy for';
+      this.purposeText.subheading = 'Who are you buying airtime for?';
+      this.purposeText.navigationHeading = 'Buy for someone new';
+      this.purposeText.navigationSubheading = `Enter account details`;
+      this.purposeText.navigationIcon =
+        './assets/images/icons/Visual support_Icon_with_container.svg';
     }
   }
 }

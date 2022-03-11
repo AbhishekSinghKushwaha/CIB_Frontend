@@ -6,14 +6,14 @@
   <h3 class="m-4 ms-2">Please select an operator</h3>
 
   <div
-    *ngFor="let item of operators; let i = index"
+    *ngFor="let item of data; let i = index"
     class="row gx-0 align-items-stretch m-2 pb-2 cursor-pointer"
     (click)="select(i)"
   >
     <div class="col-md-2">
       <img
         class="rounded-circle img-d"
-        [src]="item?.operatorIconPath"
+        [src]="item?.iconUrl"
         width="60px"
         height="60px"
         alt="Generic placeholder image"
@@ -22,14 +22,16 @@
     <div class="col-md-9 mx-2">
       <div class="row gx-0 user-list-item" style="height: 60px">
         <div class="col-md-10 d-flex">
-          <div class="align-self-center">{{ item.operatorName }}</div>
+          <div class="align-self-center">{{ item.walletDescription }}</div>
         </div>
         <div class="col-md-2 d-flex">
           <div class="align-self-center">
             <mat-icon
               color="primary"
               [svgIcon]="
-                selected?.id === item?.id ? 'check_round' : 'radio_button_off'
+                selected?.wallet === item?.wallet
+                  ? 'check_round'
+                  : 'radio_button_off'
               "
             ></mat-icon>
           </div>

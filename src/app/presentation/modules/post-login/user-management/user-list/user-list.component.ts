@@ -42,6 +42,14 @@ export class UserListComponent implements OnInit, AfterViewInit {
     'status',
     'actions',
   ];
+
+  filterByColumns: string[] = [
+    'id',
+    'name',
+    'phone',
+    'email'
+  ]
+
   dataSource: MatTableDataSource<User>;
 
   searchControl: FormControl = new FormControl({ value: '', disabled: true });
@@ -81,7 +89,20 @@ export class UserListComponent implements OnInit, AfterViewInit {
   openFilterModal() {
     this.dialog
       .open<UserListSearchModalComponent>(UserListSearchModalComponent, {
-        data: { users: this.users },
+        data: { 
+          collection: this.users, 
+          title: 'User search',          
+          copy: 'Search for a user by entering their ID number, user ID, and phone number',
+          displayedColumns: [
+              'select',
+              'id',
+              'name',
+              'phone',
+              'email',
+              'status',
+            ],
+          filterByColumns: this.filterByColumns
+          },
       })
       .afterClosed()
       .pipe(take(1))
