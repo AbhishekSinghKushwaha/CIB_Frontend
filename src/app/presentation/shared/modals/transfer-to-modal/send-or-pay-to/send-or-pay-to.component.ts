@@ -104,5 +104,15 @@ export class SendOrPayToComponent implements OnInit {
       this.purposeText.navigationIcon =
         "./assets/images/icons/Visual support_Icon_with_container.svg";
     }
+    else if (
+      this.transactionType === this.transferType.BUY_AIRTIME
+    ) {
+      this.purposeText.heading = 'Buy for';
+      this.purposeText.subheading = 'Who are you buying airtime for?';
+      this.purposeText.navigationHeading = 'Buy for someone new';
+      this.purposeText.navigationSubheading = `Enter account details`;
+      this.purposeText.navigationIcon =
+        './assets/images/icons/Visual support_Icon_with_container.svg';
+    }
   }
 }

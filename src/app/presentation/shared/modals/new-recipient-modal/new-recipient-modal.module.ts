@@ -14,7 +14,9 @@ import { MobileMoneyNewRecipientComponent } from './mobile-money-new-recipient/m
 import { BankModalModule } from '../bank-modal/bank-modal.module';
 import { MobileOperatorsModalComponent } from './mobile-operators-modal/mobile-operators-modal.component';
 import { IntercountryNewRecipientComponent } from './intercountry-new-recipient/intercountry-new-recipient.component';
-
+import { AirtimeNewRecepientComponent } from './airtime-new-recepient/airtime-new-recepient.component';
+import { MobileOperatorsModule } from 'src/app/presentation/shared/components/mobile-operators/mobile-operators.module';
+import { MobileOperatorsConstants } from 'src/app/core/utils/constants/mobile-operator.constants';
 @NgModule({
   declarations: [
     NewRecipientModalComponent,
@@ -26,6 +28,7 @@ import { IntercountryNewRecipientComponent } from './intercountry-new-recipient/
     MobileMoneyNewRecipientComponent,
     MobileOperatorsModalComponent,
     IntercountryNewRecipientComponent,
+    AirtimeNewRecepientComponent,
   ],
   exports: [NewRecipientModalComponent],
   imports: [
@@ -34,7 +37,8 @@ import { IntercountryNewRecipientComponent } from './intercountry-new-recipient/
     CountryModalModule,
     BankModalModule,
     FormElementsModule,
+    MobileOperatorsModule
   ],
-  providers: [NewRecipientService],
+  providers: [NewRecipientService, MobileOperatorsConstants],
 })
 export class NewRecipientModalModule {}

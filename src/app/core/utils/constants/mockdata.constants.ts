@@ -8,6 +8,8 @@ import { UserListModel, UserModel } from "../../domain/user.model";
 import { CompanyListModel } from "../../domain/company.model";
 import { BeneficiaryModel } from "../../domain/beneficiary.model";
 import { TransferType } from "./transaction-type.constants";
+import { AirtimeAmountRangeModel } from '../../domain/international-airtime-amount-range.model';
+import { CountryMobileCodeModal } from 'src/app/core/domain/countryCode.model';
 
 const accounts: SelectAccountModel[] = [
   {
@@ -647,6 +649,33 @@ const buyGoodsFavourites: BuyGoodsFavouriteModel[] = [
 
 const accountNumber: string = "2837181638719349";
 
+const airtimeAmountRange: AirtimeAmountRangeModel[] = [
+  {
+    amountRangeType: 'Amount range'
+  },
+  {
+    amountRangeType: 'Fixed bundles'
+  }
+];
+
+const mobileCodes: CountryMobileCodeModal[] = [
+  {
+    mobileCode: '+254',
+  },
+  {
+    mobileCode: '+256',
+  },
+  {
+    mobileCode: '+255',
+  },
+  {
+    mobileCode: '+249',
+  },
+  {
+    mobileCode: '+250',
+  }
+];
+
 export const mockData = {
   accounts,
   favourites,
@@ -657,4 +686,6 @@ export const mockData = {
   users,
   userList,
   companyList,
+  airtimeAmountRange,
+  mobileCodes
 };

@@ -167,6 +167,12 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
         });
         break;
       default:
+      case this.transferType.BUY_AIRTIME:
+        this.transferToService.openTransferToModal({
+          favourites: this.beneficiaries,
+          transactionType: this.transactionType,
+        });
+        break;  
         break;
     }
   }
@@ -222,6 +228,10 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
           this.parentForm.controls.sendTo.setValue(x);
         });
         break;
+        case this.transferType.BUY_AIRTIME:
+        this.newRecipientService.data.subscribe((x) => {
+          this.parentForm.controls.sendTo.setValue(x);
+        });
         break;
       default:
         break;

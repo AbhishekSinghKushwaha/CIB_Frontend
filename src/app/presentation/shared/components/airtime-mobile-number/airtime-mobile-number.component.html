@@ -1,0 +1,24 @@
+<div class="airtime-mobile-modal-screen p-1" *ngIf="visibility">
+    <div class="row">
+        <div class="col-md-4">
+          <mat-icon (click)="close()" svgIcon="caret_left"></mat-icon>
+        </div>
+        <h4 class="fw-bold col-md-8">Buy for someone new</h4>
+    </div>
+    <h3 class="strong-text pt-4">Please enter the recipient’s details</h3>
+    <form [formGroup]="airtimeMobileNumberForm" (ngSubmit)="submit()" class="d-flex flex-column pt-4" autocomplete="off">
+        <div class="row gx-0 m-3">
+            <app-phone-number-input
+              [parentForm]="airtimeMobileNumberForm"
+              fieldName="phoneNumber"
+              formControlName="phoneNumber"
+              placeholder="Enter their mobile number"
+              label="Mobile Number"
+            ></app-phone-number-input>
+          </div>
+        <div class="pt-4">
+          <button color="primary" type="submit" mat-flat-button
+          [disabled]="airtimeMobileNumberForm.invalid" class="px-5">Continue</button>
+        </div>
+      </form>
+</div>
