@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="mb-3">
+    <button mat-icon-button aria-label="Back" class="back-icon">
+      <div class="strong-text">
+        <mat-icon svgIcon="caret_left"></mat-icon>
+        <span>Service Request</span>
+      </div>
+    </button>
+  </div>
+  <div class="row">
+    <app-card-component
+      class="col-md-6 p-3"
+      [data]="link"
+      *ngFor="let link of serviceRequestLinks"
+    >
+    </app-card-component>
+  </div>
+</div>

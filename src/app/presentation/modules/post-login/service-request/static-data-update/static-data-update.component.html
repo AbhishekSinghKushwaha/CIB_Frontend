@@ -1,0 +1,84 @@
+<div class="row" *ngIf="!completed">
+  <div class="row mb-1 justify-content-md-center">
+    <div class="col-md-11">
+      <div class="mb-3">
+        <button
+          mat-icon-button
+          aria-label="Back"
+          class="back-icon"
+          routerLink="/service-request/"
+        >
+          <div class="strong-text">
+            <mat-icon svgIcon="caret_left"></mat-icon>
+            <span>Static data update</span>
+          </div>
+        </button>
+      </div>
+      <h3 class="strong-text">Please enter details</h3>
+      <form
+        [formGroup]="dataUpdateForm"
+        class="d-flex flex-column"
+        autocomplete="off"
+      >
+        <div class="row">
+          <div class="col-md-6">
+            <app-user-list
+              [parentForm]="dataUpdateForm"
+              currencyFieldName="user"
+              label="User"
+              placeholder="Select user"
+              fieldName="user"
+              formControlName="user"
+            ></app-user-list>
+          </div>
+          <div class="col-md-6">
+            <app-phone-number-input
+              [parentForm]="dataUpdateForm"
+              currencyFieldName="phoneNumber"
+              label="Phone number"
+              placeholder="Enter phone number"
+              formControlName="phoneNumber"
+            >
+            </app-phone-number-input>
+          </div>
+          <div class="col-md-6">
+            <app-email-input
+              [parentForm]="dataUpdateForm"
+              label="Email"
+              placeholder="Enter email"
+              formControlName="email"
+              fieldName="email"
+            >
+            </app-email-input>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="row p-5 m-1 pt-2">
+    <h3 class="strong-text">Roles</h3>
+    <app-card-component
+      class="col-md-6 p-3"
+      [data]="link"
+      *ngFor="let link of moreLinks"
+    >
+    </app-card-component>
+  </div>
+  <div class="ps-5 ms-4">
+    <button
+      mat-raised-button
+      [disabled]="dataUpdateForm.invalid"
+      color="primary"
+      (click)="submit()"
+    >
+      Action
+    </button>
+  </div>
+</div>
+<div class="row" *ngIf="completed">
+  <app-confirmation-completion
+    [data]="completionData"
+    (confirmationDone)="confirmationDone($event)"
+  ></app-confirmation-completion>
+</div>

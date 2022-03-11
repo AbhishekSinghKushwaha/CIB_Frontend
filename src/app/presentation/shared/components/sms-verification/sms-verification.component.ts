@@ -10,8 +10,7 @@ import {
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { SharedUtils } from './../../../../core/utils/shared.util';
 import { NotificationModalService } from 'src/app/core/services/modal-services/notification-modal/notification-modal.service';
-import { StorageService } from 'src/app/core/services/storage/storage.service';
-import { LoginSmsVerificationService } from 'src/app/core/services/login-sms-verification/login-sms-verification.service';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 @Component({
   selector: 'app-sms-verification',
@@ -37,8 +36,7 @@ export class SmsVerificationComponent implements OnInit {
   constructor(
     private readonly fb: FormBuilder,
     private readonly notificationModalService: NotificationModalService,
-    private readonly storageService: StorageService,
-    private readonly loginSmsVerificationService: LoginSmsVerificationService
+    private readonly authService: AuthService
   ) {
     this.initOtpForm();
   }
@@ -126,17 +124,17 @@ export class SmsVerificationComponent implements OnInit {
   }
 
   public async resendOTPCode(): Promise<void> {
-    const user = await this.storageService.getData('loginCred');
     this.verifyOtpFormArray.reset();
 
-    this.loginSmsVerificationService.resendOTP(user).subscribe(
+    this.authService.resendOTP().subscribe(
       (data) => {
-        this.otpResent = true;
-        this.restartOTPTimer();
+        console.log('resendOTP', data);
       },
       (error) => {
         console.log(error);
       }
     );
+    this.otpResent = true;
+    this.restartOTPTimer();
   }
 }

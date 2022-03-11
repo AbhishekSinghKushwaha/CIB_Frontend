@@ -1,15 +1,15 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from "@angular/core";
 import {
   MatDialog,
   MatDialogRef,
   MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
-import { TransactionTypeConstants } from 'src/app/core/utils/constants/transaction-type.constants';
+} from "@angular/material/dialog";
+import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
 
 @Component({
-  selector: 'app-confirm-payment',
-  templateUrl: './confirm-payment.component.html',
-  styleUrls: ['./confirm-payment.component.scss'],
+  selector: "app-confirm-payment",
+  templateUrl: "./confirm-payment.component.html",
+  styleUrls: ["./confirm-payment.component.scss"],
 })
 export class ConfirmPaymentComponent implements OnInit {
   transferType = TransactionTypeConstants.TransferType;
@@ -34,34 +34,34 @@ export class ConfirmPaymentComponent implements OnInit {
   formatTransactionType() {
     switch (this.paymentData.transactionType) {
       case this.transferType.OWN_EQUITY:
-        this.transactionType = 'Send To Your Own Equity Account';
+        this.transactionType = "Send To Your Own Equity Account";
         break;
       case this.transferType.INTRA_BANK:
-        this.transactionType = 'Send To An Equity Account';
+        this.transactionType = "Send To An Equity Account";
         break;
       case this.transferType.INTER_BANK:
-        this.transactionType = 'Send To Another Bank';
+        this.transactionType = "Send To Another Bank";
         break;
       case this.transferType.EFT:
-        this.transactionType = 'Send Via EFT';
+        this.transactionType = "Send to another bank via EFT";
         break;
       case this.transferType.RTGS:
-        this.transactionType = 'Send Via RTGS';
+        this.transactionType = "Send to another bank via RTGS";
         break;
       case this.transferType.MOBILE_MONEY:
-        this.transactionType = 'Send Via Mobile Money';
+        this.transactionType = "Send via Mobile Money";
         break;
       case this.transferType.PESALINK:
-        this.transactionType = 'Send Via Pesalink';
+        this.transactionType = "Send via Pesalink";
         break;
       case this.transferType.SWIFT:
-        this.transactionType = 'Send To An International Account Via Swift';
+        this.transactionType = "Send to another bank via SWIFT";
         break;
       case this.transferType.BUY_AIRTIME:
-        this.transactionType = 'Buy Airtime';
+        this.transactionType = "Buy Airtime";
         break;
       case this.transferType.BUY_GOODS:
-        this.transactionType = 'Buy Goods';
+        this.transactionType = "Buy Goods";
         break;
       default:
         break;

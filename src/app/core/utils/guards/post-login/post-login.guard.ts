@@ -1,23 +1,37 @@
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  Router,
+  RouterStateSnapshot,
+  UrlTree,
+} from '@angular/router';
 import { Observable } from 'rxjs';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import LOGIN_CONSTANTS from '../../constants/pre-login.constants';
 
 @Injectable()
 export class PostLoginGuard implements CanActivate {
-  constructor(private storageService: StorageService, private router: Router) { }
+  constructor(private storageService: StorageService,
+    private readonly authService: AuthService,
+    private router: Router) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const data = this.storageService.getData('loginState');
-    const loginDataSet = !!this.storageService.getData('loginCred');
-    if (data?.stage === LOGIN_CONSTANTS.LOGIN_STAGES.LOGIN_SUCCESS && loginDataSet) {
-      return true
+    state: RouterStateSnapshot
+  ):
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree>
+    | boolean
+    | UrlTree {
+    const stage = this.authService.getLoginState();
+    if (
+      stage === LOGIN_CONSTANTS.LOGIN_STAGES.LOGIN_SUCCESS
+    ) {
+      return true;
     }
-    this.router.navigate(['/auth/customer-onboarding']);
-    return false
+    this.router.navigate(['/auth/login']);
+    return false;
   }
-
 }

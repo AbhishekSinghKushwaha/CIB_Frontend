@@ -414,6 +414,12 @@ button {
       border-bottom: none;
     }
   }
+
+  .toggle-container {
+    > mat-icon {
+      transform: scale(2);
+    }
+  }
 }
 
 // Removing dotted underline on disabled form fields

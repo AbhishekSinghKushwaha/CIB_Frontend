@@ -28,14 +28,10 @@
     <mat-icon svgIcon="caret_down"></mat-icon>
   </button>
   <small class="text-grey text-sm-start mt-2 mb-0">
-    {{
-      value?.bank?.bankName ||
-        value?.mobileOperator?.operatorCountry ||
-        value?.tillName
-    }}
+    {{ value?.bank?.bankName || value?.tillName }}
     {{ value?.country?.countryName }}</small
   ><br />
   <small class="text-grey text-sm-start mt-2 mb-0">{{
-    value?.accountNumber || value?.mobileOperator?.operatorName
+    value?.accountNumber || value?.mobileWallet?.walletDescription
   }}</small>
 </mat-form-field>

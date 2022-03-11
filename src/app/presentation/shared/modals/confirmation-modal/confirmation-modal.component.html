@@ -1,0 +1,39 @@
+<div class="confirm-payment p-0">
+  <div class="row gx-0">
+    <div class="col-md-4 pt-4">
+      <mat-icon (click)="close()" class="cursor-pointer">close</mat-icon>
+    </div>
+    <div class="col-md-8 pt-4">
+      <h5 class="strong-text col-md-8">{{ data.title }}</h5>
+    </div>
+  </div>
+  <div class="row gx-0 m-4">
+    <div class="col ml-4">
+      <h4 class="ml-4">{{ data.subtitle }}</h4>
+    </div>
+  </div>
+
+  <div class="row gx-0 p-4">
+    <div
+      *ngFor="let item of data.content"
+      class="col-lg-6 col-md-6 col-sm-12 mb-3"
+    >
+      <span class="text-grey text-sm">{{ item.key }}</span>
+      <p class="mb-0 text-sm pb-0" [innerHTML]="item.value"></p>
+    </div>
+  </div>
+
+  <div class="row gx-0 m-3">
+    <div class="col">
+      <button
+        mat-raised-button
+        type="button"
+        color="primary"
+        class="px-5 mt-4"
+        (click)="confirmationClicked()"
+      >
+        {{ data.submitButtonText }}
+      </button>
+    </div>
+  </div>
+</div>

@@ -4,7 +4,13 @@
   </a>
 
   <!-- Dashboard/Home -->
-  <a mat-list-item class="text-grey text-sm" (click)="toggleSideMenu()" [routerLink]="['/dashboard']" routerLinkActive="router-link-active" >
+  <a
+    mat-list-item
+    class="text-grey text-sm"
+    (click)="toggleSideMenu()"
+    [routerLink]="['/dashboard']"
+    routerLinkActive="router-link-active"
+  >
     <div class="row pl-3">
       <div class="col-12">
         <mat-icon svgIcon="home"></mat-icon>
@@ -14,7 +20,12 @@
   </a>
 
   <!-- Transact -->
-  <a mat-list-item class="text-grey text-sm" [routerLink]="['/transact']" routerLinkActive="router-link-active" >
+  <a
+    mat-list-item
+    class="text-grey text-sm"
+    [routerLink]="['/transact']"
+    routerLinkActive="router-link-active"
+  >
     <div class="row pl-3">
       <div class="col-12">
         <mat-icon class="menu-icon" svgIcon="transact"></mat-icon>
@@ -26,7 +37,12 @@
   </a>
 
   <!-- Borrow -->
-  <a mat-list-item class="text-grey text-sm" [routerLink]="['/borrow']" routerLinkActive="router-link-active" >
+  <a
+    mat-list-item
+    class="text-grey text-sm"
+    [routerLink]="['/borrow']"
+    routerLinkActive="router-link-active"
+  >
     <div class="row pl-3">
       <div class="col-12">
         <mat-icon class="menu-icon" svgIcon="borrow-unselected"> </mat-icon>
@@ -40,7 +56,13 @@
   <mat-divider class="ml-4"></mat-divider>
 
   <!-- More -->
-  <a mat-list-item class="text-grey text-sm" [routerLink]="['/more']" routerLinkActive="router-link-active" (click)="toggleSideMenu()">
+  <a
+    mat-list-item
+    class="text-grey text-sm"
+    [routerLink]="['/more']"
+    routerLinkActive="router-link-active"
+    (click)="toggleSideMenu()"
+  >
     <div class="row pl-3">
       <div class="col-12">
         <mat-icon svgIcon="nav_more"></mat-icon>
@@ -50,17 +72,17 @@
   </a>
 
   <!-- Language -->
-  <a mat-list-item class="text-grey text-sm">
+  <a mat-list-item class="text-grey text-sm" (click)="openLanguageModal()">
     <div class="row pl-3">
       <div class="col-12">
         <mat-icon svgIcon="localization"></mat-icon>
-        <span class="pl-2 text-truncate">English</span>
+        <span class="pl-2 text-truncate">{{ language.langDesc }}</span>
       </div>
     </div>
   </a>
 
   <!-- Sign Out -->
-  <a mat-list-item class="text-grey text-sm">
+  <a mat-list-item class="text-grey text-sm" (click)="logout()">
     <div class="row pl-3">
       <div class="col-12">
         <mat-icon svgIcon="logout"></mat-icon>

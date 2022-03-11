@@ -1,19 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
-import { ScheduledPaymentModel } from 'src/app/core/domain/scheduled-payment.model';
-import { AccountsService } from 'src/app/core/services/accounts/accounts.service';
-import { IntrabankService } from 'src/app/core/services/transfers/intrabank/intrabank.service';
-import { TransactionTypeConstants } from 'src/app/core/utils/constants/transaction-type.constants';
-import { accountLimitValidator } from 'src/app/core/utils/validators/limits.validators';
-import { ConfirmPaymentComponent } from 'src/app/presentation/shared/modals/confirm-payment/confirm-payment.component';
-import { BaseTransactComponent } from '../base-transact.component';
+import { Component, OnInit } from "@angular/core";
+import { FormGroup, Validators, FormBuilder } from "@angular/forms";
+import { MatDialog } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { Router } from "@angular/router";
+import { ScheduledPaymentModel } from "src/app/core/domain/scheduled-payment.model";
+import { AccountsService } from "src/app/core/services/accounts/accounts.service";
+import { IntrabankService } from "src/app/core/services/transfers/intrabank/intrabank.service";
+import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
+import { accountLimitValidator } from "src/app/core/utils/validators/limits.validators";
+import { ConfirmPaymentComponent } from "src/app/presentation/shared/modals/confirm-payment/confirm-payment.component";
+import { BaseTransactComponent } from "../base-transact.component";
 @Component({
-  selector: 'app-other-equity-account',
-  templateUrl: './other-equity-account.component.html',
-  styleUrls: ['./other-equity-account.component.scss'],
+  selector: "app-other-equity-account",
+  templateUrl: "./other-equity-account.component.html",
+  styleUrls: ["./other-equity-account.component.scss"],
 })
 export class OtherEquityAccountComponent
   extends BaseTransactComponent
@@ -44,12 +44,12 @@ export class OtherEquityAccountComponent
 
   private initForm(): void {
     this.intraBankTransferForm = this.fb.group({
-      sendFrom: ['', [Validators.required]],
-      sendTo: ['', [Validators.required]],
+      sendFrom: ["", [Validators.required]],
+      sendTo: ["", [Validators.required]],
       amount: [{}, [Validators.required, accountLimitValidator]],
-      reason: [''],
-      fxReferenceId: ['', [Validators.required]],
-      schedulePayment: ['', [Validators.required]],
+      reason: [""],
+      fxReferenceId: ["", [Validators.required]],
+      schedulePayment: ["", [Validators.required]],
     });
   }
 
@@ -104,8 +104,8 @@ export class OtherEquityAccountComponent
     const payload = {
       amount: this.getForm.amount.value.amount,
       beneficiaryAccount: this.getForm.sendTo.value.accountNumber,
-      beneficiaryBank: '',
-      beneficiaryBankCode: '54', // TODO:: Needs some more analysis. Bank Code is required in the intrabank journey
+      beneficiaryBank: "",
+      beneficiaryBankCode: "54", // TODO:: Needs some more analysis. Bank Code is required in the intrabank journey
       beneficiaryCurrency: this.getForm.sendTo.value.currency,
       beneficiaryName: this.getForm.sendTo.value.accountName,
       currency: this.getForm.amount.value.currency,
@@ -127,17 +127,12 @@ export class OtherEquityAccountComponent
         .subscribe(
           (res) => {
             if (res.status) {
-              this.router.navigate([
-                '/transact/other-equity-account/submit-transfer',
-              ]);
+              this.router.navigate(["/transact/transfer-submitted"]);
             } else {
-              console.log(res.message);
               // TODO:: Notify error
             }
           },
-          (err) => {
-            console.log(err);
-          }
+          (err) => {}
         );
     }
   }

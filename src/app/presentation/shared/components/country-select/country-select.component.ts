@@ -5,23 +5,25 @@ import {
   Output,
   Input,
   OnDestroy,
-} from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Subject, Subscription } from 'rxjs';
-import { CountryModel } from 'src/app/core/domain/bank.model';
-import { recipientModel } from 'src/app/core/domain/recipient.model';
-import { CountryService } from 'src/app/core/services/modal-services/country.service';
-import { countrySettings } from 'src/app/core/utils/constants/country.settings';
-import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
+} from "@angular/core";
+import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { Subject, Subscription } from "rxjs";
+import { CountryModel } from "src/app/core/domain/bank.model";
+import { recipientModel } from "src/app/core/domain/recipient.model";
+import { CountryService } from "src/app/core/services/modal-services/country.service";
+import { SharedDataService } from "src/app/core/services/shared-data/shared-data.service";
+import { StorageService } from "src/app/core/services/storage/storage.service";
+import { countrySettings } from "src/app/core/utils/constants/country.settings";
+import { mockData } from "src/app/core/utils/constants/mockdata.constants";
 
 @Component({
-  selector: 'app-country-select',
-  templateUrl: './country-select.component.html',
-  styleUrls: ['./country-select.component.scss'],
+  selector: "app-country-select",
+  templateUrl: "./country-select.component.html",
+  styleUrls: ["./country-select.component.scss"],
 })
 export class CountrySelectComponent implements OnInit, OnDestroy {
   visibility = true;
-  countries = mockData.countries;
+  countries: CountryModel[];
   viewTypes = countrySettings.viewTypes;
   subscriptions: Subscription[] = [];
   @Input() category: string;
@@ -30,15 +32,19 @@ export class CountrySelectComponent implements OnInit, OnDestroy {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: recipientModel,
-    private readonly countryService: CountryService
-  ) {}
+    private readonly countryService: CountryService,
+    private readonly storageService: StorageService
+  ) {
+    this.countries = this.storageService.getData("countries");
+  }
 
   ngOnInit(): void {}
 
   openCountries(): void {
     const modal = this.countryService.openCountry(
       this.countries,
-      this.category
+      this.category,
+      {}
     );
     this.subscriptions.push(
       modal.afterClosed().subscribe((data: CountryModel) => {

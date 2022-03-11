@@ -8,15 +8,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatStyleModule } from './mat-style.module';
-import { LayoutModule } from './presentation/layout/layout.module';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserRepository } from './core/repositories/user.repository';
 import { UserMockRepository } from './data/repository/user-mock-repository/user-mock.repository';
 import { ErrorIntercept } from './core/utils/interceptors/error.interceptor';
-import { fakeBackendProvider } from './core/utils/interceptors/fake-backend-interceptor.interceptor';
 import { PostLoginGuard } from './core/utils/guards/post-login/post-login.guard';
 import { LoginGuard } from './core/utils/guards/login/login.guard';
-
+import { AuthTokenInterceptor } from './core/utils/interceptors/auth-token.interceptor';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LanguageModalModule } from './presentation/shared/modals/language-modal/language-modal.module';
+import { httpTranslateLoader, LanguageTranslateModule } from './translate.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,18 +28,30 @@ import { LoginGuard } from './core/utils/guards/login/login.guard';
     BrowserAnimationsModule,
     HttpClientModule,
     MatStyleModule,
-    LayoutModule,
     DataModule,
     CoreModule,
     PresentationModule,
+    LanguageModalModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpTranslateLoader,
+        deps: [HttpClient]
+      }
+    }),
+    LanguageTranslateModule.forRoot()
   ],
   exports: [AppRoutingModule],
   providers: [
     { provide: UserRepository, useClass: UserMockRepository },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorIntercept, multi: true },
-    fakeBackendProvider,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthTokenInterceptor,
+      multi: true
+    },
     PostLoginGuard,
-    LoginGuard
+    LoginGuard,
   ],
   bootstrap: [AppComponent],
 })

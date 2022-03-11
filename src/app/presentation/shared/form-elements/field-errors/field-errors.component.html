@@ -1,21 +1,31 @@
 <mat-error *ngIf="formField?.dirty">
-	<small class="validationError" *ngIf="formField?.hasError('required')">
-		This is a required field.
-	</small>
+  <small class="validationError" *ngIf="formField?.hasError('required')">
+    This is a required field.
+  </small>
 
-	<span class="validationError" *ngIf="formField?.hasError('noEmptyString')">
-		Please enter a valid name.
-	</span>
+  <span class="validationError" *ngIf="formField?.hasError('noEmptyString')">
+    Please enter a valid input.
+  </span>
 
-	<span class="validationError" *ngIf="formField?.hasError('normalEmailRule')">
-		Email format is invalid.
-	</span>
+  <span class="validationError" *ngIf="formField?.hasError('normalEmailRule')">
+    Email format is invalid.
+  </span>
 
-	<span class="validationError" *ngIf="formField?.hasError('noWhitespaceRequired')">
-		No spaces allowed.
-	</span>
+  <span
+    class="validationError"
+    *ngIf="formField?.hasError('noWhitespaceRequired')"
+  >
+    No spaces allowed.
+  </span>
 
-	<small class="validationError" *ngIf="formField?.errors?.isWithinLimit === false">
-		Amount is above limit for the account
-	</small>
+  <span class="validationError" *ngIf="formField?.hasError('email')">
+    Please enter a valid email
+  </span>
+
+  <small
+    class="validationError"
+    *ngIf="formField?.errors?.isWithinLimit === false"
+  >
+    Amount is above limit for the account
+  </small>
 </mat-error>

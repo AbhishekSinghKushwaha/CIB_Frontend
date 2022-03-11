@@ -92,8 +92,8 @@
               <app-swift-charges
                 [parentForm]="swiftTransferForm"
                 label="Charges"
-                formControlName="charges"
-                fieldName="charges"
+                formControlName="chargeOption"
+                fieldName="chargeOption"
                 placeholder="Select an option"
               ></app-swift-charges>
             </div>
@@ -101,7 +101,7 @@
             <div class="col-md-6">
               <app-payment-category
                 [parentForm]="swiftTransferForm"
-                label="Payment Category"
+                label="Transaction BCC Code"
                 fieldName="paymentCategory"
                 formControlName="paymentCategory"
                 placeholder="Select a Payment Category"
@@ -121,9 +121,8 @@
           <div class="mt-4">
             <button
               mat-raised-button
-              [disabled]="swiftTransferForm.invalid"
               color="primary"
-              disabled
+              [disabled]="swiftTransferForm.invalid"
             >
               Send money
             </button>

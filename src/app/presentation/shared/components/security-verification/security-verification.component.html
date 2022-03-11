@@ -1,0 +1,41 @@
+<h3 class="strong-text">How would you like to get verified?</h3>
+<div class="text-grey">Please, select one of the options below.</div>
+<div
+  class="row product-list-item"
+  *ngFor="let product of userVerifyProducts; let i = index; let isLast = last"
+  (click)="toggleProduct(product)"
+  matRipple
+>
+  <div class="col-2 my-auto">
+    <div class="icon-container">
+      <mat-icon color="primary" [svgIcon]="product.icon"></mat-icon>
+    </div>
+  </div>
+  <div class="col-10 product-list-item-label">
+    <div class="row h-100 justify-content-around align-items-center">
+      <div class="col-10 pl-0 text-truncate">
+        {{ product.name }}
+      </div>
+      <div class="col-2">
+        <mat-icon
+          color="primary"
+          [svgIcon]="isChecked(product) ? 'check_round' : 'radio_button_off'"
+        ></mat-icon>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-5">
+  <div class="col-12 text-left">
+    <button
+      [disabled]="!selectedItem"
+      mat-flat-button
+      color="primary"
+      class="px-5"
+      (click)="submit()"
+    >
+      Continue
+    </button>
+  </div>
+</div>

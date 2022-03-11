@@ -5,10 +5,10 @@
   <p class="text-center fw-bold pt-2">Send to someone new</p>
   <h3 class="m-4 ms-2">Please enter the recipient's details</h3>
 
-  <app-country-select
+  <!-- <app-country-select
     [category]="countrySelectType"
     (selectedCountry)="setCountry($event)"
-  ></app-country-select>
+  ></app-country-select> -->
   <form
     [formGroup]="newRecipientForm"
     (submit)="submit()"
@@ -16,6 +16,17 @@
     autocomplete="off"
   >
     <div class="row gx-0">
+      <!-- Country -->
+      <div class="col-md-6 col-lg-12">
+        <app-country-select-input
+          [parentForm]="newRecipientForm"
+          fieldName="country"
+          placeholder="Select the country"
+          formControlName="country"
+          label="Country"
+        >
+        </app-country-select-input>
+      </div>
       <!-- Bank -->
       <div class="col-md-6 col-lg-12">
         <app-select-bank

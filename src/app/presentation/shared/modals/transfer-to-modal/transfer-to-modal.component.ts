@@ -1,12 +1,12 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { TransferToService } from 'src/app/core/services/modal-services/transfer-to.service';
-import { TransactionTypeConstants } from 'src/app/core/utils/constants/transaction-type.constants';
+import { Component, Inject, OnInit } from "@angular/core";
+import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { TransferToService } from "src/app/core/services/modal-services/transfer-to.service";
+import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
 
 @Component({
-  selector: 'app-transfer-to-modal',
-  templateUrl: './transfer-to-modal.component.html',
-  styleUrls: ['./transfer-to-modal.component.scss'],
+  selector: "app-transfer-to-modal",
+  templateUrl: "./transfer-to-modal.component.html",
+  styleUrls: ["./transfer-to-modal.component.scss"],
 })
 export class TransferToModalComponent implements OnInit {
   transferType = TransactionTypeConstants.TransferType;
@@ -16,9 +16,7 @@ export class TransferToModalComponent implements OnInit {
     private readonly transferToService: TransferToService
   ) {}
 
-  ngOnInit(): void {
-    console.log(this.data);
-  }
+  ngOnInit(): void {}
 
   close() {
     this.transferToService.closeTransferToModal();

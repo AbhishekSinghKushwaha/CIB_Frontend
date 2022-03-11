@@ -9,5 +9,13 @@ export interface UserModel {
   family: 'Father' | 'Mother' | 'Baby';
   smsToken: string;
   username: string;
-  securityQuestions: { question: string; answer: string }[];
+}
+
+
+export interface UserListModel {
+  id: string;
+  name: string;
+  profileType: string;
+  status: string;
+  lastViewed: string;
 }

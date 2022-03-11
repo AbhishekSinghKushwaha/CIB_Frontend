@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { TransactionTypeModalService } from 'src/app/core/services/transaction-type-modal/transaction-type-modal.service';
+import { TransferTypeModalService } from 'src/app/core/services/transaction-type-modal/transaction-type-modal.service';
 
 @Component({
   selector: 'app-transaction-type-modal',
@@ -12,7 +12,7 @@ export class TransactionTypeModalComponent implements OnInit {
 
   constructor(
     private readonly dialogRef: MatDialogRef<TransactionTypeModalComponent>,
-    private readonly transactionTypeModalService: TransactionTypeModalService,
+    private readonly transactionTypeModalService: TransferTypeModalService,
     @Inject(MAT_DIALOG_DATA) public data: any[]
   ) {
     this.selected = this.transactionTypeModalService.default;

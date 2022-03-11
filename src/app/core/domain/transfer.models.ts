@@ -1,9 +1,9 @@
 export interface FromAccount {
-  balance: number;
+  balance?: number;
   currency: string;
   accountName?: string;
-  accountNumber: number;
-  accountType?: 'Savings' | 'Current' | 'Mobile account';
+  accountNumber?: number;
+  accountType?: "Savings" | "Current" | "Mobile account";
   transactionLimit: number;
   balanceHidden?: false;
   bankId?: string;
@@ -46,11 +46,40 @@ export interface TransactionTypeModel {
   name?: string;
 }
 
-export interface MobileOperator {
-  id?: string;
-  operatorName?: string;
-  operatorIconPath?: string;
-  serviceName?: string; // i.e MPESA, Equitel Money
-  serviceIconPath?: string; // i.e Mpesa Icon logo
-  operatorCountry?: string;
+export interface MobileWallet {
+  walletDescription?: string;
+  wallet?: string;
+  iconUrl?: string;
+  walletCurrencies?: WalletCurrency[];
+}
+
+export interface WalletCurrency {
+  currencyCode?: string;
+  currencyDescription?: string;
+}
+
+export interface Telco {
+  id?: number;
+  telco?: string;
+  iconUrl?: string;
+}
+
+export interface TransferTypeDTO {
+  OWN_EQUITY: string;
+  INTRA_BANK: string;
+  INTER_BANK: string;
+  EFT: string;
+  SWIFT: string;
+  RTGS: string;
+  BUY_GOODS: string;
+  MOBILE_MONEY: string;
+  BUY_AIRTIME: string;
+  PESALINK: string;
+  INTER_COUNTRY_TRANSFER: string;
+  SUBSIDIARY: string;
+}
+
+export interface Sector {
+  sectorCode?: string;
+  sectorDescription?: string;
 }

@@ -1,17 +1,18 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { CountryModel } from 'src/app/core/domain/bank.model';
-import { CountryService } from 'src/app/core/services/modal-services/country.service';
-import { NewRecipientService } from 'src/app/core/services/modal-services/new-recipient.service';
-import { countrySettings } from 'src/app/core/utils/constants/country.settings';
-import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
+import { Component, forwardRef, Input, OnInit } from "@angular/core";
+import { FormControl, FormGroup, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { Subject } from "rxjs";
+import { debounceTime, distinctUntilChanged } from "rxjs/operators";
+import { CountryModel } from "src/app/core/domain/bank.model";
+import { CountryService } from "src/app/core/services/modal-services/country.service";
+import { NewRecipientService } from "src/app/core/services/modal-services/new-recipient.service";
+import { StorageService } from "src/app/core/services/storage/storage.service";
+import { countrySettings } from "src/app/core/utils/constants/country.settings";
+import { mockData } from "src/app/core/utils/constants/mockdata.constants";
 
 @Component({
-  selector: 'app-phone-number-input',
-  templateUrl: './phone-number-input.component.html',
-  styleUrls: ['./phone-number-input.component.scss'],
+  selector: "app-phone-number-input",
+  templateUrl: "./phone-number-input.component.html",
+  styleUrls: ["./phone-number-input.component.scss"],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -34,6 +35,17 @@ export class PhoneNumberInputComponent implements OnInit {
   @Input()
   placeholder!: string;
 
+  _selectedCountry: CountryModel;
+
+  @Input() set selectedCountry(data: CountryModel) {
+    if (data) {
+      // do something
+      this.country = data;
+
+      this.formField.setValue(this.formField.value);
+    }
+  }
+
   country!: CountryModel;
 
   phoneNumberEntered = new Subject<number>();
@@ -50,7 +62,8 @@ export class PhoneNumberInputComponent implements OnInit {
 
   constructor(
     private countryService: CountryService,
-    private newRecipientService: NewRecipientService
+    private newRecipientService: NewRecipientService,
+    private storageService: StorageService
   ) {}
 
   ngOnInit(): void {
@@ -79,10 +92,19 @@ export class PhoneNumberInputComponent implements OnInit {
   }
 
   openDialCodeModal() {
-    this.countryService.openCountry(
-      mockData.countries,
-      countrySettings.viewTypes.NAME_ONLY
-    );
+    this.countryService
+      .openCountry(
+        this.storageService.getData("countries"),
+        countrySettings.viewTypes.NAME_ONLY,
+        {}
+      )
+      .afterClosed()
+      .subscribe((res) => {
+        this.country = res;
+
+        this.country?.dialCode &&
+          this.changed(this.country?.dialCode + this.value);
+      });
   }
 
   onPhoneNumberEntered() {
@@ -90,12 +112,14 @@ export class PhoneNumberInputComponent implements OnInit {
       .pipe(debounceTime(1000), distinctUntilChanged())
       .subscribe((res) => {
         this.value = res.toString();
-        this.changed(this.country.dialCode + this.value);
+        this.changed((this.country?.dialCode || "") + this.value);
       });
   }
 
   listenToDataStreams() {
-    this.countryService.selectedCountry.subscribe((x) => (this.country = x));
+    // this.countryService.selectedCountry.subscribe((x) => {
+    //   this.country = x;
+    // });
 
     this.onPhoneNumberEntered();
   }

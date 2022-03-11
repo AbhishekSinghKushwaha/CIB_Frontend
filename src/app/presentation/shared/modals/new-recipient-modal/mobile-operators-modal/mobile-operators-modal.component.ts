@@ -1,17 +1,24 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
-import { MobileMoneyNewRecipientComponent } from '../mobile-money-new-recipient/mobile-money-new-recipient.component';
+import { Component, Inject, Input, OnInit } from "@angular/core";
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from "@angular/material/dialog";
+import { MobileWallet } from "src/app/core/domain/transfer.models";
+import { MobileWalletsService } from "src/app/core/services/modal-services/mobile-wallets.service";
+import { mockData } from "src/app/core/utils/constants/mockdata.constants";
+import { MobileMoneyNewRecipientComponent } from "../mobile-money-new-recipient/mobile-money-new-recipient.component";
 
+export interface MobileOperatorsModalData {
+  hideRecipient: boolean;
+}
 @Component({
-  selector: 'app-mobile-operators-modal',
-  templateUrl: './mobile-operators-modal.component.html',
-  styleUrls: ['./mobile-operators-modal.component.scss'],
+  selector: "app-mobile-operators-modal",
+  templateUrl: "./mobile-operators-modal.component.html",
+  styleUrls: ["./mobile-operators-modal.component.scss"],
 })
 export class MobileOperatorsModalComponent implements OnInit {
   @Input() transferType: string;
-
-  operators = mockData.mobileOperators;
 
   isChecked: boolean = false;
 
@@ -21,7 +28,9 @@ export class MobileOperatorsModalComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<MobileOperatorsModalComponent>,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: MobileWallet[],
+    private mobileWalletsService: MobileWalletsService
   ) {}
 
   ngOnInit(): void {}
@@ -31,9 +40,8 @@ export class MobileOperatorsModalComponent implements OnInit {
   }
 
   select(i: number) {
-    this.selected = this.operators[i];
-    this.visibility = false;
-    this.openMobileMoneyNewRecipientModal();
+    this.selected = this.data[i];
+    this.mobileWalletsService.selectWallet(this.selected);
   }
 
   openMobileMoneyNewRecipientModal() {
@@ -42,8 +50,6 @@ export class MobileOperatorsModalComponent implements OnInit {
       data: this.selected,
     });
 
-    modal.afterClosed().subscribe((x) => {
-      console.log(x);
-    });
+    modal.afterClosed().subscribe((x) => {});
   }
 }
