@@ -10,12 +10,10 @@ import { NewRecipientService } from "src/app/core/services/modal-services/new-re
 import { SharedDataService } from "src/app/core/services/shared-data/shared-data.service";
 import { TransferToService } from "src/app/core/services/modal-services/transfer-to.service";
 import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
-<<<<<<< HEAD
-import { MerchantDetailsService } from 'src/app/core/services/merchant-details/merchant-details.service';
-=======
 import { BeneficiaryManagementService } from "src/app/core/services/beneficiary-management/beneficiary-management.service";
 import { StorageService } from "src/app/core/services/storage/storage.service";
->>>>>>> c331547a4cebd6aaae2000acc6f1ac46bb6639d1
+import { MerchantDetailsService } from 'src/app/core/services/merchant-details/merchant-details.service';
+
 
 @Component({
   selector: "app-transfer-to",
@@ -67,12 +65,9 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
     private readonly transferToService: TransferToService,
     private readonly newRecipientService: NewRecipientService,
     private sharedDataService: SharedDataService,
-<<<<<<< HEAD
-    private readonly merchantDetailsService: MerchantDetailsService
-=======
     private beneficiaryService: BeneficiaryManagementService,
-    private storageService: StorageService
->>>>>>> c331547a4cebd6aaae2000acc6f1ac46bb6639d1
+    private storageService: StorageService,
+    private readonly merchantDetailsService: MerchantDetailsService
   ) {}
 
   ngOnInit(): void {
@@ -151,11 +146,7 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
           this.favouriteMerchantDetails = res;
         });
         this.transferToService.openTransferToModal({
-<<<<<<< HEAD
-          favourites: this.favouriteMerchantDetails,
-=======
           favourites: this.beneficiaries,
->>>>>>> c331547a4cebd6aaae2000acc6f1ac46bb6639d1
           transactionType: this.transactionType,
         });
         break;
