@@ -43,6 +43,26 @@ export class DataLookupService {
     );
   }
 
+  // Get telcos
+  getTelcos(countryCode: string): Observable<any> {
+    const params = {
+      countryCode,
+    };
+    return this.http.get(environment.apiUrl + urlList.dataLookUp.getTelcos, {
+      params,
+    });
+  }
+
+  // Get mobile money transfer wallets offered by different telcos
+  getMobileWallets(countryCode: string): Observable<any> {
+    const params = {
+      countryCode,
+    };
+    return this.http.get(
+      environment.apiUrl + urlList.dataLookUp.getMobileWallets,
+      { params }
+    );
+  }
   // Get sectors / Transaction BCC Code for swift/ Payment Category
   getSectors(): Observable<any> {
     return this.http.get(environment.apiUrl + urlList.dataLookUp.getSectors);

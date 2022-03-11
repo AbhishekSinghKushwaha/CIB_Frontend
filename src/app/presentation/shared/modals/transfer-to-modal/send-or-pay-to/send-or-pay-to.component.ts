@@ -32,10 +32,10 @@ export class SendOrPayToComponent implements OnInit {
     private readonly transferToService: TransferToService,
     private readonly newRecipientService: NewRecipientService
   ) {
-    this.selectedFavourite = transferToService.defaultFavourite;
-    this.transferToService.selectedFavourite.subscribe(
-      (x) => (this.selectedFavourite = x)
-    );
+    this.selectedFavourite = newRecipientService.default;
+    this.newRecipientService.data.subscribe((x) => {
+      this.selectedFavourite = x;
+    });
   }
 
   ngOnInit(): void {
