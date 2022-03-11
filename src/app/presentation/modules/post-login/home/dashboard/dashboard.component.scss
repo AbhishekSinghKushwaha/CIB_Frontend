@@ -1,0 +1,140 @@
+#dashboard-page {
+    font-family: 'Open sans';
+    font-size: 14px;
+    box-sizing: border-box;
+    line-height: 20px;
+
+    .dashboard-page--content {
+        &--section-title {
+            font-weight: 600;
+font-size: 20px;
+line-height: 28px;
+        }
+        &--header {
+            &__title {
+                font-size: 20px;
+                color: green;
+            }
+            &__subtitle {
+                color: #929497 !important;
+            } 
+        }
+        &--favorites {
+            
+            &__icon {
+                width: 70px;
+                height: 70px;
+            }
+            &__title {
+                font-weight: 600;
+                margin-bottom: 0;
+            }
+            &__subtitle {
+                font-size: 12px;
+                color: #A32A29;
+            }
+        }
+
+        &--accounts {
+            &__card {
+                position: relative;
+                color: white;
+                width: 100%;
+                height: 160px;
+                background-image: url("../../../../../../assets/images/dashboard-account-card-background.png");
+                &__icon{
+                    position: absolute;
+                    top: 10px;
+                    right: 15px;
+                    width: 24px;
+                    height: 24px;
+                    cursor: pointer;
+                }
+                &__title {
+                    color: white !important;
+                    font-weight: 600;
+                    font-size: 16px;
+                    line-height: 24px;
+                }
+                &__amount {
+                    font-weight: 600;
+                    font-size: 20px;
+                    line-height: 28px;
+                }
+                &__footer {
+                    position: absolute;
+                    left: 15px;
+                    bottom: 10px;
+                    font-weight: normal;
+                    font-size: 12px; 
+                }
+                
+            }
+
+            &__action {
+                &__card{
+                    &__icon {
+                        background: rgba(146, 148, 151, 0.2);
+                        box-shadow: none;
+                    }
+                    &__button {
+                        background: transparent;
+                        border: none;
+                    }
+                }
+            }
+        }
+
+        &--loans {
+            &__card {
+                position: relative;
+                color: #221F1F;
+                width: 100%;
+                height: 160px;
+                background-image: url("../../../../../../assets/images/dashboard-loan-card-background.png");
+                &__icon{
+                    position: absolute;
+                    top: 10px;
+                    right: 15px;
+                    width: 24px;
+                    height: 24px;
+                    cursor: pointer;
+                }
+                &__title {
+                    font-weight: 600;
+                    font-size: 16px;
+                    line-height: 24px;
+                }
+                &__amount {
+                    font-weight: 600;
+                    font-size: 20px;
+                    line-height: 28px;
+                }
+                &__footer {
+                    width: 90%;
+                    position: absolute;
+                    left: 15px;
+                    bottom: 10px;
+                    font-weight: normal;
+                    font-size: 12px; 
+                }
+                
+            }
+
+            &__action {
+                &__card{
+                    &__icon {
+                        background: rgba(146, 148, 151, 0.2);
+                        box-shadow: none;
+                    }
+                    &__button {
+                        background: transparent;
+                        border: none;
+                    }
+                }
+            }
+        }
+         
+    }
+    
+}
