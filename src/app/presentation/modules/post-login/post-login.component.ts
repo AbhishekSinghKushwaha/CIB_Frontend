@@ -50,6 +50,7 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getBanks();
     this.getCountries();
     this.getUserAccounts();
+    this.getSectors();
     this.loadingListener();
     this.getBeneficiaries();
     this.getTelcos();
@@ -123,6 +124,14 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     this.dataLookupService.getMobileWallets("KE").subscribe((res) => {
       if (res.status) {
         this.storageService.setData("wallets", res.data);
+      }
+    });
+  }
+
+  getSectors() {
+    this.dataLookupService.getSectors().subscribe((res) => {
+      if (res.status) {
+        this.storageService.setData("sectors", res.data);
       }
     });
   }

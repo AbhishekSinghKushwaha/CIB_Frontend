@@ -78,3 +78,8 @@ export interface TransferTypeDTO {
   INTER_COUNTRY_TRANSFER: string;
   SUBSIDIARY: string;
 }
+
+export interface Sector {
+  sectorCode?: string;
+  sectorDescription?: string;
+}

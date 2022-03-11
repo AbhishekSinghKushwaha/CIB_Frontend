@@ -27,17 +27,7 @@ const SwiftChargesOptions = [
   },
 ];
 
-const PaymentCategories = [
-  { name: "Oil and allied" },
-  { name: "Chemicals" },
-  { name: "Manufacturing goods" },
-  { name: "Food Imports" },
-  { name: "Raw materials (e.g tobacco, rubber)" },
-  { name: "Outwards investments" },
-];
-
 export const TransactionTypeConstants = {
   TransferType,
   SwiftChargesOptions,
-  PaymentCategories,
 };

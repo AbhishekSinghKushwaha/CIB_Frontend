@@ -112,7 +112,7 @@ export class UserDetailsComponent implements OnInit {
   }
 
   private createUser(): Observable<User> {
-    const id: number = +this.userDetailsForm.controls['userId'].value;
+    const id: string = this.userDetailsForm.controls['userId'].value;
     const name: string = this.userDetailsForm.controls['userName'].value;
     const phone: string = this.userDetailsForm.controls['phoneNumber'].value;
     const status: UserStatus = 'pending';
@@ -122,8 +122,8 @@ export class UserDetailsComponent implements OnInit {
     return this.userListService.addUser(user);
   }
 
-  private updateUser(userId: number): Observable<User | undefined> {
-    const id: number = +this.userDetailsForm.controls['userId'].value;
+  private updateUser(userId: string): Observable<User | undefined> {
+    const id: string = this.userDetailsForm.controls['userId'].value;
     const name: string = this.userDetailsForm.controls['userName'].value;
     const phone: string = this.userDetailsForm.controls['phoneNumber'].value;
     const status: UserStatus = 'pending';

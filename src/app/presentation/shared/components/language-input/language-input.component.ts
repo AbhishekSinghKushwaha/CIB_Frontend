@@ -14,10 +14,10 @@ export class LanguageInputComponent implements OnInit {
   constructor(
     private readonly languageService: LanguageService,
     public translate: TranslateService) {
-    this.language = languageService.defaultLanguage;
   }
 
   ngOnInit(): void {
+    this.language = this.languageService.defaultLanguage;
   }
 
   openLanguageModal() {

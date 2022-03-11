@@ -82,11 +82,6 @@ const users: UserModel[] = [
     newLogin: false,
     smsToken: "666666",
     response_code: 200,
-    securityQuestions: [
-      { question: "What village were you born in?", answer: "aaa" },
-      { question: "What was the last city you visited?", answer: "bbb" },
-      { question: "At what age did you start working", answer: "ccc" },
-    ],
   },
 ];
 

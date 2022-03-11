@@ -6,6 +6,7 @@ import { SidebarComponent } from './sidebar.component';
 import { MatStyleModule } from 'src/app/mat-style.module';
 import { SignoutModalModule } from '../../shared/modals/signout-modal/signout-modal.module';
 import { ConfirmDialogModule } from '../../shared/modals/confirm-dialog/confirm-dialog.module';
+import { LanguageModalModule } from '../../shared/modals/language-modal/language-modal.module';
 
 @NgModule({
   declarations: [SidebarComponent],
@@ -16,7 +17,8 @@ import { ConfirmDialogModule } from '../../shared/modals/confirm-dialog/confirm-
     MatStyleModule,
     SignoutModalModule,
     SidebarRoutingModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    LanguageModalModule,
   ],
   exports: [SidebarComponent],
 })

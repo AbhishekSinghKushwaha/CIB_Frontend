@@ -1,0 +1,17 @@
+<div class="card border-0 security-verification">
+  <div class="row ps-5">
+    <div class="col-md-12">
+      <button mat-button aria-label="Back" class="back-icon" (click)="back()">
+        <div class="strong-text">
+          <mat-icon svgIcon="chevron-left" class="chevron"></mat-icon>
+          <span> Verify </span>
+        </div>
+      </button>
+    </div>
+  </div>
+  <div class="card-body ps-5">
+    <app-security-verification
+      (onSubmit)="onSubmit($event)"
+    ></app-security-verification>
+  </div>
+</div>

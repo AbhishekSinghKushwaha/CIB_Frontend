@@ -63,4 +63,8 @@ export class DataLookupService {
       { params }
     );
   }
+  // Get sectors / Transaction BCC Code for swift/ Payment Category
+  getSectors(): Observable<any> {
+    return this.http.get(environment.apiUrl + urlList.dataLookUp.getSectors);
+  }
 }

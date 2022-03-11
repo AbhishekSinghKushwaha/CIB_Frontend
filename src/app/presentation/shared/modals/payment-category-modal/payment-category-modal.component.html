@@ -2,8 +2,8 @@
   <button mat-icon-button matSuffix class="close-button" (click)="close()">
     <mat-icon>close</mat-icon>
   </button>
-  <p class="text-center fw-bold pt-2">Send to someone new</p>
-  <h3 class="m-4 mb-0 ms-2">Please enter the recipient's details</h3>
+  <p class="text-center fw-bold pt-2">Transaction BCC Code/Reason</p>
+  <h3 class="m-4 mb-0 ms-2">Please select the transaction BCC code/reason</h3>
   <p class="text-grey text-sm-start ms-2">
     These payment categories are for reporting purposes for buying and importing
     goods
@@ -22,13 +22,13 @@
   <div class="row gx-0">
     <h3
       class="strong-text p-3"
-      *ngIf="(data | paymentCategorySearch: searchText).length as results"
+      *ngIf="(sectors | paymentCategorySearch: searchText).length as results"
     >
       {{ results }} result{{ results ? "s" : "" }}
     </h3>
     <div
       *ngFor="
-        let item of data | paymentCategorySearch: searchText;
+        let item of sectors | paymentCategorySearch: searchText;
         let i = index;
         let isLast = last
       "
@@ -38,14 +38,14 @@
       <div class="col-md-12">
         <div class="row gx-0 user-list-item">
           <div class="col-md-10 d-flex">
-            <div class="align-self-center">{{ item.name }}</div>
+            <div class="align-self-center">{{ item.sectorDescription }}</div>
           </div>
           <div class="col-md-2 d-flex">
             <div class="align-self-center">
               <mat-icon
                 color="primary"
                 [svgIcon]="
-                  selected?.name === item?.name
+                  selected?.sectorDescription === item?.sectorDescription
                     ? 'check_round'
                     : 'radio_button_off'
                 "
