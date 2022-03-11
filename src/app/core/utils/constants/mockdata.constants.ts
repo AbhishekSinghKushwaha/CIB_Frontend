@@ -8,7 +8,6 @@ import { UserListModel, UserModel } from "../../domain/user.model";
 import { CompanyListModel } from "../../domain/company.model";
 import { BeneficiaryModel } from "../../domain/beneficiary.model";
 import { TransferType } from "./transaction-type.constants";
-// import { MobileOperator } from '../../domain/transfer.models';
 import { AirtimeAmountRangeModel } from '../../domain/international-airtime-amount-range.model';
 import { CountryMobileCodeModal } from 'src/app/core/domain/countryCode.model';
 
@@ -687,7 +686,6 @@ export const mockData = {
   users,
   userList,
   companyList,
-  // mobileOperators,
   airtimeAmountRange,
   mobileCodes
 };

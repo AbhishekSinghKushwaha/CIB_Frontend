@@ -10,6 +10,8 @@ import { MobileOperatorsConstants } from 'src/app/core/utils/constants/mobile-op
 import { SharedDataService } from 'src/app/core/services/shared-data/shared-data.service';
 import { AirtimeMobileNumberService } from 'src/app/core/services/airtime-mobile-number/airtime-mobile-number.service';
 import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
+import { StorageService } from "src/app/core/services/storage/storage.service";
+import { Subject, Subscription } from "rxjs";
 
 @Component({
   selector: 'app-airtime-new-recepient',
@@ -21,10 +23,13 @@ export class AirtimeNewRecepientComponent implements OnInit {
   selected: any;
   airTimeForm: FormGroup;
   country: CountryModel;
+  countries: CountryModel[];
   countrySelectType = countrySettings.viewTypes.FLAG_AND_NAME;
   @Input() isChecked: boolean;
   visibility = true;
-
+  @Input() category: string;
+  @Output() selectedCountry = new Subject<CountryModel>();
+  subscriptions: Subscription[] = [];
 
   constructor(
     readonly dialogRef: MatDialogRef<AirtimeNewRecepientComponent>,
@@ -32,19 +37,28 @@ export class AirtimeNewRecepientComponent implements OnInit {
     private readonly countryService: CountryService,
     private mobileOperatorsService: MobileOperatorsService,
     private readonly airtimeMobileNumberService: AirtimeMobileNumberService,
+    private readonly storageService: StorageService,
   ) {
     this.selected = this.mobileOperatorsService.default;
-    this.mobileOperatorsService.selected.subscribe((x) => (this.selected = x));    
+    this.mobileOperatorsService.selected.subscribe((x) => (this.selected = x));  
+    this.countries = this.storageService.getData("countries");  
   }
 
   ngOnInit(): void {
     this.listenToDataStreams();
   }
 
-  openCountry() {
-    this.countryService.openCountry(
-      mockData.countries,
-      countrySettings.viewTypes.NAME_ONLY
+  openCountries(): void {
+    const modal = this.countryService.openCountry(
+      this.countries,
+      this.category,
+      {}
+    );
+    this.subscriptions.push(
+      modal.afterClosed().subscribe((data: CountryModel) => {
+        this.countryService.openedStatus.next(false);
+        this.selectedCountry.next(data);
+      })
     );
   }
 
