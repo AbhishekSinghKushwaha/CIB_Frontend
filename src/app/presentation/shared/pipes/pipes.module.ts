@@ -6,7 +6,7 @@ import { TillNumberSearchPipe } from "./tillNumber-search/till-number-search.pip
 import { PaymentCategorySearchPipe } from "./payment-category-search/payment-category-search.pipe";
 import { CountrySearchPipe } from "./country-search/country-search.pipe";
 import { FormatFileSizePipe } from "./file-size-formatter/file-size-formatter.pipe";
-import { TransactionTypePipe } from "./transaction-type/transaction-type.pipe";
+import { TransferTypeLabelPipe } from "./transfer-type/transfer-type.pipe";
 
 @NgModule({
   declarations: [
@@ -16,7 +16,8 @@ import { TransactionTypePipe } from "./transaction-type/transaction-type.pipe";
     PaymentCategorySearchPipe,
     CountrySearchPipe,
     FormatFileSizePipe,
-    TransactionTypePipe
+    TransferTypeLabelPipe
+
   ],
   imports: [CommonModule],
   exports: [
@@ -26,7 +27,7 @@ import { TransactionTypePipe } from "./transaction-type/transaction-type.pipe";
     PaymentCategorySearchPipe,
     CountrySearchPipe,
     FormatFileSizePipe,
-    TransactionTypePipe
+    TransferTypeLabelPipe
   ],
 })
 export class PipesModule {}

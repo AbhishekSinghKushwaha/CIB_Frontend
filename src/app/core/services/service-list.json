@@ -42,11 +42,17 @@
     "getBanks": "/cibpaymentservice-v1/api/v1/Transfer/GetBanks/",
     "getCurrencies": "/cibpaymentservice-v1/api/v1/Transfer/GetCurrencies",
     "getSubsidiaries": "/cibpaymentservice-v1/api/v1/Transfer/GetSubsidiaries",
+<<<<<<< HEAD
     "getSectors": "/cibpaymentservice-v1/api/v1/Transfer/GetSectors",
     "getFavouriteMerchants": "/cibpaymentservice-v1/api/v1/BuyGoods/FavoriteMerchants",
     "getMerchants": "/cibpaymentservice-v1/api/v1/BuyGoods/Merchants",
     "getMerchantDetails": "/cibpaymentservice-v1/api/v1/BuyGoods/MerchantDetail/",
     "getFavouriteMerchantDetails": "/cibpaymentservice-v1/api/v1/BuyGoods/FavoriteMerchants/"
+=======
+    "getTelcos": "/cibpaymentservice-v1/api/v1/Transfer/GetTelcos",
+    "getMobileWallets": "/cibpaymentservice-v1/api/v1/Transfer/GetMobileWallets",
+    "getSectors": "/cibpaymentservice-v1/api/v1/Transfer/GetSectors"
+>>>>>>> c331547a4cebd6aaae2000acc6f1ac46bb6639d1
   },
   "statement": {
     "getPdf": "/v1/generatepdf/statement"
@@ -67,7 +73,8 @@
     "add": "/cibpaymentservice-v1/api/v1/Beneficiary/AddBeneficiary",
     "edit": "/cibpaymentservice-v1/api/v1/Beneficiary/EditBeneficiary",
     "remove": "/cibpaymentservice-v1/api/v1/Beneficiary/RemoveBeneficiary",
-    "getAll": "/cibpaymentservice-v1/api/v1/Beneficiary/GetBeneficiaries"
+    "getAll": "/cibpaymentservice-v1/api/v1/Beneficiary/GetBeneficiaries",
+    "getBeneficiary": "/cibpaymentservice-v1/api/v1/Beneficiary/GetBeneficiary"
   },
   "userAdministration": {
     "getUsers": "/cibuseraccess-v1/api/UserAdministration/users",

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TransactionTypeModalService } from 'src/app/core/services/transaction-type-modal/transaction-type-modal.service';
+import { TransferTypeModalService } from 'src/app/core/services/transaction-type-modal/transaction-type-modal.service';
 
 @Component({
   selector: 'app-transaction-type-list-item',
@@ -11,7 +11,7 @@ export class TransactionTypeListItemComponent implements OnInit {
   @Input() isChecked: boolean;
 
   constructor(
-    private readonly transactionTypeModalService: TransactionTypeModalService
+    private readonly transactionTypeModalService: TransferTypeModalService
   ) {}
 
   ngOnInit(): void {}

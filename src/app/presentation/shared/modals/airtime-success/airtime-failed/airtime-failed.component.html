@@ -1,0 +1,17 @@
+<mat-card class="notification-modal-screen p-0 mat-elevation-z7 cursor-pointer">
+  <div *ngIf="data.image" class="d-none d-sm-flex justify-content-center align-items-center img-bg p-2">
+    <img [src]="data.image" height="180px" />
+  </div>
+  <mat-card-content class="p-4">
+    <h3 class="card-title strong-text">{{ data.title }}</h3>
+    <small class="text-muted text-grey">
+      {{ data.message }}
+    </small>
+    <p class="pt-3">
+        <span  class="mt-4 text cursor-pointer"
+        (click)="close()">Cancel</span>
+        <span  class=" ms-4 mt-4 text text-danger cursor-pointer strong-text"
+        (click)="closeModal()">Try again</span>
+    </p>
+  </mat-card-content>
+</mat-card>

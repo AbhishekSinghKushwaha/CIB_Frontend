@@ -1,18 +1,18 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, Inject, Input, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup } from "@angular/forms";
 import {
   MatDialog,
   MatDialogRef,
   MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
-import { UniversalValidators } from 'ngx-validators';
-import { MobileOperator } from 'src/app/core/domain/transfer.models';
-import { NewRecipientService } from 'src/app/core/services/modal-services/new-recipient.service';
+} from "@angular/material/dialog";
+import { UniversalValidators } from "ngx-validators";
+import { MobileWallet } from "src/app/core/domain/transfer.models";
+import { NewRecipientService } from "src/app/core/services/modal-services/new-recipient.service";
 
 @Component({
-  selector: 'app-mobile-money-new-recipient',
-  templateUrl: './mobile-money-new-recipient.component.html',
-  styleUrls: ['./mobile-money-new-recipient.component.scss'],
+  selector: "app-mobile-money-new-recipient",
+  templateUrl: "./mobile-money-new-recipient.component.html",
+  styleUrls: ["./mobile-money-new-recipient.component.scss"],
 })
 export class MobileMoneyNewRecipientComponent implements OnInit {
   mobileMoneyNewRecipientForm: FormGroup;
@@ -23,7 +23,7 @@ export class MobileMoneyNewRecipientComponent implements OnInit {
     private newRecipientService: NewRecipientService,
     private dialogRef: MatDialogRef<MobileMoneyNewRecipientComponent>,
     private readonly dialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) private selectedOperator: MobileOperator
+    @Inject(MAT_DIALOG_DATA) private selectedOperator: MobileWallet
   ) {}
 
   ngOnInit(): void {
@@ -33,7 +33,7 @@ export class MobileMoneyNewRecipientComponent implements OnInit {
   initForm() {
     this.mobileMoneyNewRecipientForm = this.fb.group({
       phoneNumber: [
-        '',
+        "",
         [UniversalValidators.isNumber, UniversalValidators.noWhitespace],
       ],
     });

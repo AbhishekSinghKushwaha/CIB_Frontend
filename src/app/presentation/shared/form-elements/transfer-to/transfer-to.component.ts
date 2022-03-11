@@ -8,10 +8,14 @@ import {
 import { recipientModel } from "src/app/core/domain/recipient.model";
 import { NewRecipientService } from "src/app/core/services/modal-services/new-recipient.service";
 import { SharedDataService } from "src/app/core/services/shared-data/shared-data.service";
-import { mockData } from "src/app/core/utils/constants/mockdata.constants";
 import { TransferToService } from "src/app/core/services/modal-services/transfer-to.service";
 import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
+<<<<<<< HEAD
 import { MerchantDetailsService } from 'src/app/core/services/merchant-details/merchant-details.service';
+=======
+import { BeneficiaryManagementService } from "src/app/core/services/beneficiary-management/beneficiary-management.service";
+import { StorageService } from "src/app/core/services/storage/storage.service";
+>>>>>>> c331547a4cebd6aaae2000acc6f1ac46bb6639d1
 
 @Component({
   selector: "app-transfer-to",
@@ -56,16 +60,24 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
     return this.parentForm?.get(this.fieldName) as FormControl;
   }
 
+  beneficiaries: any[];
+
   transferType = TransactionTypeConstants.TransferType;
   constructor(
     private readonly transferToService: TransferToService,
     private readonly newRecipientService: NewRecipientService,
     private sharedDataService: SharedDataService,
+<<<<<<< HEAD
     private readonly merchantDetailsService: MerchantDetailsService
+=======
+    private beneficiaryService: BeneficiaryManagementService,
+    private storageService: StorageService
+>>>>>>> c331547a4cebd6aaae2000acc6f1ac46bb6639d1
   ) {}
 
   ngOnInit(): void {
     this.listenToDataStreams();
+    this.getBeneficiaries();
   }
 
   public writeValue(value: any): void {
@@ -90,6 +102,16 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
   }
 
   // TODO:: Get beneficiaries as per the transaction type
+  getBeneficiaries() {
+    this.beneficiaries = this.storageService
+      .getData("beneficiaries")
+      .filter((beneficiary: any) => {
+        return (
+          beneficiary.isFavourite === true &&
+          beneficiary.transferTypeId === Number(this.transactionType)
+        );
+      });
+  }
 
   // Open transfer to modal based on transaction type and pass the required paramenters
   openTransferToModal() {
@@ -108,19 +130,19 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
         break;
       case this.transferType.INTRA_BANK:
         this.transferToService.openTransferToModal({
-          favourites: mockData.favourites,
+          favourites: this.beneficiaries,
           transactionType: this.transactionType,
         });
         break;
       case this.transferType.EFT:
         this.transferToService.openTransferToModal({
-          favourites: mockData.favourites,
+          favourites: this.beneficiaries,
           transactionType: this.transactionType,
         });
         break;
       case this.transferType.RTGS:
         this.transferToService.openTransferToModal({
-          favourites: mockData.favourites,
+          favourites: this.beneficiaries,
           transactionType: this.transactionType,
         });
         break;
@@ -129,35 +151,45 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
           this.favouriteMerchantDetails = res;
         });
         this.transferToService.openTransferToModal({
+<<<<<<< HEAD
           favourites: this.favouriteMerchantDetails,
+=======
+          favourites: this.beneficiaries,
+>>>>>>> c331547a4cebd6aaae2000acc6f1ac46bb6639d1
           transactionType: this.transactionType,
         });
         break;
       case this.transferType.MOBILE_MONEY:
         this.transferToService.openTransferToModal({
-          favourites: mockData.favourites,
+          favourites: this.beneficiaries,
           transactionType: this.transactionType,
         });
         break;
       case this.transferType.SWIFT:
         this.transferToService.openTransferToModal({
-          favourites: mockData.favourites,
+          favourites: this.beneficiaries,
           transactionType: this.transactionType,
         });
         break;
       case this.transferType.PESALINK:
         this.transferToService.openTransferToModal({
-          favourites: mockData.favourites,
+          favourites: this.beneficiaries,
           transactionType: this.transactionType,
         });
         break;
       case this.transferType.INTER_COUNTRY_TRANSFER:
         this.transferToService.openTransferToModal({
-          favourites: mockData.favourites,
+          favourites: this.beneficiaries,
           transactionType: this.transactionType,
         });
         break;
       default:
+      case this.transferType.BUY_AIRTIME:
+        this.transferToService.openTransferToModal({
+          favourites: this.beneficiaries,
+          transactionType: this.transactionType,
+        });
+        break;  
         break;
     }
   }
@@ -213,6 +245,10 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
           this.parentForm.controls.sendTo.setValue(x);
         });
         break;
+        case this.transferType.BUY_AIRTIME:
+        this.newRecipientService.data.subscribe((x) => {
+          this.parentForm.controls.sendTo.setValue(x);
+        });
         break;
       default:
         break;

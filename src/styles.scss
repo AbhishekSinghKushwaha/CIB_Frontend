@@ -416,7 +416,9 @@ button {
   }
 
   .toggle-container {
-    transform: scale(2);
+    > mat-icon {
+      transform: scale(2);
+    }
   }
 }
 

@@ -759,6 +759,36 @@ export class CustomIconService {
         'assets/images/icons/visual-support-icons-create_user.svg'
       )
     );
+    this.matIconRegistry.addSvgIcon(
+      'dashboard_send_to_icon1',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/send_to.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'dashboard_send_to_icon2',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/send_to1.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'dashboard_pay',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/buy.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'dashboard_buy',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/pay.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'dashboard_more',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/dashboard_more.svg'
+      )
+    );
   }
 }
 

@@ -1,0 +1,29 @@
+<div class="airtime-modal-screen p-1" *ngIf="visibility">
+    <div class="row">
+        <div class="col-md-4">
+          <mat-icon (click)="close()" svgIcon="caret_left"></mat-icon>
+        </div>
+        <h4 class="fw-bold col-md-8">Buy for someone new</h4>
+    </div>
+    <h3 class="strong-text pt-4 pb-3">Please select an operator</h3>
+  
+    <mat-form-field appearance="standard" style="width: 100%" floatLabel="always" (click)="openCountries()">
+        <mat-label>Country</mat-label>
+        <input matInput type="text" class="strong-text" id="country" name="country" 
+        [value]="country?.countryName ? country?.countryName : ''"
+        [placeholder]="country?.countryName || '' || 'Kenya'"/>
+        <button type="button" mat-icon-button matSuffix>
+            <mat-icon svgIcon="caret_down"></mat-icon>
+        </button>
+    </mat-form-field>
+
+    <app-mobile-operators
+        *ngFor="let account of data.mobileOperators" 
+        [data]="account"
+        [isChecked]="selected && selected.name === account.name">
+    </app-mobile-operators>
+
+    <!-- <app-mobile-operators-modal
+    [transferType]="data"
+  ></app-mobile-operators-modal> -->
+</div>
