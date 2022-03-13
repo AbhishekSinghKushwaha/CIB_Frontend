@@ -10,6 +10,7 @@ import { MobileWalletsService } from "src/app/core/services/modal-services/mobil
 import { SharedDataService } from "src/app/core/services/shared-data/shared-data.service";
 import { TransferFromService } from "src/app/core/services/modal-services/transfer-from.service";
 import { TelcoService } from "src/app/core/services/modal-services/telco.service";
+import { IntrabankService } from "src/app/core/services/transfers/intrabank/intrabank.service";
 @Component({
   selector: "app-beneficiary-management-form",
   templateUrl: "./beneficiary-management-form.component.html",
@@ -35,7 +36,8 @@ export class BeneficiaryManagementFormComponent implements OnInit {
     private mobileWalletService: MobileWalletsService,
     private sharedDataService: SharedDataService,
     private transferFromService: TransferFromService,
-    private telcoService: TelcoService
+    private telcoService: TelcoService,
+    private readonly intraBankService: IntrabankService
   ) {
     this.beneficiaryId = route.snapshot.paramMap.get("id");
     this.phoneUtil = PhoneNumberUtil.getInstance();
@@ -224,6 +226,12 @@ export class BeneficiaryManagementFormComponent implements OnInit {
     // TODO:: Do product selction for bill payments
 
     return productName;
+  }
+
+  perfomNameEquiry() {
+    this.intraBankService.accountSearch({}).subscribe((res) => {
+      console.log(res);
+    });
   }
 
   toggleFav(): void {
