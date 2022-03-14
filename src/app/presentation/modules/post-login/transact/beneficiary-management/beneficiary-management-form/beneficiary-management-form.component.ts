@@ -156,12 +156,24 @@ export class BeneficiaryManagementFormComponent implements OnInit {
     });
   }
 
-  createBeneficiary() {
+  async createBeneficiary() {
+    console.log(await this.perfomNameEquiry());
     if (!this.beneficiaryForm.get("phoneNumber")?.dirty) {
       this.beneficiaryForm.controls.phoneNumber.setValue(
         this.initialPhoneNumber
       );
     }
+
+    if (
+      this.getFormFields.transferType.value.value ===
+      this.transferType.INTRA_BANK
+    ) {
+      const response = await this.perfomNameEquiry();
+      response.status
+        ? this.getFormFields.accountName.setValue(response.data.accountName)
+        : "";
+    }
+
     const payload = {
       countryCode: this.getFormFields.country.value.countryCode,
       bankCode: this.getFormFields.bank.value.bankCode,
@@ -228,10 +240,12 @@ export class BeneficiaryManagementFormComponent implements OnInit {
     return productName;
   }
 
-  perfomNameEquiry() {
-    this.intraBankService.accountSearch({}).subscribe((res) => {
-      console.log(res);
+  async perfomNameEquiry() {
+    const account = await this.beneficiaryManagementService.accountSearch({
+      accountNumber: this.getFormFields.accountNumber.value,
+      bankCode: "54",
     });
+    return account;
   }
 
   toggleFav(): void {
