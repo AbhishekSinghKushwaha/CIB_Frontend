@@ -12,6 +12,8 @@ import { TransferToService } from "src/app/core/services/modal-services/transfer
 import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
 import { BeneficiaryManagementService } from "src/app/core/services/beneficiary-management/beneficiary-management.service";
 import { StorageService } from "src/app/core/services/storage/storage.service";
+import { MerchantDetailsService } from 'src/app/core/services/merchant-details/merchant-details.service';
+
 
 @Component({
   selector: "app-transfer-to",
@@ -27,6 +29,8 @@ import { StorageService } from "src/app/core/services/storage/storage.service";
 })
 export class TransferToComponent implements ControlValueAccessor, OnInit {
   destinationAccounts: any[];
+
+  favouriteMerchantDetails: any[];
 
   @Input() transactionType!: string;
 
@@ -62,7 +66,8 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
     private readonly newRecipientService: NewRecipientService,
     private sharedDataService: SharedDataService,
     private beneficiaryService: BeneficiaryManagementService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private readonly merchantDetailsService: MerchantDetailsService
   ) {}
 
   ngOnInit(): void {
@@ -137,6 +142,9 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
         });
         break;
       case this.transferType.BUY_GOODS:
+        this.merchantDetailsService.favouriteMerchantDetails.subscribe((res) => {
+          this.favouriteMerchantDetails = res;
+        });
         this.transferToService.openTransferToModal({
           favourites: this.beneficiaries,
           transactionType: this.transactionType,

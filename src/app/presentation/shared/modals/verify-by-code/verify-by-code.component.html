@@ -2,7 +2,7 @@
     <mat-icon class="text-success">check_circle</mat-icon>
     <span style="padding-left: 10px;">{{ alertMessage }}</span>
 </div>
-<form [formGroup]="form" (submit)="submit()">
+<form [formGroup]="verifyOtpForm" (submit)="submit()">
     <div class="row mt-5">
         <div class="col-5">
             <div *ngIf="data === 'By email'">
@@ -23,20 +23,48 @@
             </div>
             <small class="text-grey m-2">Please enter the code below</small>
 
-            <div class="inputs d-flex flex-row mt-3">
-                <div class="form-group" *ngFor="let input of formInput">
-                    <input matInput class="m-2 text-center form-control rounded" type="text" formControlName="{{input}}" maxlength="1">
-                </div>
+            <div class="d-flex flex-row mt-3" formArrayName="digits">
+                <input
+                    type="tel"
+                    *ngFor="let field of verifyOtpFormArray.controls; let i = index"
+                    #inputs
+                    [maxLength]="1"
+                    [formControlName]="i"
+                    (keydown)="check(i, field, $event)"
+                    class="otp-input"
+                    autocomplete="off"
+                />
             </div>
         </div>
     </div> 
 
     <div class="row mt-4">
         <div class="col-md-2">
-            <button mat-raised-button [disabled]="form.invalid" type="submit" color="primary" class="px-5" routerLink="/transact/buy-goods/submit-transfer">Verify</button>
+            <button mat-raised-button [disabled]="verifyOtpForm.invalid" type="submit" color="primary" class="px-5" (click)="verify()">Verify</button>
         </div>  
         <div class="col-md-3">
-            <button mat-stroked-button [disabled]="timeLeft != 60" type="button" color="primary" (click)="startTimer()" class="px-5">{{timeLeft == 60 ? 'Resend code' : 'Resend in 0:'+timeLeft}}</button>
+            <button
+            mat-stroked-button
+            color="primary"
+            type="button"
+            class="col-12"
+            [disabled]="timeToResend > 0"
+            (click)="resendOTPCode()"
+          >
+            <div *ngIf="timeToResend > 0" class="resend-otp-text">
+              <div class="btn-text">
+                <span>Resend in</span>
+                00:{{
+                  timeToResend > 10
+                    ? timeToResend
+                    : ("0" + timeToResend).slice(-2)
+                }}
+              </div>
+            </div>
+            <div *ngIf="!otpResent && timeToResend === 0" class="btn-text">
+              Resend code
+            </div>
+          </button>
         </div>
         <div class="col-md-1">
             <button mat-stroked-button type="button" color="primary" class="px-5" routerLink="/transact/buy-goods/otp-verification">Try another method</button>
