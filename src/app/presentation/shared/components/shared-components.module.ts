@@ -27,6 +27,9 @@ import { SecurityVerificationComponent } from './security-verification/security-
 import { SecurityChallengeComponent } from './security-challenge/security-challenge.component';
 import { SecurityQuestionsModalModule } from '../modals/security-questions-modal/security-questions-modal.module';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { TransactionsListComponent } from './transactions-list/transactions-list.component';
+import { PaginatorComponent } from './paginator/paginator.component';
+import { ListItemsComponent } from './list-items/list-items.component';
 
 
 const components = [
@@ -48,7 +51,10 @@ const components = [
   LogoutConfirmationModalComponent,
   SecurityVerificationComponent,
   SecurityChallengeComponent,
-  ResetPasswordComponent
+  ResetPasswordComponent,
+  TransactionsListComponent,
+  PaginatorComponent,
+  ListItemsComponent
 ];
 
 @NgModule({

@@ -1,0 +1,134 @@
+<div class="activity-detail p-3" *ngIf="status !== 'Reinitiated' || !show">
+  <div class="mb-3">
+    <button
+      mat-icon-button
+      aria-label="Back"
+      class="back-icon"
+      routerLink="/activities/"
+    >
+      <div class="strong-text">
+        <mat-icon svgIcon="caret_left"></mat-icon>
+      </div>
+    </button>
+  </div>
+  <div class="row-fluid mb-4">
+    <div class="row">
+      <div class="col-8">
+        <h3 class="strong-text">Transaction detail</h3>
+      </div>
+      <div class="col-4" *ngIf="data.status === 'Approved'">
+        <app-card-component
+          [data]="{ text: 'View or download receipt', suffixIcon: 'eyes_view' }"
+          (click)="openReceipt()"
+        ></app-card-component>
+      </div>
+    </div>
+  </div>
+  <div class="row-fluid text-danger fs-4 mb-3">
+    33,000 KES
+    <mat-icon svgIcon="question_mark"></mat-icon>
+  </div>
+  <div class="row-fluid">
+    <div class="row">
+      <div class="col-6">
+        <a mat-button href="" class="bg-light">
+          <mat-icon
+            [svgIcon]="transactionIcon[data.status]"
+            mat-raised-button
+          ></mat-icon>
+          {{ data.status }}
+        </a>
+        <a mat-button href="">
+          <mat-icon svgIcon="edit"></mat-icon>
+          Edit
+        </a>
+      </div>
+      <div class="col-6 d-flex justify-content-end">
+        <button
+          *ngIf="data.status !== 'Pending'"
+          mat-raised-button
+          class="me-3"
+          color="primary"
+          [disabled]="data.status !== 'Rejected'"
+          (click)="reinitiate()"
+        >
+          <span class="pe-3 ps-3">Reinitiate</span>
+        </button>
+        <button
+          *ngIf="data.status !== 'Pending'"
+          mat-stroked-button
+          color="primary"
+          [disabled]="data.status !== 'Rejected'"
+        >
+          <span class="pe-3 ps-3">Delete</span>
+        </button>
+        <button
+          (click)="approve()"
+          class="me-3"
+          mat-raised-button
+          color="primary"
+          *ngIf="data.status === 'Pending'"
+        >
+          <span class="pe-3 ps-3">Approve</span>
+        </button>
+        <button
+          (click)="reject()"
+          mat-stroked-button
+          color="primary"
+          *ngIf="data.status === 'Pending'"
+        >
+          <span class="pe-3 ps-3">Reject</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<mat-card *ngIf="show">
+  <mat-card-content>
+    <div class="row">
+      <div class="col-4">
+        <small class="strong-text"> Pending Requests </small>
+        <h3 class="strong-text">12</h3>
+      </div>
+      <div class="col-4">
+        <small class="strong-text"> Approved Transactions </small>
+        <h3 class="strong-text">253</h3>
+      </div>
+      <div class="col-4">
+        <small class="strong-text"> Rejected Transactions </small>
+        <h3 class="strong-text">253</h3>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<div class="row pe-5 ps-5" *ngIf="status !== 'Reinitiated'">
+  <div
+    class="alert alert-danger"
+    role="alert"
+    *ngIf="data.status === 'Rejected'"
+  >
+    <span class="text-danger strong-text">
+      <mat-icon svgIcon="exclamation"></mat-icon> Reason for rejection
+    </span>
+    <br />
+    <span class="error-description">Missing the appropriate documentation</span>
+  </div>
+  <div class="row">
+    <app-list-items [data]="transactionDetail"></app-list-items>
+  </div>
+  <div class="row p-5">
+    <h4 class="strong-text">Supporting documents</h4>
+    <app-card-component
+      class="row col-4"
+      [data]="{ text: 'Upload documents', subText: '3 Documents' }"
+      (click)="openUploadModal()"
+    ></app-card-component>
+  </div>
+</div>
+
+<div class="row" *ngIf="status === 'Reinitiated'">
+  <app-confirmation-completion
+    [data]="completionData"
+    (confirmationDone)="confirmationDone($event)"
+  ></app-confirmation-completion>
+</div>

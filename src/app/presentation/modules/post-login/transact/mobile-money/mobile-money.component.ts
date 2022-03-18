@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { ConfirmationModalService } from 'src/app/core/services/modal-services/confirmation-modal.service';
+import { SwiftTransferService } from 'src/app/core/services/transfers/swift/swift-transfer.service';
 import { TransactionTypeConstants } from 'src/app/core/utils/constants/transaction-type.constants';
 import { accountLimitValidator } from 'src/app/core/utils/validators/limits.validators';
 import { ConfirmPaymentComponent } from 'src/app/presentation/shared/modals/confirm-payment/confirm-payment.component';
@@ -19,7 +22,12 @@ export class MobileMoneyComponent implements OnInit {
     return this.mobileMoneyTransferForm.controls;
   }
 
-  constructor(private readonly fb: FormBuilder, private dialog: MatDialog) {}
+  constructor(
+    private readonly fb: FormBuilder,
+    private dialog: MatDialog,
+    private readonly router: Router,
+    private readonly swiftTransferService: SwiftTransferService,
+    private readonly confirmationModalService: ConfirmationModalService) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -47,21 +55,85 @@ export class MobileMoneyComponent implements OnInit {
       currency: this.getForm.amount.value.currency,
       destinationAccount: this.getForm.sendTo.value.accountNumber,
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
-      transferType: this.transferType.OWN_EQUITY,
+      transferType: Number(this.transferType.MOBILE_MONEY),
+      countryCode: "KE", //TODO:: Default have it as kenya, then change to pick the user's country
     };
-    // this.ownEquityAccountService
-    //   .getTransferCharges(payload)
-    //   .subscribe((res) => {
-    //     if (res.status) {
-    //       this.confirmPayment(res.data);
-    //     } else {
-    //       // TODO:: Notify error
-    //     }
-    //   });
+    this.swiftTransferService.getTransferCharges(payload).subscribe((res) => {
+      if (res.status) {
+        this.confirmPayment(res.data);
+      } else {
+        // TODO:: Notify error
+      }
+    });
   }
 
   // Confirm Payment and return the confirmation boolean before initiating payment.
   confirmPayment(transferFee: string) {
+    const data = {
+      title: "Payment Confirmation",
+      subtitle: "To continue, please confirm your transaction",
+      submitButtonText: "Confirm",
+      content: [
+        {
+          key: "Transaction",
+          value: "Send to another bank via SWIFT",
+        },
+        {
+          key: "Amount",
+          value: `${this.getForm.amount.value.amount} ${this.getForm.amount.value.currency}`,
+        },
+        {
+          key: "Charges",
+          value: `${transferFee} ${this.getForm.amount.value.currency}`,
+        },
+        {
+          key: "From",
+          value: `${this.getForm.sendFrom.value.accountName}<br>
+            ${this.getForm.sendFrom.value.accountNumber}
+          `,
+        },
+        {
+          key: "To",
+          value: `${this.getForm.sendTo.value.firstName} ${this.getForm.sendTo.value.lastName}<br>
+            <span><strong>Bank:</strong></span> ${this.getForm.sendTo.value.bank.bankName}<br>
+            <span><strong>Ac/No:</strong></span> ${this.getForm.sendTo.value.accountNumber}<br>
+            ${this.getForm.sendTo.value.country.countryName}
+          `,
+        },
+        {
+          key: "Payment Date",
+          value: `${this.getForm.schedulePayment.value.startDate}`,
+        },
+        {
+          key: "Frequency",
+          value: `${this.getForm.schedulePayment.value.frequency.frequency}<br>
+            ${this.getForm.schedulePayment.value.reminderDay.reminder}
+          `,
+        },
+        {
+          key: "FX Reference ID",
+          value: `${this.getForm.fxReferenceId.value}`,
+        },
+        {
+          key: "Payment Reason",
+          value: `${this.getForm.reason.value}`,
+        },
+      ],
+    };
+
+    this.confirmationModalService
+      .open(data)
+      .afterClosed()
+      .subscribe((confirmed: boolean) => {
+        if (data) {
+          this.sendMoney();
+        }
+      });
+  }
+
+
+  // Confirm Payment and return the confirmation boolean before initiating payment.
+  confirmPaymentMain(transferFee: string) {
     if (this.mobileMoneyTransferForm.valid) {
       const paymentData = {
         from: this.getForm.sendFrom.value,
@@ -106,26 +178,18 @@ export class MobileMoneyComponent implements OnInit {
         endDate: this.getForm.schedulePayment.value.endDate.toISOString(),
       },
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
-      transferType: this.transferType.MOBILE_MONEY,
+      transferType: Number(this.transferType.MOBILE_MONEY),
     };
-    // if (this.ownEquityAccountTransferForm.valid) {
-    //   this.ownEquityAccountService.sendToOwnEquityAccount(payload).subscribe(
-    //     (res) => {
-    //       if (res.status) {
-    //         this.router.navigate([
-    //           '/transact/other-equity-account/submit-transfer',
-    //         ]);
-    //       } else {
-    //         alert(res.message);
-    //         // TODO:: Notify Error
-    //       }
-    //     },
-    //     (err) => {
-    //       alert(
-    //         `Sorry, we're unable to complete your transaction. Please give us some time to fix the problem and try again later.`
-    //       );
-    //     }
-    //   );
-    // }
+
+    if (this.mobileMoneyTransferForm.valid) {
+      this.swiftTransferService.sendViaSwift(payload).subscribe((res) => {
+        if (res.status) {
+          this.router.navigate(["/transact/transfer-submitted"]);
+        } else {
+          alert(res.message);
+          // TODO:: Notify Error
+        }
+      });
+    }
   }
 }

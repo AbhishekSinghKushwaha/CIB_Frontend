@@ -6,7 +6,7 @@
   </div>
   <div class="col-md-6 pt-3">
     <h3>{{ data.message }}</h3>
-    <small class="text-grey">{{ data.subMessage }}</small>
+    <small class="text-grey" [innerHTML]="data.subMessage"></small>
 
     <div class="pt-5">
       <button mat-raised-button color="primary" (click)="done()">
