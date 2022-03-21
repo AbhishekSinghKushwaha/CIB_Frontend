@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { RolesComponent } from './roles/roles.component';
 import { UserDetailsComponent } from './user-details.component';
 
 const routes: Routes = [
@@ -8,34 +9,28 @@ const routes: Routes = [
     component: UserDetailsComponent
   },
   {
-    path:'roles',
-    data: {
-      redirectTo: 'user-management/add-user'
-    },
-    loadChildren: (): Promise<any> => 
-      import('./roles/roles.module').then(
-        (m) => m.RolesModule
-      )
+    path: 'roles',
+    component: RolesComponent
   },
   {
-    path:'limits',
+    path: 'limits',
     data: {
       redirectTo: 'user-management/add-user'
     },
-    loadChildren: (): Promise<any> => 
+    loadChildren: (): Promise<any> =>
       import('./limits/limits.module').then(
         (m) => m.LimitsModule
       )
   },
   {
-    path:'products',
+    path: 'products',
     data: {
       redirectTo: 'user-management/edit-user'
     },
-    loadChildren: (): Promise<any> => 
+    loadChildren: (): Promise<any> =>
       import('./products/products.module').then(
         (m) => m.ProductsModule
-      ) 
+      )
   },
 
 ];

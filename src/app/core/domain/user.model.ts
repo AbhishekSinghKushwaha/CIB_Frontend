@@ -19,3 +19,9 @@ export interface UserListModel {
   status: string;
   lastViewed: string;
 }
+
+export interface UserFormPropModel {
+  addRoleLink: string;
+  userListLink: string;
+  memberId: string;
+}

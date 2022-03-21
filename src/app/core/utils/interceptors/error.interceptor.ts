@@ -19,8 +19,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 @Injectable()
 export class ErrorIntercept
   extends BaseTransactComponent
-  implements HttpInterceptor
-{
+  implements HttpInterceptor {
   disabledRoutes: string[] = [
     environment.apiUrl + urlList.accounts.getUserAccounts,
     environment.apiUrl + urlList.dataLookUp.getBanks,
@@ -64,10 +63,11 @@ export class ErrorIntercept
           errorMessage.message = error.error.message;
           this.notifyError(errorMessage);
         } else {
+          console.log(error);
           errorMessage.error = true;
-          errorMessage.errorStatus = `${error.status}`;
-          errorMessage.message = error.error.message;
-          errorMessage.details = error.error;
+          errorMessage.errorStatus = `${error?.status}`;
+          errorMessage.message = error?.error?.message;
+          errorMessage.details = error?.error;
           this.notifyError(errorMessage);
         }
         // TODO:: Add loggin service here

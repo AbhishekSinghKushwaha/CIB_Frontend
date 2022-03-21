@@ -1,0 +1,164 @@
+<div class="row gx-0">
+  <div class="col-md-12">
+    <div class="row gx-0 mb-4 justify-content-md-center">
+      <div class="col-md-11">
+        <div class="mb-3">
+          <button
+            mat-icon-button
+            aria-label="Back"
+            class="back-icon"
+            [routerLink]="data.userListLink"
+          >
+            <div class="strong-text">
+              <mat-icon svgIcon="caret_left"></mat-icon>
+              <span>{{ data.memberId ? "Edit" : "Add" }} </span>
+            </div>
+          </button>
+        </div>
+        <div class="row mt-3">
+          <h3>
+            Please {{ data.memberId ? "update" : "enter" }} the user's details
+          </h3>
+          <form
+            [formGroup]="teamMemberDetailsForm"
+            (submit)="teamMemberDetailsForm.valid && submit()"
+            class="d-flex flex-column"
+          >
+            <div class="row pt-4">
+              <div class="col-md-6 mb-3">
+                <app-input
+                  [parentForm]="teamMemberDetailsForm"
+                  fieldName="name"
+                  formControlName="name"
+                  placeholder="Enter their first and last name"
+                  label="Full Name"
+                ></app-input>
+              </div>
+              <div class="col-md-6 mb-3">
+                <app-input
+                  [parentForm]="teamMemberDetailsForm"
+                  fieldName="emailAddress"
+                  formControlName="emailAddress"
+                  placeholder="Enter their email address"
+                  label="Email Address"
+                ></app-input>
+              </div>
+              <div class="col-md-6 mb-3">
+                <app-input
+                  [parentForm]="teamMemberDetailsForm"
+                  fieldName="idNumber"
+                  formControlName="idNumber"
+                  placeholder="Enter their ID or Passport Number"
+                  label="ID / Passport Number"
+                ></app-input>
+              </div>
+              <div class="col-md-6 mb-3">
+                <app-phone-number-input
+                  [parentForm]="teamMemberDetailsForm"
+                  fieldName="phoneNumber"
+                  formControlName="phoneNumber"
+                  placeholder="Enter their mobile number"
+                  label="Mobile Number"
+                  [selectedCountry]="selectedCountry"
+                ></app-phone-number-input>
+              </div>
+              <div class="col-md-6">
+                <app-input
+                  [parentForm]="teamMemberDetailsForm"
+                  fieldName="transactionLimit"
+                  formControlName="transactionLimit"
+                  placeholder="5,000,000.00"
+                  label="Transaction Limit"
+                ></app-input>
+              </div>
+              <div class="col-md-6 mb-3">
+                <app-phone-number-input
+                  [parentForm]="teamMemberDetailsForm"
+                  fieldName="officePhoneNumber"
+                  formControlName="officePhoneNumber"
+                  placeholder="Enter their office number"
+                  label="Office Phone Number"
+                  [selectedCountry]="selectedCountry"
+                ></app-phone-number-input>
+              </div>
+              <div class="row" *ngIf="data.memberId">
+                <div class="col-md-6">
+                  <div class="row product-list-item" (click)="addRoles()">
+                    <div class="col-md-2">
+                      <button mat-fab class="text-primary">
+                        <mat-icon>person</mat-icon>
+                      </button>
+                    </div>
+                    <div class="col-md-7 product-list-item-label">
+                      <p class="mb-0">User's roles</p>
+                      <small class="text-grey">Assign roles to a user</small>
+                    </div>
+                    <div class="col-1 text-grey pt-4" *ngIf="!rolesAdded">
+                      off
+                    </div>
+                    <div class="col-1 text-primary pt-4" *ngIf="rolesAdded">
+                      <strong>On</strong>
+                    </div>
+                    <div
+                      class="col-md-2 card card-block justify-content-center"
+                    >
+                      <mat-icon
+                        color="primary"
+                        svgIcon="caret_right"
+                      ></mat-icon>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="col-md-6 cursor-pointer"
+                  routerLink="/auth/customer-onboarding/register/add-product-service"
+                >
+                  <div class="row product-list-item">
+                    <div class="col-md-2">
+                      <button mat-fab class="text-primary">
+                        <mat-icon>person</mat-icon>
+                      </button>
+                    </div>
+                    <div class="col-md-7 product-list-item-label">
+                      <p class="mb-0">Products & sub-products</p>
+                      <small class="text-grey"
+                        >Choose the relevant options for your company</small
+                      >
+                    </div>
+                    <div class="col-1 text-grey pt-4" *ngIf="!rolesAdded">
+                      off
+                    </div>
+                    <div class="col-1 text-primary pt-4" *ngIf="rolesAdded">
+                      <strong>On</strong>
+                    </div>
+                    <div
+                      class="col-md-2 card card-block justify-content-center"
+                    >
+                      <mat-icon
+                        color="primary"
+                        svgIcon="caret_right"
+                      ></mat-icon>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <button
+                mat-raised-button
+                color="primary"
+                class="mt-5 col-md-3"
+                type="submit"
+                [disabled]="teamMemberDetailsForm.invalid"
+              >
+                {{ data.memberId ? "Update" : "Add" }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
