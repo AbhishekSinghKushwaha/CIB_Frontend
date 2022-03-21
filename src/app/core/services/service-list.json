@@ -51,7 +51,8 @@
     "getFavouriteMerchantDetails": "/cibpaymentservice-v1/api/v1/BuyGoods/FavoriteMerchants/"
   },
   "statement": {
-    "getPdf": "/v1/generatepdf/statement"
+    "getPdf": "/v1/generatepdf/statement",
+    "getTransactions": "/cibpaymentservice-v1/api/v1/Transfer/Transactions"
   },
   "login": {
     "loginUser": "/cibuseraccess-v1/api/Auth/oauth/token",
