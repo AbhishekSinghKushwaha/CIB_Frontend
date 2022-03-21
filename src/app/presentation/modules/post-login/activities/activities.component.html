@@ -1,0 +1,37 @@
+<div class="row">
+  <app-card-component
+    class="col-md-6 p-3"
+    [data]="{
+      text: 'Payments',
+      subText: 'Requests for purchases & payments',
+      prefixIcon:
+        'assets/images/icons/visual-support-icon-card-insertion-with-grey-bg.svg',
+      suffixIcon: 'caret_right',
+      route: '/service-request/static-update/edit/accounts'
+    }"
+  >
+  </app-card-component>
+  <app-card-component
+    class="col-md-6 p-3"
+    [data]="{
+      text: 'Send money',
+      subText: 'Requests for sending money',
+      prefixIcon:
+        'assets/images/icons/visual-support-icon-card-insertion-with-grey-bg.svg',
+      suffixIcon: 'caret_right',
+      route: '/transact/swift'
+    }"
+  >
+  </app-card-component>
+</div>
+
+<div class="row mt-4">
+  <mat-tab-group>
+    <mat-tab label="Pending requests">
+      <app-transactions-list [category]="'pending'"></app-transactions-list>
+    </mat-tab>
+    <mat-tab label="History">
+      <app-transactions-list [category]="'history'"></app-transactions-list
+    ></mat-tab>
+  </mat-tab-group>
+</div>

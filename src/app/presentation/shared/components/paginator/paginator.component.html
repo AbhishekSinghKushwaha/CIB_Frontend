@@ -1,0 +1,40 @@
+<div class="row p-2 trans-card">
+  <div class="col-6 d-flex justify-content-start">
+    <span class="align-self-center pe-3"
+      ><small class="text-grey">{{ data?.description }}</small>
+    </span>
+    <span class="align-self-center pt-3">
+      <mat-form-field appearance="outline" style="width: 80px; font-size: 12px">
+        <mat-select
+          disableRipple
+          [(ngModel)]="pageSize"
+          (selectionChange)="onPageSizeChange()"
+        >
+          <mat-option
+            [value]="option"
+            *ngFor="let option of data?.pageSizeOptions"
+          >
+            {{ option }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </span>
+  </div>
+  <div class="col-6 d-flex justify-content-end">
+    <span class="align-self-center">
+      <mat-button-toggle-group
+        appearance="standard"
+        mat-stroked-button
+        color="primary"
+        [(ngModel)]="currentPageToggle"
+        (change)="onPageChange()"
+      >
+        <mat-button-toggle
+          [value]="i + 1"
+          *ngFor="let page of data?.pages; let i = index"
+          >{{ i + 1 }}</mat-button-toggle
+        >
+      </mat-button-toggle-group>
+    </span>
+  </div>
+</div>

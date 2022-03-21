@@ -760,6 +760,42 @@ export class CustomIconService {
       )
     );
     this.matIconRegistry.addSvgIcon(
+      'transaction_approved',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/visual-support-icons-approved.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'transaction_rejected',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/visual-support-icons-rejected.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'transaction_pending',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/visual-support-icons-pending.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'question_mark',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/visual-support-icons-question-mark.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'exclamation',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/visual-support-icons-exclamation.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'equity_primary_logo',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/logos/one-equity/Primary.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
       'dashboard_send_to_icon1',
       this.domSanitizer.bypassSecurityTrustResourceUrl(
         'assets/images/icons/send_to.svg'

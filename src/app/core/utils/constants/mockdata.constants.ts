@@ -6,6 +6,8 @@ import { SelectAccountModel } from "./../../domain/select-account.model";
 import { BuyGoodsFavouriteModel } from "./../../domain/buy-goods-favourites.model";
 import { UserListModel, UserModel } from "../../domain/user.model";
 import { CompanyListModel } from "../../domain/company.model";
+import { ConfirmationModel } from "../../domain/confirmation.model";
+import { TransactionListmodel } from "../../domain/transaction-list.model";
 import { BeneficiaryModel } from "../../domain/beneficiary.model";
 import { TransferType } from "./transaction-type.constants";
 import { AirtimeAmountRangeModel } from '../../domain/international-airtime-amount-range.model';
@@ -676,6 +678,81 @@ const mobileCodes: CountryMobileCodeModal[] = [
   }
 ];
 
+const transactionDetail: ConfirmationModel[] = [
+  {
+    content: [
+      {
+        key: 'Payment date',
+        value: '01 January 2021'
+      },
+      {
+        key: 'From',
+        value: 'Loot<br>0810174008113 • Savings'
+      },
+      {
+        key: 'Narration',
+        value: 'Payment to IdeaHub vendor'
+      }
+    ]
+  },
+  {
+    title: 'Beneficiary details',
+    content: [
+      {
+        key: 'Beneficiary name',
+        value: 'Isah Uche Olusegun'
+      },
+      {
+        key: 'Account number',
+        value: '00113577162'
+      },
+      {
+        key: 'IBAN number',
+        value: '2085252042'
+      },
+      {
+        key: 'Beneficiary bank',
+        value: 'HSBC Group'
+      },
+      {
+        key: 'Bank code',
+        value: '06454'
+      }
+    ]
+  }, {
+    title: 'Conversion rate',
+    content: [
+      {
+        key: 'Rate',
+        value: '12.43%'
+      },
+      {
+        key: 'Source amount',
+        value: '34,239,812,398.00 KES'
+      },
+      {
+        key: 'Converted amount',
+        value: '301,406,799.23 USD'
+      }
+    ]
+  },
+];
+
+const histororicalTransactions: TransactionListmodel[] = Array(35).fill(0).map((x, i) => ({
+  title: 'Reference C38437393944034',
+  description: 'MOBILE WALLET TRANSFER TO LESLIE ISAH',
+  amount: '000,000.00 KES',
+  date: 'Thu,23 Aug',
+  status: i % 2 === 0 ? 'Approved' : 'Rejected'
+}));
+const pendingTransactions: TransactionListmodel[] = Array(32).fill(0).map((x, i) => ({
+  title: 'Reference C38437393944034',
+  description: 'MOBILE WALLET TRANSFER TO LESLIE ISAH',
+  amount: '000,000.00 KES',
+  date: 'Thu,23 Aug',
+  status: 'Pending'
+}));
+
 export const mockData = {
   accounts,
   favourites,
@@ -686,6 +763,9 @@ export const mockData = {
   users,
   userList,
   companyList,
+  transactionDetail,
+  histororicalTransactions,
+  pendingTransactions,
   airtimeAmountRange,
   mobileCodes
 };

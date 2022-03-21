@@ -1,7 +1,7 @@
-<mat-card class="cursor-pointer" [routerLink]="data.route">
+<mat-card class="cursor-pointer" [routerLink]="data.route && data.route">
   <mat-card-content>
-    <div class="row">
-      <div class="col-md-2" *ngIf="data.prefixIcon">
+    <div class="d-flex justify-content-between">
+      <div class="" *ngIf="data.prefixIcon">
         <img
           class="img-fluid"
           width="45px"
@@ -9,14 +9,15 @@
           alt="Generic placeholder image"
         />
       </div>
-      <div class="col-md-8 card card-block justify-content-center">
+      <div class="">
         <div class="mb-0" [innerHTML]="data.text"></div>
-        <small class="text-grey" [innerHTML]="data.subText"></small>
+        <small
+          *ngIf="data.subText"
+          class="text-grey"
+          [innerHTML]="data.subText"
+        ></small>
       </div>
-      <div
-        *ngIf="data.suffixIcon"
-        class="col-md-2 card card-block justify-content-center"
-      >
+      <div *ngIf="data.suffixIcon">
         <mat-icon color="primary" [svgIcon]="data.suffixIcon"></mat-icon>
       </div>
     </div>

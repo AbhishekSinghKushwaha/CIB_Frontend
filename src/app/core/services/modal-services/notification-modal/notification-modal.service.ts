@@ -7,7 +7,7 @@ import { NotificationModalComponent } from '../../../../presentation/shared/moda
   providedIn: 'root'
 })
 export class NotificationModalService {
-  constructor(private readonly dialog: MatDialog) {}
+  constructor(private readonly dialog: MatDialog) { }
 
   open(data: PreLoginModal) {
     return this.dialog.open<NotificationModalComponent, PreLoginModal>(

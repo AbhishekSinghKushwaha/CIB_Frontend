@@ -22,6 +22,7 @@ interface LogoutData {
 })
 export class AuthService extends BaseTransactComponent implements OnDestroy {
   private isLoggedIn = new BehaviorSubject<boolean>(false);
+  private otpMesssage = new BehaviorSubject<string>('');
   private activeLogoutTimer: any;
   private logoutWarningTimer: any;
   private autoRefreshTokenTimer: any;
@@ -108,6 +109,10 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
     }
     this.storageService.setData('access_token', accessToken);
     // this.autoRefreshToken(accessToken);
+  }
+
+  setOTPMessage(message: string) {
+    this.otpMesssage.next(message)
   }
 
   setLoginState(state: string) {
