@@ -8,7 +8,7 @@ import { TokenResponseModel } from '../../domain/user-auth.model';
 import { LogoutService } from '../modal-services/logout.service';
 import urlList from '../service-list.json';
 import { StorageService } from '../storage/storage.service';
-import { UserModel } from '../../domain/user.model';
+import { LoggedinUserModel, UserModel } from '../../domain/user.model';
 import LOGIN_CONSTANTS from '../../utils/constants/pre-login.constants';
 import { BaseTransactComponent } from 'src/app/presentation/modules/post-login/transact/base-transact.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -120,10 +120,31 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
     this.loginState.next(state)
   }
 
-  loginSuccess() {
-    this.setLoginState(LOGIN_CONSTANTS.LOGIN_STAGES.LOGIN_SUCCESS);
-    this.router.navigate(['/dashboard']);
-    this.autoLogin();
+  async loginSuccess() {
+    return new Promise((resolve, reject) => {
+      this.getLogonUser().subscribe(response => {
+        console.log('loginSuccess', response)
+        if (response) {
+          this.userState = response;
+          this.setLoginState(LOGIN_CONSTANTS.LOGIN_STAGES.LOGIN_SUCCESS);
+          this.router.navigate(['/dashboard']);
+          this.autoLogin();
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      }, error => {
+        resolve(false);
+      });
+    })
+
+  }
+
+  getLogonUser() {
+    const url = `${environment.apiUrl}${urlList.login.getLogonUser}${this.accessToken?.username}`;
+    return this.http
+      .get<LoggedinUserModel>(url);
+
   }
 
   getLoginState(): string | null {
@@ -147,6 +168,13 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
     return token;
   }
 
+  get userState(): LoggedinUserModel {
+    return this.storageService.getData('user_data');
+  }
+  set userState(data: LoggedinUserModel) {
+    this.storageService.setData('user_data', data);
+  }
+
   doLogout(): void {
     this.clearTimers();
     // this.logout();
@@ -156,6 +184,11 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
       errorStatus: '',
       message: 'You have been signed out successfully',
     });
+  }
+  cancelLogin(): void {
+    this.clearTimers();
+    this.clearUserData();
+    this.router.navigate(['/auth/login']);
   }
 
   autoLogin(): boolean {

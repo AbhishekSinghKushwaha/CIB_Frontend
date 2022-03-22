@@ -6,4 +6,5 @@ export interface TokenResponseModel {
   firstTimeLogin: boolean;
   name: string;
   tokenExpirationDate: Date;
+  username: string;
 }

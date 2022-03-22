@@ -6,15 +6,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { FromAccount } from 'src/app/core/domain/transfer.models';
 import { UserFormPropModel } from 'src/app/core/domain/user.model';
-import { LimitEditorService } from 'src/app/core/services/limit-editor/limit-editor.service';
-import { ProductEditorService } from 'src/app/core/services/product-editor/product-editor.service';
-import { RoleEditorService } from 'src/app/core/services/role-editor/role-editor.service';
-import { SelectAccountAccessService } from 'src/app/core/services/select-account-access/select-account-access.service';
-import { SharedDataService } from 'src/app/core/services/shared-data/shared-data.service';
-import { UserListService } from '../user-list/services/user-list.service';
 import { User, UserStatus } from '../user-list/user-list.component';
 
 @Component({

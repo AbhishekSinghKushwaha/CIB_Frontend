@@ -1,9 +1,10 @@
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PhoneNumberUtil } from 'google-libphonenumber';
 import { CountryModel } from 'src/app/core/domain/bank.model';
-import { UserFormPropModel } from 'src/app/core/domain/user.model';
+import { UserFormPropModel, UserModel } from 'src/app/core/domain/user.model';
 import { TeamMembersService } from 'src/app/core/services/customer-onboarding/team-members.service';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 
@@ -15,6 +16,7 @@ import { StorageService } from 'src/app/core/services/storage/storage.service';
 export class CorporateUserFormComponent implements OnInit {
   // userListLink:/auth/customer-onboarding/register/team-members
   // addRoleLink:/auth/customer-onboarding/register/team-member-roles
+  user: UserModel;
   private _data: UserFormPropModel
   @Input() set data(input: UserFormPropModel) {
     this._data = input;
@@ -35,13 +37,14 @@ export class CorporateUserFormComponent implements OnInit {
   constructor(
     private readonly fb: FormBuilder,
     private storageService: StorageService,
+    private authService: AuthService,
     private teamMembersService: TeamMembersService,
     private readonly router: Router,
   ) {
     this.phoneUtil = PhoneNumberUtil.getInstance();
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.initForm();
 
     this.checkRoles();
@@ -51,6 +54,7 @@ export class CorporateUserFormComponent implements OnInit {
 
   setUser() {
     this.teamMembersService.selectedUser$.subscribe((x) => {
+      console.log('selectedUser', x);
       if (Object.keys(x).length > 0) {
         this.teamMemberDetailsForm.setValue(x);
 
@@ -88,6 +92,7 @@ export class CorporateUserFormComponent implements OnInit {
       this.teamMembersService
         .getTeamMemberDetails(this.data.memberId)
         .subscribe((res) => {
+          console.log('user detail', res);
           if (res.isSuccessful) {
             this.teamMemberDetailsForm.controls.idNumber.patchValue(
               res.data.identityNumber
@@ -171,9 +176,11 @@ export class CorporateUserFormComponent implements OnInit {
       );
     }
 
+    const teamMember = this.teamMemberDetailsForm.getRawValue()
+    console.log('teamMember', teamMember);
     this.teamMembersService
       .addTeamMember(
-        this.teamMemberDetailsForm.getRawValue(),
+        teamMember,
         this.storageService.getData("corporateId")
       )
       .subscribe((res) => {

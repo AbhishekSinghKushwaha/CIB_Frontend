@@ -17,6 +17,7 @@ export class CorporateUserRolesComponent implements OnInit {
   private _roles: Role[];
   @Input() set roles(input: Role[]) {
     this._roles = input;
+    console.log(input);
     this.setAlreadySelectedRoles();
   };
   get roles(): Role[] {
