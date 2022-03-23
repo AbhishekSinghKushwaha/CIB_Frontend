@@ -112,7 +112,12 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
   }
 
   setOTPMessage(message: string) {
-    this.otpMesssage.next(message)
+    this.storageService.setData('otp_message', { message })
+  }
+
+  getOTPMessage() {
+    const value = this.storageService.getData('otp_message');
+    return value.message;
   }
 
   setLoginState(state: string) {
