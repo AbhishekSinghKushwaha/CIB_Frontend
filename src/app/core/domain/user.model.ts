@@ -24,6 +24,7 @@ export interface UserFormPropModel {
   addRoleLink: string;
   userListLink: string;
   memberId: string;
+  addProductLink?: string;
 }
 
 export interface LoggedinUserModel {

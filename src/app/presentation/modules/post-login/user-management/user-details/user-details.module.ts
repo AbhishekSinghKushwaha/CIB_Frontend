@@ -10,11 +10,16 @@ import { CorporateUserFormModuleModule } from 'src/app/presentation/shared/compo
 import { CorporateUserRolesComponent } from 'src/app/presentation/shared/components/corporate-user-roles/corporate-user-roles.component';
 import { RolesComponent } from './roles/roles.component';
 import { CorporateUserRolesModule } from 'src/app/presentation/shared/components/corporate-user-roles/corporate-user-roles.module';
+import { CorporateUserProductsModule } from 'src/app/presentation/shared/components/corporate-user-products/corporate-user-products.module';
+import { ProductsComponent } from './products/products.component';
+import { ProductOptionsComponent } from './product-options/product-options.component';
 
 @NgModule({
   declarations: [
     UserDetailsComponent,
-    RolesComponent
+    RolesComponent,
+    ProductsComponent,
+    ProductOptionsComponent
   ],
   imports: [
     UserDetailsRoutingModule,
@@ -24,7 +29,8 @@ import { CorporateUserRolesModule } from 'src/app/presentation/shared/components
     SelectAccountAccessModule,
     ReactiveFormsModule,
     CorporateUserFormModuleModule,
-    CorporateUserRolesModule
+    CorporateUserRolesModule,
+    CorporateUserProductsModule
   ]
 })
 export class UserDetailsModule {

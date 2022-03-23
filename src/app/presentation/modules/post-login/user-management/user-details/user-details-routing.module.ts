@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ProductOptionsComponent } from './product-options/product-options.component';
+import { ProductsComponent } from './products/products.component';
 import { RolesComponent } from './roles/roles.component';
 import { UserDetailsComponent } from './user-details.component';
 
@@ -24,13 +26,11 @@ const routes: Routes = [
   },
   {
     path: 'products',
-    data: {
-      redirectTo: 'user-management/edit-user'
-    },
-    loadChildren: (): Promise<any> =>
-      import('./products/products.module').then(
-        (m) => m.ProductsModule
-      )
+    component: ProductsComponent,
+  },
+  {
+    path: 'products/options/:productId',
+    component: ProductOptionsComponent
   },
 
 ];

@@ -4,13 +4,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatStyleModule } from 'src/app/mat-style.module';
 import { LanguageTranslateModule } from 'src/app/translate.module';
-import { CorporateUserFormComponent } from './corporate-user-form.component';
 import { FormElementsModule } from '../../form-elements/form-elements.module';
-import { SharedComponentsModule } from '../shared-components.module';
+import { CorporateUserProductsComponent } from './corporate-user-products.component';
+import { CorporateUserProductOptionsComponent } from '../corporate-user-product-options/corporate-user-product-options.component';
 
 @NgModule({
   declarations: [
-    CorporateUserFormComponent
+    CorporateUserProductsComponent,
+    CorporateUserProductOptionsComponent
   ],
   imports: [
     CommonModule,
@@ -19,11 +20,10 @@ import { SharedComponentsModule } from '../shared-components.module';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedComponentsModule,
     FormElementsModule,
     LanguageTranslateModule.forRoot(),
 
   ],
-  exports: [CorporateUserFormComponent]
+  exports: [CorporateUserProductsComponent, CorporateUserProductOptionsComponent]
 })
-export class CorporateUserFormModuleModule { }
+export class CorporateUserProductsModule { }

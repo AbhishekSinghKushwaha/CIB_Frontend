@@ -31,6 +31,7 @@ export class UserDetailsComponent implements OnInit {
     this.userFormprop = {
       addRoleLink: 'roles',
       userListLink: '/user-management',
+      addProductLink: 'products',
       memberId: this.memberId
     }
   }
