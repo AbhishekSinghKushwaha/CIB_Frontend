@@ -52,7 +52,7 @@
   },
   "statement": {
     "getPdf": "/v1/generatepdf/statement",
-    "getTransactions": "/cibpaymentservice-v1/api/v1/Transfer/Transactions"
+    "getTransactions": "/cibpaymentservice-v1/api/v1/Transactions/Summary"
   },
   "login": {
     "loginUser": "/cibuseraccess-v1/api/Auth/oauth/token",

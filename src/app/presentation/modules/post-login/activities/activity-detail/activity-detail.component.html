@@ -4,7 +4,7 @@
       mat-icon-button
       aria-label="Back"
       class="back-icon"
-      routerLink="/activities/"
+      routerLink="/dashboard/"
     >
       <div class="strong-text">
         <mat-icon svgIcon="caret_left"></mat-icon>
@@ -16,7 +16,10 @@
       <div class="col-8">
         <h3 class="strong-text">Transaction detail</h3>
       </div>
-      <div class="col-4" *ngIf="data.status === 'Approved'">
+      <div
+        class="col-4"
+        *ngIf="data.approvalStatus === approvalStatus.Approved"
+      >
         <app-card-component
           [data]="{ text: 'View or download receipt', suffixIcon: 'eyes_view' }"
           (click)="openReceipt()"
@@ -25,7 +28,7 @@
     </div>
   </div>
   <div class="row-fluid text-danger fs-4 mb-3">
-    33,000 KES
+    {{ data?.amount }} {{ data?.currency }}
     <mat-icon svgIcon="question_mark"></mat-icon>
   </div>
   <div class="row-fluid">
@@ -33,32 +36,36 @@
       <div class="col-6">
         <a mat-button href="" class="bg-light">
           <mat-icon
-            [svgIcon]="transactionIcon[data.status]"
+            [svgIcon]="setIcon(data?.approvalStatus || 0)"
             mat-raised-button
           ></mat-icon>
-          {{ data.status }}
+          {{ getTransactionStatusKey(data?.approvalStatus || 1) }}
         </a>
-        <a mat-button href="">
+        <a
+          mat-button
+          *ngIf="data?.approvalStatus !== approvalStatus.Approved"
+          (click)="editTransaction(data?.transferType || 0)"
+        >
           <mat-icon svgIcon="edit"></mat-icon>
           Edit
         </a>
       </div>
       <div class="col-6 d-flex justify-content-end">
         <button
-          *ngIf="data.status !== 'Pending'"
+          *ngIf="data.approvalStatus !== approvalStatus.Pending"
           mat-raised-button
           class="me-3"
           color="primary"
-          [disabled]="data.status !== 'Rejected'"
+          [disabled]="data.approvalStatus !== approvalStatus.Rejected"
           (click)="reinitiate()"
         >
           <span class="pe-3 ps-3">Reinitiate</span>
         </button>
         <button
-          *ngIf="data.status !== 'Pending'"
+          *ngIf="data.approvalStatus !== approvalStatus.Pending"
           mat-stroked-button
           color="primary"
-          [disabled]="data.status !== 'Rejected'"
+          [disabled]="data.approvalStatus !== approvalStatus.Rejected"
         >
           <span class="pe-3 ps-3">Delete</span>
         </button>
@@ -67,7 +74,7 @@
           class="me-3"
           mat-raised-button
           color="primary"
-          *ngIf="data.status === 'Pending'"
+          *ngIf="data.approvalStatus === approvalStatus.Pending"
         >
           <span class="pe-3 ps-3">Approve</span>
         </button>
@@ -75,7 +82,7 @@
           (click)="reject()"
           mat-stroked-button
           color="primary"
-          *ngIf="data.status === 'Pending'"
+          *ngIf="data.approvalStatus === approvalStatus.Pending"
         >
           <span class="pe-3 ps-3">Reject</span>
         </button>
@@ -83,29 +90,12 @@
     </div>
   </div>
 </div>
-<mat-card *ngIf="show">
-  <mat-card-content>
-    <div class="row">
-      <div class="col-4">
-        <small class="strong-text"> Pending Requests </small>
-        <h3 class="strong-text">12</h3>
-      </div>
-      <div class="col-4">
-        <small class="strong-text"> Approved Transactions </small>
-        <h3 class="strong-text">253</h3>
-      </div>
-      <div class="col-4">
-        <small class="strong-text"> Rejected Transactions </small>
-        <h3 class="strong-text">253</h3>
-      </div>
-    </div>
-  </mat-card-content>
-</mat-card>
-<div class="row pe-5 ps-5" *ngIf="status !== 'Reinitiated'">
+
+<div class="row gx-0">
   <div
     class="alert alert-danger"
     role="alert"
-    *ngIf="data.status === 'Rejected'"
+    *ngIf="data.approvalStatus === approvalStatus.Rejected"
   >
     <span class="text-danger strong-text">
       <mat-icon svgIcon="exclamation"></mat-icon> Reason for rejection
@@ -113,14 +103,65 @@
     <br />
     <span class="error-description">Missing the appropriate documentation</span>
   </div>
-  <div class="row">
-    <app-list-items [data]="transactionDetail"></app-list-items>
+  <!-- Transaction info -->
+  <mat-divider class="mt-4"></mat-divider>
+  <div class="row mt-3">
+    <div class="col mt-3">
+      <span class="text-grey text-sm">Payment Date</span>
+      <p class="mb-0 text-sm pb-0">{{ data?.date || "Thur, 23 Aug" }}</p>
+    </div>
+    <div class="col mt-3">
+      <span class="text-grey text-sm">From</span>
+      <p class="mb-0 text-sm pb-0">{{ data?.sourceAccountName }}</p>
+      <p class="mb-0 text-sm pb-0">{{ data?.sourceAccount }}</p>
+      <p class="mb-0 text-sm pb-0">{{ data?.sourceBank }}</p>
+    </div>
+    <div class="col mt-3">
+      <span class="text-grey text-sm">Narration</span>
+      <p class="mb-0 text-sm pb-0">{{ data?.narration }}</p>
+    </div>
   </div>
-  <div class="row p-5">
+  <mat-divider class="mt-3"></mat-divider>
+
+  <div class="row mt-3">
+    <h4 class="strong-text">Beneficiary Details</h4>
+    <div class="d-flex flex-column">
+      <div class="row">
+        <div class="col-4 mt-3">
+          <span class="text-grey text-sm">Beneficiary Name</span>
+          <p class="mb-0 text-sm pb-0">{{ data?.beneficiaryName }}</p>
+        </div>
+        <div class="col-4 mt-3">
+          <span class="text-grey text-sm">Account Number</span>
+          <p class="mb-0 text-sm pb-0">{{ data?.beneficiaryAccount }}</p>
+        </div>
+        <div class="col-4 mt-3">
+          <span class="text-grey text-sm">IBAN Number</span>
+          <p class="mb-0 text-sm pb-0">{{ data?.narration }}</p>
+        </div>
+
+        <div class="col-md-4 mt-3">
+          <span class="text-grey text-sm">Beneficiary Bank</span>
+          <p class="mb-0 text-sm pb-0">{{ data?.beneficiaryBank }}</p>
+        </div>
+
+        <div class="col-md-4 mt-3">
+          <span class="text-grey text-sm">Beneficiary Bank Code</span>
+          <p class="mb-0 text-sm pb-0">{{ data?.beneficiaryBankCode }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <mat-divider class="mt-4"></mat-divider>
+
+  <div class="row mt-4">
     <h4 class="strong-text">Supporting documents</h4>
     <app-card-component
-      class="row col-4"
-      [data]="{ text: 'Upload documents', subText: '3 Documents' }"
+      class="row col-4 mt-3"
+      [data]="{
+        text: 'Uploaded documents',
+        subText: data?.documents?.length + ' Documents'
+      }"
       (click)="openUploadModal()"
     ></app-card-component>
   </div>

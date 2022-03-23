@@ -10,8 +10,8 @@ import { ConfirmationModel } from "../../domain/confirmation.model";
 import { TransactionListmodel } from "../../domain/transaction-list.model";
 import { BeneficiaryModel } from "../../domain/beneficiary.model";
 import { TransferType } from "./transaction-type.constants";
-import { AirtimeAmountRangeModel } from '../../domain/international-airtime-amount-range.model';
-import { CountryMobileCodeModal } from 'src/app/core/domain/countryCode.model';
+import { AirtimeAmountRangeModel } from "../../domain/international-airtime-amount-range.model";
+import { CountryMobileCodeModal } from "src/app/core/domain/countryCode.model";
 
 const accounts: SelectAccountModel[] = [
   {
@@ -653,105 +653,150 @@ const accountNumber: string = "2837181638719349";
 
 const airtimeAmountRange: AirtimeAmountRangeModel[] = [
   {
-    amountRangeType: 'Amount range'
+    amountRangeType: "Amount range",
   },
   {
-    amountRangeType: 'Fixed bundles'
-  }
+    amountRangeType: "Fixed bundles",
+  },
 ];
 
 const mobileCodes: CountryMobileCodeModal[] = [
   {
-    mobileCode: '+254',
+    mobileCode: "+254",
   },
   {
-    mobileCode: '+256',
+    mobileCode: "+256",
   },
   {
-    mobileCode: '+255',
+    mobileCode: "+255",
   },
   {
-    mobileCode: '+249',
+    mobileCode: "+249",
   },
   {
-    mobileCode: '+250',
-  }
+    mobileCode: "+250",
+  },
 ];
 
 const transactionDetail: ConfirmationModel[] = [
   {
     content: [
       {
-        key: 'Payment date',
-        value: '01 January 2021'
+        key: "Payment date",
+        value: "01 January 2021",
       },
       {
-        key: 'From',
-        value: 'Loot<br>0810174008113 • Savings'
+        key: "From",
+        value: "Loot<br>0810174008113 • Savings",
       },
       {
-        key: 'Narration',
-        value: 'Payment to IdeaHub vendor'
-      }
-    ]
+        key: "Narration",
+        value: "Payment to IdeaHub vendor",
+      },
+    ],
   },
   {
-    title: 'Beneficiary details',
+    title: "Beneficiary details",
     content: [
       {
-        key: 'Beneficiary name',
-        value: 'Isah Uche Olusegun'
+        key: "Beneficiary name",
+        value: "Isah Uche Olusegun",
       },
       {
-        key: 'Account number',
-        value: '00113577162'
+        key: "Account number",
+        value: "00113577162",
       },
       {
-        key: 'IBAN number',
-        value: '2085252042'
+        key: "IBAN number",
+        value: "2085252042",
       },
       {
-        key: 'Beneficiary bank',
-        value: 'HSBC Group'
+        key: "Beneficiary bank",
+        value: "HSBC Group",
       },
       {
-        key: 'Bank code',
-        value: '06454'
-      }
-    ]
-  }, {
-    title: 'Conversion rate',
+        key: "Bank code",
+        value: "06454",
+      },
+    ],
+  },
+  {
+    title: "Conversion rate",
     content: [
       {
-        key: 'Rate',
-        value: '12.43%'
+        key: "Rate",
+        value: "12.43%",
       },
       {
-        key: 'Source amount',
-        value: '34,239,812,398.00 KES'
+        key: "Source amount",
+        value: "34,239,812,398.00 KES",
       },
       {
-        key: 'Converted amount',
-        value: '301,406,799.23 USD'
-      }
-    ]
+        key: "Converted amount",
+        value: "301,406,799.23 USD",
+      },
+    ],
   },
 ];
 
-const histororicalTransactions: TransactionListmodel[] = Array(35).fill(0).map((x, i) => ({
-  title: 'Reference C38437393944034',
-  description: 'MOBILE WALLET TRANSFER TO LESLIE ISAH',
-  amount: '000,000.00 KES',
-  date: 'Thu,23 Aug',
-  status: i % 2 === 0 ? 'Approved' : 'Rejected'
-}));
-const pendingTransactions: TransactionListmodel[] = Array(32).fill(0).map((x, i) => ({
-  title: 'Reference C38437393944034',
-  description: 'MOBILE WALLET TRANSFER TO LESLIE ISAH',
-  amount: '000,000.00 KES',
-  date: 'Thu,23 Aug',
-  status: 'Pending'
-}));
+const histororicalTransactions: TransactionListmodel[] = Array(35)
+  .fill(0)
+  .map((x, i) => ({
+    amount: 50,
+    approvalStatus: 6,
+    beneficiaryAccount: "1120161406205",
+    beneficiaryBank: "EQUITY BANK",
+    beneficiaryBankCode: "54",
+    beneficiaryCurrency: "KES",
+    beneficiaryName: "EMMANUEL SAMUEL KIANGAI MACHARIA",
+    conversionRate: 0,
+    currency: "KES",
+    documents: [],
+    fxReferenceID: "",
+    narration: "",
+    paymentReason: "test transfer",
+    paymentReference: "",
+    phoneNumber: "",
+    requestReference: "EC4B5EE924",
+    response: "",
+    sourceAccount: "1100194977404",
+    sourceAccountName: "JAMES EKAI NATUKOI",
+    sourceBank: "EQUITY BANK",
+    sourceBankCode: "54",
+    transactionStatus: 1,
+    transferCharge: 0,
+    transferType: 1,
+    date: "",
+  }));
+const pendingTransactions: TransactionListmodel[] = Array(32)
+  .fill(0)
+  .map((x, i) => ({
+    amount: 50,
+    approvalStatus: 1,
+    beneficiaryAccount: "1120161406205",
+    beneficiaryBank: "EQUITY BANK",
+    beneficiaryBankCode: "54",
+    beneficiaryCurrency: "KES",
+    beneficiaryName: "EMMANUEL SAMUEL KIANGAI MACHARIA",
+    conversionRate: 0,
+    currency: "KES",
+    documents: [],
+    fxReferenceID: "",
+    narration: "",
+    paymentReason: "test transfer",
+    paymentReference: "",
+    phoneNumber: "",
+    requestReference: "EC4B5EE924",
+    response: "",
+    sourceAccount: "1100194977404",
+    sourceAccountName: "JAMES EKAI NATUKOI",
+    sourceBank: "EQUITY BANK",
+    sourceBankCode: "54",
+    transactionStatus: 1,
+    transferCharge: 0,
+    transferType: 1,
+    date: "",
+  }));
 
 export const mockData = {
   accounts,
@@ -767,5 +812,5 @@ export const mockData = {
   histororicalTransactions,
   pendingTransactions,
   airtimeAmountRange,
-  mobileCodes
+  mobileCodes,
 };

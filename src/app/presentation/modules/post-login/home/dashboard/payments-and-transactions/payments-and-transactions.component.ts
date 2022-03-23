@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
+import { TransactionListmodel } from "src/app/core/domain/transaction-list.model";
 import { TransactionsService } from "src/app/core/services/transactions/transactions.service";
+import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
 
 @Component({
   selector: "app-payments-and-transactions",
@@ -7,6 +9,9 @@ import { TransactionsService } from "src/app/core/services/transactions/transact
   styleUrls: ["./payments-and-transactions.component.scss"],
 })
 export class PaymentsAndTransactionsComponent implements OnInit {
+  pendingTransactions = [];
+  historyTransactions = [];
+  transactionSummary: any;
   constructor(private transactionsService: TransactionsService) {}
 
   ngOnInit(): void {
@@ -14,8 +19,47 @@ export class PaymentsAndTransactionsComponent implements OnInit {
   }
 
   getTransactions() {
-    this.transactionsService.getTransactions().subscribe((res) => {
-      console.log(res);
+    const params = {
+      page: 1,
+      pageSize: 15,
+      From: "2020-10-2",
+      To: "2022-10-2",
+      TransactionType: "",
+      ApprovalStatus: 1,
+    };
+    this.transactionsService.getTransactions(params).subscribe((res) => {
+      if (res.status) {
+        console.log(res);
+        this.transactionSummary = res.data;
+
+        this.pendingTransactions = res.data.transactions.dataList.filter(
+          (transaction: TransactionListmodel) => {
+            return (
+              transaction.approvalStatus ===
+              TransactionTypeConstants.TransactionApprovalStatus.Pending
+            );
+          }
+        );
+
+        this.transactionsService.setPendingTransactions(
+          this.pendingTransactions
+        );
+
+        this.historyTransactions = res.data.transactions.dataList.filter(
+          (transaction: TransactionListmodel) => {
+            return (
+              transaction.approvalStatus ===
+                TransactionTypeConstants.TransactionApprovalStatus.Rejected &&
+              transaction.approvalStatus ===
+                TransactionTypeConstants.TransactionApprovalStatus.Approved
+            );
+          }
+        );
+
+        this.transactionsService.setHistoryTransactions(
+          this.historyTransactions
+        );
+      }
     });
   }
 }

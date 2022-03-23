@@ -86,7 +86,7 @@ export class BeneficiaryManagementService {
           environment.apiUrl + urlList.beneficiary.getAll
         )
         .subscribe((rs: any) => {
-          this.beneficiaries = [...rs.data];
+          this.beneficiaries = [...rs.data.dataList];
           this.storageService.setData("beneficiaries", this.beneficiaries);
           this.formData.next({
             type: BeneficiaryActionResultType.GET,

@@ -25,13 +25,46 @@
   </app-card-component>
 </div>
 
+<mat-divider class="mt-4"></mat-divider>
+
+<mat-card>
+  <mat-card-content>
+    <div class="row">
+      <div class="col-4">
+        <small class="strong-text"> Pending Requests </small>
+        <h3 class="strong-text">
+          {{ transactionSummary?.pendingRequests || 0 }}
+        </h3>
+      </div>
+      <div class="col-4">
+        <small class="strong-text"> Approved Transactions </small>
+        <h3 class="strong-text">
+          {{ transactionSummary?.approvedTransactions || 0 }}
+        </h3>
+      </div>
+      <div class="col-4">
+        <small class="strong-text"> Rejected Transactions </small>
+        <h3 class="strong-text">
+          {{ transactionSummary?.rejectedTransactions || 0 }}
+        </h3>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
 <div class="row mt-4">
   <mat-tab-group>
     <mat-tab label="Pending requests">
-      <app-transactions-list [category]="'pending'"></app-transactions-list>
+      <app-transactions-list
+        [pendingTransactions]="pendingTransactions"
+        [category]="'pending'"
+      ></app-transactions-list>
     </mat-tab>
     <mat-tab label="History">
-      <app-transactions-list [category]="'history'"></app-transactions-list
+      <app-transactions-list
+        [historyTransactions]="historyTransactions"
+        [category]="'history'"
+      ></app-transactions-list
     ></mat-tab>
   </mat-tab-group>
 </div>
