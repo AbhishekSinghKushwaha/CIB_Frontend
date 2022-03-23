@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PhoneNumberUtil } from 'google-libphonenumber';
 import { CountryModel } from 'src/app/core/domain/bank.model';
-import { UserFormPropModel, UserModel } from 'src/app/core/domain/user.model';
+import { LoggedinUserModel, UserFormPropModel, UserModel } from 'src/app/core/domain/user.model';
 import { TeamMembersService } from 'src/app/core/services/customer-onboarding/team-members.service';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 
@@ -16,7 +16,7 @@ import { StorageService } from 'src/app/core/services/storage/storage.service';
 export class CorporateUserFormComponent implements OnInit {
   // userListLink:/auth/customer-onboarding/register/team-members
   // addRoleLink:/auth/customer-onboarding/register/team-member-roles
-  user: UserModel;
+  user: LoggedinUserModel;
   private _data: UserFormPropModel
   @Input() set data(input: UserFormPropModel) {
     this._data = input;
@@ -40,8 +40,10 @@ export class CorporateUserFormComponent implements OnInit {
     private authService: AuthService,
     private teamMembersService: TeamMembersService,
     private readonly router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
     this.phoneUtil = PhoneNumberUtil.getInstance();
+    this.user = this.authService.userState;
   }
 
   ngOnInit() {
@@ -50,6 +52,9 @@ export class CorporateUserFormComponent implements OnInit {
     this.checkRoles();
 
     this.setUser();
+
+    console.log('Form State',
+      this.teamMembersService.getUser())
   }
 
   setUser() {
@@ -131,6 +136,7 @@ export class CorporateUserFormComponent implements OnInit {
     roles?.length > 0
       ? ((this.rolesAdded = true), this.formatRolesPayload(roles))
       : (this.rolesAdded = false);
+    console.log('roles', roles)
   }
 
   addRoles() {
@@ -146,7 +152,7 @@ export class CorporateUserFormComponent implements OnInit {
     this.teamMembersService.setUser(this.teamMemberDetailsForm.getRawValue());
     this.router.navigate(
       [this.data.addRoleLink],
-      { queryParams: { id: this.data.memberId } }
+      { relativeTo: this.activatedRoute }
     );
   }
 
@@ -181,7 +187,7 @@ export class CorporateUserFormComponent implements OnInit {
     this.teamMembersService
       .addTeamMember(
         teamMember,
-        this.storageService.getData("corporateId")
+        this.user.corporateId
       )
       .subscribe((res) => {
         if (res.isSuccessful) {

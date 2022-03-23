@@ -27,14 +27,18 @@ export class TeamMembersService extends StateService<UserState> {
     this.setState({ user });
   }
 
+  getUser() {
+    return this.state;
+  }
+
   /*********API ENDPOINTS****************/
 
   // Add User details
   addTeamMember(payload: TeamMember, corporateId: string): Observable<any> {
     return this.http.post(
       environment.apiUrl +
-        urlList.customerOnboarding.addCorporateUser +
-        corporateId,
+      urlList.customerOnboarding.addCorporateUser +
+      corporateId,
       payload
     );
   }
@@ -43,8 +47,8 @@ export class TeamMembersService extends StateService<UserState> {
   getTeamMembers(corporateId: string): Observable<any> {
     return this.http.get(
       environment.apiUrl +
-        urlList.customerOnboarding.getCorporateUsers +
-        corporateId
+      urlList.customerOnboarding.getCorporateUsers +
+      corporateId
     );
   }
 
@@ -59,8 +63,8 @@ export class TeamMembersService extends StateService<UserState> {
   updateTeamMemberDetails(payload: any, userId: string): Observable<any> {
     return this.http.post(
       environment.apiUrl +
-        urlList.customerOnboarding.updateCorporateUserDetails +
-        userId,
+      urlList.customerOnboarding.updateCorporateUserDetails +
+      userId,
       payload
     );
   }
@@ -69,8 +73,8 @@ export class TeamMembersService extends StateService<UserState> {
   deleteTeamMember(referenceId: string): Observable<any> {
     return this.http.post(
       environment.apiUrl +
-        urlList.customerOnboarding.removeCorporateUser +
-        referenceId,
+      urlList.customerOnboarding.removeCorporateUser +
+      referenceId,
       {}
     );
   }

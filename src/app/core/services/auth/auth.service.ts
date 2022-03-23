@@ -127,6 +127,7 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
         if (response) {
           this.userState = response;
           this.setLoginState(LOGIN_CONSTANTS.LOGIN_STAGES.LOGIN_SUCCESS);
+          console.log('this.userState', this.userState);
           this.router.navigate(['/dashboard']);
           this.autoLogin();
           resolve(true);
@@ -141,7 +142,7 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
   }
 
   getLogonUser() {
-    const url = `${environment.apiUrl}${urlList.login.getLogonUser}${this.accessToken?.username}`;
+    const url = `${environment.apiUrl}${urlList.login.getLogonUser}userid=${this.accessToken?.username}`;
     return this.http
       .get<LoggedinUserModel>(url);
 

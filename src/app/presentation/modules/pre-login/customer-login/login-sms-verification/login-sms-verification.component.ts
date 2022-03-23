@@ -90,9 +90,10 @@ export class LoginSmsVerificationComponent implements OnInit {
     if (otp) {
       this.authService.submitOTP(otp).subscribe(
         async (response) => {
+          console.log('submitOTP', response);
           if (response) {
-            const response = await this.authService.loginSuccess();
-            if (!response) {
+            const loginStat = await this.authService.loginSuccess();
+            if (!loginStat) {
               this.otpError = true;
             }
           } else {

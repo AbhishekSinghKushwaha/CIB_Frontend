@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Permission, Role } from 'src/app/core/domain/customer-onboarding.model';
 import { TeamMembersService } from 'src/app/core/services/customer-onboarding/team-members.service';
@@ -12,6 +13,8 @@ import { StorageService } from 'src/app/core/services/storage/storage.service';
 export class CorporateUserRolesComponent implements OnInit {
   activeRoles: any[];
   redirectTo: string;
+  selectedMainRole: string;
+
   @Input() backLink: any;
   @Input() memberId: any;
   private _roles: Role[];
@@ -28,7 +31,8 @@ export class CorporateUserRolesComponent implements OnInit {
     private readonly router: Router,
     private readonly teamMembersService: TeamMembersService,
     private storageService: StorageService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private location: Location
   ) {
     this.activeRoles = [];
   }
@@ -94,7 +98,17 @@ export class CorporateUserRolesComponent implements OnInit {
     }
   }
 
-  isRoleActive(roleId: any, permissionId: any): boolean {
+  isParentRoleActive(roleId: any): boolean {
+    return true;
+  }
+
+  mainRoleChange(event: any) {
+    if (event.value) {
+      this.activeRoles = this.activeRoles.filter(x => x.description === event.value)
+    }
+  }
+
+  isRoleActive(roleId: any, permissionId: any, mainSelected = false): boolean {
     const selectedRole = this.activeRoles?.find((role) => {
       return role.id === roleId;
     });
@@ -111,6 +125,9 @@ export class CorporateUserRolesComponent implements OnInit {
         isActive = true;
       }
     }
+    if (!mainSelected) {
+      isActive = false;
+    }
 
     return isActive;
   }
@@ -118,9 +135,6 @@ export class CorporateUserRolesComponent implements OnInit {
   saveRoles(): void {
     this.storageService.setData("selected-roles", this.activeRoles);
 
-    this.router.navigate(
-      ["/auth/customer-onboarding/register/add-team-member"],
-      { queryParams: { id: this.memberId } }
-    );
+    this.location.back();
   }
 }

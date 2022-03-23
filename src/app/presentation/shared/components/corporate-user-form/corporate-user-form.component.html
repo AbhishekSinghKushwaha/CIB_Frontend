@@ -81,9 +81,9 @@
                   [selectedCountry]="selectedCountry"
                 ></app-phone-number-input>
               </div>
-              <div class="row" *ngIf="data.memberId">
+              <div class="row">
                 <div class="col-md-6">
-                  <div class="row product-list-item" (click)="addRoles()">
+                  <div class="row product-list-item ms-1" (click)="addRoles()">
                     <div class="col-md-2">
                       <button mat-fab class="text-primary">
                         <mat-icon>person</mat-icon>
@@ -109,10 +109,9 @@
                     </div>
                   </div>
                 </div>
-
                 <div
                   class="col-md-6 cursor-pointer"
-                  routerLink="/auth/customer-onboarding/register/add-product-service"
+                  [routerLink]="data.addRoleLink"
                 >
                   <div class="row product-list-item">
                     <div class="col-md-2">
