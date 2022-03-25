@@ -5,20 +5,20 @@
 <form [formGroup]="verifyOtpForm" (submit)="submit()">
     <div class="row mt-5">
         <div class="col-5">
-            <div *ngIf="data === 'By email'">
+            <div *ngIf="data === 'email'">
             <img src="assets/images/Illustrations/Illustrations_MagicLink.svg" alt="">  
             </div>
-            <div *ngIf="data === 'By sms'">
+            <div *ngIf="data === 'sms'">
                 <img src="assets/images/Illustrations/verification-code.svg" alt="">  
             </div>
         </div>
 
         <div class="col-7">
             <h3 class="strong-text m-2">We sent a verification code to</h3>
-            <div *ngIf="data === 'By email'">
+            <div *ngIf="data === 'email'">
                 <h3 class="strong-text m-2">v••••••••i@•••••••co.ke</h3>
             </div>
-            <div *ngIf="data === 'By sms'">
+            <div *ngIf="data === 'sms'">
                 <h3 class="strong-text m-2">+254 72 •••••••••• 13</h3>
             </div>
             <small class="text-grey m-2">Please enter the code below</small>
@@ -70,7 +70,7 @@
             <button mat-stroked-button type="button" color="primary" class="px-5" routerLink="/transact/buy-goods/otp-verification">Try another method</button>
         </div>          
     </div> 
-    <div class="row col-md-11 mt-3" *ngIf="data === 'By email'">
+    <div class="row col-md-11 mt-3" *ngIf="data === 'email'">
         <div class="col-md-3">
             <button mat-stroked-button type="button" color="primary" class="px-5">Open Outlook</button>
         </div>

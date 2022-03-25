@@ -6,6 +6,8 @@
                 matInput
                 type="text"
                 class="strong-text"
+                [id]="currencyFieldName"
+                [name]="currencyFieldName"
                 [value]="currency?.currencyCode || ''"
                 [placeholder]="currency?.currencyCode || 'KES'"
             />
@@ -22,8 +24,6 @@
                 [id]="fieldName"
                 [name]="fieldName"
                 class="strong-text"
-                [id]="fieldName"
-                [name]="fieldName"
                 [value]="value?.amount || ''"
                 (input)="onChange($event)"
                 (blur)="touched()"
@@ -37,8 +37,6 @@
             <input
                 matInput
                 type="number"
-                [id]="fieldName"
-                [name]="fieldName"
                 class="strong-text"
                 [id]="fieldName"
                 [name]="fieldName"
@@ -67,4 +65,3 @@
         </mat-form-field>
     </div> 
 </div>
-

@@ -17,6 +17,8 @@ import { Subject } from 'rxjs';
 import { SharedUtils } from './../../../../core/utils/shared.util';
 import { NotificationModalService } from 'src/app/core/services/modal-services/notification-modal/notification-modal.service';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { TransactionTypeConstants } from 'src/app/core/utils/constants/transaction-type.constants';
+import { BuyAirtimeService } from 'src/app/core/services/transfers/buy-airtime/buy-airtime.service';
 
 
 @Component({
@@ -46,9 +48,13 @@ export class VerifyByCodeComponent implements OnInit {
   alertMessage: string;
   @Input() data: any;
   payload: any;
+  airtimePayload: any;
 
   formInput = ['input1', 'input2', 'input3', 'input4', 'input5', 'input6'];
   @ViewChildren('formRow') rows: any;
+  
+  @Input() transactionType!: string;
+  transferType = TransactionTypeConstants.TransferType;
 
   constructor(
     private readonly otpCodeService: OtpCodeService,
@@ -56,7 +62,8 @@ export class VerifyByCodeComponent implements OnInit {
       private readonly router: Router,
       private readonly fb: FormBuilder,
       private readonly notificationModalService: NotificationModalService,
-      private readonly authService: AuthService
+      private readonly authService: AuthService,
+      private readonly buyAirtimeService: BuyAirtimeService
     ) {
     this.initOtpForm();
   }
@@ -149,30 +156,17 @@ export class VerifyByCodeComponent implements OnInit {
   }
 
   submitOtp(otp: string) {
-    this.buyGoodsService.currentData.subscribe(data => {
-      this.payload = data;
-    });
     this.otpError = false;
     if (otp) {
       this.authService.submitOTP(otp).subscribe(
         (response) => {
           if (response) {
-
-            this.buyGoodsService.buyGoodsTransfer(this.payload).subscribe(
-              (res) => {
-                if (res.status) {
-                  this.router.navigate(["/transact/buy-goods/submit-transfer"]);
-                } else {
-                  console.log(res.message);
-                  // TODO:: Notify Error
-                }
-              },
-              (err) => {
-                alert(
-                  `Sorry, we're unable to complete your transaction. Please give us some time to fix the problem and try again later.`
-                );
-              }
-            );
+            if(this.transactionType === this.transferType.BUY_AIRTIME) {
+              this.buyAirtime();
+            }
+            else if(this.transactionType === this.transferType.BUY_GOODS) {
+              this.buyGoods();
+            }
           } else {
             this.otpError = true;
           }
@@ -180,6 +174,51 @@ export class VerifyByCodeComponent implements OnInit {
         (error) => {
           this.otpError = true;
           console.log({ error });
+        }
+      );
+    }
+  }
+
+  buyAirtime() {
+    this.buyAirtimeService.currentData.subscribe(data => {
+      this.airtimePayload = data;
+    });
+    if(this.airtimePayload) {
+      this.buyAirtimeService.buyAirtimeTransfer(this.airtimePayload).subscribe(
+        (res) => {
+          if(res.status){
+          this.router.navigate(['/transact/buy-airtime/success']);
+        } else{
+          console.log(res.message);
+        }
+      },
+      (err) => {
+        alert(
+          `Sorry, we're unable to complete your transaction. Please give us some time to fix the problem and try again later.`
+        );
+      }
+      );
+    }
+  }
+
+  buyGoods() {
+    this.buyGoodsService.currentData.subscribe(data => {
+      this.payload = data;
+    });
+    if(this.payload) {
+      this.buyGoodsService.buyGoodsTransfer(this.payload).subscribe(
+        (res) => {
+          if (res.status) {
+            this.router.navigate(["/transact/buy-goods/submit-transfer"]);
+          } else {
+            console.log(res.message);
+            // TODO:: Notify Error
+          }
+        },
+        (err) => {
+          alert(
+            `Sorry, we're unable to complete your transaction. Please give us some time to fix the problem and try again later.`
+          );
         }
       );
     }
