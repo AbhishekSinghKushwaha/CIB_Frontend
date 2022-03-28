@@ -1,0 +1,33 @@
+<div class="container new-recipient-modal-screen p-1">
+  <button mat-icon-button matSuffix class="close-button" (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <p class="text-center fw-bold pt-2">Send to someone new</p>
+  <h3 class="m-4 ms-2">Please enter the recipient's details</h3>
+
+  <mat-card
+    class="m-2 mb-1 cursor-pointer mat-elevation-z0"
+    *ngFor="let charge of charges; let i = index; let isLast = last"
+    (click)="select(i)"
+  >
+    <div class="row align-items-stretch">
+      <div class="col-md-11">
+        <h3>{{ charge?.option }}</h3>
+        <p class="text-justify mb-1">
+          {{ charge?.description }}
+        </p>
+      </div>
+      <div class="col-md-1">
+        <mat-icon
+          color="primary"
+          [svgIcon]="
+            selected?.option === charge?.option
+              ? 'check_round'
+              : 'radio_button_off'
+          "
+        ></mat-icon>
+      </div>
+    </div>
+    <mat-divider *ngIf="!isLast" class="mt-2 pt-3"></mat-divider>
+  </mat-card>
+</div>

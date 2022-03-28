@@ -1,0 +1,14 @@
+<div class="container select-account-modal-screen">
+  <button mat-icon-button matSuffix class="close-button" (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <p class="text-center fw-bold pt-2">Send from</p>
+  <h3 class="m-4 ms-2">Please select an account</h3>
+  <app-account-dropdown-item
+    *ngFor="let account of data"
+    [data]="account"
+    [transferType]="'from'"
+    [isChecked]="selected && selected?.accountName === account?.accountName"
+  >
+  </app-account-dropdown-item>
+</div>

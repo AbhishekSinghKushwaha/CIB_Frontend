@@ -1,0 +1,13 @@
+<div class="own-equity-modal-screen p-0">
+  <button mat-icon-button matSuffix class="close-button" (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <p class="text-center fw-bold pt-2">Branch</p>
+  <div class="row gx-0 p-3">
+    <div *ngFor="let branch of branches; let isLast = last; let i = index">
+      <app-branch-list-item [data]="branch" [isChecked]="selected === branch">
+      </app-branch-list-item>
+      <mat-divider *ngIf="!isLast" class="pt-1"></mat-divider>
+    </div>
+  </div>
+</div>

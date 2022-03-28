@@ -1,0 +1,30 @@
+<div class="row align-items-stretch mb-2 pb-2 cursor-pointer" (click)="select()">
+    <div class="col-md-12">
+        <div class="row user-list-item" style="height: 60px">
+        <div class="col-md-10 d-flex">
+            <div class="align-self-center">{{data.amountRangeType}}</div>
+        </div>
+        
+        <div class="col-md-2 d-flex">
+            <div class="align-self-center">
+            <mat-icon
+                color="primary"
+                [svgIcon]="isChecked ? 'check_round' : 'radio_button_off'"
+                ></mat-icon>
+            </div>
+        </div>
+        </div>
+
+        <div [formGroup]="airTimeForm" *ngIf="selected && selected.amountRangeType === 'Amount range' && data.amountRangeType === 'Amount range'">
+            <app-buyairtime-amount
+                [parentForm]="airTimeForm"
+                fieldName="amount"
+                label="Amount"
+                placeholder="Enter an amount"
+                formControlName="amount"
+            >
+            </app-buyairtime-amount>
+        </div>
+    </div>
+</div>
+

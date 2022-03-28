@@ -1,29 +1,33 @@
-import { Injectable } from '@angular/core';
-import { TransactDashboardList } from '../../domain/transact-list.model';
-import { TransactionTypeModel } from '../../domain/transaction-type.model';
 
+export const TransferType = {
+  OWN_EQUITY: "1",
+  INTRA_BANK: "2",
+  INTER_BANK: "3001",
+  EFT: "4",
+  SWIFT: "5",
+  RTGS: "6",
+  BUY_GOODS: "11",
+  MOBILE_MONEY: "9",
+  BUY_AIRTIME: "10",
+  PESALINK: "7",
+  INTER_COUNTRY_TRANSFER: "",
+  SUBSIDIARY: "8",
+};
 
-const TRANSACT_TYPE: TransactionTypeModel[] = [{
-  id: 1,
-  name: 'Money in'
-}, {
-  id: 2,
-  name: 'Money out'
-}, {
-  id: 3,
-  name: 'Bill payment'
-}, {
-  id: 4,
-  name: 'Bank Transfer'
-}, {
-  id: 5,
-  name: 'Mobile payment'
-}, {
-  id: 6,
-  name: 'Pesalink'
-}, {
-  id: 7,
-  name: 'RTGS'
-},];
+const SwiftChargesOptions = [
+  {
+    option: "Pay full charges",
+    description: "You will pay the full amount of the foreign bank charges",
+    charge: 1,
+  },
+  {
+    option: "Share Charges",
+    description: "Your recipient will account for half of the transfer charges",
+    charge: 2,
+  },
+];
 
-export default TRANSACT_TYPE;
+export const TransactionTypeConstants = {
+  TransferType,
+  SwiftChargesOptions,
+};

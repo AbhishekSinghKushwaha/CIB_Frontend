@@ -12,7 +12,8 @@ export interface BankModel {
   isDirectPesalink: boolean;
 }
 
-export interface SubsidiaryModel {
+export interface CountryModel {
+  id?: string;
   countryCode: string;
   countryName: string;
   currency: string;
@@ -21,5 +22,5 @@ export interface SubsidiaryModel {
   dialCode: string;
   flagPath: string;
   operatingCountry: boolean;
-  countryCode3Chars: null;
+  countryCode3Chars: string;
 }

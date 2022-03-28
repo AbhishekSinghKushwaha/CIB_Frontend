@@ -8,21 +8,9 @@ import { StatementListService } from 'src/app/core/services/statement/statement-
 import { NotificationModalModule } from '../notification-modal/notification-modal.module';
 
 @NgModule({
-  declarations: [
-    StatementDetailModalComponent,
-    StatementListModalComponent,
-  ],
-  imports: [
-    CommonModule,
-    MatStyleModule,
-    NotificationModalModule
-  ],
-  exports: [
-    StatementDetailModalComponent
-  ],
-  providers: [
-    StatementDetailService,
-    StatementListService
-  ]
+  declarations: [StatementDetailModalComponent, StatementListModalComponent],
+  imports: [CommonModule, MatStyleModule, NotificationModalModule],
+  exports: [StatementDetailModalComponent],
+  providers: [StatementDetailService, StatementListService],
 })
-export class StatementModalModule { }
+export class StatementModalModule {}

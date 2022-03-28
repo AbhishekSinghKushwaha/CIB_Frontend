@@ -15,7 +15,6 @@ export class UserMockRepositoryMapper extends Mapper<UserMockEntity, UserModel> 
       response_code: param.response_code,
       smsToken: param.smsToken,
       username: param.username,
-      securityQuestions: param.securityQuestions
     }
   };
   mapTo(param: UserModel): UserMockEntity {
@@ -30,7 +29,6 @@ export class UserMockRepositoryMapper extends Mapper<UserMockEntity, UserModel> 
       response_code: param.response_code,
       smsToken: param.smsToken,
       username: param.username,
-      securityQuestions: param.securityQuestions,
     };
   }
 }

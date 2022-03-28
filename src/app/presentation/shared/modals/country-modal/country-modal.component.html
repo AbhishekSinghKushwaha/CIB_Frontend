@@ -1,31 +1,41 @@
-<div class="p-3">
-  <div class="row">
-    <div class="col-md-4">
-      <mat-icon svgIcon="caret_left" (click)="close()"></mat-icon>
+<div class="new-recipient-modal-screen p-1">
+  <div class="p-3">
+    <button mat-icon-button matSuffix class="close-button" (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+    <p class="text-center fw-bold pt-2">Country</p>
+    <h3 class="m-4 ms-2">Please select country</h3>
+    <div class="row gx-0">
+      <mat-form-field appearance="outline">
+        <input
+          matInput
+          [(ngModel)]="searchText"
+          placeholder="Search for a country"
+        />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
     </div>
-    <h4 class="strong-text col-md-8">
-      {{ data.category === viewTypes.FLAG_AND_NAME ? "Currency" : "Country" }}
-    </h4>
-  </div>
-  <h3 class="strong-text pt-4 mb-4">
-    Please select a
-    {{ data.category === viewTypes.FLAG_AND_NAME ? "currency" : "country" }}
-  </h3>
-  <div class="row">
-    <mat-form-field appearance="outline">
-      <input
-        matInput
-        [(ngModel)]="searchText"
-        placeholder="Search for a country"
-      />
-      <mat-icon matSuffix>search</mat-icon>
-    </mat-form-field>
-  </div>
-  <div *ngFor="let item of data.country; let isLast = last; let i = index">
-    <app-country-list-item
-      [data]="item"
-      [isChecked]="selected?.name === item.name"
-    ></app-country-list-item>
-    <mat-divider *ngIf="!isLast" class="pt-3"></mat-divider>
+    <div>
+      <h3
+        class="strong-text p-3"
+        *ngIf="(data.country | countrySearch: searchText).length as results"
+      >
+        {{ results }} result{{ results ? "s" : "" }}
+      </h3>
+    </div>
+    <div
+      *ngFor="
+        let item of data.country | countrySearch: searchText;
+        let isLast = last;
+        let i = index
+      "
+    >
+      <app-country-list-item
+        [data]="item"
+        [isChecked]="selected?.countryName === item.countryName"
+        (selectedCountry)="onSelectedCountry($event)"
+      ></app-country-list-item>
+      <mat-divider *ngIf="!isLast" class="pt-3"></mat-divider>
+    </div>
   </div>
 </div>

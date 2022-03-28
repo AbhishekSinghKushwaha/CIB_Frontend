@@ -1,28 +1,81 @@
 {
-    "accounts": {
-        "getUserAccounts": "/cibaccountservice-v1/api/v1/Accounts/GetUserMappedAccounts"
-    },
-    "transfers": {
-        "sendOwnEquityAccount": "/cibpaymentservice-v1/api/v1/Transfer/Send",
-        "intraBankTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
-        "getTransferCharges": "/cibpaymentservice-v1/api/v1/Transfer/GetTransferCharge",
-        "getAccountDetails": "/cibpaymentservice-v1/api/v1/Transfer/NameEnquiry"
-    },
-    "dataLookUp": {
-        "getCountries": "/cibpaymentservice-v1/api/v1/Transfer/GetCountries",
-        "getBanks":"/cibpaymentservice-v1/api/v1/Transfer/GetBanks/",
-        "getCurrencies":"/cibpaymentservice-v1/api/v1/Transfer/GetCurrencies",
-        "getSubsidiaries": "/cibpaymentservice-v1/api/v1/Transfer/GetSubsidiaries"
-    },
-    "statement": {
-        "getPdf": "/v1/generatepdf/statement"
-    },
-    "login":{
-      "loginUser":"/users/authorization/login",
-      "verifyOtp":"/authorization/login/verifyOtp",
-      "resendOtp":"/authorization/oauth/regenerateOtp",
-      "validateOtp":"/authorization/user/validateOTPReset",
-      "securityQuestions":"/authorization/user/securityQuestions",
-      "securityAnswers":"/authorization/user/securityAnswers"
-    }
+  "customerOnboarding": {
+    "verifyCorporate": "/cibonboarding-v1/api/Registration/verify-corporate",
+    "getRequiredDocuments": "/cibonboarding-v1/api/Registration/get-required-documents",
+    "getCorporateRegistrationStage": "/cibonboarding-v1/api/Registration/get-corporate-registration-stage/",
+    "addCorporateDetails": "/cibonboarding-v1/api/Registration/add-corporate-detail/",
+    "addDirectorDetails": "/cibonboarding-v1/api/Registration/add-director-detail/",
+    "getCompanyDirectors": "/cibonboarding-v1/api/Registration/get-corporate-directors/",
+    "getCorporateDirector": "/cibonboarding-v1/api/Registration/get-single-directors/",
+    "deleteCompanyDirector": "/cibonboarding-v1/api/Registration/remove-director/",
+    "getRoles": "/cibonboarding-v1/api/Registration/get-roles/",
+    "addCorporateUser": "/cibonboarding-v1/api/Registration/add-corporate-user/",
+    "removeCorporateUser": "/cibonboarding-v1/api/Registration/remove-corporate-user/",
+    "removeCorporateProduct": "/cibonboarding-v1/api/Registration/remove-corporate-products/",
+    "getCorporateUsers": "/cibonboarding-v1/api/Registration/get-corporate-users/",
+    "getCorporateUser": "/cibonboarding-v1/api/Registration/get-single-corporate-user/",
+    "getProductsAndServices": "/cibonboarding-v1/api/Registration/get-products-and-services",
+    "addCorporateProduct": "/cibonboarding-v1/api/Registration/add-corporate-products/",
+    "getCorporateProducts": "/cibonboarding-v1/api/Registration/get-corporate-products/",
+    "updateDirectorDetails": "/cibonboarding-v1/api/Registration/update-director-detail/",
+    "updateCorporateUserDetails": "/cibonboarding-v1/api/Registration/update-corporate-user/",
+    "updateCorporateProduct": "/cibonboarding-v1/api/Registration/update-corporate-products/",
+    "getRegistrationSummary": "/cibonboarding-v1/api/Registration/preview-corporate-detail/",
+    "uploadCorporateDocuments": "/cibonboarding-v1/api/Registration/updload-corporate-documents/"
+  },
+  "accounts": {
+    "getUserAccounts": "/cibaccountservice-v1/api/v1/Accounts/GetUserMappedAccounts"
+  },
+  "transfers": {
+    "sendOwnEquityAccount": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+    "intraBankTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+    "swiftTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+    "mobileMoneyTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+    "buyAirtimeTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+    "buyGoodsTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+    "getTransferCharges": "/cibpaymentservice-v1/api/v1/Transfer/GetTransferCharge",
+    "getAccountDetails": "/cibpaymentservice-v1/api/v1/Transfer/NameEnquiry",
+    "getCharges": "/cibpaymentservice-v1/api/v1/BuyGoods/Charges"
+  },
+  "dataLookUp": {
+    "getCountries": "/cibpaymentservice-v1/api/v1/Transfer/GetCountries",
+    "getBanks": "/cibpaymentservice-v1/api/v1/Transfer/GetBanks/",
+    "getCurrencies": "/cibpaymentservice-v1/api/v1/Transfer/GetCurrencies",
+    "getSubsidiaries": "/cibpaymentservice-v1/api/v1/Transfer/GetSubsidiaries",
+    "getTelcos": "/cibpaymentservice-v1/api/v1/Transfer/GetTelcos",
+    "getMobileWallets": "/cibpaymentservice-v1/api/v1/Transfer/GetMobileWallets",
+    "getSectors": "/cibpaymentservice-v1/api/v1/Transfer/GetSectors",
+    "getFavouriteMerchants": "/cibpaymentservice-v1/api/v1/BuyGoods/FavoriteMerchants",
+    "getMerchants": "/cibpaymentservice-v1/api/v1/BuyGoods/Merchants",
+    "getMerchantDetails": "/cibpaymentservice-v1/api/v1/BuyGoods/MerchantDetail/",
+    "getFavouriteMerchantDetails": "/cibpaymentservice-v1/api/v1/BuyGoods/FavoriteMerchants/"
+  },
+  "statement": {
+    "getPdf": "/v1/generatepdf/statement"
+  },
+  "login": {
+    "loginUser": "/cibuseraccess-v1/api/Auth/oauth/token",
+    "verifyOtp": "/cibuseraccess-v1/api/Auth/login/verifyOtp",
+    "verifyForgetPasswordOtp": "/cibuseraccess-v1/api/Auth/user/verifyForgotPasswordOtp",
+    "resendOtp": "/cibuseraccess-v1/api/Auth/generateOtp",
+    "validateOtp": "/authorization/user/validateOTPReset",
+    "securityAnswers": "/cibuseraccess-v1/api/SecurityQuestion/user/verify-securityquestions",
+    "validateUser": "/cibuseraccess-v1/api/Auth/user/initiatePasswordReset",
+    "getSecurityQuestions": "/cibuseraccess-v1/api/SecurityQuestion/securityquestions",
+    "getMySecurityQuestions": "/cibuseraccess-v1/api/SecurityQuestion/user/securityquestions",
+    "resetPassword": "/cibuseraccess-v1/api/Auth/user/resetPassword"
+  },
+  "beneficiary": {
+    "add": "/cibpaymentservice-v1/api/v1/Beneficiary/AddBeneficiary",
+    "edit": "/cibpaymentservice-v1/api/v1/Beneficiary/EditBeneficiary",
+    "remove": "/cibpaymentservice-v1/api/v1/Beneficiary/RemoveBeneficiary",
+    "getAll": "/cibpaymentservice-v1/api/v1/Beneficiary/GetBeneficiaries",
+    "getBeneficiary": "/cibpaymentservice-v1/api/v1/Beneficiary/GetBeneficiary"
+  },
+  "userAdministration": {
+    "getUsers": "/cibuseraccess-v1/api/UserAdministration/users",
+    "changeStatus": "/cibuseraccess-v1/api/UserAdministration/disable-enable",
+    "delete": "/cibuseraccess-v1/api/UserAdministration/delete",
+    "getUserById": "/cibuseraccess-v1/api/Auth/user/single-user"
+  }
 }

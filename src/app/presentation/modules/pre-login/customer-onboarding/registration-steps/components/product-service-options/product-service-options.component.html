@@ -1,0 +1,64 @@
+<div class="row gx-0">
+  <div class="col-md-12">
+    <div class="row gx-0 mb-4 justify-content-md-center">
+      <div class="col-md-11">
+        <div class="mb-3">
+          <button
+            mat-icon-button
+            aria-label="Back"
+            class="back-icon"
+            (click)="goBack()"
+          >
+            <div class="strong-text">
+              <mat-icon svgIcon="caret_left"></mat-icon>
+              <span>Products and sub-products</span>
+            </div>
+          </button>
+        </div>
+        <h3 class="title mb-3">Please Select products and sub-products</h3>
+        <div
+          class="row mt-3"
+          *ngFor="let service of product?.productServices; let i = index"
+        >
+          <div
+            class="row product-list-item col-md-6 mt-3"
+            (click)="toggle(service?.id || '')"
+          >
+            <div class="col-1 my-auto">
+              <div class="icon-container">
+                <mat-icon [svgIcon]="'withdraw'" color="primary"></mat-icon>
+              </div>
+            </div>
+            <div class="col-10 offset-1 product-list-item-label">
+              <div class="row h-100 justify-content-around align-items-center">
+                <div class="col-10 float-left text-truncate">
+                  <h4>{{ service?.serviceName }}</h4>
+                  <p class="text-grey text-sm">{{ service?.description }}</p>
+                </div>
+                <div class="col-2 float-right toggle-container">
+                  <mat-icon
+                    [svgIcon]="
+                      isServiceActive(service?.id || '')
+                        ? 'toggle_button_on'
+                        : 'toggle_button_off'
+                    "
+                  ></mat-icon>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-5 mb-5 pb-5">
+          <button
+            mat-raised-button
+            (click)="submit()"
+            color="primary"
+            class="px-5"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

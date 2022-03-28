@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h3 class="strong-text mt-5">Great!</h3>
+            <small class="text-grey">Your airtime was purchased successfully</small>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-6">
+            <div class="">
+              <img src="assets/images/Illustrations/Group 29.svg" alt="">  
+            </div>
+            
+        </div>
+
+        <div class="col-6">
+            <h4 class="strong-text">{{ data?.amount?.amount }} {{ data?.amount?.currency }}</h4>
+            <small class="text-grey">Airtime amount</small><br><br>
+
+            <h4 class="strong-text">{{ data?.transferFee }} {{ data?.amount?.currency }}</h4>
+            <small class="text-grey">Charges</small><br><br>
+
+            <h4 class="strong-text">{{ data?.to?.accountName }}</h4>
+            <h4 class="strong-text">{{ data?.to?.accountNumber}}</h4>
+            <small class="text-grey">Bought for</small><br><br>
+
+            <h4 class="strong-text">{{ data?.from?.accountName }}</h4>
+            <h4 class="strong-text">{{ data?.from?.accountNumber }} • {{ data?.from?.accountType}}</h4>
+            <small class="text-grey">Bought from</small><br><br>
+
+            <h4 class="strong-text">{{data?.fxReferenceId}}</h4>
+            <small class="text-grey">Transaction reference</small><br><br>
+
+            <h4 class="strong-text">{{ data?.schedulePayment?.startDate | date: "medium" }}</h4>
+            <small class="text-grey">Completed on</small><br>
+
+        </div>
+    </div>
+    
+    <div class="row col-md-8">
+        <div class="col-md-3">
+            <button mat-raised-button type="button" color="primary" class="px-5 mt-4" (click)="done()">Done</button>
+        </div>
+        <div class="col-md-3 pl-2">
+            <button mat-stroked-button type="button" color="primary" class="px-5 mt-4" (click)="openAddFavourite()">Add to favourites</button>
+        </div> 
+    </div>
+</div>
+

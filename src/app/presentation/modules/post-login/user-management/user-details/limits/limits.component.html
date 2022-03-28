@@ -1,0 +1,59 @@
+<div class="row">
+    <div class="col-md-12">
+      <div class="row mb-4 justify-content-md-center">
+        <div class="col-md-11">
+            <div class="mb-3">
+                <button
+                mat-icon-button
+                aria-label="Back"
+                class="back-icon"
+                (click)="goBack()"
+                >
+                <div class="strong-text">
+                    <mat-icon svgIcon="caret_left"></mat-icon>
+                    <span>Edit User Limit</span>
+                </div>
+                </button>
+            </div>                    
+            <div class="row mt-3">
+                <h3>Please enter details</h3>
+            </div>
+            <form
+                autocomplete="off"
+                [formGroup]="userLimitsForm"
+                (submit)="save()">
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <app-input [parentForm]="userLimitsForm" fieldName="userName" label="User Name"
+                        placeholder="Enter full user name" formControlName="userName"></app-input>
+                    </div>
+                    <div class="col-md-6" (click)="openCurrencyModal()">                        
+                        <app-input [parentForm]="userLimitsForm" fieldName="currency" label="Currency"
+                        formControlName="currency" placeholder="Optional" 
+                        ></app-input>
+                    </div>
+                    <div class="col-md-6">
+                        <app-input [parentForm]="userLimitsForm" [type]="'number'" fieldName="transactionLimit" label="Transaction Limit"
+                        formControlName="transactionLimit" placeholder="Transaction Limit"></app-input>
+                    </div>
+                    <div class="col-md-6">
+                        <app-input [parentForm]="userLimitsForm" [type]="'number'" fieldName="dailyLimit" label="Daily Limit"
+                        placeholder="Daily Limit" formControlName="dailyLimit"></app-input>
+                    </div>
+                    <div class="col-md-6">
+                        <app-input [parentForm]="userLimitsForm" [type]="'number'" fieldName="weeklyLimit" label="Weekly Limit"
+                        formControlName="weeklyLimit" placeholder="Weekly Limit"></app-input>
+                    </div>
+                    <div class="col-md-6">
+                        <app-input [parentForm]="userLimitsForm" [type]="'number'" fieldName="monthlyLimit" label="Monthly Limit"
+                        formControlName="monthlyLimit" placeholder="Monthly Limit"></app-input>
+                    </div>
+                </div>
+                <div class="row">
+                    <button mat-raised-button color="primary" type="submit" class="mt-5 col-md-3"
+                        [disabled]="userLimitsForm.invalid">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

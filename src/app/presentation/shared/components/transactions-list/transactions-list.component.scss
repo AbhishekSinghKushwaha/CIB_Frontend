@@ -1,0 +1,21 @@
+::ng-deep .mat-tab-label {
+  width: 50% !important;
+}
+::ng-deep .mat-form-field-outline-start {
+  border-radius: 28px 0 0 28px !important;
+  min-width: 28px !important;
+}
+
+::ng-deep .mat-form-field-outline-end {
+  border-radius: 0 28px 28px 0 !important;
+}
+// mat-form-field-outline-start ,mat-form-field-outline-end
+mat-form-field.mat-form-field {
+  font-size: 12px;
+}
+
+.trans-card {
+  border-radius: 5px;
+  margin: 24px 0;
+  background-color: #fff;
+}

@@ -1,0 +1,116 @@
+<div *ngIf="isloggedOut">
+  <div class="card">
+    <div class="card-body card-icon-shadow">
+      <mat-icon [ngStyle]="{ color: 'green' }">check_circle</mat-icon>
+      You have been signed out successfully.
+    </div>
+  </div>
+</div>
+<div class="card border-0 login-screen">
+  <div class="card-body ps-4">
+    <h3 class="strong-text">{{ "login_hello" | translate }}</h3>
+    <div class="row text-muted">
+      <p>
+        Sign in to continue. Remember, your password is yours, do not share it
+        with anyone.
+      </p>
+      <p>
+        If this is your first time here, you can register using your Equitel or
+        Eazzy Banking details.
+      </p>
+    </div>
+    <div class="row text-muted">
+      <form
+        [formGroup]="loginPasswordForm"
+        (ngSubmit)="submit()"
+        autocomplete="off"
+      >
+        <div class="row mb-3">
+          <mat-form-field class="col-md-12">
+            <mat-label for="username"> Email address, mobile number </mat-label>
+            <input
+              matInput
+              type="text"
+              id="username"
+              formControlName="username"
+              placeholder="Enter your email address or mobile number"
+            />
+            <mat-error *ngIf="f.username.errors" class="validationError">
+              <div *ngIf="f.username.errors.required">
+                Email or mobile is required
+              </div>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="row mb-3">
+          <mat-form-field class="col-md-12">
+            <mat-label for="loginPasswordForm"> Password or PIN </mat-label>
+            <input
+              matInput
+              [type]="hidePassword ? 'password' : 'text'"
+              id="password"
+              formControlName="password"
+              autocomplete="new-password"
+              placeholder="Enter your password or pin"
+            />
+            <button
+              mat-icon-button
+              type="button"
+              matSuffix
+              class="password-icon"
+              (click)="hidePassword = !hidePassword"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hidePassword"
+            >
+              <mat-icon
+                [svgIcon]="hidePassword ? 'show-password' : 'hide-password'"
+              ></mat-icon>
+            </button>
+            <mat-error *ngIf="f.password.errors" class="validationError">
+              <div *ngIf="f.password.errors.required">Password is required</div>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-12">
+            <button
+              mat-button
+              color="primary"
+              class="ps-0"
+              type="button"
+              [disabled]="submitted"
+              routerLink="/auth/login/forgot-password"
+            >
+              Forgot your password?
+            </button>
+          </div>
+        </div>
+        <div class="row gx-4">
+          <div class="col">
+            <button
+              mat-flat-button
+              color="primary"
+              type="submit"
+              class="col-12"
+              [disabled]="submitted"
+            >
+              {{ "button_signin" | translate }}
+            </button>
+          </div>
+          <div class="col">
+            <button
+              mat-stroked-button
+              color="primary"
+              type="button"
+              class="col-12"
+              [routerLink]="['/auth/customer-onboarding']"
+              routerLinkActive="router-link-active"
+            >
+              {{ "button_register" | translate }}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

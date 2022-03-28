@@ -1,0 +1,60 @@
+<div class="new-recipient-modal-screen p-2">
+  <button mat-icon-button matSuffix class="close-button" (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <p class="text-center fw-bold pt-2">Transaction BCC Code/Reason</p>
+  <h3 class="m-4 mb-0 ms-2">Please select the transaction BCC code/reason</h3>
+  <p class="text-grey text-sm-start ms-2">
+    These payment categories are for reporting purposes for buying and importing
+    goods
+  </p>
+
+  <div class="row gx-0">
+    <mat-form-field appearance="outline">
+      <input
+        matInput
+        [(ngModel)]="searchText"
+        placeholder="Search for a bank"
+      />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+  <div class="row gx-0">
+    <h3
+      class="strong-text p-3"
+      *ngIf="(sectors | paymentCategorySearch: searchText).length as results"
+    >
+      {{ results }} result{{ results ? "s" : "" }}
+    </h3>
+    <div
+      *ngFor="
+        let item of sectors | paymentCategorySearch: searchText;
+        let i = index;
+        let isLast = last
+      "
+      class="row gx-0 align-items-stretch m-2 pb-2 cursor-pointer"
+      (click)="select(i)"
+    >
+      <div class="col-md-12">
+        <div class="row gx-0 user-list-item">
+          <div class="col-md-10 d-flex">
+            <div class="align-self-center">{{ item.sectorDescription }}</div>
+          </div>
+          <div class="col-md-2 d-flex">
+            <div class="align-self-center">
+              <mat-icon
+                color="primary"
+                [svgIcon]="
+                  selected?.sectorDescription === item?.sectorDescription
+                    ? 'check_round'
+                    : 'radio_button_off'
+                "
+              ></mat-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+      <mat-divider *ngIf="!isLast" class="pt-3 mt-3"></mat-divider>
+    </div>
+  </div>
+</div>

@@ -5,64 +5,68 @@ import {
   Output,
   Input,
   OnDestroy,
-} from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Subject, Subscription } from 'rxjs';
-import { CountryModel } from 'src/app/core/domain/country.model';
-import { recipientModel } from 'src/app/core/domain/recipient.model';
-import { CountryService } from 'src/app/core/services/country/country.service';
-import { countrySettings } from 'src/app/core/utils/constants/country.settings';
-import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
+} from "@angular/core";
+import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { Subject, Subscription } from "rxjs";
+import { CountryModel } from "src/app/core/domain/bank.model";
+import { recipientModel } from "src/app/core/domain/recipient.model";
+import { CountryService } from "src/app/core/services/modal-services/country.service";
+import { SharedDataService } from "src/app/core/services/shared-data/shared-data.service";
+import { StorageService } from "src/app/core/services/storage/storage.service";
+import { countrySettings } from "src/app/core/utils/constants/country.settings";
+import { mockData } from "src/app/core/utils/constants/mockdata.constants";
 
 @Component({
-  selector: 'app-country-select',
-  templateUrl: './country-select.component.html',
-  styleUrls: ['./country-select.component.scss'],
+  selector: "app-country-select",
+  templateUrl: "./country-select.component.html",
+  styleUrls: ["./country-select.component.scss"],
 })
 export class CountrySelectComponent implements OnInit, OnDestroy {
   visibility = true;
-  countries = mockData.countries;
+  countries: CountryModel[];
   viewTypes = countrySettings.viewTypes;
   subscriptions: Subscription[] = [];
   @Input() category: string;
-  @Output() selected = new Subject<CountryModel>();
+  @Output() selectedCountry = new Subject<CountryModel>();
+  selected: any;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: recipientModel,
-    private readonly countryService: CountryService
-  ) { }
+    private readonly countryService: CountryService,
+    private readonly storageService: StorageService
+  ) {
+    this.countries = this.storageService.getData("countries");
+  }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   openCountries(): void {
-    this.visibility = false;
     const modal = this.countryService.openCountry(
       this.countries,
-      this.category
+      this.category,
+      {}
     );
     this.subscriptions.push(
       modal.afterClosed().subscribe((data: CountryModel) => {
-        console.log('Inner', data);
         this.countryService.openedStatus.next(false);
-        this.visibility = true;
-        this.selected.next(data);
+        this.selectedCountry.next(data);
       })
     );
   }
 
   ngOnDestroy(): void {
-    const modal = this.countryService.openCountry(
-      this.countries,
-      this.category
-    );
-    this.subscriptions.push(
-      modal.afterClosed().subscribe((data: CountryModel) => {
-        this.countryService.openedStatus.next(false);
-        this.visibility = true;
-        this.selected.next(data);
-      })
-    );
-    this.subscriptions.length &&
-      this.subscriptions.forEach((value) => value && value.unsubscribe());
+    // const modal = this.countryService.openCountry(
+    //   this.countries,
+    //   this.category
+    // );
+    // this.subscriptions.push(
+    //   modal.afterClosed().subscribe((data: CountryModel) => {
+    //     this.countryService.openedStatus.next(false);
+    //     this.visibility = true;
+    //     this.selectedCountry.next(data);
+    //   })
+    // );
+    // this.subscriptions.length &&
+    //   this.subscriptions.forEach((value) => value && value.unsubscribe());
   }
 }

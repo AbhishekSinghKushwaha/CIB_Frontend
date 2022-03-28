@@ -37,7 +37,10 @@
                     disabled
                     placeholder="Transfer Via RTGS"
                   />
-                  <mat-radio-button matSuffix value="6"></mat-radio-button>
+                  <mat-radio-button
+                    matSuffix
+                    value="{{ transferType.RTGS }}"
+                  ></mat-radio-button>
                 </mat-form-field>
               </div>
 
@@ -54,7 +57,10 @@
                     disabled
                     placeholder="Transfer Via EFT"
                   />
-                  <mat-radio-button matSuffix value="4"></mat-radio-button>
+                  <mat-radio-button
+                    matSuffix
+                    value="{{ transferType.EFT }}"
+                  ></mat-radio-button>
                 </mat-form-field>
               </div>
             </div>
@@ -79,7 +85,7 @@
                 formControlName="sendTo"
                 fieldName="sendTo"
                 placeholder="Select the recipient"
-                transactionType="interBankTransfer"
+                [transactionType]="getForm.transactionType.value"
               >
               </app-transfer-to>
             </div>
@@ -101,7 +107,8 @@
                 fieldName="schedulePayment"
                 placeholder="Select a payment date"
                 transactionType="interBankTransfer"
-              ></app-schedule-payment-input>
+              >
+              </app-schedule-payment-input>
             </div>
             <!-- FX Reference ID -->
             <div class="col-md-6">

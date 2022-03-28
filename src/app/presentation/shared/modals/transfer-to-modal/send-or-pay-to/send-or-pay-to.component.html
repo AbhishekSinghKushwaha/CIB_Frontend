@@ -1,0 +1,123 @@
+<div *ngIf="visibility">
+  <p class="text-center fw-bold pt-2">{{ purposeText?.heading }}</p>
+  <h3 class="m-4 ms-3">{{ purposeText?.subheading }}</h3>
+  <div class="row gx-0 m-2">
+    <mat-form-field appearance="outline">
+      <input matInput [(ngModel)]="searchText" />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <div
+    class="row gx-0 ms-3 mt-2 pb-3 cursor-pointer"
+    (click)="
+      transactionType === transferType.PESALINK
+        ? openPesalinkNewRecipient('bank')
+        : openNewRecipient()
+    "
+  >
+    <div class="col-md-10">
+      <div class="row">
+        <div class="col-md-2 icon">
+          <img
+            src="{{ purposeText?.navigationIcon }}"
+            class="fav-icon"
+            alt=""
+          />
+        </div>
+        <div class="col-md-10">
+          <div class="">
+            <span>{{ purposeText?.navigationHeading }}</span>
+            <p *ngIf="purposeText?.navigationSubheading">
+              <small class="text-grey">{{
+                purposeText?.navigationSubheading
+              }}</small>
+            </p>
+          </div>
+          <mat-divider
+            *ngIf="transactionType === transferType.PESALINK"
+          ></mat-divider>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <button type="button" mat-icon-button matSuffix>
+        <mat-icon svgIcon="caret_right"></mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <!-- ONLY IF PESALINK -->
+  <div
+    *ngIf="transactionType === transferType.PESALINK"
+    class="row gx-0 ms-3 mt-2 pb-3 cursor-pointer"
+    (click)="
+      transactionType === transferType.PESALINK
+        ? openPesalinkNewRecipient('phone-linked')
+        : openNewRecipient()
+    "
+  >
+    <div class="col-md-10">
+      <div class="row">
+        <div class="col-md-2 icon">
+          <img
+            src="./assets/images/icons/Phone-linked account.svg"
+            class="fav-icon"
+            alt=""
+          />
+        </div>
+        <div class="col-md-10">
+          <div class="">
+            <span>Send to phone-linked account</span>
+            <p *ngIf="purposeText?.navigationSubheading">
+              <small class="text-grey">{{
+                purposeText?.navigationSubheading
+              }}</small>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <button type="button" mat-icon-button matSuffix>
+        <mat-icon svgIcon="caret_right"></mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <mat-divider class="p-2"></mat-divider>
+  <div class="d-flex justify-content-between bd-highlight m-2">
+    <h3>Favourites</h3>
+    <div
+      class="text-danger cursor-pointer"
+      (click)="openBeneficiaryManagementModal()"
+    >
+      Manage
+    </div>
+  </div>
+  <app-beneficiary-list-item
+    *ngFor="let account of favourites | favouriteSearch: searchText"
+    [data]="account"
+    [isChecked]="
+      selectedFavourite &&
+      selectedFavourite.accountNumber === account.accountNumber
+    "
+  >
+  </app-beneficiary-list-item>
+  <div
+    class="row gx-0 ms-3"
+    *ngIf="(favourites | favouriteSearch: searchText).length < 1"
+  >
+    0 favourites found
+  </div>
+  <div
+    class="row gx-0 ms-3 d-flex justify-content-center text-danger text-decoration-underline cursor-pointer"
+    *ngIf="
+      searchText &&
+      favourites.length !== (favourites | favouriteSearch: searchText).length
+    "
+    (click)="resetBeneficiaries()"
+  >
+    See all beneficiaries
+  </div>
+</div>

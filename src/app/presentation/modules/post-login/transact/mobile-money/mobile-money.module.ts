@@ -1,16 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
-import { MobileMoneyRoutingModule } from './mobile-money-routing.module';
-import { MobileMoneyComponent } from './mobile-money.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatStyleModule } from 'src/app/mat-style.module';
-import { SharedComponentsModule } from 'src/app/presentation/shared/components/shared-components.module';
-import { FormElementsModule } from 'src/app/presentation/shared/form-elements/form-elements.module';
-import { CurrencySelectionModule } from 'src/app/presentation/shared/modals/currency-selection/currency-selection.module';
-import { FavouritesModalModule } from 'src/app/presentation/shared/modals/favourites-modal/favourites-modal.module';
-import { SchedulePaymentModule } from 'src/app/presentation/shared/modals/schedule-payment/schedule-payment.module';
-import { SelectAccountModalModule } from 'src/app/presentation/shared/modals/select-account-modal/select-account-modal.module';
+import { MobileMoneyRoutingModule } from "./mobile-money-routing.module";
+import { MobileMoneyComponent } from "./mobile-money.component";
+import { SharedComponentsModule } from "src/app/presentation/shared/components/shared-components.module";
+import { SharedModalsModule } from "src/app/presentation/shared/modals/shared-modals.module";
+import { MatStyleModule } from "src/app/mat-style.module";
+import { FormElementsModule } from "src/app/presentation/shared/form-elements/form-elements.module";
 
 @NgModule({
   declarations: [MobileMoneyComponent],
@@ -18,12 +14,8 @@ import { SelectAccountModalModule } from 'src/app/presentation/shared/modals/sel
     CommonModule,
     MobileMoneyRoutingModule,
     SharedComponentsModule,
+    SharedModalsModule,
     MatStyleModule,
-    ReactiveFormsModule,
-    FavouritesModalModule,
-    SelectAccountModalModule,
-    CurrencySelectionModule,
-    SchedulePaymentModule,
     FormElementsModule,
   ],
 })

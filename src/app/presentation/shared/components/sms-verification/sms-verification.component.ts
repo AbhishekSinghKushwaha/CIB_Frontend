@@ -1,15 +1,21 @@
 import { Subject } from 'rxjs';
-import { Component, OnInit, QueryList, ViewChildren, Output, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  QueryList,
+  ViewChildren,
+  Output,
+  Input,
+} from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { SharedUtils } from './../../../../core/utils/shared.util';
-import { NotificationModalService } from 'src/app/core/services/notification-modal/notification-modal.service';
-import { StorageService } from 'src/app/core/services/storage/storage.service';
-import { LoginSmsVerificationService } from 'src/app/core/services/login-sms-verification/login-sms-verification.service';
+import { NotificationModalService } from 'src/app/core/services/modal-services/notification-modal/notification-modal.service';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 @Component({
   selector: 'app-sms-verification',
   templateUrl: './sms-verification.component.html',
-  styleUrls: ['./sms-verification.component.scss']
+  styleUrls: ['./sms-verification.component.scss'],
 })
 export class SmsVerificationComponent implements OnInit {
   @ViewChildren('inputs') inputs: QueryList<any>;
@@ -27,10 +33,11 @@ export class SmsVerificationComponent implements OnInit {
     }
   }
 
-  constructor(private readonly fb: FormBuilder,
+  constructor(
+    private readonly fb: FormBuilder,
     private readonly notificationModalService: NotificationModalService,
-    private readonly storageService: StorageService,
-    private readonly loginSmsVerificationService: LoginSmsVerificationService) {
+    private readonly authService: AuthService
+  ) {
     this.initOtpForm();
   }
 
@@ -97,38 +104,37 @@ export class SmsVerificationComponent implements OnInit {
   }
 
   submit() {
-    this.formSubmission.next(true)
+    this.formSubmission.next(true);
   }
 
   verifyOTP() {
     if (this.verifyOtpFormArray.valid) {
       this.onOTPVerified.next(this.verifyOtpFormArray.getRawValue().join(''));
     }
-
   }
 
   modalIncorectVerification(): void {
     const message = SharedUtils.getNotificationModalParam({
       title: 'Incorrect verification code',
-      message: 'The details you entered aren\'t familiar to us. Please try again or register to create your profile',
-      buttonText: 'Try again'
-    })
+      message:
+        "The details you entered aren't familiar to us. Please try again or register to create your profile",
+      buttonText: 'Try again',
+    });
     this.notificationModalService.open(message);
   }
 
   public async resendOTPCode(): Promise<void> {
-    const user = await this.storageService.getData('loginCred');
     this.verifyOtpFormArray.reset();
 
-    this.loginSmsVerificationService.resendOTP(user).subscribe(
+    this.authService.resendOTP().subscribe(
       (data) => {
-        this.otpResent = true;
-        this.restartOTPTimer();
+        console.log('resendOTP', data);
       },
       (error) => {
         console.log(error);
       }
     );
+    this.otpResent = true;
+    this.restartOTPTimer();
   }
-
 }
