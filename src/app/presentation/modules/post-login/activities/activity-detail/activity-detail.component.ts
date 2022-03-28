@@ -140,7 +140,10 @@ export class ActivityDetailComponent implements OnInit {
   editTransaction(transferType: number) {
     switch (transferType) {
       case Number(this.transactionType.OWN_EQUITY):
-        this.router.navigate(["/transact/own-equity-account"]);
+        this.router.navigate(["/transact/own-equity-account/" + this.id]);
+        break;
+      case Number(this.transactionType.INTRA_BANK):
+        this.router.navigate(["/transact/other-equity-account/" + this.id]);
         break;
 
       default:
