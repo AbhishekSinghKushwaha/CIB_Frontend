@@ -139,4 +139,10 @@ export class BeneficiaryManagementService {
         });
       });
   }
+
+  accountSearch(payload: any): Promise<any> {
+    return this.http
+      .post(environment.apiUrl + urlList.transfers.getAccountDetails, payload)
+      .toPromise();
+  }
 }
