@@ -14,24 +14,40 @@
   </div>
 </div>
 <div
-  class="row mt-1 mb-1 p-2 trans-card cursor-pointer"
-  *ngFor="let transaction of transactions; let i = index"
+  class="row mt-1 mb-2 p-2 trans-card cursor-pointer"
+  *ngFor="let transaction of pendingTransactions; let i = index"
   (click)="openTransaction(transaction, i)"
 >
-  <div class="strong-text">{{ transaction.title }}</div>
+  <div class="strong-text">Reference {{ transaction.requestReference }}</div>
   <div class="d-flex justify-content-between">
-    <div>{{ transaction.description }}</div>
-    <div>{{ transaction.amount }}</div>
+    <div>
+      {{ transaction?.narration || "MOBILE WALLET TRANSFER TO LESLIE ISAH" }}
+    </div>
+    <div>{{ transaction.amount }} {{ transaction?.currency }}</div>
   </div>
   <div class="d-flex align-items-start">
     <span class="pe-3">
-      <small class="text-grey">{{ transaction.date }}</small>
+      <small class="text-grey">{{ transaction?.date }} Thur, 23 Aug</small>
+    </span>
+    <span class="pe-3" *ngIf="category === 'pending'">
+      <!-- <mat-icon [svgIcon]="transactionIcon.Pending"></mat-icon> -->
+      <!-- <small class="strong-text">{{
+        getTransactionStatusKey(
+          transaction?.approvalStatus || approvalStatus.Pending
+        )
+      }}</small> -->
     </span>
     <span class="pe-3" *ngIf="category === 'history'">
-      <mat-icon [svgIcon]="transactionIcon[transaction.status]"></mat-icon>
+      <!-- <mat-icon [svgIcon]="transactionIcon.Pending"></mat-icon> -->
+      <small class="strong-text">{{
+        getTransactionStatusKey(transaction?.approvalStatus || 1)
+      }}</small>
     </span>
-    <span class="pe-3" *ngIf="category === 'history'">
-      <small class="strong-text">{{ transaction.status }}</small>
+
+    <span class="pe-3" *ngIf="category === 'standingOrders'">
+      <small class="strong-text">{{
+        getTransactionStatusKey(transaction?.approvalStatus || 1)
+      }}</small>
     </span>
   </div>
 </div>
