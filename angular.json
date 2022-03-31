@@ -73,18 +73,7 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "4mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2mb",
-                  "maximumError": "7mb"
-                }
-              ],
+              
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
