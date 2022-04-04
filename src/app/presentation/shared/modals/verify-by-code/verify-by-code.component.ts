@@ -76,6 +76,10 @@ export class VerifyByCodeComponent implements OnInit {
       return this.verifyOtpForm.controls;
     }
 
+    get otpMessage() {
+      return this.authService.getOTPMessage();
+    }
+
     get verifyOtpFormArray() {
       return this.verifyOtpForm.get('digits') as FormArray;
     }
@@ -167,6 +171,9 @@ export class VerifyByCodeComponent implements OnInit {
             else if(this.transactionType === this.transferType.BUY_GOODS) {
               this.buyGoods();
             }
+            else if(this.transactionType === 'Standing Orders') {
+              this.standingOrders();
+            }
           } else {
             this.otpError = true;
           }
@@ -224,6 +231,10 @@ export class VerifyByCodeComponent implements OnInit {
     }
   }
 
+  standingOrders() {
+    this.router.navigate([`/transact/standing-orders/transfer-submitted/${this.transactionType}`]);
+  }
+
   check(index: number, field: any, event: any): void {
     if (isNaN(parseInt(event.key, 10)) && event.key !== 'Backspace') {
       event.preventDefault();
@@ -240,5 +251,9 @@ export class VerifyByCodeComponent implements OnInit {
         // console.log('first field');
       }
     }
+  }
+
+  tryOtherMethod() {
+    this.router.navigate([`/transact/otp-verification/${this.transactionType}`]);
   }
 }

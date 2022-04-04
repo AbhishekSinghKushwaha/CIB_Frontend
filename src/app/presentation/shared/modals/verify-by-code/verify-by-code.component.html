@@ -14,11 +14,11 @@
         </div>
 
         <div class="col-7">
-            <h3 class="strong-text m-2">We sent a verification code to</h3>
             <div *ngIf="data === 'email'">
-                <h3 class="strong-text m-2">v••••••••i@•••••••co.ke</h3>
+                <h3 class="strong-text m-2">{{ otpMessage }}</h3>
             </div>
             <div *ngIf="data === 'sms'">
+                <h3 class="strong-text m-2">We sent a verification code to</h3>
                 <h3 class="strong-text m-2">+254 72 •••••••••• 13</h3>
             </div>
             <small class="text-grey m-2">Please enter the code below</small>
@@ -67,7 +67,7 @@
           </button>
         </div>
         <div class="col-md-1">
-            <button mat-stroked-button type="button" color="primary" class="px-5" routerLink="/transact/buy-goods/otp-verification">Try another method</button>
+            <button mat-stroked-button type="button" color="primary" class="px-5" (click)="tryOtherMethod()">Try another method</button>
         </div>          
     </div> 
     <div class="row col-md-11 mt-3" *ngIf="data === 'email'">

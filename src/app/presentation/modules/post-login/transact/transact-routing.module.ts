@@ -92,16 +92,21 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'otp-verification',
+    path: 'otp-verification/:type',
     loadChildren: () => import('./otp-verify/otp-verification/otp-verification.module').then(m => m.OtpVerificationModule)
   },
   {
-    path: 'otp-verification-code',
+    path: 'otp-verification-code/:data/:type',
     loadChildren: () => import('./otp-verify/otp-verification-code/otp-verification-code.module').then(m => m.OtpVerificationCodeModule)
   },
   {
     path: 'contact-details',
     loadChildren: () => import('./otp-verify/contact-details/contact-details.module').then(m => m.ContactDetailsModule)
+  },
+  {
+    path: "standing-orders",
+    loadChildren: (): Promise<any> =>
+      import("./standing-orders/standing-orders.module").then((m) => m.StandingOrdersModule),
   },
   {
     path: "**",
