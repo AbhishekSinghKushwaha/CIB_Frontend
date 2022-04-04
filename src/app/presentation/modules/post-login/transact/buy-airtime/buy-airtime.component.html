@@ -1,4 +1,4 @@
-<div *ngIf="!loading">
+<div>
     <div class="mb-3">
       <button
         mat-icon-button
@@ -55,6 +55,7 @@
         <div class="col-md-6">
           <app-buyairtime-amount
             [parentForm]="airTimeForm"
+            currencyFieldName="amount"
             label="Amount"
             fieldName="amount"
             placeholder="Enter an amount"
@@ -113,9 +114,5 @@
       </div>
 
     </form>
-  </div>
-  
-  <div class="row justify-content-md-center" *ngIf="loading">
-    <mat-spinner style="margin-top: 30vh"></mat-spinner>
   </div>
   

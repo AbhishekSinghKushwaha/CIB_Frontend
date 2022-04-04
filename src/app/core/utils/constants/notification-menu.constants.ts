@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NotificationDashboardList } from '../../domain/notification-preferences-list.model';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class NotificationConstants {
   constructor() { }
 

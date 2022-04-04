@@ -60,7 +60,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
     private readonly dialog: MatDialog,
     private readonly userManagementSuccessService: UserManagementSuccessService,
     private readonly userAdministrationService: UserAdministrationService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource();
@@ -71,7 +71,8 @@ export class UserListComponent implements OnInit, AfterViewInit {
           name: `${element.firstName} ${element.lastName}`,
           phone: element.phoneNumber,
           email: element.email,
-          status: element.status ? 'enabled' : 'disabled',
+          status: element.status,
+          statusName: element.statusName.match(/[A-Z][a-z]+|[0-9]+/g).join(" ")
         };
       });
       this.dataSource.data = this.users;
@@ -89,20 +90,20 @@ export class UserListComponent implements OnInit, AfterViewInit {
   openFilterModal() {
     this.dialog
       .open<UserListSearchModalComponent>(UserListSearchModalComponent, {
-        data: { 
-          collection: this.users, 
-          title: 'User search',          
+        data: {
+          collection: this.users,
+          title: 'User search',
           copy: 'Search for a user by entering their ID number, user ID, and phone number',
           displayedColumns: [
-              'select',
-              'id',
-              'name',
-              'phone',
-              'email',
-              'status',
-            ],
+            'select',
+            'id',
+            'name',
+            'phone',
+            'email',
+            'status',
+          ],
           filterByColumns: this.filterByColumns
-          },
+        },
       })
       .afterClosed()
       .pipe(take(1))
@@ -129,7 +130,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
             this.userManagementSuccessService.setBackButtonText(
               'Enable a user'
             );
-            this.userAdministrationService.enableUser(user.id).subscribe(() => {
+            this.userAdministrationService.reviewStatus(user.id, 1).subscribe(() => {
               this.router.navigate(['success'], {
                 relativeTo: this.activatedRoute,
               });
@@ -140,7 +141,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
               'Disable a user'
             );
             this.userAdministrationService
-              .disableUser(user.id, actionResult.data)
+              .reviewStatus(user.id, 2, { DisableReason: actionResult.data })
               .subscribe(() => {
                 this.router.navigate(['success'], {
                   relativeTo: this.activatedRoute,
@@ -156,7 +157,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
             this.userManagementSuccessService.setBackButtonText(
               'Remove a user'
             );
-            this.userAdministrationService.deleteUser(user.id).subscribe(() => {
+            this.userAdministrationService.reviewStatus(user.id, 3).subscribe(() => {
               this.router.navigate(['success'], {
                 relativeTo: this.activatedRoute,
               });

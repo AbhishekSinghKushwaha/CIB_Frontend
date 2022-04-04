@@ -146,7 +146,9 @@ export class BuyGoodsComponent extends BaseTransactComponent implements OnInit {
     if (this.buyGoodsForm.valid) {
       this.buyGoodsService.getTillNumber(tillNumber);
       this.buyGoodsService.payBuyGoods(payload);
-      this.router.navigate(['/transact/buy-goods/otp-verification']);
+      this.router.navigate(['/transact/otp-verification', {
+        'type': this.transferType.BUY_GOODS,
+      }]);
     }
   }
 }

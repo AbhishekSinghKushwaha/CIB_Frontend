@@ -21,13 +21,13 @@
             <h4 class="strong-text">{{ data?.transferFee }} {{ data?.amount?.currency }}</h4>
             <small class="text-grey">Charges</small><br><br>
 
-            <h4 class="strong-text">{{ data?.to?.accountName }}</h4>
-            <h4 class="strong-text">{{ data?.to?.accountNumber}}</h4>
-            <small class="text-grey">Bought for</small><br><br>
+            <h4 class="strong-text">{{ data?.to?.phoneNumber }}</h4>
+            <h4 class="strong-text">{{ data?.to?.telco.telco}}</h4>
+            <small class="text-grey">Paid to</small><br><br>
 
             <h4 class="strong-text">{{ data?.from?.accountName }}</h4>
             <h4 class="strong-text">{{ data?.from?.accountNumber }} • {{ data?.from?.accountType}}</h4>
-            <small class="text-grey">Bought from</small><br><br>
+            <small class="text-grey">Paid from</small><br><br>
 
             <h4 class="strong-text">{{data?.fxReferenceId}}</h4>
             <small class="text-grey">Transaction reference</small><br><br>

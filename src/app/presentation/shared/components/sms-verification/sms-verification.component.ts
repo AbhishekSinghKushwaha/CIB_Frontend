@@ -50,6 +50,10 @@ export class SmsVerificationComponent implements OnInit {
     return this.verifyOtpForm.controls;
   }
 
+  get otpMessage() {
+    return this.authService.getOTPMessage();
+  }
+
   get verifyOtpFormArray() {
     return this.verifyOtpForm.get('digits') as FormArray;
   }

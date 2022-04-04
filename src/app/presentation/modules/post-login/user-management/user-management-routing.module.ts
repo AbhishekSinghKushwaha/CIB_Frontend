@@ -3,28 +3,25 @@ import { RouterModule, Routes } from '@angular/router';
 import { UserResolver } from './resolvers/user.resolver';
 
 const routes: Routes = [
-  
+
   {
     path: '',
     loadChildren: (): Promise<any> =>
       import('./user-list/user-list.module').then(
         (m) => m.UserListModule
       ),
-  },{
-    path:'add',
-    loadChildren: (): Promise<any> => 
+  }, {
+    path: 'add',
+    loadChildren: (): Promise<any> =>
       import('./user-details/user-details.module').then(
         (m) => m.UserDetailsModule
       )
-  },{
-    path:'edit/:id',
-    loadChildren: (): Promise<any> => 
+  }, {
+    path: 'edit/:id',
+    loadChildren: (): Promise<any> =>
       import('./user-details/user-details.module').then(
         (m) => m.UserDetailsModule
-      ),
-      resolve: {
-        user: UserResolver
-      }
+      )
   },
   {
     path: 'success',

@@ -17,6 +17,7 @@ import { IntercountryNewRecipientComponent } from "./intercountry-new-recipient/
 import { AirtimeNewRecepientComponent } from "./airtime-new-recepient/airtime-new-recepient.component";
 import { MobileOperatorsModule } from "src/app/presentation/shared/components/mobile-operators/mobile-operators.module";
 import { MobileOperatorsConstants } from "src/app/core/utils/constants/mobile-operator.constants";
+import { TelcoModalModule } from "src/app/presentation/shared/modals/telco-modal/telco-modal.module";
 import { MobileWalletsService } from "src/app/core/services/modal-services/mobile-wallets.service";
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { MobileWalletsService } from "src/app/core/services/modal-services/mobil
     NewRecipientService,
     MobileOperatorsConstants,
     MobileWalletsService,
+    TelcoModalModule,
   ],
 })
 export class NewRecipientModalModule {}
