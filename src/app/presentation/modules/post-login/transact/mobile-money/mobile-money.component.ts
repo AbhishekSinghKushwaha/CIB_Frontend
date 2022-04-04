@@ -54,9 +54,11 @@ export class MobileMoneyComponent implements OnInit {
     const payload = {
       amount: this.getForm.amount.value.amount,
       currency: this.getForm.amount.value.currency,
-      destinationAccount: this.getForm.sendTo.value.accountNumber,
+      destinationAccount: this.getForm.sendTo.value.phoneNumber,
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
+      destinationBankCode: this.getForm.sendTo.value.mobileWallet.wallet,
       transferType: Number(this.transferType.MOBILE_MONEY),
+      fxReferenceId: this.getForm.fxReferenceId.value,
       countryCode: "KE", //TODO:: Default have it as kenya, then change to pick the user's country
     };
     this.swiftTransferService.getTransferCharges(payload).subscribe((res) => {
@@ -77,7 +79,7 @@ export class MobileMoneyComponent implements OnInit {
       content: [
         {
           key: "Transaction",
-          value: "Send to another bank via SWIFT",
+          value: `Send to mobile wallet via ${this.getForm.sendTo.value.mobileWallet?.walletDescription}`,
         },
         {
           key: "Amount",
@@ -95,10 +97,9 @@ export class MobileMoneyComponent implements OnInit {
         },
         {
           key: "To",
-          value: `${this.getForm.sendTo.value.firstName} ${this.getForm.sendTo.value.lastName}<br>
-            <span><strong>Bank:</strong></span> ${this.getForm.sendTo.value.bank.bankName}<br>
-            <span><strong>Ac/No:</strong></span> ${this.getForm.sendTo.value.accountNumber}<br>
-            ${this.getForm.sendTo.value.country.countryName}
+          value: `${this.getForm.sendTo.value.accountName}<br>
+            ${this.getForm.sendTo.value.phoneNumber}<br>
+            ${this.getForm.sendTo.value.mobileWallet?.walletDescription}
           `,
         },
         {
@@ -163,9 +164,9 @@ export class MobileMoneyComponent implements OnInit {
   sendMoney() {
     const payload = {
       amount: this.getForm.amount.value.amount,
-      beneficiaryAccount: this.getForm.sendTo.value.accountNumber,
-      beneficiaryBank: "",
-      beneficiaryBankCode: "",
+      beneficiaryAccount: this.getForm.sendTo.value.phoneNumber,
+      beneficiaryBank: this.getForm.sendTo.value.mobileWallet?.wallet,
+      beneficiaryBankCode: this.getForm.sendTo.value.mobileWallet?.wallet,
       beneficiaryCurrency: this.getForm.sendTo.value.currency,
       beneficiaryName: this.getForm.sendTo.value.accountName,
       currency: this.getForm.amount.value.currency,

@@ -27,6 +27,12 @@
   <button type="button" mat-icon-button matSuffix>
     <mat-icon svgIcon="caret_down"></mat-icon>
   </button>
+  <small
+    class="text-grey text-sm-start mt-2 mb-0"
+    *ngIf="transactionType === transferType.MOBILE_MONEY"
+  >
+    {{ value?.phoneNumber }}
+  </small>
   <small class="text-grey text-sm-start mt-2 mb-0">
     {{ value?.bank?.bankName || value?.tillName }}
     {{ value?.country?.countryName }}</small
