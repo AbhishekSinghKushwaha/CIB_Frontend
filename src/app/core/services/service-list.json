@@ -78,5 +78,10 @@
     "changeStatus": "/cibuseraccess-v1/api/UserAdministration/CreateReviewRequest",
     "delete": "/cibuseraccess-v1/api/UserAdministration/delete",
     "getUserById": "/cibuseraccess-v1/api/Auth/user/single-user"
+  },
+  "airtime": {
+    "getCharges": "/cibpaymentservice-v1/api/v1/Airtime/GetCharge",
+    "getOperatorsCountries": "/cibpaymentservice-v1/api/v1/Airtime/GetOperatorCountries",
+    "getOperators": "/cibpaymentservice-v1/api/v1/Airtime/GetOperators/"
   }
 }

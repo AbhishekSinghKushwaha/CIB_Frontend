@@ -55,6 +55,7 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getBeneficiaries();
     this.getTelcos();
     this.getMobileWallets();
+    this.getSubsidiaries();
   }
 
   ngAfterViewInit() {}
@@ -132,6 +133,14 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     this.dataLookupService.getSectors().subscribe((res) => {
       if (res.status) {
         this.storageService.setData("sectors", res.data);
+      }
+    });
+  }
+
+  getSubsidiaries() {
+    this.dataLookupService.getSubsidiaries().subscribe((res) => {
+      if (res.status) {
+        this.storageService.setData("subsidiaries", res.data);
       }
     });
   }

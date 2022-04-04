@@ -32,6 +32,9 @@ export class BuyairtimeAmountComponent implements ControlValueAccessor, OnInit {
   public fieldName!: string;
 
   @Input()
+  public currencyFieldName!: string;
+
+  @Input()
   public label!: string;
 
   @Input()
@@ -66,7 +69,6 @@ export class BuyairtimeAmountComponent implements ControlValueAccessor, OnInit {
     private readonly fixedRangeService: FixedRangeService,
     private readonly fixedRangeConstants: FixedRangeConstants,
     private readonly transferFromService: TransferFromService
-
   ) { 
     this.currencySelectionService.selected.subscribe((x) => this.currency = x);
     
@@ -77,6 +79,7 @@ export class BuyairtimeAmountComponent implements ControlValueAccessor, OnInit {
     this.fixedRangeService.selected.subscribe((res) => {
       this.fixedAmount = res;
       this.value.amount = res.text;
+      this.value.currency = this.currency.currencyCode;
     });
   }
 
@@ -95,7 +98,9 @@ export class BuyairtimeAmountComponent implements ControlValueAccessor, OnInit {
     // Get Selected Currency
     this.currencySelectionService.selected.subscribe((x) => {
       this.currency = x;
+      this.currencyFieldName && this.parentForm.controls[this.currencyFieldName].setValue(this.currency);
     });
+
 
     this.onAmountEntered();
   }

@@ -16,6 +16,8 @@ export class OtpVerificationCodeComponent implements OnInit {
   otpVerificationCodeForm: FormGroup;
   otpVerificationCode: otpCodeModel;
 
+  transferType: any;
+
   constructor(
     private readonly otpVerificationListService: OtpVerificationListService,
     private readonly otpCodeService: OtpCodeService,
@@ -31,6 +33,7 @@ export class OtpVerificationCodeComponent implements OnInit {
   private eventsSubscriptions(): void {
     this.route.params.subscribe((params) => {
       this.otpVerificationType = params['data'];
+      this.transferType = params['type'];
     });
 
     this.otpCodeService.data.subscribe((response) => {
