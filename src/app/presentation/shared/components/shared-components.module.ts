@@ -30,7 +30,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { TransactionsListComponent } from './transactions-list/transactions-list.component';
 import { PaginatorComponent } from './paginator/paginator.component';
 import { ListItemsComponent } from './list-items/list-items.component';
-
+import { DeleteModule } from '../modals/delete/delete.module';
+import { StandingOrdersListComponent } from './standing-orders-list/standing-orders-list.component';
 
 const components = [
   AccountDropdownItemComponent,
@@ -54,7 +55,8 @@ const components = [
   ResetPasswordComponent,
   TransactionsListComponent,
   PaginatorComponent,
-  ListItemsComponent
+  ListItemsComponent,
+  StandingOrdersListComponent
 ];
 
 @NgModule({
@@ -68,8 +70,8 @@ const components = [
     ReactiveFormsModule,
     LanguageModalModule,
     LanguageTranslateModule.forRoot(),
-    SecurityQuestionsModalModule
-
+    SecurityQuestionsModalModule,
+    DeleteModule
   ],
   exports: components
 })

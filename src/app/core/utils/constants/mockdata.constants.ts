@@ -10,8 +10,10 @@ import { ConfirmationModel } from "../../domain/confirmation.model";
 import { TransactionListmodel } from "../../domain/transaction-list.model";
 import { BeneficiaryModel } from "../../domain/beneficiary.model";
 import { TransferType } from "./transaction-type.constants";
+import { StandingOrdersListmodel } from "../../domain/standing-orders-list.model";
+import { TransactionTypeModel } from "src/app/core/domain/transaction-type.model";
 import { AirtimeAmountRangeModel } from "../../domain/international-airtime-amount-range.model";
-import { CountryMobileCodeModal } from "src/app/core/domain/countryCode.model";
+import { CountryMobileCodeModal } from "../../domain/countryCode.model";
 
 const accounts: SelectAccountModel[] = [
   {
@@ -797,6 +799,91 @@ const pendingTransactions: TransactionListmodel[] = Array(32)
     transferType: 1,
     date: "",
   }));
+const standingOrderDetail: ConfirmationModel[] = [
+  {
+    content: [
+      {
+        key: "Start date",
+        value: "01 January 2021",
+      },
+      {
+        key: "End date",
+        value: "01 January 2021",
+      },
+      {
+        key: "Transaction Type",
+        value: "Send money to Equity Account",
+      },
+      {
+        key: "From",
+        value: "Loot<br>0810174008113 • Savings",
+      },
+      {
+        key: "Narration",
+        value: "Payment to IdeaHub vendor",
+      },
+    ],
+  },
+  {
+    title: "Beneficiary details",
+    content: [
+      {
+        key: "Beneficiary name",
+        value: "Isah Uche Olusegun",
+      },
+      {
+        key: "Account number",
+        value: "00113577162",
+      },
+      {
+        key: "IBAN number",
+        value: "2085252042",
+      },
+      {
+        key: "Beneficiary bank",
+        value: "HSBC Group",
+      },
+      {
+        key: "Bank code",
+        value: "06454",
+      },
+    ],
+  },
+];
+
+const standingOrders: StandingOrdersListmodel[] = Array(32)
+  .fill(0)
+  .map((x, i) => ({
+    title: "List label",
+    description: "MOBILE WALLET TRANSFER TO LESLIE ISAH",
+    amount: "000,000.00 KES",
+    date: "Thu, 23 2021 Aug - Fri 23 July, 2022",
+    status: i % 2 === 0 ? "Active" : "Inactive",
+  }));
+
+export const TransactionType: TransactionTypeModel[] = [
+  {
+    type: "Buy airtime",
+  },
+  {
+    type: "Pay bill",
+  },
+  {
+    type: "Buy goods & services",
+  },
+  {
+    type: "Send money to Equity account",
+  },
+  {
+    type: "Send money to other bank",
+  },
+  {
+    type: "Send to wallet",
+  },
+  {
+    type: "Withdraw cash",
+  },
+];
 
 export const mockData = {
   accounts,
@@ -813,4 +900,7 @@ export const mockData = {
   pendingTransactions,
   airtimeAmountRange,
   mobileCodes,
+  standingOrders,
+  standingOrderDetail,
+  TransactionType,
 };

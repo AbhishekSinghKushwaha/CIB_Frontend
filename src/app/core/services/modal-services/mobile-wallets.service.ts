@@ -10,11 +10,13 @@ import urlList from "../service-list.json";
 interface MobileWalletState {
   wallet: MobileWallet;
   wallets: MobileWallet[];
+  transferPayload: {};
 }
 
 const initialState: MobileWalletState = {
   wallet: {},
   wallets: [],
+  transferPayload: {},
 };
 @Injectable()
 export class MobileWalletsService extends StateService<MobileWalletState> {
@@ -41,6 +43,10 @@ export class MobileWalletsService extends StateService<MobileWalletState> {
 
   selectWallet(wallet: MobileWallet): void {
     this.setState({ wallet });
+  }
+
+  setMobileMoneyTransferPayload(transferPayload: any): void {
+    this.setState({ transferPayload });
   }
 
   walletNameEnquiry(payload: any): Observable<any> {

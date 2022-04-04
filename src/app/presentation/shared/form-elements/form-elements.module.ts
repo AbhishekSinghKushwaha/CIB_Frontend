@@ -32,6 +32,7 @@ import { SelectTransferTypeComponent } from "./select-transfer-type/select-trans
 import { SelectTelcoComponent } from "./select-telco/select-telco.component";
 import { SelectMobileWalletComponent } from "./select-mobile-wallet/select-mobile-wallet.component";
 import { TelcoModalModule } from "../modals/telco-modal/telco-modal.module";
+import { TransactionTypeComponent } from './transaction-type/transaction-type.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { TelcoModalModule } from "../modals/telco-modal/telco-modal.module";
     SelectTransferTypeComponent,
     SelectTelcoComponent,
     SelectMobileWalletComponent,
+    TransactionTypeComponent,
   ],
   imports: [
     CommonModule,
@@ -96,6 +98,7 @@ import { TelcoModalModule } from "../modals/telco-modal/telco-modal.module";
     SelectTransferTypeComponent,
     SelectTelcoComponent,
     SelectMobileWalletComponent,
+    TransactionTypeComponent
   ],
   providers: [],
 })

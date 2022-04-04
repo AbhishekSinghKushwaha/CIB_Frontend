@@ -10,11 +10,12 @@
             <div class="">
               <img src="assets/images/Illustrations/Group 29.svg" alt="">  
             </div>
-            
         </div>
 
         <div class="col-7">
-            <h4 class="mt-5">Fund transfer submitted for approval!</h4>
+            <h4 class="mt-5" *ngIf="transferType !== 'Standing Orders'">Fund transfer submitted for approval!</h4>
+
+            <h3 class="mt-5 strong-text" *ngIf="transferType === 'Standing Orders'">Standing order submitted for approval!</h3><br>
 
             <p>Permanent Amendment</p>
 
@@ -26,7 +27,18 @@
 
             <br>
 
-            <button mat-raised-button type="button" color="primary" class="px-5 mt-4" (click)="done()">Done</button>
+            <div *ngIf="transferType !== 'Standing Orders'">
+                <button mat-raised-button type="button" color="primary" class="px-5 mt-4" (click)="done()">Done</button>
+            </div>
+
+            <div class="row col-md-10" *ngIf="transferType === 'Standing Orders'">
+                <div class="col-md-4">
+                    <button mat-raised-button type="button" color="primary" class="px-5 mt-4" (click)="done()">Done</button>
+                </div>
+                <div class="col-md-3">
+                    <button mat-stroked-button type="button" color="primary" class="px-5 mt-4" (click)="openAddFavourite()">Add to favourites</button>
+                </div> 
+            </div>
         </div>
     </div>
 </div>

@@ -1,0 +1,23 @@
+#dashboard-page {
+    font-family: 'Open sans';
+    font-size: 14px;
+    box-sizing: border-box;
+    line-height: 20px;
+
+    .dashboard-page--content {
+        &--accounts {
+            &__action {
+                &__card{
+                    &__icon {
+                        background: rgba(146, 148, 151, 0.2);
+                        box-shadow: none;
+                    }
+                    &__button {
+                        background: transparent;
+                        border: none;
+                    }
+                }
+            }
+        } 
+    }
+}

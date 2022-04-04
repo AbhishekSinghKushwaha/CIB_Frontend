@@ -1,0 +1,36 @@
+<div>
+    <div class="mb-3">
+      <button
+        mat-icon-button
+        aria-label="Back"
+        class="back-icon"
+        routerLink="/transact"
+      >
+        <div class="strong-text">
+          <mat-icon svgIcon="caret_left"></mat-icon>
+          <span>Standing Order</span>
+        </div>
+      </button>
+    </div>
+    <h3 class="strong-text">Standing Order</h3>
+    <div id="dashboard-page">
+        <div class="col-md-4 mt-4">
+            <div class="row dashboard-page--content--accounts__action__card">
+                <div class="col-md-3">
+                    <button mat-fab class="dashboard-page--content--accounts__action__card__icon">
+                        <mat-icon svgIcon="withdraw"></mat-icon>
+                    </button>
+                </div>
+                <div class="col-md-7">
+                    <p class="mb-0">Add new standing order</p>
+                    <small class="text-grey">Save, transact, borrow and more</small>
+                </div>
+                <div class="col-md-2 card card-block justify-content-center dashboard-page--content--accounts__action__card__button">
+                    <mat-icon color="primary" svgIcon="caret_right" routerLink="/transact/standing-orders/new"></mat-icon>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h4 class="strong-text mt-5">Existing Standing Orders</h4>
+    <app-standing-orders-list [category]="'standing-orders'"></app-standing-orders-list>
+</div>      
