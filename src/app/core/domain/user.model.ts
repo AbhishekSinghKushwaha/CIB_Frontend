@@ -19,3 +19,25 @@ export interface UserListModel {
   status: string;
   lastViewed: string;
 }
+
+export interface UserFormPropModel {
+  addRoleLink: string;
+  userListLink: string;
+  memberId: string;
+  addProductLink?: string;
+}
+
+export interface LoggedinUserModel {
+  firstName: string;
+  lastName: string;
+  email: string;
+  dateOfBirth: string;
+  corporateId: string;
+  firstTimeLogin: boolean;
+  userName: string;
+  userId: string;
+  phoneNumber: string;
+  idNumber: string;
+  status: boolean;
+  statusName: string;
+}

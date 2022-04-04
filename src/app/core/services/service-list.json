@@ -63,7 +63,8 @@
     "validateUser": "/cibuseraccess-v1/api/Auth/user/initiatePasswordReset",
     "getSecurityQuestions": "/cibuseraccess-v1/api/SecurityQuestion/securityquestions",
     "getMySecurityQuestions": "/cibuseraccess-v1/api/SecurityQuestion/user/securityquestions",
-    "resetPassword": "/cibuseraccess-v1/api/Auth/user/resetPassword"
+    "resetPassword": "/cibuseraccess-v1/api/Auth/user/resetPassword",
+    "getLogonUser":"/cibuseraccess-v1/api/Auth/user/single-user?"
   },
   "beneficiary": {
     "add": "/cibpaymentservice-v1/api/v1/Beneficiary/AddBeneficiary",
@@ -74,7 +75,7 @@
   },
   "userAdministration": {
     "getUsers": "/cibuseraccess-v1/api/UserAdministration/users",
-    "changeStatus": "/cibuseraccess-v1/api/UserAdministration/disable-enable",
+    "changeStatus": "/cibuseraccess-v1/api/UserAdministration/CreateReviewRequest",
     "delete": "/cibuseraccess-v1/api/UserAdministration/delete",
     "getUserById": "/cibuseraccess-v1/api/Auth/user/single-user"
   }

@@ -38,12 +38,13 @@
             *matCellDef="let row"
             class="status"
             [ngClass]="{
-              enabled: row.status === 'enabled',
-              disabled: row.status === 'disabled',
-              pending: row.status === 'pending'
+              enabled: row.status === 1,
+              disabled: row.status === 2,
+              pending: row.status === 3,
+              others: [4, 5, 6].includes(row.status)
             }"
           >
-            {{ row.status }}
+            {{ row.statusName }}
           </td>
         </ng-container>
 

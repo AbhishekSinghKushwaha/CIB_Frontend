@@ -89,9 +89,13 @@ export class LoginSmsVerificationComponent implements OnInit {
     this.otpError = false;
     if (otp) {
       this.authService.submitOTP(otp).subscribe(
-        (response) => {
+        async (response) => {
+          console.log('submitOTP', response);
           if (response) {
-            this.authService.loginSuccess();
+            const loginStat = await this.authService.loginSuccess();
+            if (!loginStat) {
+              this.otpError = true;
+            }
           } else {
             this.otpError = true;
           }
@@ -102,5 +106,9 @@ export class LoginSmsVerificationComponent implements OnInit {
         }
       );
     }
+  }
+
+  cancelLogin() {
+    this.authService.cancelLogin();
   }
 }
