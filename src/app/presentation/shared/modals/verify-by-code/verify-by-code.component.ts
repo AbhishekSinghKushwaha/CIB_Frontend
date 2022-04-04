@@ -7,27 +7,33 @@ import {
   ElementRef,
   Output,
   QueryList,
-} from '@angular/core';
-import { otpCodeModel } from 'src/app/core/domain/otp-code.model';
-import { OtpCodeService } from 'src/app/core/services/otp-code/otp-code.service';
-import { FormControl, FormGroup, FormArray, Validators, FormBuilder } from '@angular/forms';
-import { BuyGoodsService } from 'src/app/core/services/transfers/buy-goods/buy-goods.service';
-import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
-import { SharedUtils } from './../../../../core/utils/shared.util';
-import { NotificationModalService } from 'src/app/core/services/modal-services/notification-modal/notification-modal.service';
-import { AuthService } from 'src/app/core/services/auth/auth.service';
-import { TransactionTypeConstants } from 'src/app/core/utils/constants/transaction-type.constants';
-import { BuyAirtimeService } from 'src/app/core/services/transfers/buy-airtime/buy-airtime.service';
-
+} from "@angular/core";
+import { otpCodeModel } from "src/app/core/domain/otp-code.model";
+import { OtpCodeService } from "src/app/core/services/otp-code/otp-code.service";
+import {
+  FormControl,
+  FormGroup,
+  FormArray,
+  Validators,
+  FormBuilder,
+} from "@angular/forms";
+import { BuyGoodsService } from "src/app/core/services/transfers/buy-goods/buy-goods.service";
+import { Router } from "@angular/router";
+import { Subject } from "rxjs";
+import { SharedUtils } from "./../../../../core/utils/shared.util";
+import { NotificationModalService } from "src/app/core/services/modal-services/notification-modal/notification-modal.service";
+import { AuthService } from "src/app/core/services/auth/auth.service";
+import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
+import { BuyAirtimeService } from "src/app/core/services/transfers/buy-airtime/buy-airtime.service";
+import { MobileMoneyService } from "src/app/core/services/transfers/mobile-money/mobile-money.service";
 
 @Component({
-  selector: 'app-verify-by-code',
-  templateUrl: './verify-by-code.component.html',
-  styleUrls: ['./verify-by-code.component.scss'],
+  selector: "app-verify-by-code",
+  templateUrl: "./verify-by-code.component.html",
+  styleUrls: ["./verify-by-code.component.scss"],
 })
 export class VerifyByCodeComponent implements OnInit {
-  @ViewChildren('inputs') inputs: QueryList<any>;
+  @ViewChildren("inputs") inputs: QueryList<any>;
   verifyOtpForm: FormGroup;
   timeToResend: number;
   otpResent = false;
@@ -50,21 +56,22 @@ export class VerifyByCodeComponent implements OnInit {
   payload: any;
   airtimePayload: any;
 
-  formInput = ['input1', 'input2', 'input3', 'input4', 'input5', 'input6'];
-  @ViewChildren('formRow') rows: any;
-  
+  formInput = ["input1", "input2", "input3", "input4", "input5", "input6"];
+  @ViewChildren("formRow") rows: any;
+
   @Input() transactionType!: string;
   transferType = TransactionTypeConstants.TransferType;
 
   constructor(
     private readonly otpCodeService: OtpCodeService,
-      private readonly buyGoodsService: BuyGoodsService,
-      private readonly router: Router,
-      private readonly fb: FormBuilder,
-      private readonly notificationModalService: NotificationModalService,
-      private readonly authService: AuthService,
-      private readonly buyAirtimeService: BuyAirtimeService
-    ) {
+    private readonly buyGoodsService: BuyGoodsService,
+    private readonly router: Router,
+    private readonly fb: FormBuilder,
+    private readonly notificationModalService: NotificationModalService,
+    private readonly authService: AuthService,
+    private readonly buyAirtimeService: BuyAirtimeService,
+    private mobileMoneyService: MobileMoneyService
+  ) {
     this.initOtpForm();
   }
 
@@ -72,58 +79,58 @@ export class VerifyByCodeComponent implements OnInit {
     this.initForm();
     this.initOTPTimer();
   }
-    get f(): any {
-      return this.verifyOtpForm.controls;
-    }
+  get f(): any {
+    return this.verifyOtpForm.controls;
+  }
 
-    get otpMessage() {
-      return this.authService.getOTPMessage();
-    }
+  get otpMessage() {
+    return this.authService.getOTPMessage();
+  }
 
-    get verifyOtpFormArray() {
-      return this.verifyOtpForm.get('digits') as FormArray;
-    }
-  
-    initOtpForm(): void {
-      this.verifyOtpForm = this.fb.group({
-        digits: this.fb.array([]),
-      });
-    }
+  get verifyOtpFormArray() {
+    return this.verifyOtpForm.get("digits") as FormArray;
+  }
 
-    initOTPTimer(seconds: number = 60): void {
-      this.timeToResend = seconds;
-      const intervalId = setInterval(() => {
-        this.timeToResend = this.timeToResend - 1;
-        if (this.timeToResend === 0) {
-          clearInterval(intervalId);
-        }
-      }, 1000);
-    }
-    restartOTPTimer(): void {
-      const intervalId = setInterval(() => {
-        this.otpResent = false;
-        this.initOTPTimer();
+  initOtpForm(): void {
+    this.verifyOtpForm = this.fb.group({
+      digits: this.fb.array([]),
+    });
+  }
+
+  initOTPTimer(seconds: number = 60): void {
+    this.timeToResend = seconds;
+    const intervalId = setInterval(() => {
+      this.timeToResend = this.timeToResend - 1;
+      if (this.timeToResend === 0) {
         clearInterval(intervalId);
-      }, 5000);
-    }
-
-    modalIncorectVerification(): void {
-      const message = SharedUtils.getNotificationModalParam({
-        title: 'Incorrect verification code',
-        message:
-          "The details you entered aren't familiar to us. Please try again or register to create your profile",
-        buttonText: 'Try again',
-      });
-      this.notificationModalService.open(message);
-    }
-
-    initForm(): void {
-      for (let i = 0; i < this.numOfDigits; i++) {
-        (this.verifyOtpForm.get('digits') as FormArray).push(
-          this.fb.control(null, Validators.required)
-        );
       }
+    }, 1000);
+  }
+  restartOTPTimer(): void {
+    const intervalId = setInterval(() => {
+      this.otpResent = false;
+      this.initOTPTimer();
+      clearInterval(intervalId);
+    }, 5000);
+  }
+
+  modalIncorectVerification(): void {
+    const message = SharedUtils.getNotificationModalParam({
+      title: "Incorrect verification code",
+      message:
+        "The details you entered aren't familiar to us. Please try again or register to create your profile",
+      buttonText: "Try again",
+    });
+    this.notificationModalService.open(message);
+  }
+
+  initForm(): void {
+    for (let i = 0; i < this.numOfDigits; i++) {
+      (this.verifyOtpForm.get("digits") as FormArray).push(
+        this.fb.control(null, Validators.required)
+      );
     }
+  }
 
   submit(): void {
     this.otpCodeService.set(this.verifyOtpForm.value);
@@ -154,9 +161,9 @@ export class VerifyByCodeComponent implements OnInit {
 
   verify() {
     if (this.verifyOtpFormArray.valid) {
-      this.onOTPVerified.next(this.verifyOtpFormArray.getRawValue().join(''));
+      this.onOTPVerified.next(this.verifyOtpFormArray.getRawValue().join(""));
     }
-    this.submitOtp(this.verifyOtpFormArray.getRawValue().join(''));
+    this.submitOtp(this.verifyOtpFormArray.getRawValue().join(""));
   }
 
   submitOtp(otp: string) {
@@ -165,15 +172,7 @@ export class VerifyByCodeComponent implements OnInit {
       this.authService.submitOTP(otp).subscribe(
         (response) => {
           if (response) {
-            if(this.transactionType === this.transferType.BUY_AIRTIME) {
-              this.buyAirtime();
-            }
-            else if(this.transactionType === this.transferType.BUY_GOODS) {
-              this.buyGoods();
-            }
-            else if(this.transactionType === 'Standing Orders') {
-              this.standingOrders();
-            }
+            this.perfomTransfer();
           } else {
             this.otpError = true;
           }
@@ -187,63 +186,68 @@ export class VerifyByCodeComponent implements OnInit {
   }
 
   buyAirtime() {
-    this.buyAirtimeService.currentData.subscribe(data => {
+    this.buyAirtimeService.currentData.subscribe((data) => {
       this.airtimePayload = data;
     });
-    if(this.airtimePayload) {
-      this.buyAirtimeService.buyAirtimeTransfer(this.airtimePayload).subscribe(
-        (res) => {
-          if(res.status){
-          this.router.navigate(['/transact/buy-airtime/success']);
-        } else{
-          console.log(res.message);
-        }
-      },
-      (err) => {
-        alert(
-          `Sorry, we're unable to complete your transaction. Please give us some time to fix the problem and try again later.`
-        );
-      }
-      );
+    if (this.airtimePayload) {
+      this.buyAirtimeService
+        .buyAirtimeTransfer(this.airtimePayload)
+        .subscribe((res) => {
+          if (res.status) {
+            this.router.navigate(["/transact/buy-airtime/success"]);
+          } else {
+            console.log(res.message);
+          }
+        });
     }
   }
 
   buyGoods() {
-    this.buyGoodsService.currentData.subscribe(data => {
+    this.buyGoodsService.currentData.subscribe((data) => {
       this.payload = data;
     });
-    if(this.payload) {
-      this.buyGoodsService.buyGoodsTransfer(this.payload).subscribe(
-        (res) => {
-          if (res.status) {
-            this.router.navigate(["/transact/buy-goods/submit-transfer"]);
-          } else {
-            console.log(res.message);
-            // TODO:: Notify Error
-          }
-        },
-        (err) => {
-          alert(
-            `Sorry, we're unable to complete your transaction. Please give us some time to fix the problem and try again later.`
-          );
+    if (this.payload) {
+      this.buyGoodsService.buyGoodsTransfer(this.payload).subscribe((res) => {
+        if (res.status) {
+          this.router.navigate(["/transact/buy-goods/submit-transfer"]);
+        } else {
+          console.log(res.message);
+          // TODO:: Notify Error
         }
-      );
+      });
+    }
+  }
+
+  mobileMoney() {
+    this.mobileMoneyService.transferPayload$.subscribe((res) => {
+      this.payload = res;
+    });
+    if (this.payload) {
+      this.mobileMoneyService.sendMobileMoney(this.payload).subscribe((res) => {
+        if (res.status) {
+          this.router.navigate(["/transact/transfer-submitted"]);
+        } else {
+          console.log(res.message);
+        }
+      });
     }
   }
 
   standingOrders() {
-    this.router.navigate([`/transact/standing-orders/transfer-submitted/${this.transactionType}`]);
+    this.router.navigate([
+      `/transact/standing-orders/transfer-submitted/${this.transactionType}`,
+    ]);
   }
 
   check(index: number, field: any, event: any): void {
-    if (isNaN(parseInt(event.key, 10)) && event.key !== 'Backspace') {
+    if (isNaN(parseInt(event.key, 10)) && event.key !== "Backspace") {
       event.preventDefault();
     }
-    if (field.value && event.key !== 'Backspace') {
+    if (field.value && event.key !== "Backspace") {
       if (index < this.inputs.toArray().length - 1) {
         this.inputs.toArray()[index + 1].nativeElement.focus();
       }
-    } else if (event.key === 'Backspace') {
+    } else if (event.key === "Backspace") {
       if (index > 0) {
         field.setValue(null);
         this.inputs.toArray()[index - 1].nativeElement.focus();
@@ -254,6 +258,27 @@ export class VerifyByCodeComponent implements OnInit {
   }
 
   tryOtherMethod() {
-    this.router.navigate([`/transact/otp-verification/${this.transactionType}`]);
+    this.router.navigate([
+      `/transact/otp-verification/${this.transactionType}`,
+    ]);
+  }
+
+  perfomTransfer() {
+    switch (this.transactionType) {
+      case this.transferType.BUY_AIRTIME:
+        this.buyAirtime();
+        break;
+      case this.transferType.BUY_GOODS:
+        this.buyGoods();
+        break;
+      case "Standing Orders":
+        this.standingOrders();
+        break;
+      case this.transferType.MOBILE_MONEY:
+        this.mobileMoney();
+        break;
+      default:
+        break;
+    }
   }
 }
