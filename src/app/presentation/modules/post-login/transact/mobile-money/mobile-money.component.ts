@@ -157,6 +157,9 @@ export class MobileMoneyComponent implements OnInit {
     };
     if (this.mobileMoneyTransferForm.valid) {
       this.mobileMoneyTransferService.setTransferPayload(payload);
+      this.mobileMoneyTransferService.setFavouritesPayload(
+        this.mobileMoneyTransferForm.getRawValue()
+      );
       this.router.navigate([
         `/transact/otp-verification/${this.transferType.MOBILE_MONEY}`,
       ]);

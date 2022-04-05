@@ -26,6 +26,9 @@ import { AuthService } from "src/app/core/services/auth/auth.service";
 import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
 import { BuyAirtimeService } from "src/app/core/services/transfers/buy-airtime/buy-airtime.service";
 import { MobileMoneyService } from "src/app/core/services/transfers/mobile-money/mobile-money.service";
+import { IntrabankService } from "src/app/core/services/transfers/intrabank/intrabank.service";
+import { InterbankService } from "src/app/core/services/transfers/interbank/interbank.service";
+import { SwiftTransferService } from "src/app/core/services/transfers/swift/swift-transfer.service";
 
 @Component({
   selector: "app-verify-by-code",
@@ -70,7 +73,10 @@ export class VerifyByCodeComponent implements OnInit {
     private readonly notificationModalService: NotificationModalService,
     private readonly authService: AuthService,
     private readonly buyAirtimeService: BuyAirtimeService,
-    private mobileMoneyService: MobileMoneyService
+    private mobileMoneyService: MobileMoneyService,
+    private intrabankService: IntrabankService,
+    private interbankService: InterbankService,
+    private swiftTransferService: SwiftTransferService
   ) {
     this.initOtpForm();
   }
@@ -225,7 +231,62 @@ export class VerifyByCodeComponent implements OnInit {
     if (this.payload) {
       this.mobileMoneyService.sendMobileMoney(this.payload).subscribe((res) => {
         if (res.status) {
-          this.router.navigate(["/transact/transfer-submitted"]);
+          this.router.navigate([
+            `/transact/transfer-submitted/${this.transactionType}`,
+          ]);
+        } else {
+          console.log(res.message);
+        }
+      });
+    }
+  }
+
+  intrabankTransfer() {
+    this.intrabankService.transferPayload$.subscribe((res) => {
+      this.payload = res;
+    });
+    if (this.payload) {
+      this.intrabankService
+        .sendToAnotherEquityAccount(this.payload)
+        .subscribe((res) => {
+          if (res.status) {
+            this.router.navigate([
+              `/transact/transfer-submitted/${this.transactionType}`,
+            ]);
+          } else {
+            console.log(res.message);
+          }
+        });
+    }
+  }
+
+  interbankTransfer() {
+    this.interbankService.transferPayload$.subscribe((res) => {
+      this.payload = res;
+    });
+    if (this.payload) {
+      this.interbankService.sendToOtherBanks(this.payload).subscribe((res) => {
+        if (res.status) {
+          this.router.navigate([
+            `/transact/transfer-submitted/${this.transactionType}`,
+          ]);
+        } else {
+          console.log(res.message);
+        }
+      });
+    }
+  }
+
+  swiftTransfer() {
+    this.swiftTransferService.transferPayload$.subscribe((res) => {
+      this.payload = res;
+    });
+    if (this.payload) {
+      this.swiftTransferService.sendViaSwift(this.payload).subscribe((res) => {
+        if (res.status) {
+          this.router.navigate([
+            `/transact/transfer-submitted/${this.transactionType}`,
+          ]);
         } else {
           console.log(res.message);
         }
@@ -276,6 +337,18 @@ export class VerifyByCodeComponent implements OnInit {
         break;
       case this.transferType.MOBILE_MONEY:
         this.mobileMoney();
+        break;
+      case this.transferType.INTRA_BANK:
+        this.intrabankTransfer();
+        break;
+      case this.transferType.RTGS:
+        this.interbankTransfer();
+        break;
+      case this.transferType.EFT:
+        this.interbankTransfer();
+        break;
+      case this.transferType.SWIFT:
+        this.swiftTransfer();
         break;
       default:
         break;

@@ -83,7 +83,8 @@ export class BeneficiaryManagementService {
     } else {
       this.http
         .get<BeneficiaryModel[]>(
-          environment.apiUrl + urlList.beneficiary.getAll
+          environment.apiUrl + urlList.beneficiary.getAll,
+          { params: { pageSize: 15 } }
         )
         .subscribe((rs: any) => {
           this.beneficiaries = [...rs.data.dataList];

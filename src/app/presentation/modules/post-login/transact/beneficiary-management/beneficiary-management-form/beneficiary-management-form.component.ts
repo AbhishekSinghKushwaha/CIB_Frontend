@@ -157,7 +157,6 @@ export class BeneficiaryManagementFormComponent implements OnInit {
   }
 
   async createBeneficiary() {
-    console.log(await this.perfomNameEquiry());
     if (!this.beneficiaryForm.get("phoneNumber")?.dirty) {
       this.beneficiaryForm.controls.phoneNumber.setValue(
         this.initialPhoneNumber

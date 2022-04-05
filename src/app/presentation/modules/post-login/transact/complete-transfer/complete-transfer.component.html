@@ -1,45 +1,78 @@
 <div class="container">
-    <div class="row">
-        <div class="col">
-            <h4 class="strong-text mt-5">Confirmation</h4>
-        </div>
+  <div class="row">
+    <div class="col">
+      <h4 class="strong-text mt-5">Confirmation</h4>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-5">
+      <div class="">
+        <img src="assets/images/Illustrations/Group 29.svg" alt="" />
+      </div>
     </div>
 
-    <div class="row mt-5">
-        <div class="col-5">
-            <div class="">
-              <img src="assets/images/Illustrations/Group 29.svg" alt="">  
-            </div>
+    <div class="col-7">
+      <h4 class="mt-5" *ngIf="transferType !== 'Standing Orders'">
+        Fund transfer submitted for approval!
+      </h4>
+
+      <h3 class="mt-5 strong-text" *ngIf="transferType === 'Standing Orders'">
+        Standing order submitted for approval!
+      </h3>
+      <br />
+
+      <p>Permanent Amendment</p>
+
+      <span class="text-sm text-grey"
+        >Transaction of KES 0.00, daily transact limit of KES 0.00 on 16/04/2021
+        at 10:45:23 was submitted for approval.</span
+      >
+
+      <br /><br />
+
+      <span class="text-sm text-grey"
+        >You will be notified once the transaction has been approved</span
+      >
+
+      <br />
+
+      <div class="row col-md-10">
+        <div class="col-md-4">
+          <button
+            mat-raised-button
+            type="button"
+            color="primary"
+            class="px-5 mt-4"
+            (click)="done()"
+          >
+            Done
+          </button>
         </div>
+        <div class="col-md-3">
+          <button
+            mat-stroked-button
+            *ngIf="transferType === 'Standing Orders'"
+            type="button"
+            color="primary"
+            class="px-5 mt-4"
+            (click)="openAddFavourite()"
+          >
+            Add to favourites
+          </button>
 
-        <div class="col-7">
-            <h4 class="mt-5" *ngIf="transferType !== 'Standing Orders'">Fund transfer submitted for approval!</h4>
-
-            <h3 class="mt-5 strong-text" *ngIf="transferType === 'Standing Orders'">Standing order submitted for approval!</h3><br>
-
-            <p>Permanent Amendment</p>
-
-            <span class="text-sm text-grey">Transaction of KES 0.00, daily transact limit of KES 0.00 on 16/04/2021 at 10:45:23 was submitted for approval.</span>
-
-            <br><br>
-
-            <span class="text-sm text-grey">You will be notified once the transaction has been approved</span>
-
-            <br>
-
-            <div *ngIf="transferType !== 'Standing Orders'">
-                <button mat-raised-button type="button" color="primary" class="px-5 mt-4" (click)="done()">Done</button>
-            </div>
-
-            <div class="row col-md-10" *ngIf="transferType === 'Standing Orders'">
-                <div class="col-md-4">
-                    <button mat-raised-button type="button" color="primary" class="px-5 mt-4" (click)="done()">Done</button>
-                </div>
-                <div class="col-md-3">
-                    <button mat-stroked-button type="button" color="primary" class="px-5 mt-4" (click)="openAddFavourite()">Add to favourites</button>
-                </div> 
-            </div>
+          <button
+            *ngIf="checkIfFavouriteExists()"
+            mat-stroked-button
+            type="button"
+            color="primary"
+            class="px-5 mt-4"
+            (click)="addToFavourites()"
+          >
+            Add to favourites
+          </button>
         </div>
+      </div>
     </div>
+  </div>
 </div>
-

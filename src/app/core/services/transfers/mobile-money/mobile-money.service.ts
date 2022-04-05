@@ -8,11 +8,13 @@ import { environment } from "src/environments/environment";
 interface MobileMoneyState {
   wallet: MobileWallet;
   transferPayload: {};
+  favouritesPayload: {};
 }
 
 const initialState: MobileMoneyState = {
   wallet: {},
   transferPayload: {},
+  favouritesPayload: {},
 };
 @Injectable({
   providedIn: "root",
@@ -20,6 +22,10 @@ const initialState: MobileMoneyState = {
 export class MobileMoneyService extends StateService<MobileMoneyState> {
   transferPayload$: Observable<any> = this.select(
     (state) => state.transferPayload
+  );
+
+  favouritesPayload$: Observable<any> = this.select(
+    (state) => state.favouritesPayload
   );
 
   wallet$: Observable<MobileWallet> = this.select((state) => state.wallet);
@@ -30,6 +36,10 @@ export class MobileMoneyService extends StateService<MobileMoneyState> {
 
   setTransferPayload(transferPayload: any): void {
     this.setState({ transferPayload });
+  }
+
+  setFavouritesPayload(favouritesPayload: any): void {
+    this.setState({ favouritesPayload });
   }
 
   getTransferCharges(payload: any): Observable<any> {

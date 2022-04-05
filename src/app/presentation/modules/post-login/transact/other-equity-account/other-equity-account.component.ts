@@ -5,6 +5,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
 import { ScheduledPaymentModel } from "src/app/core/domain/scheduled-payment.model";
 import { AccountsService } from "src/app/core/services/accounts/accounts.service";
+import { ConfirmationModalService } from "src/app/core/services/modal-services/confirmation-modal.service";
 import { IntrabankService } from "src/app/core/services/transfers/intrabank/intrabank.service";
 import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
 import { accountLimitValidator } from "src/app/core/utils/validators/limits.validators";
@@ -33,7 +34,8 @@ export class OtherEquityAccountComponent
     private fb: FormBuilder,
     private dialog: MatDialog,
     private intraBankTransferService: IntrabankService,
-    private router: Router
+    private router: Router,
+    private confirmationModalService: ConfirmationModalService
   ) {
     super(snackBar);
   }
@@ -76,31 +78,70 @@ export class OtherEquityAccountComponent
   // Confirm Payment and return the confirmation boolean before initiating payment.
   confirmPayment(transferFee: number) {
     if (this.intraBankTransferForm.valid) {
-      const paymentData = {
-        from: this.getForm.sendFrom.value,
-        to: this.getForm.sendTo.value,
-        amount: this.getForm.amount.value,
-        transactionType: this.transferType.INTRA_BANK,
-        paymentReason: this.getForm.reason.value,
-        fxReferenceId: this.getForm.fxReferenceId.value,
-        schedulePayment: this.getForm.schedulePayment.value,
-        transferFee,
-      };
-      const dialogRef = this.dialog.open(ConfirmPaymentComponent, {
-        data: paymentData,
-        disableClose: true,
-      });
+      const data = {
+        title: "Payment Confirmation",
+        subtitle: "To continue, please confirm your transaction",
+        submitButtonText: "Confirm",
+        content: [
+          {
+            key: "Transaction",
+            value: "Send money to an equity account",
+          },
+          {
+            key: "Amount",
+            value: `${this.getForm.amount.value.amount} ${this.getForm.amount.value.currency}`,
+          },
+          {
+            key: "Charges",
+            value: `${transferFee} ${this.getForm.amount.value.currency}`,
+          },
+          {
+            key: "From",
+            value: `${this.getForm.sendFrom.value.accountName}<br>
+            ${this.getForm.sendFrom.value.accountNumber}
+          `,
+          },
+          {
+            key: "To",
+            value: `${this.getForm.sendTo.value.accountName}<br>
+            ${this.getForm.sendTo.value.accountNumber}
+          `,
+          },
+          {
+            key: "Frequency",
+            value: `${this.getForm.schedulePayment.value.frequency.frequency}<br>
+            ${this.getForm.schedulePayment.value.reminderDay.reminder}
+          `,
+          },
+          {
+            key: "Payment Date",
+            value: `${this.getForm.schedulePayment.value.startDate}`,
+          },
 
-      dialogRef.afterClosed().subscribe((res) => {
-        if (res.confirmed) {
-          this.sendMoney();
-        }
-      });
+          {
+            key: "FX Reference ID",
+            value: `${this.getForm.fxReferenceId.value}`,
+          },
+          {
+            key: "Payment Reason",
+            value: `${this.getForm.reason.value}`,
+          },
+        ],
+      };
+
+      this.confirmationModalService
+        .open(data)
+        .afterClosed()
+        .subscribe((confirmed: boolean) => {
+          if (data) {
+            this.savePayloadForOtpVerification();
+          }
+        });
     }
   }
 
   // Initiate fund transfer to another equity account
-  sendMoney() {
+  savePayloadForOtpVerification() {
     const payload = {
       amount: this.getForm.amount.value.amount,
       beneficiaryAccount: this.getForm.sendTo.value.accountNumber,
@@ -122,18 +163,10 @@ export class OtherEquityAccountComponent
     };
 
     if (this.intraBankTransferForm.valid) {
-      this.intraBankTransferService
-        .sendToAnotherEquityAccount(payload)
-        .subscribe(
-          (res) => {
-            if (res.status) {
-              this.router.navigate(["/transact/transfer-submitted"]);
-            } else {
-              // TODO:: Notify error
-            }
-          },
-          (err) => {}
-        );
+      this.intraBankTransferService.setTransferPayload(payload);
+      this.router.navigate([
+        `/transact/otp-verification/${this.transferType.INTRA_BANK}`,
+      ]);
     }
   }
 }
