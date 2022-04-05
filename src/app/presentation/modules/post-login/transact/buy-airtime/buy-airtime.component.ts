@@ -193,9 +193,7 @@ export class BuyAirtimeComponent extends BaseTransactComponent implements OnInit
     };
     if (this.airTimeForm.valid) {
       this.buyAirtimeService.airtimePayload(payload);
-      this.router.navigate(['/transact/otp-verification', {
-        'type': this.transferType.BUY_AIRTIME,
-      }]);
+      this.router.navigate([`/transact/otp-verification/${this.transferType.BUY_AIRTIME}`]);
     }
   }
 }

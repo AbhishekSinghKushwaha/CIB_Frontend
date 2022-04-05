@@ -4,102 +4,118 @@
   </button>
 
   <div *ngIf="view === 'main'">
-    <p class="text-center fw-bold pt-2">Transaction receipt</p>
-    <div class="p-3 main-div">
-      <mat-card>
-        <mat-card-content>
-          <div
-            class="h-100 justify-content-center align-items-center upper-layer"
-          >
-            <div class="d-flex justify-content-center mb-3">
-              <mat-icon
-                svgIcon="equity_primary_logo"
-                style="transform: scale(2)"
-              ></mat-icon>
-            </div>
-            <div class="d-flex justify-content-center">
-              <small class="strong-text">
-                Thank you for paying with Equity online
-              </small>
-            </div>
-            <div class="d-flex justify-content-center">
-              <small class="text-grey"
-                >Hello Emmanuel, here is your receipt
-              </small>
-            </div>
-          </div>
-          <div
-            class="h-100 justify-content-center align-items-center lower-layer mb-3"
-          >
-            <small class="d-flex justify-content-center text-grey mt-2"
-              >Amount</small
-            >
-            <h2 class="d-flex justify-content-center text-danger strong-text">
-              33,000.00 KES
-            </h2>
+    <div #receiptDownload>
+      <table class="table table-borderless">
+        <tbody>
+          <tr>
+            <td>
+              <p class="text-center fw-bold pt-2">Transaction receipt</p>
+              <div class="p-3 main-div">
+                <mat-card>
+                  <mat-card-content>
+                    <div
+                      class="h-100 justify-content-center align-items-center upper-layer"
+                    >
+                      <div class="d-flex justify-content-center mb-3">
+                        <mat-icon
+                          svgIcon="equity_primary_logo"
+                          style="transform: scale(2)"
+                        ></mat-icon>
+                      </div>
+                      <div class="d-flex justify-content-center">
+                        <small class="strong-text">
+                          Thank you for paying with Equity online
+                        </small>
+                      </div>
+                      <div class="d-flex justify-content-center">
+                        <small class="text-grey"
+                          >Hello Emmanuel, here is your receipt
+                        </small>
+                      </div>
+                    </div>
+                    <div
+                      class="h-100 justify-content-center align-items-center lower-layer mb-3"
+                    >
+                      <small
+                        class="d-flex justify-content-center text-grey mt-2"
+                        >Amount</small
+                      >
+                      <h2
+                        class="d-flex justify-content-center text-danger strong-text"
+                      >
+                        33,000.00 KES
+                      </h2>
 
-            <small class="d-flex justify-content-center strong-text">
-              September 2020 rent for
-            </small>
-            <small class="d-flex justify-content-center strong-text">
-              Babylon Gardens A13
-            </small>
+                      <small class="d-flex justify-content-center strong-text">
+                        September 2020 rent for
+                      </small>
+                      <small class="d-flex justify-content-center strong-text">
+                        Babylon Gardens A13
+                      </small>
 
-            <small class="d-flex justify-content-center text-grey mt-2"
-              >Payment reason
-            </small>
+                      <small
+                        class="d-flex justify-content-center text-grey mt-2"
+                        >Payment reason
+                      </small>
 
-            <small class="d-flex justify-content-center text-grey mt-3"
-              >Payment to
-            </small>
-            <small class="d-flex justify-content-center strong-text"
-              >Kevin Lubega M-PESA</small
-            >
-            <small class="d-flex justify-content-center strong-text"
-              >254700027233444 MPESA</small
-            >
-            <small class="d-flex justify-content-center strong-text"
-              >Ref. WIH3YEUEUE8</small
-            >
+                      <small
+                        class="d-flex justify-content-center text-grey mt-3"
+                        >Payment to
+                      </small>
+                      <small class="d-flex justify-content-center strong-text"
+                        >Kevin Lubega M-PESA</small
+                      >
+                      <small class="d-flex justify-content-center strong-text"
+                        >254700027233444 MPESA</small
+                      >
+                      <small class="d-flex justify-content-center strong-text"
+                        >Ref. WIH3YEUEUE8</small
+                      >
 
-            <small class="d-flex justify-content-center text-grey mt-3"
-              >Sent from
-            </small>
-            <small class="d-flex justify-content-center strong-text"
-              >Emmanuel Machara</small
-            >
-            <small class="d-flex justify-content-center strong-text"
-              >Savings - 009999</small
-            >
+                      <small
+                        class="d-flex justify-content-center text-grey mt-3"
+                        >Sent from
+                      </small>
+                      <small class="d-flex justify-content-center strong-text"
+                        >Emmanuel Machara</small
+                      >
+                      <small class="d-flex justify-content-center strong-text"
+                        >Savings - 009999</small
+                      >
 
-            <small class="text-grey d-flex justify-content-center mt-3"
-              >Ref. 42094823742039</small
-            >
-            <small class="text-grey d-flex justify-content-center">
-              21 August 2020 11:59:08 EAT</small
-            >
-          </div>
-          <div class="h-100 justify-content-center align-items-center mb-3">
-            <div class="row">
-              <div class="col-2">
-                <img
-                  class="img-fluid"
-                  src="assets/images/icons/visual-support-icons-barcode.svg"
-                />
+                      <small
+                        class="text-grey d-flex justify-content-center mt-3"
+                        >Ref. 42094823742039</small
+                      >
+                      <small class="text-grey d-flex justify-content-center">
+                        21 August 2020 11:59:08 EAT</small
+                      >
+                    </div>
+                    <div
+                      class="h-100 justify-content-center align-items-center mb-3"
+                    >
+                      <div class="row">
+                        <div class="col-2">
+                          <img class="img-fluid" src="" />
+                        </div>
+                        <div class="col-10">
+                          <small class="text-grey">
+                            Scan this code to download One Equity from Google
+                            Play or Apple App Store
+                            <span class="text-primary">
+                              https://online.equitygroup.com</span
+                            >
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                  </mat-card-content>
+                </mat-card>
               </div>
-              <div class="col-10">
-                <small class="text-grey">
-                  Scan this code to download One Equity from Google Play or
-                  Apple App Store
-                  <span class="text-primary">
-                    https://online.equitygroup.com</span
-                  >
-                </small>
-              </div>
-            </div>
-          </div>
-        </mat-card-content>
-      </mat-card>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     <div class="row d-flex flex-column p-4">
@@ -109,7 +125,7 @@
       <button
         mat-raised-button
         color="primary"
-        (click)="setView()"
+        (click)="downloadAsPDF()"
         class="mt-2"
       >
         Download

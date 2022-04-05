@@ -46,17 +46,8 @@ export class SwiftNewRecipientComponent implements OnInit {
     });
   }
 
-  subscribeEvents(): void {
-    this.countryService.selectedCountry.subscribe((x) => {
-      this.getForm.country.patchValue(x);
-    });
-  }
-
-  setCountry(country: CountryModel) {
-    this.getForm.country.patchValue(country);
-  }
-
   submit() {
+    console.log(this.newRecipientForm.getRawValue());
     this.newRecipientService.set(this.newRecipientForm.getRawValue());
     this.dialog.closeAll();
   }

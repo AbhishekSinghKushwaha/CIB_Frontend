@@ -78,7 +78,6 @@ export class BeneficiaryManagementComponent implements OnInit {
       this.loaded = true;
       this.showAlert(value.type);
       this.beneficiaries = value.data;
-      console.log(this.beneficiaries);
       this.dataSource = new MatTableDataSource<BeneficiaryModel>(
         this.beneficiaries
       );

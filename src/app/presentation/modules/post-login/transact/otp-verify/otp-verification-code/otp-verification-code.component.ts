@@ -23,7 +23,10 @@ export class OtpVerificationCodeComponent implements OnInit {
     private readonly otpCodeService: OtpCodeService,
     public router: Router,
     public route: ActivatedRoute
-  ) {}
+  ) {
+    this.otpVerificationType = route.snapshot.params['data'];
+    this.transferType = route.snapshot.params['type'];
+  }
 
   ngOnInit(): void {
     this.initForm();
@@ -31,11 +34,6 @@ export class OtpVerificationCodeComponent implements OnInit {
   }
 
   private eventsSubscriptions(): void {
-    this.route.params.subscribe((params) => {
-      this.otpVerificationType = params['data'];
-      this.transferType = params['type'];
-    });
-
     this.otpCodeService.data.subscribe((response) => {
       this.otpVerificationCodeForm.controls.otpVerificationCode.setValue(
         response

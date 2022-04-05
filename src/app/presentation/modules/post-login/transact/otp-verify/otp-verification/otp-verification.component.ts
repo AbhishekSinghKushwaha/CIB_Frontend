@@ -18,6 +18,8 @@ export class OtpVerificationComponent implements OnInit {
   payload: any;
   otpResent = false;
   transactionType: any;
+  email= "email";
+  sms= "sms"; 
 
   constructor(
     private readonly otpVerificationListService: OtpVerificationListService,
@@ -25,7 +27,9 @@ export class OtpVerificationComponent implements OnInit {
     private readonly buyGoodsService: BuyGoodsService,
     private readonly authService: AuthService,
     public route: ActivatedRoute
-  ) { }
+  ) { 
+    this.transactionType = route.snapshot.params['type'];
+  }
 
   ngOnInit(): void {
     this.initForm();
@@ -36,10 +40,6 @@ export class OtpVerificationComponent implements OnInit {
     this.otpVerificationListService.selected.subscribe((response) => {
       this.otpVerificationForm.controls.otpVerificationType.setValue(response.verificationType);
       this.otpVerificationType = response;
-    });
-
-    this.route.params.subscribe((params) => {
-      this.transactionType = params['type'];
     });
   }
 
@@ -55,30 +55,26 @@ export class OtpVerificationComponent implements OnInit {
 
   submit() {
     if(this.otpVerificationType.verificationType === 'By sms') {
-
-    this.router.navigate(['/transact/otp-verification-code',
-    {
-      'data': 'sms',
-      'type': this.transactionType
-    }
-    ]);
+      this.authService.resendOTP().subscribe(
+        (data) => {
+          this.otpResent = true;
+          this.router.navigate([`/transact/otp-verification-code/${this.sms}/${this.transactionType}`]);
+        },
+        (error) => {
+          console.log(error);
+        }
+      ); 
     }
     else if(this.otpVerificationType.verificationType === 'By email') {
       this.authService.resendOTP().subscribe(
         (data) => {
           this.otpResent = true;
-          this.router.navigate(['/transact/otp-verification-code',
-          {
-            'data': 'email',
-            'type': this.transactionType
-          }
-          ]);
+          this.router.navigate([`/transact/otp-verification-code/${this.email}/${this.transactionType}`]);
         },
         (error) => {
           console.log(error);
         }
-      );
-      
+      ); 
     }
   }
 

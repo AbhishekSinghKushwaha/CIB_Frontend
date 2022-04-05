@@ -1,208 +1,295 @@
 <div class="container dashboard-page--content pb-5" id="dashboard-page">
-    <div class="row text-center dashboard-page--content__header ">
-        <h1 class="dashboard-page--content--header__title">Good morning</h1>
-        <p class="dashboard-page--content--header__subtitle">What do you want to do this morning</p>
+  <div class="row text-center dashboard-page--content__header">
+    <h1 class="dashboard-page--content--header__title">Good morning</h1>
+    <p class="dashboard-page--content--header__subtitle">
+      What do you want to do this morning
+    </p>
+  </div>
+  <div class="row text-center dashboard-page--content--favorites mb-5">
+    <div class="col-md-2">
+      <mat-icon
+        class="dashboard-page--content--favorites__icon"
+        [svgIcon]="'dashboard_send_to_icon1'"
+        color="primary"
+      ></mat-icon>
+      <p class="dashboard-page--content--favorites__title">Send To</p>
+      <p class="dashboard-page--content--favorites__subtitle">Equity</p>
     </div>
-    <div class="row text-center dashboard-page--content--favorites mb-5">
-        <div class="col-md-2">
-            <mat-icon class="dashboard-page--content--favorites__icon" [svgIcon]="'dashboard_send_to_icon1'"
-                color="primary"></mat-icon>
-            <p class="dashboard-page--content--favorites__title">Send To</p>
-            <p class="dashboard-page--content--favorites__subtitle">Equity</p>
-        </div>
-        <div class="col-md-2">
-            <mat-icon class="dashboard-page--content--favorites__icon" [svgIcon]="'dashboard_send_to_icon1'"
-                color="primary"></mat-icon>
-            <p class="dashboard-page--content--favorites__title">Send To</p>
-            <p class="dashboard-page--content--favorites__subtitle">Equity</p>
-        </div>
-        <div class="col-md-2">
-            <mat-icon class="dashboard-page--content--favorites__icon" [svgIcon]="'dashboard_send_to_icon1'"
-                color="primary"></mat-icon>
-            <p class="dashboard-page--content--favorites__title">Send To</p>
-            <p class="dashboard-page--content--favorites__subtitle">Equity</p>
-        </div>
-        <div class="col-md-2">
-            <mat-icon class="dashboard-page--content--favorites__icon" [svgIcon]="'dashboard_send_to_icon1'"
-                color="primary"></mat-icon>
-            <p class="dashboard-page--content--favorites__title">Send To</p>
-            <p class="dashboard-page--content--favorites__subtitle">Equity</p>
-        </div>
-        <div class="col-md-2">
-            <mat-icon class="dashboard-page--content--favorites__icon" [svgIcon]="'dashboard_send_to_icon1'"
-                color="primary"></mat-icon>
-            <p class="dashboard-page--content--favorites__title">Send To</p>
-            <p class="dashboard-page--content--favorites__subtitle">Equity</p>
-        </div>
-        <div class="col-md-2">
-            <mat-icon class="dashboard-page--content--favorites__icon" [svgIcon]="'dashboard_send_to_icon1'"
-                color="primary"></mat-icon>
-            <p class="dashboard-page--content--favorites__title">Send To</p>
-            <p class="dashboard-page--content--favorites__subtitle">Equity</p>
-        </div>
+    <div class="col-md-2">
+      <mat-icon
+        class="dashboard-page--content--favorites__icon"
+        [svgIcon]="'dashboard_send_to_icon1'"
+        color="primary"
+      ></mat-icon>
+      <p class="dashboard-page--content--favorites__title">Send To</p>
+      <p class="dashboard-page--content--favorites__subtitle">Equity</p>
     </div>
-
-    <div class="row dashboard-page--content--accounts mb-5">
-        <h2 class="dashboard-page--content--section-title mb-4">My Accounts</h2>
-        <div class="row  dashboard-page--content--accounts__slider ">
-            <div class="col-md-4">
-                <mat-card class="dashboard-page--content--accounts__card">
-                    <mat-icon class="dashboard-page--content--accounts__card__icon" [svgIcon]="'dashboard_more'"
-                        color="primary"></mat-icon>
-                    <h3 class="dashboard-page--content--accounts__card__title">JAMES EKAI NATUKOI</h3>
-                    <p class="dashboard-page--content--accounts__card_amount">5,450,159.87 KES</p>
-                    <p class="dashboard-page--content--accounts__card__footer">1100194977404 • Savings</p>
-                </mat-card>
-            </div>
-            <div class="col-md-4">
-                <mat-card class="dashboard-page--content--accounts__card">
-                    <mat-icon class="dashboard-page--content--accounts__card__icon" [svgIcon]="'dashboard_more'"
-                        color="primary"></mat-icon>
-                    <h3 class="dashboard-page--content--accounts__card__title">EMMANUEL SAMUEL KIANGAI MACHARIA</h3>
-                    <p class="dashboard-page--content--accounts__card_amount">4,061,773.25 KES</p>
-                    <p class="dashboard-page--content--accounts__card__footer">1120161406205 • Savings</p>
-                </mat-card>
-            </div>
-
-        </div>
-        <div class="row dashboard-page--content--accounts__action mt-5 ">
-            <div class="col-md-4 mt-4">
-                <div class="row dashboard-page--content--accounts__action__card">
-                    <div class="col-md-3">
-                        <button mat-fab class="dashboard-page--content--accounts__action__card__icon">
-                            <mat-icon svgIcon="withdraw"></mat-icon>
-                        </button>
-                    </div>
-                    <div class="col-md-7">
-                        <p class="mb-0">Add</p>
-                        <small class="text-grey">A bank account, card, mobile wallet or PayPal account </small>
-                    </div>
-                    <div
-                        class="col-md-2 card card-block justify-content-center dashboard-page--content--accounts__action__card__button">
-                        <mat-icon color="primary" svgIcon="caret_right"></mat-icon>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mt-4">
-                <div class="row dashboard-page--content--accounts__action__card">
-                    <div class="col-md-3">
-                        <button mat-fab class="dashboard-page--content--accounts__action__card__icon">
-                            <mat-icon svgIcon="withdraw"></mat-icon>
-                        </button>
-                    </div>
-                    <div class="col-md-7">
-                        <p class="mb-0">Open an account</p>
-                        <small class="text-grey">Save, transact, borrow and more </small>
-                    </div>
-                    <div
-                        class="col-md-2 card card-block justify-content-center dashboard-page--content--accounts__action__card__button">
-                        <mat-icon color="primary" svgIcon="caret_right"></mat-icon>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mt-4">
-                <div class="row dashboard-page--content--accounts__action__card">
-                    <div class="col-md-3">
-                        <button mat-fab class="dashboard-page--content--accounts__action__card__icon">
-                            <mat-icon svgIcon="withdraw"></mat-icon>
-                        </button>
-                    </div>
-                    <div class="col-md-7">
-                        <p class="mb-0">Open an account</p>
-                        <small class="text-grey">Save, transact, borrow and more </small>
-                    </div>
-                    <div
-                        class="col-md-2 card card-block justify-content-center dashboard-page--content--accounts__action__card__button">
-                        <mat-icon color="primary" svgIcon="caret_right"></mat-icon>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mt-4">
-                <div class="row dashboard-page--content--accounts__action__card">
-                    <div class="col-md-3">
-                        <button mat-fab class="dashboard-page--content--accounts__action__card__icon">
-                            <mat-icon svgIcon="withdraw"></mat-icon>
-                        </button>
-                    </div>
-                    <div class="col-md-7">
-                        <p class="mb-0">Apply for a new card</p>
-                        <small class="text-grey">Get a new credit, prepaid  or virtual card </small>
-                    </div>
-                    <div
-                        class="col-md-2 card card-block justify-content-center dashboard-page--content--accounts__action__card__button">
-                        <mat-icon color="primary" svgIcon="caret_right"></mat-icon>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+    <div class="col-md-2">
+      <mat-icon
+        class="dashboard-page--content--favorites__icon"
+        [svgIcon]="'dashboard_send_to_icon1'"
+        color="primary"
+      ></mat-icon>
+      <p class="dashboard-page--content--favorites__title">Send To</p>
+      <p class="dashboard-page--content--favorites__subtitle">Equity</p>
     </div>
-
-    <div class="row dashboard-page--content--loans">
-        <h2 class="dashboard-page--content--section-title mb-4">My Loans</h2>
-        <div class="row  dashboard-page--content--loans__slider ">
-            <div class="col-md-4">
-                <mat-card class="dashboard-page--content--loans__card">
-                    <mat-icon class="dashboard-page--content--loans__card__icon" [svgIcon]="'dashboard_more'"
-                        color="primary"></mat-icon>
-                    <h3 class="dashboard-page--content--loans__card__title">Salary Advance Loan</h3>
-                    <p class="dashboard-page--content--loans__card_amount">33,500.00 KES</p>
-
-                    <div class="dashboard-page--content--loans__card__footer">
-                        <div class="dashboard-page--content--loans__card__footer__progress">
-                            <p class="m-0 text-primary">70%</p>
-                            <mat-progress-bar color="#A32A29" [value]="70" class="mb-1"></mat-progress-bar>
-                        </div>
-
-                        <p>Next Payment <span class="text-primary mt-3">15
-                                December 2021 </span></p>
-                    </div>
-
-                </mat-card>
-            </div>
-            <div class="col-md-4">
-                <mat-card class="dashboard-page--content--loans__card">
-                    <mat-icon class="dashboard-page--content--loans__card__icon" [svgIcon]="'dashboard_more'"
-                        color="primary"></mat-icon>
-                    <h3 class="dashboard-page--content--loans__card__title">Salary Advance Loan</h3>
-                    <p class="dashboard-page--content--loans__card_amount">33,500.00 KES</p>
-
-                    <div class="dashboard-page--content--loans__card__footer">
-                        <div class="dashboard-page--content--loans__card__footer__progress">
-                            <p class="m-0 text-primary">70%</p>
-                            <mat-progress-bar color="#A32A29" [value]="70" class="mb-1"></mat-progress-bar>
-                        </div>
-
-                        <p>Next Payment <span class="text-primary mt-3">15
-                                December 2021 </span></p>
-                    </div>
-
-                </mat-card>
-            </div>
-
-        </div>
-        <div class="row dashboard-page--content--loans__action mt-5 ">
-            <div class="col-md-4  mt-4">
-                <div class="row dashboard-page--content--loans__action__card">
-                    <div class="col-md-3">
-                        <button mat-fab class="dashboard-page--content--loans__action__card__icon">
-                            <mat-icon svgIcon="withdraw"></mat-icon>
-                        </button>
-                    </div>
-                    <div class="col-md-7">
-                        <p class="mb-0">Apply for a Loan</p>
-                        <small class="text-grey">Lorem ipsum dolor sit amet consectetur adipiscing elit.</small>
-                    </div>
-                    <div
-                        class="col-md-2 card card-block justify-content-center dashboard-page--content--loans__action__card__button">
-                        <mat-icon color="primary" svgIcon="caret_right"></mat-icon>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
+    <div class="col-md-2">
+      <mat-icon
+        class="dashboard-page--content--favorites__icon"
+        [svgIcon]="'dashboard_send_to_icon1'"
+        color="primary"
+      ></mat-icon>
+      <p class="dashboard-page--content--favorites__title">Send To</p>
+      <p class="dashboard-page--content--favorites__subtitle">Equity</p>
     </div>
+    <div class="col-md-2">
+      <mat-icon
+        class="dashboard-page--content--favorites__icon"
+        [svgIcon]="'dashboard_send_to_icon1'"
+        color="primary"
+      ></mat-icon>
+      <p class="dashboard-page--content--favorites__title">Send To</p>
+      <p class="dashboard-page--content--favorites__subtitle">Equity</p>
+    </div>
+    <div class="col-md-2">
+      <mat-icon
+        class="dashboard-page--content--favorites__icon"
+        [svgIcon]="'dashboard_send_to_icon1'"
+        color="primary"
+      ></mat-icon>
+      <p class="dashboard-page--content--favorites__title">Send To</p>
+      <p class="dashboard-page--content--favorites__subtitle">Equity</p>
+    </div>
+  </div>
 
+  <div class="row dashboard-page--content--accounts mb-5">
+    <h2 class="dashboard-page--content--section-title mb-4">My Accounts</h2>
+    <div class="row dashboard-page--content--accounts__slider">
+      <div class="col-md-4">
+        <mat-card class="dashboard-page--content--accounts__card">
+          <mat-icon
+            class="dashboard-page--content--accounts__card__icon"
+            [svgIcon]="'dashboard_more'"
+            color="primary"
+          ></mat-icon>
+          <h3 class="dashboard-page--content--accounts__card__title">
+            JAMES EKAI NATUKOI
+          </h3>
+          <p class="dashboard-page--content--accounts__card_amount">
+            5,450,159.87 KES
+          </p>
+          <p class="dashboard-page--content--accounts__card__footer">
+            1100194977404 • Savings
+          </p>
+        </mat-card>
+      </div>
+      <div class="col-md-4">
+        <mat-card class="dashboard-page--content--accounts__card">
+          <mat-icon
+            class="dashboard-page--content--accounts__card__icon"
+            [svgIcon]="'dashboard_more'"
+            color="primary"
+          ></mat-icon>
+          <h3 class="dashboard-page--content--accounts__card__title">
+            EMMANUEL SAMUEL KIANGAI MACHARIA
+          </h3>
+          <p class="dashboard-page--content--accounts__card_amount">
+            4,061,773.25 KES
+          </p>
+          <p class="dashboard-page--content--accounts__card__footer">
+            1120161406205 • Savings
+          </p>
+        </mat-card>
+      </div>
+    </div>
+    <div class="row dashboard-page--content--accounts__action mt-5">
+      <div class="col-md-4 mt-4">
+        <div class="row dashboard-page--content--accounts__action__card">
+          <div class="col-md-3">
+            <button
+              mat-fab
+              class="dashboard-page--content--accounts__action__card__icon"
+            >
+              <mat-icon svgIcon="withdraw"></mat-icon>
+            </button>
+          </div>
+          <div class="col-md-7">
+            <p class="mb-0">Add</p>
+            <small class="text-grey"
+              >A bank account, card, mobile wallet or PayPal account
+            </small>
+          </div>
+          <div
+            class="col-md-2 card card-block justify-content-center dashboard-page--content--accounts__action__card__button"
+          >
+            <mat-icon color="primary" svgIcon="caret_right"></mat-icon>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mt-4">
+        <div class="row dashboard-page--content--accounts__action__card">
+          <div class="col-md-3">
+            <button
+              mat-fab
+              class="dashboard-page--content--accounts__action__card__icon"
+            >
+              <mat-icon svgIcon="withdraw"></mat-icon>
+            </button>
+          </div>
+          <div class="col-md-7">
+            <p class="mb-0">Open an account</p>
+            <small class="text-grey">Save, transact, borrow and more </small>
+          </div>
+          <div
+            class="col-md-2 card card-block justify-content-center dashboard-page--content--accounts__action__card__button"
+          >
+            <mat-icon color="primary" svgIcon="caret_right"></mat-icon>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mt-4">
+        <div class="row dashboard-page--content--accounts__action__card">
+          <div class="col-md-3">
+            <button
+              mat-fab
+              class="dashboard-page--content--accounts__action__card__icon"
+            >
+              <mat-icon svgIcon="withdraw"></mat-icon>
+            </button>
+          </div>
+          <div class="col-md-7">
+            <p class="mb-0">Open an account</p>
+            <small class="text-grey">Save, transact, borrow and more </small>
+          </div>
+          <div
+            class="col-md-2 card card-block justify-content-center dashboard-page--content--accounts__action__card__button"
+          >
+            <mat-icon color="primary" svgIcon="caret_right"></mat-icon>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mt-4">
+        <div class="row dashboard-page--content--accounts__action__card">
+          <div class="col-md-3">
+            <button
+              mat-fab
+              class="dashboard-page--content--accounts__action__card__icon"
+            >
+              <mat-icon svgIcon="withdraw"></mat-icon>
+            </button>
+          </div>
+          <div class="col-md-7">
+            <p class="mb-0">Apply for a new card</p>
+            <small class="text-grey"
+              >Get a new credit, prepaid or virtual card
+            </small>
+          </div>
+          <div
+            class="col-md-2 card card-block justify-content-center dashboard-page--content--accounts__action__card__button"
+          >
+            <mat-icon color="primary" svgIcon="caret_right"></mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <div class="row dashboard-page--content--loans">
+    <h2 class="dashboard-page--content--section-title mb-4">My Loans</h2>
+    <div class="row dashboard-page--content--loans__slider">
+      <div class="col-md-4">
+        <mat-card class="dashboard-page--content--loans__card">
+          <mat-icon
+            class="dashboard-page--content--loans__card__icon"
+            [svgIcon]="'dashboard_more'"
+            color="primary"
+          ></mat-icon>
+          <h3 class="dashboard-page--content--loans__card__title">
+            Salary Advance Loan
+          </h3>
+          <p class="dashboard-page--content--loans__card_amount">
+            33,500.00 KES
+          </p>
+
+          <div class="dashboard-page--content--loans__card__footer">
+            <div class="dashboard-page--content--loans__card__footer__progress">
+              <p class="m-0 text-primary">70%</p>
+              <mat-progress-bar
+                color="#A32A29"
+                [value]="70"
+                class="mb-1"
+              ></mat-progress-bar>
+            </div>
+
+            <p>
+              Next Payment
+              <span class="text-primary mt-3">15 December 2021 </span>
+            </p>
+          </div>
+        </mat-card>
+      </div>
+      <div class="col-md-4">
+        <mat-card class="dashboard-page--content--loans__card">
+          <mat-icon
+            class="dashboard-page--content--loans__card__icon"
+            [svgIcon]="'dashboard_more'"
+            color="primary"
+          ></mat-icon>
+          <h3 class="dashboard-page--content--loans__card__title">
+            Salary Advance Loan
+          </h3>
+          <p class="dashboard-page--content--loans__card_amount">
+            33,500.00 KES
+          </p>
+
+          <div class="dashboard-page--content--loans__card__footer">
+            <div class="dashboard-page--content--loans__card__footer__progress">
+              <p class="m-0 text-primary">70%</p>
+              <mat-progress-bar
+                color="#A32A29"
+                [value]="70"
+                class="mb-1"
+              ></mat-progress-bar>
+            </div>
+
+            <p>
+              Next Payment
+              <span class="text-primary mt-3">15 December 2021 </span>
+            </p>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+    <div class="row dashboard-page--content--loans__action mt-5">
+      <div class="col-md-4 mt-4">
+        <div class="row dashboard-page--content--loans__action__card">
+          <div class="col-md-3">
+            <button
+              mat-fab
+              class="dashboard-page--content--loans__action__card__icon"
+            >
+              <mat-icon svgIcon="withdraw"></mat-icon>
+            </button>
+          </div>
+          <div class="col-md-7">
+            <p class="mb-0">Apply for a Loan</p>
+            <small class="text-grey"
+              >Lorem ipsum dolor sit amet consectetur adipiscing elit.</small
+            >
+          </div>
+          <div
+            class="col-md-2 card card-block justify-content-center dashboard-page--content--loans__action__card__button"
+          >
+            <mat-icon color="primary" svgIcon="caret_right"></mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Available to an initiator -->
+<div>
+  <h2 class="fw-bold mb-4">Payments & Transactions</h2>
+  <app-payments-and-transactions></app-payments-and-transactions>
 </div>
