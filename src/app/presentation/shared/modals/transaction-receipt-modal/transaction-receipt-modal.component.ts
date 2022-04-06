@@ -37,7 +37,12 @@ export class TransactionReceiptModalComponent implements OnInit {
           paymentReference: "77B4732F36",
         })
         .subscribe((res) => {
-          console.log(res);
+          const myFile = new File([res], "receipt.pdf", {
+            type: res.type,
+          });
+          console.log(myFile);
+          const url = window.URL.createObjectURL(myFile);
+          window.open(url);
         });
     }
   }
