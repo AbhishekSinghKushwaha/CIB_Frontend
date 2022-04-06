@@ -31,7 +31,7 @@ export class PaymentsAndTransactionsComponent implements OnInit {
   getTransactions() {
     const params = {
       page: 1,
-      pageSize: 15,
+      pageSize: 350,
       From: this.dateRange.from,
       To: this.dateRange.to, // Automatically picks todays date
       TransactionType: "",

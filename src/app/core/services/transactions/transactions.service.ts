@@ -80,7 +80,8 @@ export class TransactionsService extends StateService<TransctionsState> {
   downloadReceiptAsPdf(transactionReference: any): Observable<any> {
     return this.http.post(
       environment.apiUrl + urlList.statement.downloadReceipt,
-      transactionReference
+      transactionReference,
+      { responseType: "blob" }
     );
   }
 }

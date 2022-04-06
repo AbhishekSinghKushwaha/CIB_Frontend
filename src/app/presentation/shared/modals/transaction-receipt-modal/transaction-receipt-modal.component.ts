@@ -34,9 +34,10 @@ export class TransactionReceiptModalComponent implements OnInit {
     if (item === "PDF") {
       this.transactionService
         .downloadReceiptAsPdf({
-          paymentReference: "77B4732F36",
+          paymentReference: "19AA231D5D",
         })
         .subscribe((res) => {
+          console.log(res);
           const myFile = new File([res], "receipt.pdf", {
             type: res.type,
           });
