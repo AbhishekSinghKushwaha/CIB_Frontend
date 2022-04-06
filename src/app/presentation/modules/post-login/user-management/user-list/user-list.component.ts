@@ -35,7 +35,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
   private sort: MatSort;
 
   displayedColumns: string[] = [
-    'id',
+    'idNumber',
     'name',
     'phone',
     'email',
@@ -44,7 +44,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
   ];
 
   filterByColumns: string[] = [
-    'id',
+    'idNumber',
     'name',
     'phone',
     'email'
@@ -68,6 +68,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
       this.users = result.items.map((element: any) => {
         return {
           id: element.userId,
+          idNumber: element.idNumber,
           name: `${element.firstName} ${element.lastName}`,
           phone: element.phoneNumber,
           email: element.email,
@@ -76,6 +77,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
         };
       });
       this.dataSource.data = this.users;
+      console.log(result);
     });
   }
 
@@ -96,7 +98,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
           copy: 'Search for a user by entering their ID number, user ID, and phone number',
           displayedColumns: [
             'select',
-            'id',
+            'idNumber',
             'name',
             'phone',
             'email',

@@ -24,7 +24,7 @@ export class AddProductServiceComponent implements OnInit {
   constructor(
     private storageService: StorageService,
     private router: Router,
-    private productsService: ProductsAndServicesService,
+    private productsService: ProductsAndServicesService<Product, ProductService>,
     private route: ActivatedRoute
   ) {
     this.productId = this.route.snapshot.queryParamMap.get('id');

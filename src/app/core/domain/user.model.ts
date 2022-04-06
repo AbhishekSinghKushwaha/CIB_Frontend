@@ -41,3 +41,31 @@ export interface LoggedinUserModel {
   status: boolean;
   statusName: string;
 }
+
+
+export interface UserRole {
+  id?: string;
+  permissions: UserPermission[];
+  roleName?: string;
+}
+
+export interface UserPermission {
+  id?: string;
+  name?: string;
+  claim?: string;
+  description?: string;
+}
+
+export interface UserProduct {
+  id: string;
+  productGroupId: string;
+  name?: string;
+  description?: string;
+  subProducts: UserSubProduct[];
+}
+export interface UserSubProduct {
+  id?: string;
+  productId: string;
+  name?: string;
+  description?: string;
+}

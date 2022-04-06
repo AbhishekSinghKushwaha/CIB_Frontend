@@ -62,15 +62,6 @@
                   [selectedCountry]="selectedCountry"
                 ></app-phone-number-input>
               </div>
-              <div class="col-md-6">
-                <app-input
-                  [parentForm]="teamMemberDetailsForm"
-                  fieldName="transactionLimit"
-                  formControlName="transactionLimit"
-                  placeholder="5,000,000.00"
-                  label="Transaction Limit"
-                ></app-input>
-              </div>
               <div class="col-md-6 mb-3">
                 <app-phone-number-input
                   [parentForm]="teamMemberDetailsForm"
@@ -81,85 +72,68 @@
                   [selectedCountry]="selectedCountry"
                 ></app-phone-number-input>
               </div>
-              <div class="row">
-                <div class="col-md-6 pt-1" (click)="addRoles()">
-                  <div class="row product-list-item">
-                    <div class="col-md-2">
-                      <button mat-fab class="text-primary">
-                        <mat-icon>person</mat-icon>
-                      </button>
-                    </div>
-                    <div class="col-md-7 product-list-item-label pt-3">
-                      <p class="mb-0">User's roles</p>
-                    </div>
-                    <div class="col-1 text-grey pt-4" *ngIf="!rolesAdded">
-                      off
-                    </div>
-                    <div class="col-1 text-primary pt-4" *ngIf="rolesAdded">
-                      <strong>On</strong>
-                    </div>
-                    <div
-                      class="col-md-2 card card-block justify-content-center"
-                    >
-                      <mat-icon
-                        color="primary"
-                        svgIcon="caret_right"
-                      ></mat-icon>
-                    </div>
+              <div
+                class="col-md-6 cursor-pointer"
+                routerLink="/service-request/user-limit/edit"
+                *ngIf="data.memberId"
+              >
+                <div class="row product-list-item">
+                  <div class="col-md-2">
+                    <button mat-fab class="text-primary">
+                      <mat-icon>person</mat-icon>
+                    </button>
+                  </div>
+                  <div class="col-md-7 product-list-item-label pt-3">
+                    <p class="mb-0">Edit user limits</p>
+                  </div>
+                  <div class="col-md-2 card card-block justify-content-center">
+                    <mat-icon color="primary" svgIcon="caret_right"></mat-icon>
                   </div>
                 </div>
-                <div
-                  class="col-md-6 cursor-pointer pt-1"
-                  [routerLink]="data.addProductLink"
-                  *ngIf="data.memberId"
-                >
-                  <div class="row product-list-item">
-                    <div class="col-md-2">
-                      <button mat-fab class="text-primary">
-                        <mat-icon>person</mat-icon>
-                      </button>
-                    </div>
-                    <div class="col-md-7 product-list-item-label pt-3">
-                      <p class="mb-0">Products & sub-products</p>
-                    </div>
-                    <div class="col-1 text-grey pt-4" *ngIf="!rolesAdded">
-                      off
-                    </div>
-                    <div class="col-1 text-primary pt-4" *ngIf="rolesAdded">
-                      <strong>On</strong>
-                    </div>
-                    <div
-                      class="col-md-2 card card-block justify-content-center"
-                    >
-                      <mat-icon
-                        color="primary"
-                        svgIcon="caret_right"
-                      ></mat-icon>
-                    </div>
+              </div>
+              <div class="col-md-6 pt-1" (click)="addRoles()">
+                <div class="row product-list-item">
+                  <div class="col-md-2">
+                    <button mat-fab class="text-primary">
+                      <mat-icon>person</mat-icon>
+                    </button>
+                  </div>
+                  <div class="col-md-7 product-list-item-label pt-3">
+                    <p class="mb-0">User's roles</p>
+                  </div>
+                  <div class="col-1 text-grey pt-4" *ngIf="!rolesAdded">
+                    off
+                  </div>
+                  <div class="col-1 text-primary pt-4" *ngIf="rolesAdded">
+                    <strong>On</strong>
+                  </div>
+                  <div class="col-md-2 card card-block justify-content-center">
+                    <mat-icon color="primary" svgIcon="caret_right"></mat-icon>
                   </div>
                 </div>
-                <div
-                  class="col-md-6 cursor-pointer pt-1"
-                  routerLink="/service-request/user-limit/edit"
-                  *ngIf="data.memberId"
-                >
-                  <div class="row product-list-item">
-                    <div class="col-md-2">
-                      <button mat-fab class="text-primary">
-                        <mat-icon>person</mat-icon>
-                      </button>
-                    </div>
-                    <div class="col-md-7 product-list-item-label pt-3">
-                      <p class="mb-0">Edit user limits</p>
-                    </div>
-                    <div
-                      class="col-md-2 card card-block justify-content-center"
-                    >
-                      <mat-icon
-                        color="primary"
-                        svgIcon="caret_right"
-                      ></mat-icon>
-                    </div>
+              </div>
+              <div
+                class="col-md-6 cursor-pointer pt-1"
+                [routerLink]="data.addProductLink"
+                *ngIf="data.memberId"
+              >
+                <div class="row product-list-item">
+                  <div class="col-md-2">
+                    <button mat-fab class="text-primary">
+                      <mat-icon>person</mat-icon>
+                    </button>
+                  </div>
+                  <div class="col-md-7 product-list-item-label pt-3">
+                    <p class="mb-0">Products & sub-products</p>
+                  </div>
+                  <div class="col-1 text-grey pt-4" *ngIf="!rolesAdded">
+                    off
+                  </div>
+                  <div class="col-1 text-primary pt-4" *ngIf="rolesAdded">
+                    <strong>On</strong>
+                  </div>
+                  <div class="col-md-2 card card-block justify-content-center">
+                    <mat-icon color="primary" svgIcon="caret_right"></mat-icon>
                   </div>
                 </div>
               </div>

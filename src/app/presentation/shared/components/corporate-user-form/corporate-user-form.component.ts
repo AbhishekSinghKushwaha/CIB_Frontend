@@ -126,8 +126,8 @@ export class CorporateUserFormComponent implements OnInit {
       emailAddress: ["", [Validators.required, Validators.email]],
       idNumber: ["", [Validators.required]],
       officePhoneNumber: ["", [Validators.required]],
-      transactionLimit: ["", [Validators.required]],
       roles: [[]],
+      permissionIds: []
     });
   }
 
@@ -182,22 +182,22 @@ export class CorporateUserFormComponent implements OnInit {
       );
     }
 
-    const teamMember = this.teamMemberDetailsForm.getRawValue()
+    const teamMember = this.teamMemberDetailsForm.getRawValue();
     console.log('teamMember', teamMember);
-    this.teamMembersService
-      .addTeamMember(
-        teamMember,
-        this.user.corporateId
-      )
-      .subscribe((res) => {
-        if (res.isSuccessful) {
-          this.storageService.removeData("selected-roles");
-          this.teamMembersService.setUser({});
-          this.router.navigate([
-            this.data.userListLink,
-          ]);
-        }
-      });
+    // this.teamMembersService
+    //   .addTeamMember(
+    //     teamMember,
+    //     this.user.corporateId
+    //   )
+    //   .subscribe((res) => {
+    //     if (res.isSuccessful) {
+    //       this.storageService.removeData("selected-roles");
+    //       this.teamMembersService.setUser({});
+    //       this.router.navigate([
+    //         this.data.userListLink,
+    //       ]);
+    //     }
+    //   });
   }
 
   submit() {
@@ -216,18 +216,20 @@ export class CorporateUserFormComponent implements OnInit {
         this.initialOfficeNumber
       );
     }
-    this.teamMembersService
-      .updateTeamMemberDetails(
-        this.teamMemberDetailsForm.getRawValue(),
-        this.data.memberId
-      )
-      .subscribe((res) => {
-        if (res.isSuccessful) {
-          this.storageService.removeData("selected-roles");
-          this.router.navigate([
-            this.data.userListLink,
-          ]);
-        }
-      });
+    const teamMember = this.teamMemberDetailsForm.getRawValue();
+    console.log('teamMember', teamMember);
+    // this.teamMembersService
+    //   .updateTeamMemberDetails(
+    //     teamMember,
+    //     this.data.memberId
+    //   )
+    //   .subscribe((res) => {
+    //     if (res.isSuccessful) {
+    //       this.storageService.removeData("selected-roles");
+    //       this.router.navigate([
+    //         this.data.userListLink,
+    //       ]);
+    //     }
+    //   });
   }
 }

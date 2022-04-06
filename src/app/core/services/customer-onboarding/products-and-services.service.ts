@@ -9,42 +9,36 @@ import {
 import urlList from '../service-list.json';
 import { StateService } from '../state/state.service';
 
-interface ProductsState {
-  selectedProducts: Product[];
-  selectedProduct: Product;
-  selectedServices: ProductService[];
+interface ProductsState<T, U> {
+  selectedProducts: T[];
+  selectedProduct: T | any;
+  selectedServices: U[];
 }
-
-const initialState: ProductsState = {
-  selectedProducts: [],
-  selectedServices: [],
-  selectedProduct: {
-    id: '',
-    productName: '',
-    productServices: [],
-    description: '',
-  },
-};
 @Injectable({
   providedIn: 'root',
 })
-export class ProductsAndServicesService extends StateService<ProductsState> {
-  selectedProduct$: Observable<Product> = this.select(
+export class ProductsAndServicesService<T, U> extends StateService<ProductsState<T, U>> {
+
+  selectedProduct$: Observable<T> = this.select(
     (state) => state.selectedProduct
   );
 
-  selectedProducts$: Observable<Product[]> = this.select(
+  selectedProducts$: Observable<T[]> = this.select(
     (state) => state.selectedProducts
   );
   constructor(private http: HttpClient) {
-    super(initialState);
+    super({
+      selectedProducts: [],
+      selectedServices: [],
+      selectedProduct: {},
+    });
   }
 
-  selectProduct(product: Product) {
+  selectProduct(product: T) {
     this.setState({ selectedProduct: product });
   }
 
-  selectProducts(selectedProducts: Product[]) {
+  selectProducts(selectedProducts: T[]) {
     this.setState({ selectedProducts: selectedProducts });
   }
 
@@ -56,8 +50,8 @@ export class ProductsAndServicesService extends StateService<ProductsState> {
   ): Observable<any> {
     return this.http.post(
       environment.apiUrl +
-        urlList.customerOnboarding.addCorporateProduct +
-        corporateId,
+      urlList.customerOnboarding.addCorporateProduct +
+      corporateId,
       payload
     );
   }
@@ -66,8 +60,8 @@ export class ProductsAndServicesService extends StateService<ProductsState> {
   getCorporateProducts(corporateId: string): Observable<any> {
     return this.http.get(
       environment.apiUrl +
-        urlList.customerOnboarding.getCorporateProducts +
-        corporateId
+      urlList.customerOnboarding.getCorporateProducts +
+      corporateId
     );
   }
 
@@ -75,8 +69,8 @@ export class ProductsAndServicesService extends StateService<ProductsState> {
   removeProductAndService(corporateId: string, payload: any): Observable<any> {
     return this.http.post(
       environment.apiUrl +
-        urlList.customerOnboarding.removeCorporateProduct +
-        corporateId,
+      urlList.customerOnboarding.removeCorporateProduct +
+      corporateId,
       payload
     );
   }
@@ -85,8 +79,8 @@ export class ProductsAndServicesService extends StateService<ProductsState> {
   updateProductAndService(corporateId: string, payload: any): Observable<any> {
     return this.http.post(
       environment.apiUrl +
-        urlList.customerOnboarding.updateCorporateProduct +
-        corporateId,
+      urlList.customerOnboarding.updateCorporateProduct +
+      corporateId,
       payload
     );
   }

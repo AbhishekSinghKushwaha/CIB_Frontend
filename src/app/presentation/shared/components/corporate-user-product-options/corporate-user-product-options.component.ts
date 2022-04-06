@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Product, ProductService } from 'src/app/core/domain/customer-onboarding.model';
+import { UserProduct, UserSubProduct } from 'src/app/core/domain/user.model';
 import { ProductsAndServicesService } from 'src/app/core/services/customer-onboarding/products-and-services.service';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { NotificationConstants } from 'src/app/core/utils/constants/notification-menu.constants';
@@ -12,9 +12,9 @@ import { NotificationConstants } from 'src/app/core/utils/constants/notification
   styleUrls: ['./corporate-user-product-options.component.scss']
 })
 export class CorporateUserProductOptionsComponent implements OnInit {
-  product: Product;
-  selectedServices: ProductService[] = [];
-  alreadySelectedProducts: Product[];
+  product: UserProduct;
+  selectedSubproducts: UserSubProduct[] = [];
+  alreadySelectedProducts: UserProduct[];
 
   productId: any;
   corporateId: any;
@@ -22,7 +22,7 @@ export class CorporateUserProductOptionsComponent implements OnInit {
     public readonly notificationDashboardList: NotificationConstants,
     private readonly router: Router,
     private readonly storageService: StorageService,
-    private readonly productsServices: ProductsAndServicesService,
+    private readonly productsServices: ProductsAndServicesService<UserProduct, UserSubProduct>,
     private readonly activatedRoute: ActivatedRoute,
     private readonly location: Location,
   ) {
@@ -46,14 +46,14 @@ export class CorporateUserProductOptionsComponent implements OnInit {
 
     this.productsServices.selectedProducts$.subscribe((x) => {
       this.alreadySelectedProducts = x;
-      this.setAlreadySelectedServices();
+      this.setAlreadySelectedSubproducts();
     });
   }
 
   mapEditProduct() {
     const allProducts = this.storageService.getData('products-and-services');
 
-    const selectedProduct = allProducts?.find((product: Product) => {
+    const selectedProduct = allProducts?.find((product: UserProduct) => {
       return product.id === this.productId;
     });
 
@@ -62,26 +62,26 @@ export class CorporateUserProductOptionsComponent implements OnInit {
     this.product = selectedProduct;
   }
 
-  setAlreadySelectedServices() {
+  setAlreadySelectedSubproducts() {
     if (
       this.alreadySelectedProducts?.length > 0 &&
-      this.selectedServices?.length === 0
+      this.selectedSubproducts?.length === 0
     ) {
-      this.alreadySelectedProducts.forEach((service: Product) => {
+      this.alreadySelectedProducts.forEach((service: UserProduct) => {
         if (service.id === this.product.id) {
-          this.selectedServices = service.productServices;
+          this.selectedSubproducts = service.subProducts;
         }
       });
     } else {
-      this.selectedServices = [];
+      this.selectedSubproducts = [];
     }
   }
 
   // Unused function
-  renameObjectKeys(product: any): Product {
+  renameObjectKeys(product: any): UserProduct {
     let isDone = false;
     product.id = product.productId;
-    product.productServices = product.services;
+    product.subProducts = product.services;
 
     delete product.productId;
     product.services.forEach((service: any, i: number) => {
@@ -110,25 +110,25 @@ export class CorporateUserProductOptionsComponent implements OnInit {
 
   toggle(serviceId: string) {
     if (this.isServiceActive(serviceId)) {
-      const selectedServiceIndex = this.selectedServices.findIndex(
-        (service: ProductService) => service.id === serviceId
+      const selectedServiceIndex = this.selectedSubproducts.findIndex(
+        (service: UserSubProduct) => service.id === serviceId
       );
-      this.selectedServices.splice(selectedServiceIndex, 1);
+      this.selectedSubproducts.splice(selectedServiceIndex, 1);
     } else {
       // Add the service to selected services array
-      const selectedService = this.product?.productServices?.find(
-        (service: ProductService) => {
+      const selectedSubproduct = this.product?.subProducts?.find(
+        (service: UserSubProduct) => {
           return service.id === serviceId;
         }
       );
 
-      this.selectedServices.push(selectedService || {});
+      selectedSubproduct && this.selectedSubproducts.push(selectedSubproduct);
     }
   }
 
   isServiceActive(serviceId: string): boolean {
-    const selectedService = this.selectedServices?.find(
-      (service: ProductService) => {
+    const selectedService = this.selectedSubproducts?.find(
+      (service: UserSubProduct) => {
         return service.id === serviceId;
       }
     );
@@ -138,23 +138,21 @@ export class CorporateUserProductOptionsComponent implements OnInit {
 
   addProduct() {
     const existingProduct = this.alreadySelectedProducts.find(
-      (product: Product) => {
+      (product: UserProduct) => {
         return product.id === this.product.id;
       }
     );
 
-    let selectedProduct: Product = {
-      productName: this.product.productName,
-      id: this.product.id,
-      description: this.product.description,
-      productServices: this.selectedServices,
+    let selectedProduct: UserProduct = {
+      ...this.product,
+      subProducts: this.selectedSubproducts,
     };
 
     let newArrayOfServices = [];
 
     if (existingProduct) {
       const newArr: any[] = this.alreadySelectedProducts.map(
-        (element: Product) => {
+        (element: UserProduct) => {
           if (element.id === this.product.id) {
             return selectedProduct;
           }
@@ -162,8 +160,8 @@ export class CorporateUserProductOptionsComponent implements OnInit {
         }
       );
 
-      newArr.forEach((prod: Product, i: number) => {
-        if (prod.productServices.length === 0) {
+      newArr.forEach((prod: UserProduct, i: number) => {
+        if (prod.subProducts.length === 0) {
           newArr.splice(i, 1);
         }
       });
@@ -186,8 +184,8 @@ export class CorporateUserProductOptionsComponent implements OnInit {
     this.productId = null;
     let newArray = [];
 
-    for (let i = 0; i < this.selectedServices.length; i++) {
-      const element = this.selectedServices[i];
+    for (let i = 0; i < this.selectedSubproducts.length; i++) {
+      const element = this.selectedSubproducts[i];
       newArray.push(element.id);
     }
     const payload = {

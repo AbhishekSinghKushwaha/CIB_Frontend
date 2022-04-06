@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Product, ProductService } from 'src/app/core/domain/customer-onboarding.model';
+import { UserProduct, UserSubProduct } from 'src/app/core/domain/user.model';
 import { ProductsAndServicesService } from 'src/app/core/services/customer-onboarding/products-and-services.service';
 import { DataLookupService } from 'src/app/core/services/data-lookup/data-lookup.service';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
@@ -15,14 +15,14 @@ export class CorporateUserProductsComponent implements OnInit {
   @Input() backLink: any;
   @Input() memberId: any;
   products: any[];
-  selectedProducts: Product[];
+  selectedProducts: UserProduct[];
   payload: any[] = [];
   productId: any; // For edit purposes
 
   constructor(
     private storageService: StorageService,
     private router: Router,
-    private productsService: ProductsAndServicesService,
+    private productsService: ProductsAndServicesService<UserProduct, UserSubProduct>,
     private activatedRoute: ActivatedRoute,
     private location: Location,
     private dataLookup: DataLookupService
@@ -35,7 +35,7 @@ export class CorporateUserProductsComponent implements OnInit {
   }
 
   getProductsAndServices() {
-    this.dataLookup.getProductsAndServices().subscribe((res) => {
+    this.dataLookup.getProductsAndServices().userManagement.subscribe((res) => {
       if (res.isSuccessful) {
         this.storageService.setData("products-and-services", res.data);
         this.products = res.data;
@@ -51,7 +51,7 @@ export class CorporateUserProductsComponent implements OnInit {
     });
   }
 
-  selectProduct(product: Product) {
+  selectProduct(product: UserProduct) {
     this.productsService.selectProduct(product);
     this.router.navigate([
       `${this.router.url}/options/${product.id}`
@@ -61,13 +61,13 @@ export class CorporateUserProductsComponent implements OnInit {
   preparePayload() {
     if (this.selectedProducts?.length > 0) {
       for (let i = 0; i < this.selectedProducts.length; i++) {
-        const product: Product = this.selectedProducts[i];
+        const product: UserProduct = this.selectedProducts[i];
         let serviceArray = [];
 
-        for (let j = 0; j < product?.productServices?.length; j++) {
-          const service: ProductService = product?.productServices[j];
+        for (let j = 0; j < product?.subProducts?.length; j++) {
+          const service: UserSubProduct = product?.subProducts[j];
           serviceArray.push(service.id);
-          if (j + 1 == product.productServices.length) {
+          if (j + 1 == product.subProducts.length) {
             let payload = {
               productId: product.id,
               services: serviceArray,

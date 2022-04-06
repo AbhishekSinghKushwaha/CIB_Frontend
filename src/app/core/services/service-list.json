@@ -23,6 +23,10 @@
     "getRegistrationSummary": "/cibonboarding-v1/api/Registration/preview-corporate-detail/",
     "uploadCorporateDocuments": "/cibonboarding-v1/api/Registration/updload-corporate-documents/"
   },
+  "userManagement":{
+    "getRoles": "/cibcore/api/roles",
+    "getProductsAndServices": "/cibcore/api/products"
+  },
   "accounts": {
     "getUserAccounts": "/cibaccountservice-v1/api/v1/Accounts/GetUserMappedAccounts"
   },

@@ -29,7 +29,7 @@ export class RolesComponent implements OnInit {
 
   // Get roles
   getRoles() {
-    this.dataLookup.getRoles().subscribe((res: any) => {
+    this.dataLookup.getRoles().userManagement.subscribe((res: any) => {
       if (res.isSuccessful) {
         this.roles = res.data;
       }
