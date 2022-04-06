@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { TransactionReceiptModalService } from "src/app/core/services/modal-services/transaction-receipt-modal/transaction-receipt-modal.service";
+import { TransactionsService } from "src/app/core/services/transactions/transactions.service";
 
 @Component({
   selector: "app-transaction-receipt-modal",
@@ -13,7 +14,8 @@ export class TransactionReceiptModalComponent implements OnInit {
   @ViewChild("receiptDownload") pdfTable: ElementRef;
 
   constructor(
-    private readonly transactionReceiptModalService: TransactionReceiptModalService
+    private readonly transactionReceiptModalService: TransactionReceiptModalService,
+    private transactionService: TransactionsService
   ) {}
 
   ngOnInit(): void {}
@@ -27,4 +29,16 @@ export class TransactionReceiptModalComponent implements OnInit {
   }
 
   public downloadAsPDF() {}
+
+  download(item: any) {
+    if (item === "PDF") {
+      this.transactionService
+        .downloadReceiptAsPdf({
+          paymentReference: "77B4732F36",
+        })
+        .subscribe((res) => {
+          console.log(res);
+        });
+    }
+  }
 }

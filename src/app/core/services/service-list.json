@@ -52,7 +52,8 @@
   },
   "statement": {
     "getPdf": "/v1/generatepdf/statement",
-    "getTransactions": "/cibpaymentservice-v1/api/v1/Transactions/Summary"
+    "getTransactions": "/cibpaymentservice-v1/api/v1/Transactions/Summary",
+    "downloadReceipt": "/cibpaymentservice-v1/api/v1/Transactions/DownloadReceipt"
   },
   "login": {
     "loginUser": "/cibuseraccess-v1/api/Auth/oauth/token",
@@ -65,7 +66,7 @@
     "getSecurityQuestions": "/cibuseraccess-v1/api/SecurityQuestion/securityquestions",
     "getMySecurityQuestions": "/cibuseraccess-v1/api/SecurityQuestion/user/securityquestions",
     "resetPassword": "/cibuseraccess-v1/api/Auth/user/resetPassword",
-    "getLogonUser":"/cibuseraccess-v1/api/Auth/user/single-user?"
+    "getLogonUser": "/cibuseraccess-v1/api/Auth/user/single-user?"
   },
   "beneficiary": {
     "add": "/cibpaymentservice-v1/api/v1/Beneficiary/AddBeneficiary",

@@ -76,4 +76,11 @@ export class TransactionsService extends StateService<TransctionsState> {
       { params }
     );
   }
+
+  downloadReceiptAsPdf(transactionReference: any): Observable<any> {
+    return this.http.post(
+      environment.apiUrl + urlList.statement.downloadReceipt,
+      transactionReference
+    );
+  }
 }
