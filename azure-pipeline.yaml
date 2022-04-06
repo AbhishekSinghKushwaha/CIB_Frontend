@@ -73,4 +73,4 @@ stages:
             inputs:
               command: custom
               verbose: false
-              customCommand: "run build:dev"
+              customCommand: "run build:uat"
