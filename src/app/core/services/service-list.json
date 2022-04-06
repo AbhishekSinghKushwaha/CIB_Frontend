@@ -30,6 +30,7 @@
     "sendOwnEquityAccount": "/cibpaymentservice-v1/api/v1/Transfer/Send",
     "intraBankTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
     "swiftTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+    "sendToSubsidiary": "/cibpaymentservice-v1/api/v1/Transfer/Send",
     "mobileMoneyTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
     "buyAirtimeTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
     "buyGoodsTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
@@ -65,7 +66,7 @@
     "getSecurityQuestions": "/cibuseraccess-v1/api/SecurityQuestion/securityquestions",
     "getMySecurityQuestions": "/cibuseraccess-v1/api/SecurityQuestion/user/securityquestions",
     "resetPassword": "/cibuseraccess-v1/api/Auth/user/resetPassword",
-    "getLogonUser":"/cibuseraccess-v1/api/Auth/user/single-user?"
+    "getLogonUser": "/cibuseraccess-v1/api/Auth/user/single-user?"
   },
   "beneficiary": {
     "add": "/cibpaymentservice-v1/api/v1/Beneficiary/AddBeneficiary",

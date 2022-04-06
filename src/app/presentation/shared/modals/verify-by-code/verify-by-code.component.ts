@@ -29,6 +29,7 @@ import { MobileMoneyService } from "src/app/core/services/transfers/mobile-money
 import { IntrabankService } from "src/app/core/services/transfers/intrabank/intrabank.service";
 import { InterbankService } from "src/app/core/services/transfers/interbank/interbank.service";
 import { SwiftTransferService } from "src/app/core/services/transfers/swift/swift-transfer.service";
+import { IntercountryService } from "src/app/core/services/transfers/intercountry/intercountry.service";
 
 @Component({
   selector: "app-verify-by-code",
@@ -76,7 +77,8 @@ export class VerifyByCodeComponent implements OnInit {
     private mobileMoneyService: MobileMoneyService,
     private intrabankService: IntrabankService,
     private interbankService: InterbankService,
-    private swiftTransferService: SwiftTransferService
+    private swiftTransferService: SwiftTransferService,
+    private intercountryService: IntercountryService
   ) {
     this.initOtpForm();
   }
@@ -294,6 +296,25 @@ export class VerifyByCodeComponent implements OnInit {
     }
   }
 
+  subsidiaryTransfer() {
+    this.intercountryService.transferPayload$.subscribe((res) => {
+      this.payload = res;
+    });
+    if (this.payload) {
+      this.intercountryService
+        .sendToSubsidiary(this.payload)
+        .subscribe((res) => {
+          if (res.status) {
+            this.router.navigate([
+              `/transact/transfer-submitted/${this.transactionType}`,
+            ]);
+          } else {
+            console.log(res.message);
+          }
+        });
+    }
+  }
+
   standingOrders() {
     this.router.navigate([
       `/transact/standing-orders/transfer-submitted/${this.transactionType}`,
@@ -349,6 +370,9 @@ export class VerifyByCodeComponent implements OnInit {
         break;
       case this.transferType.SWIFT:
         this.swiftTransfer();
+        break;
+      case this.transferType.SUBSIDIARY:
+        this.subsidiaryTransfer();
         break;
       default:
         break;

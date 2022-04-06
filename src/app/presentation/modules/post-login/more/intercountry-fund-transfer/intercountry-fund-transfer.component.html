@@ -1,120 +1,115 @@
-<div *ngIf="!loading">
-    <div class="mb-3">
-      <button
-        mat-icon-button
-        aria-label="Back"
-        class="back-icon"
-        routerLink="/more"
+<div>
+  <div class="mb-3">
+    <button
+      mat-icon-button
+      aria-label="Back"
+      class="back-icon"
+      routerLink="/more"
+    >
+      <div class="strong-text">
+        <mat-icon svgIcon="caret_left"></mat-icon>
+        <span>Send money via intercountry</span>
+      </div>
+    </button>
+  </div>
+  <h3 class="strong-text">Please enter the payment details</h3>
+  <form
+    class="d-flex flex-column"
+    autocomplete="off"
+    [formGroup]="intercountryFundTransfer"
+    (submit)="getTransferCharges()"
+  >
+    <div class="row pt-4">
+      <!-- Transfer From -->
+      <div class="col-md-6">
+        <app-transfer-from
+          [parentForm]="intercountryFundTransfer"
+          label="Send From"
+          placeholder="Send From"
+          formControlName="sendFrom"
+          fieldName="sendFrom"
+        ></app-transfer-from>
+      </div>
+      <!-- Transfer To -->
+      <div class="col-md-6 align-self-end">
+        <app-transfer-to
+          [parentForm]="intercountryFundTransfer"
+          fieldName="sendTo"
+          formControlName="sendTo"
+          label="Send To"
+          placeholder="Select Recipient"
+          transactionType="{{ transferType.INTER_COUNTRY_TRANSFER }}"
+        ></app-transfer-to>
+      </div>
+      <!-- FX Reference ID -->
+      <div class="col-md-6">
+        <app-input
+          [parentForm]="intercountryFundTransfer"
+          fieldName="fxReferenceId"
+          label="FX Reference ID"
+          placeholder="Enter FX reference ID"
+          formControlName="fxReferenceId"
+        ></app-input>
+      </div>
+      <!-- Transfer amount -->
+      <div class="col-md-6">
+        <app-transfer-amount
+          [parentForm]="intercountryFundTransfer"
+          fieldName="amount"
+          label="Amount"
+          placeholder="Enter an amount"
+          formControlName="amount"
+        >
+        </app-transfer-amount>
+      </div>
+      <!-- Schedule Payment -->
+      <div class="col-md-6">
+        <app-schedule-payment-input
+          [parentForm]="intercountryFundTransfer"
+          label="Schedule Payment"
+          fieldName="schedulePayment"
+          placeholder="Select a payment date"
+          transactionType="ownEquityAccount"
+        ></app-schedule-payment-input>
+      </div>
+      <!-- Payment Reason -->
+      <div class="col-md-6">
+        <app-input
+          [parentForm]="intercountryFundTransfer"
+          fieldName="reason"
+          label="Payment Reason"
+          formControlName="reason"
+          placeholder="Optional"
+        ></app-input>
+      </div>
+    </div>
+    <!-- Additional Information Upload -->
+    <div class="pt-3" *ngIf="aboveTransactionTypeLimit">
+      <h3 class="strong-text">Additional Information</h3>
+      <small class="text-grey"
+        >If you are sending more than 10,000,000 we need more information from
+        you</small
+      ><br />
+
+      <div
+        class="col-md-6 upload-container mt-4"
+        (click)="openSupportingDocuments()"
       >
-        <div class="strong-text">
-          <mat-icon svgIcon="caret_left"></mat-icon>
-          <span>Send money via intercountry</span>
-        </div>
+        <div>Upload a document</div>
+        <mat-icon class="folder-icon">note_add</mat-icon>
+      </div>
+    </div>
+    <!-- Submit Button -->
+    <div class="mt-4">
+      <button
+        mat-raised-button
+        type="submit"
+        [disabled]="intercountryFundTransfer.invalid"
+        color="primary"
+        class="px-5"
+      >
+        Send money
       </button>
     </div>
-    <h3 class="strong-text">Please enter the payment details</h3>
-    <form
-      class="d-flex flex-column"
-      autocomplete="off"
-      [formGroup]="intercountryFundTransfer"
-      (submit)="getTransferCharges()"
-    >
-      <div class="row pt-4">
-        <!-- Transfer From -->
-        <div class="col-md-6">
-          <app-transfer-from
-            [parentForm]="intercountryFundTransfer"
-            label="Send From"
-            placeholder="Send From"
-            formControlName="sendFrom"
-            fieldName="sendFrom"
-          ></app-transfer-from>
-        </div>
-        <!-- Transfer To -->
-        <div class="col-md-6 align-self-end">
-          <app-transfer-to
-            [parentForm]="intercountryFundTransfer"
-            fieldName="sendTo"
-            formControlName="sendTo"
-            label="Send To"
-            placeholder="Select Recipient"
-            transactionType="{{ transferType.INTER_COUNTRY_TRANSFER }}"
-          ></app-transfer-to>
-        </div>
-        <!-- FX Reference ID -->
-        <div class="col-md-6">
-            <app-input
-              [parentForm]="intercountryFundTransfer"
-              fieldName="fxReferenceId"
-              label="FX Reference ID"
-              placeholder="Enter FX reference ID"
-              formControlName="fxReferenceId"
-            ></app-input>
-        </div>
-        <!-- Transfer amount -->
-        <div class="col-md-6">
-          <app-transfer-amount
-            [parentForm]="intercountryFundTransfer"
-            fieldName="amount"
-            label="Amount"
-            placeholder="Enter an amount"
-            formControlName="amount"
-          >
-          </app-transfer-amount>
-        </div>
-        <!-- Schedule Payment -->
-        <div class="col-md-6">
-          <app-schedule-payment-input
-            [parentForm]="intercountryFundTransfer"
-            label="Schedule Payment"
-            fieldName="schedulePayment"
-            placeholder="Select a payment date"
-            transactionType="ownEquityAccount"
-          ></app-schedule-payment-input>
-        </div>
-        <!-- Payment Reason -->
-        <div class="col-md-6">
-          <app-input
-            [parentForm]="intercountryFundTransfer"
-            fieldName="reason"
-            label="Payment Reason"
-            formControlName="reason"
-            placeholder="Optional"
-          ></app-input>
-        </div>
-      </div>
-      <!-- Additional Information Upload -->
-      <div class="pt-3" *ngIf="aboveTransactionTypeLimit">
-        <h3 class="strong-text">Additional Information</h3>
-        <small class="text-grey"
-          >If you are sending more than 10,000,000 we need more information from
-          you</small
-        ><br />
-  
-        <div
-          class="col-md-6 upload-container mt-4"
-          (click)="openSupportingDocuments()"
-        >
-          <div>Upload a document</div>
-          <mat-icon class="folder-icon">note_add</mat-icon>
-        </div>
-      </div>
-      <!-- Submit Button -->
-      <div class="mt-4">
-        <button
-          mat-raised-button
-          type="submit"
-          [disabled]="intercountryFundTransfer.invalid"
-          color="primary"
-          class="px-5"
-        >
-          Send money
-        </button>
-      </div>
-    </form>
-  </div>
-  
-  <div class="row justify-content-md-center" *ngIf="loading">
-    <mat-spinner style="margin-top: 30vh"></mat-spinner>
-  </div>
-  
+  </form>
+</div>
