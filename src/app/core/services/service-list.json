@@ -27,7 +27,10 @@
     "getRoles": "/cibcore/api/roles",
     "getProductsAndServices": "/cibcore/api/products",
     "addUser":"/cibcore/api/CorporateUsers/InApp",
-    "getUser":"/cibcore/api/CorporateUsers/"
+    "getUser":"/cibcore/api/CorporateUsers/",
+    "getUserLimit":"/cibcore/api/UserTransactionLimit/Limits/",
+    "addUserLimit":"/cibcore/api/UserTransactionLimit/Add/",
+    "editUserLimit":"/cibcore/api/UserTransactionLimit/Update/"
   },
   "accounts": {
     "getUserAccounts": "/cibaccountservice-v1/api/v1/Accounts/GetUserMappedAccounts"

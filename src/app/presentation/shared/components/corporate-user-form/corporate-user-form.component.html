@@ -74,7 +74,9 @@
               </div>
               <div
                 class="col-md-6 cursor-pointer"
-                routerLink="/service-request/user-limit/edit"
+                [routerLink]="
+                  '/service-request/user-limit/edit/' + data.username
+                "
                 *ngIf="data.username"
               >
                 <div class="row product-list-item">
@@ -86,7 +88,9 @@
                   <div class="col-md-7 product-list-item-label pt-3">
                     <p class="mb-0">Edit user limits</p>
                   </div>
-                  <div class="col-md-2 card card-block justify-content-center">
+                  <div
+                    class="col-md-1 offset-md-1 card card-block justify-content-center"
+                  >
                     <mat-icon color="primary" svgIcon="caret_right"></mat-icon>
                   </div>
                 </div>

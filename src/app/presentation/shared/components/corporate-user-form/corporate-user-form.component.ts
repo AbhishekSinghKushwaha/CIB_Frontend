@@ -35,7 +35,8 @@ export class CorporateUserFormComponent implements OnInit {
   initialPhoneNumber: any;
   intialValues: any;
   selectedSubproducts = [];
-  selectedRoles: any[]
+  selectedRoles: any[];
+  userLimitSet: boolean;
 
   constructor(
     private readonly fb: FormBuilder,
@@ -55,6 +56,7 @@ export class CorporateUserFormComponent implements OnInit {
     this.checkRoles();
     this.setUser();
     this.selectedSubproducts = this.storageService.getData('selected-subproducts') || [];
+    this.userLimitSet = this.storageService.getData('user-limit');
   }
 
   setUser() {

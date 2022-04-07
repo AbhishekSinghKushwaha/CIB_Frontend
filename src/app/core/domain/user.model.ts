@@ -69,3 +69,11 @@ export interface UserSubProduct {
   name?: string;
   description?: string;
 }
+
+export interface UserLimitModel {
+  currencyCode: string;
+  dailyLimit: number
+  monthlyLimit: number
+  transactionLimit: number
+  weeklyLimit: number
+}

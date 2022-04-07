@@ -19,6 +19,20 @@ import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
 export class UserListComponent implements ControlValueAccessor, OnInit {
   @Input() parentForm!: FormGroup;
 
+  private _defaultData: any;
+  @Input() set defaultData(value: any) {
+    if (value) {
+      this._defaultData = value;
+      this.parentForm.controls[this.fieldName].setValue(value);
+    }
+
+  };
+  get defaultData() {
+    return this._defaultData;
+  }
+
+  @Input() showModal: boolean;
+
   @Input() public fieldName!: string;
 
   @Input() public label!: string;

@@ -17,4 +17,16 @@ export class UserService {
   resetPassword(data: any) {
     return this.http.post(`${environment.apiUrl}${urlList.login.resetPassword}`, data);
   }
+
+  getLimit(username: string) {
+    return this.http.get(`${environment.apiUrl}${urlList.userManagement.getUserLimit}${username}`);
+  }
+
+  editLimit(username: string, currencyCode: string, payload: any) {
+    return this.http.put(`${environment.apiUrl}${urlList.userManagement.editUserLimit}${username}/${currencyCode}`, payload);
+  }
+
+  addLimit(username: string, payload: any) {
+    return this.http.post(`${environment.apiUrl}${urlList.userManagement.addUserLimit}${username}`, payload);
+  }
 }
