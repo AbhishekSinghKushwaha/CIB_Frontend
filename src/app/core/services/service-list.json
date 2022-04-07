@@ -57,7 +57,8 @@
     "getFavouriteMerchantDetails": "/cibpaymentservice-v1/api/v1/BuyGoods/FavoriteMerchants/"
   },
   "statement": {
-    "getPdf": "/v1/generatepdf/statement"
+    "getPdf": "/v1/generatepdf/statement",
+    "getTransactions": "/cibpaymentservice-v1/api/v1/Transactions/Summary"
   },
   "login": {
     "loginUser": "/cibuseraccess-v1/api/Auth/oauth/token",
@@ -84,5 +85,10 @@
     "changeStatus": "/cibuseraccess-v1/api/UserAdministration/CreateReviewRequest",
     "delete": "/cibuseraccess-v1/api/UserAdministration/delete",
     "getUserById": "/cibuseraccess-v1/api/Auth/user/single-user"
+  },
+  "airtime": {
+    "getCharges": "/cibpaymentservice-v1/api/v1/Airtime/GetCharge",
+    "getOperatorsCountries": "/cibpaymentservice-v1/api/v1/Airtime/GetOperatorCountries",
+    "getOperators": "/cibpaymentservice-v1/api/v1/Airtime/GetOperators/"
   }
 }

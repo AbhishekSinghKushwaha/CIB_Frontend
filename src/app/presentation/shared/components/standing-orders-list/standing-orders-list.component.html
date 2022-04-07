@@ -1,0 +1,88 @@
+<div class="row mt-2 mb-1">
+    <div class="col-md-11">
+      <mat-form-field appearance="outline" style="width: 100%">
+        <input matInput [(ngModel)]="searchText" placeholder="Search" />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+    <div class="col-md-1">
+      <img
+        class="img-fluid"
+        style="width: 50px"
+        src="./assets/images/icons/visual-support-icons-modulator.svg"
+      />
+    </div>
+  </div>
+  <div class="row mt-1 mb-1 p-2 trans-card" *ngFor="let transaction of transactions; let i = index">
+  
+    <div class="d-flex justify-content-between">
+      <div class="strong-text">{{ transaction.title }}</div>
+      <div>
+        <mat-icon svgIcon="three_dots_on_grey" color="primary" [matMenuTriggerFor]="menu"></mat-icon>
+  
+        <mat-menu #menu="matMenu" xPosition="before" class="my-menu">
+          <div class="row cursor-pointer" (click)="openTransaction(transaction, i)">
+            <div class="col-md-5 pb-1">
+              <button mat-fab class="button_icon">
+                <mat-icon svgIcon="eyes_view"></mat-icon>
+              </button>
+            </div>
+            <div class="col-md-7 card card-block justify-content-center">
+              <span>View</span>
+            </div>
+          </div>
+          <mat-divider class="pb-1"></mat-divider>
+          <div class="row cursor-pointer" (click)="editStandingOrder(i)">
+            <div class="col-md-5 pb-1">
+              <button mat-fab class="button_icon">
+                <mat-icon svgIcon="edit"></mat-icon>
+              </button>
+            </div>
+            <div class="col-md-7 card card-block justify-content-center">
+              <span>Edit</span>
+            </div>
+          </div>
+          <mat-divider class="pb-1"></mat-divider>  
+          <div class="row cursor-pointer" (click)="openCancel()">
+            <div class="col-md-5">
+              <button mat-fab class="button_icon">
+                <mat-icon svgIcon="delete-documents"></mat-icon>
+              </button>
+            </div>
+            <div class="col-md-7 card card-block justify-content-center">
+              <span>Cancel</span>
+            </div>
+          </div>    
+          <!-- <button mat-menu-item (click)="openTransaction(transaction, i)">
+            <mat-icon svgIcon="eyes_view"></mat-icon>
+            <span>View</span>
+          </button>
+          <button mat-menu-item (click)="editStandingOrder(i)">
+            <mat-icon svgIcon="edit"></mat-icon>
+            <span>Edit</span>
+          </button>
+          <button mat-menu-item (click)="openCancel()">
+            <mat-icon svgIcon="delete-documents"></mat-icon>
+            <span>Cancel</span>
+          </button> -->
+        </mat-menu>
+      </div>
+    </div>
+    <div class="d-flex justify-content-between">
+      <div>{{ transaction.description }}</div>
+      <div>{{ transaction.amount }}</div>
+    </div>
+    <div class="d-flex align-items-start">
+      <span class="pe-3">
+        <small class="text-grey">{{ transaction.date }}</small>
+      </span>
+      <span class="pe-1">
+        <mat-icon [svgIcon]="transactionIcon[transaction.status]"></mat-icon>
+      </span>
+      <span>
+        <small class="strong-text">{{ transaction.status }}</small>
+      </span>
+    </div>
+  </div>  
+  <app-paginator [data]="paginationData"></app-paginator>
+  

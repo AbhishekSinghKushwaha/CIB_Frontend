@@ -5,6 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:dev": "ng build --configuration=development",
+    "build:uat": "ng build --configuration=uat",
     "analyse": "ng build -prod --stats-json && npm run stats",
     "stats": "webpack-bundle-analyzer dist/CIB/stats.json",
     "watch": "ng build --watch --configuration development",

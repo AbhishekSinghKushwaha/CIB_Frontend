@@ -131,7 +131,13 @@ export class OwnEquityAccountComponent
       this.ownEquityAccountService.sendToOwnEquityAccount(payload).subscribe(
         (res) => {
           if (res.status) {
-            this.router.navigate(["/transact/transfer-submitted"]);
+            this.ownEquityAccountService.setFavouritesPayload(
+              this.ownEquityAccountTransferForm.getRawValue()
+            );
+            console.log(this.ownEquityAccountTransferForm.getRawValue());
+            this.router.navigate([
+              `/transact/transfer-submitted/${this.transferType.OWN_EQUITY}`,
+            ]);
           } else {
             // TODO:: Notify Error
           }

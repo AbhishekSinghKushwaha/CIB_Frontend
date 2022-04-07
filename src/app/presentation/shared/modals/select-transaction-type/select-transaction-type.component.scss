@@ -1,0 +1,18 @@
+.transaction-modal-screen {
+    width: 400px;
+    position: relative;
+  }
+  
+  .radio-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 1000;
+  }
+  

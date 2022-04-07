@@ -1,17 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { ConfirmationModalService } from 'src/app/core/services/modal-services/confirmation-modal.service';
-import { SwiftTransferService } from 'src/app/core/services/transfers/swift/swift-transfer.service';
-import { TransactionTypeConstants } from 'src/app/core/utils/constants/transaction-type.constants';
-import { accountLimitValidator } from 'src/app/core/utils/validators/limits.validators';
-import { ConfirmPaymentComponent } from 'src/app/presentation/shared/modals/confirm-payment/confirm-payment.component';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { MatDialog } from "@angular/material/dialog";
+import { Router } from "@angular/router";
+import { ConfirmationModalService } from "src/app/core/services/modal-services/confirmation-modal.service";
+import { MobileMoneyService } from "src/app/core/services/transfers/mobile-money/mobile-money.service";
+import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
+import { accountLimitValidator } from "src/app/core/utils/validators/limits.validators";
 
 @Component({
-  selector: 'app-mobile-money',
-  templateUrl: './mobile-money.component.html',
-  styleUrls: ['./mobile-money.component.scss'],
+  selector: "app-mobile-money",
+  templateUrl: "./mobile-money.component.html",
+  styleUrls: ["./mobile-money.component.scss"],
 })
 export class MobileMoneyComponent implements OnInit {
   mobileMoneyTransferForm: FormGroup;
@@ -26,8 +25,9 @@ export class MobileMoneyComponent implements OnInit {
     private readonly fb: FormBuilder,
     private dialog: MatDialog,
     private readonly router: Router,
-    private readonly swiftTransferService: SwiftTransferService,
-    private readonly confirmationModalService: ConfirmationModalService) { }
+    private readonly mobileMoneyTransferService: MobileMoneyService,
+    private readonly confirmationModalService: ConfirmationModalService
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -35,12 +35,12 @@ export class MobileMoneyComponent implements OnInit {
 
   initForm() {
     this.mobileMoneyTransferForm = this.fb.group({
-      sendFrom: ['', [Validators.required]],
-      sendTo: [''],
+      sendFrom: ["", [Validators.required]],
+      sendTo: [""],
       amount: [{}, [Validators.required, accountLimitValidator]],
-      reason: [''],
-      fxReferenceId: ['', [Validators.required]],
-      schedulePayment: ['', [Validators.required]],
+      reason: [""],
+      fxReferenceId: ["", [Validators.required]],
+      schedulePayment: ["", [Validators.required]],
     });
   }
 
@@ -53,18 +53,22 @@ export class MobileMoneyComponent implements OnInit {
     const payload = {
       amount: this.getForm.amount.value.amount,
       currency: this.getForm.amount.value.currency,
-      destinationAccount: this.getForm.sendTo.value.accountNumber,
+      destinationAccount: this.getForm.sendTo.value.phoneNumber,
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
+      destinationBankCode: this.getForm.sendTo.value.mobileWallet.wallet,
       transferType: Number(this.transferType.MOBILE_MONEY),
+      fxReferenceId: this.getForm.fxReferenceId.value,
       countryCode: "KE", //TODO:: Default have it as kenya, then change to pick the user's country
     };
-    this.swiftTransferService.getTransferCharges(payload).subscribe((res) => {
-      if (res.status) {
-        this.confirmPayment(res.data);
-      } else {
-        // TODO:: Notify error
-      }
-    });
+    this.mobileMoneyTransferService
+      .getTransferCharges(payload)
+      .subscribe((res) => {
+        if (res.status) {
+          this.confirmPayment(res.data);
+        } else {
+          // TODO:: Notify error
+        }
+      });
   }
 
   // Confirm Payment and return the confirmation boolean before initiating payment.
@@ -76,7 +80,7 @@ export class MobileMoneyComponent implements OnInit {
       content: [
         {
           key: "Transaction",
-          value: "Send to another bank via SWIFT",
+          value: `Send to mobile wallet via ${this.getForm.sendTo.value.mobileWallet?.walletDescription}`,
         },
         {
           key: "Amount",
@@ -94,10 +98,9 @@ export class MobileMoneyComponent implements OnInit {
         },
         {
           key: "To",
-          value: `${this.getForm.sendTo.value.firstName} ${this.getForm.sendTo.value.lastName}<br>
-            <span><strong>Bank:</strong></span> ${this.getForm.sendTo.value.bank.bankName}<br>
-            <span><strong>Ac/No:</strong></span> ${this.getForm.sendTo.value.accountNumber}<br>
-            ${this.getForm.sendTo.value.country.countryName}
+          value: `${this.getForm.sendTo.value.accountName}<br>
+            ${this.getForm.sendTo.value.phoneNumber}<br>
+            ${this.getForm.sendTo.value.mobileWallet?.walletDescription}
           `,
         },
         {
@@ -126,46 +129,18 @@ export class MobileMoneyComponent implements OnInit {
       .afterClosed()
       .subscribe((confirmed: boolean) => {
         if (data) {
-          this.sendMoney();
+          this.savePayloadForOtpVerification();
         }
       });
-  }
-
-
-  // Confirm Payment and return the confirmation boolean before initiating payment.
-  confirmPaymentMain(transferFee: string) {
-    if (this.mobileMoneyTransferForm.valid) {
-      const paymentData = {
-        from: this.getForm.sendFrom.value,
-        to: this.getForm.sendTo.value,
-        amount: this.getForm.amount.value,
-        transactionType: this.transferType.MOBILE_MONEY,
-        paymentReason: this.getForm.reason.value,
-        fxReferenceId: this.getForm.fxReferenceId.value,
-        schedulePayment: this.getForm.schedulePayment.value,
-        transferFee,
-      };
-      const dialogRef = this.dialog.open(ConfirmPaymentComponent, {
-        data: paymentData,
-        disableClose: true,
-      });
-
-      dialogRef.afterClosed().subscribe((res) => {
-        if (res.confirmed) {
-          this.sendMoney();
-        }
-      });
-    } else {
-    }
   }
 
   // Initiate fund transfer to own equity account
-  sendMoney() {
+  savePayloadForOtpVerification() {
     const payload = {
       amount: this.getForm.amount.value.amount,
-      beneficiaryAccount: this.getForm.sendTo.value.accountNumber,
-      beneficiaryBank: '',
-      beneficiaryBankCode: '',
+      beneficiaryAccount: this.getForm.sendTo.value.phoneNumber,
+      beneficiaryBank: this.getForm.sendTo.value.mobileWallet?.wallet,
+      beneficiaryBankCode: this.getForm.sendTo.value.mobileWallet?.wallet,
       beneficiaryCurrency: this.getForm.sendTo.value.currency,
       beneficiaryName: this.getForm.sendTo.value.accountName,
       currency: this.getForm.amount.value.currency,
@@ -180,16 +155,14 @@ export class MobileMoneyComponent implements OnInit {
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
       transferType: Number(this.transferType.MOBILE_MONEY),
     };
-
     if (this.mobileMoneyTransferForm.valid) {
-      this.swiftTransferService.sendViaSwift(payload).subscribe((res) => {
-        if (res.status) {
-          this.router.navigate(["/transact/transfer-submitted"]);
-        } else {
-          alert(res.message);
-          // TODO:: Notify Error
-        }
-      });
+      this.mobileMoneyTransferService.setTransferPayload(payload);
+      this.mobileMoneyTransferService.setFavouritesPayload(
+        this.mobileMoneyTransferForm.getRawValue()
+      );
+      this.router.navigate([
+        `/transact/otp-verification/${this.transferType.MOBILE_MONEY}`,
+      ]);
     }
   }
 }

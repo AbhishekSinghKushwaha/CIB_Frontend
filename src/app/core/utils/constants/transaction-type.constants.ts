@@ -1,4 +1,3 @@
-
 export const TransferType = {
   OWN_EQUITY: "1",
   INTRA_BANK: "2",
@@ -27,7 +26,17 @@ const SwiftChargesOptions = [
   },
 ];
 
+export const TransactionApprovalStatus = {
+  Approved: 1,
+  PendingApproval: 2,
+  PendingVerification: 3,
+  Verified: 4,
+  Rejected: 5,
+  Pending: 6,
+};
+
 export const TransactionTypeConstants = {
   TransferType,
   SwiftChargesOptions,
+  TransactionApprovalStatus,
 };

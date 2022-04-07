@@ -1,7 +1,7 @@
 <div class="row align-items-stretch mb-2 pb-2 cursor-pointer" (click)="select()">
     <div class="col-md-2">
         <img class="rounded-circle img-d" 
-        [src]="data.imageLink"
+        [src]="data.iconUrl"
         width="60px"
         height="60px"
         alt="airtel"
@@ -10,7 +10,7 @@
     <div class="col-md-10">
         <div class="row user-list-item" style="height: 60px">
         <div class="col-md-10 d-flex">
-            <div class="align-self-center">{{data.name}}</div>
+            <div class="align-self-center">{{data.telco}}</div>
         </div>
         <div class="col-md-2 d-flex">
             <div class="align-self-center">
