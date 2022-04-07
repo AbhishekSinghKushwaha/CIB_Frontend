@@ -11,13 +11,13 @@
           >
             <div class="strong-text">
               <mat-icon svgIcon="caret_left"></mat-icon>
-              <span>{{ data.memberId ? "Edit" : "Add" }} </span>
+              <span>{{ data.username ? "Edit" : "Add" }} </span>
             </div>
           </button>
         </div>
         <div class="row mt-3">
           <h3>
-            Please {{ data.memberId ? "update" : "enter" }} the user's details
+            Please {{ data.username ? "update" : "enter" }} the user's details
           </h3>
           <form
             [formGroup]="teamMemberDetailsForm"
@@ -75,7 +75,7 @@
               <div
                 class="col-md-6 cursor-pointer"
                 routerLink="/service-request/user-limit/edit"
-                *ngIf="data.memberId"
+                *ngIf="data.username"
               >
                 <div class="row product-list-item">
                   <div class="col-md-2">
@@ -115,7 +115,7 @@
               <div
                 class="col-md-6 cursor-pointer pt-1"
                 [routerLink]="data.addProductLink"
-                *ngIf="data.memberId"
+                *ngIf="data.username"
               >
                 <div class="row product-list-item">
                   <div class="col-md-2">
@@ -147,7 +147,7 @@
                 type="submit"
                 [disabled]="teamMemberDetailsForm.invalid"
               >
-                {{ data.memberId ? "Update" : "Add" }}
+                {{ data.username ? "Update" : "Add" }}
               </button>
             </div>
           </form>

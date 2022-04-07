@@ -1,5 +1,7 @@
 <app-corporate-user-roles
   [memberId]="memberId"
   [roles]="roles"
-  [backLink]="'/user-management/edit/' + memberId"
+  [backLink]="
+    memberId ? '/user-management/edit/' + memberId : '/user-management/add'
+  "
 ></app-corporate-user-roles>

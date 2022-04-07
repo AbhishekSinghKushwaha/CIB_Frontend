@@ -87,7 +87,7 @@ export class CorporateUserProductsComponent implements OnInit {
   addProducts() {
     this.productsService
       .addProductAndServiceToCorporate(
-        { products: this.payload },
+        { subProductIds: this.payload },
         this.memberId
       )
       .subscribe((res) => {

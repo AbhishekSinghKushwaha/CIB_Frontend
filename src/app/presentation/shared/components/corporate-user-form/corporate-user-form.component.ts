@@ -53,8 +53,7 @@ export class CorporateUserFormComponent implements OnInit {
 
     this.setUser();
 
-    console.log('Form State',
-      this.teamMembersService.getUser())
+    console.log('Form State', this.teamMembersService.getUser())
   }
 
   setUser() {
@@ -93,9 +92,9 @@ export class CorporateUserFormComponent implements OnInit {
   }
 
   getUser() {
-    if (this.data.memberId) {
+    if (this.data.username) {
       this.teamMembersService
-        .getTeamMemberDetails(this.data.memberId)
+        .getTeamMemberDetails(this.data.username)
         .subscribe((res) => {
           console.log('user detail', res);
           if (res.isSuccessful) {
@@ -126,21 +125,23 @@ export class CorporateUserFormComponent implements OnInit {
       emailAddress: ["", [Validators.required, Validators.email]],
       idNumber: ["", [Validators.required]],
       officePhoneNumber: ["", [Validators.required]],
-      roles: [[]],
-      permissionIds: []
+      permissionIds: [[]],
     });
   }
 
   checkRoles() {
     let roles: any[] = this.storageService.getData("selected-roles");
-    roles?.length > 0
-      ? ((this.rolesAdded = true), this.formatRolesPayload(roles))
-      : (this.rolesAdded = false);
+    if (roles?.length > 0) {
+      this.rolesAdded = true;
+      this.formatRolesPayload(roles);
+    } else {
+      this.rolesAdded = false;
+    }
     console.log('roles', roles)
   }
 
   addRoles() {
-    if (this.data.memberId) {
+    if (this.data.username) {
       this.teamMemberDetailsForm.controls.phoneNumber.setValue(
         this.initialPhoneNumber
       );
@@ -166,7 +167,7 @@ export class CorporateUserFormComponent implements OnInit {
         permissions.push(rol[j].id);
       }
     }
-    this.teamMemberDetailsForm.controls.roles.setValue(permissions);
+    this.teamMemberDetailsForm.controls.permissionIds.setValue(permissions);
   }
 
   addTeamMember() {
@@ -182,26 +183,25 @@ export class CorporateUserFormComponent implements OnInit {
       );
     }
 
-    const teamMember = this.teamMemberDetailsForm.getRawValue();
+    const teamMember = { ...this.teamMemberDetailsForm.getRawValue(), notificationOption: 'SMS' };
     console.log('teamMember', teamMember);
-    // this.teamMembersService
-    //   .addTeamMember(
-    //     teamMember,
-    //     this.user.corporateId
-    //   )
-    //   .subscribe((res) => {
-    //     if (res.isSuccessful) {
-    //       this.storageService.removeData("selected-roles");
-    //       this.teamMembersService.setUser({});
-    //       this.router.navigate([
-    //         this.data.userListLink,
-    //       ]);
-    //     }
-    //   });
+    this.teamMembersService
+      .addTeamMember(teamMember)
+      .userManagement
+      .subscribe((res: any) => {
+        console.log('addTeamMember', res);
+        if (res.isSuccessful) {
+          this.storageService.removeData("selected-roles");
+          this.teamMembersService.setUser({});
+          this.router.navigate([
+            this.data.userListLink,
+          ]);
+        }
+      });
   }
 
   submit() {
-    this.data.memberId ? this.updateTeamMember() : this.addTeamMember();
+    this.data.username ? this.updateTeamMember() : this.addTeamMember();
   }
 
   updateTeamMember() {
@@ -216,20 +216,21 @@ export class CorporateUserFormComponent implements OnInit {
         this.initialOfficeNumber
       );
     }
-    const teamMember = this.teamMemberDetailsForm.getRawValue();
+    const teamMember = { ...this.teamMemberDetailsForm.getRawValue(), notificationOption: 'SMS' };
     console.log('teamMember', teamMember);
-    // this.teamMembersService
-    //   .updateTeamMemberDetails(
-    //     teamMember,
-    //     this.data.memberId
-    //   )
-    //   .subscribe((res) => {
-    //     if (res.isSuccessful) {
-    //       this.storageService.removeData("selected-roles");
-    //       this.router.navigate([
-    //         this.data.userListLink,
-    //       ]);
-    //     }
-    //   });
+    this.teamMembersService
+      .updateTeamMemberDetails(
+        teamMember,
+      )
+      .userManagement(this.data.username)
+      .subscribe((res: any) => {
+        console.log('updateTeamMember', res);
+        if (res.isSuccessful) {
+          this.storageService.removeData("selected-roles");
+          this.router.navigate([
+            this.data.userListLink,
+          ]);
+        }
+      });
   }
 }

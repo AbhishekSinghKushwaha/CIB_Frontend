@@ -17,7 +17,7 @@ const routes: Routes = [
         (m) => m.UserDetailsModule
       )
   }, {
-    path: 'edit/:id',
+    path: 'edit/:username',
     loadChildren: (): Promise<any> =>
       import('./user-details/user-details.module').then(
         (m) => m.UserDetailsModule

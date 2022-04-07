@@ -23,7 +23,7 @@ export interface UserListModel {
 export interface UserFormPropModel {
   addRoleLink: string;
   userListLink: string;
-  memberId: string;
+  username: string;
   addProductLink?: string;
 }
 

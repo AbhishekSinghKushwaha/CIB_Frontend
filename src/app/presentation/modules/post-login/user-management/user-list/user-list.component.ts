@@ -21,6 +21,7 @@ export interface User {
   phone: string;
   email?: string;
   status: UserStatus;
+  userName: string;
 }
 
 @Component({
@@ -73,6 +74,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
           phone: element.phoneNumber,
           email: element.email,
           status: element.status,
+          userName: element.userName,
           statusName: element.statusName.match(/[A-Z][a-z]+|[0-9]+/g).join(" ")
         };
       });
@@ -151,7 +153,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
               });
             break;
           case 'edit':
-            this.router.navigate(['edit', user.id], {
+            this.router.navigate(['edit', user.userName], {
               relativeTo: this.activatedRoute,
             });
             break;
