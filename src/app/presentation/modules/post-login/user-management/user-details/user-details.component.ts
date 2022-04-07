@@ -8,6 +8,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { FromAccount } from 'src/app/core/domain/transfer.models';
 import { UserFormPropModel } from 'src/app/core/domain/user.model';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { User, UserStatus } from '../user-list/user-list.component';
 
@@ -26,7 +27,7 @@ export class UserDetailsComponent implements OnInit {
   constructor(
     private readonly router: Router,
     private readonly activatedRoute: ActivatedRoute,
-    private readonly storageService: StorageService
+    private readonly authService: AuthService
   ) {
     this.username = activatedRoute.snapshot.paramMap.get("username");
     console.log('main', this.username);
@@ -36,6 +37,7 @@ export class UserDetailsComponent implements OnInit {
       addProductLink: 'products',
       username: this.username
     }
+    console.log('userData', authService.userState)
   }
 
   ngOnInit(): void {

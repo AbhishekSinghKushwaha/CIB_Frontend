@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserProduct, UserSubProduct } from 'src/app/core/domain/user.model';
 import { ProductsAndServicesService } from 'src/app/core/services/customer-onboarding/products-and-services.service';
@@ -15,8 +15,8 @@ export class CorporateUserProductOptionsComponent implements OnInit {
   product: UserProduct;
   selectedSubproducts: UserSubProduct[] = [];
   alreadySelectedProducts: UserProduct[];
-
-  productId: any;
+  @Input() productId: any;
+  @Input() username: any;
   corporateId: any;
   constructor(
     public readonly notificationDashboardList: NotificationConstants,
@@ -26,22 +26,21 @@ export class CorporateUserProductOptionsComponent implements OnInit {
     private readonly activatedRoute: ActivatedRoute,
     private readonly location: Location,
   ) {
-    this.productId = activatedRoute.snapshot.paramMap.get('productId');
-    this.corporateId = activatedRoute.snapshot.paramMap.get('id');
   }
 
   ngOnInit(): void {
     this.listenToDataStreams();
     setTimeout(() => {
       console.log('this.productId', this.productId);
-      console.log('this.corporateId', this.corporateId);
+      console.log('this.username', this.username);
     }, 2000);
+    this.selectedSubproducts = this.storageService.getData('selected-subproducts') || [];
   }
 
   listenToDataStreams() {
     this.productsServices.selectedProduct$.subscribe((x) => {
       this.product = x;
-      this.productId !== null ? this.mapEditProduct() : this.product;
+      this.productId !== null && this.mapEditProduct();
     });
 
     this.productsServices.selectedProducts$.subscribe((x) => {
@@ -105,35 +104,35 @@ export class CorporateUserProductOptionsComponent implements OnInit {
   }
 
   submit() {
-    this.productId === null ? this.addProduct() : this.updateProduct();
+    this.storageService.setData('selected-subproducts', this.selectedSubproducts);
+    this.goBack();
   }
 
-  toggle(serviceId: string) {
-    if (this.isServiceActive(serviceId)) {
-      const selectedServiceIndex = this.selectedSubproducts.findIndex(
-        (service: UserSubProduct) => service.id === serviceId
+  toggle(subproductId: string) {
+    if (this.subproductExists(subproductId)) {
+      const selectedItemIndex = this.selectedSubproducts.findIndex(
+        (item: UserSubProduct) => item.id === subproductId
       );
-      this.selectedSubproducts.splice(selectedServiceIndex, 1);
+      this.selectedSubproducts.splice(selectedItemIndex, 1);
     } else {
       // Add the service to selected services array
       const selectedSubproduct = this.product?.subProducts?.find(
         (service: UserSubProduct) => {
-          return service.id === serviceId;
+          return service.id === subproductId;
         }
       );
 
       selectedSubproduct && this.selectedSubproducts.push(selectedSubproduct);
     }
+    console.log('selectedSubproducts', this.selectedSubproducts)
   }
 
-  isServiceActive(serviceId: string): boolean {
-    const selectedService = this.selectedSubproducts?.find(
-      (service: UserSubProduct) => {
-        return service.id === serviceId;
+  subproductExists(subproductId: string): boolean {
+    return this.selectedSubproducts?.some(
+      (item: UserSubProduct) => {
+        return item.id === subproductId;
       }
     );
-
-    return selectedService ? true : false;
   }
 
   addProduct() {

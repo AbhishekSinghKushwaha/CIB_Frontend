@@ -13,10 +13,11 @@ import { StorageService } from 'src/app/core/services/storage/storage.service';
 })
 export class CorporateUserProductsComponent implements OnInit {
   @Input() backLink: any;
-  @Input() memberId: any;
+  @Input() username: any;
   products: any[];
   selectedProducts: UserProduct[];
   payload: any[] = [];
+  selectedSubproducts: UserSubProduct[] = [];
   productId: any; // For edit purposes
 
   constructor(
@@ -32,6 +33,7 @@ export class CorporateUserProductsComponent implements OnInit {
   ngOnInit() {
     this.getProductsAndServices();
     this.listenToDataStreams();
+    this.selectedSubproducts = this.storageService.getData('selected-subproducts') || [];
   }
 
   getProductsAndServices() {
@@ -39,9 +41,13 @@ export class CorporateUserProductsComponent implements OnInit {
       if (res.isSuccessful) {
         this.storageService.setData("products-and-services", res.data);
         this.products = res.data;
-        console.log('memberId', this.memberId)
+        console.log('username', this.username)
       }
     });
+  }
+
+  isProductSelected(productId: string): boolean {
+    return this.selectedSubproducts.some(x => x.productId === productId)
   }
 
   listenToDataStreams() {
@@ -87,12 +93,12 @@ export class CorporateUserProductsComponent implements OnInit {
   addProducts() {
     this.productsService
       .addProductAndServiceToCorporate(
-        { subProductIds: this.payload },
-        this.memberId
+        { subProductIds: this.selectedSubproducts.map(x => x.id) },
       )
-      .subscribe((res) => {
+      .userManagement(this.username)
+      .subscribe((res: any) => {
         if (res.isSuccessful) {
-
+          this.storageService.removeData('selected-subproducts');
           this.location.back();
         }
       });

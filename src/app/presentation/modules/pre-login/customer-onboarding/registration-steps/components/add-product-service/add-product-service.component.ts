@@ -77,11 +77,9 @@ export class AddProductServiceComponent implements OnInit {
 
   addProducts() {
     this.productsService
-      .addProductAndServiceToCorporate(
-        { products: this.payload },
-        this.storageService.getData('corporateId')
-      )
-      .subscribe((res) => {
+      .addProductAndServiceToCorporate({ products: this.payload })
+      .onboarding(this.storageService.getData('corporateId'))
+      .subscribe((res: any) => {
         if (res.isSuccessful) {
           this.router.navigate([
             '/auth/customer-onboarding/register/product-services',

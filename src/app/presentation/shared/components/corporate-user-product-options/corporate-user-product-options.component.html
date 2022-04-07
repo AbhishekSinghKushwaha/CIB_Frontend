@@ -38,7 +38,7 @@
                 <div class="col-2 float-right toggle-container">
                   <mat-icon
                     [svgIcon]="
-                      isServiceActive(subproduct?.id || '')
+                      subproductExists(subproduct?.id || '')
                         ? 'toggle_button_on'
                         : 'toggle_button_off'
                     "

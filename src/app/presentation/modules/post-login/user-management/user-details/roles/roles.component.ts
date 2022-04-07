@@ -10,7 +10,7 @@ import { DataLookupService } from 'src/app/core/services/data-lookup/data-lookup
   styleUrls: ['./roles.component.scss']
 })
 export class RolesComponent implements OnInit {
-  memberId: any;
+  userId: any;
   roles: Role[];
   userLink: string
 
@@ -18,7 +18,7 @@ export class RolesComponent implements OnInit {
     private readonly location: Location,
     private activatedRoute: ActivatedRoute,
     private dataLookup: DataLookupService) {
-    this.memberId = activatedRoute.snapshot.paramMap.get("id");
+    this.userId = activatedRoute.snapshot.paramMap.get("username");
   }
 
   ngOnInit(): void {

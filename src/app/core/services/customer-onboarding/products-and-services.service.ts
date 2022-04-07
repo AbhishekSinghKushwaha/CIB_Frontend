@@ -44,14 +44,25 @@ export class ProductsAndServicesService<T, U> extends StateService<ProductsState
 
   /********HTTP CALLS***********/
   // Add product and service
-  addProductAndServiceToCorporate(
-    payload: any,
-    corporateId: string
-  ): Observable<any> {
-    return this.http.post(
-      environment.apiUrl +
-      urlList.customerOnboarding.addCorporateProduct +
-      corporateId,
+  addProductAndServiceToCorporate(payload: any) {
+    return {
+      onboarding: (corporateId: string) => this.http.post(
+        environment.apiUrl +
+        urlList.customerOnboarding.addCorporateProduct +
+        corporateId,
+        payload
+      ),
+      userManagement: (username: string) => this.http.put(
+        `${environment.apiUrl}${urlList.userManagement.getUser}${username}/SubProducts`,
+        payload
+      ),
+
+    };
+  }
+
+  addRoleToCorporate(payload: any, username: string) {
+    return this.http.put(
+      `${environment.apiUrl}${urlList.userManagement.addUser}/${username}/Permissions`,
       payload
     );
   }

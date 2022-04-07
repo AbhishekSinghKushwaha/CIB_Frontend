@@ -101,10 +101,16 @@
                   <div class="col-md-7 product-list-item-label pt-3">
                     <p class="mb-0">User's roles</p>
                   </div>
-                  <div class="col-1 text-grey pt-4" *ngIf="!rolesAdded">
+                  <div
+                    class="col-1 text-grey pt-4"
+                    *ngIf="!selectedRoles?.length"
+                  >
                     off
                   </div>
-                  <div class="col-1 text-primary pt-4" *ngIf="rolesAdded">
+                  <div
+                    class="col-1 text-primary pt-4"
+                    *ngIf="selectedRoles?.length"
+                  >
                     <strong>On</strong>
                   </div>
                   <div class="col-md-2 card card-block justify-content-center">
@@ -114,7 +120,7 @@
               </div>
               <div
                 class="col-md-6 cursor-pointer pt-1"
-                [routerLink]="data.addProductLink"
+                (click)="openProducts()"
                 *ngIf="data.username"
               >
                 <div class="row product-list-item">
@@ -126,10 +132,16 @@
                   <div class="col-md-7 product-list-item-label pt-3">
                     <p class="mb-0">Products & sub-products</p>
                   </div>
-                  <div class="col-1 text-grey pt-4" *ngIf="!rolesAdded">
+                  <div
+                    class="col-1 text-grey pt-4"
+                    *ngIf="!selectedSubproducts.length"
+                  >
                     off
                   </div>
-                  <div class="col-1 text-primary pt-4" *ngIf="rolesAdded">
+                  <div
+                    class="col-1 text-primary pt-4"
+                    *ngIf="selectedSubproducts.length"
+                  >
                     <strong>On</strong>
                   </div>
                   <div class="col-md-2 card card-block justify-content-center">

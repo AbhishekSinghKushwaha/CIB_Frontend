@@ -12,11 +12,11 @@ import { ProductsConstants } from 'src/app/core/utils/constants/products.constan
 })
 export class ProductsComponent implements OnInit {
 
-  memberId: any;
+  username: any;
 
   constructor(private readonly location: Location,
     private readonly activatedRoute: ActivatedRoute) {
-    this.memberId = activatedRoute.snapshot.paramMap.get("id");
+    this.username = activatedRoute.snapshot.paramMap.get("username");
   }
 
   ngOnInit(): void {
