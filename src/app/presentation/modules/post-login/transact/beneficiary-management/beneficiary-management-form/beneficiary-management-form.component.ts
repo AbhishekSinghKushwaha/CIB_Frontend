@@ -10,6 +10,7 @@ import { MobileWalletsService } from "src/app/core/services/modal-services/mobil
 import { SharedDataService } from "src/app/core/services/shared-data/shared-data.service";
 import { TransferFromService } from "src/app/core/services/modal-services/transfer-from.service";
 import { TelcoService } from "src/app/core/services/modal-services/telco.service";
+import { IntrabankService } from "src/app/core/services/transfers/intrabank/intrabank.service";
 @Component({
   selector: "app-beneficiary-management-form",
   templateUrl: "./beneficiary-management-form.component.html",
@@ -35,7 +36,8 @@ export class BeneficiaryManagementFormComponent implements OnInit {
     private mobileWalletService: MobileWalletsService,
     private sharedDataService: SharedDataService,
     private transferFromService: TransferFromService,
-    private telcoService: TelcoService
+    private telcoService: TelcoService,
+    private readonly intraBankService: IntrabankService
   ) {
     this.beneficiaryId = route.snapshot.paramMap.get("id");
     this.phoneUtil = PhoneNumberUtil.getInstance();
@@ -154,12 +156,23 @@ export class BeneficiaryManagementFormComponent implements OnInit {
     });
   }
 
-  createBeneficiary() {
+  async createBeneficiary() {
     if (!this.beneficiaryForm.get("phoneNumber")?.dirty) {
       this.beneficiaryForm.controls.phoneNumber.setValue(
         this.initialPhoneNumber
       );
     }
+
+    if (
+      this.getFormFields.transferType.value.value ===
+      this.transferType.INTRA_BANK
+    ) {
+      const response = await this.perfomNameEquiry();
+      response.status
+        ? this.getFormFields.accountName.setValue(response.data.accountName)
+        : "";
+    }
+
     const payload = {
       countryCode: this.getFormFields.country.value.countryCode,
       bankCode: this.getFormFields.bank.value.bankCode,
@@ -224,6 +237,14 @@ export class BeneficiaryManagementFormComponent implements OnInit {
     // TODO:: Do product selction for bill payments
 
     return productName;
+  }
+
+  async perfomNameEquiry() {
+    const account = await this.beneficiaryManagementService.accountSearch({
+      accountNumber: this.getFormFields.accountNumber.value,
+      bankCode: "54",
+    });
+    return account;
   }
 
   toggleFav(): void {

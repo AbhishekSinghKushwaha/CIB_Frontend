@@ -12,8 +12,7 @@ import { TransferToService } from "src/app/core/services/modal-services/transfer
 import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
 import { BeneficiaryManagementService } from "src/app/core/services/beneficiary-management/beneficiary-management.service";
 import { StorageService } from "src/app/core/services/storage/storage.service";
-import { MerchantDetailsService } from 'src/app/core/services/merchant-details/merchant-details.service';
-
+import { MerchantDetailsService } from "src/app/core/services/merchant-details/merchant-details.service";
 
 @Component({
   selector: "app-transfer-to",
@@ -142,9 +141,11 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
         });
         break;
       case this.transferType.BUY_GOODS:
-        this.merchantDetailsService.favouriteMerchantDetails.subscribe((res) => {
-          this.favouriteMerchantDetails = res;
-        });
+        this.merchantDetailsService.favouriteMerchantDetails.subscribe(
+          (res) => {
+            this.favouriteMerchantDetails = res;
+          }
+        );
         this.transferToService.openTransferToModal({
           favourites: this.beneficiaries,
           transactionType: this.transactionType,
@@ -180,7 +181,7 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
           favourites: this.beneficiaries,
           transactionType: this.transactionType,
         });
-        break;  
+        break;
         break;
     }
   }
@@ -236,7 +237,7 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
           this.parentForm.controls.sendTo.setValue(x);
         });
         break;
-        case this.transferType.BUY_AIRTIME:
+      case this.transferType.BUY_AIRTIME:
         this.newRecipientService.data.subscribe((x) => {
           this.parentForm.controls.sendTo.setValue(x);
         });

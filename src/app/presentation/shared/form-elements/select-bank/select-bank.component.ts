@@ -46,6 +46,19 @@ export class SelectBankComponent implements OnInit {
 
   public isDisabled!: boolean;
 
+  defaultCountry = {
+    countryCode: "KE",
+    countryName: "Kenya",
+    currency: "KES",
+    currencySymbol: "Sh",
+    nationality: "Kenyan",
+    dialCode: "254",
+    flagPath:
+      "https://oneequity.blob.core.windows.net/assets/visuals/flags/kenya.svg",
+    operatingCountry: true,
+    countryCode3Chars: "KEN",
+  };
+
   get formField(): FormControl {
     return this.parentForm?.get(this.fieldName) as FormControl;
   }
@@ -91,6 +104,8 @@ export class SelectBankComponent implements OnInit {
   }
 
   openBankSelectionModal() {
-    this.selectBankService.open(this.parentForm.controls.country.value);
+    this.parentForm.get("country") !== null
+      ? this.selectBankService.open(this.parentForm.controls.country.value)
+      : this.selectBankService.open(this.defaultCountry);
   }
 }

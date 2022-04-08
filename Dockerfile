@@ -11,7 +11,7 @@ WORKDIR /ng-app
 
 COPY . .
 
-RUN npm run build --env=dev
+RUN npm run build 
 ## Production mode build
 # RUN $(npm bin)/ng build --env=staging --prod --build-optimizer
 

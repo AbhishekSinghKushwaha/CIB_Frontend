@@ -56,6 +56,7 @@ export class SwiftComponent implements OnInit {
   }
 
   getTransferCharges() {
+    console.log(this.swiftTransferForm.getRawValue());
     const payload = {
       amount: this.getForm.amount.value.amount,
       currency: this.getForm.amount.value.currency,
@@ -143,13 +144,13 @@ export class SwiftComponent implements OnInit {
       .afterClosed()
       .subscribe((confirmed: boolean) => {
         if (data) {
-          this.sendMoney();
+          this.savePayloadForOtpVerification();
         }
       });
   }
 
   // Initiate fund transfer to own equity account
-  sendMoney() {
+  savePayloadForOtpVerification() {
     const payload = {
       amount: this.getForm.amount.value.amount,
       beneficiaryAccount: this.getForm.sendTo.value.accountNumber,
@@ -174,14 +175,13 @@ export class SwiftComponent implements OnInit {
       sectorCode: this.getForm.paymentCategory.value.sectorCode,
     };
     if (this.swiftTransferForm.valid) {
-      this.swiftTransferService.sendViaSwift(payload).subscribe((res) => {
-        if (res.status) {
-          this.router.navigate(["/transact/transfer-submitted"]);
-        } else {
-          alert(res.message);
-          // TODO:: Notify Error
-        }
-      });
+      this.swiftTransferService.setTransferPayload(payload);
+      this.swiftTransferService.setFavouritesPayload(
+        this.swiftTransferForm.getRawValue()
+      );
+      this.router.navigate([
+        `/transact/otp-verification/${this.transferType.SWIFT}`,
+      ]);
     }
   }
 }

@@ -1,25 +1,32 @@
-import { Injectable } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Subject } from 'rxjs';
-import { recipientModel } from '../../domain/recipient.model';
-import { NewRecipientModalComponent } from '../../../presentation/shared/modals/new-recipient-modal/new-recipient-modal.component';
+import { Injectable } from "@angular/core";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { Subject } from "rxjs";
+import { recipientModel } from "../../domain/recipient.model";
+import { NewRecipientModalComponent } from "../../../presentation/shared/modals/new-recipient-modal/new-recipient-modal.component";
+import { TransactionTypeConstants } from "../../utils/constants/transaction-type.constants";
+import { StorageService } from "../storage/storage.service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class NewRecipientService {
   data = new Subject<recipientModel>();
   dialogRef: any;
   private defaultData: recipientModel;
 
-  constructor(private readonly dialog: MatDialog) { }
+  transferType = TransactionTypeConstants.TransferType;
+
+  constructor(
+    private readonly dialog: MatDialog,
+    private storageService: StorageService
+  ) {}
 
   // Open New Recipient Form Based on transaction type
   open(transactionType: string) {
     return this.dialog.open<NewRecipientModalComponent, any>(
       NewRecipientModalComponent,
       {
-        maxWidth: '22vw',
+        maxWidth: "22vw",
         disableClose: true,
         data: transactionType,
       }
@@ -31,7 +38,7 @@ export class NewRecipientService {
     return this.dialog.open<NewRecipientModalComponent, any>(
       NewRecipientModalComponent,
       {
-        maxWidth: '22vw',
+        maxWidth: "22vw",
         disableClose: true,
         data: mode,
       }

@@ -1,29 +1,35 @@
-import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { environment } from "src/environments/environment";
-import urlList from "../../service-list.json";
+import { MobileWallet } from "src/app/core/domain/transfer.models";
 import { StateService } from "../../state/state.service";
-
-interface interBankState {
+import urlList from "../../service-list.json";
+import { HttpClient } from "@angular/common/http";
+import { environment } from "src/environments/environment";
+interface MobileMoneyState {
+  wallet: MobileWallet;
   transferPayload: {};
   favouritesPayload: {};
 }
 
-const initialState: interBankState = {
+const initialState: MobileMoneyState = {
+  wallet: {},
   transferPayload: {},
   favouritesPayload: {},
 };
 @Injectable({
   providedIn: "root",
 })
-export class InterbankService extends StateService<interBankState> {
+export class MobileMoneyService extends StateService<MobileMoneyState> {
   transferPayload$: Observable<any> = this.select(
-    (state) => state.favouritesPayload
+    (state) => state.transferPayload
   );
+
   favouritesPayload$: Observable<any> = this.select(
     (state) => state.favouritesPayload
   );
+
+  wallet$: Observable<MobileWallet> = this.select((state) => state.wallet);
+
   constructor(private http: HttpClient) {
     super(initialState);
   }
@@ -36,16 +42,16 @@ export class InterbankService extends StateService<interBankState> {
     this.setState({ favouritesPayload });
   }
 
-  sendToOtherBanks(payload: any): Observable<any> {
+  getTransferCharges(payload: any): Observable<any> {
     return this.http.post(
-      environment.apiUrl + urlList.transfers.sendOwnEquityAccount,
+      environment.apiUrl + urlList.transfers.getTransferCharges,
       payload
     );
   }
 
-  getTransferCharges(payload: any): Observable<any> {
+  sendMobileMoney(payload: any): Observable<any> {
     return this.http.post(
-      environment.apiUrl + urlList.transfers.getTransferCharges,
+      environment.apiUrl + urlList.transfers.mobileMoneyTransfer,
       payload
     );
   }
