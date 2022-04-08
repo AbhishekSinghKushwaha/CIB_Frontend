@@ -740,59 +740,6 @@ const transactionDetail: ConfirmationModel[] = [
   },
 ];
 
-const standingOrderDetail: ConfirmationModel[] = [
-  {
-    content: [
-      {
-        key: 'Start date',
-        value: '01 January 2021'
-      },
-      {
-        key: 'End date',
-        value: '01 January 2021'
-      },
-      {
-        key: 'Transaction Type',
-        value: 'Send money to Equity Account'
-      },
-      {
-        key: 'From',
-        value: 'Loot<br>0810174008113 • Savings'
-      },
-      {
-        key: 'Narration',
-        value: 'Payment to IdeaHub vendor'
-      }
-    ]
-  },
-  {
-    title: 'Beneficiary details',
-    content: [
-      {
-        key: 'Beneficiary name',
-        value: 'Isah Uche Olusegun'
-      },
-      {
-        key: 'Account number',
-        value: '00113577162'
-      },
-      {
-        key: 'IBAN number',
-        value: '2085252042'
-      },
-      {
-        key: 'Beneficiary bank',
-        value: 'HSBC Group'
-      },
-      {
-        key: 'Bank code',
-        value: '06454'
-      }
-    ]
-  }
-];
-
-
 const histororicalTransactions: TransactionListmodel[] = Array(35).fill(0).map((x, i) => ({
   title: 'Reference C38437393944034',
   description: 'MOBILE WALLET TRANSFER TO LESLIE ISAH',
@@ -806,14 +753,6 @@ const pendingTransactions: TransactionListmodel[] = Array(32).fill(0).map((x, i)
   amount: '000,000.00 KES',
   date: 'Thu,23 Aug',
   status: 'Pending'
-}));
-
-const standingOrders: StandingOrdersListmodel[] = Array(32).fill(0).map((x, i) => ({
-  title: 'List label',
-  description: 'MOBILE WALLET TRANSFER TO LESLIE ISAH',
-  amount: '000,000.00 KES',
-  date: 'Thu, 23 2021 Aug - Fri 23 July, 2022',
-  status: i % 2 === 0 ? 'Active' : 'Inactive'
 }));
 
 export const TransactionType: TransactionTypeModel[] = [
@@ -855,7 +794,5 @@ export const mockData = {
   pendingTransactions,
   airtimeAmountRange,
   mobileCodes,
-  standingOrders,
-  standingOrderDetail,
   TransactionType
 };

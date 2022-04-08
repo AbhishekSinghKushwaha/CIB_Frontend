@@ -98,5 +98,15 @@ export class TransactConstants {
         },
       ],
     },
+    {
+      section: 'Standing orders',
+      content: [
+        {
+          leftIcon: 'tablet_android',
+          text: 'Standing orders',
+          link: '/transact/standing-orders',
+        },
+      ],
+    },
   ];
 }

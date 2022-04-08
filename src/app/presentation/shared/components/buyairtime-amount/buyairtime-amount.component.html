@@ -25,6 +25,7 @@
                 [name]="fieldName"
                 class="strong-text"
                 [value]="value?.amount || ''"
+                [disabled]="sendFromAccount === undefined"
                 (input)="onChange($event)"
                 (blur)="touched()"
                 [placeholder]="placeholder"
@@ -41,6 +42,7 @@
                 [id]="fieldName"
                 [name]="fieldName"
                 [value]="value?.amount || ''"
+                [disabled]="sendFromAccount === undefined"
                 (input)="onChange($event)"
                 (blur)="touched()"
                 [placeholder]="placeholder"
@@ -61,6 +63,7 @@
                 class="strong-text"
                 [value]="value?.amount || ''"
                 [placeholder]="placeholder"
+                [disabled]="sendFromAccount === undefined"
             />
         </mat-form-field>
     </div> 
