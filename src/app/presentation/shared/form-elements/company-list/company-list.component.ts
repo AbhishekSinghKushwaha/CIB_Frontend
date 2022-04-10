@@ -27,7 +27,17 @@ export class CompanyListComponent implements ControlValueAccessor, OnInit {
 
   @Input() transactionType!: string;
 
-  @Input() defaultData: string;
+  private _defaultData: any;
+  @Input() set defaultData(value: any) {
+    if (value) {
+      this._defaultData = value;
+      this.parentForm.controls[this.fieldName].setValue(value);
+    }
+
+  };
+  get defaultData() {
+    return this._defaultData;
+  }
 
   public value!: UserListModel;
 

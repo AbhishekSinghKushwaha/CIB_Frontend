@@ -79,7 +79,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
         };
       });
       this.dataSource.data = this.users;
-      console.log(result);
+
     });
   }
 

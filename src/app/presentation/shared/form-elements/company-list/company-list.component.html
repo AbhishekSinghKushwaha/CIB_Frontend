@@ -6,7 +6,7 @@
     class="strong-text"
     [id]="fieldName"
     [name]="fieldName"
-    [value]="value?.name || ''"
+    [value]="value || ''"
     [disabled]="isDisabled"
     (input)="onChange($event)"
     (blur)="touched()"

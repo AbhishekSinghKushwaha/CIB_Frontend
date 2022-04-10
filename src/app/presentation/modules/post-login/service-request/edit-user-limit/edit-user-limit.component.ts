@@ -74,7 +74,7 @@ export class EditUserLimitComponent implements OnInit {
     this.userService
       .getLimit(username)
       .subscribe((response: any) => {
-        console.log('getUserLimits', response);
+
         if (response.isSuccessful) {
           this.userLimits = response.data;
         }
@@ -123,24 +123,22 @@ export class EditUserLimitComponent implements OnInit {
       }]
     }
     this.confirmationModalService.open(this.data).afterClosed().subscribe((data: boolean) => {
-      this.completed = !!data;
       const { user, currency, ...payload } = this.editUserDataForm.getRawValue();
-      console.log({ ...payload, currencyCode: this.editUserDataForm.value.currency.currencyCode });
       if (!this.updateMode) {
         this.userService
           .addLimit(this.username, { ...payload, currencyCode: this.editUserDataForm.value.currency.currencyCode })
           .subscribe((response: any) => {
-            console.log(response)
-            if (response.isSuccessful) {
 
+            if (response.isSuccessful) {
+              this.completed = !!data;
             }
           })
       } else {
         this.userService
           .editLimit(this.username, this.editUserDataForm.value.currency.currencyCode, payload)
           .subscribe((response: any) => {
-            console.log(response)
             if (response.isSuccessful) {
+              this.completed = !!data;
 
             }
           })
@@ -204,7 +202,7 @@ export class EditUserLimitComponent implements OnInit {
         startWith(null),
       ).subscribe((res) => {
         if (res) {
-          console.log('Changes', res);
+
           this.username = res.userName
           this.userDetail = res;
           this.getUserLimits(res.userName)

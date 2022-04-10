@@ -23,6 +23,12 @@
     "getRegistrationSummary": "/cibonboarding-v1/api/Registration/preview-corporate-detail/",
     "uploadCorporateDocuments": "/cibonboarding-v1/api/Registration/updload-corporate-documents/"
   },
+  "corporate":{
+    "main":"/cibcore/api/Corporates/",
+    "addTransactionLimit":"/cibcore/api/CorporateTransactionLimit/Add/",
+    "getTransactionLimit":"/cibcore/api/CorporateTransactionLimit/Limits/",
+    "updateTransactionLimit":"/cibcore/api/CorporateTransactionLimit/Update/"
+  },
   "userManagement":{
     "getRoles": "/cibcore/api/roles",
     "getProductsAndServices": "/cibcore/api/products",
