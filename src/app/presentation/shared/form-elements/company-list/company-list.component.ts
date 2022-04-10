@@ -27,13 +27,15 @@ export class CompanyListComponent implements ControlValueAccessor, OnInit {
 
   @Input() transactionType!: string;
 
+  @Input() defaultData: string;
+
   public value!: UserListModel;
 
   public changed!: (value: string) => void;
 
   public touched!: () => void;
 
-  public isDisabled!: boolean;
+  public isDisabled = true;
 
   get formField(): FormControl {
     return this.parentForm?.get(this.fieldName) as FormControl;

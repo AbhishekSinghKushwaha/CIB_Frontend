@@ -29,4 +29,8 @@ export class UserService {
   addLimit(username: string, payload: any) {
     return this.http.post(`${environment.apiUrl}${urlList.userManagement.addUserLimit}${username}`, payload);
   }
+
+  getUserCorporateDetail(corporateID: string) {
+    return this.http.get(`${environment.apiUrl}${urlList.customerOnboarding.getRegistrationSummary}${corporateID}`);
+  }
 }

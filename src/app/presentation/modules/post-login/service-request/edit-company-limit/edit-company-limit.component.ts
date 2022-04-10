@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfirmationModel } from 'src/app/core/domain/confirmation.model';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { ConfirmationModalService } from 'src/app/core/services/modal-services/confirmation-modal.service';
+import { UserService } from 'src/app/core/services/user/user.service';
 import { CONFIRMATIONCOMPLETION } from 'src/app/core/utils/constants/confirmation.constants';
 
 @Component({
@@ -17,10 +19,24 @@ export class EditCompanyLimitComponent implements OnInit {
 
   constructor(
     private readonly fb: FormBuilder,
+    private readonly userService: UserService,
+    private readonly authService: AuthService,
     private readonly confirmationModalService: ConfirmationModalService) { }
 
   ngOnInit(): void {
     this.initForm();
+    this.getCorporate();
+  }
+
+  getCorporate() {
+    console.log('CorporateId', this.authService.userState.corporateId)
+    this.userService
+      .getUserCorporateDetail(this.authService.userState.corporateId)
+      .subscribe((response: any) => {
+        if (response.isSuccessful) {
+          console.log('getUserCorporateDetail', response);
+        }
+      });
   }
 
   submit() {
