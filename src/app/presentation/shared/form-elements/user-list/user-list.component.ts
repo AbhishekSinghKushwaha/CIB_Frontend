@@ -1,8 +1,10 @@
-import { Component, forwardRef, OnInit, Input } from '@angular/core';
+import { Component, forwardRef, OnInit, Input, OnDestroy } from '@angular/core';
 import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { UserListModel } from 'src/app/core/domain/user.model';
 import { UserListService } from 'src/app/core/services/modal-services/user-list.service';
 import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
+import { SharedUtils } from 'src/app/core/utils/shared.util';
 
 @Component({
   selector: 'app-user-list',
@@ -16,7 +18,7 @@ import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
     },
   ],
 })
-export class UserListComponent implements ControlValueAccessor, OnInit {
+export class UserListComponent implements ControlValueAccessor, OnInit, OnDestroy {
   @Input() parentForm!: FormGroup;
 
   private _defaultData: any;
@@ -33,6 +35,8 @@ export class UserListComponent implements ControlValueAccessor, OnInit {
 
   @Input() showModal: boolean;
 
+  @Input() userListData: UserListModel[];
+
   @Input() public fieldName!: string;
 
   @Input() public label!: string;
@@ -40,6 +44,8 @@ export class UserListComponent implements ControlValueAccessor, OnInit {
   @Input() placeholder!: string;
 
   @Input() transactionType!: string;
+
+  private subscriptions: Subscription[] = [];
 
   public value!: UserListModel;
 
@@ -85,10 +91,14 @@ export class UserListComponent implements ControlValueAccessor, OnInit {
   }
 
   openModal() {
-    this.userListService.open(mockData.userList)
+    this.subscriptions.push(this.userListService.open(this.userListData)
       .afterClosed()
       .subscribe((item: UserListModel) =>
-        this.parentForm.controls[this.fieldName].setValue(item)
-      );
+        item && this.parentForm.controls[this.fieldName].setValue(item)
+      ));
+  }
+
+  ngOnDestroy() {
+    SharedUtils.unSubscribe(this.subscriptions);
   }
 }

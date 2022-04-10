@@ -1,9 +1,4 @@
-<mat-form-field
-  appearance="standard"
-  style="width: 100%"
-  floatLabel="always"
-  (click)="openModal()"
->
+<mat-form-field appearance="standard" style="width: 100%" floatLabel="always">
   <mat-label>{{ label }}</mat-label>
   <input
     matInput
@@ -17,7 +12,7 @@
     (blur)="touched()"
     [placeholder]="placeholder"
   />
-  <button type="button" mat-icon-button matSuffix>
+  <!-- <button type="button" mat-icon-button matSuffix>
     <mat-icon svgIcon="caret_down"></mat-icon>
-  </button>
+  </button> -->
 </mat-form-field>

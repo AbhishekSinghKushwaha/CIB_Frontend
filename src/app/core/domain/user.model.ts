@@ -13,8 +13,12 @@ export interface UserModel {
 
 
 export interface UserListModel {
-  id: string;
+  idNumber: string;
   name: string;
+  userName: string;
+  firstName: string;
+  lastName: string;
+  statusName: string;
   profileType: string;
   status: string;
   lastViewed: string;

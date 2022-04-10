@@ -70,11 +70,11 @@ export class CompanyListComponent implements ControlValueAccessor, OnInit {
     this.isDisabled = isDisabled;
   }
 
-  openModal() {
-    this.companyListService.open(mockData.companyList)
-      .afterClosed()
-      .subscribe((item: UserListModel) =>
-        this.parentForm.controls[this.fieldName].setValue(item)
-      );
-  }
+  // openModal() {
+  //   this.companyListService.open(mockData.companyList)
+  //     .afterClosed()
+  //     .subscribe((item: UserListModel) =>
+  //       this.parentForm.controls[this.fieldName].setValue(item)
+  //     );
+  // }
 }

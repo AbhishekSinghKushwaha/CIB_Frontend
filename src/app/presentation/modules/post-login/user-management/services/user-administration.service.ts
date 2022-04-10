@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import urlList from '../../../../../core/services/service-list.json';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class UserAdministrationService {
   constructor(private http: HttpClient) { }
 

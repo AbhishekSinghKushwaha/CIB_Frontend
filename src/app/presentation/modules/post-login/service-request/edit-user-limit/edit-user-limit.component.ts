@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationModel } from 'src/app/core/domain/confirmation.model';
 import { ConfirmationModalService } from 'src/app/core/services/modal-services/confirmation-modal.service';
 import { CONFIRMATIONCOMPLETION } from 'src/app/core/utils/constants/confirmation.constants';
 import { TeamMembersService } from 'src/app/core/services/customer-onboarding/team-members.service';
-import { startWith } from 'rxjs/operators';
+import { map, startWith, take, takeUntil } from 'rxjs/operators';
 import { CurrencyModel } from 'src/app/core/domain/transfer.models';
 import { UserService } from 'src/app/core/services/user/user.service';
-import { UserLimitModel } from 'src/app/core/domain/user.model';
+import { UserLimitModel, UserListModel } from 'src/app/core/domain/user.model';
+import { UserAdministrationService } from '../../user-management/services/user-administration.service';
 
 @Component({
   selector: 'app-edit-user-limit',
@@ -26,6 +27,7 @@ export class EditUserLimitComponent implements OnInit {
   selectedCurrency: CurrencyModel;
   userLimits: UserLimitModel[];
   updateMode: boolean;
+  userListData: UserListModel[] = [];
 
   constructor(
     private readonly fb: FormBuilder,
@@ -34,46 +36,59 @@ export class EditUserLimitComponent implements OnInit {
     private readonly activatedRoute: ActivatedRoute,
     private readonly location: Location,
     private readonly teamMembersService: TeamMembersService,
-    private readonly userService: UserService) {
+    private readonly userService: UserService,
+    private readonly userAdministrationService: UserAdministrationService) {
 
     this.username = activatedRoute.snapshot.paramMap.get('username');
-    this.getUserLimits();
   }
 
   ngOnInit(): void {
     this.initForm();
-    this.getUser();
+    this.checkCurrencyValueChanges();
+    this.checkNameValueChanges();
+    if (this.username) {
+      this.getUserLimits(this.username);
+      this.getUser(this.username);
+    } else {
+      this.getAllUsers()
+    }
   }
 
-  getUserLimits() {
+  getAllUsers() {
+    this.userAdministrationService.getUsers().subscribe((result: any) => {
+      this.userListData = result.items.map((element: UserListModel) => {
+        // TODO: lastViewed column to be set from backend
+        return {
+          idNumber: element.idNumber,
+          name: `${element.firstName} ${element.lastName}`,
+          profileType: 'Individual',
+          userName: element.userName,
+          status: element.statusName.match(/[A-Z][a-z]+|[0-9]+/g)?.join(" "),
+          lastViewed: ''
+        };
+      });
+    });
+  }
+
+  getUserLimits(username: string) {
     this.userService
-      .getLimit(this.username)
+      .getLimit(username)
       .subscribe((response: any) => {
-        console.log(response)
+        console.log('getUserLimits', response);
         if (response.isSuccessful) {
           this.userLimits = response.data;
         }
       });
   }
 
-  getUser() {
-    if (this.username) {
-      this.teamMembersService
-        .getTeamMemberDetails(this.username)
-        .subscribe((res) => {
-          if (res.isSuccessful) {
-            this.userDetail = res.data;
-            this.userService
-              .getLimit(this.username)
-              .subscribe((response: any) => {
-                console.log(response)
-                if (response.isSuccessful) {
-
-                }
-              });
-          }
-        });
-    }
+  getUser(username: string) {
+    this.teamMembersService
+      .getTeamMemberDetails(username)
+      .subscribe((res) => {
+        if (res.isSuccessful) {
+          this.userDetail = res.data;
+        }
+      });
   }
 
 
@@ -111,14 +126,17 @@ export class EditUserLimitComponent implements OnInit {
       this.completed = !!data;
       const { user, currency, ...payload } = this.editUserDataForm.getRawValue();
       console.log({ ...payload, currencyCode: this.editUserDataForm.value.currency.currencyCode });
-      !this.updateMode ? this.userService
-        .addLimit(this.username, { ...payload, currencyCode: this.editUserDataForm.value.currency.currencyCode })
-        .subscribe((response: any) => {
-          console.log(response)
-          if (response.isSuccessful) {
+      if (!this.updateMode) {
+        this.userService
+          .addLimit(this.username, { ...payload, currencyCode: this.editUserDataForm.value.currency.currencyCode })
+          .subscribe((response: any) => {
+            console.log(response)
+            if (response.isSuccessful) {
 
-          }
-        }) : this.userService
+            }
+          })
+      } else {
+        this.userService
           .editLimit(this.username, this.editUserDataForm.value.currency.currencyCode, payload)
           .subscribe((response: any) => {
             console.log(response)
@@ -126,6 +144,7 @@ export class EditUserLimitComponent implements OnInit {
 
             }
           })
+      }
     })
   }
 
@@ -138,19 +157,28 @@ export class EditUserLimitComponent implements OnInit {
   }
 
   initForm(): void {
-    this.editUserDataForm = this.fb.group({
-      user: ['', [Validators.required]],
-      currency: ['', [Validators.required]],
-      transactionLimit: ['', [Validators.required]],
-      dailyLimit: ['', [Validators.required]],
-      weeklyLimit: ['', [Validators.required]],
-      monthlyLimit: ['', [Validators.required]],
+    this.editUserDataForm = new FormGroup({
+      user: new FormControl('', [Validators.required]),
+      currency: new FormControl('', [Validators.required]),
+      transactionLimit: new FormControl('', [Validators.required]),
+      dailyLimit: new FormControl('', [Validators.required]),
+      weeklyLimit: new FormControl('', [Validators.required]),
+      monthlyLimit: new FormControl('', [Validators.required]),
     });
+  }
+
+  checkValueChanges() {
+    // this.editUserDataForm.valueChanges
+    //   .pipe()
+    //   .subscribe()
+  }
+
+  checkCurrencyValueChanges() {
     this.editUserDataForm.controls.currency
       .valueChanges
       .pipe(startWith(null))
       .subscribe((data) => {
-        if (this.selectedCurrency !== data) {
+        if (data && this.selectedCurrency !== data) {
           this.selectedCurrency = data;
           this.updateMode = false;
           const currentLimit = this.userLimits?.length && this.userLimits.find(x => x.currencyCode === this.selectedCurrency.currencyCode);
@@ -166,6 +194,20 @@ export class EditUserLimitComponent implements OnInit {
             this.editUserDataForm.controls.weeklyLimit.setValue('');
             this.editUserDataForm.controls.monthlyLimit.setValue('');
           }
+        }
+      });
+  }
+
+  checkNameValueChanges() {
+    this.editUserDataForm.controls.user
+      .valueChanges.pipe(
+        startWith(null),
+      ).subscribe((res) => {
+        if (res) {
+          console.log('Changes', res);
+          this.username = res.userName
+          this.userDetail = res;
+          this.getUserLimits(res.userName)
         }
       });
   }
