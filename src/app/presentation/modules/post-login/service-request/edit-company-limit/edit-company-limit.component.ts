@@ -40,7 +40,7 @@ export class EditCompanyLimitComponent implements OnInit {
   }
 
   getCorporate() {
-    // TODO :: Corporate information should be gotten from core service and not onboarding
+    // TODO :: Corporate information should be fetched from core service and not onboarding
     this.userService
       .getUserCorporateDetail(this.authService.userState.corporateId)
       .pipe(
