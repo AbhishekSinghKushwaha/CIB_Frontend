@@ -80,10 +80,10 @@
       *ngSwitchCase="'security-challenge'"
     ></app-security-challenge>
 
-    <app-reset-password
-      [token]="securityToken"
-      [userIdentifier]="credentialsControls?.credentials?.value"
+    <app-confirmation-completion
+      [data]="completionData"
       *ngSwitchCase="'change-password'"
-    ></app-reset-password>
+      (confirmationDone)="confirmationDone($event)"
+    ></app-confirmation-completion>
   </div>
 </div>

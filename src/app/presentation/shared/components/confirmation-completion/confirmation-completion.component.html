@@ -1,14 +1,30 @@
-<h3 class="strong-text">{{ data.title }}</h3>
-
+<h3 class="strong-text" *ngIf="data.title">{{ data.title }}</h3>
 <div class="row mt-5">
-  <div class="col-md-6">
+  <div
+    class="col-md-6"
+    [ngClass]="{
+      'col-lg-6': data?.category !== 'small',
+      'col-lg-12': data?.category === 'small'
+    }"
+    *ngIf="data?.category !== 'small'"
+  >
     <img class="img-fluid mt-4 mb-4" [src]="data.icon" />
   </div>
-  <div class="col-md-6 pt-3">
-    <h3>{{ data.message }}</h3>
-    <small class="text-grey" [innerHTML]="data.subMessage"></small>
-
-    <div class="pt-5">
+  <div
+    class="col-md-6 pt-3"
+    [ngClass]="{
+      'col-lg-6': data?.category !== 'small',
+      'col-lg-12': data?.category === 'small'
+    }"
+  >
+    <div class="row">
+      <h3>{{ data.message }}</h3>
+      <small class="text-grey" [innerHTML]="data.subMessage"></small>
+    </div>
+    <div class="row mt-3 mb-3" *ngIf="data?.category === 'small'">
+      <img class="img-fluid mt-4 mb-4 width-60" [src]="data.icon" />
+    </div>
+    <div class="pt-5" [ngClass]="{ row: data?.category === 'small' }">
       <button mat-raised-button color="primary" (click)="done()">
         {{ data.buttonText }}
       </button>

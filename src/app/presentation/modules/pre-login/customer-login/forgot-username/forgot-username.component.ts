@@ -8,6 +8,7 @@ import { NotificationModalService } from 'src/app/core/services/modal-services/n
 import { SecurityChallengeService } from 'src/app/core/services/security-challenge/security-challenge.service';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { UserService } from 'src/app/core/services/user/user.service';
+import { CONFIRMATIONCOMPLETION } from 'src/app/core/utils/constants/confirmation.constants';
 import { SharedUtils } from 'src/app/core/utils/shared.util';
 
 @Component({
@@ -22,6 +23,7 @@ export class ForgotUsernameComponent implements OnInit {
   securityToken: string;
   submitted: boolean;
   initialResponse: string;
+  completionData = CONFIRMATIONCOMPLETION.forgotUsernameData;
 
   credentialsForm: FormGroup = new FormGroup({
     credentials: new FormControl(null, [
@@ -41,6 +43,13 @@ export class ForgotUsernameComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.storageService.getData('loginCred');
+  }
+
+
+  confirmationDone(event: boolean) {
+    if (event) {
+      this.router.navigate(['/auth/login'])
+    }
   }
 
   resetStage() {
