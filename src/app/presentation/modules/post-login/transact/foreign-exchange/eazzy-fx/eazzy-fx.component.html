@@ -1,0 +1,20 @@
+<div>
+  <div class="mb-3">
+    <button
+      mat-icon-button
+      aria-label="Back"
+      class="back-icon"
+      routerLink="/transact"
+    >
+      <div class="strong-text">
+        <mat-icon svgIcon="caret_left"></mat-icon>
+        <span>Eazzy FX</span>
+      </div>
+    </button>
+  </div>
+  <mat-button-toggle-group value="rates" (change)="navigate($event)">
+    <mat-button-toggle value="rates">Rates</mat-button-toggle>
+    <mat-button-toggle value="pair">Select pair</mat-button-toggle>
+  </mat-button-toggle-group>
+  <router-outlet></router-outlet>
+</div>

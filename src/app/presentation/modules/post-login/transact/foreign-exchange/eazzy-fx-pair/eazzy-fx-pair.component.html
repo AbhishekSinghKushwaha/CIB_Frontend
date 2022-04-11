@@ -1,0 +1,51 @@
+<h3 class="strong-text mt-4">What pair do you wish to compare?</h3>
+<div class="row">
+  <div
+    class="col-6 p-4 my-2 d-flex justify-content-between align-items-center rounded currency-item"
+    (click)="chooseSourceCurrency()"
+  >
+    <div class="d-inline-flex justify-content-center align-items-center">
+      <img [src]="sourceRate.image" />
+      <div class="d-inline-flex flex-column justify-content-center">
+        <span>Convert from</span>
+        <span class="text-grey"
+          >{{ sourceRate.country }} - {{ sourceRate.currency }}</span
+        >
+      </div>
+    </div>
+    <mat-icon color="primary" [svgIcon]="'caret_down'"></mat-icon>
+  </div>
+  <div
+    class="col-6 p-4 my-2 d-flex justify-content-between align-items-center rounded currency-item"
+    (click)="chooseDestinationCurrency()"
+  >
+    <div class="d-inline-flex justify-content-center align-items-center">
+      <img [src]="destinationRate.image" />
+      <div class="d-inline-flex flex-column justify-content-center">
+        <span>Convert to</span>
+        <span class="text-grey"
+          >{{ destinationRate.country }} - {{ destinationRate.currency }}</span
+        >
+      </div>
+    </div>
+    <mat-icon color="primary" [svgIcon]="'caret_down'"></mat-icon>
+  </div>
+</div>
+<mat-divider></mat-divider>
+<div class="d-flex justify-content-between">
+  <span class="text-grey">Rates were last updated 20 minutes ago</span>
+</div>
+
+<button
+  mat-raised-button
+  color="primary"
+  class="mt-5 col-md-3"
+  style="margin-right: 10px"
+  (click)="generateDeal()"
+>
+  Generate deal
+</button>
+
+<button mat-raised-button class="mt-5 col-md-3" (click)="negotiateDeal()">
+  Negotiate deal
+</button>

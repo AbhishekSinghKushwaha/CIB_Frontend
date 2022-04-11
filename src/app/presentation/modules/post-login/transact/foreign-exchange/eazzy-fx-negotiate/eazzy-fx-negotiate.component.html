@@ -1,0 +1,67 @@
+<form
+  class="row"
+  autocomplete="off"
+  [formGroup]="negotiationFormGroup"
+  (submit)="negotiate()"
+>
+  <div class="col-md-6">
+    <app-transfer-amount
+      [parentForm]="negotiationFormGroup"
+      fieldName="amount"
+      label="Amount"
+      placeholder="Enter an amount"
+      formControlName="amount"
+    >
+    </app-transfer-amount>
+  </div>
+
+  <div class="col-md-6">
+    <app-schedule-payment-input
+      [parentForm]="negotiationFormGroup"
+      label="Schedule Payment"
+      fieldName="schedulePayment"
+      placeholder="Select a payment date"
+      transactionType="ownEquityAccount"
+    ></app-schedule-payment-input>
+  </div>
+  <div class="col-md-6">
+    <mat-form-field
+      appearance="standard"
+      style="width: 100%"
+      floatLabel="always"
+      (click)="selectTransactionType()"
+    >
+      <mat-label>Transaction Type</mat-label>
+      <input
+        matInput
+        type="text"
+        class="strong-text"
+        [value]="negotiationFormGroup.get('transactionType')?.value"
+        placeholder="Select transaction type"
+      />
+      <button type="button" mat-icon-button matSuffix>
+        <mat-icon svgIcon="caret_down"></mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div class="col-md-6">
+    <app-input
+      [parentForm]="negotiationFormGroup"
+      fieldName="reason"
+      label="Payment Reason"
+      formControlName="reason"
+      placeholder="Optional"
+    ></app-input>
+  </div>
+  <div class="mt-4">
+    <button
+      mat-raised-button
+      type="submit"
+      [disabled]="negotiationFormGroup.invalid"
+      color="primary"
+      class="px-5"
+    >
+      Submit
+    </button>
+  </div>
+</form>

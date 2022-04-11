@@ -120,6 +120,11 @@ const routes: Routes = [
       ),
   },
   {
+    path: "foreign-exchange",
+    loadChildren: (): Promise<any> =>
+      import("./foreign-exchange/foreign-exchange.module").then((m) => m.ForeignExchangeModule),
+  },
+  {
     path: "**",
     redirectTo: "",
   },
