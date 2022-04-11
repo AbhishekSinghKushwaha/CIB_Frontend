@@ -73,9 +73,10 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
   }
 
   public submitForgetPasswordOTP(otp: string, email: string) {
-    const url = `${environment.apiUrl}${urlList.login.verifyForgetPasswordOtp}?email=${email}&otp=${otp}`;
-    return this.http
-      .get<UserModel>(url);
+    return {
+      forgotPassword: this.http.get<UserModel>(`${environment.apiUrl}${urlList.login.verifyForgetPasswordOtp}?email=${email}&otp=${otp}`),
+      forgotUsername: this.http.get<UserModel>(`${environment.apiUrl}${urlList.login.verifyForgotUsernameOtp}?email=${email}&otp=${otp}`)
+    }
   }
 
   resendOTP() {

@@ -9,23 +9,25 @@
       >
         <div class="strong-text">
           <mat-icon svgIcon="chevron-left" class="chevron"></mat-icon>
-          <span> Forgot password </span>
+          <span> Forgot username </span>
         </div>
       </button>
     </div>
   </div>
   <div class="card-body ps-5" [ngSwitch]="stage">
     <div class="row pt-4 pb-5" *ngSwitchDefault>
-      <h3 class="strong-text">Have you forgotten your password?</h3>
+      <h3 class="strong-text">Please enter your mobile number</h3>
       <div class="text-sm text-grey">
-        We’ll email or text you a link to help you reset your password
+        Enter your mobile number and we will help you reset your email address
       </div>
-      <form [formGroup]="credentialsForm" (ngSubmit)="validateCredentials()">
+      <form
+        class="mt-4"
+        [formGroup]="credentialsForm"
+        (ngSubmit)="validateCredentials()"
+      >
         <div class="row mb-3">
           <mat-form-field class="col-md-12">
-            <mat-label for="accountInfo">
-              Email address, mobile number or user ID
-            </mat-label>
+            <mat-label for="accountInfo"> Enter your mobile number </mat-label>
             <input
               matInput
               type="text"
@@ -37,7 +39,7 @@
               class="validationError"
             >
               <div *ngIf="credentialsControls.credentials.errors.required">
-                Please enter your email address, mobile number, user ID
+                Please enter your mobile number
               </div>
               <div *ngIf="credentialsControls.credentials.errors.minlength">
                 Minimum 6 characters

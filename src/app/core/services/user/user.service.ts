@@ -11,7 +11,11 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   validateUsername(value: string) {
-    return this.http.get(`${environment.apiUrl}${urlList.login.validateUser}?email=${value}`);
+    return this.http.get(`${environment.apiUrl}${urlList.login.initiatePasswordReset}?email=${value}`);
+  }
+
+  initiateUsernameReset(value: string) {
+    return this.http.get(`${environment.apiUrl}${urlList.login.initiateUsernameReset}?email=${value}`);
   }
 
   resetPassword(data: any) {

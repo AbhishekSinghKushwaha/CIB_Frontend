@@ -8,15 +8,14 @@ import { NotificationModalService } from 'src/app/core/services/modal-services/n
 import { SecurityChallengeService } from 'src/app/core/services/security-challenge/security-challenge.service';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { UserService } from 'src/app/core/services/user/user.service';
-import { ValidateCredentialsUsecase } from 'src/app/core/usecases/validate-credentials.usecase';
 import { SharedUtils } from 'src/app/core/utils/shared.util';
 
 @Component({
-  selector: 'app-forgot-password',
-  templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.scss']
+  selector: 'app-forgot-username',
+  templateUrl: './forgot-username.component.html',
+  styleUrls: ['./forgot-username.component.scss']
 })
-export class ForgotPasswordComponent implements OnInit {
+export class ForgotUsernameComponent implements OnInit {
   otpError: boolean;
   stage: string;
   user: UserModel;
@@ -44,6 +43,14 @@ export class ForgotPasswordComponent implements OnInit {
     this.user = this.storageService.getData('loginCred');
   }
 
+  resetStage() {
+    if (!this.stage) {
+      this.router.navigate(['/auth/login']);
+    } else {
+      this.stage = '';
+    }
+  }
+
   validateCredentials(): void {
     this.submitted = true;
     if (this.credentialsForm.invalid) {
@@ -52,11 +59,16 @@ export class ForgotPasswordComponent implements OnInit {
 
     const credential = this.credentialsControls.credentials.value;
 
-    this.userService.validateUsername(credential).subscribe(
+    this.userService.initiateUsernameReset(credential).subscribe(
       (response: any) => {
-        this.submitted = false;
-        this.stage = 'sms-verification';
-        this.initialResponse = response.statusMessage;
+        console.log(response)
+        if (response) {
+          this.submitted = false;
+          this.stage = 'sms-verification';
+          this.initialResponse = response.statusMessage;
+          // this.credentialsForm.reset()
+        }
+
       },
       (error) => {
         this.otpError = true;
@@ -87,7 +99,7 @@ export class ForgotPasswordComponent implements OnInit {
     if (otp) {
       this.authService
         .submitForgetPasswordOTP(otp, this.credentialsControls.credentials.value)
-        .forgotPassword
+        .forgotUsername
         .subscribe(
           (response) => {
             this.stage = 'security-verification';
@@ -97,14 +109,6 @@ export class ForgotPasswordComponent implements OnInit {
             console.log({ error });
           }
         );
-    }
-  }
-
-  resetStage() {
-    if (!this.stage) {
-      this.router.navigate(['/auth/login']);
-    } else {
-      this.stage = '';
     }
   }
 

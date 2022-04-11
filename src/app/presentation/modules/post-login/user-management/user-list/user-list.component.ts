@@ -5,6 +5,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs/operators';
+import { UserListModel } from 'src/app/core/domain/user.model';
+import { UserListService } from 'src/app/core/services/modal-services/user-list.service';
 import { UserAdministrationService } from '../services/user-administration.service';
 import { UserManagementSuccessService } from '../services/user-management-success.service';
 import {
@@ -30,7 +32,7 @@ export interface User {
   styleUrls: ['./user-list.component.scss'],
 })
 export class UserListComponent implements OnInit, AfterViewInit {
-  private users: User[];
+  private users: UserListModel[];
 
   @ViewChild(MatSort)
   private sort: MatSort;
@@ -51,13 +53,14 @@ export class UserListComponent implements OnInit, AfterViewInit {
     'email'
   ]
 
-  dataSource: MatTableDataSource<User>;
+  dataSource: MatTableDataSource<UserListModel>;
 
   searchControl: FormControl = new FormControl({ value: '', disabled: true });
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private readonly userListService: UserListService,
     private readonly dialog: MatDialog,
     private readonly userManagementSuccessService: UserManagementSuccessService,
     private readonly userAdministrationService: UserAdministrationService
@@ -92,28 +95,11 @@ export class UserListComponent implements OnInit, AfterViewInit {
   }
 
   openFilterModal() {
-    this.dialog
-      .open<UserListSearchModalComponent>(UserListSearchModalComponent, {
-        data: {
-          collection: this.users,
-          title: 'User search',
-          copy: 'Search for a user by entering their ID number, user ID, and phone number',
-          displayedColumns: [
-            'select',
-            'idNumber',
-            'name',
-            'phone',
-            'email',
-            'status',
-          ],
-          filterByColumns: this.filterByColumns
-        },
-      })
+    this.userListService.open(this.users)
       .afterClosed()
-      .pipe(take(1))
-      .subscribe((filter: any) => {
-        if (filter) {
-          this.dataSource.data = filter.selectedData;
+      .subscribe((item: UserListModel) => {
+        if (item) {
+          this.dataSource.data = [item];
         } else {
           this.dataSource.data = this.users;
         }
