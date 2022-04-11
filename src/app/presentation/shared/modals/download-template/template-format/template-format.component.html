@@ -1,0 +1,26 @@
+<div class="download-template-modal-screen p-0">
+    <div class="row">
+        <div class="col-md-2">
+            <button mat-icon-button matSuffix class="close-button" (click)="close()">
+                <mat-icon svgIcon="caret_left"></mat-icon>
+            </button>
+        </div>
+        <div class="col-md-8">
+            <p class="text-center fw-bold pt-2">Download a template</p>
+        </div>
+    </div>
+    <h3 class="mt-4 ms-2">Please select the template format</h3>
+    <p class="text-sm text-grey ms-2">Choose a file format from the options below</p>
+    <div *ngFor="let item of data; let isLast = last; let i = index">
+        <div class="row gx-0 p-3">
+            <div class="col-md-3">
+                <button mat-icon-button>
+                    <mat-icon svgIcon="download_grey" class="button_icon"></mat-icon>
+                </button>
+            </div>
+            <div class="col-md-7 card card-block justify-content-center" (click)="closeTemplateFormat()">
+                {{item.type}}
+            </div>
+        </div>
+    </div>
+</div>

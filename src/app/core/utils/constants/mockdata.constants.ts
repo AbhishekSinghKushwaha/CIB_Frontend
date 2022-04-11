@@ -14,6 +14,7 @@ import { StandingOrdersListmodel } from "../../domain/standing-orders-list.model
 import { TransactionTypeModel } from "src/app/core/domain/transaction-type.model";
 import { AirtimeAmountRangeModel } from "../../domain/international-airtime-amount-range.model";
 import { CountryMobileCodeModal } from "../../domain/countryCode.model";
+import { DownloadTemplateModal } from "src/app/core/domain/download-template.model";
 
 const accounts: SelectAccountModel[] = [
   {
@@ -885,6 +886,30 @@ export const TransactionType: TransactionTypeModel[] = [
   },
 ];
 
+const downloadTemplate: DownloadTemplateModal[] = [
+  {
+    type: "Template 1",
+  },
+  {
+    type: "Template 2",
+  },
+  {
+    type: "Template 3",
+  }
+];
+
+const templateFormat: DownloadTemplateModal[] = [
+  {
+    type: "Excel",
+  },
+  {
+    type: "Csv",
+  },
+  {
+    type: "Other",
+  }
+];
+
 export const mockData = {
   accounts,
   favourites,
@@ -903,4 +928,6 @@ export const mockData = {
   standingOrders,
   standingOrderDetail,
   TransactionType,
+  downloadTemplate,
+  templateFormat
 };

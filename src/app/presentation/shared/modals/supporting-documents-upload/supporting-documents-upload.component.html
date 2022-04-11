@@ -1,4 +1,4 @@
-<div class="own-equity-modal-screen p-3 mat-elevation-z0">
+<div class="own-equity-modal-screen p-2 mat-elevation-z0">
   <div class="row">
     <div class="col-md-4">
       <mat-icon (click)="close()" class="cursor-pointer">close</mat-icon>
@@ -6,26 +6,20 @@
     <h4 class="strong-text col-md-8">Supporting documents</h4>
   </div>
   <h3 class="strong-text pt-4">Upload documents</h3>
-  <small class="text-grey"
-    >Please upload supporting documents in PDF or Jpeg format. The maximum size
-    allowed is 20mb.</small
-  ><br />
-  <div class="row align-upload">
+  <small class="text-grey">
+    Please upload supporting documents in PDF or Jpeg format. 
+    The maximum file size allowed per document is 3mb.</small><br/>
+  <div class="row col-md-12 ps-2">
     <div class="col-md-6 upload my-4">
       <div class="icon icon-alignment">
         <mat-icon color="primary" aria-hidden="false">file_upload</mat-icon>
       </div>
       <div class="text-center">
         <small>Upload your documents</small><br />
-        <small class="text-grey"
-          >Drag & drop or
-          <label for="input-file-id" class="browse strong-text">browse</label>
-          files here</small
-        >
-        <input
-          class="ng-hide"
-          id="input-file-id"
-          (change)="uploadFiles($event)"
+        <small class="text-grey">Drag & drop or
+          <label for="input-file-id" class="browse strong-text cursor-pointer">browse</label>
+          files here</small>
+        <input class="ng-hide" id="input-file-id" (change)="uploadFiles($event)"
           multiple="multiple"
           type="file"
           style="display: none"
