@@ -37,7 +37,7 @@ const forgotUsernameData: ConfirmationCompletionModel = {
   message: 'Great!',
   subMessage: 'An email has been sent to the registered email address for this account',
   icon: 'assets/images/icons/visual-support-icons-virtual-account-submission-avatar.svg',
-  category: 'small'
+  category: 'small',
 };
 
 export const CONFIRMATIONCOMPLETION = { chequeBook, editUserLimit, editCompanyLimit, staticUserData, forgotUsernameData };
