@@ -22,6 +22,7 @@ export class ForgotPasswordComponent implements OnInit {
   user: UserModel;
   securityToken: string;
   submitted: boolean;
+  initialResponse: string;
 
   credentialsForm: FormGroup = new FormGroup({
     credentials: new FormControl(null, [
@@ -52,9 +53,10 @@ export class ForgotPasswordComponent implements OnInit {
     const credential = this.credentialsControls.credentials.value;
 
     this.userService.validateUsername(credential).subscribe(
-      (response) => {
+      (response: any) => {
         this.submitted = false;
         this.stage = 'sms-verification';
+        this.initialResponse = response.statusMessage;
       },
       (error) => {
         this.otpError = true;
