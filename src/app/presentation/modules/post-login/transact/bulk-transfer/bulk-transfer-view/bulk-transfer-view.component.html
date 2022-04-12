@@ -1,0 +1,126 @@
+<div class="activity-detail p-3">
+    <div class="mb-3">
+      <button
+        mat-icon-button
+        aria-label="Back"
+        class="back-icon"
+        routerLink="/transact/bulk-transfer/details"
+      >
+        <div class="strong-text">
+          <mat-icon svgIcon="caret_left"></mat-icon>
+        </div>
+      </button>
+    </div>
+    <div class="row-fluid mb-4">
+        <div class="col-8">
+            <h3 class="strong-text">Payment details</h3>
+        </div>
+    </div>
+    <div class="row-fluid text-danger fs-4 mb-3">
+      10,000 KES
+      <mat-icon svgIcon="question_mark"></mat-icon>
+    </div>
+    <div class="row-fluid">
+      <div class="row">
+        <div class="col-6">
+          <a mat-button href="" class="bg-light">
+            <mat-icon [svgIcon]="transactionIcon.Active" mat-raised-button></mat-icon>
+            Successfully uploaded
+          </a>
+        </div>
+        <div class="col-6 d-flex justify-content-end">
+          <button mat-raised-button class="me-3" color="primary" (click)="edit()">
+            <span class="pe-3 ps-3">Edit</span>
+          </button>
+          <button mat-stroked-button color="primary" (click)="delete()">
+            <span class="pe-3 ps-3">Delete</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="row">
+        <div class="row gx-0 p-4">
+            <div class="col-4 mb-4">
+              <span class="text-grey text-sm">Payment date</span>
+              <p class="mb-0 text-sm pb-0">4/3/22</p>
+            </div>
+            <div class="col-4 mb-4">
+              <span class="text-grey text-sm">Payment type</span>
+              <p class="mb-0 text-sm pb-0">RTGS</p>
+            </div>
+            <div class="col-4 mb-4">
+              <span class="text-grey text-sm">Debit account name</span>
+              <p class="mb-0 text-sm pb-0">Loot</p>
+            </div>
+            <div class="col-4 mb-4">
+              <span class="text-grey text-sm">Debit account number</span>
+              <p class="mb-0 text-sm pb-0">2237846578926</p>
+            </div>
+            <div class="col-4 mb-4">
+              <span class="text-grey text-sm">Beneficiary account number</span>
+              <p class="mb-0 text-sm pb-0">2337846578955</p>
+            </div>
+            <div class="col-4 mb-4">
+                <span class="text-grey text-sm">Beneficiary mobile</span>
+                <p class="mb-0 text-sm pb-0">0810174008113</p>
+            </div>
+            <div class="col-4 mb-4">
+                <span class="text-grey text-sm">Beneficiary name</span>
+                <p class="mb-0 text-sm pb-0">Uche</p>
+            </div>
+            <div class="col-4 mb-4">
+                <span class="text-grey text-sm">Beneficiary bank</span>
+                <p class="mb-0 text-sm pb-0">Equity</p>
+            </div>
+            <div class="col-4 mb-4">
+                <span class="text-grey text-sm">Amount</span>
+                <p class="mb-0 text-sm pb-0">10.0000.00</p>
+            </div>
+            <div class="col-4 mb-4">
+                <span class="text-grey text-sm">Currency</span>
+                <p class="mb-0 text-sm pb-0">KES</p>
+            </div>
+            <div class="col-4 mb-4">
+                <span class="text-grey text-sm">Credit reference number</span>
+                <p class="mb-0 text-sm pb-0">Ref_123</p>
+            </div>
+            <div class="col-4 mb-4">
+                <span class="text-grey text-sm">Payment reason</span>
+                <p class="mb-0 text-sm pb-0">Cash management transfer</p>
+            </div>
+          </div>
+    </div>
+  </div>
+
+  <h4 class="strong-text">Attached document</h4>
+  <div class="col-md-6 mt-4">
+  <div class="progress-container mb-2">
+    <div class="row gx-0 m-4 py-3">
+      <div class="col-9">
+        <p class="mb-0">
+          <strong>Bank template.CSV</strong>
+        </p>
+      </div>
+      <div class="col-3">
+        <div class="d-flex flex-row mt-1">
+          <mat-icon
+            color="primary"
+            class="icon-close cursor-pointer m-2"
+            aria-hidden="false"
+            >visibility</mat-icon
+          >
+          <mat-icon
+            color="primary"
+            class="icon-close cursor-pointer m-2"
+            aria-hidden="false"
+            (click)="delete()"
+            >delete</mat-icon
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

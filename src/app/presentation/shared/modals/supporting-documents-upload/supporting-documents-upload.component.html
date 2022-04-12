@@ -27,7 +27,7 @@
       </div>
     </div>
 
-    <div class="col-md-6 mt-4" *ngIf="fileName">
+    <!-- <div class="col-md-6 mt-4" *ngIf="fileName">
       <div *ngFor="let data of files; let i = index">
         <div class="progress-container mb-2">
           <div class="mx-4 py-2">
@@ -52,10 +52,78 @@
           </div>
         </div>
       </div>
+    </div> -->
+
+    <!-------------------------------------------->
+    <div class="col-md-6 mt-4">
+      <div>
+        <div *ngFor="let data of progressFiles; let i = index">
+          <div class="progress-container mb-2">
+            <div class="mx-4 py-2">
+              <div class="flex-align">
+                <small>{{ data }}</small>
+                <mat-icon
+                  *ngIf="progress < 100"
+                  color="primary"
+                  class="icon-close cursor-pointer"
+                  aria-hidden="false"
+                  (click)="cancelUpload(i)"
+                  >close</mat-icon
+                >
+                <mat-icon
+                  *ngIf="progress === 100"
+                  style="color: #2f9803"
+                  class="icon-close cursor-pointer"
+                  aria-hidden="false"
+                  >done</mat-icon
+                >
+              </div>
+              <mat-progress-bar
+                *ngIf="progress < 100"
+                color="#2f9803"
+                [value]="progress"
+                class="mt-2"
+              ></mat-progress-bar>
+              <small class="progress-pre">{{
+                progress === 100 ? message : progress + "%"
+              }}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="progress-container mb-2" *ngFor="let data of files; let i = index">
+        <div class="row gx-0 m-4 py-3">
+          <div class="col-9">
+            <p class="mb-0">
+              <strong>{{ data}}</strong>
+            </p>
+          </div>
+          <div class="col-3">
+            <div class="d-flex flex-row mt-1">
+              <mat-icon
+                color="primary"
+                class="icon-close cursor-pointer m-2"
+                aria-hidden="false"
+                >visibility</mat-icon
+              >
+              <mat-icon
+                color="primary"
+                class="icon-close cursor-pointer m-2"
+                aria-hidden="false"
+                (click)="delete(i)"
+                >delete</mat-icon
+              >
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+    <!--------------------------------------------->
+    
   </div>
   <small class="text-grey">Additional information if required</small>
   <div class="py-4">
-    <button mat-flat-button disabled class="px-5">Upload</button>
+    <button mat-raised-button type="submit" color="primary" class="px-5" (click)="upload()">Upload</button>
   </div>
 </div>

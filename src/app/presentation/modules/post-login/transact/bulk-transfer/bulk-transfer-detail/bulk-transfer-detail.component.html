@@ -1,0 +1,113 @@
+<div *ngIf="alertVisible" class="d-flex justify-content-right alert alert-light mat-elevation-z8 float-end">
+    <mat-icon class="text-success">check_circle</mat-icon>
+    <span style="padding-left: 10px;">{{ alertMessage }}</span>
+</div>
+<div>
+    <div class="mb-3">
+        <button mat-icon-button aria-label="Back" class="back-icon" routerLink="/transact">
+          <div class="strong-text">
+            <mat-icon svgIcon="caret_left"></mat-icon>
+            <span>Bulk payment</span>
+          </div>
+        </button>
+    </div>
+    <div class="d-flex justify-content-right">
+        <mat-icon>info_outline</mat-icon>
+        <span class="col-md-7 text-sm text-grey ps-2">
+            This is a simplified view your bulk payment information. 
+            To see the full details of a payment, click on the three dots under “Action”.
+        </span>
+    </div>
+    
+    <div class="mt-4">
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef>Payment date</th>
+            <td mat-cell *matCellDef="let row">{{ row.date }}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef>Payment type</th>
+            <td mat-cell *matCellDef="let row">{{ row.type }}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Beneficiary name</th>
+            <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="bank">
+            <th mat-header-cell *matHeaderCellDef>Bank</th>
+            <td mat-cell *matCellDef="let row">{{ row.bank }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef>Amount</th>
+            <td mat-cell *matCellDef="let row">{{ row.amount }}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Action</th>
+            <td mat-cell *matCellDef="let element">
+              <button
+                type="button"
+                mat-icon-button
+                matSuffix
+                (click)="openActionsMenu(element)"
+              >
+                <mat-icon matSuffix [matMenuTriggerFor]="menu">more_horiz</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No data matching the filter</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div>  
+        <mat-menu #menu="matMenu" xPosition="before" class="my-menu">
+          <div class="row cursor-pointer">
+            <div class="col-md-3 pb-1">
+              <button mat-fab class="button_icon">
+                <mat-icon svgIcon="eyes_view"></mat-icon>
+              </button>
+            </div>
+            <div class="col-md-8 card card-block justify-content-center">
+              <span>View payment details</span>
+            </div>
+          </div>
+          <mat-divider class="pb-1"></mat-divider>
+          <div class="row cursor-pointer" (click)="deleteBeneficiary()">
+            <div class="col-md-3">
+              <button mat-fab class="button_icon">
+                <mat-icon svgIcon="delete-documents"></mat-icon>
+              </button>
+            </div>
+            <div class="col-md-8 card card-block justify-content-center">
+              <span>Delete beneficiary</span>
+            </div>
+          </div>    
+        </mat-menu>
+    </div>
+
+    <div class="col-md-12 p-3 d-flex justify-content-between bg-light mt-4">
+        <div class="strong-text">Total amount</div>
+        <div class="strong-text">KES 0.00</div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-2">
+            <button mat-raised-button type="submit" color="primary" class="px-5" (click)="submit()">Submit</button>
+        </div>
+        <div class="col-md-3">
+            <button mat-stroked-button type="button" color="primary" class="px-5">Cancel</button>
+        </div>
+    </div>
+    
+</div>

@@ -6,6 +6,20 @@ const routes: Routes = [
   {
     path: '',
     component: BulkTransferComponent,
+  },
+  {
+    path: "view",
+    loadChildren: (): Promise<any> =>
+      import("./bulk-transfer-view/bulk-transfer-view.module").then(
+        (m) => m.BulkTransferViewModule
+      ),
+  },
+  {
+    path: "details",
+    loadChildren: (): Promise<any> =>
+      import("./bulk-transfer-detail/bulk-transfer-detail.module").then(
+        (m) => m.BulkTransferDetailModule
+      ),
   }
 ];
 

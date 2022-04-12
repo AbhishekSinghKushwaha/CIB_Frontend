@@ -50,7 +50,9 @@ export class StandingOrdersDetailComponent implements OnInit {
   delete() {
     const payload = {
       title: 'Are you sure?',
-      message: 'Once you delete, all their details will be deleted. You can add them again anytime.'
+      message: 'Once you delete, all their details will be deleted. You can add them again anytime.',
+      buttonNo: "No, I'm not",
+      buttonYes: "Yes, I’m sure"
     }
     this.deleteService.open(payload);
   }

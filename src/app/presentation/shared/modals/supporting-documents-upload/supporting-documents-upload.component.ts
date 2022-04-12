@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { UploadConfirmationService } from 'src/app/core/services/upload-confirmation/upload-confirmation.service';
 
 @Component({
   selector: 'app-supporting-documents-upload',
@@ -14,9 +15,12 @@ export class SupportingDocumentsUploadComponent implements OnInit {
   files: any = [];
   progress = 0;
   message = '';
+  progressFiles: any[] = [];
+
 
   constructor(
-    readonly dialogRef: MatDialogRef<SupportingDocumentsUploadComponent>
+    readonly dialogRef: MatDialogRef<SupportingDocumentsUploadComponent>,
+    private readonly uploadConfirmationService: UploadConfirmationService
   ) { }
 
   ngOnInit(): void {
@@ -33,16 +37,20 @@ export class SupportingDocumentsUploadComponent implements OnInit {
       if(file){
         this.currentFile = file;
         this.fileName = this.currentFile.name;
-        this.files.push(this.fileName);
-        // this.progress = 70;
-
+        this.progressFiles.push(this.fileName);
+        this.progress = 100;
         
         if(this.progress === 100){
+          this.files.push(this.fileName);
+          this.progressFiles.pop();
           this.message = 'Completed'
         }
       }
     }
-    
+  }
+
+  upload() {
+    this.uploadConfirmationService.open();
   }
 
   cancelUpload(i:any) {
@@ -53,5 +61,8 @@ export class SupportingDocumentsUploadComponent implements OnInit {
     this.files.splice(num, 1);
   }
   
+  delete(i:any) {
+    this.files.splice(i, 1);
+  }
 
 }
