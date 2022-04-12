@@ -147,7 +147,7 @@ export class CompleteTransferComponent implements OnInit {
 
     transferType === this.transferTypes.SWIFT ||
     transferType === this.transferTypes.EFT ||
-    transferType === this.transferTypes.INTER_COUNTRY_TRANSFER ||
+    transferType === this.transferTypes.SUBSIDIARY ||
     transferType === this.transferTypes.RTGS
       ? (productName = this.favouritesPayload.sendTo?.bank?.bankCode)
       : transferType === this.transferTypes.BUY_AIRTIME

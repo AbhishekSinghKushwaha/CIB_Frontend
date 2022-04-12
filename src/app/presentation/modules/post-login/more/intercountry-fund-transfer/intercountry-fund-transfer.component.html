@@ -16,14 +16,14 @@
   <form
     class="d-flex flex-column"
     autocomplete="off"
-    [formGroup]="intercountryFundTransfer"
+    [formGroup]="intercountryFundTransferForm"
     (submit)="getTransferCharges()"
   >
     <div class="row pt-4">
       <!-- Transfer From -->
       <div class="col-md-6">
         <app-transfer-from
-          [parentForm]="intercountryFundTransfer"
+          [parentForm]="intercountryFundTransferForm"
           label="Send From"
           placeholder="Send From"
           formControlName="sendFrom"
@@ -33,18 +33,18 @@
       <!-- Transfer To -->
       <div class="col-md-6 align-self-end">
         <app-transfer-to
-          [parentForm]="intercountryFundTransfer"
+          [parentForm]="intercountryFundTransferForm"
           fieldName="sendTo"
           formControlName="sendTo"
           label="Send To"
           placeholder="Select Recipient"
-          transactionType="{{ transferType.INTER_COUNTRY_TRANSFER }}"
+          transactionType="{{ transferType.SUBSIDIARY }}"
         ></app-transfer-to>
       </div>
       <!-- FX Reference ID -->
       <div class="col-md-6">
         <app-input
-          [parentForm]="intercountryFundTransfer"
+          [parentForm]="intercountryFundTransferForm"
           fieldName="fxReferenceId"
           label="FX Reference ID"
           placeholder="Enter FX reference ID"
@@ -54,7 +54,7 @@
       <!-- Transfer amount -->
       <div class="col-md-6">
         <app-transfer-amount
-          [parentForm]="intercountryFundTransfer"
+          [parentForm]="intercountryFundTransferForm"
           fieldName="amount"
           label="Amount"
           placeholder="Enter an amount"
@@ -65,7 +65,7 @@
       <!-- Schedule Payment -->
       <div class="col-md-6">
         <app-schedule-payment-input
-          [parentForm]="intercountryFundTransfer"
+          [parentForm]="intercountryFundTransferForm"
           label="Schedule Payment"
           fieldName="schedulePayment"
           placeholder="Select a payment date"
@@ -75,7 +75,7 @@
       <!-- Payment Reason -->
       <div class="col-md-6">
         <app-input
-          [parentForm]="intercountryFundTransfer"
+          [parentForm]="intercountryFundTransferForm"
           fieldName="reason"
           label="Payment Reason"
           formControlName="reason"
@@ -104,7 +104,7 @@
       <button
         mat-raised-button
         type="submit"
-        [disabled]="intercountryFundTransfer.invalid"
+        [disabled]="intercountryFundTransferForm.invalid"
         color="primary"
         class="px-5"
       >

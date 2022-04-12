@@ -75,7 +75,6 @@ export interface TransferTypeDTO {
   MOBILE_MONEY: string;
   BUY_AIRTIME: string;
   PESALINK: string;
-  INTER_COUNTRY_TRANSFER: string;
   SUBSIDIARY: string;
 }
 

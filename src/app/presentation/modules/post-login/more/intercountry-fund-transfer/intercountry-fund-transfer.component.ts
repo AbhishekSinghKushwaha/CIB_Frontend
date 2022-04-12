@@ -22,7 +22,7 @@ export class IntercountryFundTransferComponent
   extends BaseTransactComponent
   implements OnInit
 {
-  intercountryFundTransfer: FormGroup;
+  intercountryFundTransferForm: FormGroup;
   aboveTransactionTypeLimit: boolean = false;
   transferType = TransactionTypeConstants.TransferType;
 
@@ -39,14 +39,14 @@ export class IntercountryFundTransferComponent
   }
 
   get getForm() {
-    return this.intercountryFundTransfer.controls;
+    return this.intercountryFundTransferForm.controls;
   }
   ngOnInit(): void {
     this.initForm();
   }
 
   initForm(): void {
-    this.intercountryFundTransfer = this.fb.group({
+    this.intercountryFundTransferForm = this.fb.group({
       sendFrom: ["", [Validators.required]],
       sendTo: ["", [Validators.required]],
       amount: [{}, [Validators.required, accountLimitValidator]],
@@ -67,7 +67,7 @@ export class IntercountryFundTransferComponent
       currency: this.getForm.amount.value.currency,
       destinationAccount: this.getForm.sendTo.value.accountNumber,
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
-      transferType: Number(this.transferType.SUBSIDIARY), // For Own Equity Account
+      transferType: this.transferType.SUBSIDIARY, // For Own Equity Account
     };
     this.intercountryService.getTransferCharges(payload).subscribe((res) => {
       if (res.status) {
@@ -80,7 +80,7 @@ export class IntercountryFundTransferComponent
 
   // Confirm Payment and return the confirmation boolean before initiating payment.
   confirmPayment(transferFee: string) {
-    if (this.intercountryFundTransfer.valid) {
+    if (this.intercountryFundTransferForm.valid) {
       const data = {
         title: "Payment Confirmation",
         subtitle: "To continue, please confirm your transaction",
@@ -165,8 +165,11 @@ export class IntercountryFundTransferComponent
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
       transferType: this.transferType.SUBSIDIARY,
     };
-    if (this.intercountryFundTransfer.valid) {
+    if (this.intercountryFundTransferForm.valid) {
       this.intercountryService.setTransferPayload(payload);
+      this.intercountryService.setFavouritesPayload(
+        this.intercountryFundTransferForm.getRawValue()
+      );
       this.router.navigate([
         `/transact/otp-verification/${this.transferType.SUBSIDIARY}`,
       ]);
