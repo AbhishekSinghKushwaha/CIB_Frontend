@@ -5,6 +5,6 @@ export const environment = {
   appInstance: 'one-equity',
   appName: 'Corporate Internet Banking',
   kService: 'b_tDiAKr=yiM',
-  logoutWarningTimeMinutes: 20,
-  logoutForcedTimeMinutes: 25
+  logoutWarningTimeMinutes: 100,
+  logoutForcedTimeMinutes: 200,
 };
