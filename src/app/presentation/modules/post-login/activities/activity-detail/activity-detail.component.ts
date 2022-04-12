@@ -54,22 +54,22 @@ export class ActivityDetailComponent implements OnInit {
   ngOnInit(): void {}
 
   getTransaction(index: number, category: string) {
-    this.data = mockData.pendingTransactions[index];
-    // console.log(this.data);
-    // category === "history"
-    //   ? this.transactionService.historyTransactions$.subscribe((res) => {
-    //       this.data = res[index];
-    //     })
-    //   : category === "pending"
-    //   ? this.transactionService.pendingTransactions$.subscribe((res) => {
-    //       this.data = res[index];
-    //       console.log(this.data);
-    //     })
-    //   : category === "standingOrder"
-    //   ? this.transactionService.standingOrders$.subscribe((res) => {
-    //       this.data = res[index];
-    //     })
-    //   : {};
+    // this.data = mockData.pendingTransactions[index];
+    console.log(this.data);
+    category === "history"
+      ? this.transactionService.historyTransactions$.subscribe((res) => {
+          this.data = res[index];
+        })
+      : category === "pending"
+      ? this.transactionService.pendingTransactions$.subscribe((res) => {
+          this.data = res[index];
+          console.log(this.data);
+        })
+      : category === "standingOrder"
+      ? this.transactionService.standingOrders$.subscribe((res) => {
+          this.data = res[index];
+        })
+      : {};
   }
 
   openUploadModal() {
@@ -89,7 +89,7 @@ export class ActivityDetailComponent implements OnInit {
   reject() {}
 
   approve() {
-    this.router.navigate(["activities/verifyOTP"]);
+    this.router.navigate([`/transact/otp-verification/approval`]);
   }
 
   reinitiate() {
