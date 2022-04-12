@@ -79,6 +79,7 @@
     "securityAnswers": "/cibuseraccess-v1/api/SecurityQuestion/user/verify-securityquestions",
     "initiatePasswordReset": "/cibuseraccess-v1/api/Auth/user/initiatePasswordReset",
     "initiateUsernameReset": "/cibuseraccess-v1/api/Auth/user/initiateForgoutUserName",
+    "completeforgotusername":"/cibuseraccess-v1/api/Auth/user/completeforgotusername",
     "getSecurityQuestions": "/cibuseraccess-v1/api/SecurityQuestion/securityquestions",
     "getMySecurityQuestions": "/cibuseraccess-v1/api/SecurityQuestion/user/securityquestions",
     "resetPassword": "/cibuseraccess-v1/api/Auth/user/resetPassword",

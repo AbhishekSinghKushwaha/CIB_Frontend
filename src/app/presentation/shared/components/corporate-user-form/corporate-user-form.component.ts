@@ -8,6 +8,7 @@ import { LoggedinUserModel, UserFormPropModel, UserModel, UserProduct, UserSubPr
 import { TeamMembersService } from 'src/app/core/services/customer-onboarding/team-members.service';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { ProductsAndServicesService } from 'src/app/core/services/customer-onboarding/products-and-services.service';
+import { concatMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-corporate-user-form',
@@ -193,12 +194,33 @@ export class CorporateUserFormComponent implements OnInit {
     }
 
     const teamMember = { ...this.teamMemberDetailsForm.getRawValue(), notificationOption: 'SMS' };
+    // this.teamMembersService
+    //   .addTeamMember(teamMember)
+    //   .userManagement
+    //   .subscribe((res: any) => {
+    //     if (res.isSuccessful) {
+    //       this.submitRoles()
+    //     }
+    //   });
+
     this.teamMembersService
       .addTeamMember(teamMember)
       .userManagement
-      .subscribe((res: any) => {
-        if (res.isSuccessful) {
-          this.submitRoles()
+      .pipe(
+        concatMap((res: any) =>
+          this.productsServices
+            .addRoleToCorporate({ permissionIds: this.selectedRoles.map(x => x.id) }, this.data.username),
+        )
+      )
+      .subscribe((response: any) => {
+        console.log(response);
+        if (response.isSuccessful) {
+          this.storageService.removeData("selected-roles");
+          this.teamMembersService.setUser({});
+          this.storageService.removeData('selected-subproducts');
+          this.router.navigate([
+            this.data.userListLink,
+          ]);
         }
       });
   }
@@ -220,14 +242,36 @@ export class CorporateUserFormComponent implements OnInit {
       );
     }
     const teamMember = { ...this.teamMemberDetailsForm.getRawValue(), notificationOption: 'SMS' };
+    // this.teamMembersService
+    //   .updateTeamMemberDetails(
+    //     teamMember,
+    //   )
+    //   .userManagement(this.data.username)
+    //   .subscribe((res: any) => {
+    //     if (res.isSuccessful) {
+    //       this.submitRoles()
+    //     }
+    //   });
+
+
     this.teamMembersService
-      .updateTeamMemberDetails(
-        teamMember,
-      )
+      .updateTeamMemberDetails(teamMember)
       .userManagement(this.data.username)
-      .subscribe((res: any) => {
-        if (res.isSuccessful) {
-          this.submitRoles()
+      .pipe(
+        concatMap((res: any) =>
+          this.productsServices
+            .addRoleToCorporate({ permissionIds: this.selectedRoles.map(x => x.id) }, this.data.username),
+        )
+      )
+      .subscribe((response: any) => {
+        console.log(response);
+        if (response.isSuccessful) {
+          this.storageService.removeData("selected-roles");
+          this.teamMembersService.setUser({});
+          this.storageService.removeData('selected-subproducts');
+          this.router.navigate([
+            this.data.userListLink,
+          ]);
         }
       });
   }

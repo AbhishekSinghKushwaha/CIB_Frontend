@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { concatMap, map } from 'rxjs/operators';
 import { UserVerifyProduct } from 'src/app/core/domain/user-verify-product.model';
 import { UserModel } from 'src/app/core/domain/user.model';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
@@ -135,18 +136,15 @@ export class ForgotUsernameComponent implements OnInit {
 
   securityChallengeSubmit(answers: any) {
     const result = { ...answers, userIdentifier: this.credentialsControls.credentials.value };
-    console.log(result);
     this.securityChallengeService.submitSecurityAnswers(result)
-      .subscribe(
-        (response) => {
-          if (response && response?.token) {
-            this.securityToken = response.token;
-            this.stage = 'change-password';
-          }
-        },
-        (error) => {
-          console.log({ error });
+      .pipe(
+        concatMap((res: any) => this.securityChallengeService.completeForgotUsername({ otp: res.token, email: this.credentialsControls.credentials.value })),
+      )
+      .subscribe((response: any) => {
+        console.log(response);
+        if (response) {
+          this.stage = 'change-password';
         }
-      );
+      });
   }
 }
