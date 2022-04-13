@@ -86,10 +86,22 @@ export class ActivityDetailComponent implements OnInit {
     cancelText: "Submit",
     confirmText: "Cancel",
   })
-  reject() {}
+  reject() {
+    const payload = {
+      references: [this.data.requestReference],
+      transactionApprovalStatus: this.approvalStatus.Rejected,
+    };
+    this.transactionService.setApprovalPayload(payload);
+    this.router.navigate([`/transact/otp-verification/reject-transaction`]);
+  }
 
   approve() {
-    this.router.navigate([`/transact/otp-verification/approval`]);
+    const payload = {
+      references: [this.data.requestReference],
+      transactionApprovalStatus: this.approvalStatus.Approved,
+    };
+    this.transactionService.setApprovalPayload(payload);
+    this.router.navigate([`/transact/otp-verification/approve-transaction`]);
   }
 
   reinitiate() {

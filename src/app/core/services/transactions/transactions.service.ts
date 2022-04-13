@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 import { TransactionListmodel } from "../../domain/transaction-list.model";
@@ -12,6 +13,7 @@ interface TransctionsState {
   transaction: TransactionListmodel;
   standingOrders: TransactionListmodel[];
   standingOrder: TransactionListmodel;
+  approvalPayload: {};
 }
 
 const initialState: TransctionsState = {
@@ -20,6 +22,7 @@ const initialState: TransctionsState = {
   transaction: {},
   standingOrders: [],
   standingOrder: {},
+  approvalPayload: {},
 };
 @Injectable({
   providedIn: "root",
@@ -45,7 +48,11 @@ export class TransactionsService extends StateService<TransctionsState> {
     (state) => state.transaction
   );
 
-  constructor(private http: HttpClient) {
+  approvalPayload$: Observable<any> = this.select(
+    (state) => state.approvalPayload
+  );
+
+  constructor(private http: HttpClient, private router: Router) {
     super(initialState);
   }
   /*******STATE MANAGEMENT******/
@@ -69,6 +76,10 @@ export class TransactionsService extends StateService<TransctionsState> {
     this.setState({ transaction });
   }
 
+  setApprovalPayload(payload: any): void {
+    this.setState({ approvalPayload: payload });
+  }
+
   /*******API CALLS******/
   getTransactions(params: any): Observable<any> {
     return this.http.get(
@@ -83,5 +94,24 @@ export class TransactionsService extends StateService<TransctionsState> {
       transactionReference,
       { responseType: "blob" }
     );
+  }
+
+  approveTransaction(transactionType: string) {
+    this.approvalPayload$.subscribe((payloadData) => {
+      if (payloadData) {
+        this.http
+          .post<any>(
+            environment.apiUrl + urlList.transfers.transactionApproval,
+            payloadData
+          )
+          .subscribe((res) => {
+            if (res.status) {
+              this.router.navigate([
+                `/transact/transfer-submitted/${transactionType}`,
+              ]);
+            }
+          });
+      }
+    });
   }
 }
