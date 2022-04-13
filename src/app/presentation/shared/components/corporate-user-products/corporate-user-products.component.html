@@ -32,17 +32,15 @@
                 </button>
               </div>
               <div class="p-2 bd-highlight">
-                <h3 class="pt-3">{{ product?.productName }}</h3>
+                <h3 class="pt-3">{{ product?.name }}</h3>
               </div>
               <div class="ms-auto p-2 bd-highlight">
                 <div class="d-flex bd-highlight">
                   <div class="p-2 bd-highlight">
-                    <span
-                      *ngFor="let sp of selectedProducts; let isLast = last"
-                    >
+                    <span>
                       <div
                         class="col-1 text-primary pt-2"
-                        *ngIf="product?.id === sp?.id"
+                        *ngIf="isProductSelected(product?.id)"
                       >
                         <strong>On</strong>
                       </div>
@@ -68,7 +66,7 @@
               color="primary"
               type="submit"
               class="col-8"
-              [disabled]="selectedProducts.length === 0"
+              [disabled]="selectedSubproducts.length === 0"
               (click)="saveAndContinue()"
             >
               Save & continue

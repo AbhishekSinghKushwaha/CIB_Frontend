@@ -34,13 +34,19 @@ export class TeamMembersService extends StateService<UserState> {
   /*********API ENDPOINTS****************/
 
   // Add User details
-  addTeamMember(payload: TeamMember, corporateId: string): Observable<any> {
-    return this.http.post(
-      environment.apiUrl +
-      urlList.customerOnboarding.addCorporateUser +
-      corporateId,
-      payload
-    );
+  addTeamMember(payload: TeamMember) {
+    return {
+      onboarding: (corporateId: string) => this.http.post(
+        environment.apiUrl +
+        urlList.customerOnboarding.addCorporateUser +
+        corporateId,
+        payload
+      ),
+      userManagement: this.http.post(
+        ` ${environment.apiUrl}${urlList.userManagement.addUser}`,
+        payload
+      )
+    }
   }
 
   // Get list of users
@@ -55,18 +61,24 @@ export class TeamMembersService extends StateService<UserState> {
   // Get A team member details
   getTeamMemberDetails(userId: string): Observable<any> {
     return this.http.get(
-      environment.apiUrl + urlList.customerOnboarding.getCorporateUser + userId
+      `${environment.apiUrl}${urlList.userManagement.getUser}${userId}`
     );
   }
 
   // Update Director Details
-  updateTeamMemberDetails(payload: any, userId: string): Observable<any> {
-    return this.http.post(
-      environment.apiUrl +
-      urlList.customerOnboarding.updateCorporateUserDetails +
-      userId,
-      payload
-    );
+  updateTeamMemberDetails(payload: any) {
+    return {
+      onboading: (userId: string) => this.http.post(
+        environment.apiUrl +
+        urlList.customerOnboarding.updateCorporateUserDetails +
+        userId,
+        payload
+      ),
+      userManagement: (username: string) => this.http.put(
+        `${environment.apiUrl}${urlList.userManagement.addUser}/${username}`,
+        payload
+      ),
+    }
   }
 
   // Delete Corporate User

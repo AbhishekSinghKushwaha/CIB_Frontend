@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ProductCategory } from 'src/app/core/domain/product-category.model';
 import { ProductEditorService } from 'src/app/core/services/product-editor/product-editor.service';
 import { ProductsConstants } from 'src/app/core/utils/constants/products.constants';
@@ -13,14 +14,18 @@ export class ProductOptionsComponent implements OnInit {
 
   productCategories: ProductCategory[];
   currentCategory: ProductCategory | null;
-
+  username: any;
+  productId: any;
   selectedProducts: string[];
 
   constructor(private readonly location: Location,
+    private readonly activatedRoute: ActivatedRoute,
     private readonly productConstants: ProductsConstants,
     private readonly productService: ProductEditorService) {
     this.productCategories = productConstants.PRODUCT_CATEGORIES;
     this.selectedProducts = [];
+    this.username = activatedRoute.snapshot.paramMap.get("username");
+    this.productId = activatedRoute.snapshot.paramMap.get("productId");
   }
 
   ngOnInit(): void {

@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { DropdownModal } from 'src/app/core/domain/prompt.model';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { NotificationModalService } from 'src/app/core/services/modal-services/notification-modal/notification-modal.service';
+import { SharedService } from 'src/app/core/services/shared/shared.service';
 import LOGIN_CONSTANTS from 'src/app/core/utils/constants/pre-login.constants';
 import { SharedUtils } from '../../../../../core/utils/shared.util';
 
@@ -22,6 +24,7 @@ export class LoginComponent implements OnInit {
     private readonly notificationModalService: NotificationModalService,
     private readonly authService: AuthService,
     private readonly router: Router,
+    private readonly sharedService: SharedService<string>,
     public translate: TranslateService
   ) { }
 
@@ -51,6 +54,20 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  forgotDetails() {
+    this.sharedService
+      .openDropdown(LOGIN_CONSTANTS.FORGOT_LOGIN_DETAILS)
+      .afterClosed()
+      .subscribe(data => {
+        if (data) {
+          if (data === 'Username') {
+            this.router.navigate(['/auth/login/forgot-username']);
+          } else if (data === 'Password') {
+            this.router.navigate(['/auth/login/forgot-password']);
+          }
+        }
+      })
+  }
   submit() {
     const payload = {
       ...this.loginPasswordForm.value,

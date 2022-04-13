@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { Router } from "@angular/router";
-import { Product } from "src/app/core/domain/customer-onboarding.model";
+import { Product, ProductService } from "src/app/core/domain/customer-onboarding.model";
 import { ProductsAndServicesService } from "src/app/core/services/customer-onboarding/products-and-services.service";
 import { StorageService } from "src/app/core/services/storage/storage.service";
 import { confirmModal } from "src/app/presentation/shared/decorators/confirm-dialog.decorator";
@@ -18,9 +18,9 @@ export class ProductServicesComponent implements OnInit {
   constructor(
     private readonly dialog: MatDialog,
     private storageService: StorageService,
-    private productsService: ProductsAndServicesService,
+    private productsService: ProductsAndServicesService<Product, ProductService>,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.getProductsAndService();

@@ -11,7 +11,7 @@
           >
             <div class="strong-text">
               <mat-icon svgIcon="caret_left"></mat-icon>
-              <span>Edit User Limit</span>
+              <span>Edit Company Limit</span>
             </div>
           </button>
         </div>
@@ -27,6 +27,7 @@
               <app-company-list
                 [parentForm]="editCompanyDataForm"
                 currencyFieldName="company"
+                [defaultData]="corporate?.corporateName"
                 label="Company"
                 placeholder="Select company"
                 fieldName="company"
@@ -90,7 +91,7 @@
               [disabled]="editCompanyDataForm.invalid"
               color="primary"
             >
-              Submit
+              {{ updateMode ? "Update" : "Submit" }}
             </button>
           </div>
         </form>

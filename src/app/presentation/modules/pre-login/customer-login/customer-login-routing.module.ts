@@ -46,6 +46,14 @@ const routes: Routes = [
             (m) => m.ForgotPasswordModule
           ),
       },
+      {
+        path: 'forgot-username',
+        loadChildren: (): Promise<any> =>
+          import('./forgot-username/forgot-username.module').then(
+            (m) => m.ForgotUsernameModule
+          ),
+      },
+
     ],
   },
 ];

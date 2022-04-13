@@ -1,0 +1,89 @@
+<div class="card border-0 security-verification">
+  <div class="row ps-5">
+    <div class="col-md-12">
+      <button
+        mat-button
+        aria-label="Back"
+        class="back-icon"
+        (click)="resetStage()"
+      >
+        <div class="strong-text">
+          <mat-icon svgIcon="chevron-left" class="chevron"></mat-icon>
+          <span> Forgot username </span>
+        </div>
+      </button>
+    </div>
+  </div>
+  <div class="card-body ps-5" [ngSwitch]="stage">
+    <div class="row pt-4 pb-5" *ngSwitchDefault>
+      <h3 class="strong-text">Please enter your mobile number</h3>
+      <div class="text-sm text-grey">
+        Enter your mobile number and we will help you reset your email address
+      </div>
+      <form
+        class="mt-4"
+        [formGroup]="credentialsForm"
+        (ngSubmit)="validateCredentials()"
+      >
+        <div class="row mb-3">
+          <mat-form-field class="col-md-12">
+            <mat-label for="accountInfo"> Enter your mobile number </mat-label>
+            <input
+              matInput
+              type="text"
+              id="accountInfo"
+              formControlName="credentials"
+            />
+            <mat-error
+              *ngIf="credentialsControls.credentials.errors"
+              class="validationError"
+            >
+              <div *ngIf="credentialsControls.credentials.errors.required">
+                Please enter your mobile number
+              </div>
+              <div *ngIf="credentialsControls.credentials.errors.minlength">
+                Minimum 6 characters
+              </div>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="row mb-3">
+          <div class="col-sm-5 pr-sm-0 mb-3 mb-sm-0">
+            <button
+              mat-flat-button
+              color="primary"
+              type="submit"
+              class="col-12"
+              [disabled]="credentialsForm.status === 'INVALID' || submitted"
+            >
+              Continue
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <app-sms-verification
+      (onOTPVerified)="smsVerificationSubmit($event)"
+      [otpError]="otpError"
+      [message]="initialResponse"
+      *ngSwitchCase="'sms-verification'"
+    ></app-sms-verification>
+
+    <app-security-verification
+      (onSubmit)="onSecurityVerificationSubmit($event)"
+      *ngSwitchCase="'security-verification'"
+    ></app-security-verification>
+
+    <app-security-challenge
+      (onSubmit)="securityChallengeSubmit($event)"
+      (error)="onSecurityVerificationError($event)"
+      *ngSwitchCase="'security-challenge'"
+    ></app-security-challenge>
+
+    <app-reset-password
+      [token]="securityToken"
+      [userIdentifier]="credentialsControls?.credentials?.value"
+      *ngSwitchCase="'change-password'"
+    ></app-reset-password>
+  </div>
+</div>

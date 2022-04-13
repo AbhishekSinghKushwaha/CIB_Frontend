@@ -26,7 +26,7 @@ export class ProductServiceOptionsComponent implements OnInit {
     public readonly notificationDashboardList: NotificationConstants,
     private readonly router: Router,
     private readonly storageService: StorageService,
-    private productsServices: ProductsAndServicesService,
+    private productsServices: ProductsAndServicesService<Product, ProductService>,
     private route: ActivatedRoute
   ) {
     this.productId = route.snapshot.queryParamMap.get('id');

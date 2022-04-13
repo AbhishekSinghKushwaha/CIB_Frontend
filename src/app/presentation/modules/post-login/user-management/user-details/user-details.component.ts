@@ -8,6 +8,8 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { FromAccount } from 'src/app/core/domain/transfer.models';
 import { UserFormPropModel } from 'src/app/core/domain/user.model';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { User, UserStatus } from '../user-list/user-list.component';
 
 @Component({
@@ -19,21 +21,23 @@ export class UserDetailsComponent implements OnInit {
   userDetailsForm: FormGroup;
   sourceAccounts: FromAccount[];
   private user: User;
-  memberId: any;
+  username: any;
   userFormprop: UserFormPropModel;
 
   constructor(
     private readonly router: Router,
     private readonly activatedRoute: ActivatedRoute,
+    private readonly authService: AuthService
   ) {
-    this.memberId = activatedRoute.snapshot.paramMap.get("id");
-    console.log('main', this.memberId);
+    this.username = activatedRoute.snapshot.paramMap.get("username");
+    console.log('main', this.username);
     this.userFormprop = {
       addRoleLink: 'roles',
       userListLink: '/user-management',
       addProductLink: 'products',
-      memberId: this.memberId
+      username: this.username
     }
+    console.log('userData', authService.userState)
   }
 
   ngOnInit(): void {

@@ -23,8 +23,7 @@ import { User } from '../../user-list.component';
   styleUrls: ['./user-list-search-modal.component.scss'],
 })
 export class UserListSearchModalComponent
-  implements OnInit, AfterViewInit, OnDestroy
-{
+  implements OnInit, AfterViewInit, OnDestroy {
   private $unsubscribe: Subject<void>;
 
   @ViewChild(MatSort)
@@ -37,7 +36,7 @@ export class UserListSearchModalComponent
 
   displayedColumns: string[];
   filterByColumns: string[];
-  alternativeColumns: Map<string,string[]>;
+  alternativeColumns: Map<string, string[]>;
 
   title: string;
   copy: string;
@@ -46,8 +45,8 @@ export class UserListSearchModalComponent
   selection = new SelectionModel<any>(true, []);
 
   // this dictionary includes a reference to each foreign key dictionary 
-  dictionary: Map<string,any> = new Map([ ['transferType', TransferType]]);
-  
+  dictionary: Map<string, any> = new Map([['transferType', TransferType]]);
+
   constructor(
     private readonly dialogRef: MatDialogRef<UserListSearchModalComponent>,
     private readonly translateService: TranslateService,
@@ -59,6 +58,7 @@ export class UserListSearchModalComponent
     this.alternativeColumns = data.alternativeColumns;
     this.title = data.title;
     this.copy = data.copy;
+    console.log(data.collection)
   }
 
   ngOnInit(): void {
@@ -100,9 +100,9 @@ export class UserListSearchModalComponent
     const searchTerm = this.searchForm.controls['term'].value
       .trim()
       .toLowerCase();
-      
+
     let searchCriteriaAndTerm = `${searchCriteria}:${searchTerm}`;
-    
+
     this.dataSource.filterPredicate = this.getFilterPredicate(this.alternativeColumns?.get(searchCriteria));
     this.dataSource.filter = searchCriteriaAndTerm;
   }
@@ -138,7 +138,7 @@ export class UserListSearchModalComponent
   setTerm(criteria: string): void {
     setTimeout(() => {
       this.searchForm.get('term')?.setValue(criteria);
-    }, 0)    
+    }, 0)
   }
 
   getTranslation(key: string | unknown): string {
@@ -176,10 +176,10 @@ export class UserListSearchModalComponent
       let propertyValue: string = item[searchCriteria] + '';
 
       let rs = false;
-          rs = propertyValue.toLowerCase().includes(searchTerm);
+      rs = propertyValue.toLowerCase().includes(searchTerm);
 
       if (multipleSearchCriteria) {
-        multipleSearchCriteria.forEach( (additionalSearchCriteria) => {
+        multipleSearchCriteria.forEach((additionalSearchCriteria) => {
           propertyValue = item[additionalSearchCriteria] + '';
           if (propertyValue.toLowerCase().includes(searchTerm)) {
             rs = true;

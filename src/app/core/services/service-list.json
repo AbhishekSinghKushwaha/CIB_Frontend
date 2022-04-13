@@ -23,6 +23,21 @@
     "getRegistrationSummary": "/cibonboarding-v1/api/Registration/preview-corporate-detail/",
     "uploadCorporateDocuments": "/cibonboarding-v1/api/Registration/updload-corporate-documents/"
   },
+  "corporate":{
+    "main":"/cibcore/api/Corporates/",
+    "addTransactionLimit":"/cibcore/api/CorporateTransactionLimit/Add/",
+    "getTransactionLimit":"/cibcore/api/CorporateTransactionLimit/Limits/",
+    "updateTransactionLimit":"/cibcore/api/CorporateTransactionLimit/Update/"
+  },
+  "userManagement":{
+    "getRoles": "/cibcore/api/roles",
+    "getProductsAndServices": "/cibcore/api/products",
+    "addUser":"/cibcore/api/CorporateUsers/InApp",
+    "getUser":"/cibcore/api/CorporateUsers/",
+    "getUserLimit":"/cibcore/api/UserTransactionLimit/Limits/",
+    "addUserLimit":"/cibcore/api/UserTransactionLimit/Add/",
+    "editUserLimit":"/cibcore/api/UserTransactionLimit/Update/"
+  },
   "accounts": {
     "getUserAccounts": "/cibaccountservice-v1/api/v1/Accounts/GetUserMappedAccounts"
   },
@@ -58,10 +73,12 @@
     "loginUser": "/cibuseraccess-v1/api/Auth/oauth/token",
     "verifyOtp": "/cibuseraccess-v1/api/Auth/login/verifyOtp",
     "verifyForgetPasswordOtp": "/cibuseraccess-v1/api/Auth/user/verifyForgotPasswordOtp",
+    "verifyForgotUsernameOtp": "/cibuseraccess-v1/api/Auth/user/verifyForgotUsernameOtp",
     "resendOtp": "/cibuseraccess-v1/api/Auth/generateOtp",
     "validateOtp": "/authorization/user/validateOTPReset",
     "securityAnswers": "/cibuseraccess-v1/api/SecurityQuestion/user/verify-securityquestions",
-    "validateUser": "/cibuseraccess-v1/api/Auth/user/initiatePasswordReset",
+    "initiatePasswordReset": "/cibuseraccess-v1/api/Auth/user/initiatePasswordReset",
+    "initiateUsernameReset": "/cibuseraccess-v1/api/Auth/user/initiateForgoutUserName",
     "getSecurityQuestions": "/cibuseraccess-v1/api/SecurityQuestion/securityquestions",
     "getMySecurityQuestions": "/cibuseraccess-v1/api/SecurityQuestion/user/securityquestions",
     "resetPassword": "/cibuseraccess-v1/api/Auth/user/resetPassword",
