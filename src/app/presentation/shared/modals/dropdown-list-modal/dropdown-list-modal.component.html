@@ -1,0 +1,15 @@
+<div class="container select-account-modal-screen">
+  <button mat-icon-button matSuffix class="close-button" (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <p class="text-center fw-bold pt-2">{{ data.title }}</p>
+  <h3 class="m-4 ms-2">{{ data.description }}</h3>
+  <div
+    *ngFor="let item of data.list"
+    class="row m-2 ms-2 cursor-pointer"
+    (click)="select(item)"
+  >
+    <div [ngClass]="{ 'strong-text': true }">{{ item }}</div>
+    <mat-divider class="m-3"></mat-divider>
+  </div>
+</div>

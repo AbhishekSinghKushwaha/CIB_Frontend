@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LimitsComponent } from './limits.component';
+import { DropdownListModalComponent } from './dropdown-list-modal.component';
 
-describe('LimitsComponent', () => {
-  let component: LimitsComponent;
-  let fixture: ComponentFixture<LimitsComponent>;
+describe('DropdownListModalComponent', () => {
+  let component: DropdownListModalComponent;
+  let fixture: ComponentFixture<DropdownListModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LimitsComponent ]
+      declarations: [ DropdownListModalComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LimitsComponent);
+    fixture = TestBed.createComponent(DropdownListModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

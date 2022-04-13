@@ -1,3 +1,4 @@
+import { forEach } from 'lodash';
 import { Component, Input, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,18 +14,18 @@ import { StorageService } from 'src/app/core/services/storage/storage.service';
 export class CorporateUserRolesComponent implements OnInit {
   activeRoles: any[];
   redirectTo: string;
-  selectedMainRole: string;
+  selectedMainRole: any;
 
   @Input() backLink: any;
-  @Input() memberId: any;
+  @Input() userId: any;
   private _roles: Role[];
+  loadedRoles: string[];
   @Input() set roles(input: Role[]) {
     this._roles = input;
-    console.log(input);
-    this.setAlreadySelectedRoles();
+    this.setAlreadySelectedRoles(input);
   };
   get roles(): Role[] {
-    return this._roles;
+    return this._roles || [];
   }
 
   constructor(
@@ -40,61 +41,32 @@ export class CorporateUserRolesComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  setAlreadySelectedRoles() {
-    const roles = this.storageService.getData("selected-roles");
-    if (this.activeRoles.length === 0 && roles !== null) {
-      this.activeRoles = roles;
-    } else {
+  setAlreadySelectedRoles(allRoles: Role[]) {
+    if (allRoles) {
+      const oldActiveRoles = this.storageService.getData("selected-roles");
       this.activeRoles = [];
+      for (const item of allRoles) {
+        item.permissions.forEach(perm => {
+          if (oldActiveRoles.map((x: any) => x.id).indexOf(perm.id) > -1) {
+            this.activeRoles.push({ ...perm, roleName: item.roleName, roleId: item.id });
+            this.selectedMainRole = item.roleName;
+          }
+        })
+      }
     }
+
   }
 
   toggle(roleId: any, permissionId: any): void {
-    const selectedRole = this.activeRoles?.find((role) => {
-      return role.id === roleId;
-    });
-
-    const role = this.roles.find((role) => {
-      return role.id === roleId;
-    });
-
-    const permission = role?.permissions.find((permission: Permission) => {
-      return permission.id === permissionId;
-    });
-
-    if (selectedRole) {
-      const selectedPermission = selectedRole?.permissions.find(
-        (permission: Permission) => {
-          return permission.id === permissionId;
-        }
-      );
-
-      const selectedRoleIndex = this.activeRoles.findIndex((role) => {
-        return role.id === roleId;
-      });
-
-      if (selectedPermission) {
-        const selectedPermissionIndex = selectedRole.permissions.findIndex(
-          (permission: Permission) => permission.id === permissionId
-        );
-
-        selectedRole.permissions.splice(selectedPermissionIndex, 1);
-
-        if (selectedRole.permissions.length === 0) {
-          this.activeRoles.splice(selectedRoleIndex, 1);
-        } else {
-          this.activeRoles[selectedRoleIndex] = selectedRole;
-        }
-      } else {
-        selectedRole.permissions.push(permission);
-
-        this.activeRoles[selectedRoleIndex] = selectedRole;
-      }
+    const role = this.roles.find((role) => role.id === roleId);
+    const permission = role?.permissions.find((permission: Permission) => permission.id === permissionId);
+    const selectedPermissionIndex = this.activeRoles?.findIndex(
+      (permission: Permission) => permission.id === permissionId
+    );
+    if (selectedPermissionIndex > -1) {
+      this.activeRoles.splice(selectedPermissionIndex, 1);
     } else {
-      this.activeRoles.push({
-        ...role,
-        ...{ permissions: [permission] },
-      });
+      this.activeRoles.push({ roleName: role?.roleName, roleId: role?.id, ...permission });
     }
   }
 
@@ -104,37 +76,20 @@ export class CorporateUserRolesComponent implements OnInit {
 
   mainRoleChange(event: any) {
     if (event.value) {
-      this.activeRoles = this.activeRoles.filter(x => x.description === event.value)
+      this.activeRoles = this.activeRoles.filter(x => x.roleName === event.value)
     }
   }
 
   isRoleActive(roleId: any, permissionId: any, mainSelected = false): boolean {
-    const selectedRole = this.activeRoles?.find((role) => {
-      return role.id === roleId;
-    });
-
-    let isActive: boolean = false;
-    if (selectedRole) {
-      const selectedPermission = selectedRole.permissions.find(
-        (permission: any) => {
-          return permission.id === permissionId;
-        }
-      );
-
-      if (selectedPermission) {
-        isActive = true;
+    return this.activeRoles.some(
+      (permission: any) => {
+        return permission.id === permissionId;
       }
-    }
-    if (!mainSelected) {
-      isActive = false;
-    }
-
-    return isActive;
+    );
   }
 
   saveRoles(): void {
     this.storageService.setData("selected-roles", this.activeRoles);
-
     this.location.back();
   }
 }

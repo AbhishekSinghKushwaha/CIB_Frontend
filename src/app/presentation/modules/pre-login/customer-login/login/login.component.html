@@ -76,12 +76,12 @@
             <button
               mat-button
               color="primary"
-              class="ps-0"
+              class="ps-0 strong-text"
               type="button"
               [disabled]="submitted"
-              routerLink="/auth/login/forgot-password"
+              (click)="forgotDetails()"
             >
-              Forgot your password?
+              Forgot your login details?
             </button>
           </div>
         </div>

@@ -20,6 +20,7 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
 export class SmsVerificationComponent implements OnInit {
   @ViewChildren('inputs') inputs: QueryList<any>;
   verifyOtpForm: FormGroup;
+  @Input() message: string;
   timeToResend: number;
   otpResent = false;
   submitted = false;

@@ -4,9 +4,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PhoneNumberUtil } from 'google-libphonenumber';
 import { CountryModel } from 'src/app/core/domain/bank.model';
-import { LoggedinUserModel, UserFormPropModel, UserModel } from 'src/app/core/domain/user.model';
+import { LoggedinUserModel, UserFormPropModel, UserModel, UserProduct, UserSubProduct } from 'src/app/core/domain/user.model';
 import { TeamMembersService } from 'src/app/core/services/customer-onboarding/team-members.service';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
+import { ProductsAndServicesService } from 'src/app/core/services/customer-onboarding/products-and-services.service';
 
 @Component({
   selector: 'app-corporate-user-form',
@@ -33,6 +34,9 @@ export class CorporateUserFormComponent implements OnInit {
   initialOfficeNumber: any;
   initialPhoneNumber: any;
   intialValues: any;
+  selectedSubproducts = [];
+  selectedRoles: any[];
+  userLimitSet: boolean;
 
   constructor(
     private readonly fb: FormBuilder,
@@ -40,7 +44,8 @@ export class CorporateUserFormComponent implements OnInit {
     private authService: AuthService,
     private teamMembersService: TeamMembersService,
     private readonly router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private readonly productsServices: ProductsAndServicesService<UserProduct, UserSubProduct>,
   ) {
     this.phoneUtil = PhoneNumberUtil.getInstance();
     this.user = this.authService.userState;
@@ -48,18 +53,14 @@ export class CorporateUserFormComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-
     this.checkRoles();
-
     this.setUser();
-
-    console.log('Form State',
-      this.teamMembersService.getUser())
+    this.selectedSubproducts = this.storageService.getData('selected-subproducts') || [];
+    this.userLimitSet = this.storageService.getData('user-limit');
   }
 
   setUser() {
     this.teamMembersService.selectedUser$.subscribe((x) => {
-      console.log('selectedUser', x);
       if (Object.keys(x).length > 0) {
         this.teamMemberDetailsForm.setValue(x);
 
@@ -93,11 +94,10 @@ export class CorporateUserFormComponent implements OnInit {
   }
 
   getUser() {
-    if (this.data.memberId) {
+    if (this.data.username) {
       this.teamMembersService
-        .getTeamMemberDetails(this.data.memberId)
+        .getTeamMemberDetails(this.data.username)
         .subscribe((res) => {
-          console.log('user detail', res);
           if (res.isSuccessful) {
             this.teamMemberDetailsForm.controls.idNumber.patchValue(
               res.data.identityNumber
@@ -114,6 +114,16 @@ export class CorporateUserFormComponent implements OnInit {
             this.teamMemberDetailsForm.controls.phoneNumber.setValue(
               this.formatPhoneNumber(this.initialPhoneNumber)
             );
+
+            if (!this.storageService.getData('selected-subproducts')) {
+              this.selectedSubproducts = res.data.subProducts;
+              this.storageService.setData('selected-subproducts', this.selectedSubproducts);
+            }
+            if (!this.storageService.getData('selected-roles')) {
+              this.selectedRoles = res.data.permissions;
+              this.storageService.setData('selected-roles', res.data.permissions);
+            }
+
           }
         });
     }
@@ -126,21 +136,18 @@ export class CorporateUserFormComponent implements OnInit {
       emailAddress: ["", [Validators.required, Validators.email]],
       idNumber: ["", [Validators.required]],
       officePhoneNumber: ["", [Validators.required]],
-      transactionLimit: ["", [Validators.required]],
-      roles: [[]],
+      permissionIds: [[]],
     });
   }
 
   checkRoles() {
-    let roles: any[] = this.storageService.getData("selected-roles");
-    roles?.length > 0
-      ? ((this.rolesAdded = true), this.formatRolesPayload(roles))
-      : (this.rolesAdded = false);
-    console.log('roles', roles)
+    this.selectedRoles = this.storageService.getData("selected-roles");
+    this.selectedRoles?.length && this.formatRolesPayload();
   }
 
-  addRoles() {
-    if (this.data.memberId) {
+  persistForm() {
+
+    if (this.data.username) {
       this.teamMemberDetailsForm.controls.phoneNumber.setValue(
         this.initialPhoneNumber
       );
@@ -150,23 +157,26 @@ export class CorporateUserFormComponent implements OnInit {
       );
     }
     this.teamMembersService.setUser(this.teamMemberDetailsForm.getRawValue());
+  }
+
+  openProducts() {
+    this.persistForm();
+    this.router.navigate(
+      [this.data.addProductLink],
+      { relativeTo: this.activatedRoute }
+    );
+  }
+
+  addRoles() {
+    this.persistForm();
     this.router.navigate(
       [this.data.addRoleLink],
       { relativeTo: this.activatedRoute }
     );
   }
 
-  formatRolesPayload(roles: any[]) {
-    let permissions = [];
-
-    for (let i = 0; i < roles.length; i++) {
-      let rol = roles[i].permissions;
-
-      for (let j = 0; j < rol.length; j++) {
-        permissions.push(rol[j].id);
-      }
-    }
-    this.teamMemberDetailsForm.controls.roles.setValue(permissions);
+  formatRolesPayload() {
+    this.teamMemberDetailsForm.controls.permissionIds.setValue(this.selectedRoles.map(x => x.id));
   }
 
   addTeamMember() {
@@ -182,26 +192,19 @@ export class CorporateUserFormComponent implements OnInit {
       );
     }
 
-    const teamMember = this.teamMemberDetailsForm.getRawValue()
-    console.log('teamMember', teamMember);
+    const teamMember = { ...this.teamMemberDetailsForm.getRawValue(), notificationOption: 'SMS' };
     this.teamMembersService
-      .addTeamMember(
-        teamMember,
-        this.user.corporateId
-      )
-      .subscribe((res) => {
+      .addTeamMember(teamMember)
+      .userManagement
+      .subscribe((res: any) => {
         if (res.isSuccessful) {
-          this.storageService.removeData("selected-roles");
-          this.teamMembersService.setUser({});
-          this.router.navigate([
-            this.data.userListLink,
-          ]);
+          this.submitRoles()
         }
       });
   }
 
   submit() {
-    this.data.memberId ? this.updateTeamMember() : this.addTeamMember();
+    this.data.username ? this.updateTeamMember() : this.addTeamMember();
   }
 
   updateTeamMember() {
@@ -216,18 +219,32 @@ export class CorporateUserFormComponent implements OnInit {
         this.initialOfficeNumber
       );
     }
+    const teamMember = { ...this.teamMemberDetailsForm.getRawValue(), notificationOption: 'SMS' };
     this.teamMembersService
       .updateTeamMemberDetails(
-        this.teamMemberDetailsForm.getRawValue(),
-        this.data.memberId
+        teamMember,
       )
-      .subscribe((res) => {
+      .userManagement(this.data.username)
+      .subscribe((res: any) => {
+        if (res.isSuccessful) {
+          this.submitRoles()
+        }
+      });
+  }
+
+  submitRoles() {
+    this.productsServices
+      .addRoleToCorporate({ permissionIds: this.selectedRoles.map(x => x.id) }, this.data.username)
+      .subscribe((res: any) => {
         if (res.isSuccessful) {
           this.storageService.removeData("selected-roles");
+          this.teamMembersService.setUser({});
+          this.storageService.removeData('selected-subproducts');
           this.router.navigate([
             this.data.userListLink,
           ]);
         }
       });
+
   }
 }

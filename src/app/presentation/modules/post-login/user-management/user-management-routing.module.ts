@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UserResolver } from './resolvers/user.resolver';
 
 const routes: Routes = [
 
@@ -17,19 +16,12 @@ const routes: Routes = [
         (m) => m.UserDetailsModule
       )
   }, {
-    path: 'edit/:id',
+    path: 'edit/:username',
     loadChildren: (): Promise<any> =>
       import('./user-details/user-details.module').then(
         (m) => m.UserDetailsModule
       )
-  },
-  {
-    path: 'success',
-    loadChildren: (): Promise<any> =>
-      import('./user-management-success/user-management-success.module').then(
-        (m) => m.UserManagementSuccessModule
-      ),
-  },
+  }
 ];
 
 @NgModule({

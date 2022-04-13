@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Product, ProductService } from 'src/app/core/domain/customer-onboarding.model';
+import { UserProduct, UserSubProduct } from 'src/app/core/domain/user.model';
 import { ProductsAndServicesService } from 'src/app/core/services/customer-onboarding/products-and-services.service';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { NotificationConstants } from 'src/app/core/utils/constants/notification-menu.constants';
@@ -12,48 +12,47 @@ import { NotificationConstants } from 'src/app/core/utils/constants/notification
   styleUrls: ['./corporate-user-product-options.component.scss']
 })
 export class CorporateUserProductOptionsComponent implements OnInit {
-  product: Product;
-  selectedServices: ProductService[] = [];
-  alreadySelectedProducts: Product[];
-
-  productId: any;
+  product: UserProduct;
+  selectedSubproducts: UserSubProduct[] = [];
+  alreadySelectedProducts: UserProduct[];
+  @Input() productId: any;
+  @Input() username: any;
   corporateId: any;
   constructor(
     public readonly notificationDashboardList: NotificationConstants,
     private readonly router: Router,
     private readonly storageService: StorageService,
-    private readonly productsServices: ProductsAndServicesService,
+    private readonly productsServices: ProductsAndServicesService<UserProduct, UserSubProduct>,
     private readonly activatedRoute: ActivatedRoute,
     private readonly location: Location,
   ) {
-    this.productId = activatedRoute.snapshot.paramMap.get('productId');
-    this.corporateId = activatedRoute.snapshot.paramMap.get('id');
   }
 
   ngOnInit(): void {
     this.listenToDataStreams();
     setTimeout(() => {
       console.log('this.productId', this.productId);
-      console.log('this.corporateId', this.corporateId);
+      console.log('this.username', this.username);
     }, 2000);
+    this.selectedSubproducts = this.storageService.getData('selected-subproducts') || [];
   }
 
   listenToDataStreams() {
     this.productsServices.selectedProduct$.subscribe((x) => {
       this.product = x;
-      this.productId !== null ? this.mapEditProduct() : this.product;
+      this.productId !== null && this.mapEditProduct();
     });
 
     this.productsServices.selectedProducts$.subscribe((x) => {
       this.alreadySelectedProducts = x;
-      this.setAlreadySelectedServices();
+      this.setAlreadySelectedSubproducts();
     });
   }
 
   mapEditProduct() {
     const allProducts = this.storageService.getData('products-and-services');
 
-    const selectedProduct = allProducts?.find((product: Product) => {
+    const selectedProduct = allProducts?.find((product: UserProduct) => {
       return product.id === this.productId;
     });
 
@@ -62,26 +61,26 @@ export class CorporateUserProductOptionsComponent implements OnInit {
     this.product = selectedProduct;
   }
 
-  setAlreadySelectedServices() {
+  setAlreadySelectedSubproducts() {
     if (
       this.alreadySelectedProducts?.length > 0 &&
-      this.selectedServices?.length === 0
+      this.selectedSubproducts?.length === 0
     ) {
-      this.alreadySelectedProducts.forEach((service: Product) => {
+      this.alreadySelectedProducts.forEach((service: UserProduct) => {
         if (service.id === this.product.id) {
-          this.selectedServices = service.productServices;
+          this.selectedSubproducts = service.subProducts;
         }
       });
     } else {
-      this.selectedServices = [];
+      this.selectedSubproducts = [];
     }
   }
 
   // Unused function
-  renameObjectKeys(product: any): Product {
+  renameObjectKeys(product: any): UserProduct {
     let isDone = false;
     product.id = product.productId;
-    product.productServices = product.services;
+    product.subProducts = product.services;
 
     delete product.productId;
     product.services.forEach((service: any, i: number) => {
@@ -105,56 +104,54 @@ export class CorporateUserProductOptionsComponent implements OnInit {
   }
 
   submit() {
-    this.productId === null ? this.addProduct() : this.updateProduct();
+    this.storageService.setData('selected-subproducts', this.selectedSubproducts);
+    this.goBack();
   }
 
-  toggle(serviceId: string) {
-    if (this.isServiceActive(serviceId)) {
-      const selectedServiceIndex = this.selectedServices.findIndex(
-        (service: ProductService) => service.id === serviceId
+  toggle(subproductId: string) {
+    if (this.subproductExists(subproductId)) {
+      const selectedItemIndex = this.selectedSubproducts.findIndex(
+        (item: UserSubProduct) => item.id === subproductId
       );
-      this.selectedServices.splice(selectedServiceIndex, 1);
+      this.selectedSubproducts.splice(selectedItemIndex, 1);
     } else {
       // Add the service to selected services array
-      const selectedService = this.product?.productServices?.find(
-        (service: ProductService) => {
-          return service.id === serviceId;
+      const selectedSubproduct = this.product?.subProducts?.find(
+        (service: UserSubProduct) => {
+          return service.id === subproductId;
         }
       );
 
-      this.selectedServices.push(selectedService || {});
+      selectedSubproduct && this.selectedSubproducts.push(selectedSubproduct);
     }
+    console.log('selectedSubproducts', this.selectedSubproducts)
   }
 
-  isServiceActive(serviceId: string): boolean {
-    const selectedService = this.selectedServices?.find(
-      (service: ProductService) => {
-        return service.id === serviceId;
+  subproductExists(subproductId: string): boolean {
+    return this.selectedSubproducts?.some(
+      (item: UserSubProduct) => {
+        return item.id === subproductId;
       }
     );
-
-    return selectedService ? true : false;
   }
 
   addProduct() {
     const existingProduct = this.alreadySelectedProducts.find(
-      (product: Product) => {
+      (product: UserProduct) => {
         return product.id === this.product.id;
       }
     );
 
-    let selectedProduct: Product = {
-      productName: this.product.productName,
-      id: this.product.id,
-      description: this.product.description,
-      productServices: this.selectedServices,
+    let selectedProduct: UserProduct = {
+      ...this.product,
+      subProducts: this.selectedSubproducts,
     };
 
     let newArrayOfServices = [];
 
     if (existingProduct) {
       const newArr: any[] = this.alreadySelectedProducts.map(
-        (element: Product) => {
+        (element: UserProduct) => {
           if (element.id === this.product.id) {
             return selectedProduct;
           }
@@ -162,8 +159,8 @@ export class CorporateUserProductOptionsComponent implements OnInit {
         }
       );
 
-      newArr.forEach((prod: Product, i: number) => {
-        if (prod.productServices.length === 0) {
+      newArr.forEach((prod: UserProduct, i: number) => {
+        if (prod.subProducts.length === 0) {
           newArr.splice(i, 1);
         }
       });
@@ -186,8 +183,8 @@ export class CorporateUserProductOptionsComponent implements OnInit {
     this.productId = null;
     let newArray = [];
 
-    for (let i = 0; i < this.selectedServices.length; i++) {
-      const element = this.selectedServices[i];
+    for (let i = 0; i < this.selectedSubproducts.length; i++) {
+      const element = this.selectedSubproducts[i];
       newArray.push(element.id);
     }
     const payload = {
