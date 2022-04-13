@@ -56,7 +56,6 @@ export class SwiftComponent implements OnInit {
   }
 
   getTransferCharges() {
-    console.log(this.swiftTransferForm.getRawValue());
     const payload = {
       amount: this.getForm.amount.value.amount,
       currency: this.getForm.amount.value.currency,
