@@ -77,7 +77,7 @@ export class ActivityDetailComponent implements OnInit {
   }
 
   openReceipt() {
-    this.transactionReceiptModalService.open();
+    this.transactionReceiptModalService.open(this.data);
   }
 
   @confirmModal({

@@ -1,4 +1,11 @@
-import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import {
+  Component,
+  ElementRef,
+  Inject,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
+import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { TransactionReceiptModalService } from "src/app/core/services/modal-services/transaction-receipt-modal/transaction-receipt-modal.service";
 import { TransactionsService } from "src/app/core/services/transactions/transactions.service";
 
@@ -15,10 +22,13 @@ export class TransactionReceiptModalComponent implements OnInit {
 
   constructor(
     private readonly transactionReceiptModalService: TransactionReceiptModalService,
-    private transactionService: TransactionsService
+    private transactionService: TransactionsService,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.data);
+  }
 
   close() {
     this.transactionReceiptModalService.close();

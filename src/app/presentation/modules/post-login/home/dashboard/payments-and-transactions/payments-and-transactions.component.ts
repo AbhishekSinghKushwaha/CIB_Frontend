@@ -61,7 +61,7 @@ export class PaymentsAndTransactionsComponent implements OnInit {
             (transaction: TransactionListmodel) => {
               return (
                 transaction.approvalStatus ===
-                  TransactionTypeConstants.TransactionApprovalStatus.Approved ||
+                  TransactionTypeConstants.TransactionApprovalStatus.Rejected ||
                 transaction.approvalStatus ===
                   TransactionTypeConstants.TransactionApprovalStatus.Approved
               );
