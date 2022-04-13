@@ -114,7 +114,7 @@
     class="row gx-0 ms-3 d-flex justify-content-center text-danger text-decoration-underline cursor-pointer"
     *ngIf="
       searchText &&
-      favourites.length !== (favourites | favouriteSearch: searchText).length
+      favourites?.length !== (favourites | favouriteSearch: searchText)?.length
     "
     (click)="resetBeneficiaries()"
   >

@@ -83,13 +83,14 @@ export class ActivityDetailComponent implements OnInit {
   @confirmModal({
     title: "Transaction request rejection",
     message: "Reason for rejection",
-    cancelText: "Submit",
-    confirmText: "Cancel",
+    cancelText: "Cancel",
+    confirmText: "Submit",
   })
   reject() {
     const payload = {
       references: [this.data.requestReference],
       transactionApprovalStatus: this.approvalStatus.Rejected,
+      remarks: "Transaction doesn't meet certain criteria",
     };
     this.transactionService.setApprovalPayload(payload);
     this.router.navigate([`/transact/otp-verification/reject-transaction`]);

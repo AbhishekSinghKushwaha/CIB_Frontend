@@ -108,7 +108,9 @@
   <div class="row mt-3">
     <div class="col mt-3">
       <span class="text-grey text-sm">Payment Date</span>
-      <p class="mb-0 text-sm pb-0">{{ data?.date || "Thur, 23 Aug" }}</p>
+      <p class="mb-0 text-sm pb-0">
+        {{ data?.dateCreated | date: "mediumDate" }}
+      </p>
     </div>
     <div class="col mt-3">
       <span class="text-grey text-sm">From</span>

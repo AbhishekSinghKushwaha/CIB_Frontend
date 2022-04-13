@@ -42,14 +42,15 @@ export class PaymentsAndTransactionsComponent implements OnInit {
         console.log(res);
         this.transactionSummary = res.data;
 
-        this.pendingTransactions = this.transactionSummary.transactions.dataList
-          .filter((transaction: TransactionListmodel) => {
-            return (
-              transaction.approvalStatus ===
-              TransactionTypeConstants.TransactionApprovalStatus.Pending
-            );
-          })
-          .reverse();
+        this.pendingTransactions =
+          this.transactionSummary.transactions.dataList.filter(
+            (transaction: TransactionListmodel) => {
+              return (
+                transaction.approvalStatus ===
+                TransactionTypeConstants.TransactionApprovalStatus.Pending
+              );
+            }
+          );
 
         this.transactionsService.setPendingTransactions(
           this.pendingTransactions
@@ -60,7 +61,7 @@ export class PaymentsAndTransactionsComponent implements OnInit {
             (transaction: TransactionListmodel) => {
               return (
                 transaction.approvalStatus ===
-                  TransactionTypeConstants.TransactionApprovalStatus.Rejected &&
+                  TransactionTypeConstants.TransactionApprovalStatus.Approved ||
                 transaction.approvalStatus ===
                   TransactionTypeConstants.TransactionApprovalStatus.Approved
               );

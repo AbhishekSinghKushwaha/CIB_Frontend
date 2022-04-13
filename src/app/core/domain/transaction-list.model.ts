@@ -23,5 +23,6 @@ export interface TransactionListmodel {
   transactionStatus?: number;
   transferCharge?: number;
   transferType?: number;
-  date?: string;
+  dateCreated?: string;
+  remarks?: string;
 }
