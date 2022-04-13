@@ -50,7 +50,7 @@ export class OtherEquityAccountComponent
       sendTo: ["", [Validators.required]],
       amount: [{}, [Validators.required, accountLimitValidator]],
       reason: [""],
-      fxReferenceId: ["", [Validators.required]],
+      fxReferenceId: [""],
       schedulePayment: ["", [Validators.required]],
     });
   }

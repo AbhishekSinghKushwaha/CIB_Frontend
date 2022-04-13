@@ -5,6 +5,7 @@ import { StateService } from "../../state/state.service";
 import urlList from "../../service-list.json";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
+import { Router } from "@angular/router";
 interface MobileMoneyState {
   wallet: MobileWallet;
   transferPayload: {};
@@ -30,7 +31,7 @@ export class MobileMoneyService extends StateService<MobileMoneyState> {
 
   wallet$: Observable<MobileWallet> = this.select((state) => state.wallet);
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     super(initialState);
   }
 
@@ -49,10 +50,24 @@ export class MobileMoneyService extends StateService<MobileMoneyState> {
     );
   }
 
-  sendMobileMoney(payload: any): Observable<any> {
-    return this.http.post(
-      environment.apiUrl + urlList.transfers.mobileMoneyTransfer,
-      payload
-    );
+  sendMobileMoney(transactionType: string) {
+    this.transferPayload$.subscribe((res: any) => {
+      if (res) {
+        this.http
+          .post<any>(
+            environment.apiUrl + urlList.transfers.mobileMoneyTransfer,
+            res
+          )
+          .subscribe((resp) => {
+            if (resp.status) {
+              this.router.navigate([
+                `/transact/transfer-submitted/${transactionType}`,
+              ]);
+            } else {
+              console.log(res.message);
+            }
+          });
+      }
+    });
   }
 }

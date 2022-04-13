@@ -41,7 +41,17 @@ export class CompleteTransferComponent implements OnInit {
   ngOnInit(): void {}
 
   done() {
-    this.router.navigate(["/transact"]);
+    switch (this.transferType) {
+      case "approve-transaction":
+        this.router.navigate(["/dashboard"]);
+        break;
+      case "reject-transaction":
+        this.router.navigate(["/dashboard"]);
+        break;
+      default:
+        this.router.navigate(["/transact"]);
+        break;
+    }
   }
 
   openAddFavourite() {
