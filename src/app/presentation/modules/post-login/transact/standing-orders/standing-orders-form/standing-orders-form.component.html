@@ -17,25 +17,24 @@
       class="d-flex flex-column"
       autocomplete="off"
       [formGroup]="standingOrdersForm"
-      (submit)="submit()"
+      (submit)="getTransferCharges()"
     >
      <!-- Transaction Type-->
      <div class="row">
      <div class="col-md-6">
       <app-transaction-type
         [parentForm]="standingOrdersForm"
+        fieldName="transferType"
+        placeholder="Select Transaction Type"
+        formControlName="transferType"
         label="Select Transaction Type"
-        placeholder="Transaction Type"
-        formControlName="transactionType"
-        fieldName="transactionType"
       > 
       </app-transaction-type>
     </div></div>
       <div class="row">
         <!-- BUY AIRTIME -->
         <!-- Transfer From -->
-        <div class="col-md-6" *ngIf="
-        getForm.transactionType.value.type === 'Buy airtime'">
+        <div class="col-md-6" *ngIf="getForm.transferType.value.value === transferType.BUY_AIRTIME">
           <app-transfer-from
             [parentForm]="standingOrdersForm"
             label="Buy From"
@@ -45,8 +44,7 @@
           ></app-transfer-from>
         </div>
         <!-- Transfer To -->
-        <div class="col-md-6 align-self-end" *ngIf="
-        getForm.transactionType.value.type === 'Buy airtime'">
+        <div class="col-md-6 align-self-end" *ngIf="getForm.transferType.value.value === transferType.BUY_AIRTIME">
           <app-transfer-to
             [parentForm]="standingOrdersForm"
             fieldName="sendTo"
@@ -56,34 +54,9 @@
             transactionType="{{ transferType.BUY_AIRTIME }}"
           ></app-transfer-to>
         </div>
-        <!-- PAY BILL -->
-        <!-- Transfer From -->
-        <div class="col-md-6" *ngIf="
-        getForm.transactionType.value.type === 'Pay bill'">
-          <app-transfer-from
-            [parentForm]="standingOrdersForm"
-            label="Pay From"
-            placeholder="Pay From"
-            formControlName="sendFrom"
-            fieldName="sendFrom"
-          ></app-transfer-from>
-        </div>
-        <!-- Transfer To -->
-        <div class="col-md-6 align-self-end" *ngIf="
-        getForm.transactionType.value.type === 'Pay bill'">
-          <app-transfer-to  
-            [parentForm]="standingOrdersForm"
-            fieldName="sendTo"
-            formControlName="sendTo"
-            label="Pay To"
-            placeholder="Select a biller"
-            transactionType="{{ transferType.OWN_EQUITY }}"
-          ></app-transfer-to>
-        </div>
          <!-- BUY GOODS -->
          <!-- Transfer amount -->
-         <div class="col-md-6" *ngIf="
-         getForm.transactionType.value.type === 'Buy goods & services'">
+         <div class="col-md-6" *ngIf="getForm.transferType.value.value === transferType.BUY_GOODS">
           <app-transfer-from
             [parentForm]="standingOrdersForm"
             label="Pay from"
@@ -92,8 +65,7 @@
           ></app-transfer-from>
         </div>
         <!-- Transfer To -->
-        <div class="col-md-6 align-self-end" *ngIf="
-        getForm.transactionType.value.type === 'Buy goods & services'">
+        <div class="col-md-6 align-self-end" *ngIf="getForm.transferType.value.value === transferType.BUY_GOODS">
           <app-transfer-to
             [parentForm]="standingOrdersForm"
             fieldName="sendTo"
@@ -103,10 +75,18 @@
             transactionType="{{ transferType.BUY_GOODS }}"
           ></app-transfer-to>
         </div>
-        <!-- SEND MONEY TO EQUITY ACCOUNT -->
+        <!-- OTHER -->
         <!-- Transfer-from -->
-        <div class="col-md-6" *ngIf="
-        getForm.transactionType.value.type === 'Send money to Equity account'">
+        <div class="col-md-6"
+        *ngIf="getForm.transferType.value.value === transferType.INTRA_BANK || 
+        getForm.transferType.value.value === transferType.OWN_EQUITY || 
+        getForm.transferType.value.value === transferType.MOBILE_MONEY ||
+        getForm.transferType.value.value === transferType.INTER_BANK ||
+        getForm.transferType.value.value === transferType.PESALINK ||
+        getForm.transferType.value.value === transferType.INTER_COUNTRY_TRANSFER ||
+        getForm.transferType.value.value === transferType.SWIFT ||
+        getForm.transferType.value.value === transferType.EFT ||
+        getForm.transferType.value.value === transferType.RTGS">
           <app-transfer-from
             [parentForm]="standingOrdersForm"
             label="Send From"
@@ -116,47 +96,29 @@
           ></app-transfer-from>
         </div>
         <!-- Transfer To -->
-        <div class="col-md-6 align-self-end" *ngIf="
-        getForm.transactionType.value.type === 'Send money to Equity account'">
+        <div class="col-md-6 align-self-end" 
+        *ngIf="getForm.transferType.value.value === transferType.INTRA_BANK || 
+        getForm.transferType.value.value === transferType.OWN_EQUITY || 
+        getForm.transferType.value.value === transferType.MOBILE_MONEY ||
+        getForm.transferType.value.value === transferType.INTER_BANK ||
+        getForm.transferType.value.value === transferType.PESALINK ||
+        getForm.transferType.value.value === transferType.INTER_COUNTRY_TRANSFER || 
+        getForm.transferType.value.value === transferType.SWIFT ||
+        getForm.transferType.value.value === transferType.EFT ||
+        getForm.transferType.value.value === transferType.RTGS">
           <app-transfer-to
             [parentForm]="standingOrdersForm"
             label="Send To"
             formControlName="sendTo"
             fieldName="sendTo"
-            placeholder="Select the recipient"
-            transactionType="{{ transferType.INTRA_BANK }}"
+            placeholder="Select recipient"
+            [transactionType]="getForm.transferType.value.value"
           >
           </app-transfer-to>
         </div>
-        <!-- SEND MONEY TO OTHER BANK -->
-        <!-- Send From -->
-        <div class="col-md-6" *ngIf="
-        getForm.transactionType.value.type === 'Send money to other bank'">
-          <app-transfer-from
-            [parentForm]="standingOrdersForm"
-            label="Pay From"
-            placeholder="Pay From"
-            formControlName="sendFrom"
-            fieldName="sendFrom"
-          >
-          </app-transfer-from>
-        </div>
-        <!-- Send To -->
-        <div class="col-md-6 align-self-end" *ngIf="
-        getForm.transactionType.value.type === 'Send money to other bank'">
-          <app-transfer-to
-            [parentForm]="standingOrdersForm"
-            label="Merchant Name"
-            formControlName="sendTo"
-            fieldName="sendTo"
-            placeholder="Select the recipient"
-            transactionType="{{ transferType.INTER_BANK }}"
-          >
-          </app-transfer-to>
-        </div>
+
         <!-- Transfer amount -->
-        <div class="col-md-6" *ngIf="
-        getForm.transactionType.value.type !== 'Buy airtime'">
+        <div class="col-md-6" *ngIf="getForm.transferType.value.value !== transferType.BUY_AIRTIME">
           <app-transfer-amount
             [parentForm]="standingOrdersForm"
             fieldName="amount"
@@ -166,10 +128,10 @@
           >
           </app-transfer-amount>
         </div>
+
         <!-- BUY AIRTIME -->
         <!-- Transfer amount -->
-        <div class="col-md-6" *ngIf="
-        getForm.transactionType.value.type === 'Buy airtime'">
+        <div class="col-md-6" *ngIf="getForm.transferType.value.value === transferType.BUY_AIRTIME">
           <app-buyairtime-amount
             [parentForm]="standingOrdersForm"
             label="Amount"
@@ -190,6 +152,39 @@
             transactionType="ownEquityAccount"
           ></app-schedule-payment-input>
         </div>
+
+        <!-- License -->
+        <div class="col-md-6" *ngIf="getForm.transferType.value.value === transferType.SWIFT">
+          <app-input
+            [parentForm]="standingOrdersForm"
+            label="License"
+            placeholder="Enter License"
+            formControlName="license"
+            fieldName="license"
+          >
+          </app-input>
+        </div>
+        <!-- Foreign Charges -->
+        <div class="col-md-6" *ngIf="getForm.transferType.value.value === transferType.SWIFT">
+          <app-swift-charges
+            [parentForm]="standingOrdersForm"
+            label="Charges"
+            formControlName="chargeOption"
+            fieldName="chargeOption"
+            placeholder="Select an option"
+          ></app-swift-charges>
+        </div>
+        <!-- Payment Category -->
+        <div class="col-md-6" *ngIf="getForm.transferType.value.value === transferType.SWIFT">
+          <app-payment-category
+            [parentForm]="standingOrdersForm"
+            label="Transaction BCC Code"
+            fieldName="paymentCategory"
+            formControlName="paymentCategory"
+            placeholder="Select a Payment Category"
+          ></app-payment-category>
+        </div>
+        
         <!-- Payment Reason -->
         <div class="col-md-6">
           <app-input

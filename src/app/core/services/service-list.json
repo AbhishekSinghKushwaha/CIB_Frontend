@@ -101,5 +101,13 @@
     "getCharges": "/cibpaymentservice-v1/api/v1/Airtime/GetCharge",
     "getOperatorsCountries": "/cibpaymentservice-v1/api/v1/Airtime/GetOperatorCountries",
     "getOperators": "/cibpaymentservice-v1/api/v1/Airtime/GetOperators/"
+  },
+  "standingOrders": {
+    "createStandingOrder": "/cibpaymentservice-v1/api/v1/SchedulePayment/Schedule",
+    "editStandingOrder": "/cibpaymentservice-v1/api/v1/SchedulePayment/EditSchedule",
+    "getStandingOrders": "/cibpaymentservice-v1/api/v1/SchedulePayment/GetAll",
+    "deleteStandingOrder": "/cibpaymentservice-v1/api/v1/SchedulePayment/Delete",
+    "deactivateStandingOrder": "/cibpaymentservice-v1/api/v1/SchedulePayment/Deactivate",
+    "getScheduleId": "/cibpaymentservice-v1/api/v1/SchedulePayment/GetSchedule"
   }
 }

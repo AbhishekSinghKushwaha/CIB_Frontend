@@ -1,7 +1,7 @@
 import { Component, forwardRef, Input, OnInit } from "@angular/core";
 import { FormControl, FormGroup, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { TransactionTypeService } from 'src/app/core/services/transaction-type/transaction-type.service';
-import { mockData } from "src/app/core/utils/constants/mockdata.constants";
+import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
 
 @Component({
   selector: 'app-transaction-type',
@@ -54,7 +54,7 @@ export class TransactionTypeComponent implements OnInit {
 
   private eventsSubscriptions(): void {
     this.transactionTypeService.selected.subscribe((response) => {
-      this.parentForm.controls.transactionType.setValue(response);
+      this.parentForm.controls.transferType.setValue(response);
     });
   }
 
@@ -80,7 +80,7 @@ export class TransactionTypeComponent implements OnInit {
   }
 
   openTransactionType() {
-    this.transactionTypeService.open(mockData.TransactionType);
+    this.transactionTypeService.open(TransactionTypeConstants.TransferType);
   }
 
 }
