@@ -7,19 +7,37 @@
   </div>
 </div>
 <div class="card border-0 login-screen">
-  <div class="card-body ps-4">
-    <h3 class="strong-text">{{ "login_hello" | translate }}</h3>
-    <div class="row text-muted">
-      <p>
-        Sign in to continue. Remember, your password is yours, do not share it
-        with anyone.
-      </p>
-      <p>
-        If this is your first time here, you can register using your Equitel or
-        Eazzy Banking details.
-      </p>
+  <div class="row ps-5">
+    <div class="col-md-12">
+      <button
+        mat-button
+        aria-label="Back"
+        class="back-icon"
+        (click)="resetStage()"
+      >
+        <div class="strong-text">
+          <mat-icon svgIcon="chevron-left" class="chevron"></mat-icon>
+          <span> {{ "login_hello" | translate }} </span>
+        </div>
+      </button>
     </div>
-    <div class="row text-muted">
+  </div>
+  <div class="row text-muted">
+    <p>
+      Sign in to continue. Remember, your password is yours, do not share it
+      with anyone.
+    </p>
+    <p>
+      If this is your first time here, you can register using your Equitel or
+      Eazzy Banking details.
+    </p>
+  </div>
+  <div class="card-body ps-5" [ngSwitch]="stage">
+    <div class="row pt-4 pb-5" *ngSwitchDefault>
+      <h3 class="strong-text">Have you forgotten your password?</h3>
+      <div class="text-sm text-grey">
+        We’ll email or text you a link to help you reset your password
+      </div>
       <form
         [formGroup]="loginPasswordForm"
         (ngSubmit)="submit()"
@@ -112,5 +130,31 @@
         </div>
       </form>
     </div>
+
+    <app-reset-password
+      [userIdentifier]="f.username.value"
+      [submitted]="passwordChangeSubmitStatus"
+      (onSubmit)="onPasswordChangeSubmit($event)"
+      *ngSwitchCase="'change-password'"
+    ></app-reset-password>
+
+    <app-sms-verification
+      (onOTPVerified)="smsVerificationSubmit($event)"
+      [otpError]="otpError"
+      [message]="initialResponse"
+      *ngSwitchCase="'sms-verification'"
+    ></app-sms-verification>
+
+    <!--  
+    <app-security-verification
+      (onSubmit)="onSecurityVerificationSubmit($event)"
+      *ngSwitchCase="'security-verification'"
+    ></app-security-verification>
+
+    <app-security-challenge
+      (onSubmit)="securityChallengeSubmit($event)"
+      (error)="onSecurityVerificationError($event)"
+      *ngSwitchCase="'security-challenge'"
+    ></app-security-challenge> -->
   </div>
 </div>

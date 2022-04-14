@@ -121,18 +121,12 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
     return value?.message;
   }
 
-  setLoginState(state: string) {
-    this.storageService.setData('login_state', { state });
-    this.loginState.next(state)
-  }
-
   async loginSuccess() {
     return new Promise((resolve, reject) => {
       this.getLogonUser().subscribe(response => {
         console.log('loginSuccess', response)
         if (response) {
           this.userState = response;
-          this.setLoginState(LOGIN_CONSTANTS.LOGIN_STAGES.LOGIN_SUCCESS);
           console.log('this.userState', this.userState);
           this.router.navigate(['/dashboard']);
           this.autoLogin();

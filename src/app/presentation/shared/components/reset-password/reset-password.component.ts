@@ -1,9 +1,10 @@
 import { FormControl, Validators } from '@angular/forms';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarComponent } from 'src/app/presentation/shared/components/snackbar/snackbar.component';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-reset-password',
@@ -12,11 +13,17 @@ import { SnackbarComponent } from 'src/app/presentation/shared/components/snackb
 })
 export class ResetPasswordComponent implements OnInit {
   resetPasswordForm: FormGroup = new FormGroup({});
-  @Input() token: string;
   @Input() userIdentifier: string;
+  @Output() onSubmit = new Subject();
   hidePassword1 = true;
   hidePassword2 = true;
-  submitted: boolean;
+  private _submitted: boolean;
+  @Input() set submitted(value) {
+    value && this.resetPasswordForm.reset();
+  }
+  get submitted(): boolean {
+    return this._submitted;
+  }
   pattern = '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{12,}$';
 
   constructor(private readonly userservice: UserService, protected snackbar: MatSnackBar) { }
@@ -40,40 +47,11 @@ export class ResetPasswordComponent implements OnInit {
   submit() {
     if (this.resetPasswordForm.valid) {
       this.submitted = true;
-
-      const payload = {
+      const payload: { newPassword: string, userIdentifier: string, token?: string } = {
         newPassword: this.resetPasswordForm.value.password,
-        userIdentifier: this.userIdentifier,
-        token: this.token
+        userIdentifier: this.userIdentifier
       }
-      this.userservice.resetPassword(payload).subscribe(
-        (response) => {
-          this.submitted = false;
-          this.resetPasswordForm.reset();
-          const message = {
-            error: false,
-            errorStatus: '',
-            message: 'Your password has been reset successfully',
-            details: 'Your password has been reset successfully'
-          }
-          this.snackbar.openFromComponent(SnackbarComponent, {
-            data: message,
-            horizontalPosition: 'end',
-            verticalPosition: 'top',
-            duration: 5000,
-          });
-        },
-        (error) => {
-          this.submitted = false;
-          const errorMessage = { error: true, errorStatus: `${error.status}`, message: error.error.message, details: error.error }
-          this.snackbar.openFromComponent(SnackbarComponent, {
-            data: errorMessage,
-            horizontalPosition: 'end',
-            verticalPosition: 'top',
-            duration: 5000,
-          });
-        }
-      );
+      this.onSubmit.next(payload);
     }
 
 
