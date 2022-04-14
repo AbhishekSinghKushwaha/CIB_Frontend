@@ -145,16 +145,10 @@
       *ngSwitchCase="'sms-verification'"
     ></app-sms-verification>
 
-    <!--  
-    <app-security-verification
-      (onSubmit)="onSecurityVerificationSubmit($event)"
-      *ngSwitchCase="'security-verification'"
-    ></app-security-verification>
-
     <app-security-challenge
       (onSubmit)="securityChallengeSubmit($event)"
       (error)="onSecurityVerificationError($event)"
       *ngSwitchCase="'security-challenge'"
-    ></app-security-challenge> -->
+    ></app-security-challenge>
   </div>
 </div>
