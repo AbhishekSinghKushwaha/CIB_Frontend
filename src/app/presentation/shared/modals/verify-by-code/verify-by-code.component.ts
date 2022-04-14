@@ -29,6 +29,7 @@ import { MobileMoneyService } from "src/app/core/services/transfers/mobile-money
 import { IntrabankService } from "src/app/core/services/transfers/intrabank/intrabank.service";
 import { InterbankService } from "src/app/core/services/transfers/interbank/interbank.service";
 import { SwiftTransferService } from "src/app/core/services/transfers/swift/swift-transfer.service";
+import { IntercountryService } from "src/app/core/services/transfers/intercountry/intercountry.service";
 import { TransactionsService } from "src/app/core/services/transactions/transactions.service";
 
 @Component({
@@ -80,6 +81,7 @@ export class VerifyByCodeComponent implements OnInit {
     private intrabankService: IntrabankService,
     private interbankService: InterbankService,
     private swiftTransferService: SwiftTransferService,
+    private intercountryService: IntercountryService,
     private transactionService: TransactionsService
   ) {
     this.initOtpForm();
@@ -295,6 +297,9 @@ export class VerifyByCodeComponent implements OnInit {
       case "delete-transaction":
         // TODO:: DELETE TRANSACTION
         this.transactionService.approveTransaction("approve-transaction");
+        break;
+      case this.transferType.SUBSIDIARY:
+        // this.subsidiaryTransfer();
         break;
       default:
         break;

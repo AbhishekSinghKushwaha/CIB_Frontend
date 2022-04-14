@@ -4,6 +4,7 @@ import { BankModel, CountryModel } from "src/app/core/domain/bank.model";
 import { CountryService } from "src/app/core/services/modal-services/country.service";
 import { SharedDataService } from "src/app/core/services/shared-data/shared-data.service";
 import { StorageService } from "src/app/core/services/storage/storage.service";
+import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
 
 @Component({
   selector: "app-country-select-input",
@@ -44,6 +45,8 @@ export class CountrySelectInputComponent implements OnInit {
 
   public isDisabled!: boolean;
 
+  transferType = TransactionTypeConstants.TransferType;
+
   get formField(): FormControl {
     return this.parentForm?.get(this.fieldName) as FormControl;
   }
@@ -77,8 +80,16 @@ export class CountrySelectInputComponent implements OnInit {
   }
 
   openCountrySelectionModal() {
+    let countries = [];
+    this.transactionType === this.transferType.SUBSIDIARY
+      ? (countries = this.storageService
+          .getData("countries")
+          .filter((v: any) => {
+            return v.operatingCountry === true;
+          }))
+      : (countries = this.storageService.getData("countries"));
     this.countryService
-      .openCountry(this.storageService.getData("countries"), "", {})
+      .openCountry(countries, "", {})
       .afterClosed()
       .subscribe((res) => {
         this.parentForm.controls.country.setValue(res);
