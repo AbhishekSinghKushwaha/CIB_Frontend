@@ -18,34 +18,41 @@ import { TransactionTypeConstants } from "src/app/core/utils/constants/transacti
   styleUrls: ["./transactions-list.component.scss"],
 })
 export class TransactionsListComponent implements OnInit, OnChanges {
-  private _searchText: string;
+  // private _searchText: string;
 
-  searchText: any;
   // get searchText(): string {
   //   return this._searchText;
   // }
 
   // set searchText(input: string) {
   //   const value = input.toLowerCase();
-  //   this.transactions = [];
-  //   for (const transaction of this.originalTransactions) {
-  //     if (
-  //       transaction.amount.toLowerCase().indexOf(value) > -1 ||
-  //       transaction.date.toLowerCase().indexOf(value) > -1 ||
-  //       transaction.description.toLowerCase().indexOf(value) > -1 ||
-  //       transaction.status.toLowerCase().indexOf(value) > -1 ||
-  //       transaction.title.toLowerCase().indexOf(value) > -1
-  //     ) {
-  //       this.transactions.push(transaction);
+
+  //   for (const transaction of this.data) {
+  //     const isValue = Object.values(transaction).some((val) => {
+  //       console.log(typeof val, value, val);
+  //       if (
+  //         typeof val !== "object" &&
+  //         typeof val !== "number" &&
+  //         val !== null &&
+  //         val.indexOf(value) > -1
+  //       ) {
+  //         return true;
+  //       }
+  //       return false;
+  //     });
+  //     console.log(isValue);
+  //     if (isValue) {
+  //       this.data.push(transaction);
   //     }
   //   }
   //   this._searchText = input;
   //   this.paginationData = new PaginationModel(
   //     10,
   //     [10, 25, 40, 60],
-  //     this.transactions.length
+  //     this.data.length
   //   );
   // }
+  searchText: string;
   paginationData: PaginationModel;
 
   transactionIcon = {
@@ -55,8 +62,7 @@ export class TransactionsListComponent implements OnInit, OnChanges {
   };
 
   @Input() category: string;
-  @Input() pendingTransactions: TransactionListmodel[] = [];
-  @Input() historyTransactions: TransactionListmodel[] = [];
+  @Input() data: TransactionListmodel[] = [];
   @Input() standingOrderTransactions: TransactionListmodel[] = [];
 
   approvalStatus = TransactionTypeConstants.TransactionApprovalStatus;

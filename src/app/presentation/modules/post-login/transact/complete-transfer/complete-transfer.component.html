@@ -12,14 +12,9 @@
       </div>
     </div>
 
-    <div class="col-7">
-      <h4 class="mt-5" *ngIf="transferType !== 'Standing Orders'">
-        Fund transfer submitted for approval!
-      </h4>
-
-      <h3 class="mt-5 strong-text" *ngIf="transferType === 'Standing Orders'">
-        Standing order submitted for approval!
-      </h3>
+    <!-- Standing Orders -->
+    <div class="col-7" *ngIf="transferType === 'Standing Orders'">
+      <h3 class="mt-5 strong-text">Standing order submitted for approval!</h3>
       <br />
 
       <p>Permanent Amendment</p>
@@ -53,6 +48,121 @@
           <button
             mat-stroked-button
             *ngIf="transferType === 'Standing Orders'"
+            type="button"
+            color="primary"
+            class="px-5 mt-4"
+            (click)="openAddFavourite()"
+          >
+            Add to favourites
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Approve transaction -->
+    <div class="col-7" *ngIf="transferType === 'approve-transaction'">
+      <h2 class="mt-5 fw-bold">Transaction has been successfully approved</h2>
+      <br />
+      <span class="text-sm text-grey"
+        >The initiator will be notified of this transaction's approval
+        status</span
+      >
+
+      <br />
+
+      <div class="row col-md-10 mt-4">
+        <div class="col-md-4">
+          <button
+            mat-raised-button
+            type="button"
+            color="primary"
+            class="px-5 mt-4"
+            (click)="done()"
+          >
+            Done
+          </button>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+    </div>
+
+    <!-- Reject Transaction -->
+    <div class="col-7" *ngIf="transferType === 'reject-transaction'">
+      <h2 class="mt-5 fw-bold">Transaction has been rejected</h2>
+
+      <br />
+
+      <span class="text-sm text-grey"
+        >The initiator will be notified of this transaction's approval
+        status</span
+      >
+
+      <br />
+
+      <div class="row col-md-10 mt-4">
+        <div class="col-md-4">
+          <button
+            mat-raised-button
+            type="button"
+            color="primary"
+            class="px-5 mt-4"
+            (click)="done()"
+          >
+            Done
+          </button>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+    </div>
+
+    <!-- Other Transactions -->
+    <div
+      class="col-7"
+      *ngIf="
+        transferType === transferTypes.BUY_AIRTIME ||
+        transferType === transferTypes.BUY_GOODS ||
+        transferType === transferTypes.EFT ||
+        transferType === transferTypes.INTER_BANK ||
+        transferType === transferTypes.INTRA_BANK ||
+        transferType === transferTypes.MOBILE_MONEY ||
+        transferType === transferTypes.OWN_EQUITY ||
+        transferType === transferTypes.PESALINK ||
+        transferType === transferTypes.RTGS ||
+        transferType === transferTypes.SUBSIDIARY ||
+        transferType === transferTypes.SWIFT
+      "
+    >
+      <h4 class="mt-5">Fund transfer submitted for approval</h4>
+
+      <br />
+
+      <p>Permanent Amendment</p>
+
+      <span class="text-sm text-grey"></span>
+
+      <br /><br />
+
+      <span class="text-sm text-grey"
+        >You will be notified once the transaction has been approved</span
+      >
+
+      <br />
+
+      <div class="row col-md-10">
+        <div class="col-md-4">
+          <button
+            mat-raised-button
+            type="button"
+            color="primary"
+            class="px-5 mt-4"
+            (click)="done()"
+          >
+            Done
+          </button>
+        </div>
+        <div class="col-md-3">
+          <button
+            mat-stroked-button
             type="button"
             color="primary"
             class="px-5 mt-4"

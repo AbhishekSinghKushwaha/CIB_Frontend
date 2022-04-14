@@ -30,6 +30,7 @@ import { IntrabankService } from "src/app/core/services/transfers/intrabank/intr
 import { InterbankService } from "src/app/core/services/transfers/interbank/interbank.service";
 import { SwiftTransferService } from "src/app/core/services/transfers/swift/swift-transfer.service";
 import { IntercountryService } from "src/app/core/services/transfers/intercountry/intercountry.service";
+import { TransactionsService } from "src/app/core/services/transactions/transactions.service";
 
 @Component({
   selector: "app-verify-by-code",
@@ -65,6 +66,8 @@ export class VerifyByCodeComponent implements OnInit {
 
   @Input() transactionType!: string;
   transferType = TransactionTypeConstants.TransferType;
+  transactionApprovalStatus =
+    TransactionTypeConstants.TransactionApprovalStatus;
 
   constructor(
     private readonly otpCodeService: OtpCodeService,
@@ -78,7 +81,8 @@ export class VerifyByCodeComponent implements OnInit {
     private intrabankService: IntrabankService,
     private interbankService: InterbankService,
     private swiftTransferService: SwiftTransferService,
-    private intercountryService: IntercountryService
+    private intercountryService: IntercountryService,
+    private transactionService: TransactionsService
   ) {
     this.initOtpForm();
   }
@@ -226,95 +230,6 @@ export class VerifyByCodeComponent implements OnInit {
     }
   }
 
-  mobileMoney() {
-    this.mobileMoneyService.transferPayload$.subscribe((res) => {
-      this.payload = res;
-    });
-    if (this.payload) {
-      this.mobileMoneyService.sendMobileMoney(this.payload).subscribe((res) => {
-        if (res.status) {
-          this.router.navigate([
-            `/transact/transfer-submitted/${this.transactionType}`,
-          ]);
-        } else {
-          console.log(res.message);
-        }
-      });
-    }
-  }
-
-  intrabankTransfer() {
-    this.intrabankService.transferPayload$.subscribe((res) => {
-      this.payload = res;
-    });
-    if (this.payload) {
-      this.intrabankService
-        .sendToAnotherEquityAccount(this.payload)
-        .subscribe((res) => {
-          if (res.status) {
-            this.router.navigate([
-              `/transact/transfer-submitted/${this.transactionType}`,
-            ]);
-          } else {
-            console.log(res.message);
-          }
-        });
-    }
-  }
-
-  interbankTransfer() {
-    this.interbankService.transferPayload$.subscribe((res) => {
-      this.payload = res;
-    });
-    if (this.payload) {
-      this.interbankService.sendToOtherBanks(this.payload).subscribe((res) => {
-        if (res.status) {
-          this.router.navigate([
-            `/transact/transfer-submitted/${this.transactionType}`,
-          ]);
-        } else {
-          console.log(res.message);
-        }
-      });
-    }
-  }
-
-  swiftTransfer() {
-    this.swiftTransferService.transferPayload$.subscribe((res) => {
-      this.payload = res;
-    });
-    if (this.payload) {
-      this.swiftTransferService.sendViaSwift(this.payload).subscribe((res) => {
-        if (res.status) {
-          this.router.navigate([
-            `/transact/transfer-submitted/${this.transactionType}`,
-          ]);
-        } else {
-          console.log(res.message);
-        }
-      });
-    }
-  }
-
-  subsidiaryTransfer() {
-    this.intercountryService.transferPayload$.subscribe((res) => {
-      this.payload = res;
-    });
-    if (this.payload) {
-      this.intercountryService
-        .sendToSubsidiary(this.payload)
-        .subscribe((res) => {
-          if (res.status) {
-            this.router.navigate([
-              `/transact/transfer-submitted/${this.transactionType}`,
-            ]);
-          } else {
-            console.log(res.message);
-          }
-        });
-    }
-  }
-
   standingOrders() {
     this.router.navigate([
       `/transact/standing-orders/transfer-submitted/${this.transactionType}`,
@@ -357,22 +272,34 @@ export class VerifyByCodeComponent implements OnInit {
         this.standingOrders();
         break;
       case this.transferType.MOBILE_MONEY:
-        this.mobileMoney();
+        this.mobileMoneyService.sendMobileMoney(this.transactionType);
         break;
       case this.transferType.INTRA_BANK:
-        this.intrabankTransfer();
+        this.intrabankService.sendViaIntrabankTransfer(this.transactionType);
         break;
       case this.transferType.RTGS:
-        this.interbankTransfer();
+        this.interbankService.sendViaInterbankTransfer(this.transactionType);
         break;
       case this.transferType.EFT:
-        this.interbankTransfer();
+        this.interbankService.sendViaInterbankTransfer(this.transactionType);
         break;
       case this.transferType.SWIFT:
-        this.swiftTransfer();
+        this.swiftTransferService.sendViaSwiftTransfer(this.transactionType);
+        break;
+      case "approve-transaction":
+        // TODO:: APPROVE TRANSACTION
+        this.transactionService.approveTransaction("approve-transaction");
+        break;
+      case "reject-transaction":
+        // TODO:: REJECT TRANSACTION
+        this.transactionService.approveTransaction("reject-transaction");
+        break;
+      case "delete-transaction":
+        // TODO:: DELETE TRANSACTION
+        this.transactionService.approveTransaction("approve-transaction");
         break;
       case this.transferType.SUBSIDIARY:
-        this.subsidiaryTransfer();
+        // this.subsidiaryTransfer();
         break;
       default:
         break;

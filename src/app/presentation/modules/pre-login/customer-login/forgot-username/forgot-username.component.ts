@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { concatMap, map } from 'rxjs/operators';
 import { UserVerifyProduct } from 'src/app/core/domain/user-verify-product.model';
 import { UserModel } from 'src/app/core/domain/user.model';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
@@ -8,6 +9,7 @@ import { NotificationModalService } from 'src/app/core/services/modal-services/n
 import { SecurityChallengeService } from 'src/app/core/services/security-challenge/security-challenge.service';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { UserService } from 'src/app/core/services/user/user.service';
+import { CONFIRMATIONCOMPLETION } from 'src/app/core/utils/constants/confirmation.constants';
 import { SharedUtils } from 'src/app/core/utils/shared.util';
 
 @Component({
@@ -22,6 +24,7 @@ export class ForgotUsernameComponent implements OnInit {
   securityToken: string;
   submitted: boolean;
   initialResponse: string;
+  completionData = CONFIRMATIONCOMPLETION.forgotUsernameData;
 
   credentialsForm: FormGroup = new FormGroup({
     credentials: new FormControl(null, [
@@ -41,6 +44,13 @@ export class ForgotUsernameComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.storageService.getData('loginCred');
+  }
+
+
+  confirmationDone(event: boolean) {
+    if (event) {
+      this.router.navigate(['/auth/login'])
+    }
   }
 
   resetStage() {
@@ -126,18 +136,15 @@ export class ForgotUsernameComponent implements OnInit {
 
   securityChallengeSubmit(answers: any) {
     const result = { ...answers, userIdentifier: this.credentialsControls.credentials.value };
-    console.log(result);
     this.securityChallengeService.submitSecurityAnswers(result)
-      .subscribe(
-        (response) => {
-          if (response && response?.token) {
-            this.securityToken = response.token;
-            this.stage = 'change-password';
-          }
-        },
-        (error) => {
-          console.log({ error });
+      .pipe(
+        concatMap((res: any) => this.securityChallengeService.completeForgotUsername({ otp: res.token, email: this.credentialsControls.credentials.value })),
+      )
+      .subscribe((response: any) => {
+        console.log(response);
+        if (response) {
+          this.stage = 'change-password';
         }
-      );
+      });
   }
 }

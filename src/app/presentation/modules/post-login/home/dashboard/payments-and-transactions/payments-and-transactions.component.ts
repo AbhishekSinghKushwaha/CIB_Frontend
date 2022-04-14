@@ -31,7 +31,7 @@ export class PaymentsAndTransactionsComponent implements OnInit {
   getTransactions() {
     const params = {
       page: 1,
-      pageSize: 15,
+      pageSize: 350,
       From: this.dateRange.from,
       To: this.dateRange.to, // Automatically picks todays date
       TransactionType: "",
@@ -42,29 +42,31 @@ export class PaymentsAndTransactionsComponent implements OnInit {
         console.log(res);
         this.transactionSummary = res.data;
 
-        this.pendingTransactions = res.data.transactions.dataList.filter(
-          (transaction: TransactionListmodel) => {
-            return (
-              transaction.approvalStatus ===
-              TransactionTypeConstants.TransactionApprovalStatus.Pending
-            );
-          }
-        );
+        this.pendingTransactions =
+          this.transactionSummary.transactions.dataList.filter(
+            (transaction: TransactionListmodel) => {
+              return (
+                transaction.approvalStatus ===
+                TransactionTypeConstants.TransactionApprovalStatus.Pending
+              );
+            }
+          );
 
         this.transactionsService.setPendingTransactions(
           this.pendingTransactions
         );
 
-        this.historyTransactions = res.data.transactions.dataList.filter(
-          (transaction: TransactionListmodel) => {
-            return (
-              transaction.approvalStatus ===
-                TransactionTypeConstants.TransactionApprovalStatus.Rejected &&
-              transaction.approvalStatus ===
-                TransactionTypeConstants.TransactionApprovalStatus.Approved
-            );
-          }
-        );
+        this.historyTransactions =
+          this.transactionSummary.transactions.dataList.filter(
+            (transaction: TransactionListmodel) => {
+              return (
+                transaction.approvalStatus ===
+                  TransactionTypeConstants.TransactionApprovalStatus.Rejected ||
+                transaction.approvalStatus ===
+                  TransactionTypeConstants.TransactionApprovalStatus.Approved
+              );
+            }
+          );
 
         this.transactionsService.setHistoryTransactions(
           this.historyTransactions

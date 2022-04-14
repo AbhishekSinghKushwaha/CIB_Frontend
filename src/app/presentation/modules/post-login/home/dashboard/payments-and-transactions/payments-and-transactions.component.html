@@ -56,13 +56,13 @@
   <mat-tab-group>
     <mat-tab label="Pending requests">
       <app-transactions-list
-        [pendingTransactions]="pendingTransactions"
+        [data]="pendingTransactions"
         [category]="'pending'"
       ></app-transactions-list>
     </mat-tab>
     <mat-tab label="History">
       <app-transactions-list
-        [historyTransactions]="historyTransactions"
+        [data]="historyTransactions"
         [category]="'history'"
       ></app-transactions-list
     ></mat-tab>

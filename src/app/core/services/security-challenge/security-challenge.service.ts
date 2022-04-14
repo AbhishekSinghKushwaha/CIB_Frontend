@@ -38,6 +38,12 @@ export class SecurityChallengeService {
       .post<{ message: string, token: string }>(url, answers);
   }
 
+  completeForgotUsername(payload: any) {
+    const url = environment.apiUrl + urlList.login.completeforgotusername;
+    return this.http
+      .post<{ message: string, token: string }>(url, payload);
+  }
+
   open(allQuestions: SecurityQuestionModel[], displayedQuestions: SecurityQuestionModel[], toUpdate: SecurityQuestionModel) {
     this.modalRef = this.dialog.open<SecurityQuestionsModalComponent, any>(
       SecurityQuestionsModalComponent,
