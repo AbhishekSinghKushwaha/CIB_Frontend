@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
 
   forgotDetails() {
     this.sharedService
-      .openDropdown(LOGIN_CONSTANTS.FORGOT_LOGIN_DETAILS)
+      .openDropdownModal(LOGIN_CONSTANTS.FORGOT_LOGIN_DETAILS)
       .afterClosed()
       .subscribe(data => {
         if (data) {

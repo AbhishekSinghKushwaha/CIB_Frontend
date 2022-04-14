@@ -10,7 +10,7 @@ export class SharedService<T> {
 
   constructor(private readonly dialog: MatDialog) { }
 
-  openDropdown(data: DropdownModal<T>) {
+  openDropdownModal(data: DropdownModal<T>) {
     this.dropdownListModalRef = this.dialog.open<DropdownListModalComponent<T>>(
       DropdownListModalComponent,
       {
