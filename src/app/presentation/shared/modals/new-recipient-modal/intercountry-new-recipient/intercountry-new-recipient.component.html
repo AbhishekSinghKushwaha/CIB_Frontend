@@ -1,57 +1,26 @@
-<div class="container new-intercountry-modal-screen p-1">
+<div class="container new-recipient-modal-screen p-1">
   <button mat-icon-button matSuffix class="close-button" (click)="close()">
     <mat-icon svgIcon="caret_left"></mat-icon>
   </button>
   <p class="text-center fw-bold pt-2">Send to someone new</p>
-  <h3 class="pt-4">
-    <strong>Please enter the recipient's details</strong>
-  </h3>
+  <h3 class="m-4 ms-2">Please enter the recipient's details</h3>
   <form
     [formGroup]="interCountryNewRecipientForm"
     (submit)="submit()"
     class="d-flex flex-column"
     autocomplete="off"
   >
-    <div class="row pt-3">
+    <div class="row gx-0 m-3">
       <div class="col-md-6 col-lg-12">
-        <mat-form-field
-          appearance="standard"
-          style="width: 100%"
-          floatLabel="always"
-          (click)="openCountries()"
+        <app-country-select-input
+          [parentForm]="interCountryNewRecipientForm"
+          fieldName="country"
+          formControlName="country"
+          label="Select Country"
+          placeholder="Select Country"
+          [transactionType]="transferType.SUBSIDIARY"
         >
-          <mat-label>Country</mat-label>
-          <input
-            parentForm="interCountryNewRecipientForm"
-            matInput
-            type="text"
-            class="strong-text"
-            formControlName="country"
-            fieldName="country"
-            value="{{ (selected | async)?.countryName }}"
-          />
-          <button type="button" mat-icon-button matSuffix>
-            <mat-icon svgIcon="caret_down"></mat-icon>
-          </button>
-        </mat-form-field>
-      </div>
-      <div class="col-md-6 col-lg-12">
-        <app-select-bank
-          [parentForm]="interCountryNewRecipientForm"
-          fieldName="bank"
-          formControlName="bank"
-          label="Select Bank"
-          placeholder=""
-        ></app-select-bank>
-      </div>
-      <div class="col-md-6 col-lg-12">
-        <app-input
-          [parentForm]="interCountryNewRecipientForm"
-          fieldName="accountName"
-          placeholder="Enter their account name"
-          formControlName="accountName"
-          label="Account Name"
-        ></app-input>
+        </app-country-select-input>
       </div>
 
       <div class="col-md-6 col-lg-12">
@@ -65,7 +34,7 @@
       </div>
       <div class="col-md-6 col-lg-12"></div>
     </div>
-    <div class="mt-4">
+    <div class="m-3">
       <button
         type="submit"
         mat-raised-button
