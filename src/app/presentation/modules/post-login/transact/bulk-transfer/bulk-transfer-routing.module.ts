@@ -8,7 +8,7 @@ const routes: Routes = [
     component: BulkTransferComponent,
   },
   {
-    path: "view",
+    path: "view/:id",
     loadChildren: (): Promise<any> =>
       import("./bulk-transfer-view/bulk-transfer-view.module").then(
         (m) => m.BulkTransferViewModule

@@ -3,13 +3,22 @@ import { MatTableDataSource } from '@angular/material/table';
 import { DeleteService } from 'src/app/core/services/delete/delete.service';
 import { ConfirmationModalService } from "src/app/core/services/modal-services/confirmation-modal.service";
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 export interface User {
-  date: string,
-  type: string,
-  name: string,
-  bank: string,
-  amount: string
+  id: number;
+  paymentDate: string,
+  paymentType: string,
+  debitAccountName: string,
+  debitAccountNumber: string,
+  beneficiaryAccountNumber: string,
+  beneficiaryMobile: string,
+  beneficiaryName: string,
+  beneficiaryBank: string,
+  amount: string,
+  currency: string,
+  reference: string,
+  reason: string,
 }
 
 @Component({
@@ -19,11 +28,14 @@ export interface User {
 })
 export class BulkTransferDetailComponent implements OnInit {
 
+  bulkTransferDetailForm: FormGroup;
+
   private users: User[];
   alertVisible: boolean;
   alertMessage: string;
   dataSource: MatTableDataSource<User>;
   type = 'bulk-transfer';
+  error: boolean = false;
 
   displayedColumns: string[] = [
     'date',
@@ -34,23 +46,56 @@ export class BulkTransferDetailComponent implements OnInit {
     'actions',
   ];
 
+  userId: any;
+
   constructor(
     private readonly deleteService: DeleteService,
     private readonly confirmationModalService: ConfirmationModalService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly fb: FormBuilder,
   ) { }
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource();
     this.users = Array(5).fill(0).map((x, i) => ({
-        date: "4/3/22",
-        type: "RTGS",
-        name: "Mello",
-        bank: "Equity",
-        amount: "10,000.00"
+        id: 1,
+        paymentDate: "4/3/22",
+        paymentType: "RTGS",
+        debitAccountName: "Loot",
+        debitAccountNumber: "Equity",
+        beneficiaryAccountNumber: "2337846578955",
+        beneficiaryMobile: "0810174008113",
+        beneficiaryName: "Mello",
+        beneficiaryBank: "Equity",
+        amount: "10.0000.00",
+        currency: "KES",
+        reference: "Ref_123",
+        reason: "Cash management transfer",
       }));
 
     this.dataSource.data = this.users;
+    this.initForm();
+  }
+
+  get getForm() {
+    return this.bulkTransferDetailForm.controls;
+  }
+
+  initForm(): void {
+    this.bulkTransferDetailForm = this.fb.group({
+      paymentDate: ['', [Validators.required]],
+      paymentType: ['', [Validators.required]],
+      debitAccountName: ['', [Validators.required]],
+      debitAccountNumber: ['',[Validators.required, Validators.pattern("[0-9 ]{13}")]],
+      beneficiaryAccountNumber: ['', [Validators.required, Validators.pattern("[0-9 ]{13}")]],
+      beneficiaryMobile: ['', [Validators.required, Validators.pattern("[0-9 ]{10}")]],
+      beneficiaryName: ['', [Validators.required]],
+      beneficiaryBank: ['', [Validators.required]],
+      amount: ['', [Validators.required]],
+      currency: ['', [Validators.required]],
+      reference: ['', [Validators.required]],
+      reason: [''],
+    });
   }
 
   showAlert(message: string): void {
@@ -70,7 +115,7 @@ export class BulkTransferDetailComponent implements OnInit {
       content: [
         {
           key: "Transaction",
-          value: `${this.type}`,
+          value: "Bulk Transfer",
         },
         {
           key: "Total amount",
@@ -126,7 +171,12 @@ export class BulkTransferDetailComponent implements OnInit {
   }
 
   openActionsMenu(user: User): void {
+    this.userId = user.id;
     console.log(user, 'user');
+  }
+
+  viewDetails() {
+    this.router.navigate([`/transact/bulk-transfer/view/${this.userId}`]);
   }
 
 }

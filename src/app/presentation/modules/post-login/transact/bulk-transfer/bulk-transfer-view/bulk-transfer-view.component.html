@@ -1,3 +1,7 @@
+<div *ngIf="alertVisible" class="d-flex justify-content-right alert alert-light mat-elevation-z8 float-end">
+  <mat-icon class="text-success">check_circle</mat-icon>
+  <span style="padding-left: 10px;">{{ alertMessage }}</span>
+</div>
 <div class="activity-detail p-3">
     <div class="mb-3">
       <button
@@ -29,8 +33,11 @@
           </a>
         </div>
         <div class="col-6 d-flex justify-content-end">
-          <button mat-raised-button class="me-3" color="primary" (click)="edit()">
+          <button mat-raised-button class="me-3" color="primary" (click)="edit()" *ngIf="!editMode">
             <span class="pe-3 ps-3">Edit</span>
+          </button>
+          <button mat-raised-button class="me-3" color="primary" (click)="save()" *ngIf="editMode">
+            <span class="pe-3 ps-3">Save</span>
           </button>
           <button mat-stroked-button color="primary" (click)="delete()">
             <span class="pe-3 ps-3">Delete</span>
@@ -39,61 +46,269 @@
       </div>
     </div>
   </div>
+  <form class="d-flex flex-column" autocomplete="off" [formGroup]="bulkTransferViewForm"> 
+        <div class="row p-4">
+          <!--Payment date-->
+            <div class="col-4 mb-4 d-flex justify-content-between">
+              <div *ngIf="!editMode">
+                <span class="text-grey text-sm">Payment date</span>
+                <p class="mb-0 text-sm pb-0">4/3/22</p>
+              </div>
 
-  <div class="row">
-    <div class="row">
-        <div class="row gx-0 p-4">
-            <div class="col-4 mb-4">
-              <span class="text-grey text-sm">Payment date</span>
-              <p class="mb-0 text-sm pb-0">4/3/22</p>
+              <div *ngIf="editMode" class="col-md-11">
+                <app-input
+                  [parentForm]="bulkTransferViewForm"
+                  fieldName="paymentDate"
+                  label="Payment date"
+                  placeholder=""
+                  formControlName="paymentDate"
+                ></app-input>
+              </div>
             </div>
-            <div class="col-4 mb-4">
-              <span class="text-grey text-sm">Payment type</span>
-              <p class="mb-0 text-sm pb-0">RTGS</p>
+            
+
+            <!--Payment type-->
+            <div class="col-md-4 mb-4 d-flex justify-content-between">
+              <div *ngIf="!editMode">
+                <span class="text-grey text-sm">Payment type</span>
+                <p class="mb-0 text-sm pb-0">RTGS</p>
+              </div>
+
+              <div *ngIf="editMode" class="col-md-11">
+                <app-input
+                  [parentForm]="bulkTransferViewForm"
+                  fieldName="paymentType"
+                  label="Payment type"
+                  placeholder=""
+                  formControlName="paymentType"
+                ></app-input>
+              </div>
             </div>
-            <div class="col-4 mb-4">
-              <span class="text-grey text-sm">Debit account name</span>
-              <p class="mb-0 text-sm pb-0">Loot</p>
+            
+
+            <!--Debit account number-->
+            <div class="col-md-4 mb-4 d-flex justify-content-between">
+              <div *ngIf="!editMode">
+                <span class="text-grey text-sm">Debit account name</span>
+                <p class="mb-0 text-sm pb-0">Loot</p>
+              </div>
+              
+              <div *ngIf="editMode" class="col-md-11">
+                <app-input
+                  [parentForm]="bulkTransferViewForm"
+                  fieldName="debitAccountName"
+                  label="Debit account name"
+                  placeholder=""
+                  formControlName="debitAccountName"
+                ></app-input>
+              </div>
             </div>
-            <div class="col-4 mb-4">
-              <span class="text-grey text-sm">Debit account number</span>
-              <p class="mb-0 text-sm pb-0">2237846578926</p>
+            
+
+            <!--Debit account number-->
+            <div class="col-md-4 mb-4 d-flex justify-content-between">
+              <div *ngIf="!editMode">
+                <span class="text-grey text-sm">Debit account number</span>
+                <p class="mb-0 text-sm pb-0">2237846578926</p>
+              </div>
+
+              <div *ngIf="editMode" class="col-md-11">
+                <app-input
+                [parentForm]="bulkTransferViewForm"
+                fieldName="debitAccountNumber"
+                label="Debit account number"
+                placeholder=""
+                formControlName="debitAccountNumber"
+              ></app-input>
+              </div>
+
+              <span
+                *ngIf="bulkTransferViewForm.controls['debitAccountNumber'].invalid 
+                && bulkTransferViewForm.controls['debitAccountNumber'].errors?.pattern
+                || bulkTransferViewForm.controls['debitAccountNumber'].errors?.required" 
+                data-toggle="tooltip"
+                title="The account number has the incorrect length"
+                >
+                <!-- bulkTransferViewForm.controls['debitAccountNumber'].touched -->
+                <mat-icon class="error">info_outline</mat-icon>
+              </span>
             </div>
-            <div class="col-4 mb-4">
-              <span class="text-grey text-sm">Beneficiary account number</span>
-              <p class="mb-0 text-sm pb-0">2337846578955</p>
+
+            <!--Beneficiary account number-->
+            <div class="col-md-4 mb-4 d-flex justify-content-between">
+              <div *ngIf="!editMode">
+                <span class="text-grey text-sm">Beneficiary account number</span>
+                <p class="mb-0 text-sm pb-0">2337846578955</p>
+              </div>
+              
+              <div *ngIf="editMode" class="col-md-11">
+                <app-input
+                [parentForm]="bulkTransferViewForm"
+                fieldName="beneficiaryAccountNumber"
+                label="Beneficiary account number"
+                placeholder=""
+                formControlName="beneficiaryAccountNumber"
+              ></app-input>
+              </div>
+
+              <span
+                *ngIf="bulkTransferViewForm.controls['beneficiaryAccountNumber'].invalid 
+                && bulkTransferViewForm.controls['beneficiaryAccountNumber'].errors?.pattern
+                || bulkTransferViewForm.controls['beneficiaryAccountNumber'].errors?.required" 
+                data-toggle="tooltip"
+                title="The account number has the incorrect length"
+                >
+                <mat-icon class="error">info_outline</mat-icon>
+              </span>
             </div>
-            <div class="col-4 mb-4">
+
+             <!--Beneficiary mobile-->
+            <div class="col-md-4 mb-4 d-flex justify-content-between">
+              <div *ngIf="!editMode">
                 <span class="text-grey text-sm">Beneficiary mobile</span>
                 <p class="mb-0 text-sm pb-0">0810174008113</p>
+              </div>
+
+              <div *ngIf="editMode" class="col-md-11">
+                <app-input
+                [parentForm]="bulkTransferViewForm"
+                fieldName="beneficiaryMobile"
+                label="Beneficiary mobile"
+                placeholder=""
+                formControlName="beneficiaryMobile"
+                ></app-input>
+              </div>
+
+              <span
+                *ngIf="bulkTransferViewForm.controls['beneficiaryMobile'].invalid 
+                && bulkTransferViewForm.controls['beneficiaryMobile'].errors?.pattern
+                || bulkTransferViewForm.controls['beneficiaryMobile'].errors?.required" 
+                data-toggle="tooltip"
+                title="Number length incorrect"
+                >
+                <mat-icon class="error">info_outline</mat-icon>
+              </span>
             </div>
-            <div class="col-4 mb-4">
+
+            <!--Beneficiary name-->
+            <div class="col-md-4 mb-4 d-flex justify-content-between">
+              <div *ngIf="!editMode">
                 <span class="text-grey text-sm">Beneficiary name</span>
                 <p class="mb-0 text-sm pb-0">Uche</p>
+              </div>
+
+              <div *ngIf="editMode" class="col-md-11">
+                <app-input
+                [parentForm]="bulkTransferViewForm"
+                fieldName="beneficiaryName"
+                label="Beneficiary name"
+                placeholder=""
+                formControlName="beneficiaryName"
+              ></app-input>
+              </div>  
             </div>
-            <div class="col-4 mb-4">
+
+            <!--Beneficiary bank-->
+            <div class="col-md-4 mb-4 d-flex justify-content-between">
+              <div *ngIf="!editMode">
                 <span class="text-grey text-sm">Beneficiary bank</span>
                 <p class="mb-0 text-sm pb-0">Equity</p>
+              </div>
+
+              <div *ngIf="editMode" class="col-md-11">
+                <app-input
+                  [parentForm]="bulkTransferViewForm"
+                  fieldName="beneficiaryBank"
+                  label="Beneficiary bank"
+                  placeholder=""
+                  formControlName="beneficiaryBank"
+                ></app-input>
+              </div>
             </div>
-            <div class="col-4 mb-4">
+
+            <!--Amount-->
+            <div class="col-md-4 mb-4 d-flex justify-content-between">
+              <div *ngIf="!editMode">
                 <span class="text-grey text-sm">Amount</span>
                 <p class="mb-0 text-sm pb-0">10.0000.00</p>
+              </div>
+                
+              <div *ngIf="editMode" class="col-md-11">
+                <app-input
+                [parentForm]="bulkTransferViewForm"
+                fieldName="amount"
+                label="Amount"
+                placeholder=""
+                formControlName="amount"
+              ></app-input>
+              </div>
+
+              <span
+                *ngIf="bulkTransferViewForm.controls['amount'].invalid 
+                && bulkTransferViewForm.controls['amount'].errors?.pattern
+                || bulkTransferViewForm.controls['amount'].errors?.required" 
+                data-toggle="tooltip"
+                title="Number length incorrect"
+                >
+                <mat-icon class="error">info_outline</mat-icon>
+              </span>
             </div>
-            <div class="col-4 mb-4">
+
+            <!--Currency-->
+            <div class="col-md-4 mb-4 d-flex justify-content-between">
+              <div *ngIf="!editMode">
                 <span class="text-grey text-sm">Currency</span>
                 <p class="mb-0 text-sm pb-0">KES</p>
+              </div>
+
+              <div *ngIf="editMode" class="col-md-11">
+              <app-input
+                [parentForm]="bulkTransferViewForm"
+                fieldName="currency"
+                label="Currency"
+                placeholder=""
+                formControlName="currency"
+                ></app-input>
+              </div>  
             </div>
-            <div class="col-4 mb-4">
+            
+            <!--Credit reference number-->
+            <div class="col-md-4 mb-4 d-flex justify-content-between">
+              <div *ngIf="!editMode">
                 <span class="text-grey text-sm">Credit reference number</span>
                 <p class="mb-0 text-sm pb-0">Ref_123</p>
+              </div>
+
+              <div *ngIf="editMode" class="col-md-11">
+                <app-input
+                  [parentForm]="bulkTransferViewForm"
+                  fieldName="reference"
+                  label="Credit reference number"
+                  placeholder=""
+                  formControlName="reference"
+                ></app-input>
+              </div>
             </div>
-            <div class="col-4 mb-4">
+            
+            <!--Payment reason-->
+            <div class="col-md-4 mb-4 d-flex justify-content-between">
+              <div *ngIf="!editMode">
                 <span class="text-grey text-sm">Payment reason</span>
                 <p class="mb-0 text-sm pb-0">Cash management transfer</p>
+              </div>
+
+              <div *ngIf="editMode" class="col-md-11">
+                <app-input
+                  [parentForm]="bulkTransferViewForm"
+                  fieldName="reason"
+                  label="Payment reason"
+                  placeholder=""
+                  formControlName="reason"
+                ></app-input>
+              </div>
             </div>
           </div>
-    </div>
-  </div>
+  </form> 
 
   <h4 class="strong-text">Attached document</h4>
   <div class="col-md-6 mt-4">
