@@ -66,10 +66,11 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
 
   }
 
-  public submitOTP(otp: string) {
-    const url = `${environment.apiUrl}${urlList.login.verifyOtp}?reference=ref&otp=${otp}`;
-    return this.http
-      .get<UserModel>(url);
+  public submitOTP(payload: string) {
+    return {
+      submitOTP: this.http.get<UserModel>(`${environment.apiUrl}${urlList.login.verifyOtp}?reference=ref&otp=${payload}`),
+      submitFirstTimeLogin: this.http.post<UserModel>(`${environment.apiUrl}${urlList.login.firstlogin}`, payload),
+    }
   }
 
   public submitForgetPasswordOTP(otp: string, email: string) {
@@ -129,11 +130,9 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
   async loginSuccess() {
     return new Promise((resolve, reject) => {
       this.getLogonUser().subscribe(response => {
-        console.log('loginSuccess', response)
         if (response) {
           this.userState = response;
           this.setLoginState(LOGIN_CONSTANTS.LOGIN_STAGES.LOGIN_SUCCESS);
-          console.log('this.userState', this.userState);
           this.router.navigate(['/dashboard']);
           this.autoLogin();
           resolve(true);
@@ -167,7 +166,7 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
 
     // const currentTime = new Date().getTime();
     // const expired = this.accessToken && new Date(this.accessToken?.tokenExpirationDate).getTime() > currentTime;
-    // console.log('expired', expired)
+    // 
     // if (expired) {
     //   return null;
     // }

@@ -181,7 +181,7 @@ export class VerifyByCodeComponent implements OnInit {
   submitOtp(otp: string) {
     this.otpError = false;
     if (otp) {
-      this.authService.submitOTP(otp).subscribe(
+      this.authService.submitOTP(otp).submitOTP.subscribe(
         (response) => {
           if (response) {
             this.perfomTransfer();
