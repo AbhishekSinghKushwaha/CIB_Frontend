@@ -83,6 +83,7 @@ export class VerifyByCodeComponent implements OnInit {
     private transactionService: TransactionsService
   ) {
     this.initOtpForm();
+    console.log(this.transactionType);
   }
 
   ngOnInit(): void {
@@ -259,6 +260,7 @@ export class VerifyByCodeComponent implements OnInit {
   }
 
   perfomTransfer() {
+    console.log(this.transactionType);
     switch (this.transactionType) {
       case this.transferType.BUY_AIRTIME:
         this.buyAirtime();
@@ -291,10 +293,6 @@ export class VerifyByCodeComponent implements OnInit {
       case "reject-transaction":
         // TODO:: REJECT TRANSACTION
         this.transactionService.approveTransaction("reject-transaction");
-        break;
-      case "delete-transaction":
-        // TODO:: DELETE TRANSACTION
-        this.transactionService.approveTransaction("approve-transaction");
         break;
       default:
         break;

@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Observable } from "rxjs";
+import { take } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import { TransactionListmodel } from "../../domain/transaction-list.model";
 import urlList from "../service-list.json";
@@ -97,7 +98,7 @@ export class TransactionsService extends StateService<TransctionsState> {
   }
 
   approveTransaction(transactionType: string) {
-    this.approvalPayload$.subscribe((payloadData) => {
+    this.approvalPayload$.pipe(take(1)).subscribe((payloadData) => {
       if (payloadData) {
         this.http
           .post<any>(
@@ -106,6 +107,7 @@ export class TransactionsService extends StateService<TransctionsState> {
           )
           .subscribe((res) => {
             if (res.status) {
+              this.setApprovalPayload({});
               this.router.navigate([
                 `/transact/transfer-submitted/${transactionType}`,
               ]);
