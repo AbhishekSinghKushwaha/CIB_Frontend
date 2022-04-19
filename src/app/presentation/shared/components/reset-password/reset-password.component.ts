@@ -46,11 +46,11 @@ export class ResetPasswordComponent implements OnInit {
 
   submit() {
     if (this.resetPasswordForm.valid) {
-      this.submitted = true;
       const payload: { newPassword: string, userIdentifier: string, token?: string } = {
-        newPassword: this.resetPasswordForm.value.password,
+        newPassword: this.f.password.value,
         userIdentifier: this.userIdentifier
       }
+      this.submitted = true;
       this.onSubmit.next(payload);
     }
 

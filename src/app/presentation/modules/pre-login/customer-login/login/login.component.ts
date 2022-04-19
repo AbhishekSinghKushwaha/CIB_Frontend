@@ -29,6 +29,9 @@ export class LoginComponent implements OnInit {
   otpError: boolean;
   passwordChangeSubmitStatus: boolean;
   securityToken: string;
+  firstTimeLogin: boolean;
+  finalLoginPayload: any = {};
+  title = 'Hello there';
 
   constructor(
     private readonly notificationModalService: NotificationModalService,
@@ -57,7 +60,6 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/dashboard']);
         }
       })
-      .catch((e) => console.log(e));
   }
 
   private initForm(): void {
@@ -94,20 +96,22 @@ export class LoginComponent implements OnInit {
     this.authService.clearUserData();
     this.authService.userLogin(payload).subscribe(
       (authData: TokenResponseModel) => {
-        console.log(authData);
-        if (authData.firstTimeLogin) {
+
+        this.firstTimeLogin = !!authData?.firstTimeLogin;
+        if (!authData?.firstTimeLogin) {
           this.stage = 'sms-verification';
           this.initialResponse = authData.message;
-
+          this.title = 'Sign in';
         } else {
           this.stage = 'change-password';
           this.initialResponse = authData.message;
+          this.title = 'Password creation';
         }
         this.authService.setToken({ ...authData, username: payload.username });
       },
       (error) => {
         this.modalTakeAnotherLook();
-        console.log({ error });
+
       }
     );
   }
@@ -115,23 +119,43 @@ export class LoginComponent implements OnInit {
   smsVerificationSubmit(otp: string) {
     this.otpError = false;
     if (otp) {
-      this.authService.submitOTP(otp).subscribe(
-        async (response) => {
-          console.log('submitOTP', response);
-          if (response) {
-            const loginStat = await this.authService.loginSuccess();
-            if (!loginStat) {
+      this.firstTimeLogin && (this.finalLoginPayload.otp = otp);
+      this.firstTimeLogin ?
+        this.authService.submitOTP(this.finalLoginPayload).submitFirstTimeLogin.subscribe(
+          async (response) => {
+
+            if (response) {
+              const loginStat = await this.authService.loginSuccess();
+              if (!loginStat) {
+                this.otpError = true;
+              }
+            } else {
               this.otpError = true;
             }
-          } else {
+          },
+          (error) => {
             this.otpError = true;
+
           }
-        },
-        (error) => {
-          this.otpError = true;
-          console.log({ error });
-        }
-      );
+        ) :
+        this.authService.submitOTP(otp).submitOTP.subscribe(
+          async (response) => {
+
+            if (response) {
+              const loginStat = await this.authService.loginSuccess();
+              if (!loginStat) {
+                this.otpError = true;
+              }
+            } else {
+              this.otpError = true;
+            }
+          },
+          (error) => {
+            this.otpError = true;
+
+          }
+        )
+
     }
   }
 
@@ -185,34 +209,40 @@ export class LoginComponent implements OnInit {
     this.notificationModalService.open(message);
   }
 
-  onPasswordChangeSubmit(payload: any) {
-    this.userService.resetPassword(payload).subscribe(
-      (response) => {
-        this.passwordChangeSubmitStatus = false;
-        const message = {
-          error: false,
-          errorStatus: '',
-          message: 'Your password has been reset successfully',
-          details: 'Your password has been reset successfully'
-        }
-        this.snackbar.openFromComponent(SnackbarComponent, {
-          data: message,
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-          duration: 5000,
-        });
-      },
-      (error) => {
-        this.passwordChangeSubmitStatus = false;
-        const errorMessage = { error: true, errorStatus: `${error.status}`, message: error.error.message, details: error.error }
-        this.snackbar.openFromComponent(SnackbarComponent, {
-          data: errorMessage,
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-          duration: 5000,
-        });
-      }
-    );
+  onPasswordChangeSubmit({ newPassword }: any) {
+
+    if (newPassword) {
+      this.finalLoginPayload.password = newPassword;
+      this.stage = 'security-challenge';
+      this.title = 'Verify';
+    }
+    // this.userService.resetPassword(payload).subscribe(
+    //   (response) => {
+    //     this.passwordChangeSubmitStatus = false;
+    //     const message = {
+    //       error: false,
+    //       errorStatus: '',
+    //       message: 'Your password has been reset successfully',
+    //       details: 'Your password has been reset successfully'
+    //     }
+    //     this.snackbar.openFromComponent(SnackbarComponent, {
+    //       data: message,
+    //       horizontalPosition: 'end',
+    //       verticalPosition: 'top',
+    //       duration: 5000,
+    //     });
+    //   },
+    //   (error) => {
+    //     this.passwordChangeSubmitStatus = false;
+    //     const errorMessage = { error: true, errorStatus: `${error.status}`, message: error.error.message, details: error.error }
+    //     this.snackbar.openFromComponent(SnackbarComponent, {
+    //       data: errorMessage,
+    //       horizontalPosition: 'end',
+    //       verticalPosition: 'top',
+    //       duration: 5000,
+    //     });
+    //   }
+    // );
   }
 
   onSecurityVerificationError(error: boolean) {
@@ -221,19 +251,36 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  securityChallengeSubmit(answers: any) {
-    const result = { ...answers, userIdentifier: this.f.username.value };
-    this.securityChallengeService.submitSecurityAnswers(result)
-      .subscribe(
-        (response) => {
-          if (response && response?.token) {
-            this.securityToken = response.token;
-            this.stage = 'change-password';
+  securityChallengeSubmit({ userQuestionsDtos }: any) {
+    if (userQuestionsDtos) {
+      this.authService.resendOTP()
+        .subscribe(
+          (response: any) => {
+
+            if (response && response?.successful) {
+              this.initialResponse = response.statusMessage;
+              this.finalLoginPayload.userQuestionsDtos = userQuestionsDtos;
+              this.stage = 'sms-verification';
+              this.title = 'Sign in';
+            }
+          },
+          (error) => {
+
           }
-        },
-        (error) => {
-          console.log({ error });
-        }
-      );
+        );
+
+    }
+    // this.securityChallengeService.submitSecurityAnswers(result)
+    //   .subscribe(
+    //     (response) => {
+    //       if (response && response?.token) {
+    //         this.securityToken = response.token;
+    //         this.stage = 'change-password';
+    //       }
+    //     },
+    //     (error) => {
+    //       
+    //     }
+    //   );
   }
 }

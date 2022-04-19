@@ -23,7 +23,7 @@ export class AccountCardComponent implements OnInit {
 
   openLink() {
 
-    this.router.navigate([
+    this.data?.primaryLink && this.router.navigate([
       this.data?.primaryLink,
     ]);
   }
