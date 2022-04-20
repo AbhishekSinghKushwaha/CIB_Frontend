@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { Subject } from 'rxjs';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -15,6 +15,7 @@ import { SecurityQuestionModel } from 'src/app/core/domain/security-question.mod
 })
 export class SecurityChallengeComponent implements OnInit {
   @Output() onSubmit = new Subject<any>();
+  @Input() title: { main: string, description: string };
   securityChallengeForm: FormGroup = new FormGroup({});
   allSecurityQuestions: SecurityQuestionModel[] = [];
   displayedSecurityQuestions: SecurityQuestionModel[] = [];

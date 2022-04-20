@@ -94,25 +94,20 @@ export class SendOrPayToComponent implements OnInit {
       this.purposeText.navigationSubheading = `Enter account details`;
       this.purposeText.navigationIcon =
         "./assets/images/icons/visual-support-icon-other-bank.svg";
-    } else if (
-      this.transactionType === this.transferType.INTER_COUNTRY_TRANSFER
-    ) {
+    } else if (this.transactionType === this.transferType.SUBSIDIARY) {
       this.purposeText.heading = "Send To";
       this.purposeText.subheading = "Who are you sending money to?";
       this.purposeText.navigationHeading = "Send to someone new";
       this.purposeText.navigationSubheading = `Enter account details`;
       this.purposeText.navigationIcon =
         "./assets/images/icons/Visual support_Icon_with_container.svg";
-    }
-    else if (
-      this.transactionType === this.transferType.BUY_AIRTIME
-    ) {
-      this.purposeText.heading = 'Buy for';
-      this.purposeText.subheading = 'Who are you buying airtime for?';
-      this.purposeText.navigationHeading = 'Buy for someone new';
+    } else if (this.transactionType === this.transferType.BUY_AIRTIME) {
+      this.purposeText.heading = "Buy for";
+      this.purposeText.subheading = "Who are you buying airtime for?";
+      this.purposeText.navigationHeading = "Buy for someone new";
       this.purposeText.navigationSubheading = `Enter account details`;
       this.purposeText.navigationIcon =
-        './assets/images/icons/Visual support_Icon_with_container.svg';
+        "./assets/images/icons/Visual support_Icon_with_container.svg";
     }
   }
 }

@@ -8,6 +8,7 @@ import { MatStyleModule } from 'src/app/mat-style.module';
 import { NotificationModalModule } from '../../../../shared/modals/notification-modal/notification-modal.module';
 import { LanguageTranslateModule } from 'src/app/translate.module';
 import { DropdownListModalModule } from 'src/app/presentation/shared/modals/dropdown-list-modal/dropdown-list-modal.module';
+import { SharedComponentsModule } from 'src/app/presentation/shared/components/shared-components.module';
 
 @NgModule({
   declarations: [LoginComponent],
@@ -19,7 +20,8 @@ import { DropdownListModalModule } from 'src/app/presentation/shared/modals/drop
     MatStyleModule,
     NotificationModalModule,
     LanguageTranslateModule.forRoot(),
-    DropdownListModalModule
+    DropdownListModalModule,
+    SharedComponentsModule
   ],
 })
 export class LoginModule { }

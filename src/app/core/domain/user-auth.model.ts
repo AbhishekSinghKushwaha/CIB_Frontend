@@ -7,4 +7,5 @@ export interface TokenResponseModel {
   name: string;
   tokenExpirationDate: Date;
   username: string;
+  message: string;
 }

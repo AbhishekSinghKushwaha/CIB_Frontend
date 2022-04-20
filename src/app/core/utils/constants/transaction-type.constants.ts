@@ -9,7 +9,6 @@ export const TransferType = {
   MOBILE_MONEY: "9",
   BUY_AIRTIME: "10",
   PESALINK: "7",
-  INTER_COUNTRY_TRANSFER: "",
   SUBSIDIARY: "8",
 };
 

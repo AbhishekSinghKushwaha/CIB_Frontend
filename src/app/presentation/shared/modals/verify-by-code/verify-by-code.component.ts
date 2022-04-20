@@ -29,6 +29,7 @@ import { MobileMoneyService } from "src/app/core/services/transfers/mobile-money
 import { IntrabankService } from "src/app/core/services/transfers/intrabank/intrabank.service";
 import { InterbankService } from "src/app/core/services/transfers/interbank/interbank.service";
 import { SwiftTransferService } from "src/app/core/services/transfers/swift/swift-transfer.service";
+import { IntercountryService } from "src/app/core/services/transfers/intercountry/intercountry.service";
 import { TransactionsService } from "src/app/core/services/transactions/transactions.service";
 
 @Component({
@@ -80,6 +81,7 @@ export class VerifyByCodeComponent implements OnInit {
     private intrabankService: IntrabankService,
     private interbankService: InterbankService,
     private swiftTransferService: SwiftTransferService,
+    private intercountryService: IntercountryService,
     private transactionService: TransactionsService
   ) {
     this.initOtpForm();
@@ -180,7 +182,7 @@ export class VerifyByCodeComponent implements OnInit {
   submitOtp(otp: string) {
     this.otpError = false;
     if (otp) {
-      this.authService.submitOTP(otp).subscribe(
+      this.authService.submitOTP(otp).submitOTP.subscribe(
         (response) => {
           if (response) {
             this.perfomTransfer();
@@ -293,6 +295,13 @@ export class VerifyByCodeComponent implements OnInit {
       case "reject-transaction":
         // TODO:: REJECT TRANSACTION
         this.transactionService.approveTransaction("reject-transaction");
+        break;
+      case "delete-transaction":
+        // TODO:: DELETE TRANSACTION
+        this.transactionService.approveTransaction("approve-transaction");
+        break;
+      case this.transferType.SUBSIDIARY:
+        this.intercountryService.sendToSubsidiary(this.transactionType);
         break;
       default:
         break;

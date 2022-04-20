@@ -62,7 +62,7 @@ export class OtherEquityAccountComponent
       currency: this.getForm.amount.value.currency,
       destinationAccount: this.getForm.sendTo.value.accountNumber,
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
-      transferType: 1, // For Own Equity Account
+      transferType: Number(this.transferType.INTRA_BANK), // For Own Equity Account
     };
     this.intraBankTransferService
       .getTransferCharges(payload)
