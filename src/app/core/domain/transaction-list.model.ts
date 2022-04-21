@@ -25,4 +25,5 @@ export interface TransactionListmodel {
   transferType?: number;
   dateCreated?: string;
   remarks?: string;
+  scheduledPayment?: any;
 }

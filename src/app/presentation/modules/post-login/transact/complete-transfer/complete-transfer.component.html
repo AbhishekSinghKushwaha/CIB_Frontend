@@ -129,7 +129,8 @@
         transferType === transferTypes.PESALINK ||
         transferType === transferTypes.RTGS ||
         transferType === transferTypes.SUBSIDIARY ||
-        transferType === transferTypes.SWIFT
+        transferType === transferTypes.SWIFT ||
+        transferType === 'reinitiate-transaction'
       "
     >
       <h4 class="mt-5">Fund transfer submitted for approval</h4>
@@ -161,16 +162,6 @@
           </button>
         </div>
         <div class="col-md-3">
-          <button
-            mat-stroked-button
-            type="button"
-            color="primary"
-            class="px-5 mt-4"
-            (click)="openAddFavourite()"
-          >
-            Add to favourites
-          </button>
-
           <button
             *ngIf="checkIfFavouriteExists()"
             mat-stroked-button

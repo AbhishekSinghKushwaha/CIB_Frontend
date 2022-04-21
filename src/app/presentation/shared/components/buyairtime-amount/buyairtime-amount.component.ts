@@ -106,9 +106,9 @@ export class BuyairtimeAmountComponent implements ControlValueAccessor, OnInit {
   // Listen to events, pick the sendFrom data
   listenToDataEvents() {
     // Get sendFrom Account
-    this.transferFromService.selectedTransferFromAccount.subscribe((x) => {
+    this.transferFromService.transferFromAmount$.subscribe((x) => {
       this.sendFromAccount = x;
-      this.currency.currencyCode = x.currency;
+      this.currency.currencyCode = x.currency || "";
     });
 
     // Get Selected Currency
@@ -161,7 +161,8 @@ export class BuyairtimeAmountComponent implements ControlValueAccessor, OnInit {
    * TODO:: Factor in limits as per transcations and daily limit calculations
    */
   checkLimit() {
-    if (this.value.amount > this.sendFromAccount?.transactionLimit) {
+    const limit = this.sendFromAccount.transactionLimit || 0;
+    if (this.value.amount > limit) {
       this.value.isWithinLimit = false;
       this.value.currency = this.currency.currencyCode;
       this.changed(this.value);

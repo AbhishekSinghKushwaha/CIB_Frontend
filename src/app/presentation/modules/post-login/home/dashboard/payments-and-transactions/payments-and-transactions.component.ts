@@ -13,6 +13,8 @@ export class PaymentsAndTransactionsComponent implements OnInit {
   historyTransactions = [];
   transactionSummary: any;
 
+  approvalStatus = TransactionTypeConstants.TransactionApprovalStatus;
+
   dateRange = {
     from: "",
     to: "",
@@ -25,49 +27,46 @@ export class PaymentsAndTransactionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getTransactions();
+    this.getPendingTransactions();
+    this.getHistoryTransactions();
   }
 
-  getTransactions() {
+  getPendingTransactions() {
     const params = {
-      page: 1,
-      pageSize: 350,
-      From: this.dateRange.from,
+      page: 1, // To be set by pagination controls
+      pageSize: 350, // To be set by pagination controls
+      From: this.dateRange.from, // Automaticall sets a month ago from today's date
       To: this.dateRange.to, // Automatically picks todays date
       TransactionType: "",
-      ApprovalStatus: 1,
+      ApprovalStatus: [this.approvalStatus.Pending], // To change to allow for filters
     };
+
     this.transactionsService.getTransactions(params).subscribe((res) => {
       if (res.status) {
-        console.log(res);
-        this.transactionSummary = res.data;
-
-        this.pendingTransactions =
-          this.transactionSummary.transactions.dataList.filter(
-            (transaction: TransactionListmodel) => {
-              return (
-                transaction.approvalStatus ===
-                TransactionTypeConstants.TransactionApprovalStatus.Pending
-              );
-            }
-          );
-
+        this.pendingTransactions = res.data.transactions.dataList;
         this.transactionsService.setPendingTransactions(
           this.pendingTransactions
         );
+      }
+    });
+  }
 
-        this.historyTransactions =
-          this.transactionSummary.transactions.dataList.filter(
-            (transaction: TransactionListmodel) => {
-              return (
-                transaction.approvalStatus ===
-                  TransactionTypeConstants.TransactionApprovalStatus.Rejected ||
-                transaction.approvalStatus ===
-                  TransactionTypeConstants.TransactionApprovalStatus.Approved
-              );
-            }
-          );
+  getHistoryTransactions() {
+    const params = {
+      page: 1, // To be set by pagination controls
+      pageSize: 350, // To be set by pagination controls
+      From: this.dateRange.from, // Automaticall sets a month ago from today's date
+      To: this.dateRange.to, // Automatically picks todays date
+      TransactionType: "",
+      ApprovalStatus: [
+        this.approvalStatus.Approved,
+        this.approvalStatus.Rejected,
+      ],
+    };
 
+    this.transactionsService.getTransactions(params).subscribe((res) => {
+      if (res.status) {
+        this.historyTransactions = res.data.transactions.dataList;
         this.transactionsService.setHistoryTransactions(
           this.historyTransactions
         );

@@ -55,8 +55,6 @@ export class ActivityDetailComponent implements OnInit {
   ngOnInit(): void {}
 
   getTransaction(index: number, category: string) {
-    // this.data = mockData.pendingTransactions[index];
-    console.log(this.data);
     category === "history"
       ? this.transactionService.historyTransactions$.subscribe((res) => {
           this.data = res[index];
@@ -64,7 +62,6 @@ export class ActivityDetailComponent implements OnInit {
       : category === "pending"
       ? this.transactionService.pendingTransactions$.subscribe((res) => {
           this.data = res[index];
-          console.log(this.data);
         })
       : category === "standingOrder"
       ? this.transactionService.standingOrders$.subscribe((res) => {
@@ -101,7 +98,8 @@ export class ActivityDetailComponent implements OnInit {
   }
 
   reinitiate() {
-    this.status = "Reinitiated";
+    this.transactionService.setReinitiatePayload(this.data);
+    this.router.navigate([`/transact/otp-verification/reinitiate-transaction`]);
   }
 
   confirmationDone(data: boolean) {}
@@ -146,14 +144,35 @@ export class ActivityDetailComponent implements OnInit {
   }
 
   editTransaction(transferType: number) {
+    this.transactionService.setTransaction(this.data);
     switch (transferType) {
       case Number(this.transactionType.OWN_EQUITY):
-        this.router.navigate(["/transact/own-equity-account/" + this.id]);
+        this.router.navigate(["/transact/own-equity-account/"]);
         break;
       case Number(this.transactionType.INTRA_BANK):
-        this.router.navigate(["/transact/other-equity-account/" + this.id]);
+        this.router.navigate(["/transact/other-equity-account/"]);
         break;
-
+      case Number(this.transactionType.SWIFT):
+        this.router.navigate(["/transact/swift/"]);
+        break;
+      case Number(this.transactionType.PESALINK):
+        this.router.navigate(["/transact/pesalink/"]);
+        break;
+      case Number(this.transactionType.MOBILE_MONEY):
+        this.router.navigate(["/transact/mobile-money/"]);
+        break;
+      case Number(this.transactionType.RTGS):
+        this.router.navigate(["/transact/other-banks/"]);
+        break;
+      case Number(this.transactionType.EFT):
+        this.router.navigate(["/transact/other-banks/"]);
+        break;
+      case Number(this.transactionType.BUY_AIRTIME):
+        this.router.navigate(["/transact/buy-airtime/"]);
+        break;
+      case Number(this.transactionType.BUY_GOODS):
+        this.router.navigate(["/transact/buy-goods/"]);
+        break;
       default:
         break;
     }

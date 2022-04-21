@@ -9,12 +9,10 @@ import {
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Subject, Subscription } from "rxjs";
 import { CountryModel } from "src/app/core/domain/bank.model";
-import { recipientModel } from "src/app/core/domain/recipient.model";
+import { RecipientModel } from "src/app/core/domain/recipient.model";
 import { CountryService } from "src/app/core/services/modal-services/country.service";
-import { SharedDataService } from "src/app/core/services/shared-data/shared-data.service";
 import { StorageService } from "src/app/core/services/storage/storage.service";
 import { countrySettings } from "src/app/core/utils/constants/country.settings";
-import { mockData } from "src/app/core/utils/constants/mockdata.constants";
 
 @Component({
   selector: "app-country-select",
@@ -31,7 +29,7 @@ export class CountrySelectComponent implements OnInit, OnDestroy {
   selected: any;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: recipientModel,
+    @Inject(MAT_DIALOG_DATA) public data: RecipientModel,
     private readonly countryService: CountryService,
     private readonly storageService: StorageService
   ) {

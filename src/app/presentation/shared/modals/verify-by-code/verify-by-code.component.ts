@@ -296,9 +296,9 @@ export class VerifyByCodeComponent implements OnInit {
         // TODO:: REJECT TRANSACTION
         this.transactionService.approveTransaction("reject-transaction");
         break;
-      case "delete-transaction":
+      case "reinitiate-transaction":
         // TODO:: DELETE TRANSACTION
-        this.transactionService.approveTransaction("approve-transaction");
+        this.transactionService.reinitiateTransaction("reinitiate-transaction");
         break;
       case this.transferType.SUBSIDIARY:
         this.intercountryService.sendToSubsidiary(this.transactionType);

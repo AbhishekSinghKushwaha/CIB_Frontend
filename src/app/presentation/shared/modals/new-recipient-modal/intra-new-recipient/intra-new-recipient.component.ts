@@ -7,7 +7,7 @@ import {
 } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { CountryModel } from "src/app/core/domain/bank.model";
-import { recipientModel } from "src/app/core/domain/recipient.model";
+import { RecipientModel } from "src/app/core/domain/recipient.model";
 import { CountryService } from "src/app/core/services/modal-services/country.service";
 import { NewRecipientService } from "src/app/core/services/modal-services/new-recipient.service";
 import { IntrabankService } from "src/app/core/services/transfers/intrabank/intrabank.service";
@@ -33,7 +33,7 @@ export class IntraNewRecipientComponent
     private dialog: MatDialog,
     readonly dialogRef: MatDialogRef<IntraNewRecipientComponent>,
     private readonly newRecipientService: NewRecipientService,
-    @Inject(MAT_DIALOG_DATA) public data: recipientModel,
+    @Inject(MAT_DIALOG_DATA) public data: RecipientModel,
     private readonly countryService: CountryService,
     private snackBar: MatSnackBar,
     private intraBankTransferService: IntrabankService
