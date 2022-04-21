@@ -105,6 +105,16 @@ export class TransactConstants {
           leftIcon: 'laptop_chromebook',
           text: 'EazzyFX',
           link: '/transact/foreign-exchange/eazzy-fx',
+        }
+      ]
+    },
+    {
+      section: 'Standing orders',
+      content: [
+        {
+          leftIcon: 'tablet_android',
+          text: 'Standing orders',
+          link: '/transact/standing-orders',
         },
       ],
     },

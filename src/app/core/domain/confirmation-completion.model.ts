@@ -1,7 +1,8 @@
 export interface ConfirmationCompletionModel {
-  title: string;
+  title?: string;
   message: string;
   subMessage: string;
   icon: string;
   buttonText: string;
+  category?: string;
 }

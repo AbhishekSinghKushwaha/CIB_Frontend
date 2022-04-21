@@ -15,7 +15,7 @@ export class UserResolver implements Resolve<User> {
   constructor(
     private userAdministrationService: UserAdministrationService,
     private router: Router
-  ) {}
+  ) { }
 
   resolve(
     route: ActivatedRouteSnapshot,
@@ -32,6 +32,7 @@ export class UserResolver implements Resolve<User> {
             name: `${result.firstName} ${result.lastName}`,
             phone: result.phoneNumber,
             email: result.email,
+            userName: result.userName,
             status: (result.status ? 'enabled' : 'disabled') as UserStatus,
           };
           return of(user);

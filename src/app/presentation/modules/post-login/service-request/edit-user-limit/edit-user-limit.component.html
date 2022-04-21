@@ -7,7 +7,7 @@
             mat-icon-button
             aria-label="Back"
             class="back-icon"
-            routerLink="/service-request/"
+            (click)="goBack()"
           >
             <div class="strong-text">
               <mat-icon svgIcon="caret_left"></mat-icon>
@@ -26,6 +26,9 @@
             <div class="col-md-6">
               <app-user-list
                 [parentForm]="editUserDataForm"
+                [showModal]="username ? false : true"
+                [defaultData]="userDetail"
+                [userListData]="userListData"
                 currencyFieldName="user"
                 label="User"
                 placeholder="Select user"
@@ -90,7 +93,7 @@
               [disabled]="editUserDataForm.invalid"
               color="primary"
             >
-              Submit
+              {{ updateMode ? "Update" : "Submit" }}
             </button>
           </div>
         </form>

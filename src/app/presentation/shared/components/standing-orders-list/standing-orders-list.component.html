@@ -16,12 +16,12 @@
   <div class="row mt-1 mb-1 p-2 trans-card" *ngFor="let transaction of transactions; let i = index">
   
     <div class="d-flex justify-content-between">
-      <div class="strong-text">{{ transaction.title }}</div>
+      <div class="strong-text"></div>
       <div>
         <mat-icon svgIcon="three_dots_on_grey" color="primary" [matMenuTriggerFor]="menu"></mat-icon>
   
         <mat-menu #menu="matMenu" xPosition="before" class="my-menu">
-          <div class="row cursor-pointer" (click)="openTransaction(transaction, i)">
+          <div class="row cursor-pointer" (click)="openTransaction(transaction, transaction.id)">
             <div class="col-md-5 pb-1">
               <button mat-fab class="button_icon">
                 <mat-icon svgIcon="eyes_view"></mat-icon>
@@ -32,7 +32,7 @@
             </div>
           </div>
           <mat-divider class="pb-1"></mat-divider>
-          <div class="row cursor-pointer" (click)="editStandingOrder(i)">
+          <div class="row cursor-pointer" (click)="editStandingOrder(transaction.id)">
             <div class="col-md-5 pb-1">
               <button mat-fab class="button_icon">
                 <mat-icon svgIcon="edit"></mat-icon>
@@ -43,7 +43,7 @@
             </div>
           </div>
           <mat-divider class="pb-1"></mat-divider>  
-          <div class="row cursor-pointer" (click)="openCancel()">
+          <div class="row cursor-pointer" (click)="openCancel(transaction, transaction.id)">
             <div class="col-md-5">
               <button mat-fab class="button_icon">
                 <mat-icon svgIcon="delete-documents"></mat-icon>
@@ -53,34 +53,22 @@
               <span>Cancel</span>
             </div>
           </div>    
-          <!-- <button mat-menu-item (click)="openTransaction(transaction, i)">
-            <mat-icon svgIcon="eyes_view"></mat-icon>
-            <span>View</span>
-          </button>
-          <button mat-menu-item (click)="editStandingOrder(i)">
-            <mat-icon svgIcon="edit"></mat-icon>
-            <span>Edit</span>
-          </button>
-          <button mat-menu-item (click)="openCancel()">
-            <mat-icon svgIcon="delete-documents"></mat-icon>
-            <span>Cancel</span>
-          </button> -->
         </mat-menu>
       </div>
     </div>
     <div class="d-flex justify-content-between">
-      <div>{{ transaction.description }}</div>
-      <div>{{ transaction.amount }}</div>
+      <div class="strong-text">{{ transaction.title }}</div>
+      <div>{{ transaction.amount }} {{ transaction.beneficiaryCurrency }}</div>
     </div>
     <div class="d-flex align-items-start">
       <span class="pe-3">
-        <small class="text-grey">{{ transaction.date }}</small>
+        <small class="text-grey">{{ transaction.startDate | date: 'EE, dd YYYY MMM' }} - {{ transaction.endDate | date: 'EE, dd YYYY MMM' }}</small>
       </span>
       <span class="pe-1">
-        <mat-icon [svgIcon]="transactionIcon[transaction.status]"></mat-icon>
+        <mat-icon svgIcon="{{transaction.status === 1 ? transactionIcon.Active : transactionIcon.Inactive}}"></mat-icon>
       </span>
       <span>
-        <small class="strong-text">{{ transaction.status }}</small>
+        <small class="strong-text">{{ transaction.status === 1 ? "Active" : "Inactive" }}</small>
       </span>
     </div>
   </div>  

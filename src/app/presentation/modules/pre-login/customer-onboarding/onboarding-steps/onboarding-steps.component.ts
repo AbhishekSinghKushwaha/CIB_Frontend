@@ -15,7 +15,7 @@ export class OnboardingStepsComponent implements OnInit {
     private readonly spinnerService: SpinnerService,
     private storageService: StorageService,
     private dataLookup: DataLookupService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadingListener();
@@ -34,7 +34,7 @@ export class OnboardingStepsComponent implements OnInit {
 
   // Get roles
   getRoles() {
-    this.dataLookup.getRoles().subscribe((res) => {
+    this.dataLookup.getRoles().onboarding.subscribe((res) => {
       if (res.isSuccessful) {
         this.storageService.setData("onboarding-roles", res.data);
       }
@@ -51,7 +51,7 @@ export class OnboardingStepsComponent implements OnInit {
   }
 
   getProductsAndServices() {
-    this.dataLookup.getProductsAndServices().subscribe((res) => {
+    this.dataLookup.getProductsAndServices().onboarding.subscribe((res) => {
       if (res.isSuccessful) {
         this.storageService.setData("products-and-services", res.data);
       }

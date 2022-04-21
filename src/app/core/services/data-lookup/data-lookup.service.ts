@@ -9,7 +9,7 @@ import urlList from "../service-list.json";
   providedIn: "root",
 })
 export class DataLookupService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // Get Banks in a particular country
   getBanks(country: string): Observable<any> {
@@ -30,17 +30,27 @@ export class DataLookupService {
   }
 
   // Get Roles for customer onboarding
-  getRoles(): Observable<any> {
-    return this.http.get(
-      environment.apiUrl + urlList.customerOnboarding.getRoles
-    );
+  getRoles(): { 'onboarding': Observable<any>, 'userManagement': Observable<any>, } {
+    return {
+      onboarding: this.http.get(
+        environment.apiUrl + urlList.customerOnboarding.getRoles
+      ),
+      userManagement: this.http.get(
+        environment.apiUrl + urlList.userManagement.getRoles
+      ),
+    }
   }
 
   // Get Products and services for onboarding
-  getProductsAndServices(): Observable<any> {
-    return this.http.get(
-      environment.apiUrl + urlList.customerOnboarding.getProductsAndServices
-    );
+  getProductsAndServices(): { 'onboarding': Observable<any>, 'userManagement': Observable<any>, } {
+    return {
+      onboarding: this.http.get(
+        environment.apiUrl + urlList.customerOnboarding.getProductsAndServices
+      ),
+      userManagement: this.http.get(
+        environment.apiUrl + urlList.userManagement.getProductsAndServices
+      )
+    }
   }
 
   // Get telcos

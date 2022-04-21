@@ -219,7 +219,7 @@ export class BeneficiaryManagementFormComponent implements OnInit {
 
     transferType === this.transferType.SWIFT ||
     transferType === this.transferType.EFT ||
-    transferType === this.transferType.INTER_COUNTRY_TRANSFER ||
+    transferType === this.transferType.SUBSIDIARY ||
     transferType === this.transferType.RTGS
       ? (productName = this.getFormFields.bank.value.bankCode)
       : transferType === this.transferType.BUY_AIRTIME

@@ -6,3 +6,12 @@ export interface PromptModel {
   submitButtonText: string;
   refuseButtonText: string;
 }
+
+
+
+
+export interface DropdownModal<T> {
+  title: string;
+  description: string;
+  list: T[];
+}

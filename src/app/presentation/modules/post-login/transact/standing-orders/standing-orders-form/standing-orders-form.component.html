@@ -1,234 +1,270 @@
 <div>
-    <div class="mb-3">
-      <button
-        mat-icon-button
-        aria-label="Back"
-        class="back-icon"
-        routerLink="/transact/standing-orders"
+  <div class="mb-3">
+    <button
+      mat-icon-button
+      aria-label="Back"
+      class="back-icon"
+      routerLink="/transact/standing-orders"
+    >
+      <div class="strong-text">
+        <mat-icon svgIcon="caret_left"></mat-icon>
+        <span>{{ editMode ? "Edit Standing Order" : "Standing Order" }}</span>
+      </div>
+    </button>
+  </div>
+  <h3 class="strong-text">
+    {{
+      editMode
+        ? "Please update the payment details"
+        : "Create New Standing Order"
+    }}
+  </h3>
+  <form
+    class="d-flex flex-column"
+    autocomplete="off"
+    [formGroup]="standingOrdersForm"
+    (submit)="getTransferCharges()"
+  >
+    <!-- Transaction Type-->
+    <div class="row">
+      <div class="col-md-6">
+        <app-transaction-type
+          [parentForm]="standingOrdersForm"
+          fieldName="transferType"
+          placeholder="Select Transaction Type"
+          formControlName="transferType"
+          label="Select Transaction Type"
+        >
+        </app-transaction-type>
+      </div>
+    </div>
+    <div class="row">
+      <!-- BUY AIRTIME -->
+      <!-- Transfer From -->
+      <div
+        class="col-md-6"
+        *ngIf="getForm.transferType.value.value === transferType.BUY_AIRTIME"
       >
-        <div class="strong-text">
-          <mat-icon svgIcon="caret_left"></mat-icon>
-          <span>{{editMode ? "Edit Standing Order" : "Standing Order"}}</span>
-        </div>
+        <app-transfer-from
+          [parentForm]="standingOrdersForm"
+          label="Buy From"
+          formControlName="sendFrom"
+          fieldName="sendFrom"
+          transactionType="buyAirTime"
+        ></app-transfer-from>
+      </div>
+      <!-- Transfer To -->
+      <div
+        class="col-md-6 align-self-end"
+        *ngIf="getForm.transferType.value.value === transferType.BUY_AIRTIME"
+      >
+        <app-transfer-to
+          [parentForm]="standingOrdersForm"
+          fieldName="sendTo"
+          formControlName="sendTo"
+          label="Buy for"
+          placeholder="Select Recipient"
+          transactionType="{{ transferType.BUY_AIRTIME }}"
+        ></app-transfer-to>
+      </div>
+      <!-- BUY GOODS -->
+      <!-- Transfer amount -->
+      <div
+        class="col-md-6"
+        *ngIf="getForm.transferType.value.value === transferType.BUY_GOODS"
+      >
+        <app-transfer-from
+          [parentForm]="standingOrdersForm"
+          label="Pay from"
+          formControlName="sendFrom"
+          fieldName="sendFrom"
+        ></app-transfer-from>
+      </div>
+      <!-- Transfer To -->
+      <div
+        class="col-md-6 align-self-end"
+        *ngIf="getForm.transferType.value.value === transferType.BUY_GOODS"
+      >
+        <app-transfer-to
+          [parentForm]="standingOrdersForm"
+          fieldName="sendTo"
+          formControlName="sendTo"
+          label="Pay to"
+          placeholder="Select the merchant"
+          transactionType="{{ transferType.BUY_GOODS }}"
+        ></app-transfer-to>
+      </div>
+      <!-- OTHER -->
+      <!-- Transfer-from -->
+      <div
+        class="col-md-6"
+        *ngIf="
+          getForm.transferType.value.value === transferType.INTRA_BANK ||
+          getForm.transferType.value.value === transferType.OWN_EQUITY ||
+          getForm.transferType.value.value === transferType.MOBILE_MONEY ||
+          getForm.transferType.value.value === transferType.INTER_BANK ||
+          getForm.transferType.value.value === transferType.PESALINK ||
+          getForm.transferType.value.value === transferType.SUBSIDIARY ||
+          getForm.transferType.value.value === transferType.SWIFT ||
+          getForm.transferType.value.value === transferType.EFT ||
+          getForm.transferType.value.value === transferType.RTGS
+        "
+      >
+        <app-transfer-from
+          [parentForm]="standingOrdersForm"
+          label="Send From"
+          placeholder="Send From"
+          formControlName="sendFrom"
+          fieldName="sendFrom"
+        ></app-transfer-from>
+      </div>
+      <!-- Transfer To -->
+      <div
+        class="col-md-6 align-self-end"
+        *ngIf="
+          getForm.transferType.value.value === transferType.INTRA_BANK ||
+          getForm.transferType.value.value === transferType.OWN_EQUITY ||
+          getForm.transferType.value.value === transferType.MOBILE_MONEY ||
+          getForm.transferType.value.value === transferType.INTER_BANK ||
+          getForm.transferType.value.value === transferType.PESALINK ||
+          getForm.transferType.value.value === transferType.SUBSIDIARY ||
+          getForm.transferType.value.value === transferType.SWIFT ||
+          getForm.transferType.value.value === transferType.EFT ||
+          getForm.transferType.value.value === transferType.RTGS
+        "
+      >
+        <app-transfer-to
+          [parentForm]="standingOrdersForm"
+          label="Send To"
+          formControlName="sendTo"
+          fieldName="sendTo"
+          placeholder="Select recipient"
+          [transactionType]="getForm.transferType.value.value"
+        >
+        </app-transfer-to>
+      </div>
+
+      <!-- Transfer amount -->
+      <div
+        class="col-md-6"
+        *ngIf="getForm.transferType.value.value !== transferType.BUY_AIRTIME"
+      >
+        <app-transfer-amount
+          [parentForm]="standingOrdersForm"
+          fieldName="amount"
+          label="Amount"
+          placeholder="Enter an amount"
+          formControlName="amount"
+        >
+        </app-transfer-amount>
+      </div>
+
+      <!-- BUY AIRTIME -->
+      <!-- Transfer amount -->
+      <div
+        class="col-md-6"
+        *ngIf="getForm.transferType.value.value === transferType.BUY_AIRTIME"
+      >
+        <app-buyairtime-amount
+          [parentForm]="standingOrdersForm"
+          label="Amount"
+          fieldName="amount"
+          placeholder="Enter an amount"
+          formControlName="amount"
+        >
+        </app-buyairtime-amount>
+      </div>
+
+      <!-- Schedule Payment -->
+      <div class="col-md-6">
+        <app-schedule-payment-input
+          [parentForm]="standingOrdersForm"
+          label="Schedule Payment"
+          fieldName="schedulePayment"
+          placeholder="Select a payment date"
+          transactionType="ownEquityAccount"
+        ></app-schedule-payment-input>
+      </div>
+
+      <!-- License -->
+      <div
+        class="col-md-6"
+        *ngIf="getForm.transferType.value.value === transferType.SWIFT"
+      >
+        <app-input
+          [parentForm]="standingOrdersForm"
+          label="License"
+          placeholder="Enter License"
+          formControlName="license"
+          fieldName="license"
+        >
+        </app-input>
+      </div>
+      <!-- Foreign Charges -->
+      <div
+        class="col-md-6"
+        *ngIf="getForm.transferType.value.value === transferType.SWIFT"
+      >
+        <app-swift-charges
+          [parentForm]="standingOrdersForm"
+          label="Charges"
+          formControlName="chargeOption"
+          fieldName="chargeOption"
+          placeholder="Select an option"
+        ></app-swift-charges>
+      </div>
+      <!-- Payment Category -->
+      <div
+        class="col-md-6"
+        *ngIf="getForm.transferType.value.value === transferType.SWIFT"
+      >
+        <app-payment-category
+          [parentForm]="standingOrdersForm"
+          label="Transaction BCC Code"
+          fieldName="paymentCategory"
+          formControlName="paymentCategory"
+          placeholder="Select a Payment Category"
+        ></app-payment-category>
+      </div>
+
+      <!-- Payment Reason -->
+      <div class="col-md-6">
+        <app-input
+          [parentForm]="standingOrdersForm"
+          fieldName="reason"
+          label="Payment Reason"
+          formControlName="reason"
+          placeholder="Optional"
+        ></app-input>
+      </div>
+    </div>
+    <!-- Additional Information Upload -->
+    <div class="pt-3" *ngIf="aboveTransactionTypeLimit">
+      <h3 class="strong-text">Additional Information</h3>
+      <small class="text-grey"
+        >If you are sending more than 10,000,000 we need more information from
+        you</small
+      ><br />
+
+      <div
+        class="col-md-6 upload-container mt-4"
+        (click)="openSupportingDocuments()"
+      >
+        <div>Upload a document</div>
+        <mat-icon class="folder-icon">note_add</mat-icon>
+      </div>
+    </div>
+    <!-- Submit Button -->
+    <div class="mt-4">
+      <button
+        mat-raised-button
+        type="submit"
+        [disabled]="standingOrdersForm.invalid"
+        color="primary"
+        class="px-5"
+      >
+        {{ editMode ? "Update" : "Create Standing Order" }}
       </button>
     </div>
-    <h3 class="strong-text">{{ editMode ? "Please update the payment details" : "Create New Standing Order" }}</h3>
-    <form
-      class="d-flex flex-column"
-      autocomplete="off"
-      [formGroup]="standingOrdersForm"
-      (submit)="submit()"
-    >
-     <!-- Transaction Type-->
-     <div class="row">
-     <div class="col-md-6">
-      <app-transaction-type
-        [parentForm]="standingOrdersForm"
-        label="Select Transaction Type"
-        placeholder="Transaction Type"
-        formControlName="transactionType"
-        fieldName="transactionType"
-      > 
-      </app-transaction-type>
-    </div></div>
-      <div class="row">
-        <!-- BUY AIRTIME -->
-        <!-- Transfer From -->
-        <div class="col-md-6" *ngIf="
-        getForm.transactionType.value.type === 'Buy airtime'">
-          <app-transfer-from
-            [parentForm]="standingOrdersForm"
-            label="Buy From"
-            formControlName="sendFrom"
-            fieldName="sendFrom"
-            transactionType="buyAirTime"
-          ></app-transfer-from>
-        </div>
-        <!-- Transfer To -->
-        <div class="col-md-6 align-self-end" *ngIf="
-        getForm.transactionType.value.type === 'Buy airtime'">
-          <app-transfer-to
-            [parentForm]="standingOrdersForm"
-            fieldName="sendTo"
-            formControlName="sendTo"
-            label="Buy for"
-            placeholder="Select Recipient"
-            transactionType="{{ transferType.BUY_AIRTIME }}"
-          ></app-transfer-to>
-        </div>
-        <!-- PAY BILL -->
-        <!-- Transfer From -->
-        <div class="col-md-6" *ngIf="
-        getForm.transactionType.value.type === 'Pay bill'">
-          <app-transfer-from
-            [parentForm]="standingOrdersForm"
-            label="Pay From"
-            placeholder="Pay From"
-            formControlName="sendFrom"
-            fieldName="sendFrom"
-          ></app-transfer-from>
-        </div>
-        <!-- Transfer To -->
-        <div class="col-md-6 align-self-end" *ngIf="
-        getForm.transactionType.value.type === 'Pay bill'">
-          <app-transfer-to  
-            [parentForm]="standingOrdersForm"
-            fieldName="sendTo"
-            formControlName="sendTo"
-            label="Pay To"
-            placeholder="Select a biller"
-            transactionType="{{ transferType.OWN_EQUITY }}"
-          ></app-transfer-to>
-        </div>
-         <!-- BUY GOODS -->
-         <!-- Transfer amount -->
-         <div class="col-md-6" *ngIf="
-         getForm.transactionType.value.type === 'Buy goods & services'">
-          <app-transfer-from
-            [parentForm]="standingOrdersForm"
-            label="Pay from"
-            formControlName="sendFrom"
-            fieldName="sendFrom"
-          ></app-transfer-from>
-        </div>
-        <!-- Transfer To -->
-        <div class="col-md-6 align-self-end" *ngIf="
-        getForm.transactionType.value.type === 'Buy goods & services'">
-          <app-transfer-to
-            [parentForm]="standingOrdersForm"
-            fieldName="sendTo"
-            formControlName="sendTo"
-            label="Pay to"
-            placeholder="Select the merchant"
-            transactionType="{{ transferType.BUY_GOODS }}"
-          ></app-transfer-to>
-        </div>
-        <!-- SEND MONEY TO EQUITY ACCOUNT -->
-        <!-- Transfer-from -->
-        <div class="col-md-6" *ngIf="
-        getForm.transactionType.value.type === 'Send money to Equity account'">
-          <app-transfer-from
-            [parentForm]="standingOrdersForm"
-            label="Send From"
-            placeholder="Send From"
-            formControlName="sendFrom"
-            fieldName="sendFrom"
-          ></app-transfer-from>
-        </div>
-        <!-- Transfer To -->
-        <div class="col-md-6 align-self-end" *ngIf="
-        getForm.transactionType.value.type === 'Send money to Equity account'">
-          <app-transfer-to
-            [parentForm]="standingOrdersForm"
-            label="Send To"
-            formControlName="sendTo"
-            fieldName="sendTo"
-            placeholder="Select the recipient"
-            transactionType="{{ transferType.INTRA_BANK }}"
-          >
-          </app-transfer-to>
-        </div>
-        <!-- SEND MONEY TO OTHER BANK -->
-        <!-- Send From -->
-        <div class="col-md-6" *ngIf="
-        getForm.transactionType.value.type === 'Send money to other bank'">
-          <app-transfer-from
-            [parentForm]="standingOrdersForm"
-            label="Pay From"
-            placeholder="Pay From"
-            formControlName="sendFrom"
-            fieldName="sendFrom"
-          >
-          </app-transfer-from>
-        </div>
-        <!-- Send To -->
-        <div class="col-md-6 align-self-end" *ngIf="
-        getForm.transactionType.value.type === 'Send money to other bank'">
-          <app-transfer-to
-            [parentForm]="standingOrdersForm"
-            label="Merchant Name"
-            formControlName="sendTo"
-            fieldName="sendTo"
-            placeholder="Select the recipient"
-            transactionType="{{ transferType.INTER_BANK }}"
-          >
-          </app-transfer-to>
-        </div>
-        <!-- Transfer amount -->
-        <div class="col-md-6" *ngIf="
-        getForm.transactionType.value.type !== 'Buy airtime'">
-          <app-transfer-amount
-            [parentForm]="standingOrdersForm"
-            fieldName="amount"
-            label="Amount"
-            placeholder="Enter an amount"
-            formControlName="amount"
-          >
-          </app-transfer-amount>
-        </div>
-        <!-- BUY AIRTIME -->
-        <!-- Transfer amount -->
-        <div class="col-md-6" *ngIf="
-        getForm.transactionType.value.type === 'Buy airtime'">
-          <app-buyairtime-amount
-            [parentForm]="standingOrdersForm"
-            label="Amount"
-            fieldName="amount"
-            placeholder="Enter an amount"
-            formControlName="amount"
-          >
-          </app-buyairtime-amount>
-        </div>
-
-        <!-- Schedule Payment -->
-        <div class="col-md-6">
-          <app-schedule-payment-input
-            [parentForm]="standingOrdersForm"
-            label="Schedule Payment"
-            fieldName="schedulePayment"
-            placeholder="Select a payment date"
-            transactionType="ownEquityAccount"
-          ></app-schedule-payment-input>
-        </div>
-        <!-- Payment Reason -->
-        <div class="col-md-6">
-          <app-input
-            [parentForm]="standingOrdersForm"
-            fieldName="reason"
-            label="Payment Reason"
-            formControlName="reason"
-            placeholder="Optional"
-          ></app-input>
-        </div>
-      </div>
-      <!-- Additional Information Upload -->
-      <div class="pt-3" *ngIf="aboveTransactionTypeLimit">
-        <h3 class="strong-text">Additional Information</h3>
-        <small class="text-grey"
-          >If you are sending more than 10,000,000 we need more information from
-          you</small
-        ><br />
-  
-        <div
-          class="col-md-6 upload-container mt-4"
-          (click)="openSupportingDocuments()"
-        >
-          <div>Upload a document</div>
-          <mat-icon class="folder-icon">note_add</mat-icon>
-        </div>
-      </div>
-      <!-- Submit Button -->
-      <div class="mt-4">
-        <button
-          mat-raised-button
-          type="submit"
-          [disabled]="standingOrdersForm.invalid"
-          color="primary"
-          class="px-5"
-        >
-        {{ editMode ? "Update" : "Create Standing Order" }}
-        </button>
-      </div>
-    </form>
-  </div>
-  
+  </form>
+</div>

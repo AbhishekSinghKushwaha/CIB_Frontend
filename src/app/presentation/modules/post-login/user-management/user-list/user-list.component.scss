@@ -19,18 +19,21 @@ th {
 
 .status {
   text-transform: capitalize;
-
+  border-radius: 15px;
   &.enabled {
+    background-color: rgba(47, 152, 3, 0.04);
     color: var(--green);
   }
   &.disabled {
+    background-color: rgba(243, 135, 7, 0.04);
     color: var(--orange);
   }
   &.pending {
-    color: var(--black);
-    opacity: 0.6;
+    background-color: rgba(35, 7, 243, 0.04);
+    color: var(--blue);
   }
   &.others {
-    color: red;
+    background-color: rgba(243, 7, 7, 0.04);
+    color: var(--red);
   }
 }

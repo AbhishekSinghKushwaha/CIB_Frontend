@@ -15,8 +15,10 @@ export class PaginatorComponent implements OnInit {
     return this._data;
   }
   @Input() set data(value: PaginationModel) {
-    this._data = value;
-    this.pageSize = this.data.pageSize;
+    if (value) {
+      this._data = value;
+      this.pageSize = this._data.pageSize;
+    }
   };
   @Output() changePage = new Subject<number>();
   @Output() changeSize = new Subject<number>();

@@ -4,6 +4,7 @@ import { StandingOrdersListmodel } from 'src/app/core/domain/standing-orders-lis
 import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
 import { Router } from '@angular/router';
 import { DeleteService } from 'src/app/core/services/delete/delete.service';
+import { StandingOrdersService } from "src/app/core/services/transfers/standing-orders/standing-orders.service";
 
 @Component({
   selector: 'app-standing-orders-list',
@@ -19,7 +20,7 @@ export class StandingOrdersListComponent implements OnInit {
   set searchText(input: string) {
     const value = input.toLowerCase();
     this.transactions = [];
-    for (const transaction of this.originalTransactions) {
+    for (const transaction of this.transactions) {
       if (transaction.amount.toLowerCase().indexOf(value) > -1 ||
         transaction.date.toLowerCase().indexOf(value) > -1 ||
         transaction.description.toLowerCase().indexOf(value) > -1 ||
@@ -37,8 +38,7 @@ export class StandingOrdersListComponent implements OnInit {
     return this._category
   }
   paginationData: PaginationModel;
-  transactions: StandingOrdersListmodel[] = [];
-  originalTransactions: StandingOrdersListmodel[] = [];
+  transactions: any[] = [];
   transactionIcon = { Active: 'transaction_approved', Inactive: 'transaction_pending' };
 
   @Input() set category(category: string) {
@@ -48,28 +48,42 @@ export class StandingOrdersListComponent implements OnInit {
 
   constructor(
     private readonly router: Router,
-    private readonly deleteService: DeleteService
+    private readonly deleteService: DeleteService,
+    private readonly standingOrdersService: StandingOrdersService
     ) { }
 
   ngOnInit(): void {
   }
 
   loadStandingOrders() {
-    this.originalTransactions = mockData.standingOrders;
-    this.transactions = [...this.originalTransactions];
-    this.paginationData = new PaginationModel(10, [10, 25, 40, 60], this.transactions.length);
+    this.standingOrdersService.getStandingOrders().subscribe((response) => {
+      this.transactions = response.data;
+      console.log(this.transactions);
+      this.paginationData = new PaginationModel(10, [10, 25, 40, 60], this.transactions.length);
+    });
   }
 
   openTransaction(data: StandingOrdersListmodel, index: number) {
     this.router.navigate([`transact/standing-orders/detail/${index}`])
   }
 
-  openCancel() {
+  openCancel(data: StandingOrdersListmodel, index: any) {
     const payload = {
       title: 'Are you sure?',
-      message: 'Once you cancel the standing order for airtime?'
+      message: 'Once you cancel the standing order for ' + data.title + '?',
     }
-    this.deleteService.open(payload);
+    // this.deleteService.open(payload);
+    const deactivatePayload = {
+      id: Number(index)
+    }
+    const modal = this.deleteService.open(payload);
+    modal.afterClosed().subscribe(() => {
+      this.standingOrdersService.deactivateStandingOrder(deactivatePayload).subscribe((res) => {
+        if (res.status) {
+          this.loadStandingOrders();
+        }
+      });
+    });
   }
 
   editStandingOrder(index: number) {

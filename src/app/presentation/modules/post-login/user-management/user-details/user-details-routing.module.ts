@@ -15,16 +15,6 @@ const routes: Routes = [
     component: RolesComponent
   },
   {
-    path: 'limits',
-    data: {
-      redirectTo: 'user-management/add-user'
-    },
-    loadChildren: (): Promise<any> =>
-      import('./limits/limits.module').then(
-        (m) => m.LimitsModule
-      )
-  },
-  {
     path: 'products',
     component: ProductsComponent,
   },

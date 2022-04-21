@@ -3,7 +3,6 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserModel } from 'src/app/core/domain/user.model';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
-import LOGIN_CONSTANTS from 'src/app/core/utils/constants/pre-login.constants';
 
 @Component({
   selector: 'app-login-sms-verification',
@@ -42,7 +41,6 @@ export class LoginSmsVerificationComponent implements OnInit {
         }
         this.user = data;
       })
-      .catch((e) => console.log(e));
   }
 
   get f(): any {
@@ -80,7 +78,7 @@ export class LoginSmsVerificationComponent implements OnInit {
         field.setValue(null);
         this.inputs.toArray()[index - 1].nativeElement.focus();
       } else {
-        // console.log('first field');
+        // 
       }
     }
   }
@@ -88,9 +86,9 @@ export class LoginSmsVerificationComponent implements OnInit {
   submit(otp: string) {
     this.otpError = false;
     if (otp) {
-      this.authService.submitOTP(otp).subscribe(
+      this.authService.submitOTP(otp).submitOTP.subscribe(
         async (response) => {
-          console.log('submitOTP', response);
+
           if (response) {
             const loginStat = await this.authService.loginSuccess();
             if (!loginStat) {
@@ -102,7 +100,7 @@ export class LoginSmsVerificationComponent implements OnInit {
         },
         (error) => {
           this.otpError = true;
-          console.log({ error });
+
         }
       );
     }

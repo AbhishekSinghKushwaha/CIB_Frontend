@@ -18,7 +18,7 @@
       </div>
       <div
         class="col-4"
-        *ngIf="data.approvalStatus === approvalStatus.Approved"
+        *ngIf="data?.approvalStatus === approvalStatus.Approved"
       >
         <app-card-component
           [data]="{ text: 'View or download receipt', suffixIcon: 'eyes_view' }"
@@ -52,29 +52,21 @@
       </div>
       <div class="col-6 d-flex justify-content-end">
         <button
-          *ngIf="data.approvalStatus !== approvalStatus.Pending"
+          *ngIf="data?.approvalStatus !== approvalStatus.Pending"
           mat-raised-button
           class="me-3"
           color="primary"
-          [disabled]="data.approvalStatus !== approvalStatus.Rejected"
+          [disabled]="data?.approvalStatus !== approvalStatus.Rejected"
           (click)="reinitiate()"
         >
           <span class="pe-3 ps-3">Reinitiate</span>
-        </button>
-        <button
-          *ngIf="data.approvalStatus !== approvalStatus.Pending"
-          mat-stroked-button
-          color="primary"
-          [disabled]="data.approvalStatus !== approvalStatus.Rejected"
-        >
-          <span class="pe-3 ps-3">Delete</span>
         </button>
         <button
           (click)="approve()"
           class="me-3"
           mat-raised-button
           color="primary"
-          *ngIf="data.approvalStatus === approvalStatus.Pending"
+          *ngIf="data?.approvalStatus === approvalStatus.Pending"
         >
           <span class="pe-3 ps-3">Approve</span>
         </button>
@@ -82,7 +74,7 @@
           (click)="reject()"
           mat-stroked-button
           color="primary"
-          *ngIf="data.approvalStatus === approvalStatus.Pending"
+          *ngIf="data?.approvalStatus === approvalStatus.Pending"
         >
           <span class="pe-3 ps-3">Reject</span>
         </button>
@@ -95,20 +87,22 @@
   <div
     class="alert alert-danger"
     role="alert"
-    *ngIf="data.approvalStatus === approvalStatus.Rejected"
+    *ngIf="data?.approvalStatus === approvalStatus.Rejected"
   >
     <span class="text-danger strong-text">
       <mat-icon svgIcon="exclamation"></mat-icon> Reason for rejection
     </span>
     <br />
-    <span class="error-description">Missing the appropriate documentation</span>
+    <span class="error-description">{{ data?.remarks }}</span>
   </div>
   <!-- Transaction info -->
   <mat-divider class="mt-4"></mat-divider>
   <div class="row mt-3">
     <div class="col mt-3">
       <span class="text-grey text-sm">Payment Date</span>
-      <p class="mb-0 text-sm pb-0">{{ data?.date || "Thur, 23 Aug" }}</p>
+      <p class="mb-0 text-sm pb-0">
+        {{ data?.dateCreated | date: "mediumDate" }}
+      </p>
     </div>
     <div class="col mt-3">
       <span class="text-grey text-sm">From</span>
