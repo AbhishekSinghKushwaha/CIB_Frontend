@@ -14,6 +14,7 @@ export class EazzyFxTransactionTypeModalService {
       .open<EazzyFxTransactionTypeModalComponent>(
         EazzyFxTransactionTypeModalComponent,
         {
+          disableClose: true,
           data: transactionType,
         }
       )

@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { EazzyFixRate } from '../eazzy-fx-rate/eazzy-fx-rate.component';
-import { EazzyFixRateService } from '../services/eazzy-fix-rate.service';
+import { EazzyFxRate } from '../eazzy-fx-rate/eazzy-fx-rate.component';
+import { EazzyFxRateService } from '../services/eazzy-fx-rate.service';
 
 @Component({
   selector: 'app-eazzy-fx-rates',
@@ -10,16 +10,21 @@ import { EazzyFixRateService } from '../services/eazzy-fix-rate.service';
   styleUrls: ['./eazzy-fx-rates.component.scss'],
 })
 export class EazzyFxRatesComponent implements OnInit, OnDestroy {
-  rates: EazzyFixRate[] = [];
+  rates: EazzyFxRate[] = [];
 
   private unsubscribe$: Subject<void> = new Subject<void>();
 
-  constructor(private readonly eazzyFixRateService: EazzyFixRateService) {}
+  constructor(private readonly eazzyFxRateService: EazzyFxRateService) {}
 
   ngOnInit(): void {
-    this.eazzyFixRateService.rates$
+    this.eazzyFxRateService
+      .getRates()
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((rates: EazzyFixRate[]) => (this.rates = rates));
+      .subscribe((result: EazzyFxRate[]) => {
+        this.rates = result.filter(
+          (eazzyFixRate: EazzyFxRate) => eazzyFixRate.fromCurrency === 'KES'
+        );
+      });
   }
 
   ngOnDestroy(): void {

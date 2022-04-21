@@ -8,15 +8,21 @@ import { EazzyFxComponent } from './eazzy-fx/eazzy-fx.component';
 const routes: Routes = [
   {
     path: 'eazzy-fx',
-    component: EazzyFxComponent,
     children: [
       {
         path: 'rates',
-        component: EazzyFxRatesComponent,
-      },
-      {
-        path: 'pair',
-        component: EazzyFxPairComponent,
+        component: EazzyFxComponent,
+        children: [
+          {
+            path: '',
+            pathMatch: 'full',
+            component: EazzyFxRatesComponent,
+          },
+          {
+            path: 'pair',
+            component: EazzyFxPairComponent,
+          },
+        ],
       },
       {
         path: 'negotiate',

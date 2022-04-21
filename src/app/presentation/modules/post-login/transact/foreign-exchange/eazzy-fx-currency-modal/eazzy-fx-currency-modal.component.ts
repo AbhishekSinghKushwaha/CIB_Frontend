@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { EazzyFixRate } from '../eazzy-fx-rate/eazzy-fx-rate.component';
+import { EazzyFxRate } from '../eazzy-fx-rate/eazzy-fx-rate.component';
 
 @Component({
   selector: 'app-eazzy-fx-currency-modal',
@@ -9,7 +9,7 @@ import { EazzyFixRate } from '../eazzy-fx-rate/eazzy-fx-rate.component';
 })
 export class EazzyFxCurrencyModalComponent implements OnInit {
   title: string = '';
-  rates: EazzyFixRate[] = [];
+  rates: EazzyFxRate[] = [];
   selectedIndex: number = -1;
 
   constructor(
@@ -28,7 +28,7 @@ export class EazzyFxCurrencyModalComponent implements OnInit {
   }
 
   selectCurrency(index: number): void {
-    const selectedRate: EazzyFixRate = this.rates[index];
+    const selectedRate: EazzyFxRate = this.rates[index];
 
     this.selectedIndex = index;
 

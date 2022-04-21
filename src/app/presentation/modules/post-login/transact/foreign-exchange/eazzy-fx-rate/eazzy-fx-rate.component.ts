@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-export interface EazzyFixRate {
+export interface EazzyFxRate {
   image: string;
-  country: string;
-  currency: string;
-  priceBuy: number;
-  priceSell: number;
+  fromCurrency: string;
+  toCurrency: string;
+  buyRate: number;
+  sellRate: number;
 }
 
 @Component({
@@ -15,7 +15,7 @@ export interface EazzyFixRate {
 })
 export class EazzyFxRateComponent implements OnInit {
   @Input()
-  rate: EazzyFixRate;
+  rate: EazzyFxRate;
 
   constructor() {}
 

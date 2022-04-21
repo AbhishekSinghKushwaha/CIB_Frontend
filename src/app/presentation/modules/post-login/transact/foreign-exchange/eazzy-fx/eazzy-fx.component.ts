@@ -14,7 +14,7 @@ export class EazzyFxComponent {
     if (event.value === 'rates') {
       this.router.navigate(['transact/foreign-exchange/eazzy-fx/rates']);
     } else {
-      this.router.navigate(['transact/foreign-exchange/eazzy-fx/pair']);
+      this.router.navigate(['transact/foreign-exchange/eazzy-fx/rates/pair']);
     }
   }
 }
