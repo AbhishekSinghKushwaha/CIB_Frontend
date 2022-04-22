@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 import urlList from "../../service-list.json";
@@ -25,7 +26,7 @@ export class OwnAccountService extends StateService<OwnEquityTransferState> {
   transferPayload$: Observable<any> = this.select(
     (state) => state.transferPayload
   );
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     super(initialState);
   }
 
@@ -37,11 +38,25 @@ export class OwnAccountService extends StateService<OwnEquityTransferState> {
     this.setState({ transferPayload });
   }
 
-  sendToOwnEquityAccount(payload: any): Observable<any> {
-    return this.http.post(
-      environment.apiUrl + urlList.transfers.sendOwnEquityAccount,
-      payload
-    );
+  sendToOwnEquityAccount(transactionType: string) {
+    this.transferPayload$.subscribe((payloadData) => {
+      if (payloadData) {
+        this.http
+          .post<any>(
+            environment.apiUrl + urlList.transfers.sendOwnEquityAccount,
+            payloadData
+          )
+          .subscribe((res) => {
+            if (res.status) {
+              this.router.navigate([
+                `/transact/transfer-submitted/${transactionType}`,
+              ]);
+            } else {
+              console.log(res.message);
+            }
+          });
+      }
+    });
   }
 
   getTransferCharges(payload: any): Observable<any> {

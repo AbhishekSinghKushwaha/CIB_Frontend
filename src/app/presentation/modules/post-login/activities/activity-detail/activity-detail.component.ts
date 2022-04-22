@@ -1,5 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
+import { Subscription } from "rxjs";
 import { ConfirmationCompletionModel } from "src/app/core/domain/confirmation-completion.model";
 import { ConfirmationModel } from "src/app/core/domain/confirmation.model";
 import { TransactionListmodel } from "src/app/core/domain/transaction-list.model";
@@ -8,6 +9,7 @@ import { TransactionReceiptModalService } from "src/app/core/services/modal-serv
 import { TransactionsService } from "src/app/core/services/transactions/transactions.service";
 import { mockData } from "src/app/core/utils/constants/mockdata.constants";
 import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
+import { SharedUtils } from "src/app/core/utils/shared.util";
 import { SupportingDocumentsUploadService } from "./../../../../../core/services/supporting-documents-upload/supporting-documents-upload.service";
 
 @Component({
@@ -15,7 +17,7 @@ import { SupportingDocumentsUploadService } from "./../../../../../core/services
   templateUrl: "./activity-detail.component.html",
   styleUrls: ["./activity-detail.component.scss"],
 })
-export class ActivityDetailComponent implements OnInit {
+export class ActivityDetailComponent implements OnInit, OnDestroy {
   show = true;
   id: number;
   status: string;
@@ -39,6 +41,8 @@ export class ActivityDetailComponent implements OnInit {
   approvalStatus = TransactionTypeConstants.TransactionApprovalStatus;
   transactionType = TransactionTypeConstants.TransferType;
 
+  subscriptions: Subscription[] = [];
+
   constructor(
     private readonly supportingDocumentsUploadService: SupportingDocumentsUploadService,
     private readonly route: ActivatedRoute,
@@ -54,15 +58,23 @@ export class ActivityDetailComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  ngOnDestroy(): void {
+    SharedUtils.unSubscribe(this.subscriptions);
+  }
+
   getTransaction(index: number, category: string) {
     category === "history"
-      ? this.transactionService.historyTransactions$.subscribe((res) => {
-          this.data = res[index];
-        })
+      ? this.subscriptions.push(
+          this.transactionService.historyTransactions$.subscribe((res) => {
+            this.data = res[index];
+          })
+        )
       : category === "pending"
-      ? this.transactionService.pendingTransactions$.subscribe((res) => {
-          this.data = res[index];
-        })
+      ? this.subscriptions.push(
+          this.transactionService.pendingTransactions$.subscribe((res) => {
+            this.data = res[index];
+          })
+        )
       : category === "standingOrder"
       ? this.transactionService.standingOrders$.subscribe((res) => {
           this.data = res[index];

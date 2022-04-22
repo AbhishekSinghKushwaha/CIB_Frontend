@@ -31,6 +31,7 @@ import { InterbankService } from "src/app/core/services/transfers/interbank/inte
 import { SwiftTransferService } from "src/app/core/services/transfers/swift/swift-transfer.service";
 import { IntercountryService } from "src/app/core/services/transfers/intercountry/intercountry.service";
 import { TransactionsService } from "src/app/core/services/transactions/transactions.service";
+import { OwnAccountService } from "src/app/core/services/transfers/own-account/own-account.service";
 
 @Component({
   selector: "app-verify-by-code",
@@ -82,7 +83,8 @@ export class VerifyByCodeComponent implements OnInit {
     private interbankService: InterbankService,
     private swiftTransferService: SwiftTransferService,
     private intercountryService: IntercountryService,
-    private transactionService: TransactionsService
+    private transactionService: TransactionsService,
+    private ownEquityService: OwnAccountService
   ) {
     this.initOtpForm();
     console.log(this.transactionType);
@@ -302,6 +304,9 @@ export class VerifyByCodeComponent implements OnInit {
         break;
       case this.transferType.SUBSIDIARY:
         this.intercountryService.sendToSubsidiary(this.transactionType);
+        break;
+      case this.transferType.OWN_EQUITY:
+        this.ownEquityService.sendToOwnEquityAccount(this.transactionType);
         break;
       default:
         break;

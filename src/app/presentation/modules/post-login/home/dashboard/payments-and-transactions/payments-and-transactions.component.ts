@@ -34,7 +34,7 @@ export class PaymentsAndTransactionsComponent implements OnInit {
   getPendingTransactions() {
     const params = {
       page: 1, // To be set by pagination controls
-      pageSize: 350, // To be set by pagination controls
+      pageSize: 25, // To be set by pagination controls
       From: this.dateRange.from, // Automaticall sets a month ago from today's date
       To: this.dateRange.to, // Automatically picks todays date
       TransactionType: "",
@@ -43,6 +43,7 @@ export class PaymentsAndTransactionsComponent implements OnInit {
 
     this.transactionsService.getTransactions(params).subscribe((res) => {
       if (res.status) {
+        this.transactionSummary = res.data;
         this.pendingTransactions = res.data.transactions.dataList;
         this.transactionsService.setPendingTransactions(
           this.pendingTransactions
@@ -54,7 +55,7 @@ export class PaymentsAndTransactionsComponent implements OnInit {
   getHistoryTransactions() {
     const params = {
       page: 1, // To be set by pagination controls
-      pageSize: 350, // To be set by pagination controls
+      pageSize: 25, // To be set by pagination controls
       From: this.dateRange.from, // Automaticall sets a month ago from today's date
       To: this.dateRange.to, // Automatically picks todays date
       TransactionType: "",
