@@ -57,14 +57,7 @@ export class EazzyFxNegotiateComponent implements OnInit {
       this.negotiationFormGroup.get('transactionType')?.value;
 
     this.eazzyFxRateService
-      .generate(
-        currency,
-        '',
-        amount,
-        true,
-        transactionType === 'sell' ? 1 : 0,
-        date
-      )
+      .generate(currency, '', amount, true, transactionType, date)
       .subscribe(() => (this.negotiated = true));
   }
 

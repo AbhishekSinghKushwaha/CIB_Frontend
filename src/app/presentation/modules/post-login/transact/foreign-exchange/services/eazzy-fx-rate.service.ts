@@ -45,7 +45,7 @@ export class EazzyFxRateService {
     toCurrency: string,
     amount: number,
     isNegotiable: boolean,
-    transactionType: number,
+    transactionType: 'sell' | 'buy',
     transactionDate: string
   ): Observable<any> {
     return this.httpClient.post(environment.apiUrl + urlList.fx.generate, {
@@ -53,7 +53,7 @@ export class EazzyFxRateService {
       toCurrency,
       amount,
       isNegotiable,
-      transactionType,
+      transactionType: transactionType === 'sell' ? 1 : 0,
       transactionDate,
     });
   }
