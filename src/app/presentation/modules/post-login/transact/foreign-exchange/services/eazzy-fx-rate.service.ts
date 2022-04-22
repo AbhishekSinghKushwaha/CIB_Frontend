@@ -15,10 +15,15 @@ export class EazzyFxRateService {
   constructor(private readonly httpClient: HttpClient) {}
 
   getRates(): Observable<EazzyFxRate[]> {
+    const date: Date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const day = date.getDate();
+
     return this.httpClient
       .get(environment.apiUrl + urlList.fx.getRates, {
         params: {
-          Date: '2022-2-3',
+          Date: `${year}-${month}-${day}`,
           BankId: '54',
         },
       })
