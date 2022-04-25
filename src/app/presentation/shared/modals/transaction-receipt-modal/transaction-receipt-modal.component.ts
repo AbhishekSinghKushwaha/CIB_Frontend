@@ -1,5 +1,13 @@
-import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import {
+  Component,
+  ElementRef,
+  Inject,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
+import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { TransactionReceiptModalService } from "src/app/core/services/modal-services/transaction-receipt-modal/transaction-receipt-modal.service";
+import { TransactionsService } from "src/app/core/services/transactions/transactions.service";
 
 @Component({
   selector: "app-transaction-receipt-modal",
@@ -13,10 +21,14 @@ export class TransactionReceiptModalComponent implements OnInit {
   @ViewChild("receiptDownload") pdfTable: ElementRef;
 
   constructor(
-    private readonly transactionReceiptModalService: TransactionReceiptModalService
+    private readonly transactionReceiptModalService: TransactionReceiptModalService,
+    private transactionService: TransactionsService,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.data);
+  }
 
   close() {
     this.transactionReceiptModalService.close();
@@ -27,4 +39,22 @@ export class TransactionReceiptModalComponent implements OnInit {
   }
 
   public downloadAsPDF() {}
+
+  download(item: any) {
+    if (item === "PDF") {
+      this.transactionService
+        .downloadReceiptAsPdf({
+          paymentReference: "19AA231D5D",
+        })
+        .subscribe((res) => {
+          console.log(res);
+          const myFile = new File([res], "receipt.pdf", {
+            type: res.type,
+          });
+          console.log(myFile);
+          const url = window.URL.createObjectURL(myFile);
+          window.open(url);
+        });
+    }
+  }
 }

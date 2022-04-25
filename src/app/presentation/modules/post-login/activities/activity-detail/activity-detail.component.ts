@@ -55,7 +55,7 @@ export class ActivityDetailComponent implements OnInit {
 
   getTransaction(index: number, category: string) {
     // this.data = mockData.pendingTransactions[index];
-    // console.log(this.data);
+    console.log(this.data);
     category === "history"
       ? this.transactionService.historyTransactions$.subscribe((res) => {
           this.data = res[index];
@@ -77,19 +77,32 @@ export class ActivityDetailComponent implements OnInit {
   }
 
   openReceipt() {
-    this.transactionReceiptModalService.open();
+    this.transactionReceiptModalService.open(this.data);
   }
 
   @confirmModal({
     title: "Transaction request rejection",
     message: "Reason for rejection",
-    cancelText: "Submit",
-    confirmText: "Cancel",
+    cancelText: "Cancel",
+    confirmText: "Submit",
   })
-  reject() {}
+  reject() {
+    const payload = {
+      references: [this.data.requestReference],
+      transactionApprovalStatus: this.approvalStatus.Rejected,
+      remarks: "Transaction doesn't meet certain criteria",
+    };
+    this.transactionService.setApprovalPayload(payload);
+    this.router.navigate([`/transact/otp-verification/reject-transaction`]);
+  }
 
   approve() {
-    this.router.navigate(["activities/verifyOTP"]);
+    const payload = {
+      references: [this.data.requestReference],
+      transactionApprovalStatus: this.approvalStatus.Approved,
+    };
+    this.transactionService.setApprovalPayload(payload);
+    this.router.navigate([`/transact/otp-verification/approve-transaction`]);
   }
 
   reinitiate() {

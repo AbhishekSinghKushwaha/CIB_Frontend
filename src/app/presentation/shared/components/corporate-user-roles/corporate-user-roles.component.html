@@ -21,9 +21,9 @@
             <div class="d-flex justify-content-between">
               <h3>
                 <mat-radio-button
-                  [value]="role?.description"
+                  [value]="role?.roleName"
                   (change)="mainRoleChange($event)"
-                  >{{ role?.description }}</mat-radio-button
+                  >{{ role?.roleName }}</mat-radio-button
                 >
               </h3>
             </div>
@@ -47,14 +47,14 @@
                   <div class="col-2 float-right toggle-container">
                     <mat-icon
                       (click)="
-                        role?.description === selectedMainRole &&
+                        role?.roleName === selectedMainRole &&
                           toggle(role?.id, permission?.id)
                       "
                       [svgIcon]="
                         isRoleActive(
                           role?.id,
                           permission?.id,
-                          role?.description === selectedMainRole
+                          role?.roleName === selectedMainRole
                         )
                           ? 'toggle_button_on'
                           : 'toggle_button_off'

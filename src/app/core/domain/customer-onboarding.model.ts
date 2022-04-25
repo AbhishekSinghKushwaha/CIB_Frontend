@@ -1,4 +1,4 @@
-export interface accountOption {}
+export interface accountOption { }
 
 export interface CorporateVerify {
   accountNumber?: string;
@@ -26,6 +26,7 @@ export interface Role {
   id?: string;
   description?: string;
   permissions: Permission[];
+  roleName?: string;
 }
 
 export interface Permission {

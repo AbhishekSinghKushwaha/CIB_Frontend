@@ -17,7 +17,7 @@
         </div>
     </div>
     <div class="row-fluid text-danger fs-4 mb-3">
-      33,000 KES
+      {{ standingOrdersList?.amount }} {{ standingOrdersList?.beneficiaryCurrency }}
       <mat-icon svgIcon="question_mark"></mat-icon>
     </div>
     <div class="row-fluid">
@@ -40,7 +40,7 @@
             mat-raised-button
             class="me-3"
             color="primary"
-            (click)="update()"
+            (click)="editStandingOrder(id)"
           >
             <span class="pe-3 ps-3">Update</span>
           </button>
@@ -58,7 +58,88 @@
 
   <div class="row">
     <div class="row">
-      <app-list-items [data]="standingOrderDetail"></app-list-items>
+      <div class="row gx-0 p-4">
+        <div class="col-4 mb-3">
+          <span class="text-grey text-sm">Start Date</span>
+          <p class="mb-0 text-sm pb-0">{{standingOrdersList?.startDate | date: "dd MMM YYYY"}}</p>
+        </div>
+        <div class="col-4 mb-3">
+          <span class="text-grey text-sm">End date</span>
+          <p class="mb-0 text-sm pb-0">{{standingOrdersList?.endDate | date: "dd MMM YYYY"}}</p>
+        </div>
+        <div class="col-4 mb-3">
+          <span class="text-grey text-sm">Transaction Type</span>
+          <p class="mb-0 text-sm pb-0">{{transactionType}}</p>
+        </div>
+        <div class="col-4 mb-3">
+          <span class="text-grey text-sm">From</span>
+          <p class="mb-0 text-sm pb-0">{{standingOrdersList?.sourceAccountName}}</p>
+          <p class="mb-0 text-sm pb-0">{{standingOrdersList?.sourceAccount}}</p>
+        </div>
+        <div class="col-4 mb-3">
+          <span class="text-grey text-sm">Narration</span>
+          <p class="mb-0 text-sm pb-0">{{standingOrdersList?.title}}</p>
+        </div>
+        <mat-divider></mat-divider>
+      </div>
+
+      <div *ngIf="standingOrdersList?.transferType != transferType.BUY_AIRTIME && standingOrdersList?.transferType != transferType.BUY_GOODS">
+      <div class="row gx-0 p-4">
+        <h4 class="strong-text">Beneficiary details</h4>
+        <div class="col-4 mb-3">
+          <span class="text-grey text-sm">Beneficiary name</span>
+          <p class="mb-0 text-sm pb-0">{{standingOrdersList?.beneficiaryName}}</p>
+        </div>
+        <div class="col-4 mb-3">
+          <span class="text-grey text-sm">Account number</span>
+          <p class="mb-0 text-sm pb-0">{{standingOrdersList?.beneficiaryAccount}}</p>
+        </div>
+        <div class="col-4 mb-3">
+          <span class="text-grey text-sm">IBAN number</span>
+          <p class="mb-0 text-sm pb-0">{{standingOrdersList?.IBANNumber}}</p>
+        </div>
+        <div class="col-4 mb-3">
+          <span class="text-grey text-sm">Beneficiary bank</span>
+          <p class="mb-0 text-sm pb-0">{{standingOrdersList?.beneficiaryBank}}</p>
+        </div>
+        <div class="col-4 mb-3">
+          <span class="text-grey text-sm">Bank code</span>
+          <p class="mb-0 text-sm pb-0">{{standingOrdersList?.beneficiaryBankCode}}</p>
+        </div>
+        <mat-divider></mat-divider>
+      </div>
+    </div>
+
+      <div class="row gx-0 p-4" *ngIf="standingOrdersList?.transferType == transferType.BUY_AIRTIME">
+        <h4 class="strong-text">Beneficiary details</h4>
+        <div class="col-4 mb-3">
+          <span class="text-grey text-sm">Beneficiary name</span>
+          <p class="mb-0 text-sm pb-0">{{standingOrdersList?.beneficiaryName}}</p>
+        </div>
+        <div class="col-4 mb-3">
+          <span class="text-grey text-sm">Phone Number</span>
+          <p class="mb-0 text-sm pb-0">{{standingOrdersList?.beneficiaryAccount}}</p>
+        </div>
+        <div class="col-4 mb-3">
+          <span class="text-grey text-sm">Network</span>
+          <p class="mb-0 text-sm pb-0">{{standingOrdersList?.beneficiaryName}}</p>
+        </div>
+        <mat-divider></mat-divider>
+      </div>
+
+      <div class="row gx-0 p-4" *ngIf="standingOrdersList?.transferType == transferType.BUY_GOODS">
+        <h4 class="strong-text">Beneficiary details</h4>
+        <div class="col-4 mb-3">
+          <span class="text-grey text-sm">Merchant Name</span>
+          <p class="mb-0 text-sm pb-0">{{standingOrdersList?.beneficiaryName}}</p>
+        </div>
+        <div class="col-4 mb-3">
+          <span class="text-grey text-sm">TILL Number</span>
+          <p class="mb-0 text-sm pb-0">{{standingOrdersList?.beneficiaryAccount}}</p>
+        </div>
+        <mat-divider></mat-divider>
+      </div>
+      
     </div>
   </div>
   

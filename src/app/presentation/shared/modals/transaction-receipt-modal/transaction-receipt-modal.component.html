@@ -125,7 +125,7 @@
       <button
         mat-raised-button
         color="primary"
-        (click)="downloadAsPDF()"
+        (click)="setView()"
         class="mt-2"
       >
         Download
@@ -148,7 +148,7 @@
             width="200px"
           />
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8" (click)="download(item)">
           {{ item }}
         </div>
         <div class="col-md-2">

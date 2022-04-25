@@ -24,7 +24,7 @@ export class AddProductServiceComponent implements OnInit {
   constructor(
     private storageService: StorageService,
     private router: Router,
-    private productsService: ProductsAndServicesService,
+    private productsService: ProductsAndServicesService<Product, ProductService>,
     private route: ActivatedRoute
   ) {
     this.productId = this.route.snapshot.queryParamMap.get('id');
@@ -77,11 +77,9 @@ export class AddProductServiceComponent implements OnInit {
 
   addProducts() {
     this.productsService
-      .addProductAndServiceToCorporate(
-        { products: this.payload },
-        this.storageService.getData('corporateId')
-      )
-      .subscribe((res) => {
+      .addProductAndServiceToCorporate({ products: this.payload })
+      .onboarding(this.storageService.getData('corporateId'))
+      .subscribe((res: any) => {
         if (res.isSuccessful) {
           this.router.navigate([
             '/auth/customer-onboarding/register/product-services',

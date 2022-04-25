@@ -13,42 +13,55 @@
     />
   </div>
 </div>
-<div
-  class="row mt-1 mb-2 p-2 trans-card cursor-pointer"
-  *ngFor="let transaction of pendingTransactions; let i = index"
-  (click)="openTransaction(transaction, i)"
->
-  <div class="strong-text">Reference {{ transaction.requestReference }}</div>
-  <div class="d-flex justify-content-between">
-    <div>
-      {{ transaction?.narration || "MOBILE WALLET TRANSFER TO LESLIE ISAH" }}
+<div class="">
+  <div
+    class="row mt-1 mb-2 p-2 trans-card cursor-pointer"
+    *ngFor="let transaction of data; let i = index"
+    (click)="openTransaction(transaction, i)"
+  >
+    <div class="strong-text">Reference {{ transaction.requestReference }}</div>
+    <div class="d-flex justify-content-between">
+      <div>
+        {{ transaction?.narration || "MOBILE WALLET TRANSFER TO LESLIE ISAH" }}
+      </div>
+      <div>{{ transaction.amount }} {{ transaction?.currency }}</div>
     </div>
-    <div>{{ transaction.amount }} {{ transaction?.currency }}</div>
-  </div>
-  <div class="d-flex align-items-start">
-    <span class="pe-3">
-      <small class="text-grey">{{ transaction?.date }} Thur, 23 Aug</small>
-    </span>
-    <span class="pe-3" *ngIf="category === 'pending'">
-      <!-- <mat-icon [svgIcon]="transactionIcon.Pending"></mat-icon> -->
-      <!-- <small class="strong-text">{{
+    <div class="d-flex align-items-start">
+      <span class="pe-3">
+        <small class="text-grey">{{
+          transaction?.dateCreated | date: "mediumDate"
+        }}</small>
+      </span>
+      <span class="pe-3" *ngIf="category === 'pending'">
+        <!-- <mat-icon [svgIcon]="transactionIcon.Pending"></mat-icon> -->
+        <!-- <small class="strong-text">{{
         getTransactionStatusKey(
           transaction?.approvalStatus || approvalStatus.Pending
         )
       }}</small> -->
-    </span>
-    <span class="pe-3" *ngIf="category === 'history'">
-      <!-- <mat-icon [svgIcon]="transactionIcon.Pending"></mat-icon> -->
-      <small class="strong-text">{{
-        getTransactionStatusKey(transaction?.approvalStatus || 1)
-      }}</small>
-    </span>
+      </span>
+      <span class="pe-3" *ngIf="category === 'history'">
+        <span>
+          <mat-icon
+            *ngIf="transaction?.approvalStatus === approvalStatus.Approved"
+            [svgIcon]="transactionIcon.Approved"
+          ></mat-icon>
+          <mat-icon
+            *ngIf="transaction?.approvalStatus === approvalStatus.Rejected"
+            [svgIcon]="transactionIcon.Rejected"
+          ></mat-icon>
+        </span>
+        <small class="strong-text">{{
+          getTransactionStatusKey(transaction?.approvalStatus || 1)
+        }}</small>
+      </span>
 
-    <span class="pe-3" *ngIf="category === 'standingOrders'">
-      <small class="strong-text">{{
-        getTransactionStatusKey(transaction?.approvalStatus || 1)
-      }}</small>
-    </span>
+      <span class="pe-3" *ngIf="category === 'standingOrders'">
+        <small class="strong-text">{{
+          getTransactionStatusKey(transaction?.approvalStatus || 1)
+        }}</small>
+      </span>
+    </div>
   </div>
+  <app-paginator [data]="paginationData"></app-paginator>
 </div>
-<app-paginator [data]="paginationData"></app-paginator>

@@ -2,7 +2,7 @@
   appearance="standard"
   style="width: 100%"
   floatLabel="always"
-  (click)="openModal()"
+  (click)="showModal && openModal()"
 >
   <mat-label>{{ label }}</mat-label>
   <input
@@ -12,12 +12,12 @@
     [id]="fieldName"
     [name]="fieldName"
     [value]="value?.name || ''"
-    [disabled]="isDisabled"
+    [disabled]="isDisabled || !showModal"
     (input)="onChange($event)"
     (blur)="touched()"
     [placeholder]="placeholder"
   />
-  <button type="button" mat-icon-button matSuffix>
+  <button type="button" mat-icon-button matSuffix *ngIf="showModal">
     <mat-icon svgIcon="caret_down"></mat-icon>
   </button>
 </mat-form-field>

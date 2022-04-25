@@ -23,6 +23,21 @@
     "getRegistrationSummary": "/cibonboarding-v1/api/Registration/preview-corporate-detail/",
     "uploadCorporateDocuments": "/cibonboarding-v1/api/Registration/updload-corporate-documents/"
   },
+  "corporate":{
+    "main":"/cibcore/api/Corporates/",
+    "addTransactionLimit":"/cibcore/api/CorporateTransactionLimit/Add/",
+    "getTransactionLimit":"/cibcore/api/CorporateTransactionLimit/Limits/",
+    "updateTransactionLimit":"/cibcore/api/CorporateTransactionLimit/Update/"
+  },
+  "userManagement":{
+    "getRoles": "/cibcore/api/roles",
+    "getProductsAndServices": "/cibcore/api/products",
+    "addUser":"/cibcore/api/CorporateUsers/InApp",
+    "getUser":"/cibcore/api/CorporateUsers/",
+    "getUserLimit":"/cibcore/api/UserTransactionLimit/Limits/",
+    "addUserLimit":"/cibcore/api/UserTransactionLimit/Add/",
+    "editUserLimit":"/cibcore/api/UserTransactionLimit/Update/"
+  },
   "accounts": {
     "getUserAccounts": "/cibaccountservice-v1/api/v1/Accounts/GetUserMappedAccounts"
   },
@@ -30,12 +45,14 @@
     "sendOwnEquityAccount": "/cibpaymentservice-v1/api/v1/Transfer/Send",
     "intraBankTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
     "swiftTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+    "sendToSubsidiary": "/cibpaymentservice-v1/api/v1/Transfer/Send",
     "mobileMoneyTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
     "buyAirtimeTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
     "buyGoodsTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
     "getTransferCharges": "/cibpaymentservice-v1/api/v1/Transfer/GetTransferCharge",
     "getAccountDetails": "/cibpaymentservice-v1/api/v1/Transfer/NameEnquiry",
     "getCharges": "/cibpaymentservice-v1/api/v1/BuyGoods/Charges",
+    "transactionApproval": "/cibpaymentservice-v1/api/v1/Transactions/ApproveTransaction",
     "bulkTransfer": "/cibpaymentservice-v1/api/v1/BulkTransfer/InterBank"
   },
   "dataLookUp": {
@@ -53,20 +70,25 @@
   },
   "statement": {
     "getPdf": "/v1/generatepdf/statement",
-    "getTransactions": "/cibpaymentservice-v1/api/v1/Transactions/Summary"
+    "getTransactions": "/cibpaymentservice-v1/api/v1/Transactions/Summary",
+    "downloadReceipt": "/cibpaymentservice-v1/api/v1/Transactions/DownloadReceipt"
   },
   "login": {
     "loginUser": "/cibuseraccess-v1/api/Auth/oauth/token",
     "verifyOtp": "/cibuseraccess-v1/api/Auth/login/verifyOtp",
     "verifyForgetPasswordOtp": "/cibuseraccess-v1/api/Auth/user/verifyForgotPasswordOtp",
+    "verifyForgotUsernameOtp": "/cibuseraccess-v1/api/Auth/user/verifyForgotUsernameOtp",
     "resendOtp": "/cibuseraccess-v1/api/Auth/generateOtp",
     "validateOtp": "/authorization/user/validateOTPReset",
     "securityAnswers": "/cibuseraccess-v1/api/SecurityQuestion/user/verify-securityquestions",
-    "validateUser": "/cibuseraccess-v1/api/Auth/user/initiatePasswordReset",
+    "initiatePasswordReset": "/cibuseraccess-v1/api/Auth/user/initiatePasswordReset",
+    "initiateUsernameReset": "/cibuseraccess-v1/api/Auth/user/initiateForgoutUserName",
+    "completeforgotusername":"/cibuseraccess-v1/api/Auth/user/completeforgotusername",
     "getSecurityQuestions": "/cibuseraccess-v1/api/SecurityQuestion/securityquestions",
     "getMySecurityQuestions": "/cibuseraccess-v1/api/SecurityQuestion/user/securityquestions",
     "resetPassword": "/cibuseraccess-v1/api/Auth/user/resetPassword",
-    "getLogonUser":"/cibuseraccess-v1/api/Auth/user/single-user?"
+    "getLogonUser": "/cibuseraccess-v1/api/Auth/user/single-user?",
+    "firstlogin":"/cibuseraccess-v1/api/Auth/user/firstlogin"
   },
   "beneficiary": {
     "add": "/cibpaymentservice-v1/api/v1/Beneficiary/AddBeneficiary",
@@ -85,5 +107,13 @@
     "getCharges": "/cibpaymentservice-v1/api/v1/Airtime/GetCharge",
     "getOperatorsCountries": "/cibpaymentservice-v1/api/v1/Airtime/GetOperatorCountries",
     "getOperators": "/cibpaymentservice-v1/api/v1/Airtime/GetOperators/"
+  },
+  "standingOrders": {
+    "createStandingOrder": "/cibpaymentservice-v1/api/v1/SchedulePayment/Schedule",
+    "editStandingOrder": "/cibpaymentservice-v1/api/v1/SchedulePayment/EditSchedule",
+    "getStandingOrders": "/cibpaymentservice-v1/api/v1/SchedulePayment/GetAll",
+    "deleteStandingOrder": "/cibpaymentservice-v1/api/v1/SchedulePayment/Delete",
+    "deactivateStandingOrder": "/cibpaymentservice-v1/api/v1/SchedulePayment/Deactivate",
+    "getScheduleId": "/cibpaymentservice-v1/api/v1/SchedulePayment/GetSchedule"
   }
 }

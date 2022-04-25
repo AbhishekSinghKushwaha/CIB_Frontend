@@ -17,7 +17,7 @@
           <span  class="mt-4 text text-danger cursor-pointer strong-text"
           (click)="close()">{{data.buttonNo}}</span>
           <span  class=" ms-4 mt-4 text text-danger cursor-pointer strong-text"
-          (click)="close()">{{data.buttonYes}}</span>
+          (click)="data.id ? deleteStandingOrder() : close()">Yes, I’m sure</span>
       </p>
     </mat-card-content>
   </mat-card>

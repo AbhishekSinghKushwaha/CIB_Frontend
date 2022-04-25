@@ -169,7 +169,7 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
           transactionType: this.transactionType,
         });
         break;
-      case this.transferType.INTER_COUNTRY_TRANSFER:
+      case this.transferType.SUBSIDIARY:
         this.transferToService.openTransferToModal({
           favourites: this.beneficiaries,
           transactionType: this.transactionType,
@@ -232,7 +232,7 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
           this.parentForm.controls.sendTo.setValue(x);
         });
         break;
-      case this.transferType.INTER_COUNTRY_TRANSFER:
+      case this.transferType.SUBSIDIARY:
         this.newRecipientService.data.subscribe((x) => {
           this.parentForm.controls.sendTo.setValue(x);
         });

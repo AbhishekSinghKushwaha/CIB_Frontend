@@ -4,6 +4,7 @@ import { AddMerchantService } from "src/app/core/services/add-merchant/add-merch
 import { BeneficiaryManagementService } from "src/app/core/services/beneficiary-management/beneficiary-management.service";
 import { StorageService } from "src/app/core/services/storage/storage.service";
 import { InterbankService } from "src/app/core/services/transfers/interbank/interbank.service";
+import { IntercountryService } from "src/app/core/services/transfers/intercountry/intercountry.service";
 import { IntrabankService } from "src/app/core/services/transfers/intrabank/intrabank.service";
 import { MobileMoneyService } from "src/app/core/services/transfers/mobile-money/mobile-money.service";
 import { OwnAccountService } from "src/app/core/services/transfers/own-account/own-account.service";
@@ -32,7 +33,8 @@ export class CompleteTransferComponent implements OnInit {
     private swiftService: SwiftTransferService,
     private storageService: StorageService,
     private mobileMoneyService: MobileMoneyService,
-    private beneficiaryManagementService: BeneficiaryManagementService
+    private beneficiaryManagementService: BeneficiaryManagementService,
+    private interCountryService: IntercountryService
   ) {
     this.transferType = route.snapshot.params["type"];
     this.getFavouritesPayload();
@@ -41,7 +43,17 @@ export class CompleteTransferComponent implements OnInit {
   ngOnInit(): void {}
 
   done() {
-    this.router.navigate(["/transact"]);
+    switch (this.transferType) {
+      case "approve-transaction":
+        this.router.navigate(["/dashboard"]);
+        break;
+      case "reject-transaction":
+        this.router.navigate(["/dashboard"]);
+        break;
+      default:
+        this.router.navigate(["/transact"]);
+        break;
+    }
   }
 
   openAddFavourite() {
@@ -81,6 +93,11 @@ export class CompleteTransferComponent implements OnInit {
         break;
       case this.transferTypes.MOBILE_MONEY:
         this.mobileMoneyService.favouritesPayload$.subscribe((res) => {
+          this.favouritesPayload = res;
+        });
+        break;
+      case this.transferTypes.SUBSIDIARY:
+        this.interCountryService.favouritesPayload$.subscribe((res) => {
           this.favouritesPayload = res;
         });
         break;
@@ -140,7 +157,7 @@ export class CompleteTransferComponent implements OnInit {
 
     transferType === this.transferTypes.SWIFT ||
     transferType === this.transferTypes.EFT ||
-    transferType === this.transferTypes.INTER_COUNTRY_TRANSFER ||
+    transferType === this.transferTypes.SUBSIDIARY ||
     transferType === this.transferTypes.RTGS
       ? (productName = this.favouritesPayload.sendTo?.bank?.bankCode)
       : transferType === this.transferTypes.BUY_AIRTIME

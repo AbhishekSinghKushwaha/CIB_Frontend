@@ -1,10 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { DropdownModal } from 'src/app/core/domain/prompt.model';
+import { TokenResponseModel } from 'src/app/core/domain/user-auth.model';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { NotificationModalService } from 'src/app/core/services/modal-services/notification-modal/notification-modal.service';
+import { SecurityChallengeService } from 'src/app/core/services/security-challenge/security-challenge.service';
+import { SharedService } from 'src/app/core/services/shared/shared.service';
+import { UserService } from 'src/app/core/services/user/user.service';
 import LOGIN_CONSTANTS from 'src/app/core/utils/constants/pre-login.constants';
+import { SnackbarComponent } from 'src/app/presentation/shared/components/snackbar/snackbar.component';
 import { SharedUtils } from '../../../../../core/utils/shared.util';
 
 @Component({
@@ -17,11 +24,23 @@ export class LoginComponent implements OnInit {
   hidePassword = true;
   submitted = false;
   isloggedOut = false;
+  stage: string;
+  initialResponse: string;
+  otpError: boolean;
+  passwordChangeSubmitStatus: boolean;
+  securityToken: string;
+  firstTimeLogin: boolean;
+  finalLoginPayload: any = {};
+  title = 'Hello there';
 
   constructor(
     private readonly notificationModalService: NotificationModalService,
     private readonly authService: AuthService,
+    private readonly userService: UserService,
+    private readonly snackbar: MatSnackBar,
     private readonly router: Router,
+    private readonly sharedService: SharedService<string>,
+    private securityChallengeService: SecurityChallengeService,
     public translate: TranslateService
   ) { }
 
@@ -41,7 +60,6 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/dashboard']);
         }
       })
-      .catch((e) => console.log(e));
   }
 
   private initForm(): void {
@@ -51,6 +69,20 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  forgotDetails() {
+    this.sharedService
+      .openDropdownModal(LOGIN_CONSTANTS.FORGOT_LOGIN_DETAILS)
+      .afterClosed()
+      .subscribe(data => {
+        if (data) {
+          if (data === 'Username') {
+            this.router.navigate(['/auth/login/forgot-username']);
+          } else if (data === 'Password') {
+            this.router.navigate(['/auth/login/forgot-password']);
+          }
+        }
+      })
+  }
   submit() {
     const payload = {
       ...this.loginPasswordForm.value,
@@ -63,22 +95,78 @@ export class LoginComponent implements OnInit {
     };
     this.authService.clearUserData();
     this.authService.userLogin(payload).subscribe(
-      (authData: any) => {
-        console.log(authData);
-        this.authService.setOTPMessage(authData.message);
+      (authData: TokenResponseModel) => {
+
+        this.firstTimeLogin = !!authData?.firstTimeLogin;
+        if (!authData?.firstTimeLogin) {
+          this.stage = 'sms-verification';
+          this.initialResponse = authData.message;
+          this.title = 'Sign in';
+        } else {
+          this.stage = 'change-password';
+          this.initialResponse = authData.message;
+          this.title = 'Password creation';
+        }
         this.authService.setToken({ ...authData, username: payload.username });
-        try {
-          this.authService.setToken({ ...authData, username: payload.username });
-          this.authService.setLoginState(LOGIN_CONSTANTS.LOGIN_STAGES.SMS_VERIFICATION);
-          this.router.navigate(['/auth/login/sms-verification']);
-        } catch (error) { console.log('Login error', error) }
       },
       (error) => {
         this.modalTakeAnotherLook();
-        console.log({ error });
+
       }
     );
   }
+
+  smsVerificationSubmit(otp: string) {
+    this.otpError = false;
+    if (otp) {
+      this.firstTimeLogin && (this.finalLoginPayload.otp = otp);
+      this.firstTimeLogin ?
+        this.authService.submitOTP(this.finalLoginPayload).submitFirstTimeLogin.subscribe(
+          async (response) => {
+
+            if (response) {
+              const loginStat = await this.authService.loginSuccess();
+              if (!loginStat) {
+                this.otpError = true;
+              }
+            } else {
+              this.otpError = true;
+            }
+          },
+          (error) => {
+            this.otpError = true;
+
+          }
+        ) :
+        this.authService.submitOTP(otp).submitOTP.subscribe(
+          async (response) => {
+
+            if (response) {
+              const loginStat = await this.authService.loginSuccess();
+              if (!loginStat) {
+                this.otpError = true;
+              }
+            } else {
+              this.otpError = true;
+            }
+          },
+          (error) => {
+            this.otpError = true;
+
+          }
+        )
+
+    }
+  }
+
+  resetStage() {
+    if (!this.stage) {
+      this.router.navigate(['/auth/login']);
+    } else {
+      this.stage = '';
+    }
+  }
+
 
   // TODO: The modal services here are for examples only. These would be taken out
   modalTakeAnotherLook(): void {
@@ -119,5 +207,80 @@ export class LoginComponent implements OnInit {
       logoutButtonEnabled: true,
     });
     this.notificationModalService.open(message);
+  }
+
+  onPasswordChangeSubmit({ newPassword }: any) {
+
+    if (newPassword) {
+      this.finalLoginPayload.password = newPassword;
+      this.stage = 'security-challenge';
+      this.title = 'Verify';
+    }
+    // this.userService.resetPassword(payload).subscribe(
+    //   (response) => {
+    //     this.passwordChangeSubmitStatus = false;
+    //     const message = {
+    //       error: false,
+    //       errorStatus: '',
+    //       message: 'Your password has been reset successfully',
+    //       details: 'Your password has been reset successfully'
+    //     }
+    //     this.snackbar.openFromComponent(SnackbarComponent, {
+    //       data: message,
+    //       horizontalPosition: 'end',
+    //       verticalPosition: 'top',
+    //       duration: 5000,
+    //     });
+    //   },
+    //   (error) => {
+    //     this.passwordChangeSubmitStatus = false;
+    //     const errorMessage = { error: true, errorStatus: `${error.status}`, message: error.error.message, details: error.error }
+    //     this.snackbar.openFromComponent(SnackbarComponent, {
+    //       data: errorMessage,
+    //       horizontalPosition: 'end',
+    //       verticalPosition: 'top',
+    //       duration: 5000,
+    //     });
+    //   }
+    // );
+  }
+
+  onSecurityVerificationError(error: boolean) {
+    if (error) {
+      this.stage = 'security-verification';
+    }
+  }
+
+  securityChallengeSubmit({ userQuestionsDtos }: any) {
+    if (userQuestionsDtos) {
+      this.authService.resendOTP()
+        .subscribe(
+          (response: any) => {
+
+            if (response && response?.successful) {
+              this.initialResponse = response.statusMessage;
+              this.finalLoginPayload.userQuestionsDtos = userQuestionsDtos;
+              this.stage = 'sms-verification';
+              this.title = 'Sign in';
+            }
+          },
+          (error) => {
+
+          }
+        );
+
+    }
+    // this.securityChallengeService.submitSecurityAnswers(result)
+    //   .subscribe(
+    //     (response) => {
+    //       if (response && response?.token) {
+    //         this.securityToken = response.token;
+    //         this.stage = 'change-password';
+    //       }
+    //     },
+    //     (error) => {
+    //       
+    //     }
+    //   );
   }
 }

@@ -1,4 +1,6 @@
 <app-corporate-user-products
-  [memberId]="memberId"
-  [backLink]="'/user-management/edit/' + memberId"
+  [username]="username"
+  [backLink]="
+    username ? '/user-management/edit/' + username : '/user-management/add'
+  "
 ></app-corporate-user-products>

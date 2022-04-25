@@ -37,37 +37,6 @@ const accounts: SelectAccountModel[] = [
   },
 ];
 
-const userList: UserListModel[] = [
-  {
-    name: "Michael Scott",
-    id: "134312",
-    profileType: "Individual",
-    status: "Active",
-    lastViewed: "12/02/20",
-  },
-  {
-    name: "Moussa Doumbia",
-    id: "8937393",
-    profileType: "Individual",
-    status: "Active",
-    lastViewed: "09/06/22",
-  },
-  {
-    name: "David Pastor",
-    id: "8479393",
-    profileType: "Individual",
-    status: "Active",
-    lastViewed: "10/10/21",
-  },
-  {
-    name: "Jerry Odhiambo",
-    id: "0837484",
-    profileType: "Individual",
-    status: "Active",
-    lastViewed: "30/03/22",
-  },
-];
-
 const companyList: CompanyListModel[] = [
   { name: "Apple" },
   { name: "Microsoft" },
@@ -996,7 +965,6 @@ export const mockData = {
   buyGoodsFavourites,
   accountNumber,
   users,
-  userList,
   companyList,
   transactionDetail,
   histororicalTransactions,

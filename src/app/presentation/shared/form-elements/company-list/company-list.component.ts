@@ -27,13 +27,25 @@ export class CompanyListComponent implements ControlValueAccessor, OnInit {
 
   @Input() transactionType!: string;
 
+  private _defaultData: any;
+  @Input() set defaultData(value: any) {
+    if (value) {
+      this._defaultData = value;
+      this.parentForm.controls[this.fieldName].setValue(value);
+    }
+
+  };
+  get defaultData() {
+    return this._defaultData;
+  }
+
   public value!: UserListModel;
 
   public changed!: (value: string) => void;
 
   public touched!: () => void;
 
-  public isDisabled!: boolean;
+  public isDisabled = true;
 
   get formField(): FormControl {
     return this.parentForm?.get(this.fieldName) as FormControl;
@@ -70,11 +82,11 @@ export class CompanyListComponent implements ControlValueAccessor, OnInit {
     this.isDisabled = isDisabled;
   }
 
-  openModal() {
-    this.companyListService.open(mockData.companyList)
-      .afterClosed()
-      .subscribe((item: UserListModel) =>
-        this.parentForm.controls[this.fieldName].setValue(item)
-      );
-  }
+  // openModal() {
+  //   this.companyListService.open(mockData.companyList)
+  //     .afterClosed()
+  //     .subscribe((item: UserListModel) =>
+  //       this.parentForm.controls[this.fieldName].setValue(item)
+  //     );
+  // }
 }
