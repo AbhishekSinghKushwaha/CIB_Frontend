@@ -11,3 +11,7 @@
 .card{
   border: none !important;
 }  
+
+::ng-deep .my-download {
+  overflow: hidden !important;
+}

@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { SupportingDocumentsUploadComponent } from './supporting-documents-upload.component';
 import { MatStyleModule } from 'src/app/mat-style.module';
 import { UploadConfirmationModule } from '../upload-confirmation/upload-confirmation.module';
-import { PdfViewerModule } from '../pdf-viewer/pdf-viewer.module';
+import { PdfViewerModalModule } from '../pdf-viewer-modal/pdf-viewer-modal.module';
 
 @NgModule({
   declarations: [SupportingDocumentsUploadComponent],
-  imports: [CommonModule, MatStyleModule, UploadConfirmationModule, PdfViewerModule],
+  imports: [CommonModule, MatStyleModule, UploadConfirmationModule, PdfViewerModalModule],
   exports: [SupportingDocumentsUploadComponent],
   providers: [],
 })

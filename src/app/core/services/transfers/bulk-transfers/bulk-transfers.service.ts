@@ -9,16 +9,28 @@ import urlList from '../../service-list.json';
 })
 export class BulkTransfersService {
 
+  private dataSource = new BehaviorSubject<any[]>([]);
+  currentData = this.dataSource.asObservable();
+
   constructor(private http: HttpClient) { }
 
-  // Upload corporate documents
-  uploadCorporateDocuments(payload: any, corporateId: string): Observable<any> {
-    return this.http.post(
-      environment.apiUrl +
-        urlList.customerOnboarding.uploadCorporateDocuments +
-        corporateId,
-        payload,{
-        reportProgress: true, observe: 'events' }
-    );
+  bulkTransferPayload(payload: any[] = []): void {
+    this.dataSource.next(Object.assign([],payload));
+  }
+
+  // deleteData(id: any){
+  //   const deleteArr: any[] = this.dataSource.getValue();
+
+  //   deleteArr.map((item) => {
+  //     if (Number(item.id) == Number(id)) { 
+  //       deleteArr.filter(item => item.id == id);
+  //     }
+  //   });
+  //   this.dataSource.next(Object.assign([],deleteArr));
+  //   console.log(this.currentData);
+  // }
+
+  bulkTransfer(payload: any): Observable<any> {
+    return this.http.post(environment.apiUrl + urlList.transfers.bulkTransfer, payload);
   }
 }

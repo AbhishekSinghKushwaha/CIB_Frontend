@@ -11,10 +11,14 @@ table {
     color: var(--black);
     font-size: 12px;
   }
+
+  td {
+    background-color: #FFFFFF;
+  }
   
   th {
     font-weight: 600;
-    background-color: #e9eaea;
+    background-color: #E9EAEA;
   }
 
   .button_icon {
@@ -33,4 +37,20 @@ table {
 
 .error {
     color: #E60000;
+}
+
+input:focus {
+  outline: none;
+}
+
+.error {
+  color: #E60000;
+}
+
+.input-border {
+  border:none !important;
+}
+
+.table > :not(:first-child) {
+  border-top: none !important;
 }

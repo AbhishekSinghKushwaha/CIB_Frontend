@@ -1,0 +1,41 @@
+<div class="pdf-viewer-screen p-2 mat-elevation-z0 my-pdf">
+    <div class="row">
+      <div class="col-md-4">
+        <mat-icon (click)="close()" class="cursor-pointer">close</mat-icon>
+      </div>
+      <h4 class="strong-text col-md-8">{{data.documentName}}</h4>
+    </div>
+
+    <div class="mt-4">
+        <div class="card table-responsive">
+          <table class="table rounded table-sm table-font">
+            <thead>
+                <tr>
+                    <th>Payment date</th>
+                    <th>Payment type</th>
+                    <th>Debit account number</th>
+                    <th>Beneficiary account number</th>
+                    <th>Beneficiary mobile</th>
+                    <th>Beneficiary name</th>
+                    <th>Bank</th>
+                    <th>Amount</th>
+                    <th>Currency</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let item of data.document; let i = index">
+                <tr>
+                  <td>{{item.paymentDate}}</td>
+                  <td>{{item.paymentType}}</td>
+                  <td>{{item.debitAccountNumber}}</td> 
+                  <td>{{item.beneficiaryAccountNumber}}</td> 
+                  <td>{{item.beneficiaryMobile}}</td> 
+                  <td>{{item.beneficiaryName}}</td>  
+                  <td>{{item.beneficiaryBank}}</td>
+                  <td>{{item.amount}}</td> 
+                  <td>{{item.currency}}</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+</div>  

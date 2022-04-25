@@ -22,18 +22,25 @@
     <div class="d-flex justify-content-right" *ngIf="error">
       <mat-icon class="error">info_outline</mat-icon>
       <span class="col-md-7 text-sm error ps-2">
-        We’re unable to process the payment for Victoria. 
+        We’re unable to process the payment. 
         Click the three dots next to their name to review their details. 
       </span>
     </div>
     
-    <form autocomplete="off" [formGroup]="bulkTransferDetailForm"> 
-    <div class="mt-4">
-      <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource">
+    <form autocomplete="off" [formGroup]="bulkTransferDetailForm">
+    <!-- <div class="mt-4">
+      <div class="mat-elevation-z8 formArrayName="data" *ngFor="let i of users; let personIndex = index">
+        <table mat-table [formGroupName]="personIndex">
           <ng-container matColumnDef="date">
             <th mat-header-cell *matHeaderCellDef>Payment date</th>
-            <td mat-cell *matCellDef="let row">{{ row.paymentDate }}</td>
+            <td mat-cell *matCellDef="let row">{{ row.paymentDate }}
+            <input type="text" 
+            name="beneficiaryAccountNumber"
+            formControlName="beneficiaryAccountNumber" 
+            readonly
+            style="border:none"
+            [ngClass]="{'red':bulkTransferDetailForm.controls['beneficiaryAccountNumber'].errors?.pattern}">
+            </td>
           </ng-container>
   
           <ng-container matColumnDef="type">
@@ -78,8 +85,93 @@
           </tr>
         </table>
       </div>
+    </div> -->
+    <div class="mt-4">
+      <div class="mat-elevation-z8 card table-responsive">
+        <table class="table rounded">
+          <thead>
+              <tr>
+                  <th>Payment date</th>
+                  <th>Payment type</th>
+                  <th>Beneficiary name</th>
+                  <th>Bank</th>
+                  <th>Amount</th>
+                  <th>Action</th>
+              </tr>
+          </thead>
+          <tbody formArrayName="bulkData" *ngFor="let item of bulkData.controls; let i = index">
+              <tr [formGroupName]="i">
+                    <td>
+                      <input
+                      matInput 
+                      type="text"
+                      class="input-border" 
+                      name="paymentDate" 
+                      readonly
+                      formControlName="paymentDate"
+                      [ngClass]="{'error': bulkData.controls[i]?.get('beneficiaryAccountNumber')?.errors?.pattern}"
+                      >
+                    </td>
+                    <td>
+                      <input
+                      matInput 
+                      type="text"
+                      class="input-border" 
+                      name="paymentType" 
+                      readonly
+                      formControlName="paymentType"
+                      [ngClass]="{'error': bulkData.controls[i]?.get('beneficiaryAccountNumber')?.errors?.pattern}"
+                      >
+                    </td>
+                    <td>
+                      <input
+                      matInput 
+                      type="text"
+                      class="input-border" 
+                      name="beneficiaryName" 
+                      readonly
+                      formControlName="beneficiaryName"
+                      [ngClass]="{'error': bulkData.controls[i]?.get('beneficiaryAccountNumber')?.errors?.pattern}"
+                      >
+                    </td>
+                    <td>
+                      <input
+                      matInput 
+                      type="text"
+                      class="input-border" 
+                      name="beneficiaryBank" 
+                      readonly
+                      formControlName="beneficiaryBank"
+                      [ngClass]="{'error': bulkData.controls[i]?.get('beneficiaryAccountNumber')?.errors?.pattern}"
+                      >
+                    </td>
+                    <td>
+                    <input
+                    matInput 
+                    type="text"
+                    class="input-border" 
+                    name="amount" 
+                    readonly
+                    formControlName="amount"
+                    [ngClass]="{'error': bulkData.controls[i]?.get('beneficiaryAccountNumber')?.errors?.pattern}"
+                    >
+                  </td>
+                  <td>
+                    <button
+                      type="button"
+                      mat-icon-button
+                      matSuffix
+                      (click)="openActionsMenu(i)"
+                    >
+                      <mat-icon matSuffix [matMenuTriggerFor]="menu">more_horiz</mat-icon>
+                    </button>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+      </div>
     </div>
-    </form>
+    </form> 
 
     <div>  
         <mat-menu #menu="matMenu" xPosition="before" class="my-menu">
@@ -109,14 +201,14 @@
 
     <div class="col-md-12 p-3 d-flex justify-content-between bg-light mt-4">
         <div class="strong-text">Total amount</div>
-        <div class="strong-text">KES 50,000.00</div>
+        <div class="strong-text">KES {{totalAmount}}</div>
     </div>
     <div class="row mt-4">
         <div class="col-md-2">
-            <button mat-raised-button type="submit" color="primary" class="px-5" (click)="submit()">Submit</button>
+            <button mat-raised-button type="submit" color="primary" class="px-5" (click)="getTransferCharges()">Submit</button>
         </div>
         <div class="col-md-3">
-            <button mat-stroked-button type="button" color="primary" class="px-5">Cancel</button>
+            <button mat-stroked-button type="button" color="primary" class="px-5" (click)="cancel()">Cancel</button>
         </div>
     </div>
     

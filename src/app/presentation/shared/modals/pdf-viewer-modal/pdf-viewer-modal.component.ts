@@ -3,14 +3,14 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PdfViewerService } from "src/app/core/services/pdf-viewer/pdf-viewer.service";
 
 @Component({
-  selector: 'app-pdf-viewer',
-  templateUrl: './pdf-viewer.component.html',
-  styleUrls: ['./pdf-viewer.component.scss']
+  selector: 'app-pdf-viewer-modal',
+  templateUrl: './pdf-viewer-modal.component.html',
+  styleUrls: ['./pdf-viewer-modal.component.scss']
 })
-export class PdfViewerComponent implements OnInit {
+export class PdfViewerModalComponent implements OnInit {
 
   constructor(
-    readonly dialogRef: MatDialogRef<PdfViewerComponent>,
+    readonly dialogRef: MatDialogRef<PdfViewerModalComponent>,
     private readonly pdfViewerService: PdfViewerService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }

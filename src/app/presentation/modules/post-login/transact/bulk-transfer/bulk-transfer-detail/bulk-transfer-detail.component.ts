@@ -3,7 +3,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { DeleteService } from 'src/app/core/services/delete/delete.service';
 import { ConfirmationModalService } from "src/app/core/services/modal-services/confirmation-modal.service";
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
+import { BulkTransfersService } from 'src/app/core/services/transfers/bulk-transfers/bulk-transfers.service';
 
 export interface User {
   id: number;
@@ -30,12 +32,17 @@ export class BulkTransferDetailComponent implements OnInit {
 
   bulkTransferDetailForm: FormGroup;
 
-  private users: User[];
+  users: User[];
   alertVisible: boolean;
   alertMessage: string;
   dataSource: MatTableDataSource<User>;
   type = 'bulk-transfer';
   error: boolean = false;
+  totalAmount: number = 0;
+  beneficiaryNames: any = [];
+  paymentDate: any = [];
+
+  bulkTransferRecords: any[] = [];
 
   displayedColumns: string[] = [
     'date',
@@ -53,49 +60,82 @@ export class BulkTransferDetailComponent implements OnInit {
     private readonly confirmationModalService: ConfirmationModalService,
     private readonly router: Router,
     private readonly fb: FormBuilder,
+    private readonly bulkTransfersService: BulkTransfersService
   ) { }
 
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource();
-    this.users = Array(5).fill(0).map((x, i) => ({
-        id: 1,
-        paymentDate: "4/3/22",
-        paymentType: "RTGS",
-        debitAccountName: "Loot",
-        debitAccountNumber: "Equity",
-        beneficiaryAccountNumber: "2337846578955",
-        beneficiaryMobile: "0810174008113",
-        beneficiaryName: "Mello",
-        beneficiaryBank: "Equity",
-        amount: "10.0000.00",
-        currency: "KES",
-        reference: "Ref_123",
-        reason: "Cash management transfer",
-      }));
-
-    this.dataSource.data = this.users;
-    this.initForm();
+    this.getCsvData();
   }
 
-  get getForm() {
-    return this.bulkTransferDetailForm.controls;
+  getCsvData() {
+    this.bulkTransfersService.currentData.subscribe((data: any[]) => {
+      data.map((item) => {
+        const csvRecord = {
+          id : Number(item.id),
+          paymentDate : item.paymentDate,
+          paymentType : item.paymentType,
+          debitAccountName : item.debitAccountName,
+          debitAccountNumber : item.debitAccountNumber,
+          beneficiaryAccountNumber : item.beneficiaryAccountNumber,
+          beneficiaryMobile : item.beneficiaryMobile,
+          beneficiaryName : item.beneficiaryName,
+          beneficiaryBank : item.beneficiaryBank,
+          amount : item.amount,
+          currency : item.currency,
+          reference : item.reference,
+          reason : item.reason,
+        }
+        this.bulkTransferRecords.push(csvRecord);
+      });
+      this.initForm();
+    });
+  }
+
+  get bulkData() {
+    return this.bulkTransferDetailForm.get("bulkData") as FormArray;
+  }
+
+  confirmationData() {
+    this.bulkTransferRecords.map((res) => {
+      this.totalAmount = this.totalAmount + Number(res.amount);
+      this.beneficiaryNames.push(res.beneficiaryName);
+      this.paymentDate.push(res.paymentDate);
+    });
   }
 
   initForm(): void {
     this.bulkTransferDetailForm = this.fb.group({
-      paymentDate: ['', [Validators.required]],
-      paymentType: ['', [Validators.required]],
-      debitAccountName: ['', [Validators.required]],
-      debitAccountNumber: ['',[Validators.required, Validators.pattern("[0-9 ]{13}")]],
-      beneficiaryAccountNumber: ['', [Validators.required, Validators.pattern("[0-9 ]{13}")]],
-      beneficiaryMobile: ['', [Validators.required, Validators.pattern("[0-9 ]{10}")]],
-      beneficiaryName: ['', [Validators.required]],
-      beneficiaryBank: ['', [Validators.required]],
-      amount: ['', [Validators.required]],
-      currency: ['', [Validators.required]],
-      reference: ['', [Validators.required]],
-      reason: [''],
+      bulkData: this.fb.array([])
     });
+
+    this.bulkTransferRecords.map((user) => {
+      this.bulkData.push(this.fb.group({
+        paymentDate: [user.paymentDate, [Validators.required]],
+        paymentType: [user.paymentType, [Validators.required]],
+        debitAccountName: [user.debitAccountName, [Validators.required]],
+        debitAccountNumber: [user.debitAccountNumber,[Validators.required, Validators.pattern("[a-zA-Z0-9 ]{13}")]],
+        beneficiaryAccountNumber: [user.beneficiaryAccountNumber, [Validators.required, Validators.pattern("[0-9 ]{12}")]],
+        beneficiaryMobile: [user.beneficiaryMobile, [Validators.required, Validators.pattern("[0-9 ]{14}")]],
+        beneficiaryName: [user.beneficiaryName, [Validators.required]],
+        beneficiaryBank: [user.beneficiaryBank, [Validators.required]],
+        amount: [user.amount, [Validators.required]],
+        currency: [user.currency, [Validators.required]],
+        reference: [user.reference, [Validators.required]],
+        reason: [user.reason],
+      }))
+    });
+
+    console.log(this.bulkTransferDetailForm.get("bulkData")?.value);
+
+    if(this.bulkTransferDetailForm.get("bulkData")?.value.length > 0){
+      this.totalAmount = 0
+      this.beneficiaryNames = [];
+      this.confirmationData();
+    }
+
+    if(this.bulkTransferDetailForm.invalid){
+      this.error = true;
+    }
   }
 
   showAlert(message: string): void {
@@ -105,6 +145,10 @@ export class BulkTransferDetailComponent implements OnInit {
     this.alertVisible = true;
     this.alertMessage = message;
     setTimeout(() => (this.alertVisible = false), 2500);
+  }
+
+  getTransferCharges(){
+    this.confirmPayment("0");
   }
 
   confirmPayment(transferFee: string) {
@@ -119,7 +163,7 @@ export class BulkTransferDetailComponent implements OnInit {
         },
         {
           key: "Total amount",
-          value: "10,000.00",
+          value: `${this.totalAmount}`,
         },
         {
           key: "Charges",
@@ -127,7 +171,7 @@ export class BulkTransferDetailComponent implements OnInit {
         },
         {
           key: "Number of payments ",
-          value: "5",
+          value: `${this.bulkTransferRecords.length}`,
         },
         {
           key: "Frequency",
@@ -135,11 +179,11 @@ export class BulkTransferDetailComponent implements OnInit {
         },
         {
           key: "Payment date",
-          value: "01 January 2021",
+          value: `${this.paymentDate[0]}`,
         },
         {
           key: "Pay to",
-          value: "Mello, Uche, Jacques, John, Victoria",
+          value: `${this.beneficiaryNames}`,
         },
       ],
     };
@@ -149,14 +193,23 @@ export class BulkTransferDetailComponent implements OnInit {
       .afterClosed()
       .subscribe((confirmed: boolean) => {
         if (data) {
-          this.router.navigate([`/transact/otp-verification/${this.type}`]);
+          this.submit();
         }
       });
   }
 
   submit() {
-    this.showAlert("You successfully uploaded a document");
-    this.confirmPayment("0.00");
+    const payload = {
+      transactions: this.bulkTransferDetailForm.get("bulkData")?.value,
+    }
+    console.log(payload, "payload");
+
+    this.bulkTransfersService.bulkTransfer(payload).subscribe((res) => {
+      if(res.status){
+        this.showAlert("You successfully uploaded a document");
+        this.router.navigate([`/transact/otp-verification/${this.type}`]);   
+      }
+    });
   }
 
   deleteBeneficiary() {
@@ -167,16 +220,33 @@ export class BulkTransferDetailComponent implements OnInit {
       buttonYes: "Yes"
     }
     const modal = this.deleteService.open(payload);
-    modal.afterClosed().subscribe(() => {this.showAlert("The beneficiary has been removed");});
+    modal.afterClosed().subscribe(() => {
+      this.RemoveElementFromObjectArray(this.userId)
+      this.showAlert("The beneficiary has been removed");
+    });
   }
 
-  openActionsMenu(user: User): void {
-    this.userId = user.id;
-    console.log(user, 'user');
+  RemoveElementFromObjectArray(i: number) {
+    this.bulkTransferRecords.forEach((value,index)=>{
+        if(value.id==i) {
+          this.bulkTransferRecords.splice(index,1);
+        }
+    });
+    this.initForm();
+    // this.bulkTransfersService.deleteData(i);
+  } 
+
+  openActionsMenu(i:any): void {
+    this.userId = i;
+    console.log(this.userId, 'user');
   }
 
   viewDetails() {
     this.router.navigate([`/transact/bulk-transfer/view/${this.userId}`]);
+  }
+
+  cancel() {
+    this.router.navigate(["/transact/bulk-transfer"]);
   }
 
 }

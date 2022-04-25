@@ -1,9 +1,10 @@
-<div class="own-equity-modal-screen p-2 mat-elevation-z0">
+<link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+<div class="own-equity-modal-screen p-2 mat-elevation-z0 my-pdf">
   <div class="row">
     <div class="col-md-4">
       <mat-icon (click)="close()" class="cursor-pointer">close</mat-icon>
     </div>
-    <h4 class="strong-text col-md-8">Supporting documents</h4>
+    <h4 class="strong-text col-md-8">Upload a document</h4>
   </div>
   <h3 class="strong-text pt-4">Upload documents</h3>
   <small class="text-grey">
@@ -12,49 +13,22 @@
   <div class="row col-md-12 ps-2">
     <div class="col-md-6 upload my-4">
       <div class="icon icon-alignment">
-        <mat-icon color="primary" aria-hidden="false">file_upload</mat-icon>
+        <mat-icon color="primary" class="material-icons-outlined">file_upload</mat-icon>
       </div>
       <div class="text-center">
-        <small>Upload your documents</small><br />
+        <small>Upload your documents</small><br/>
         <small class="text-grey">Drag & drop or
           <label for="input-file-id" class="browse strong-text cursor-pointer">browse</label>
           files here</small>
-        <input class="ng-hide" id="input-file-id" (change)="uploadFiles($event)"
+        <input #csvReader class="ng-hide" id="input-file-id" (change)="uploadListener($event)"
           multiple="multiple"
           type="file"
+          accept=".csv"
           style="display: none"
         />
       </div>
     </div>
 
-    <!-- <div class="col-md-6 mt-4" *ngIf="fileName">
-      <div *ngFor="let data of files; let i = index">
-        <div class="progress-container mb-2">
-          <div class="mx-4 py-2">
-            <div class="flex-align">
-              <small>{{ data }}</small>
-              <mat-icon
-                color="primary"
-                class="icon-close cursor-pointer"
-                aria-hidden="false"
-                (click)="cancelUpload(i)"
-                >close</mat-icon
-              >
-            </div>
-            <mat-progress-bar
-              color="#A32A29"
-              [value]="progress"
-              class="mt-2"
-            ></mat-progress-bar>
-            <small class="progress-pre">{{
-              progress === 100 ? message : progress + "%"
-            }}</small>
-          </div>
-        </div>
-      </div>
-    </div> -->
-
-    <!-------------------------------------------->
     <div class="col-md-6 mt-4">
       <div>
         <div *ngFor="let data of progressFiles; let i = index">
@@ -98,29 +72,17 @@
             <p class="mb-0">
               <strong>{{ data?.documentName }}</strong>
             </p>
+            <small class="text-grey">{{ data?.size }}mb</small>
           </div>
           <div class="col-3">
-            <div class="d-flex flex-row mt-1">
-              <mat-icon
-                color="primary"
-                class="icon-close cursor-pointer m-2"
-                aria-hidden="false"
-                (click)="viewPdf(i)"
-                >visibility</mat-icon
-              >
-              <mat-icon
-                color="primary"
-                class="icon-close cursor-pointer m-2"
-                aria-hidden="false"
-                (click)="delete(i)"
-                >delete</mat-icon
-              >
+            <div class="d-flex justify-content-evenly mt-1">
+              <mat-icon svgIcon="eyes_view" (click)="viewPdf(i)"></mat-icon>
+              <mat-icon svgIcon="delete-documents" (click)="delete(i)"></mat-icon>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!--------------------------------------------->
     
   </div>
   <small class="text-grey">Additional information if required</small>

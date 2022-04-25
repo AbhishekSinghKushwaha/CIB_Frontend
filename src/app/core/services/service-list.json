@@ -35,7 +35,8 @@
     "buyGoodsTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
     "getTransferCharges": "/cibpaymentservice-v1/api/v1/Transfer/GetTransferCharge",
     "getAccountDetails": "/cibpaymentservice-v1/api/v1/Transfer/NameEnquiry",
-    "getCharges": "/cibpaymentservice-v1/api/v1/BuyGoods/Charges"
+    "getCharges": "/cibpaymentservice-v1/api/v1/BuyGoods/Charges",
+    "bulkTransfer": "/cibpaymentservice-v1/api/v1/BulkTransfer/InterBank"
   },
   "dataLookUp": {
     "getCountries": "/cibpaymentservice-v1/api/v1/Transfer/GetCountries",
