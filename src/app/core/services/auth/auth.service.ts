@@ -66,7 +66,7 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
 
   }
 
-  public submitOTP(payload: string) {
+  public submitOTP(payload: any) {
     return {
       submitOTP: this.http.get<UserModel>(`${environment.apiUrl}${urlList.login.verifyOtp}?reference=ref&otp=${payload}`),
       submitFirstTimeLogin: this.http.post<UserModel>(`${environment.apiUrl}${urlList.login.firstlogin}`, payload),
