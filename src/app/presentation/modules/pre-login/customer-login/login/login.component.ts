@@ -84,6 +84,7 @@ export class LoginComponent implements OnInit {
       })
   }
   submit() {
+    console.log('Login clicked');
     const payload = {
       ...this.loginPasswordForm.value,
       grant_type: 'password',
@@ -96,8 +97,9 @@ export class LoginComponent implements OnInit {
     this.authService.clearUserData();
     this.authService.userLogin(payload).subscribe(
       (authData: TokenResponseModel) => {
-
+        this.otpError = false;
         this.firstTimeLogin = !!authData?.firstTimeLogin;
+        this.authService.setToken({ ...authData, username: payload.username });
         if (!authData?.firstTimeLogin) {
           this.stage = 'sms-verification';
           this.initialResponse = authData.message;
@@ -107,7 +109,6 @@ export class LoginComponent implements OnInit {
           this.initialResponse = authData.message;
           this.title = 'Password creation';
         }
-        this.authService.setToken({ ...authData, username: payload.username });
       },
       (error) => {
         this.modalTakeAnotherLook();
@@ -121,6 +122,7 @@ export class LoginComponent implements OnInit {
       async (response) => {
         if (response) {
           const loginStat = await this.authService.loginSuccess();
+
           if (!loginStat) {
             this.otpError = true;
           }

@@ -13,14 +13,16 @@ export class AuthTokenInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
     const authToken = this.authService.accessToken;
     const clientId = environment.clientId;
-
-    if (authToken) {
+    console.log('intercept', authToken)
+    if (this.authService.isTokenActive && authToken) {
       request = request.clone({
         headers: request.headers.set(
           'Authorization',
           `Bearer ${authToken.access_token}`
         ),
       });
+    } else if (authToken && !this.authService.isTokenActive) {
+      this.authService.doLogout()
     }
 
     if (!request.headers.has('Content-Type')) {

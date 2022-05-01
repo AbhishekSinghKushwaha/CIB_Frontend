@@ -107,8 +107,9 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
     if (!accessToken?.tokenExpirationDate) {
       accessToken.tokenExpirationDate = new Date(
         new Date().getTime() + accessToken.expires_in * 1000
-      );
+      ).getTime();
     }
+    console.log('access_token', accessToken)
     this.storageService.setData('access_token', accessToken);
     // this.autoRefreshToken(accessToken);
   }
@@ -132,9 +133,8 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
       this.getLogonUser().subscribe(response => {
         if (response) {
           this.userState = response;
-          this.setLoginState(LOGIN_CONSTANTS.LOGIN_STAGES.LOGIN_SUCCESS);
+          this.activateLogin();
           this.router.navigate(['/dashboard']);
-          this.autoLogin();
           resolve(true);
         } else {
           resolve(false);
@@ -162,15 +162,10 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
   }
 
   get accessToken(): TokenResponseModel | null {
+    if (!this.isTokenActive) {
+      return null;
+    }
     const token = this.storageService.getData('access_token');
-
-    // const currentTime = new Date().getTime();
-    // const expired = this.accessToken && new Date(this.accessToken?.tokenExpirationDate).getTime() > currentTime;
-    // 
-    // if (expired) {
-    //   return null;
-    // }
-
     return token;
   }
 
@@ -184,12 +179,21 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
   doLogout(): void {
     this.clearTimers();
     // this.logout();
-    this.completeLogout();
-    this.notifyError({
-      error: false,
-      errorStatus: '',
-      message: 'You have been signed out successfully',
-    });
+    const lang = this.storageService.getData('currentLanguage');
+    this.clearUserData();
+    this.storageService.setData('currentLanguage', lang);
+    if (this.watchRouteChange) {
+      this.clearTimers();
+      this.watchRouteChange.unsubscribe();
+    }
+    if (this.accessToken?.access_token) {
+      this.notifyError({
+        error: false,
+        errorStatus: '',
+        message: 'You have been signed out successfully',
+      });
+      this.router.navigate(['/auth/login']);
+    }
   }
   cancelLogin(): void {
     this.clearTimers();
@@ -197,32 +201,30 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
     this.router.navigate(['/auth/login']);
   }
 
-  autoLogin(): boolean {
-    const currentTime = new Date().getTime();
-    if (this.accessToken && new Date(this.accessToken?.tokenExpirationDate).getTime() > currentTime) {
+  activateLogin() {
+    if (this.isTokenActive) {
       this.isLoggedIn.next(true);
       this.idleWarning();
-      return true;
     } else {
-      this.isLoggedIn.next(false);
       this.doLogout();
-      return false;
+    }
+  }
+
+  get isTokenActive(): boolean {
+    try {
+      return this.accessToken ? this.accessToken.tokenExpirationDate > new Date().getTime() : false;
+    } catch (error) {
+      return false
     }
   }
 
   idleWarning(): void {
     this.watchRouteChange = this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe(() => {
-        this.isLoggedIn.subscribe((resp) => {
-          if (resp === true) {
-            this.clearIdleWarningTimers();
-            this.setIdleTimers();
-          } else {
-            this.clearTimers();
-            this.watchRouteChange.unsubscribe();
-          }
-        });
+      .subscribe((resp) => {
+        console.log('idleWarning', resp)
+        this.clearIdleWarningTimers();
+        this.setIdleTimers();
       });
   }
 
@@ -275,13 +277,6 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
   }
 
   private completeLogout(): void {
-    const lang = this.storageService.getData('currentLanguage');
-    this.clearUserData();
-    this.storageService.setData('currentLanguage', lang);
-    this.isLoggedIn.next(false);
-    if (this.watchRouteChange) {
-      this.watchRouteChange.unsubscribe();
-    }
-    this.router.navigate(['/auth/login']);
+
   }
 }
