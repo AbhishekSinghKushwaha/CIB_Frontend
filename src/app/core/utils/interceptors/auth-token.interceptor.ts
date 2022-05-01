@@ -1,5 +1,5 @@
 import { HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Inject, Injectable, LOCALE_ID } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../../services/auth/auth.service';
@@ -13,16 +13,16 @@ export class AuthTokenInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
     const authToken = this.authService.accessToken;
     const clientId = environment.clientId;
-    console.log('intercept', authToken)
-    if (this.authService.isTokenActive && authToken) {
+    if (this.authService.isTokenActive) {
+      this.authService.idleWarning();
       request = request.clone({
         headers: request.headers.set(
           'Authorization',
-          `Bearer ${authToken.access_token}`
+          `Bearer ${authToken?.access_token}`
         ),
       });
     } else if (authToken && !this.authService.isTokenActive) {
-      this.authService.doLogout()
+      this.authService.doLogout('AuthTokenInterceptor')
     }
 
     if (!request.headers.has('Content-Type')) {

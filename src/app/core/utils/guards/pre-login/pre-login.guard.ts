@@ -5,17 +5,18 @@ import { StorageService } from 'src/app/core/services/storage/storage.service';
 import LOGIN_CONSTANTS from '../../constants/pre-login.constants';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class PreLoginGuard implements CanActivate {
-  constructor(private storageService: StorageService,
+  constructor(
     private router: Router,
     private readonly authService: AuthService) { }
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const isTokenActive = this.authService.isTokenActive;
+    console.log('isTokenActive', isTokenActive)
     if (!isTokenActive) {
-      return true
+      return true;
     }
     this.router.navigate(['/dashboard']);
     return false

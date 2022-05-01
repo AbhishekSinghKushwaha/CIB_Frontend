@@ -48,7 +48,7 @@ export class LogoutWarningModalComponent implements OnInit, OnDestroy {
 
   logoutNow(): void {
     this.logOut = true;
-    this.authService.doLogout();
+    this.authService.doLogout('logoutNow');
     this.closeModal();
   }
 
