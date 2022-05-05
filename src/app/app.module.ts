@@ -12,8 +12,6 @@ import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common
 import { UserRepository } from './core/repositories/user.repository';
 import { UserMockRepository } from './data/repository/user-mock-repository/user-mock.repository';
 import { ErrorIntercept } from './core/utils/interceptors/error.interceptor';
-import { PostLoginGuard } from './core/utils/guards/post-login/post-login.guard';
-import { LoginGuard } from './core/utils/guards/login/login.guard';
 import { AuthTokenInterceptor } from './core/utils/interceptors/auth-token.interceptor';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -50,8 +48,6 @@ import { httpTranslateLoader, LanguageTranslateModule } from './translate.module
       useClass: AuthTokenInterceptor,
       multi: true
     },
-    PostLoginGuard,
-    LoginGuard,
   ],
   bootstrap: [AppComponent],
 })

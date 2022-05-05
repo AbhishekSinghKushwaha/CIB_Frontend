@@ -38,7 +38,7 @@ export class SidebarComponent implements OnInit {
     confirmText: 'Sign me out',
   })
   logout() {
-    this.authService.doLogout()
+    this.authService.doLogout('logout')
   }
 
 
