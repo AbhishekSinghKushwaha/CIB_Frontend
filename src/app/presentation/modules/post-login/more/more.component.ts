@@ -20,7 +20,7 @@ export class MoreComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getUserAccounts();
+    // this.getUserAccounts();
     this.getBanks();
     this.getSubsidiaries();
   }
@@ -28,16 +28,16 @@ export class MoreComponent implements OnInit {
   interCountryFundTransfer() {
     this.router.navigate(['/more/intercountry-fund-transfer']);
   }
-
-  getUserAccounts() {
-    this.accountsService.getUserAccounts().subscribe((res) => {
-      if (res.status) {
-        this.sharedDataService.setUserAccounts(res.data);
-      } else {
-        // TODO:: Notify error
-      }
-    });
-  }
+  //This has been called already in the post login component.Please remove
+  // getUserAccounts() {
+  //   this.accountsService.getUserAccounts().subscribe((res) => {
+  //     if (res.status) {
+  //       this.sharedDataService.setUserAccounts(res.data);
+  //     } else {
+  //       // TODO:: Notify error
+  //     }
+  //   });
+  // }
 
   getBanks() {
     this.dataLookUpService.getBanks('KE').subscribe((res) => {
