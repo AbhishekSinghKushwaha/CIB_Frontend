@@ -84,7 +84,6 @@ export class LoginComponent implements OnInit {
       })
   }
   submit() {
-    console.log('Login clicked');
     const payload = {
       ...this.loginPasswordForm.value,
       grant_type: 'password',
@@ -97,6 +96,7 @@ export class LoginComponent implements OnInit {
     this.authService.clearUserData();
     this.authService.userLogin(payload).subscribe(
       (authData: TokenResponseModel) => {
+        console.log('Login', authData)
         this.otpError = false;
         this.firstTimeLogin = !!authData?.firstTimeLogin;
         this.authService.setToken({ ...authData, username: payload.username });

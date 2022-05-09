@@ -80,10 +80,14 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
       .get<UserModel>(url);
   }
 
-  userLogin(data: any) {
+  userLogin(data: any, refresh = false) {
     const payload = new URLSearchParams();
-    payload.set('username', data.username);
-    payload.set('password', data.password);
+    if (!refresh) {
+      payload.set('username', data.username);
+      payload.set('password', data.password);
+    }else{
+      payload.set('refresh_token',data.refresh_token);
+    }
     payload.set('grant_type', data.grant_type);
     payload.set('client_id', data.client_id);
     payload.set('client_secret', data.client_secret);
@@ -153,9 +157,8 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
   }
 
   doLogout(from: string): void {
-
     this.clearTimers();
-    this.dismissNotify()
+    this.dismissNotify();
     // this.logout();
     const lang = this.storageService.getData('currentLanguage');
     if (this.watchRouteChange) {
@@ -174,6 +177,7 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
     this.router.navigate(['/auth/login']);
     this.storageService.setData('currentLanguage', lang);
   }
+
   cancelLogin(): void {
     this.clearTimers();
     this.clearUserData();
@@ -232,8 +236,25 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
         this.doLogout('autoLogoutWarning');
       } else {
         // TODO :: Implement refresh token
-        this.clearIdleWarningTimers();
-        this.setIdleTimers();
+
+        const payload = {
+          grant_type: 'refresh_token',
+          client_id: 'onboarding',
+          client_secret: 'postman-secret',
+          scope: 'offline_access',
+          refresh_token:this.accessToken.refresh_token
+        };
+        this.userLogin(payload, true).subscribe(
+          (authData: TokenResponseModel) => {
+            console.log('authData', authData);
+            // this.setToken({ ...authData, username: payload.username });
+          },
+          (error) => {
+            this.clearIdleWarningTimers();
+            this.setIdleTimers();
+          }
+        );
+
       }
     });
   }
