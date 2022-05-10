@@ -1,7 +1,7 @@
 import { PresentationModule } from './presentation/presentation.module';
 import { CoreModule } from './core/core.module';
 import { DataModule } from './data/data.module';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,8 +17,10 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LanguageModalModule } from './presentation/shared/modals/language-modal/language-modal.module';
 import { httpTranslateLoader, LanguageTranslateModule } from './translate.module';
+import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 
 @NgModule({
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   declarations: [AppComponent],
   imports: [
     BrowserModule,
@@ -37,7 +39,15 @@ import { httpTranslateLoader, LanguageTranslateModule } from './translate.module
         deps: [HttpClient]
       }
     }),
-    LanguageTranslateModule.forRoot()
+    LanguageTranslateModule.forRoot(),
+    NgxLoadingModule.forRoot({
+      animationType: ngxLoadingAnimationTypes.none,  
+      backdropBackgroundColour: 'rgba(0,0,0,0.1)',
+      backdropBorderRadius: '4px',
+      primaryColour: '#ffffff',
+      secondaryColour: '#ffffff',
+      tertiaryColour: '#ffffff'
+    })
   ],
   exports: [AppRoutingModule],
   providers: [
