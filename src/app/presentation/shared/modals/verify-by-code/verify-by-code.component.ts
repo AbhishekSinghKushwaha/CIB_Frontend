@@ -20,7 +20,7 @@ import {
 import { BuyGoodsService } from "src/app/core/services/transfers/buy-goods/buy-goods.service";
 import { Router } from "@angular/router";
 import { Subject } from "rxjs";
-import { SharedUtils } from "./../../../../core/utils/shared.util";
+import SharedUtils from "./../../../../core/utils/shared.util";
 import { NotificationModalService } from "src/app/core/services/modal-services/notification-modal/notification-modal.service";
 import { AuthService } from "src/app/core/services/auth/auth.service";
 import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";

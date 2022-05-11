@@ -12,7 +12,7 @@ import { SharedService } from 'src/app/core/services/shared/shared.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import LOGIN_CONSTANTS from 'src/app/core/utils/constants/pre-login.constants';
 import { SnackbarComponent } from 'src/app/presentation/shared/components/snackbar/snackbar.component';
-import { SharedUtils } from '../../../../../core/utils/shared.util';
+import SharedUtils from '../../../../../core/utils/shared.util';
 
 @Component({
   selector: 'app-login',

@@ -1,0 +1,99 @@
+<div class="row">
+  <div class="row">
+    <div class="col-12 mb-3">
+      <button
+        mat-icon-button
+        aria-label="Back"
+        class="back-icon"
+        routerLink="/loan"
+      >
+        <div class="strong-text">
+          <mat-icon svgIcon="caret_left"></mat-icon>
+          <span>Loan Details</span>
+        </div>
+      </button>
+    </div>
+  </div>
+  <div class="row mb-4">
+    <app-card-component class="col-6 pb-3" [data]="loanCard">
+    </app-card-component>
+    <div class="col-6 p-2">
+      <div class="row mb-2">
+        <span class="fw-light">Loan Balance</span>
+        <span>{{ loanRightBar?.loanBalance }}</span>
+      </div>
+      <div class="row mb-2">
+        <span class="fw-light">Installment Amount</span>
+        <span>{{ loanRightBar?.installmentAmount }}</span>
+      </div>
+      <div class="row mb-2">
+        <span class="fw-light">Next installment date</span>
+        <span>{{ loanRightBar?.nextInstallmentDate | date: "d MMM y" }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="my-4 d-flex justify-content-around align-items-center">
+    <app-loan-action
+      *ngFor="let loanAction of loanActions"
+      [icon]="loanAction.icon"
+      [text]="loanAction.text"
+      [route]="loanAction.route"
+    >
+    </app-loan-action>
+  </div>
+  <div class="row mt-4">
+    <div class="strong-text">
+      <span>Transaction history</span>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-between align-items-center">
+    <mat-form-field class="col-12" appearance="outline">
+      <input matInput placeholder="Search" />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+  <div
+    class="row d-flex justify-content-between align-items-center p-2 mb-2 transact rounded"
+  >
+    <div class="row d-flex justify-content-between align-items-center">
+      <div class="col-11">Reference: 9830352345678</div>
+      <div class="col-1 text-white right">
+        <mat-icon svgIcon="dashboard_more"></mat-icon>
+      </div>
+    </div>
+    <div class="row d-flex justify-content-between align-items-center">
+      <div class="col-10 strong-text">
+        PAYMENT TO YOUR OWN ACCOUNT 055*******113
+      </div>
+      <div style="text-align: right" class="col-2 green">000,000.00</div>
+    </div>
+    <div class="row d-flex justify-content-between align-items-center">
+      <div class="col-9 grey">Thu 14th Nov</div>
+      <div style="text-align: right" class="col-3 strong-text">
+        000,000.00 KES
+      </div>
+    </div>
+  </div>
+  <div
+    class="row d-flex justify-content-between align-items-center p-2 mb-2 transact rounded"
+  >
+    <div class="row d-flex justify-content-between align-items-center">
+      <div class="col-11">Reference: 9830352345678</div>
+      <div class="col-1 text-white right">
+        <mat-icon svgIcon="dashboard_more"></mat-icon>
+      </div>
+    </div>
+    <div class="row d-flex justify-content-between align-items-center">
+      <div class="col-10 strong-text">
+        PAYMENT TO YOUR OWN ACCOUNT 055*******113
+      </div>
+      <div style="text-align: right" class="col-2 green">000,000.00</div>
+    </div>
+    <div class="row d-flex justify-content-between align-items-center">
+      <div class="col-9 grey">Thu 14th Nov</div>
+      <div style="text-align: right" class="col-3 strong-text">
+        000,000.00 KES
+      </div>
+    </div>
+  </div>
+</div>
