@@ -14,7 +14,7 @@ import { SidebarModule } from '../../layout/sidebar/sidebar.module';
     PostLoginRoutingModule,
     MatStyleModule,
     SidebarModule,
-    FormElementsModule,
+    FormElementsModule
   ],
 })
 export class PostLoginModule {}
