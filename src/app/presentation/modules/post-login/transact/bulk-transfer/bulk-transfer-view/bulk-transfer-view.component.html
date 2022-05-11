@@ -68,6 +68,15 @@
                   formControlName="paymentDate"
                 ></app-input>
               </div>
+
+              <span
+                *ngIf="bulkTransferViewForm.controls['paymentDate'].invalid 
+                || bulkTransferViewForm.controls['paymentDate'].errors?.required" 
+                data-toggle="tooltip"
+                title="Payment date required"
+                >
+                <mat-icon class="error">info_outline</mat-icon>
+              </span>
             </div>
             
 
@@ -75,7 +84,7 @@
             <div class="col-md-4 mb-4 d-flex justify-content-between">
               <div *ngIf="!editMode">
                 <span class="text-grey text-sm">Payment type</span>
-                <p class="mb-0 text-sm pb-0">{{ viewPaymentDetails[0]?.paymentType }}</p>
+                <p class="mb-0 text-sm pb-0">{{ paymentTypeConversion }}</p>
               </div>
 
               <div *ngIf="editMode" class="col-md-11">
@@ -87,6 +96,15 @@
                   formControlName="paymentType"
                 ></app-input>
               </div>
+
+              <span
+                *ngIf="bulkTransferViewForm.controls['paymentType'].invalid 
+                || bulkTransferViewForm.controls['paymentType'].errors?.required" 
+                data-toggle="tooltip"
+                title="Payment type required"
+                >
+                <mat-icon class="error">info_outline</mat-icon>
+              </span>
             </div>
             
 
@@ -106,6 +124,15 @@
                   formControlName="debitAccountName"
                 ></app-input>
               </div>
+
+              <span
+                *ngIf="bulkTransferViewForm.controls['debitAccountName'].invalid 
+                || bulkTransferViewForm.controls['debitAccountName'].errors?.required" 
+                data-toggle="tooltip"
+                title="The debit account name required"
+                >
+                <mat-icon class="error">info_outline</mat-icon>
+              </span>
             </div>
             
 
@@ -185,7 +212,6 @@
 
               <span
                 *ngIf="bulkTransferViewForm.controls['beneficiaryMobile'].invalid 
-                && bulkTransferViewForm.controls['beneficiaryMobile'].errors?.pattern
                 || bulkTransferViewForm.controls['beneficiaryMobile'].errors?.required" 
                 data-toggle="tooltip"
                 title="Number length incorrect"
@@ -209,7 +235,16 @@
                 placeholder=""
                 formControlName="beneficiaryName"
               ></app-input>
-              </div>  
+              </div>
+              
+              <span
+                *ngIf="bulkTransferViewForm.controls['beneficiaryName'].invalid 
+                || bulkTransferViewForm.controls['beneficiaryName'].errors?.required" 
+                data-toggle="tooltip"
+                title="The beneficiary account name required"
+                >
+                <mat-icon class="error">info_outline</mat-icon>
+              </span>
             </div>
 
             <!--Beneficiary bank-->
@@ -228,6 +263,15 @@
                   formControlName="beneficiaryBank"
                 ></app-input>
               </div>
+
+              <span
+                *ngIf="bulkTransferViewForm.controls['beneficiaryBank'].invalid 
+                || bulkTransferViewForm.controls['beneficiaryBank'].errors?.required" 
+                data-toggle="tooltip"
+                title="Beneficiary bank required"
+                >
+                <mat-icon class="error">info_outline</mat-icon>
+              </span>
             </div>
 
             <!--Amount-->
@@ -249,7 +293,6 @@
 
               <span
                 *ngIf="bulkTransferViewForm.controls['amount'].invalid 
-                && bulkTransferViewForm.controls['amount'].errors?.pattern
                 || bulkTransferViewForm.controls['amount'].errors?.required" 
                 data-toggle="tooltip"
                 title="Number length incorrect"
@@ -273,7 +316,16 @@
                 placeholder=""
                 formControlName="currency"
                 ></app-input>
-              </div>  
+              </div>
+              
+              <span
+                *ngIf="bulkTransferViewForm.controls['currency'].invalid 
+                || bulkTransferViewForm.controls['currency'].errors?.required" 
+                data-toggle="tooltip"
+                title="Currency required"
+                >
+                <mat-icon class="error">info_outline</mat-icon>
+              </span>
             </div>
             
             <!--Credit reference number-->
@@ -292,6 +344,15 @@
                   formControlName="reference"
                 ></app-input>
               </div>
+
+              <span
+                *ngIf="bulkTransferViewForm.controls['reference'].invalid 
+                || bulkTransferViewForm.controls['reference'].errors?.required" 
+                data-toggle="tooltip"
+                title="Reference number required"
+                >
+                <mat-icon class="error">info_outline</mat-icon>
+              </span>
             </div>
             
             <!--Payment reason-->
@@ -316,17 +377,18 @@
 
   <h4 class="strong-text">Attached document</h4>
   <div class="col-md-6 mt-4">
-  <div class="progress-container mb-2">
+  <div class="progress-container mb-2" *ngFor="let data of viewData?.documentName; let i = index">
     <div class="row gx-0 m-4 py-3">
       <div class="col-9">
         <p class="mb-0">
-          <strong>{{viewData?.documentName}}</strong>
+          <strong>{{data?.documentName}}</strong>
         </p>
+        <small class="text-grey">{{ data?.size }}mb</small>
       </div>
       <div class="col-3">
         <div class="d-flex justify-content-evenly mt-1">
-          <mat-icon svgIcon="eyes_view" (click)="viewCsvData()"></mat-icon>
-          <mat-icon svgIcon="delete-documents"></mat-icon>
+          <mat-icon svgIcon="eyes_view" (click)="viewCsvData(i)"></mat-icon>
+          <mat-icon svgIcon="delete-documents" (click)="deleteFile(i)"></mat-icon>
         </div>
       </div>
     </div>

@@ -22,7 +22,8 @@ export class DownloadTemplateComponent implements OnInit {
     console.log(this.data);
   }
 
-  openTemplateFormat(): void {
+  openTemplateFormat(i: any): void {
+    this.downloadTemplateService.select(this.data[i]);
     this.downloadTemplateService.openTemplate(mockData.templateFormat);
   }
 

@@ -4,8 +4,9 @@ import { DeleteService } from 'src/app/core/services/delete/delete.service';
 import { ConfirmationModalService } from "src/app/core/services/modal-services/confirmation-modal.service";
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
-import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
 import { BulkTransfersService } from 'src/app/core/services/transfers/bulk-transfers/bulk-transfers.service';
+import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
+import { BuyAirtimeService } from 'src/app/core/services/transfers/buy-airtime/buy-airtime.service';
 
 export interface User {
   id: number;
@@ -41,8 +42,18 @@ export class BulkTransferDetailComponent implements OnInit {
   totalAmount: number = 0;
   beneficiaryNames: any = [];
   paymentDate: any = [];
+  checked: boolean;
+  errorName: any = [];
 
   bulkTransferRecords: any[] = [];
+  cancelTransferRecords: any[] = [];
+
+  billspaymentRequests: any[] = [];
+  airtimePaymentRequests: any[] = [];
+  interBankTransferRequests: any[] = [];
+  intraBankTransferRequests:any[] = [];
+  swiftPaymentRequests: any[] = [];
+
 
   displayedColumns: string[] = [
     'date',
@@ -55,16 +66,114 @@ export class BulkTransferDetailComponent implements OnInit {
 
   userId: any;
 
+  transferType = TransactionTypeConstants.TransferType;
+  transactionType: any;
+  transferFee: number = 0;
+  paymentTypeConversion: any;
+
   constructor(
     private readonly deleteService: DeleteService,
     private readonly confirmationModalService: ConfirmationModalService,
     private readonly router: Router,
     private readonly fb: FormBuilder,
-    private readonly bulkTransfersService: BulkTransfersService
+    private readonly bulkTransfersService: BulkTransfersService,
+    private buyAirtimeService: BuyAirtimeService,
   ) { }
 
   ngOnInit(): void {
     this.getCsvData();
+    this.salaryEnabled();
+  }
+
+  salaryEnabled(){
+    this.bulkTransfersService.salaryMode.subscribe(data => {
+      this.checked = data;
+    });
+    console.log(this.checked, "checked");
+  }
+
+  splitCsvData() {
+    this.bulkTransferRecords.map((item) => {
+
+        if(item.paymentType == this.transferType.INTER_BANK) {
+          const interBankRecord = {
+            paymentDate : item.paymentDate,
+            paymentType : item.paymentType,
+            beneficiaryName : item.beneficiaryName,
+            bank : item.beneficiaryBank,
+            amount : item.amount,
+            debitAccountNumber : item.debitAccountNumber,
+            debitAccountName : item.debitAccountName,
+            beneficiaryAccountNumber : item.beneficiaryAccountNumber,
+            beneficiaryMobile : item.beneficiaryMobile,
+            beneficiaryBankCode: item.beneficiaryBankCode,
+            currency : item.currency,
+            reference : item.reference,
+            paymentReason : item.reason,
+          }
+          this.interBankTransferRequests.push(interBankRecord);
+        }
+        else if(item.paymentType == this.transferType.SWIFT) {
+          const swiftRecord = {
+            reference : item.reference,
+            currency : item.currency, 
+            amount : item.amount,
+            debitAccountNumber : item.debitAccountNumber,
+            destinationAccount : item.beneficiaryAccountNumber,
+            destinationName : item.beneficiaryName,
+            destinationCountry: item.countryCode,
+            swiftBicSortFedNumber: item.codeSwift,
+            paymentReason : item.reason,
+            isFedNumber: true,
+            destinationBankCode: item.beneficiaryBankCode,
+          }
+          this.swiftPaymentRequests.push(swiftRecord);
+        }
+        else if(item.paymentType == this.transferType.INTRA_BANK) {
+          const intraBankRecord = {
+            reference : item.reference,
+            currency : item.currency,
+            amount : item.amount,
+            debitAccountNumber : item.debitAccountNumber,
+            destinationAccount : item.beneficiaryAccountNumber,
+            paymentReason : item.reason,
+            bank: item.beneficiaryBank,
+          }
+          this.intraBankTransferRequests.push(intraBankRecord);
+        }
+        else if(item.paymentType == this.transferType.BUY_AIRTIME) {
+          const airtimeRecord = {
+            reference : item.reference,
+            currency : item.currency,
+            amount : item.amount,
+            phoneNumber : item.beneficiaryMobile,
+            telco: item.telco,
+            debitAccountNumber : item.debitAccountNumber,
+            isInternationalAirtime: true,
+            countryCode: item.countryCode,
+          }
+          this.airtimePaymentRequests.push(airtimeRecord);
+        }
+        else {
+          const billPaymentRecord = {
+            reference : item.reference,
+            currency : item.currency,
+            amount : item.amount,
+            debitAccountNumber : item.debitAccountNumber,
+            paymentReason : item.reason,
+            scheduled: true,
+            narration: item.narration,
+            billAccountNumber: item.beneficiaryAccountNumber,
+            billerCode: item.billerCode,
+          }
+          this.billspaymentRequests.push(billPaymentRecord);
+        }
+      });
+    console.log(this.billspaymentRequests, "billspaymentRequests");
+    console.log(this.airtimePaymentRequests, "airtimePaymentRequests");
+    console.log(this.interBankTransferRequests, "interBankTransferRequests");
+    console.log(this.intraBankTransferRequests, "intraBankTransferRequests");
+    console.log(this.swiftPaymentRequests, "swiftPaymentRequests");
   }
 
   getCsvData() {
@@ -80,16 +189,27 @@ export class BulkTransferDetailComponent implements OnInit {
           beneficiaryMobile : item.beneficiaryMobile,
           beneficiaryName : item.beneficiaryName,
           beneficiaryBank : item.beneficiaryBank,
+          beneficiaryBankCode: item.beneficiaryBankCode,
+          beneficiaryAddress: item.beneficiaryAddress,
           amount : item.amount,
           currency : item.currency,
+          narration: item.narration,
+          codeSwift: item.codeSwift,
+          telco: item.telco,
+          internationalAirtime: item.internationalAirtime,
+          countryCode: item.countryCode,
+          billerCode: item.billerCode,
           reference : item.reference,
           reason : item.reason,
         }
         this.bulkTransferRecords.push(csvRecord);
       });
+      console.log(this.bulkTransferRecords);
+
       this.initForm();
+      this.splitCsvData();
     });
-  }
+  } 
 
   get bulkData() {
     return this.bulkTransferDetailForm.get("bulkData") as FormArray;
@@ -108,14 +228,16 @@ export class BulkTransferDetailComponent implements OnInit {
       bulkData: this.fb.array([])
     });
 
-    this.bulkTransferRecords.map((user) => {
+    this.bulkTransferRecords.map((user, i) => {
+      this.formatPaymentType(user.paymentType);
       this.bulkData.push(this.fb.group({
+        id: [user.id],
         paymentDate: [user.paymentDate, [Validators.required]],
-        paymentType: [user.paymentType, [Validators.required]],
+        paymentType: [this.paymentTypeConversion, [Validators.required]],
         debitAccountName: [user.debitAccountName, [Validators.required]],
         debitAccountNumber: [user.debitAccountNumber,[Validators.required, Validators.pattern("[a-zA-Z0-9 ]{13}")]],
         beneficiaryAccountNumber: [user.beneficiaryAccountNumber, [Validators.required, Validators.pattern("[0-9 ]{12}")]],
-        beneficiaryMobile: [user.beneficiaryMobile, [Validators.required, Validators.pattern("[0-9 ]{14}")]],
+        beneficiaryMobile: [user.beneficiaryMobile, [Validators.required]],
         beneficiaryName: [user.beneficiaryName, [Validators.required]],
         beneficiaryBank: [user.beneficiaryBank, [Validators.required]],
         amount: [user.amount, [Validators.required]],
@@ -123,6 +245,17 @@ export class BulkTransferDetailComponent implements OnInit {
         reference: [user.reference, [Validators.required]],
         reason: [user.reason],
       }))
+
+      
+      if(this.bulkData.controls[i]?.get('beneficiaryAccountNumber')?.errors?.pattern ||
+        this.bulkData.controls[i]?.get('debitAccountNumber')?.errors?.pattern ||
+        this.bulkData.controls[i]?.get('beneficiaryMobile')?.errors?.pattern || 
+        this.bulkData.controls[i]?.get('paymentType')?.hasError('required') || 
+        this.bulkData.controls[i]?.get('beneficiaryBank')?.hasError('required') ||
+        this.bulkData.controls[i]?.get('amount')?.hasError('required'))
+      {
+        this.errorName.push(user.beneficiaryName);
+      }
     });
 
     console.log(this.bulkTransferDetailForm.get("bulkData")?.value);
@@ -136,6 +269,29 @@ export class BulkTransferDetailComponent implements OnInit {
     if(this.bulkTransferDetailForm.invalid){
       this.error = true;
     }
+
+    console.log(this.errorName, "errorName");
+
+  }
+
+  formatPaymentType(paymentType: any) {
+    switch (paymentType) {
+      case this.transferType.INTER_BANK:
+        this.paymentTypeConversion = "Inter Bank";
+        break;
+      case this.transferType.INTRA_BANK:
+        this.paymentTypeConversion = "Intra Bank";
+        break;
+      case this.transferType.SWIFT:
+        this.paymentTypeConversion = "SWIFT";
+        break;
+      case this.transferType.BUY_AIRTIME:
+        this.paymentTypeConversion = "Airtime";
+        break;
+      default:
+        this.paymentTypeConversion = "Bill Payment";
+        break;
+    }
   }
 
   showAlert(message: string): void {
@@ -148,10 +304,56 @@ export class BulkTransferDetailComponent implements OnInit {
   }
 
   getTransferCharges(){
-    this.confirmPayment("0");
+    this.bulkTransferRecords.map((res) => {
+      const payload = {
+        amount: res.amount,
+        currency: res.currency,
+        destinationAccount: res.beneficiaryAccountNumber,
+        sourceAccount: res.debitAccountNumber,
+        transferType: Number(res.paymentType),
+        destinationBankCode: res.beneficiaryBankCode,
+        countryCode: res.countryCode,
+        destinationCountryCode: res.countryCode,
+      };
+
+      const airtimePayload = {
+        telco: res.telco,
+        amount: res.amount,
+        sourceAccount: res.debitAccountNumber,
+      };
+
+      if(res.paymentType === this.transferType.BUY_AIRTIME){
+        this.buyAirtimeService.getCharges(airtimePayload).subscribe((res) => {
+          if (res.status) {
+            this.transferFee += Number(res.data);
+            console.log(this.transferFee, "AirTimetransferFee");
+          }
+        });
+
+      }
+      else if(res.paymentType !== this.transferType.BUY_AIRTIME && res.paymentType !== ""){
+        this.bulkTransfersService.getTransferCharges(payload).subscribe((res) => {
+          if (res.status) {
+            this.transferFee += Number(res.data);
+            console.log(this.transferFee, "transferFee");
+          } else {
+            // TODO:: Notify error
+          }
+        });
+      }
+      else if(res.paymentType === ""){
+        console.log("No payment type");
+      }
+    });
+
+    const uploadInterval = setInterval(() => {
+      this.confirmPayment(this.transferFee);
+      clearInterval(uploadInterval);
+    }, 8000);
+
   }
 
-  confirmPayment(transferFee: string) {
+  confirmPayment(transferFee: any) {
     const data = {
       title: "Payment confirmation",
       subtitle: "To continue, please confirm your transaction",
@@ -199,17 +401,58 @@ export class BulkTransferDetailComponent implements OnInit {
   }
 
   submit() {
+    // const payload = {
+    //   transactions: this.bulkTransferDetailForm.get("bulkData")?.value,
+    // }
+
     const payload = {
-      transactions: this.bulkTransferDetailForm.get("bulkData")?.value,
+      externalBatchId: "string",
+      isSalaryPayments: this.checked,
+      airtimePaymentRequests: {
+        isSalaryPayments: this.checked,
+        transactions: this.airtimePaymentRequests
+      },
+      billspaymentRequests: {
+        isSalaryPayments: this.checked,
+        transactions: this.billspaymentRequests
+      },
+      interBankTransferRequests: {
+        isSalaryPayments: this.checked,
+        transactions: this.interBankTransferRequests
+      },
+      intraBankTransferRequests: {
+        isSalaryPayments: this.checked,
+        transactions: this.intraBankTransferRequests  
+      },
+      swiftPaymentRequests: {
+        isSalaryPayments: this.checked,
+        transactions: this.swiftPaymentRequests
+      }
     }
+
     console.log(payload, "payload");
 
-    this.bulkTransfersService.bulkTransfer(payload).subscribe((res) => {
+    this.bulkTransfersService.bulkTransferMultipleMode(payload).subscribe((res) => {
       if(res.status){
         this.showAlert("You successfully uploaded a document");
         this.router.navigate([`/transact/otp-verification/${this.type}`]);   
       }
-    });
+    })
+
+    // this.checked ? 
+    // this.bulkTransfersService.bulkTransferMultipleMode(payload).subscribe((res) => {
+    //   if(res.status){
+    //     this.showAlert("You successfully uploaded a document");
+    //     this.router.navigate([`/transact/otp-verification/${this.type}`]);   
+    //   }
+    // })
+    // :
+    // this.bulkTransfersService.bulkTransfer(payload).subscribe((res) => {
+    //   if(res.status){
+    //     this.showAlert("You successfully uploaded a document");
+    //     this.router.navigate([`/transact/otp-verification/${this.type}`]);   
+    //   }
+    // });
   }
 
   deleteBeneficiary() {
@@ -233,7 +476,6 @@ export class BulkTransferDetailComponent implements OnInit {
         }
     });
     this.initForm();
-    // this.bulkTransfersService.deleteData(i);
   } 
 
   openActionsMenu(i:any): void {
@@ -247,6 +489,7 @@ export class BulkTransferDetailComponent implements OnInit {
 
   cancel() {
     this.router.navigate(["/transact/bulk-transfer"]);
+    this.bulkTransfersService.bulkTransferPayload(this.cancelTransferRecords)
   }
 
 }

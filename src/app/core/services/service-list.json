@@ -53,7 +53,8 @@
     "getAccountDetails": "/cibpaymentservice-v1/api/v1/Transfer/NameEnquiry",
     "getCharges": "/cibpaymentservice-v1/api/v1/BuyGoods/Charges",
     "transactionApproval": "/cibpaymentservice-v1/api/v1/Transactions/ApproveTransaction",
-    "bulkTransfer": "/cibpaymentservice-v1/api/v1/BulkTransfer/InterBank"
+    "bulkTransfer": "/cibpaymentservice-v1/api/v1/BulkTransfer/InterBank",
+    "bulkTransferMultipleMode": "/cibpaymentservice-v1/api/v1/BulkTransfer/MultipleModePayment"
   },
   "dataLookUp": {
     "getCountries": "/cibpaymentservice-v1/api/v1/Transfer/GetCountries",

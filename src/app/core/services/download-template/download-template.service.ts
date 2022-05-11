@@ -11,7 +11,7 @@ import { Subject } from 'rxjs';
 export class DownloadTemplateService {
 
   data = new Subject<DownloadTemplateModal>();
-  private defaultData: DownloadTemplateModal;
+  public defaultData: DownloadTemplateModal;
 
   dialogRefDownload: any;
   dialogRefTemplateFormat: any;
@@ -26,9 +26,15 @@ export class DownloadTemplateService {
     return this.dialogRefDownload;
   }
 
-  set(input: any): void {
-    this.defaultData = { ...this.defaultData, ...input };
-    this.data.next(this.defaultData);
+  // set(input: any): void {
+  //   this.defaultData = { ...this.defaultData, ...input };
+  //   this.data.next(this.defaultData);
+  // }
+
+  select(type: any): void {
+    this.defaultData = type;
+    this.data.next(type);
+    console.log(this.defaultData, "defaultData");
   }
 
   get default(): DownloadTemplateModal {

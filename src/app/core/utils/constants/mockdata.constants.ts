@@ -857,12 +857,15 @@ export const TransactionType: TransactionTypeModel[] = [
 
 const downloadTemplate: DownloadTemplateModal[] = [
   {
+    id: 1,
     type: "Template 1",
   },
   {
+    id: 2,
     type: "Template 2",
   },
   {
+    id: 3,
     type: "Template 3",
   }
 ];

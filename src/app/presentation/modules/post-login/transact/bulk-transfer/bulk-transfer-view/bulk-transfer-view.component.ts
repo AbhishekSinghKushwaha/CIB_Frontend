@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BulkTransfersService } from 'src/app/core/services/transfers/bulk-transfers/bulk-transfers.service';
 import { ActivatedRoute, Router } from "@angular/router";
 import { PdfViewerService } from "src/app/core/services/pdf-viewer/pdf-viewer.service";
+import { DeleteService } from 'src/app/core/services/delete/delete.service';
+import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
 
 @Component({
   selector: 'app-bulk-transfer-view',
@@ -23,12 +25,17 @@ export class BulkTransferViewComponent implements OnInit {
   bulkTransferRecords: any[] = [];
 
   transactionIcon = { Active: 'transaction_approved', Inactive: 'transaction_rejected' };
+  transferType = TransactionTypeConstants.TransferType;
+  paymentTypeConversion: any;
+
 
   constructor(
     private readonly fb: FormBuilder,
     private readonly bulkTransfersService: BulkTransfersService,
     private readonly route: ActivatedRoute,
     private readonly pdfViewerService: PdfViewerService,
+    private readonly deleteService: DeleteService,
+    private readonly router: Router
   ) { 
     this.id = route.snapshot.params["id"];
     console.log(this.id);
@@ -57,8 +64,16 @@ export class BulkTransferViewComponent implements OnInit {
           beneficiaryMobile : item.beneficiaryMobile,
           beneficiaryName : item.beneficiaryName,
           beneficiaryBank : item.beneficiaryBank,
+          beneficiaryBankCode: item.beneficiaryBankCode,
+          beneficiaryAddress: item.beneficiaryAddress,
           amount : item.amount,
           currency : item.currency,
+          narration: item.narration,
+          codeSwift: item.codeSwift,
+          telco: item.telco,
+          internationalAirtime: item.internationalAirtime,
+          countryCode: item.countryCode,
+          billerCode: item.billerCode,
           reference : item.reference,
           reason : item.reason,
         }
@@ -71,6 +86,7 @@ export class BulkTransferViewComponent implements OnInit {
 
   filterById(){
     this.viewPaymentDetails = this.bulkTransferRecords.filter(res => res.id == this.id);
+    this.formatPaymentType(this.viewPaymentDetails[0]?.paymentType)
     this.populateForm();
   }
 
@@ -81,7 +97,7 @@ export class BulkTransferViewComponent implements OnInit {
       debitAccountName: ['', [Validators.required]],
       debitAccountNumber: ['',[Validators.required, Validators.pattern("[a-zA-Z0-9 ]{13}")]],
       beneficiaryAccountNumber: ['', [Validators.required, Validators.pattern("[0-9 ]{12}")]],
-      beneficiaryMobile: ['', [Validators.required, Validators.pattern("[0-9 ]{14}")]],
+      beneficiaryMobile: ['', [Validators.required]],
       beneficiaryName: ['', [Validators.required]],
       beneficiaryBank: ['', [Validators.required]],
       amount: ['', [Validators.required]],
@@ -100,38 +116,38 @@ export class BulkTransferViewComponent implements OnInit {
     setTimeout(() => (this.alertVisible = false), 2500);
   }
 
-  // edit(id: any) {
-  //   this.editMode = true;
-  //   let index = this.viewPaymentDetails.indexOf(id);
-  //   id.beneficiaryMobile = "Change Hardik";
-  //   this.viewPaymentDetails[index] = id;
-  // }
   edit(){
     this.editMode = true;
   }
 
   delete() {
-
+    const payload = {
+      title: 'Deleting a beneficiary',
+      message: 'Once you remove a beneficiary, they will no longer be included in the bulk payment. Do you want to continue?',
+      buttonNo: "No",
+      buttonYes: "Yes"
+    }
+    const modal = this.deleteService.open(payload);
+    modal.afterClosed().subscribe(() => {
+      this.RemoveElementFromObjectArray(this.id)
+      this.showAlert("The beneficiary has been removed");
+      this.router.navigate(["/transact/bulk-transfer/details"]);   
+    });
   }
+
+  RemoveElementFromObjectArray(i: number) {
+    this.bulkTransferRecords.forEach((value,index)=>{
+        if(value.id==i) {
+          this.bulkTransferRecords.splice(index,1);
+        }
+    });
+    this.initForm();
+    this.bulkTransfersService.bulkTransferPayload(this.bulkTransferRecords);
+  } 
 
   save(id: any) {
     this.editMode = false;
     this.showAlert("The payment details have been updated");
-
-    // const updatedData = {
-    //   paymentDate: this.getForm.paymentDate.value,
-    //   paymentType: this.getForm.paymentType.value,
-    //   debitAccountName: this.getForm.debitAccountName.value,
-    //   debitAccountNumber: this.getForm.debitAccountNumber.value,
-    //   beneficiaryAccountNumber: this.getForm.beneficiaryAccountNumber.value,
-    //   beneficiaryMobile: this.getForm.beneficiaryMobile.value,
-    //   beneficiaryName: this.getForm.beneficiaryName.value,
-    //   beneficiaryBank: this.getForm.beneficiaryBank.value,
-    //   amount: this.getForm.amount.value,
-    //   currency: this.getForm.currency.value,
-    //   reference: this.getForm.reference.value,
-    //   reason: this.getForm.reason.value,
-    // };
 
     let index = this.bulkTransferRecords.indexOf(id);
     id.paymentDate = this.getForm.paymentDate.value,
@@ -149,7 +165,6 @@ export class BulkTransferViewComponent implements OnInit {
 
     this.bulkTransferRecords[index] = id;
 
-    // console.log(updatedData);
     console.log(this.bulkTransferRecords)
 
   this.bulkTransfersService.bulkTransferPayload(this.bulkTransferRecords);
@@ -158,7 +173,7 @@ export class BulkTransferViewComponent implements OnInit {
 
   populateForm() {
     this.bulkTransferViewForm.controls.paymentDate.setValue(this.viewPaymentDetails[0]?.paymentDate);
-    this.bulkTransferViewForm.controls.paymentType.setValue(this.viewPaymentDetails[0]?.paymentType);
+    this.bulkTransferViewForm.controls.paymentType.setValue(this.paymentTypeConversion);
     this.bulkTransferViewForm.controls.debitAccountName.setValue(this.viewPaymentDetails[0]?.debitAccountName);
     this.bulkTransferViewForm.controls.debitAccountNumber.setValue(this.viewPaymentDetails[0]?.debitAccountNumber);
     this.bulkTransferViewForm.controls.beneficiaryAccountNumber.setValue(this.viewPaymentDetails[0]?.beneficiaryAccountNumber);
@@ -169,19 +184,42 @@ export class BulkTransferViewComponent implements OnInit {
     this.bulkTransferViewForm.controls.currency.setValue(this.viewPaymentDetails[0]?.currency);
     this.bulkTransferViewForm.controls.reference.setValue(this.viewPaymentDetails[0]?.reference);
     this.bulkTransferViewForm.controls.reason.setValue(this.viewPaymentDetails[0]?.reason);
-
     
     if(this.bulkTransferViewForm.invalid){
       this.error = true;
     }
   }
 
-  viewCsvData() {
+  formatPaymentType(paymentType: any) {
+    switch (paymentType) {
+      case this.transferType.INTER_BANK:
+        this.paymentTypeConversion = "Inter Bank";
+        break;
+      case this.transferType.INTRA_BANK:
+        this.paymentTypeConversion = "Intra Bank";
+        break;
+      case this.transferType.SWIFT:
+        this.paymentTypeConversion = "SWIFT";
+        break;
+      case this.transferType.BUY_AIRTIME:
+        this.paymentTypeConversion = "Airtime";
+        break;
+      default:
+        this.paymentTypeConversion = "Bill Payment";
+        break;
+    }
+  }
+
+  viewCsvData(i: any) {
     const payload = {
-      documentName : this.viewData?.documentName,
-      document : this.viewData?.document,
+      documentName : this.viewData?.documentName[i].documentName,
+      document : this.viewData?.document[i],
     }
     this.pdfViewerService.open(payload);
+  }
+
+  deleteFile(i:any) {
+    this.viewData?.documentName.splice(i, 1);
   }
 
 }
