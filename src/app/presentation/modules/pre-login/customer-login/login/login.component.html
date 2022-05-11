@@ -39,11 +39,7 @@
           with anyone.
         </p>
       </div>
-      <form
-        [formGroup]="loginPasswordForm"
-        (ngSubmit)="submit()"
-        autocomplete="off"
-      >
+      <form [formGroup]="loginPasswordForm" autocomplete="off">
         <div class="row mb-3">
           <mat-form-field class="col-md-12" floatLabel="always">
             <mat-label for="username"> Username </mat-label>
@@ -107,8 +103,9 @@
             <button
               mat-flat-button
               color="primary"
-              type="submit"
+              type="button"
               class="col-12"
+              (click)="submit()"
               [disabled]="submitted"
             >
               {{ "button_signin" | translate }}
