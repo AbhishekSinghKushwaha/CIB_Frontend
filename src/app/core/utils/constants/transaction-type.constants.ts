@@ -1,5 +1,6 @@
 export const TransferType = {
   OWN_EQUITY: "1",
+  LOAN: "111",
   INTRA_BANK: "2",
   INTER_BANK: "3001",
   EFT: "4",

@@ -22,7 +22,7 @@ export class PayLoanComponent implements OnInit {
     private readonly loanService: LoanService,
     private readonly authService:AuthService,
     private readonly notificationModalService: NotificationModalService
-  ) { }
+  ) {this.getLoanAccounts()  }
 
   ngOnInit(): void {
     this.ownEquityAccountTransferForm = this.fb.group({

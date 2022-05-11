@@ -1,23 +1,31 @@
-<mat-card class="cursor-pointer" [routerLink]="data.route && data.route">
+<mat-card
+  class="cursor-pointer"
+  [ngClass]="{ 'cursor-pointer': !!data?.route }"
+  [routerLink]="data?.route && data.route"
+  [ngClass]="{
+    equityBG: data?.type === 'EquityRegular' || data?.type === 'EquityLong',
+    equityBGLong: data?.type === 'EquityLong'
+  }"
+>
   <mat-card-content>
-    <div class="row gx-0">
+    <div class="row gx-0" *ngIf="data?.type === 'Regular'">
       <div class="col-2">
-        <div class="" *ngIf="data.prefixIcon">
+        <div class="" *ngIf="data?.prefixIcon">
           <img
             class="img-fluid"
             width="45px"
-            [src]="data.prefixIcon"
+            [src]="data?.prefixIcon"
             alt="Generic placeholder image"
           />
         </div>
       </div>
       <div class="col-9">
         <div class="">
-          <div class="mb-0" [innerHTML]="data.text"></div>
+          <div class="mb-0" [innerHTML]="data?.text"></div>
           <small
-            *ngIf="data.subText"
+            *ngIf="data?.subText"
             class="text-grey"
-            [innerHTML]="data.subText"
+            [innerHTML]="data?.subText"
           ></small>
         </div>
       </div>
@@ -28,4 +36,28 @@
       </div>
     </div>
   </mat-card-content>
+  <mat-card-content
+    *ngIf="data?.type === 'EquityRegular' || data?.type === 'EquityLong'"
+  >
+    <div>
+      <div class="row text-white">
+        <div class="col-11">
+          <p class="text-white">{{ data?.text }}</p>
+        </div>
+        <div class="col-1 text-white">
+          <mat-icon svgIcon="dashboard_more"></mat-icon>
+        </div>
+      </div>
+      <div class="col-12 text-white strong-text">
+        <h3 class="text-white">{{ data?.subText }}</h3>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-footer
+    *ngIf="data?.footerText"
+    class="pe-4 text-white mt-2"
+    style="float: right"
+  >
+    <p>{{ data?.footerText }}</p>
+  </mat-card-footer>
 </mat-card>

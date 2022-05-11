@@ -13,6 +13,7 @@ import { TransactionTypeConstants } from "src/app/core/utils/constants/transacti
 import { BeneficiaryManagementService } from "src/app/core/services/beneficiary-management/beneficiary-management.service";
 import { StorageService } from "src/app/core/services/storage/storage.service";
 import { MerchantDetailsService } from "src/app/core/services/merchant-details/merchant-details.service";
+import { LoanService } from "src/app/core/services/loan/loan.service";
 
 @Component({
   selector: "app-transfer-to",
@@ -28,6 +29,8 @@ import { MerchantDetailsService } from "src/app/core/services/merchant-details/m
 })
 export class TransferToComponent implements ControlValueAccessor, OnInit {
   destinationAccounts: any[];
+
+  loanAccounts: any[];
 
   favouriteMerchantDetails: any[];
 
@@ -59,6 +62,7 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
 
   beneficiaries: any[];
 
+
   transferType = TransactionTypeConstants.TransferType;
   constructor(
     private readonly transferToService: TransferToService,
@@ -66,8 +70,9 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
     private sharedDataService: SharedDataService,
     private beneficiaryService: BeneficiaryManagementService,
     private storageService: StorageService,
-    private readonly merchantDetailsService: MerchantDetailsService
-  ) {}
+    private readonly merchantDetailsService: MerchantDetailsService,
+    private readonly loanService: LoanService
+  ) { }
 
   ngOnInit(): void {
     this.listenToDataStreams();
@@ -175,13 +180,25 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
           transactionType: this.transactionType,
         });
         break;
-      default:
       case this.transferType.BUY_AIRTIME:
         this.transferToService.openTransferToModal({
           favourites: this.beneficiaries,
           transactionType: this.transactionType,
         });
         break;
+      case this.transferType.LOAN:
+        let loanAccounts = this.destinationAccounts.filter((el) => {
+          return (
+            el.accountNumber !==
+            this.parentForm.controls.sendFrom.value.accountNumber
+          );
+        });
+        this.transferToService.openTransferToModal({
+          favourites: loanAccounts,
+          transactionType: this.transactionType,
+        });
+        break;
+      default:
         break;
     }
   }
@@ -239,6 +256,20 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
         break;
       case this.transferType.BUY_AIRTIME:
         this.newRecipientService.data.subscribe((x) => {
+          this.parentForm.controls.sendTo.setValue(x);
+        });
+        break;
+      case this.transferType.LOAN: // Own Equity Account
+        this.loanService
+          .loanAccounts$
+          .subscribe(accounts => {
+            console.log(this.transactionType, accounts)
+            if (accounts) {
+              this.loanAccounts = accounts;
+              this.destinationAccounts = accounts
+            }
+          });
+        this.transferToService.selectedTransferToAccount.subscribe((x) => {
           this.parentForm.controls.sendTo.setValue(x);
         });
         break;

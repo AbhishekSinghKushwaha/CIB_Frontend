@@ -20,6 +20,7 @@ import { StatementDocumentShareActionsComponent } from './components/statement-d
 import { NotificationModalModule } from 'src/app/presentation/shared/modals/notification-modal/notification-modal.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NewLoanComponent } from './new-loan/new-loan.component';
+import { SharedModalsModule } from 'src/app/presentation/shared/modals/shared-modals.module';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { NewLoanComponent } from './new-loan/new-loan.component';
     StatementModule,
     FormElementsModule,
     NotificationModalModule,
+    SharedModalsModule,
     ReactiveFormsModule
   ],
   providers: [],
