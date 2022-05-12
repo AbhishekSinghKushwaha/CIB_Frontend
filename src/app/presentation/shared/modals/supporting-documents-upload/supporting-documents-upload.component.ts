@@ -167,20 +167,32 @@ export class SupportingDocumentsUploadComponent implements OnInit {
         }
   
       // Store promises in array
-      for(let i = 0;i < input.files.length;i++){
-        if (this.isValidCSVFile(files[i])) {
-          readers.push(this.readFileAsText(input.files[i]));
-          this.handleReaderLoaded(input.files[i].name, input.files[i].size);
-        }
-        else if (this.isValidEXCELFile(files[i])) {
-          this.excelfile(input.files[i]);
-          this.handleReaderLoaded(input.files[i].name, input.files[i].size);
-        }
-        else {
-          alert("Please import valid .csv file.");
-          this.fileReset();
-        }
-    }
+    //   for(let i = 0;i < input.files.length;i++){
+    //     if (this.isValidCSVFile(files[i])) {
+    //       readers.push(this.readFileAsText(input.files[i]));
+    //       this.handleReaderLoaded(input.files[i].name, input.files[i].size);
+    //     }
+    //     else if (this.isValidEXCELFile(files[i])) {
+    //       this.excelfile(input.files[i]);
+    //       this.handleReaderLoaded(input.files[i].name, input.files[i].size);
+    //     }
+    //     else {
+    //       alert("Please import valid .csv file.");
+    //       this.fileReset();
+    //     }
+    // }
+      if (this.isValidCSVFile(files[0])) {
+        readers.push(this.readFileAsText(input.files[0]));
+        this.handleReaderLoaded(input.files[0].name, input.files[0].size);
+      }
+      else if (this.isValidEXCELFile(files[0])) {
+        this.excelfile(input.files[0]);
+        this.handleReaderLoaded(input.files[0].name, input.files[0].size);
+      }
+      else {
+        alert("Please import valid .csv file.");
+        this.fileReset();
+      }
     
     // Trigger Promises
     Promise.all(readers).then((values) => {
