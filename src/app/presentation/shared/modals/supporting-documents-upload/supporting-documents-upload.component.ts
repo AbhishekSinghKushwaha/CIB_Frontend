@@ -190,7 +190,7 @@ export class SupportingDocumentsUploadComponent implements OnInit {
         this.handleReaderLoaded(input.files[0].name, input.files[0].size);
       }
       else {
-        alert("Please import valid .csv file.");
+        alert("Please import valid .csv or .xlsx file.");
         this.fileReset();
       }
     
