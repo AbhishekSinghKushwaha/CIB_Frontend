@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
-import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { MatDialog } from "@angular/material/dialog";
 import { Subject } from "rxjs";
-import { recipientModel } from "../../domain/recipient.model";
+import { RecipientModel } from "../../domain/recipient.model";
 import { NewRecipientModalComponent } from "../../../presentation/shared/modals/new-recipient-modal/new-recipient-modal.component";
 import { TransactionTypeConstants } from "../../utils/constants/transaction-type.constants";
 import { StorageService } from "../storage/storage.service";
@@ -10,9 +10,9 @@ import { StorageService } from "../storage/storage.service";
   providedIn: "root",
 })
 export class NewRecipientService {
-  data = new Subject<recipientModel>();
+  data = new Subject<RecipientModel>();
   dialogRef: any;
-  private defaultData: recipientModel;
+  private defaultData: RecipientModel;
 
   transferType = TransactionTypeConstants.TransferType;
 
@@ -50,7 +50,7 @@ export class NewRecipientService {
     this.data.next(this.defaultData);
   }
 
-  get default(): recipientModel {
+  get default(): RecipientModel {
     return this.defaultData;
   }
 }

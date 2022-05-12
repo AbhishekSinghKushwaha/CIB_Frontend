@@ -133,7 +133,10 @@
           <span class="text-grey text-sm">Account Number</span>
           <p class="mb-0 text-sm pb-0">{{ data?.beneficiaryAccount }}</p>
         </div>
-        <div class="col-4 mt-3">
+        <div
+          class="col-4 mt-3"
+          *ngIf="transactionType.SWIFT === data?.transferType?.toString()"
+        >
           <span class="text-grey text-sm">IBAN Number</span>
           <p class="mb-0 text-sm pb-0">{{ data?.narration }}</p>
         </div>

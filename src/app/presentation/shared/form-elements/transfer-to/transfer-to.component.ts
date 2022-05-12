@@ -5,7 +5,7 @@ import {
   FormGroup,
   NG_VALUE_ACCESSOR,
 } from "@angular/forms";
-import { recipientModel } from "src/app/core/domain/recipient.model";
+import { RecipientModel } from "src/app/core/domain/recipient.model";
 import { NewRecipientService } from "src/app/core/services/modal-services/new-recipient.service";
 import { SharedDataService } from "src/app/core/services/shared-data/shared-data.service";
 import { TransferToService } from "src/app/core/services/modal-services/transfer-to.service";
@@ -48,7 +48,7 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
   @Input()
   placeholder!: string;
 
-  public value!: recipientModel;
+  public value!: RecipientModel;
 
   public changed!: (value: string) => void;
 
@@ -207,7 +207,7 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
     console.log(this.transactionType);
     switch (this.transactionType) {
       case this.transferType.OWN_EQUITY: // Own Equity Account
-        this.sharedDataService.userAccounts.subscribe((res) => {
+        this.sharedDataService.userAccounts$.subscribe((res) => {
           this.destinationAccounts = res;
         });
         this.transferToService.selectedTransferToAccount.subscribe((x) => {

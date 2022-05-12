@@ -1,29 +1,21 @@
-import { Component, forwardRef, Inject, OnInit, Input, Output, ViewChild } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from "@angular/forms";
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CountryModel } from 'src/app/core/domain/bank.model';
-import { recipientModel } from 'src/app/core/domain/recipient.model';
-import { CountryService } from 'src/app/core/services/modal-services/country.service';
-import { MobileOperatorsService } from 'src/app/core/services/mobile-operators/mobile-operators.service';
-import { countrySettings } from 'src/app/core/utils/constants/country.settings';
-import { MobileOperatorsConstants } from 'src/app/core/utils/constants/mobile-operator.constants';
-import { SharedDataService } from 'src/app/core/services/shared-data/shared-data.service';
-import { AirtimeMobileNumberService } from 'src/app/core/services/airtime-mobile-number/airtime-mobile-number.service';
-import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
+import { Component, OnInit, Input } from "@angular/core";
+import { FormGroup, FormBuilder } from "@angular/forms";
+import { MatDialogRef } from "@angular/material/dialog";
+import { CountryModel } from "src/app/core/domain/bank.model";
+import { CountryService } from "src/app/core/services/modal-services/country.service";
+import { MobileOperatorsService } from "src/app/core/services/mobile-operators/mobile-operators.service";
+import { MobileOperatorsConstants } from "src/app/core/utils/constants/mobile-operator.constants";
 import { StorageService } from "src/app/core/services/storage/storage.service";
-import { Subject, Subscription } from "rxjs";
 import { NewRecipientService } from "src/app/core/services/modal-services/new-recipient.service";
-import { TransactionTypeConstants } from 'src/app/core/utils/constants/transaction-type.constants';
-import { TelcoService } from 'src/app/core/services/modal-services/telco.service';
-
+import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
+import { TelcoService } from "src/app/core/services/modal-services/telco.service";
 
 @Component({
-  selector: 'app-airtime-new-recepient',
-  templateUrl: './airtime-new-recepient.component.html',
-  styleUrls: ['./airtime-new-recepient.component.scss']
+  selector: "app-airtime-new-recepient",
+  templateUrl: "./airtime-new-recepient.component.html",
+  styleUrls: ["./airtime-new-recepient.component.scss"],
 })
 export class AirtimeNewRecepientComponent implements OnInit {
-
   selected: any;
   countries: CountryModel[];
   @Input() isChecked: boolean;
@@ -51,18 +43,20 @@ export class AirtimeNewRecepientComponent implements OnInit {
     private fb: FormBuilder,
     private readonly newRecipientService: NewRecipientService,
     private readonly telcoService: TelcoService,
-    private readonly countryService: CountryService,
+    private readonly countryService: CountryService
   ) {
     this.selected = this.mobileOperatorsService.default;
-    this.mobileOperatorsService.selected.subscribe((x) => (this.selected = x));  
-    this.countries = this.storageService.getData("countries");    
+    this.mobileOperatorsService.selected.subscribe((x) => (this.selected = x));
+    this.countries = this.storageService.getData("countries");
   }
 
   ngOnInit(): void {
     this.initForm();
     this.countries = this.storageService.getData("countries");
     this.countriesSubsidiaries = this.storageService.getData("subsidiaries");
-    this.allcountries = this.countries.filter(country => country.operatingCountry !== true);
+    this.allcountries = this.countries.filter(
+      (country) => country.operatingCountry !== true
+    );
   }
 
   private initForm(): void {
@@ -80,7 +74,7 @@ export class AirtimeNewRecepientComponent implements OnInit {
   }
 
   openCountrySelectionModal() {
-      this.countryService
+    this.countryService
       .openCountry(this.countriesSubsidiaries.concat(this.allcountries), "", {})
       .afterClosed()
       .subscribe((res) => {
@@ -91,5 +85,5 @@ export class AirtimeNewRecepientComponent implements OnInit {
           }
         });
       });
-    }
+  }
 }

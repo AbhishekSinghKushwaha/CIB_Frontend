@@ -1,0 +1,20 @@
+<mat-card class="upload-modal-screen p-0 cursor-pointer">
+    <div class="float-end pe-2 pt-2">
+        <mat-icon (click)="close()" class="cursor-pointer">close</mat-icon>
+    </div>
+  <div class="d-none d-sm-flex justify-content-center align-items-center img-bg p-2">
+    <img src="assets/images/Illustrations/handshake.svg" height="150px" />
+  </div>
+
+  <mat-card-content class="p-4">
+    <h3 class="strong-text fw-bold">Uploading your document</h3>
+    <p class="text-sm text-grey">
+        Once you upload your document, the original will no longer be valid. 
+        Updates to the bulk payment will be completed online. 
+    </p>
+    <p class="text-sm text-grey">Do you want to continue? </p>
+    <div class="mt-4">
+        <button mat-raised-button type="submit" color="primary" style="width: 100%" (click)="close()">continue</button>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -23,7 +23,7 @@ export default class SharedUtils {
   }
 
   static formatSeconds(s: number): string {
-    return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + s;
+    return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + Math.ceil(s);
   }
 
   static formatMoney(amount: number) {

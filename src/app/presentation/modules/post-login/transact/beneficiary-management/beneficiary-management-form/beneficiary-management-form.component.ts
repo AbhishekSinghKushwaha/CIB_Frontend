@@ -148,9 +148,9 @@ export class BeneficiaryManagementFormComponent implements OnInit {
   }
 
   setFromAccount(fromAccount: string) {
-    this.sharedDataService.userAccounts.subscribe((x) => {
+    this.sharedDataService.userAccounts$.subscribe((x) => {
       const account = x.find((el) => {
-        return (el.accountNumber = Number(fromAccount));
+        return (el.accountNumber = fromAccount);
       });
       this.beneficiaryForm.controls.sendFrom.setValue(account || "");
     });

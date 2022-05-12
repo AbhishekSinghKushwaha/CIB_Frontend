@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import { SupportingDocumentsUploadService } from "src/app/core/services/supporting-documents-upload/supporting-documents-upload.service";
 
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -12,20 +12,29 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
 import { ConfirmationModalService } from "src/app/core/services/modal-services/confirmation-modal.service";
 import { SharedDataService } from "src/app/core/services/shared-data/shared-data.service";
-import { ScheduledPaymentModel, FrequencySelectionModel, ReminderSelectionModel } from 'src/app/core/domain/scheduled-payment.model';
-import { SchedulePaymentService } from 'src/app/core/services/schedule-payment/schedule-payment.service';
-import { CurrencyModel, TransferAmount } from 'src/app/core/domain/transfer.models';
-import { CurrencySelectionService } from 'src/app/core/services/modal-services/currency-selection.service';
-import { AirtimeFailedService } from 'src/app/core/services/airtime-failed/airtime-failed.service';
-import { BuyAirtimeService } from 'src/app/core/services/transfers/buy-airtime/buy-airtime.service';
+import {
+  ScheduledPaymentModel,
+  FrequencySelectionModel,
+  ReminderSelectionModel,
+} from "src/app/core/domain/scheduled-payment.model";
+import { SchedulePaymentService } from "src/app/core/services/schedule-payment/schedule-payment.service";
+import {
+  CurrencyModel,
+  TransferAmount,
+} from "src/app/core/domain/transfer.models";
+import { CurrencySelectionService } from "src/app/core/services/modal-services/currency-selection.service";
+import { AirtimeFailedService } from "src/app/core/services/airtime-failed/airtime-failed.service";
+import { BuyAirtimeService } from "src/app/core/services/transfers/buy-airtime/buy-airtime.service";
 
 @Component({
-  selector: 'app-standing-orders-form',
-  templateUrl: './standing-orders-form.component.html',
-  styleUrls: ['./standing-orders-form.component.scss']
+  selector: "app-standing-orders-form",
+  templateUrl: "./standing-orders-form.component.html",
+  styleUrls: ["./standing-orders-form.component.scss"],
 })
-export class StandingOrdersFormComponent extends BaseTransactComponent implements OnInit {
-
+export class StandingOrdersFormComponent
+  extends BaseTransactComponent
+  implements OnInit
+{
   standingOrdersForm: FormGroup;
   aboveTransactionTypeLimit: boolean = false;
   transferType = TransactionTypeConstants.TransferType;
@@ -34,21 +43,29 @@ export class StandingOrdersFormComponent extends BaseTransactComponent implement
   standingOrderId: number;
   standingOrdersList: any;
   transactions: any[] = [];
-  transactionConversion: string
+  transactionConversion: string;
   transactionType: string;
 
   public value: TransferAmount = {
     amount: 0,
-    currency: '',
+    currency: "",
     isWithinLimit: true,
   };
 
-  currency: CurrencyModel = { currencyCode: '', currencyDescription: '' };
+  currency: CurrencyModel = { currencyCode: "", currencyDescription: "" };
 
-  frequency: FrequencySelectionModel = {frequency: '',  description: '', value: 0 };
-  
-  reminder: ReminderSelectionModel = { reminder: '',  description: '', value: 0 };
-  
+  frequency: FrequencySelectionModel = {
+    frequency: "",
+    description: "",
+    value: 0,
+  };
+
+  reminder: ReminderSelectionModel = {
+    reminder: "",
+    description: "",
+    value: 0,
+  };
+
   constructor(
     private readonly supportingDocumentsUploadService: SupportingDocumentsUploadService,
     private readonly fb: FormBuilder,
@@ -65,7 +82,7 @@ export class StandingOrdersFormComponent extends BaseTransactComponent implement
     private readonly buyAirtimeService: BuyAirtimeService
   ) {
     super(snackbar);
-    this.standingOrderId = route.snapshot.params['id'];
+    this.standingOrderId = route.snapshot.params["id"];
   }
 
   get getForm() {
@@ -86,7 +103,7 @@ export class StandingOrdersFormComponent extends BaseTransactComponent implement
       reason: [""],
       license: [""],
       chargeOption: [""],
-      paymentCategory: [""]
+      paymentCategory: [""],
     });
   }
 
@@ -95,22 +112,24 @@ export class StandingOrdersFormComponent extends BaseTransactComponent implement
   }
 
   populateForm() {
-    if(this.standingOrderId){
+    if (this.standingOrderId) {
       this.editMode = true;
-      this.standingOrdersService.getScheduleId(this.standingOrderId).subscribe((response) => {
-        this.standingOrdersList = response.data;
-        
-        this.standingOrdersForm.controls.transferType.setValue(
-          this.setTransferType(
-            this.transferType,
-            response.data.transferType.toString()
-          )
-        );
-        this.setFromAccount(this.standingOrdersList.sourceAccount);
-        this.setToAccount();
-        this.setAmount();
-        this.schedulePayment();
-      });
+      this.standingOrdersService
+        .getScheduleId(this.standingOrderId)
+        .subscribe((response) => {
+          this.standingOrdersList = response.data;
+
+          this.standingOrdersForm.controls.transferType.setValue(
+            this.setTransferType(
+              this.transferType,
+              response.data.transferType.toString()
+            )
+          );
+          this.setFromAccount(this.standingOrdersList.sourceAccount);
+          this.setToAccount();
+          this.setAmount();
+          this.schedulePayment();
+        });
     }
   }
 
@@ -129,9 +148,9 @@ export class StandingOrdersFormComponent extends BaseTransactComponent implement
   }
 
   setFromAccount(fromAccount: string) {
-    this.sharedDataService.userAccounts.subscribe((x) => {
+    this.sharedDataService.userAccounts$.subscribe((x) => {
       const account = x.find((el) => {
-        return (el.accountNumber = Number(fromAccount));
+        return (el.accountNumber = fromAccount);
       });
       this.standingOrdersForm.controls.sendFrom.setValue(account || "");
     });
@@ -147,7 +166,8 @@ export class StandingOrdersFormComponent extends BaseTransactComponent implement
   }
 
   formatTransactionType() {
-    this.transactionConversion = this.getForm.transferType.value.value.toString();
+    this.transactionConversion =
+      this.getForm.transferType.value.value.toString();
 
     switch (this.transactionConversion) {
       case this.transferType.OWN_EQUITY:
@@ -186,46 +206,38 @@ export class StandingOrdersFormComponent extends BaseTransactComponent implement
   }
 
   schedulePayment() {
-    if(this.standingOrdersList.frequency === 1) {
-      this.frequency.frequency = 'Once-off';
-      this.frequency.description = 'Description';
+    if (this.standingOrdersList.frequency === 1) {
+      this.frequency.frequency = "Once-off";
+      this.frequency.description = "Description";
       this.frequency.value = 1;
-    }
-    else if(this.standingOrdersList.frequency === 2) {
-      this.frequency.frequency = 'Daily';
+    } else if (this.standingOrdersList.frequency === 2) {
+      this.frequency.frequency = "Daily";
       this.frequency.value = 2;
-    }
-    else if(this.standingOrdersList.frequency === 3) {
-      this.frequency.frequency = 'Weekly';
+    } else if (this.standingOrdersList.frequency === 3) {
+      this.frequency.frequency = "Weekly";
       this.frequency.value = 3;
-    }
-    else if(this.standingOrdersList.frequency === 4) {
-      this.frequency.frequency = 'Monthly';
+    } else if (this.standingOrdersList.frequency === 4) {
+      this.frequency.frequency = "Monthly";
       this.frequency.value = 4;
-    }
-    else if(this.standingOrdersList.frequency === 5) {
-      this.frequency.frequency = 'Quarterly';
+    } else if (this.standingOrdersList.frequency === 5) {
+      this.frequency.frequency = "Quarterly";
       this.frequency.value = 5;
     }
 
-    if(this.standingOrdersList.reminder === 0) {
-      this.reminder.reminder = 'No reminder';
+    if (this.standingOrdersList.reminder === 0) {
+      this.reminder.reminder = "No reminder";
       this.reminder.value = 0;
-    }
-    else if(this.standingOrdersList.reminder === 1) {
-      this.reminder.reminder = '1 day before';
+    } else if (this.standingOrdersList.reminder === 1) {
+      this.reminder.reminder = "1 day before";
       this.reminder.value = 1;
-    } 
-    else if(this.standingOrdersList.reminder === 2) {
-      this.reminder.reminder = '2 days before';
+    } else if (this.standingOrdersList.reminder === 2) {
+      this.reminder.reminder = "2 days before";
       this.reminder.value = 2;
-    }
-    else if(this.standingOrdersList.reminder === 3) {
-      this.reminder.reminder = '3 days before';
+    } else if (this.standingOrdersList.reminder === 3) {
+      this.reminder.reminder = "3 days before";
       this.reminder.value = 3;
-    }
-    else if(this.standingOrdersList.reminder === 4) {
-      this.reminder.reminder = '4 days before';
+    } else if (this.standingOrdersList.reminder === 4) {
+      this.reminder.reminder = "4 days before";
       this.reminder.value = 4;
     }
 
@@ -235,14 +247,19 @@ export class StandingOrdersFormComponent extends BaseTransactComponent implement
       endDate: new Date(this.standingOrdersList.endDate),
       reminderDay: this.reminder,
     };
-    this.schedulePaymentService.selectFrequency(this.frequency);
-    this.schedulePaymentService.selectReminder(this.reminder);
-    this.schedulePaymentService.selectScheduledPayment(scheduledPaymentData);
-    this.standingOrdersForm.controls.schedulePayment.setValue(scheduledPaymentData);
+    this.schedulePaymentService.setFrequency(this.frequency);
+    this.schedulePaymentService.setReminder(this.reminder);
+    this.schedulePaymentService.setScheduledPayment(scheduledPaymentData);
+    this.standingOrdersForm.controls.schedulePayment.setValue(
+      scheduledPaymentData
+    );
   }
 
   getTransferCharges() {
-    if(this.standingOrdersForm.controls.transferType.value.value !== this.transferType.BUY_AIRTIME) {
+    if (
+      this.standingOrdersForm.controls.transferType.value.value !==
+      this.transferType.BUY_AIRTIME
+    ) {
       const payload = {
         amount: this.getForm.amount.value.amount,
         currency: this.getForm.amount.value.currency,
@@ -258,20 +275,26 @@ export class StandingOrdersFormComponent extends BaseTransactComponent implement
           } else {
             // TODO:: Notify error
           }
-      });
-    }
-    else if(this.standingOrdersForm.controls.transferType.value.value === this.transferType.BUY_AIRTIME){
+        });
+    } else if (
+      this.standingOrdersForm.controls.transferType.value.value ===
+      this.transferType.BUY_AIRTIME
+    ) {
       const message = {
-        title: 'Something went wrong',
-        image: './assets/images/Illustrations/Illustrations_NoAccounts.svg',
-        message: 'The system is unable to perform this payment task at the moment'
-      }
+        title: "Something went wrong",
+        image: "./assets/images/Illustrations/Illustrations_NoAccounts.svg",
+        message:
+          "The system is unable to perform this payment task at the moment",
+      };
       const payload = {
-        telco: this.getForm.sendTo.value.telco? this.getForm.sendTo.value.telco.telco : this.standingOrdersList.beneficiaryName,
+        telco: this.getForm.sendTo.value.telco
+          ? this.getForm.sendTo.value.telco.telco
+          : this.standingOrdersList.beneficiaryName,
         amount: this.getForm.amount.value.amount,
         sourceAccount: this.getForm.sendFrom.value.accountNumber,
       };
-      this.buyAirtimeService.getCharges(payload).subscribe((res) => {
+      this.buyAirtimeService.getCharges(payload).subscribe(
+        (res) => {
           if (res.status) {
             this.confirmPayment(res.data);
           } else {
@@ -280,7 +303,8 @@ export class StandingOrdersFormComponent extends BaseTransactComponent implement
         },
         (err) => {
           this.airtimeFailedService.open(message);
-        });
+        }
+      );
     }
   }
 
@@ -311,9 +335,17 @@ export class StandingOrdersFormComponent extends BaseTransactComponent implement
         },
         {
           key: "To",
-          value: `${this.getForm.sendTo.value.accountName ? this.getForm.sendTo.value.accountName : this.getForm.sendTo.value.telco.telco} 
+          value: `${
+            this.getForm.sendTo.value.accountName
+              ? this.getForm.sendTo.value.accountName
+              : this.getForm.sendTo.value.telco.telco
+          } 
           <br> 
-          ${this.getForm.sendTo.value.accountNumber ? this.getForm.sendTo.value.accountNumber : this.getForm.sendTo.value.phoneNumber}`,
+          ${
+            this.getForm.sendTo.value.accountNumber
+              ? this.getForm.sendTo.value.accountNumber
+              : this.getForm.sendTo.value.phoneNumber
+          }`,
         },
         {
           key: "From",
@@ -337,73 +369,105 @@ export class StandingOrdersFormComponent extends BaseTransactComponent implement
   standingOrder() {
     const payload = {
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
-      sourceAccountName:this.getForm.sendFrom.value.accountName,
-      sourceBankName: this.getForm.sendFrom?.value?.bankName ? this.getForm.sendFrom.value.bankName : '',
-      sourceBankCode: this.getForm.sendFrom?.value?.bankCode ? this.getForm.sendFrom.value.bankCode : '54',
+      sourceAccountName: this.getForm.sendFrom.value.accountName,
+      sourceBankName: this.getForm.sendFrom?.value?.bankName
+        ? this.getForm.sendFrom.value.bankName
+        : "",
+      sourceBankCode: this.getForm.sendFrom?.value?.bankCode
+        ? this.getForm.sendFrom.value.bankCode
+        : "54",
       sourceAccountCurrency: this.getForm.sendFrom.value.currency,
-      beneficiaryAccount: this.getForm.sendTo.value.accountNumber ? this.getForm.sendTo.value.accountNumber : this.getForm.sendTo.value.phoneNumber,
-      beneficiaryName: this.getForm.sendTo.value.accountName ? this.getForm.sendTo.value.accountName : this.getForm.sendTo.value.telco.telco,
-      beneficiaryBank: this.getForm.sendFrom?.value?.bankName ? this.getForm.sendFrom.value.bankName : '',
-      beneficiaryBankCode: this.getForm.sendFrom?.value?.bankCode ? this.getForm.sendFrom.value.bankCode : '54',
-      beneficiaryCurrency: this.getForm.sendTo.value.currency ? this.getForm.sendTo.value.currency : this.getForm.amount.value.currency,
+      beneficiaryAccount: this.getForm.sendTo.value.accountNumber
+        ? this.getForm.sendTo.value.accountNumber
+        : this.getForm.sendTo.value.phoneNumber,
+      beneficiaryName: this.getForm.sendTo.value.accountName
+        ? this.getForm.sendTo.value.accountName
+        : this.getForm.sendTo.value.telco.telco,
+      beneficiaryBank: this.getForm.sendFrom?.value?.bankName
+        ? this.getForm.sendFrom.value.bankName
+        : "",
+      beneficiaryBankCode: this.getForm.sendFrom?.value?.bankCode
+        ? this.getForm.sendFrom.value.bankCode
+        : "54",
+      beneficiaryCurrency: this.getForm.sendTo.value.currency
+        ? this.getForm.sendTo.value.currency
+        : this.getForm.amount.value.currency,
       amount: this.getForm.amount.value.amount,
       transferType: this.getForm.transferType.value.value,
       frequency: this.getForm.schedulePayment.value.frequency.value,
       startDate: this.getForm.schedulePayment.value.startDate.toISOString(),
       endDate: this.getForm.schedulePayment.value.endDate.toISOString(),
-      reminderInDays: this.getForm.schedulePayment.value.reminderDay.value
+      reminderInDays: this.getForm.schedulePayment.value.reminderDay.value,
     };
 
     const editPayload = {
       id: Number(this.standingOrderId),
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
-      sourceAccountName:this.getForm.sendFrom.value.accountName,
-      sourceBankName: this.getForm.sendFrom?.value?.bankName ? this.getForm.sendFrom.value.bankName : '',
-      sourceBankCode: this.getForm.sendFrom?.value?.bankCode ? this.getForm.sendFrom.value.bankCode : '54',
+      sourceAccountName: this.getForm.sendFrom.value.accountName,
+      sourceBankName: this.getForm.sendFrom?.value?.bankName
+        ? this.getForm.sendFrom.value.bankName
+        : "",
+      sourceBankCode: this.getForm.sendFrom?.value?.bankCode
+        ? this.getForm.sendFrom.value.bankCode
+        : "54",
       sourceAccountCurrency: this.getForm.sendFrom.value.currency,
-      beneficiaryAccount: this.getForm.sendTo.value.accountNumber ? this.getForm.sendTo.value.accountNumber : this.getForm.sendTo.value.phoneNumber,
-      beneficiaryName: this.getForm.sendTo.value.accountName ? this.getForm.sendTo.value.accountName : this.getForm.sendTo.value.telco.telco,
-      beneficiaryBank: this.getForm.sendFrom?.value?.bankName ? this.getForm.sendFrom.value.bankName : '',
-      beneficiaryBankCode: this.getForm.sendFrom?.value?.bankCode ? this.getForm.sendFrom.value.bankCode : '54',
-      beneficiaryCurrency: this.getForm.sendTo.value.currency ? this.getForm.sendTo.value.currency : this.getForm.amount.value.currency,
+      beneficiaryAccount: this.getForm.sendTo.value.accountNumber
+        ? this.getForm.sendTo.value.accountNumber
+        : this.getForm.sendTo.value.phoneNumber,
+      beneficiaryName: this.getForm.sendTo.value.accountName
+        ? this.getForm.sendTo.value.accountName
+        : this.getForm.sendTo.value.telco.telco,
+      beneficiaryBank: this.getForm.sendFrom?.value?.bankName
+        ? this.getForm.sendFrom.value.bankName
+        : "",
+      beneficiaryBankCode: this.getForm.sendFrom?.value?.bankCode
+        ? this.getForm.sendFrom.value.bankCode
+        : "54",
+      beneficiaryCurrency: this.getForm.sendTo.value.currency
+        ? this.getForm.sendTo.value.currency
+        : this.getForm.amount.value.currency,
       amount: this.getForm.amount.value.amount,
       transferType: this.getForm.transferType.value.value,
       frequency: this.getForm.schedulePayment.value.frequency.value,
       startDate: this.getForm.schedulePayment.value.startDate.toISOString(),
       endDate: this.getForm.schedulePayment.value.endDate.toISOString(),
-      reminderInDays: this.getForm.schedulePayment.value.reminderDay.value
+      reminderInDays: this.getForm.schedulePayment.value.reminderDay.value,
     };
 
     if (this.standingOrdersForm.valid) {
-      this.editMode ? 
-      this.standingOrdersService.editStandingOrder(editPayload).subscribe(
-        (res) => {
-          if (res.status) {
-            this.router.navigate([`/transact/otp-verification/${this.type}`]);
-          } else {
-            // TODO:: Notify Error
-          }
-        },
-        (err) => {
-          alert(
-            `Sorry, we're unable to complete your transaction. Please give us some time to fix the problem and try again later.`
+      this.editMode
+        ? this.standingOrdersService.editStandingOrder(editPayload).subscribe(
+            (res) => {
+              if (res.status) {
+                this.router.navigate([
+                  `/transact/otp-verification/${this.type}`,
+                ]);
+              } else {
+                // TODO:: Notify Error
+              }
+            },
+            (err) => {
+              alert(
+                `Sorry, we're unable to complete your transaction. Please give us some time to fix the problem and try again later.`
+              );
+            }
+          )
+        : this.standingOrdersService.createStandingOrder(payload).subscribe(
+            (res) => {
+              if (res.status) {
+                this.router.navigate([
+                  `/transact/otp-verification/${this.type}`,
+                ]);
+              } else {
+                // TODO:: Notify Error
+              }
+            },
+            (err) => {
+              alert(
+                `Sorry, we're unable to complete your transaction. Please give us some time to fix the problem and try again later.`
+              );
+            }
           );
-        }
-      ) :
-      this.standingOrdersService.createStandingOrder(payload).subscribe(
-        (res) => {
-          if (res.status) {
-            this.router.navigate([`/transact/otp-verification/${this.type}`]);
-          } else {
-            // TODO:: Notify Error
-          }
-        },
-        (err) => {
-          alert(
-            `Sorry, we're unable to complete your transaction. Please give us some time to fix the problem and try again later.`
-          );
-        }
-      );
     }
   }
 }

@@ -56,6 +56,7 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getTelcos();
     this.getMobileWallets();
     this.getSubsidiaries();
+    this.getCurrencies();
   }
 
   ngAfterViewInit() {}
@@ -105,6 +106,14 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     this.accountsService.getUserAccounts().subscribe((res) => {
       if (res.status) {
         this.sharedDataService.setUserAccounts(res.data);
+      }
+    });
+  }
+
+  getCurrencies() {
+    this.dataLookupService.getCurrencies().subscribe((res) => {
+      if (res.status) {
+        this.storageService.setData("currencies", res.data);
       }
     });
   }

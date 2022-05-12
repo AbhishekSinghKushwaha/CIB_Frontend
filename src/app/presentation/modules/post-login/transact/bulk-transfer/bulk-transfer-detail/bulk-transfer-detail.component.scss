@@ -1,0 +1,56 @@
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+  }
+  
+  td,
+  th {
+    color: var(--black);
+    font-size: 12px;
+  }
+
+  td {
+    background-color: #FFFFFF;
+  }
+  
+  th {
+    font-weight: 600;
+    background-color: #E9EAEA;
+  }
+
+  .button_icon {
+    background: rgba(146, 148, 151, 0.2);
+    box-shadow: none;
+  }
+  
+  .card{
+    border: none !important;
+  }
+  
+  ::ng-deep .my-menu {
+    width: 290px;
+    overflow: hidden !important;
+  }
+
+.error {
+    color: #E60000;
+}
+
+input:focus {
+  outline: none;
+}
+
+.error {
+  color: #E60000;
+}
+
+.input-border {
+  border:none !important;
+}
+
+.table > :not(:first-child) {
+  border-top: none !important;
+}

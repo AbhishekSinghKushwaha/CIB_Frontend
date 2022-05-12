@@ -57,16 +57,14 @@ export class TransferFromComponent implements ControlValueAccessor, OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.sharedDataService.userAccounts.subscribe((res) => {
+    this.sharedDataService.userAccounts$.subscribe((res) => {
       this.sourceAccounts = res;
     });
 
-    this.transferFromAccountService.selectedTransferFromAccount.subscribe(
-      (x) => {
-        this.parentForm.controls[this.fieldName].setValue(x);
-        this.writeValue(x);
-      }
-    );
+    this.transferFromAccountService.transferFromAmount$.subscribe((x) => {
+      this.parentForm.controls[this.fieldName].setValue(x);
+      this.writeValue(x);
+    });
   }
 
   public writeValue(value: FromAccount): void {

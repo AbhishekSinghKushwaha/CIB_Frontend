@@ -1,10 +1,13 @@
+import { RecipientModel } from "./recipient.model";
+import { ScheduledPaymentModel } from "./scheduled-payment.model";
+
 export interface FromAccount {
   balance?: number;
-  currency: string;
+  currency?: string;
   accountName?: string;
-  accountNumber?: number;
+  accountNumber?: string;
   accountType?: "Savings" | "Current" | "Mobile account";
-  transactionLimit: number;
+  transactionLimit?: number;
   balanceHidden?: false;
   bankId?: string;
   cards?: any[];
@@ -81,4 +84,19 @@ export interface TransferTypeDTO {
 export interface Sector {
   sectorCode?: string;
   sectorDescription?: string;
+}
+
+export interface EditTransaction {
+  sendFrom: FromAccount;
+  sendTo: RecipientModel;
+  amount: TransferAmount;
+  chargeOption?: number;
+  documents?: any[];
+  fxReferenceId?: string;
+  internationalProductId?: string;
+  reason?: string;
+  schedulePayment?: ScheduledPaymentModel;
+  paymentCategory?: string;
+  transferType?: number;
+  license?: string;
 }
