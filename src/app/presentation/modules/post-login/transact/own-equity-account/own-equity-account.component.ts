@@ -20,7 +20,7 @@ import {
   EditTransaction,
   TransferAmount,
 } from "src/app/core/domain/transfer.models";
-import { SharedUtils } from "src/app/core/utils/shared.util";
+import SharedUtils from "src/app/core/utils/shared.util";
 import { SharedDataService } from "src/app/core/services/shared-data/shared-data.service";
 import {
   FrequencySelectionModel,

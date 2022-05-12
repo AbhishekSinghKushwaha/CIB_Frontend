@@ -19,7 +19,7 @@ import { StorageService } from "src/app/core/services/storage/storage.service";
 import { TransactionsService } from "src/app/core/services/transactions/transactions.service";
 import { IntrabankService } from "src/app/core/services/transfers/intrabank/intrabank.service";
 import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
-import { SharedUtils } from "src/app/core/utils/shared.util";
+import SharedUtils from "src/app/core/utils/shared.util";
 import { accountLimitValidator } from "src/app/core/utils/validators/limits.validators";
 import { ConfirmPaymentComponent } from "src/app/presentation/shared/modals/confirm-payment/confirm-payment.component";
 import { BaseTransactComponent } from "../base-transact.component";

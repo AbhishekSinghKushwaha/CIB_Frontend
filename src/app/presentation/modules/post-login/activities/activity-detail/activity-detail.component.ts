@@ -9,7 +9,7 @@ import { TransactionReceiptModalService } from "src/app/core/services/modal-serv
 import { TransactionsService } from "src/app/core/services/transactions/transactions.service";
 import { mockData } from "src/app/core/utils/constants/mockdata.constants";
 import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
-import { SharedUtils } from "src/app/core/utils/shared.util";
+import SharedUtils from "src/app/core/utils/shared.util";
 import { SupportingDocumentsUploadService } from "./../../../../../core/services/supporting-documents-upload/supporting-documents-upload.service";
 
 @Component({

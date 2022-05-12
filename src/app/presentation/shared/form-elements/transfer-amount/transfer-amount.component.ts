@@ -16,7 +16,7 @@ import { CurrencySelectionService } from "src/app/core/services/modal-services/c
 import { TransferFromService } from "src/app/core/services/modal-services/transfer-from.service";
 import { StorageService } from "src/app/core/services/storage/storage.service";
 import { CurrencySelectionConstants } from "src/app/core/utils/constants/currency-selection.constants";
-import { SharedUtils } from "src/app/core/utils/shared.util";
+import SharedUtils from "src/app/core/utils/shared.util";
 @Component({
   selector: "app-transfer-amount",
   templateUrl: "./transfer-amount.component.html",
