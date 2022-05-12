@@ -1,5 +1,5 @@
 .own-equity-modal-screen {
-  width: 675px;
+  width: 700px;
   margin: 0;
   padding: 0;
 }
@@ -67,6 +67,6 @@
   justify-content: flex-end;
 }
 
-.align-upload {
-  padding-left: 15px !important;
+::ng-deep .my-pdf {
+  overflow: hidden !important;
 }

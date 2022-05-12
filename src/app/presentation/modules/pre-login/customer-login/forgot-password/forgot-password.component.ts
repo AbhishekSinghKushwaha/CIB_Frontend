@@ -10,7 +10,7 @@ import { SecurityChallengeService } from 'src/app/core/services/security-challen
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { ValidateCredentialsUsecase } from 'src/app/core/usecases/validate-credentials.usecase';
-import { SharedUtils } from 'src/app/core/utils/shared.util';
+import SharedUtils from 'src/app/core/utils/shared.util';
 import { SnackbarComponent } from 'src/app/presentation/shared/components/snackbar/snackbar.component';
 
 @Component({

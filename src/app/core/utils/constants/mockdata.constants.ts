@@ -14,6 +14,7 @@ import { StandingOrdersListmodel } from "../../domain/standing-orders-list.model
 import { TransactionTypeModel } from "src/app/core/domain/transaction-type.model";
 import { AirtimeAmountRangeModel } from "../../domain/international-airtime-amount-range.model";
 import { CountryMobileCodeModal } from "../../domain/countryCode.model";
+import { DownloadTemplateModal } from "src/app/core/domain/download-template.model";
 
 const accounts: SelectAccountModel[] = [
   {
@@ -854,6 +855,111 @@ export const TransactionType: TransactionTypeModel[] = [
   },
 ];
 
+const downloadTemplate: DownloadTemplateModal[] = [
+  {
+    id: 1,
+    type: "Template 1",
+  },
+  {
+    id: 2,
+    type: "Template 2",
+  },
+  {
+    id: 3,
+    type: "Template 3",
+  }
+];
+
+const templateFormat: DownloadTemplateModal[] = [
+  {
+    type: "Excel",
+  },
+  {
+    type: "Csv",
+  },
+  {
+    type: "Other",
+  }
+];
+
+const bulkTransferData = [
+  {
+    id: 1,
+    paymentDate: "4/3/22",
+    paymentType: "RTGS",
+    debitAccountName: "Loot",
+    debitAccountNumber: "Equity",
+    beneficiaryAccountNumber: "2337846578955",
+    beneficiaryMobile: "0810174008113",
+    beneficiaryName: "Mello",
+    beneficiaryBank: "Equity",
+    amount: "10,0000.00",
+    currency: "KES",
+    reference: "Ref_123",
+    reason: "Cash management transfer",
+  },
+  {
+    id: 2,
+    paymentDate: "4/3/22",
+    paymentType: "SWIFT",
+    debitAccountName: "Loot",
+    debitAccountNumber: "Equity",
+    beneficiaryAccountNumber: "2337846576666",
+    beneficiaryMobile: "0810174008113",
+    beneficiaryName: "Uche",
+    beneficiaryBank: "Equity",
+    amount: "10,0000.00",
+    currency: "KES",
+    reference: "Ref_123",
+    reason: "Cash management transfer",
+  },
+  {
+    id: 3,
+    paymentDate: "4/3/22",
+    paymentType: "EFT",
+    debitAccountName: "Loot",
+    debitAccountNumber: "Equity",
+    beneficiaryAccountNumber: "2337846573333",
+    beneficiaryMobile: "0810174008113",
+    beneficiaryName: "Jacques",
+    beneficiaryBank: "Equity",
+    amount: "10,0000.00",
+    currency: "KES",
+    reference: "Ref_123",
+    reason: "Cash management transfer",
+  },
+  {
+    id: 4,
+    paymentDate: "4/3/22",
+    paymentType: "PESALINK",
+    debitAccountName: "Loot",
+    debitAccountNumber: "Equity",
+    beneficiaryAccountNumber: "2337846577777",
+    beneficiaryMobile: "0810174008113",
+    beneficiaryName: "John",
+    beneficiaryBank: "Equity",
+    amount: "10,0000.00",
+    currency: "KES",
+    reference: "Ref_123",
+    reason: "Cash management transfer",
+  },
+  {
+    id: 5,
+    paymentDate: "4/3/22",
+    paymentType: "RTGS",
+    debitAccountName: "Loot",
+    debitAccountNumber: "Equity",
+    beneficiaryAccountNumber: "2337846574444",
+    beneficiaryMobile: "0810174008113",
+    beneficiaryName: "Victoria",
+    beneficiaryBank: "Equity",
+    amount: "10,0000.00",
+    currency: "KES",
+    reference: "Ref_123",
+    reason: "Cash management transfer",
+  },
+]
+
 export const mockData = {
   accounts,
   favourites,
@@ -871,4 +977,7 @@ export const mockData = {
   standingOrders,
   standingOrderDetail,
   TransactionType,
+  downloadTemplate,
+  templateFormat,
+  bulkTransferData
 };

@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { UserListModel } from 'src/app/core/domain/user.model';
 import { UserListService } from 'src/app/core/services/modal-services/user-list.service';
 import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
-import { SharedUtils } from 'src/app/core/utils/shared.util';
+import SharedUtils from 'src/app/core/utils/shared.util';
 
 @Component({
   selector: 'app-user-list',

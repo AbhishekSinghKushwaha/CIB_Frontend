@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { BeneficiaryModel } from "src/app/core/domain/beneficiary.model";
-import { recipientModel } from "src/app/core/domain/recipient.model";
+import { RecipientModel } from "src/app/core/domain/recipient.model";
 import { FromAccount } from "src/app/core/domain/transfer.models";
 import { NewRecipientService } from "src/app/core/services/modal-services/new-recipient.service";
 import { TransferFromService } from "src/app/core/services/modal-services/transfer-from.service";
@@ -28,7 +28,7 @@ export class BeneficiaryListItemComponent implements OnInit {
   ngOnInit(): void {}
 
   selectSingle(): void {
-    const recipientFormat: recipientModel = {
+    const recipientFormat: RecipientModel = {
       country: this.data.country,
       accountNumber: this.data.accountNumber,
       accountName: this.data.fullName,
@@ -68,11 +68,11 @@ export class BeneficiaryListItemComponent implements OnInit {
 
   setFromAccount() {
     if (this.data.fromAccount) {
-      this.sharedDataService.userAccounts.subscribe((x) => {
-        const account = x.find((el) => {
-          return (el.accountNumber = this.data.fromAccount);
+      this.sharedDataService.userAccounts$.subscribe((x) => {
+        const account = x.find((el: FromAccount) => {
+          return el.accountNumber === this.data.fromAccount;
         });
-        this.transferFromService.selectTransferFromAccount(account);
+        this.transferFromService.setTransferFromAccount(account || {});
       });
     }
   }

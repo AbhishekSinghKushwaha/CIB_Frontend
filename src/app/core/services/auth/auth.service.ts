@@ -9,7 +9,6 @@ import { LogoutService } from '../modal-services/logout.service';
 import urlList from '../service-list.json';
 import { StorageService } from '../storage/storage.service';
 import { LoggedinUserModel, UserModel } from '../../domain/user.model';
-import LOGIN_CONSTANTS from '../../utils/constants/pre-login.constants';
 import { BaseTransactComponent } from 'src/app/presentation/modules/post-login/transact/base-transact.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -21,21 +20,15 @@ interface LogoutData {
   providedIn: 'root',
 })
 export class AuthService extends BaseTransactComponent implements OnDestroy {
-  private isLoggedIn = new BehaviorSubject<boolean>(false);
   private otpMesssage = new BehaviorSubject<string>('');
   private activeLogoutTimer: any;
   private logoutWarningTimer: any;
   private autoRefreshTokenTimer: any;
-  private logoutWarningTimeMinutes = environment.logoutWarningTimeMinutes;
-  private logoutWarningTime = this.logoutWarningTimeMinutes * 60 * 1000; // minutes * seconds * milliseconds
-  private logoutForcedTimeMinutes = environment.logoutForcedTimeMinutes;
-  private logoutForcedTime = this.logoutForcedTimeMinutes * 60 * 1000; // minutes * seconds * milliseconds
   private watchRouteChange: Subscription;
-  loginState = new BehaviorSubject<string | null>(null);
-
-  get IsLoggedIn(): Observable<boolean> {
-    return this.isLoggedIn.asObservable();
-  }
+  private msBeforeForcedLogout = environment.minutesBeforeForcedLogout * 60 * 1000;
+  // get IsLoggedIn(): Observable<boolean> {
+  //   return this.isLoggedIn.asObservable();
+  // }
 
   constructor(
     private router: Router,
@@ -52,6 +45,7 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
     if (this.watchRouteChange) {
       this.watchRouteChange.unsubscribe();
     }
+
   }
 
   public async getUserData(): Promise<UserModel> {
@@ -66,7 +60,7 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
 
   }
 
-  public submitOTP(payload: string) {
+  public submitOTP(payload: any) {
     return {
       submitOTP: this.http.get<UserModel>(`${environment.apiUrl}${urlList.login.verifyOtp}?reference=ref&otp=${payload}`),
       submitFirstTimeLogin: this.http.post<UserModel>(`${environment.apiUrl}${urlList.login.firstlogin}`, payload),
@@ -86,10 +80,14 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
       .get<UserModel>(url);
   }
 
-  userLogin(data: any) {
+  userLogin(data: any, refresh = false) {
     const payload = new URLSearchParams();
-    payload.set('username', data.username);
-    payload.set('password', data.password);
+    if (!refresh) {
+      payload.set('username', data.username);
+      payload.set('password', data.password);
+    } else {
+      payload.set('refresh_token', data.refresh_token);
+    }
     payload.set('grant_type', data.grant_type);
     payload.set('client_id', data.client_id);
     payload.set('client_secret', data.client_secret);
@@ -104,13 +102,11 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
   }
 
   setToken(accessToken: TokenResponseModel): void {
-    if (!accessToken?.tokenExpirationDate) {
-      accessToken.tokenExpirationDate = new Date(
-        new Date().getTime() + accessToken.expires_in * 1000
-      );
-    }
+    accessToken.tokenExpirationDate = new Date(
+      new Date().getTime() + accessToken.expires_in * 1000
+    ).getTime();
     this.storageService.setData('access_token', accessToken);
-    // this.autoRefreshToken(accessToken);
+    this.idleWarning();
   }
 
   setOTPMessage(message: string) {
@@ -122,19 +118,13 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
     return value?.message;
   }
 
-  setLoginState(state: string) {
-    this.storageService.setData('login_state', { state });
-    this.loginState.next(state)
-  }
-
   async loginSuccess() {
     return new Promise((resolve, reject) => {
       this.getLogonUser().subscribe(response => {
         if (response) {
           this.userState = response;
-          this.setLoginState(LOGIN_CONSTANTS.LOGIN_STAGES.LOGIN_SUCCESS);
+          this.activateLogin();
           this.router.navigate(['/dashboard']);
-          this.autoLogin();
           resolve(true);
         } else {
           resolve(false);
@@ -150,27 +140,10 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
     const url = `${environment.apiUrl}${urlList.login.getLogonUser}userid=${this.accessToken?.username}`;
     return this.http
       .get<LoggedinUserModel>(url);
-
   }
 
-  getLoginState(): string | null {
-    const value = this.storageService.getData('login_state');
-    if (value) {
-      return value.state;
-    }
-    return null
-  }
-
-  get accessToken(): TokenResponseModel | null {
+  get accessToken(): TokenResponseModel {
     const token = this.storageService.getData('access_token');
-
-    // const currentTime = new Date().getTime();
-    // const expired = this.accessToken && new Date(this.accessToken?.tokenExpirationDate).getTime() > currentTime;
-    // 
-    // if (expired) {
-    //   return null;
-    // }
-
     return token;
   }
 
@@ -181,70 +154,102 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
     this.storageService.setData('user_data', data);
   }
 
-  doLogout(): void {
+  doLogout(from: string): void {
     this.clearTimers();
+    this.dismissNotify();
     // this.logout();
-    this.completeLogout();
-    this.notifyError({
-      error: false,
-      errorStatus: '',
-      message: 'You have been signed out successfully',
-    });
+    const lang = this.storageService.getData('currentLanguage');
+    if (this.watchRouteChange) {
+      this.clearTimers();
+      this.watchRouteChange.unsubscribe();
+    }
+    if (this.accessToken?.access_token && from !== 'AuthTokenInterceptor') {
+      this.notifyError({
+        error: false,
+        errorStatus: '',
+        message: 'You have been signed out successfully',
+      });
+    }
+    this.clearUserData();
+
+    this.router.navigate(['/auth/login']);
+    this.storageService.setData('currentLanguage', lang);
   }
+
   cancelLogin(): void {
     this.clearTimers();
     this.clearUserData();
     this.router.navigate(['/auth/login']);
   }
 
-  autoLogin(): boolean {
-    const currentTime = new Date().getTime();
-    if (this.accessToken && new Date(this.accessToken?.tokenExpirationDate).getTime() > currentTime) {
-      this.isLoggedIn.next(true);
+  activateLogin() {
+    if (this.isTokenActive) {
       this.idleWarning();
-      return true;
-    } else {
-      this.isLoggedIn.next(false);
-      this.doLogout();
-      return false;
+    }
+  }
+
+  get isTokenActive(): boolean {
+    try {
+      return this.accessToken ? (this.accessToken?.tokenExpirationDate || 0) > new Date().getTime() : false;
+    } catch (error) {
+      return false
     }
   }
 
   idleWarning(): void {
+    // if (!this.watchRouteChange) {
     this.watchRouteChange = this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe(() => {
-        this.isLoggedIn.subscribe((resp) => {
-          if (resp === true) {
-            this.clearIdleWarningTimers();
-            this.setIdleTimers();
-          } else {
-            this.clearTimers();
-            this.watchRouteChange.unsubscribe();
-          }
-        });
+      .subscribe((resp) => {
+        this.clearIdleWarningTimers();
+        this.setIdleTimers();
+        !this.isTokenActive && this.doLogout('idleWarning');
       });
+    // }
   }
 
   setIdleTimers(): void {
+
     this.logoutWarningTimer = setTimeout(() => {
       this.autoLogoutWarning();
-    }, this.logoutWarningTime);
+    }, this.msTillLogout - this.msBeforeForcedLogout);
 
+    // Force logout
     this.activeLogoutTimer = setTimeout(() => {
       this.logoutService.closeLogoutWarning(true);
-    }, this.logoutForcedTime);
+    }, this.msTillLogout);
+  }
+
+  get msTillLogout(): number {
+    return this.accessToken ? this.accessToken?.tokenExpirationDate - new Date().getTime() : 0;
   }
 
   autoLogoutWarning(): void {
     const logoutWarningModal = this.logoutService.openLogoutWarning();
-    logoutWarningModal.componentInstance.msTillLogout = this.logoutForcedTime - this.logoutWarningTime;
+    logoutWarningModal.componentInstance.msTillLogout = this.msTillLogout;
     logoutWarningModal.afterClosed().subscribe((logoutNow: boolean) => {
       if (logoutNow) {
-        this.doLogout();
+        this.doLogout('autoLogoutWarning');
       } else {
-        this.clearIdleWarningTimers();
-        this.setIdleTimers();
+        const payload = {
+          grant_type: 'refresh_token',
+          client_id: 'onboarding',
+          client_secret: 'postman-secret',
+          scope: 'offline_access',
+          refresh_token: this.accessToken.refresh_token
+        };
+        this.userLogin(payload, true).subscribe(
+          (authData: TokenResponseModel) => {
+            authData?.access_token &&
+              this.setToken({ ...this.accessToken, ...authData });
+            this.activateLogin();
+            this.clearIdleWarningTimers();
+            this.setIdleTimers();
+          },
+          (error) => {
+          }
+        );
+
       }
     });
   }
@@ -275,13 +280,6 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
   }
 
   private completeLogout(): void {
-    const lang = this.storageService.getData('currentLanguage');
-    this.clearUserData();
-    this.storageService.setData('currentLanguage', lang);
-    this.isLoggedIn.next(false);
-    if (this.watchRouteChange) {
-      this.watchRouteChange.unsubscribe();
-    }
-    this.router.navigate(['/auth/login']);
+
   }
 }

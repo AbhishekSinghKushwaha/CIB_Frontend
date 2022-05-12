@@ -2,10 +2,15 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Observable } from "rxjs";
+import { take } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import { TransactionListmodel } from "../../domain/transaction-list.model";
+import { CurrencySelectionService } from "../modal-services/currency-selection.service";
+import { TransferFromService } from "../modal-services/transfer-from.service";
 import urlList from "../service-list.json";
+import { SharedDataService } from "../shared-data/shared-data.service";
 import { StateService } from "../state/state.service";
+import { StorageService } from "../storage/storage.service";
 
 interface TransctionsState {
   pendingTransactions: TransactionListmodel[];
@@ -14,6 +19,7 @@ interface TransctionsState {
   standingOrders: TransactionListmodel[];
   standingOrder: TransactionListmodel;
   approvalPayload: {};
+  reinitiatePayload: {};
 }
 
 const initialState: TransctionsState = {
@@ -23,6 +29,7 @@ const initialState: TransctionsState = {
   standingOrders: [],
   standingOrder: {},
   approvalPayload: {},
+  reinitiatePayload: {},
 };
 @Injectable({
   providedIn: "root",
@@ -52,7 +59,18 @@ export class TransactionsService extends StateService<TransctionsState> {
     (state) => state.approvalPayload
   );
 
-  constructor(private http: HttpClient, private router: Router) {
+  reinitiatePayload$: Observable<any> = this.select(
+    (state) => state.reinitiatePayload
+  );
+
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private readonly currencySelectionService: CurrencySelectionService,
+    private readonly storageService: StorageService,
+    private readonly transferFromService: TransferFromService,
+    private readonly sharedDataService: SharedDataService
+  ) {
     super(initialState);
   }
   /*******STATE MANAGEMENT******/
@@ -80,11 +98,33 @@ export class TransactionsService extends StateService<TransctionsState> {
     this.setState({ approvalPayload: payload });
   }
 
+  setReinitiatePayload(reinitiatePayload: any): void {
+    this.setState({ reinitiatePayload });
+  }
+
+  async configureEditData(transaction: TransactionListmodel) {
+    this.setSendFrom(transaction);
+  }
+
+  //Edit configs
+  async setSendFrom(data: TransactionListmodel) {
+    console.log("Tunafika");
+    const accounts = await this.sharedDataService.countries$.toPromise();
+    console.log(accounts);
+    // this.sharedDataService.userAccounts.subscribe((accounts) => {
+    //   const account = accounts.find(
+    //     (value) => value.accountNumber === data.sourceAccount
+    //   );
+
+    //   this.transferFromService.setTransferFromAccount(account || {});
+    // });
+  }
+
   /*******API CALLS******/
-  getTransactions(params: any): Observable<any> {
-    return this.http.get(
+  getTransactions(payload: any): Observable<any> {
+    return this.http.post(
       environment.apiUrl + urlList.statement.getTransactions,
-      { params }
+      payload
     );
   }
 
@@ -97,7 +137,7 @@ export class TransactionsService extends StateService<TransctionsState> {
   }
 
   approveTransaction(transactionType: string) {
-    this.approvalPayload$.subscribe((payloadData) => {
+    this.approvalPayload$.pipe(take(1)).subscribe((payloadData) => {
       if (payloadData) {
         this.http
           .post<any>(
@@ -106,6 +146,7 @@ export class TransactionsService extends StateService<TransctionsState> {
           )
           .subscribe((res) => {
             if (res.status) {
+              this.setApprovalPayload({});
               this.router.navigate([
                 `/transact/transfer-submitted/${transactionType}`,
               ]);
@@ -113,5 +154,30 @@ export class TransactionsService extends StateService<TransctionsState> {
           });
       }
     });
+  }
+
+  reinitiateTransaction(transactionType: string) {
+    this.reinitiatePayload$
+      .pipe(take(1))
+      .subscribe((payloadData) => {
+        if (payloadData) {
+          this.http
+            .post<any>(
+              environment.apiUrl + urlList.transfers.reinitiateTransaction,
+              {
+                reference: payloadData.requestReference,
+                reInitiateDetails: payloadData,
+              }
+            )
+            .subscribe((res) => {
+              if (res.status) {
+                this.router.navigate([
+                  `/transact/transfer-submitted/${transactionType}`,
+                ]);
+              }
+            });
+        }
+      })
+      .unsubscribe();
   }
 }

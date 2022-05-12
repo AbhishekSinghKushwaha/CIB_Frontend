@@ -55,6 +55,11 @@ export class TransactConstants {
           subtext: 'A local or international bank',
           link: '/transact/pesa-link',
         },
+        {
+          leftIcon: 'phone_iphone',
+          text: 'Bulk payment',
+          link: '/transact/bulk-transfer',
+        },
       ],
     },
     {

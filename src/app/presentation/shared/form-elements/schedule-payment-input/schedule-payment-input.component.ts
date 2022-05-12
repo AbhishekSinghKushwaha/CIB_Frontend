@@ -1,22 +1,22 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { Component, forwardRef, Input, OnInit } from "@angular/core";
 import {
   ControlValueAccessor,
   FormControl,
   FormGroup,
   NG_VALUE_ACCESSOR,
-} from '@angular/forms';
-import { ScheduledPaymentModel } from 'src/app/core/domain/scheduled-payment.model';
-import { SchedulePaymentService } from 'src/app/core/services/schedule-payment/schedule-payment.service';
-import * as moment from 'moment';
+} from "@angular/forms";
+import { ScheduledPaymentModel } from "src/app/core/domain/scheduled-payment.model";
+import { SchedulePaymentService } from "src/app/core/services/schedule-payment/schedule-payment.service";
+import * as moment from "moment";
 
 export interface Value {
   value?: string;
   reminder?: string;
 }
 @Component({
-  selector: 'app-schedule-payment-input',
-  templateUrl: './schedule-payment-input.component.html',
-  styleUrls: ['./schedule-payment-input.component.scss'],
+  selector: "app-schedule-payment-input",
+  templateUrl: "./schedule-payment-input.component.html",
+  styleUrls: ["./schedule-payment-input.component.scss"],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -88,7 +88,7 @@ export class SchedulePaymentInputComponent
   }
 
   eventsSubscription(): void {
-    this.schedulePaymentService.selectedSchedulePayment.subscribe((res) => {
+    this.schedulePaymentService.scheduledPayment$.subscribe((res) => {
       this.formatView(res);
     });
   }
@@ -96,29 +96,33 @@ export class SchedulePaymentInputComponent
   formatView(scheduledPayment: ScheduledPaymentModel) {
     switch (scheduledPayment.frequency.value) {
       case 1: // Once off frequncy
-        this.value.value = `Today, ${moment().format('MMMM Do YYYY')}`;
+        if (moment(scheduledPayment.startDate).isAfter(moment())) {
+          this.value.value = `On this day, ${moment().format("MMMM Do YYYY")}`;
+        } else {
+          this.value.value = `Today, ${moment().format("MMMM Do YYYY")}`;
+        }
         this.value.reminder = scheduledPayment.reminderDay?.reminder;
         break;
       case 2: // Daily
         this.value.value = `Everyday from ${moment(
           scheduledPayment.startDate
-        ).format('MMM Do')} to ${moment(scheduledPayment.endDate).format(
-          'MMM Do'
+        ).format("MMM Do")} to ${moment(scheduledPayment.endDate).format(
+          "MMM Do"
         )}`;
         this.value.reminder = scheduledPayment.reminderDay?.reminder;
         break;
       case 3: // Weekly
-        this.value.value = `Every week on ${moment().format('dddd')}`;
+        this.value.value = `Every week on ${moment().format("dddd")}`;
         this.value.reminder = scheduledPayment.reminderDay?.reminder;
         break;
       case 4: // Monthly
-        this.value.value = `Every month on the ${moment().format('Do')}`;
+        this.value.value = `Every month on the ${moment().format("Do")}`;
         this.value.reminder = scheduledPayment.reminderDay?.reminder;
         break;
       case 5: // Yearly
         this.value.value = `Every year on ${moment(
           scheduledPayment.startDate
-        ).format('MMM Do')}`;
+        ).format("MMM Do")}`;
         this.value.reminder = scheduledPayment.reminderDay?.reminder;
         break;
       default:

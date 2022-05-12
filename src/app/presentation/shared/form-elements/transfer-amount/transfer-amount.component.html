@@ -36,7 +36,19 @@
         [placeholder]="placeholder"
         placeholder="Enter an amount"
       />
+      <mat-hint *ngIf="conversionRate">
+        <span
+          >Converted amount = {{ conversionRate?.convertedAmount }}
+          {{ currency.currencyCode }}</span
+        >
+        <br />
+        <span
+          >1 {{ currency.currencyCode }} = {{ conversionRate?.rate }}
+          {{ sendFromAccount.currency }}</span
+        >
+      </mat-hint>
     </mat-form-field>
+
     <app-field-errors [formField]="formField"></app-field-errors>
   </div>
 </div>

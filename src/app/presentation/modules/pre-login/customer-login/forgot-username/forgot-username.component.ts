@@ -10,7 +10,7 @@ import { SecurityChallengeService } from 'src/app/core/services/security-challen
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { CONFIRMATIONCOMPLETION } from 'src/app/core/utils/constants/confirmation.constants';
-import { SharedUtils } from 'src/app/core/utils/shared.util';
+import SharedUtils from 'src/app/core/utils/shared.util';
 
 @Component({
   selector: 'app-forgot-username',

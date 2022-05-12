@@ -1,0 +1,17 @@
+.download-template-modal-screen {
+    width: 375px;
+    margin: 0;
+    padding: 0;
+  }
+
+.button_icon {
+    transform: scale(2);
+}
+
+.card{
+  border: none !important;
+}  
+
+::ng-deep .my-template {
+  overflow: hidden !important;
+}

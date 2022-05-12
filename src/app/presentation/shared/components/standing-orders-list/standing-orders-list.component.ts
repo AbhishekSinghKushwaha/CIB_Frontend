@@ -71,6 +71,8 @@ export class StandingOrdersListComponent implements OnInit {
     const payload = {
       title: 'Are you sure?',
       message: 'Once you cancel the standing order for ' + data.title + '?',
+      buttonNo: "No, I'm not",
+      buttonYes: "Yes, I’m sure"
     }
     // this.deleteService.open(payload);
     const deactivatePayload = {
