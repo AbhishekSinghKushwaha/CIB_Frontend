@@ -96,8 +96,10 @@ export class LoginComponent implements OnInit {
     this.authService.clearUserData();
     this.authService.userLogin(payload).subscribe(
       (authData: TokenResponseModel) => {
-
+        
+        this.otpError = false;
         this.firstTimeLogin = !!authData?.firstTimeLogin;
+        this.authService.setToken({ ...authData, username: payload.username });
         if (!authData?.firstTimeLogin) {
           this.stage = 'sms-verification';
           this.initialResponse = authData.message;
@@ -107,7 +109,6 @@ export class LoginComponent implements OnInit {
           this.initialResponse = authData.message;
           this.title = 'Password creation';
         }
-        this.authService.setToken({ ...authData, username: payload.username });
       },
       (error) => {
         this.modalTakeAnotherLook();
@@ -116,46 +117,33 @@ export class LoginComponent implements OnInit {
     );
   }
 
+  smsVerificationSubmitMain(payload: any, type: 'submitFirstTimeLogin' | 'submitOTP') {
+    this.authService.submitOTP(payload)[type].subscribe(
+      async (response) => {
+        if (response) {
+          const loginStat = await this.authService.loginSuccess();
+
+          if (!loginStat) {
+            this.otpError = true;
+          }
+        } else {
+          this.otpError = true;
+        }
+      },
+      (error) => {
+        this.otpError = true;
+
+      }
+    )
+  }
+
   smsVerificationSubmit(otp: string) {
     this.otpError = false;
     if (otp) {
       this.firstTimeLogin && (this.finalLoginPayload.otp = otp);
-      this.firstTimeLogin ?
-        this.authService.submitOTP(this.finalLoginPayload).submitFirstTimeLogin.subscribe(
-          async (response) => {
-
-            if (response) {
-              const loginStat = await this.authService.loginSuccess();
-              if (!loginStat) {
-                this.otpError = true;
-              }
-            } else {
-              this.otpError = true;
-            }
-          },
-          (error) => {
-            this.otpError = true;
-
-          }
-        ) :
-        this.authService.submitOTP(otp).submitOTP.subscribe(
-          async (response) => {
-
-            if (response) {
-              const loginStat = await this.authService.loginSuccess();
-              if (!loginStat) {
-                this.otpError = true;
-              }
-            } else {
-              this.otpError = true;
-            }
-          },
-          (error) => {
-            this.otpError = true;
-
-          }
-        )
-
+      const payload = this.firstTimeLogin ? this.finalLoginPayload : otp;
+      const type = this.firstTimeLogin ? 'submitFirstTimeLogin' : 'submitOTP';
+      this.smsVerificationSubmitMain(payload, type);
     }
   }
 

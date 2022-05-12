@@ -30,15 +30,9 @@ export class BeneficiaryManagementService {
 
   constructor(
     private readonly http: HttpClient,
-    private readonly authService: AuthService,
     private router: Router,
     private storageService: StorageService
   ) {
-    this.authService.IsLoggedIn.subscribe((loggedIn) => {
-      if (!loggedIn) {
-        //  this.beneficiaries.splice(0);
-      }
-    });
   }
 
   submitForm(data: any): void {

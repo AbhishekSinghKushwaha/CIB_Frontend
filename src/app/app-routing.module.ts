@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
-import { LoginGuard } from './core/utils/guards/login/login.guard';
 import { PostLoginGuard } from './core/utils/guards/post-login/post-login.guard';
+import { PreLoginGuard } from './core/utils/guards/pre-login/pre-login.guard';
 
 const routes: Routes = [
   {
@@ -18,7 +18,7 @@ const routes: Routes = [
       import('./presentation/modules/pre-login/pre-login.module').then(
         (m) => m.PreLoginModule
       ),
-    canActivate: [LoginGuard]
+    canActivate: [PreLoginGuard]
   },
   {
     path: '**',
