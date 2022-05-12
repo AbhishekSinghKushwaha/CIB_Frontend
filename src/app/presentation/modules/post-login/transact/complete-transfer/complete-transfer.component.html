@@ -12,25 +12,41 @@
       </div>
     </div>
 
-    <!-- Standing Orders -->
-    <div class="col-7" *ngIf="transferType === 'Standing Orders'">
-      <h3 class="mt-5 strong-text">Standing order submitted for approval!</h3>
+    <div class="col-7">
+      <h4
+        class="mt-5"
+        *ngIf="
+          transferType !== 'Standing Orders' && transferType !== 'bulk-transfer'
+        "
+      >
+        Fund transfer submitted for approval!
+      </h4>
+
+      <h3 class="mt-5 strong-text" *ngIf="transferType === 'Standing Orders'">
+        Standing order submitted for approval!
+      </h3>
+
+      <div *ngIf="transferType === 'bulk-transfer'">
+        <h3 class="mt-5 strong-text">Your request has been submitted</h3>
+        <span class="text-sm text-grey">
+          We’ll let you know the status of your request once it has been
+          reviewed.
+        </span>
+      </div>
       <br />
 
-      <p>Permanent Amendment</p>
-
-      <span class="text-sm text-grey"
-        >Transaction of KES 0.00, daily transact limit of KES 0.00 on 16/04/2021
-        at 10:45:23 was submitted for approval.</span
-      >
-
-      <br /><br />
-
-      <span class="text-sm text-grey"
-        >You will be notified once the transaction has been approved</span
-      >
-
-      <br />
+      <div *ngIf="transferType !== 'bulk-transfer'">
+        <p>Permanent Amendment</p>
+        <span class="text-sm text-grey">
+          Transaction of KES 0.00, daily transact limit of KES 0.00 on
+          16/04/2021 at 10:45:23 was submitted for approval.
+        </span>
+        <br /><br />
+        <span class="text-sm text-grey"
+          >You will be notified once the transaction has been approved</span
+        >
+        <br />
+      </div>
 
       <div class="row col-md-10">
         <div class="col-md-4">
@@ -168,6 +184,17 @@
               transferType !== transferTypes.OWN_EQUITY &&
               transferType !== 'reinitiate-transaction'
             "
+            mat-stroked-button
+            type="button"
+            color="primary"
+            class="px-5 mt-4"
+            (click)="openAddFavourite()"
+          >
+            Add to favourites
+          </button>
+
+          <button
+            *ngIf="checkIfFavouriteExists() && transferType !== 'bulk-transfer'"
             mat-stroked-button
             type="button"
             color="primary"

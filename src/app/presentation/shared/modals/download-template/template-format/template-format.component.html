@@ -1,0 +1,46 @@
+<div class="download-template-modal-screen p-0 my-template">
+    <div class="row">
+        <div class="col-md-2">
+            <button mat-icon-button matSuffix class="close-button" (click)="close()">
+                <mat-icon svgIcon="caret_left"></mat-icon>
+            </button>
+        </div>
+        <div class="col-md-8">
+            <p class="text-center fw-bold pt-2">Download a template</p>
+        </div>
+    </div>
+    <h3 class="mt-4 ms-2">Please select the template format</h3>
+    <p class="text-sm text-grey ms-2">Choose a file format from the options below</p>
+    <div>
+        <div class="row gx-0 p-3 cursor-pointer">
+            <div class="col-md-3">
+                <button mat-icon-button>
+                    <mat-icon svgIcon="download_grey" class="button_icon"></mat-icon>
+                </button>
+            </div>
+            <div class="col-md-7 card card-block justify-content-center" (click)="downloadExcel()">
+                Excel
+            </div>
+        </div>
+        <div class="row gx-0 p-3 cursor-pointer">
+            <div class="col-md-3">
+                <button mat-icon-button>
+                    <mat-icon svgIcon="download_grey" class="button_icon"></mat-icon>
+                </button>
+            </div>
+            <div class="col-md-7 card card-block justify-content-center" (click)="downloadCSV()">
+                Csv
+            </div>
+        </div>
+        <div class="row gx-0 p-3 cursor-pointer">
+            <div class="col-md-3">
+                <button mat-icon-button>
+                    <mat-icon svgIcon="download_grey" class="button_icon"></mat-icon>
+                </button>
+            </div>
+            <div class="col-md-7 card card-block justify-content-center" (click)="downloadOther()">
+                Other
+            </div>
+        </div>
+    </div>
+</div>

@@ -54,7 +54,9 @@
     "getCharges": "/cibpaymentservice-v1/api/v1/BuyGoods/Charges",
     "transactionApproval": "/cibpaymentservice-v1/api/v1/Transactions/ApproveTransaction",
     "reinitiateTransaction": "/cibpaymentservice-v1/api/v1/Transfer/ReInitiate",
-    "getConversionRate": "/cibpaymentservice-v1/api/v1/Transfer/GetExchangeRates"
+    "getConversionRate": "/cibpaymentservice-v1/api/v1/Transfer/GetExchangeRates",
+    "bulkTransfer": "/cibpaymentservice-v1/api/v1/BulkTransfer/InterBank",
+    "bulkTransferMultipleMode": "/cibpaymentservice-v1/api/v1/BulkTransfer/MultipleModePayment"
   },
   "dataLookUp": {
     "getCountries": "/cibpaymentservice-v1/api/v1/Transfer/GetCountries",
