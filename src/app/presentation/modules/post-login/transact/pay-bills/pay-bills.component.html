@@ -1,1 +1,100 @@
-<p>pay-bills works!</p>
+<div>
+  <div class="mb-3">
+    <button
+      mat-icon-button
+      aria-label="Back"
+      class="back-icon"
+      routerLink="/transact"
+    >
+      <div class="strong-text">
+        <mat-icon svgIcon="caret_left"></mat-icon>
+        <span>Send to your own equity account</span>
+      </div>
+    </button>
+  </div>
+  <h3 class="strong-text">Please enter the payment details</h3>
+  <form
+    class="d-flex flex-column"
+    autocomplete="off"
+    [formGroup]="payBillTransferForm"
+    (submit)="confirmBillPayment()"
+  >
+    <div class="row pt-4">
+      <!-- Transfer From -->
+      <div class="col-md-6">
+        <app-transfer-from
+          [parentForm]="payBillTransferForm"
+          label="Pay From"
+          placeholder="Pay From"
+          formControlName="payFrom"
+          fieldName="payFrom"
+        ></app-transfer-from>
+      </div>
+      <!-- Transfer To -->
+      <div class="col-md-6 align-self-end">
+        <app-select-billers
+          [parentForm]="payBillTransferForm"
+          fieldName="payTo"
+          formControlName="payTo"
+          label="Pay To"
+          placeholder="Select biller"
+        ></app-select-billers>
+      </div>
+      <!-- FX Reference ID -->
+      <div class="col-md-6">
+        <app-input
+          [parentForm]="payBillTransferForm"
+          fieldName="fxReferenceId"
+          label="FX Reference ID"
+          placeholder="Enter FX reference ID"
+          formControlName="fxReferenceId"
+        ></app-input>
+      </div>
+      <!-- Transfer amount -->
+      <div class="col-md-6">
+        <app-transfer-amount
+          [parentForm]="payBillTransferForm"
+          fieldName="amount"
+          label="Amount"
+          placeholder="Enter an amount"
+          formControlName="amount"
+        >
+        </app-transfer-amount>
+      </div>
+      <!-- Schedule Payment -->
+      <div class="col-md-6">
+        <app-schedule-payment-input
+          [parentForm]="payBillTransferForm"
+          label="Schedule Payment"
+          fieldName="schedulePayment"
+          placeholder="Select a payment date"
+          transactionType="ownEquityAccount"
+        ></app-schedule-payment-input>
+      </div>
+
+      <!-- Payment Reason -->
+      <div class="col-md-6">
+        <app-input
+          [parentForm]="payBillTransferForm"
+          fieldName="reason"
+          label="Payment Reason"
+          formControlName="reason"
+          placeholder="Optional"
+        ></app-input>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="mt-4">
+      <button
+        mat-raised-button
+        type="submit"
+        [disabled]="payBillTransferForm.invalid"
+        color="primary"
+        class="px-5"
+      >
+        Pay bill
+      </button>
+    </div>
+  </form>
+</div>

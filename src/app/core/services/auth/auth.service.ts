@@ -103,6 +103,22 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
 
   }
 
+  userSwitch(data: any) {
+    const payload = new URLSearchParams();
+    payload.set('grant_type', data.grant_type);
+    payload.set('client_id', data.client_id);
+    payload.set('client_secret', data.client_secret);
+    payload.set('scope', data.scope);
+    payload.set('corporateId', data.corporateId)
+
+    const headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
+
+    const url = environment.apiUrl + urlList.login.loginUser;
+    return this.http
+      .post<TokenResponseModel>(url, payload, { headers });
+
+  }
+
   setToken(accessToken: TokenResponseModel): void {
     if (!accessToken?.tokenExpirationDate) {
       accessToken.tokenExpirationDate = new Date(
@@ -143,6 +159,13 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
         resolve(false);
       });
     })
+
+  }
+
+  getGroupedCorporate(corporateId: string) {
+    const url = environment.apiUrl + urlList.userManagement.getGroupedCorporate + `/${corporateId}`;
+    return this.http
+      .get(url);
 
   }
 

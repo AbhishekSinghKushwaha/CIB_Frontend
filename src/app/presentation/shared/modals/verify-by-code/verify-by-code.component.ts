@@ -31,6 +31,7 @@ import { InterbankService } from "src/app/core/services/transfers/interbank/inte
 import { SwiftTransferService } from "src/app/core/services/transfers/swift/swift-transfer.service";
 import { IntercountryService } from "src/app/core/services/transfers/intercountry/intercountry.service";
 import { TransactionsService } from "src/app/core/services/transactions/transactions.service";
+import { BillServiceService } from "src/app/core/services/transfers/bill-service/bill-service.service";
 
 @Component({
   selector: "app-verify-by-code",
@@ -60,6 +61,7 @@ export class VerifyByCodeComponent implements OnInit {
   @Input() data: any;
   payload: any;
   airtimePayload: any;
+  billPaymentPayload: any;
 
   formInput = ["input1", "input2", "input3", "input4", "input5", "input6"];
   @ViewChildren("formRow") rows: any;
@@ -82,7 +84,8 @@ export class VerifyByCodeComponent implements OnInit {
     private interbankService: InterbankService,
     private swiftTransferService: SwiftTransferService,
     private intercountryService: IntercountryService,
-    private transactionService: TransactionsService
+    private transactionService: TransactionsService,
+    private billPaymentService: BillServiceService
   ) {
     this.initOtpForm();
   }
@@ -197,6 +200,25 @@ export class VerifyByCodeComponent implements OnInit {
     }
   }
 
+  billPayment() {
+    this.billPaymentService.currentData.subscribe((data: any) => {
+      this.billPaymentPayload = data;
+    })
+    if (this.billPaymentPayload) {
+      this.billPaymentService
+        .postValidateBill(this.billPaymentPayload)
+        .subscribe((res) => {
+          if (res.status) {
+            this.router.navigate([
+              `/transact/transfer-submitted/${this.transferType.BILL_PAYMENT}`,
+            ])
+          } else {
+            console.log(res.message);
+          }
+        })
+    }
+  }
+
   buyAirtime() {
     this.buyAirtimeService.currentData.subscribe((data) => {
       this.airtimePayload = data;
@@ -264,6 +286,9 @@ export class VerifyByCodeComponent implements OnInit {
     switch (this.transactionType) {
       case this.transferType.BUY_AIRTIME:
         this.buyAirtime();
+        break;
+      case this.transferType.BILL_PAYMENT:
+        this.billPayment();
         break;
       case this.transferType.BUY_GOODS:
         this.buyGoods();

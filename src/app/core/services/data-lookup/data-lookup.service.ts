@@ -11,6 +11,12 @@ import urlList from "../service-list.json";
 export class DataLookupService {
   constructor(private http: HttpClient) { }
 
+  getUserData(): Observable<any> {
+    return this.http.get(
+      environment.apiUrl + urlList.userManagement.currentUserData
+    );
+  }
+
   // Get Banks in a particular country
   getBanks(country: string): Observable<any> {
     return this.http.get(

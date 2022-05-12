@@ -1,3 +1,5 @@
+import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { BillServiceService } from './../../../core/services/transfers/bill-service/bill-service.service';
 import { BreakpointObserver, MediaMatcher } from "@angular/cdk/layout";
 import {
   AfterViewInit,
@@ -25,7 +27,7 @@ import { StorageService } from "src/app/core/services/storage/storage.service";
 export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
-
+  currrentCountry = this.storageService.getData('userCountry')
   mobileQuery!: MediaQueryList;
   private mobileQueryListener!: () => void;
   loading: boolean = false;
@@ -39,7 +41,9 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     private storageService: StorageService,
     private accountsService: AccountsService,
     private sharedDataService: SharedDataService,
-    private beneficiaryService: BeneficiaryManagementService
+    private beneficiaryService: BeneficiaryManagementService,
+    private billPaymentService: BillServiceService,
+    private authService: AuthService
   ) {
     this.getMobileQuery();
     this.mobileQueryListener = (): void => changeDetectorRef.detectChanges();
@@ -47,8 +51,10 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.getBanks();
+
+    this.getCurrentUserData();
     this.getCountries();
+    this.getBanks();
     this.getUserAccounts();
     this.getSectors();
     this.loadingListener();
@@ -56,9 +62,11 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getTelcos();
     this.getMobileWallets();
     this.getSubsidiaries();
+    this.getBillers();
+    this.getGroupedAccount();
   }
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() { }
 
   ngOnDestroy() {
     if (this.mobileQuery) {
@@ -83,18 +91,32 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
       });
   }
 
+  getCurrentUserData(): void {
+    this.dataLookupService.getUserData().subscribe((res) => {
+      console.log(res)
+      if (res.isSuccessful) {
+        this.storageService.setData("currentUserData", res.data);
+      }
+    })
+  }
+
   // Call Data Look up services
   getCountries() {
     this.dataLookupService.getCountries().subscribe((res) => {
       if (res.status) {
         this.storageService.setData("countries", res.data);
+        const currentUser = this.storageService.getData("currentUserData");
+        const currentUserCountry = res.data.filter((country: any) => country.countryCode3Chars === currentUser.corporate.countryId);
+        console.log('current user country', currentUserCountry);
+        this.storageService.setData("userCountry", currentUserCountry[0])
       }
     });
   }
 
   //TODO:: Get user default country to use to call this endpoint
   getBanks() {
-    this.dataLookupService.getBanks("KE").subscribe((res) => {
+
+    this.dataLookupService.getBanks(this.currrentCountry.countryCode).subscribe((res) => {
       if (res.status) {
         this.storageService.setData("banks", res.data);
       }
@@ -107,6 +129,26 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
         this.sharedDataService.setUserAccounts(res.data);
       }
     });
+  }
+
+  getBillers() {
+    this.billPaymentService.getBillersByCountry(this.currrentCountry.countryCode).subscribe((res) => {
+      if (res.status) {
+        this.storageService.setData('billers', res.data.items)
+      }
+    })
+  }
+
+  getGroupedAccount() {
+    const userData = this.storageService.getData('currentUserData')
+    const corporateId = userData.corporate.id;
+    this.authService.getGroupedCorporate(corporateId).subscribe((res: any) => {
+      if (res.isSuccessful) {
+        this.storageService.setData('grouped_account', res.data)
+      } else {
+        this.storageService.setData('grouped_account', [])
+      }
+    })
   }
 
   getBeneficiaries() {

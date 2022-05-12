@@ -825,6 +825,12 @@ export class CustomIconService {
         'assets/images/icons/dashboard_more.svg'
       )
     );
+    this.matIconRegistry.addSvgIcon(
+      'countries',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/icons/country.svg'
+      )
+    );
   }
 }
 

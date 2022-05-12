@@ -15,12 +15,15 @@ export class AuthTokenInterceptor implements HttpInterceptor {
     const clientId = environment.clientId;
 
     if (authToken) {
-      request = request.clone({
-        headers: request.headers.set(
-          'Authorization',
-          `Bearer ${authToken.access_token}`
-        ),
-      });
+      if (request.url.indexOf('https://api-dev.equitygroupholdings.com/v1/cibcore/api/Corporates/GroupedCorporates/') !== 0) {
+        request = request.clone({
+          headers: request.headers.set(
+            'Authorization',
+            `Bearer ${authToken.access_token}`
+          ),
+        });
+      }
+
     }
 
     if (!request.headers.has('Content-Type')) {

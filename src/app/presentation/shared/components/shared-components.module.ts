@@ -1,3 +1,5 @@
+import { GroupedAccountItemComponent } from './grouped-account-item/grouped-account-item.component';
+
 import { RouterModule } from '@angular/router';
 import { CardComponentComponent } from './card-component/card-component.component';
 import { NgModule } from '@angular/core';
@@ -56,7 +58,8 @@ const components = [
   TransactionsListComponent,
   PaginatorComponent,
   ListItemsComponent,
-  StandingOrdersListComponent
+  StandingOrdersListComponent,
+  GroupedAccountItemComponent
 ];
 
 @NgModule({

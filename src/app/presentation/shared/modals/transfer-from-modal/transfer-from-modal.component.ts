@@ -21,7 +21,7 @@ export class TransferFromModalComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   close(): void {
     this.transferFromService.closeTransferFromAccountModal();

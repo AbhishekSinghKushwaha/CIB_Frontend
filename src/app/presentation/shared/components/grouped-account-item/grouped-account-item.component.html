@@ -1,0 +1,17 @@
+<mat-card class="m-2 mb-3 cursor-pointer mat-elevation-z0" (click)="select()">
+  <div class="row align-items-stretch">
+    <div class="col-md-1">
+      <mat-icon
+        color="primary"
+        [svgIcon]="isChecked ? 'check_round' : 'radio_button_off'"
+      ></mat-icon>
+    </div>
+    <div class="col-md-11">
+      <h4>{{ data?.corporateName }}</h4>
+      <p class="mb-1">
+        {{ data?.emailAddress }}
+      </p>
+      <small class="mb-1 text-grey">{{ data?.phoneNumber }} </small>
+    </div>
+  </div>
+</mat-card>

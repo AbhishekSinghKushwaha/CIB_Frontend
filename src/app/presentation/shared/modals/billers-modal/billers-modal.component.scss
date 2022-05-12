@@ -1,0 +1,23 @@
+.new-recipient-modal-screen {
+    max-width: 42vw;
+    height: 95vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.mat-dialog-container {
+    margin: 0;
+    padding: 0;
+}
+
+.close-button {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 1000;
+}
+
+.img-d {
+    width: 60px;
+    height: 60px;
+}

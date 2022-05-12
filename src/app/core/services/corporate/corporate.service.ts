@@ -25,4 +25,8 @@ export class CorporateService {
   getCorporateDetail(corporateEmail: string) {
     return this.http.get(`${environment.apiUrl}${urlList.corporate.main}${corporateEmail}`);
   }
+
+  editUserCountry(corporateId: string, payload: any) {
+    return this.http.put(`${environment.apiUrl}${urlList.corporate.corporateUser}${corporateId}/Country`, payload)
+  }
 }

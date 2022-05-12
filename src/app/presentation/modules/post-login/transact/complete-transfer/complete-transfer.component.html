@@ -129,10 +129,17 @@
         transferType === transferTypes.PESALINK ||
         transferType === transferTypes.RTGS ||
         transferType === transferTypes.SUBSIDIARY ||
-        transferType === transferTypes.SWIFT
+        transferType === transferTypes.SWIFT ||
+        transferType === transferTypes.BILL_PAYMENT
       "
     >
-      <h4 class="mt-5">Fund transfer submitted for approval</h4>
+      <h4 class="mt-5">
+        <span *ngIf="transferTypes.BILL_PAYMENT; else fundTransfer"
+          >Bill Payment</span
+        >
+        <ng-template #fundTransfer> Fund transfer </ng-template> submitted for
+        approval
+      </h4>
 
       <br />
 
@@ -167,17 +174,6 @@
             color="primary"
             class="px-5 mt-4"
             (click)="openAddFavourite()"
-          >
-            Add to favourites
-          </button>
-
-          <button
-            *ngIf="checkIfFavouriteExists()"
-            mat-stroked-button
-            type="button"
-            color="primary"
-            class="px-5 mt-4"
-            (click)="addToFavourites()"
           >
             Add to favourites
           </button>
