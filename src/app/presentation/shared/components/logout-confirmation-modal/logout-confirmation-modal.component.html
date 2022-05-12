@@ -2,9 +2,7 @@
   <mat-card-content class="container" ngbAutofocus>
     <div class="row mt-2">
       <div class="col-12">
-        <h3 class="strong-text" i18n="@@loco:5fc68ebdbfa0f60d9b48f678">
-          Are you sure you want to sign out?
-        </h3>
+        <h3 class="strong-text">Are you sure you want to sign out?</h3>
       </div>
     </div>
     <div class="row">
@@ -13,17 +11,10 @@
         color="primary"
         class="strong-text"
         (click)="closeModal()"
-        i18n="@@loco:5f81ac24600bb213d771f734"
       >
         Keep me in
       </button>
-      <button
-        mat-button
-        color="primary"
-        class="strong-text"
-        (click)="logout()"
-        i18n="@@loco:5f81ac4307a65013ea2edef6"
-      >
+      <button mat-button color="primary" class="strong-text" (click)="logout()">
         sign me out
       </button>
     </div>

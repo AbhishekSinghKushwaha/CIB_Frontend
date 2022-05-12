@@ -85,8 +85,8 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
     if (!refresh) {
       payload.set('username', data.username);
       payload.set('password', data.password);
-    }else{
-      payload.set('refresh_token',data.refresh_token);
+    } else {
+      payload.set('refresh_token', data.refresh_token);
     }
     payload.set('grant_type', data.grant_type);
     payload.set('client_id', data.client_id);
@@ -102,11 +102,9 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
   }
 
   setToken(accessToken: TokenResponseModel): void {
-    if (!accessToken?.tokenExpirationDate) {
-      accessToken.tokenExpirationDate = new Date(
-        new Date().getTime() + accessToken.expires_in * 1000
-      ).getTime();
-    }
+    accessToken.tokenExpirationDate = new Date(
+      new Date().getTime() + accessToken.expires_in * 1000
+    ).getTime();
     this.storageService.setData('access_token', accessToken);
     this.idleWarning();
   }
@@ -125,7 +123,7 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
       this.getLogonUser().subscribe(response => {
         if (response) {
           this.userState = response;
-          // this.activateLogin();
+          this.activateLogin();
           this.router.navigate(['/dashboard']);
           resolve(true);
         } else {
@@ -185,11 +183,9 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
   }
 
   activateLogin() {
-    // if (this.isTokenActive) {
-    // this.idleWarning();
-    // } else {
-    //   this.doLogout();
-    // }
+    if (this.isTokenActive) {
+      this.idleWarning();
+    }
   }
 
   get isTokenActive(): boolean {
@@ -235,23 +231,22 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
       if (logoutNow) {
         this.doLogout('autoLogoutWarning');
       } else {
-        // TODO :: Implement refresh token
-
         const payload = {
           grant_type: 'refresh_token',
           client_id: 'onboarding',
           client_secret: 'postman-secret',
           scope: 'offline_access',
-          refresh_token:this.accessToken.refresh_token
+          refresh_token: this.accessToken.refresh_token
         };
         this.userLogin(payload, true).subscribe(
           (authData: TokenResponseModel) => {
-            console.log('authData', authData);
-            // this.setToken({ ...authData, username: payload.username });
-          },
-          (error) => {
+            authData?.access_token &&
+              this.setToken({ ...this.accessToken, ...authData });
+            this.activateLogin();
             this.clearIdleWarningTimers();
             this.setIdleTimers();
+          },
+          (error) => {
           }
         );
 
