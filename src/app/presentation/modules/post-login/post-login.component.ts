@@ -54,7 +54,6 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.getCurrentUserData();
     this.getCountries();
-    this.getBanks();
     this.getUserAccounts();
     this.getSectors();
     this.loadingListener();
@@ -65,7 +64,7 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getBillers();
     this.getGroupedAccount();
     this.getCurrencies();
-    this.getCurrentUserCountry();
+
   }
 
   ngAfterViewInit() {
@@ -105,12 +104,14 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   // Call Data Look up services
-  getCountries() {
-    this.dataLookupService.getCountries().subscribe((res) => {
+  async getCountries() {
+    await this.dataLookupService.getCountries().subscribe((res) => {
       if (res.status) {
         this.storageService.setData("countries", res.data);
       }
     });
+    await this.getCurrentUserCountry();
+    await this.getBanks();
   }
 
   getCurrentUserCountry() {
@@ -123,7 +124,7 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
   //TODO:: Get user default country to use to call this endpoint
   getBanks() {
 
-    this.dataLookupService.getBanks(this.currrentCountry.countryCode).subscribe((res) => {
+    this.dataLookupService.getBanks(this.currrentCountry.countryId).subscribe((res) => {
       if (res.status) {
         this.storageService.setData("banks", res.data);
       }

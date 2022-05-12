@@ -138,3 +138,34 @@ line-height: 28px;
     }
     
 }
+
+.user-info {
+    background: #f7f7f7;
+    float: right;
+    width: 170px;
+    height: 48px;
+    margin: auto;
+    height: 59px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    border-radius: 31px;
+    padding: 5px;
+    cursor: pointer;
+    .initial-container {
+        width: 48px;
+        height: 48px;
+        margin: auto;
+        padding: 8px;
+        background: #A32A29;
+        font-size: 20px;
+        line-height: 28px;
+        color: #fff;
+        border-radius: 50%;
+
+    }
+
+    mat-icon {
+        color: #A32A29 !important;
+    }
+}

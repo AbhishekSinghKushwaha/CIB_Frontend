@@ -15,6 +15,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'profile-detail',
+    loadChildren: (): Promise<any> =>
+      import('./profile-detail/profile-detail.module').then(
+        (m) => m.ProfileDetailModule
+      ),
+  },
+  {
     path: '**',
     redirectTo: ''
   }
