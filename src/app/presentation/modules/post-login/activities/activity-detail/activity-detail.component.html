@@ -21,7 +21,11 @@
         *ngIf="data?.approvalStatus === approvalStatus.Approved"
       >
         <app-card-component
-          [data]="{ text: 'View or download receipt', suffixIcon: 'eyes_view' }"
+          [data]="{
+            type: 'Regular',
+            text: 'View or download receipt',
+            suffixIcon: 'eyes_view'
+          }"
           (click)="openReceipt()"
         ></app-card-component>
       </div>
@@ -156,6 +160,7 @@
     <app-card-component
       class="row col-4 mt-3"
       [data]="{
+        type: 'Regular',
         text: 'Uploaded documents',
         subText: data?.documents?.length + ' Documents'
       }"

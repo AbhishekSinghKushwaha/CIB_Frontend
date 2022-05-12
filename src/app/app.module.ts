@@ -42,7 +42,7 @@ import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
     LanguageTranslateModule.forRoot(),
     NgxLoadingModule.forRoot({
       animationType: ngxLoadingAnimationTypes.none,  
-      backdropBackgroundColour: 'rgba(0,0,0,0.1)',
+      backdropBackgroundColour: 'rgba(0,0,0,0.8)',
       backdropBorderRadius: '4px',
       primaryColour: '#ffffff',
       secondaryColour: '#ffffff',

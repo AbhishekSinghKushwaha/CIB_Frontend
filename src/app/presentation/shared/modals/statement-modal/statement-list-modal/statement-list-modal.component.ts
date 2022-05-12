@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { StatementListModel } from 'src/app/core/domain/statement-list.model';
 import { mockData } from 'src/app/core/utils/constants/mockdata.constants';
 import PerfectScrollbar from 'perfect-scrollbar';
-import { SharedUtils } from './../../../../../core/utils/shared.util';
+import SharedUtils from './../../../../../core/utils/shared.util';
 import { NotificationModalService } from 'src/app/core/services/modal-services/notification-modal/notification-modal.service';
 import { StatementPdfDownloadService } from 'src/app/core/services/statement/statement-pdf-download/statement-pdf-download.service';
 import { FormGroup } from '@angular/forms';

@@ -118,5 +118,9 @@
     "deleteStandingOrder": "/cibpaymentservice-v1/api/v1/SchedulePayment/Delete",
     "deactivateStandingOrder": "/cibpaymentservice-v1/api/v1/SchedulePayment/Deactivate",
     "getScheduleId": "/cibpaymentservice-v1/api/v1/SchedulePayment/GetSchedule"
+  },
+  "loan":{
+    "loanAccounts":"/cibloanservice-v1/api/Loans/",
+    "loanRepayment":"/cibloanservice-v1/api/Loans/initiate-pay"
   }
 }
