@@ -23,20 +23,20 @@
     "getRegistrationSummary": "/cibonboarding-v1/api/Registration/preview-corporate-detail/",
     "uploadCorporateDocuments": "/cibonboarding-v1/api/Registration/updload-corporate-documents/"
   },
-  "corporate":{
-    "main":"/cibcore/api/Corporates/",
-    "addTransactionLimit":"/cibcore/api/CorporateTransactionLimit/Add/",
-    "getTransactionLimit":"/cibcore/api/CorporateTransactionLimit/Limits/",
-    "updateTransactionLimit":"/cibcore/api/CorporateTransactionLimit/Update/"
+  "corporate": {
+    "main": "/cibcore/api/Corporates/",
+    "addTransactionLimit": "/cibcore/api/CorporateTransactionLimit/Add/",
+    "getTransactionLimit": "/cibcore/api/CorporateTransactionLimit/Limits/",
+    "updateTransactionLimit": "/cibcore/api/CorporateTransactionLimit/Update/"
   },
-  "userManagement":{
+  "userManagement": {
     "getRoles": "/cibcore/api/roles",
     "getProductsAndServices": "/cibcore/api/products",
-    "addUser":"/cibcore/api/CorporateUsers/InApp",
-    "getUser":"/cibcore/api/CorporateUsers/",
-    "getUserLimit":"/cibcore/api/UserTransactionLimit/Limits/",
-    "addUserLimit":"/cibcore/api/UserTransactionLimit/Add/",
-    "editUserLimit":"/cibcore/api/UserTransactionLimit/Update/"
+    "addUser": "/cibcore/api/CorporateUsers/InApp",
+    "getUser": "/cibcore/api/CorporateUsers/",
+    "getUserLimit": "/cibcore/api/UserTransactionLimit/Limits/",
+    "addUserLimit": "/cibcore/api/UserTransactionLimit/Add/",
+    "editUserLimit": "/cibcore/api/UserTransactionLimit/Update/"
   },
   "accounts": {
     "getUserAccounts": "/cibaccountservice-v1/api/v1/Accounts/GetUserMappedAccounts"
@@ -53,6 +53,8 @@
     "getAccountDetails": "/cibpaymentservice-v1/api/v1/Transfer/NameEnquiry",
     "getCharges": "/cibpaymentservice-v1/api/v1/BuyGoods/Charges",
     "transactionApproval": "/cibpaymentservice-v1/api/v1/Transactions/ApproveTransaction",
+    "reinitiateTransaction": "/cibpaymentservice-v1/api/v1/Transfer/ReInitiate",
+    "getConversionRate": "/cibpaymentservice-v1/api/v1/Transfer/GetExchangeRates",
     "bulkTransfer": "/cibpaymentservice-v1/api/v1/BulkTransfer/InterBank",
     "bulkTransferMultipleMode": "/cibpaymentservice-v1/api/v1/BulkTransfer/MultipleModePayment"
   },
@@ -84,12 +86,12 @@
     "securityAnswers": "/cibuseraccess-v1/api/SecurityQuestion/user/verify-securityquestions",
     "initiatePasswordReset": "/cibuseraccess-v1/api/Auth/user/initiatePasswordReset",
     "initiateUsernameReset": "/cibuseraccess-v1/api/Auth/user/initiateForgoutUserName",
-    "completeforgotusername":"/cibuseraccess-v1/api/Auth/user/completeforgotusername",
+    "completeforgotusername": "/cibuseraccess-v1/api/Auth/user/completeforgotusername",
     "getSecurityQuestions": "/cibuseraccess-v1/api/SecurityQuestion/securityquestions",
     "getMySecurityQuestions": "/cibuseraccess-v1/api/SecurityQuestion/user/securityquestions",
     "resetPassword": "/cibuseraccess-v1/api/Auth/user/resetPassword",
     "getLogonUser": "/cibuseraccess-v1/api/Auth/user/single-user?",
-    "firstlogin":"/cibuseraccess-v1/api/Auth/user/firstlogin"
+    "firstlogin": "/cibuseraccess-v1/api/Auth/user/firstlogin"
   },
   "beneficiary": {
     "add": "/cibpaymentservice-v1/api/v1/Beneficiary/AddBeneficiary",

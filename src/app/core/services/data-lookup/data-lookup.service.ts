@@ -9,7 +9,7 @@ import urlList from "../service-list.json";
   providedIn: "root",
 })
 export class DataLookupService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   // Get Banks in a particular country
   getBanks(country: string): Observable<any> {
@@ -30,7 +30,7 @@ export class DataLookupService {
   }
 
   // Get Roles for customer onboarding
-  getRoles(): { 'onboarding': Observable<any>, 'userManagement': Observable<any>, } {
+  getRoles(): { onboarding: Observable<any>; userManagement: Observable<any> } {
     return {
       onboarding: this.http.get(
         environment.apiUrl + urlList.customerOnboarding.getRoles
@@ -38,19 +38,22 @@ export class DataLookupService {
       userManagement: this.http.get(
         environment.apiUrl + urlList.userManagement.getRoles
       ),
-    }
+    };
   }
 
   // Get Products and services for onboarding
-  getProductsAndServices(): { 'onboarding': Observable<any>, 'userManagement': Observable<any>, } {
+  getProductsAndServices(): {
+    onboarding: Observable<any>;
+    userManagement: Observable<any>;
+  } {
     return {
       onboarding: this.http.get(
         environment.apiUrl + urlList.customerOnboarding.getProductsAndServices
       ),
       userManagement: this.http.get(
         environment.apiUrl + urlList.userManagement.getProductsAndServices
-      )
-    }
+      ),
+    };
   }
 
   // Get telcos
@@ -61,6 +64,11 @@ export class DataLookupService {
     return this.http.get(environment.apiUrl + urlList.dataLookUp.getTelcos, {
       params,
     });
+  }
+
+  // Get all supported currencies
+  getCurrencies(): Observable<any> {
+    return this.http.get(environment.apiUrl + urlList.dataLookUp.getCurrencies);
   }
 
   // Get mobile money transfer wallets offered by different telcos

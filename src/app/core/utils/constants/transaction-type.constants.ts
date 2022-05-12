@@ -1,3 +1,7 @@
+import {
+  ReminderSelectionModel,
+  FrequencySelectionModel,
+} from "../../domain/scheduled-payment.model";
 export const TransferType = {
   OWN_EQUITY: "1",
   INTRA_BANK: "2",
@@ -25,6 +29,62 @@ const SwiftChargesOptions = [
   },
 ];
 
+const FrequencyListings: FrequencySelectionModel[] = [
+  {
+    frequency: "Once-off",
+    description: "Description",
+    value: 1,
+  },
+  {
+    frequency: "Daily",
+    description: "",
+    value: 2,
+  },
+  {
+    frequency: "Weekly",
+    description: "",
+    value: 3,
+  },
+  {
+    frequency: "Monthly",
+    description: "",
+    value: 4,
+  },
+  {
+    frequency: "Yearly",
+    description: "",
+    value: 5,
+  },
+];
+
+const ReminderListings: ReminderSelectionModel[] = [
+  {
+    reminder: "No reminder",
+    description: "",
+    value: 0,
+  },
+  {
+    reminder: "1 day before",
+    description: "",
+    value: 1,
+  },
+  {
+    reminder: "2 days before",
+    description: "",
+    value: 2,
+  },
+  {
+    reminder: "3 days before",
+    description: "",
+    value: 3,
+  },
+  {
+    reminder: "1 week before",
+    description: "",
+    value: 4,
+  },
+];
+
 export const TransactionApprovalStatus = {
   Approved: 1,
   PendingApproval: 2,
@@ -38,4 +98,6 @@ export const TransactionTypeConstants = {
   TransferType,
   SwiftChargesOptions,
   TransactionApprovalStatus,
+  FrequencyListings,
+  ReminderListings,
 };

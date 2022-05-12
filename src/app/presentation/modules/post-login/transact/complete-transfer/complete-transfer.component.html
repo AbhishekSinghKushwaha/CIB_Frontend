@@ -13,7 +13,12 @@
     </div>
 
     <div class="col-7">
-      <h4 class="mt-5" *ngIf="transferType !== 'Standing Orders' && transferType !== 'bulk-transfer'">
+      <h4
+        class="mt-5"
+        *ngIf="
+          transferType !== 'Standing Orders' && transferType !== 'bulk-transfer'
+        "
+      >
         Fund transfer submitted for approval!
       </h4>
 
@@ -22,11 +27,10 @@
       </h3>
 
       <div *ngIf="transferType === 'bulk-transfer'">
-        <h3 class="mt-5 strong-text">
-          Your request has been submitted
-        </h3>
+        <h3 class="mt-5 strong-text">Your request has been submitted</h3>
         <span class="text-sm text-grey">
-          We’ll let you know the status of your request once it has been reviewed.
+          We’ll let you know the status of your request once it has been
+          reviewed.
         </span>
       </div>
       <br />
@@ -34,11 +38,13 @@
       <div *ngIf="transferType !== 'bulk-transfer'">
         <p>Permanent Amendment</p>
         <span class="text-sm text-grey">
-          Transaction of KES 0.00, daily transact limit of KES 0.00 on 16/04/2021
-          at 10:45:23 was submitted for approval.
+          Transaction of KES 0.00, daily transact limit of KES 0.00 on
+          16/04/2021 at 10:45:23 was submitted for approval.
         </span>
         <br /><br />
-        <span class="text-sm text-grey">You will be notified once the transaction has been approved</span>
+        <span class="text-sm text-grey"
+          >You will be notified once the transaction has been approved</span
+        >
         <br />
       </div>
 
@@ -139,7 +145,8 @@
         transferType === transferTypes.PESALINK ||
         transferType === transferTypes.RTGS ||
         transferType === transferTypes.SUBSIDIARY ||
-        transferType === transferTypes.SWIFT
+        transferType === transferTypes.SWIFT ||
+        transferType === 'reinitiate-transaction'
       "
     >
       <h4 class="mt-5">Fund transfer submitted for approval</h4>
@@ -172,6 +179,11 @@
         </div>
         <div class="col-md-3">
           <button
+            *ngIf="
+              checkIfFavouriteExists() &&
+              transferType !== transferTypes.OWN_EQUITY &&
+              transferType !== 'reinitiate-transaction'
+            "
             mat-stroked-button
             type="button"
             color="primary"

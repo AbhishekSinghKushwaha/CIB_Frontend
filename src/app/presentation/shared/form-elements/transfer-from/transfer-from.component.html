@@ -20,7 +20,7 @@
   <button type="button" mat-icon-button matSuffix>
     <mat-icon svgIcon="caret_down"></mat-icon>
   </button>
-  <small *ngIf="value.accountName" class="text-grey text-sm-start mt-2 mb-0"
+  <small *ngIf="value?.accountName" class="text-grey text-sm-start mt-2 mb-0"
     >Available balance {{ value?.balance | number: "0.2" }}
     {{ value?.currency }}</small
   >

@@ -1,7 +1,7 @@
 import { BankModel } from "./bank.model";
 import { CountryModel } from "./bank.model";
 import { MobileWallet, Telco } from "./transfer.models";
-export interface recipientModel {
+export interface RecipientModel {
   country?: CountryModel;
   accountNumber: string;
   accountName?: string;

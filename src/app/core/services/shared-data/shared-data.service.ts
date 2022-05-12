@@ -1,30 +1,49 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { BankModel, CountryModel } from '../../domain/bank.model';
-import { FromAccount } from '../../domain/transfer.models';
+import { Injectable } from "@angular/core";
+import { BehaviorSubject, Observable } from "rxjs";
+import { BankModel, CountryModel } from "../../domain/bank.model";
+import { FromAccount } from "../../domain/transfer.models";
+import { StateService } from "../state/state.service";
+
+interface SharedDataState {
+  banks: BankModel[];
+  countries: CountryModel[];
+  userAccounts: FromAccount[];
+}
+
+const initialSharedDataState: SharedDataState = {
+  banks: [],
+  countries: [],
+  userAccounts: [],
+};
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
-export class SharedDataService {
-  banks = new BehaviorSubject<BankModel[]>([]);
-  countries = new BehaviorSubject<CountryModel[]>([]);
-  userAccounts = new BehaviorSubject<FromAccount[]>([]);
-  constructor() {}
-
-  setBanks(data: BankModel[]) {
-    this.banks.next(data);
+export class SharedDataService extends StateService<SharedDataState> {
+  banks$: Observable<BankModel[]> = this.select((state) => state.banks);
+  countries$: Observable<CountryModel[]> = this.select(
+    (state) => state.countries
+  );
+  userAccounts$: Observable<FromAccount[]> = this.select(
+    (state) => state.userAccounts
+  );
+  constructor() {
+    super(initialSharedDataState);
   }
 
-  setUserAccounts(accounts: FromAccount[]) {
-    this.userAccounts.next(accounts);
+  setBanks(banks: BankModel[]) {
+    this.setState({ banks });
   }
 
-  setSubsidiaries(countries: CountryModel[]) {
-    this.countries.next(countries);
+  setUserAccounts(userAccounts: FromAccount[]) {
+    this.setState({ userAccounts });
   }
+
+  // setSubsidiaries(countries: CountryModel[]) {
+  //   this.countries.next(countries);
+  // }
 
   setCountries(countries: CountryModel[]) {
-    this.countries.next(countries);
+    this.setState({ countries });
   }
 }
