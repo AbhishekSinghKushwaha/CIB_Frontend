@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="!stage">
   <div class="row">
     <div class="col-12 mb-3">
       <button
@@ -19,7 +19,7 @@
     class="row"
     autocomplete="off"
     [formGroup]="ownEquityAccountTransferForm"
-    (submit)="payLoan()"
+    (submit)="submit()"
   >
     <!-- Transfer From -->
     <div class="col-md-6">
@@ -54,9 +54,30 @@
       ></app-input>
     </div>
     <div class="mt-4">
-      <button mat-raised-button type="submit" color="primary" class="px-5">
+      <button
+        mat-raised-button
+        type="submit"
+        color="primary"
+        class="px-5"
+        [disabled]="ownEquityAccountTransferForm.status === 'INVALID'"
+      >
         Pay the loan
       </button>
     </div>
   </form>
+</div>
+
+<div class="row" *ngIf="stage === 'OTP'">
+  <app-sms-verification
+    (onOTPVerified)="submitOTP($event)"
+    [otpError]="otpError"
+    [message]="initialResponse"
+  ></app-sms-verification>
+</div>
+
+<div class="row" *ngIf="stage === 'completed'">
+  <app-confirmation-completion
+    [data]="completionData"
+    (confirmationDone)="confirmationDone($event)"
+  ></app-confirmation-completion>
 </div>

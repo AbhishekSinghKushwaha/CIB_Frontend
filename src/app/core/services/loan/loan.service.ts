@@ -20,21 +20,21 @@ export class LoanService {
     private readonly http: HttpClient,) { }
 
   getLoanAccounts(corporateId: string) {
-    this.http.get(environment.apiUrl + urlList.loan.loanAccounts +corporateId)
-    .subscribe((accounts:any)=>{
-      console.log('accounts',accounts);
-      if(accounts?.data?.length) {
-        this.loans = accounts.data;
-        this.loanAccounts$.next(accounts.data);
-        
+    this.http.get(environment.apiUrl + urlList.loan.loanAccounts + corporateId)
+      .subscribe((accounts: any) => {
+        console.log('accounts', accounts);
+        if (accounts?.data?.length) {
+          this.loans = accounts.data;
+          this.loanAccounts$.next(accounts.data);
+
         }
-    })
+      })
   }
 
-  payLoan(): Observable<any> {
+  payLoan(data: any): Observable<any> {
     this.modal = this.dialog.open<PayLoanModalComponent, any>(
       PayLoanModalComponent,
-      { disableClose: false, data: { amount: '314,731.00' } }
+      { disableClose: false, data }
     );
 
     return this.modal.afterClosed();
@@ -44,13 +44,8 @@ export class LoanService {
     this.modal.close();
   }
 
-  confirmLoanPayment(): Observable<any> {
-    this.confirmLoanPaymentModal = this.dialog.open<
-      ConfirmLoanPaymentModalComponent,
-      any
-    >(ConfirmLoanPaymentModalComponent, { disableClose: false });
-
-    return this.confirmLoanPaymentModal.afterClosed();
+  confirmLoanPayment(data: any) {
+    return this.http.post(environment.apiUrl + urlList.loan.loanRepayment, data);
   }
 
   closeConfirmationDialog(result: boolean): void {

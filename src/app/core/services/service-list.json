@@ -116,6 +116,7 @@
     "getScheduleId": "/cibpaymentservice-v1/api/v1/SchedulePayment/GetSchedule"
   },
   "loan":{
-    "loanAccounts":"/cibloanservice-v1/api/Loans/"
+    "loanAccounts":"/cibloanservice-v1/api/Loans/",
+    "loanRepayment":"/cibloanservice-v1/api/Loans/initiate-pay"
   }
 }

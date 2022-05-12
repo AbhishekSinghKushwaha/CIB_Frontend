@@ -18,7 +18,7 @@
         [svgIcon]="selection === 'full' ? 'check_round' : 'radio_button_off'"
       ></mat-icon>
     </div>
-    <div>314,731.00 KES</div>
+    <div>{{ data.amount | number: "0.2" }} KES</div>
   </div>
   <div
     class="my-4 row d-flex align-items-stretch"
