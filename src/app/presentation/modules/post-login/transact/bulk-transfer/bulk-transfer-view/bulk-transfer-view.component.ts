@@ -38,7 +38,6 @@ export class BulkTransferViewComponent implements OnInit {
     private readonly router: Router
   ) { 
     this.id = route.snapshot.params["id"];
-    console.log(this.id);
   }
 
   get getForm() {
@@ -48,7 +47,6 @@ export class BulkTransferViewComponent implements OnInit {
   ngOnInit(): void {
     this.getCsvData();
     this.viewData = this.pdfViewerService.default;
-    console.log(this.viewData, "viewData");
   }
 
   getCsvData() {
@@ -86,7 +84,7 @@ export class BulkTransferViewComponent implements OnInit {
 
   filterById(){
     this.viewPaymentDetails = this.bulkTransferRecords.filter(res => res.id == this.id);
-    this.formatPaymentType(this.viewPaymentDetails[0]?.paymentType)
+    this.formatPaymentType(Number(this.viewPaymentDetails[0]?.paymentType));
     this.populateForm();
   }
 
@@ -165,8 +163,6 @@ export class BulkTransferViewComponent implements OnInit {
 
     this.bulkTransferRecords[index] = id;
 
-    console.log(this.bulkTransferRecords)
-
   this.bulkTransfersService.bulkTransferPayload(this.bulkTransferRecords);
 
   }
@@ -192,16 +188,16 @@ export class BulkTransferViewComponent implements OnInit {
 
   formatPaymentType(paymentType: any) {
     switch (paymentType) {
-      case this.transferType.INTER_BANK:
+      case 3001:
         this.paymentTypeConversion = "Inter Bank";
         break;
-      case this.transferType.INTRA_BANK:
+      case 2:
         this.paymentTypeConversion = "Intra Bank";
         break;
-      case this.transferType.SWIFT:
+      case 5:
         this.paymentTypeConversion = "SWIFT";
         break;
-      case this.transferType.BUY_AIRTIME:
+      case 10:
         this.paymentTypeConversion = "Airtime";
         break;
       default:

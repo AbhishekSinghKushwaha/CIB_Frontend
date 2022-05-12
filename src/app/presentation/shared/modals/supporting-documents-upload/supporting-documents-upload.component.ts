@@ -6,6 +6,7 @@ import { Router } from "@angular/router";
 import { BulkTransfersService } from "src/app/core/services/transfers/bulk-transfers/bulk-transfers.service";
 import { PdfViewerService } from "src/app/core/services/pdf-viewer/pdf-viewer.service";
 import { DatePipe } from '@angular/common';
+import * as XLSX from 'xlsx';
 
 export class CsvData {
   public id: any;
@@ -60,6 +61,9 @@ export class SupportingDocumentsUploadComponent implements OnInit {
   myDate = new Date();
   paymentDate: any;
 
+  arrayBuffer: any;
+  filelist: any[];
+
   constructor(
     private router: Router,
     private bulkTransfersService: BulkTransfersService,
@@ -73,31 +77,18 @@ export class SupportingDocumentsUploadComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.storageService.getData("corporateId"));
   }
 
   close(): void {
     this.dialogRef.close(true);
   }
 
-  // uploadFiles(event: any){
-  //   const file: File = event.dataTransfer
-  //     ? event.dataTransfer.files[0]
-  //     : event.target.files[0];
-
-  //   if (file) {
-  //     this.currentFile = file;
-  //     this.fileName = this.currentFile.name;
-  //     var reader = new FileReader();
-
-  //     reader.onload = this._handleReaderLoaded.bind(this);
-  //     reader.readAsDataURL(file);
-  //   }
-  //   console.log(file);
-  // }
-
   isValidCSVFile(file: any) {
     return file.name.endsWith(".csv");
+  }
+
+  isValidEXCELFile(file: any) {
+    return file.name.endsWith(".xlsx");
   }
 
   readFileAsText(file: any){
@@ -113,7 +104,6 @@ export class SupportingDocumentsUploadComponent implements OnInit {
         
                 data = this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
                 this.records.push(data);
-                console.log(this.records);
               };
 
               reader.onerror = function () {
@@ -122,21 +112,68 @@ export class SupportingDocumentsUploadComponent implements OnInit {
               reader.readAsText(file);
   }
 
+  excelfile(file: any) {
+    let excelArr: any = [];    
+    let fileReader = new FileReader();    
+    fileReader.readAsArrayBuffer(file);     
+    fileReader.onload = (e) => {    
+        this.arrayBuffer = fileReader.result;    
+        var data = new Uint8Array(this.arrayBuffer);    
+        var arr = new Array();    
+        for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);    
+        var bstr = arr.join("");    
+        var workbook = XLSX.read(bstr, {type:"binary"});    
+        var first_sheet_name = workbook.SheetNames[0];    
+        var worksheet = workbook.Sheets[first_sheet_name];    
+        var arraylist = XLSX.utils.sheet_to_json(worksheet,{raw:true});
+      
+      arraylist.map((data: any) => {
+        const excelRecord = {
+          id : Number(data['ID']),
+          paymentType : data['PAYMENT TYPE'],
+          debitAccountName : data['DEBIT ACCOUNT NAME'],
+          debitAccountNumber : data['DEBIT ACCOUNT NUMBER'],
+          beneficiaryAccountNumber : data['BENEFICIARY ACCOUNT NUMBER'],
+          beneficiaryMobile : data['BENEFICIARY MOBILE'],
+          beneficiaryName : data['BENEFICIARY NAME'],
+          beneficiaryBank : data['NAME OF BANK'],
+          beneficiaryBankCode: data['BANK CODE'],
+          beneficiaryAddress : data['BENEFICIARY ADDRESS'],
+          amount : data['AMOUNT'],
+          currency : data['CURRENCY'],
+          narration: data['NARRATION'],
+          codeSwift: data['CODE SWIFT'],
+          telco: data['TELCO'],
+          internationalAirtime: data['INTERNATIONAL AIRTIME'],
+          countryCode: data['COUNTRY CODE'],
+          billerCode: data['BILLER CODE'],
+          reference : data['REFERENCE'],
+          reason : data['REASON'],
+        }
+        excelArr.push(excelRecord);
+      })
+
+      this.records.push(excelArr);   
+  }    
+}    
+
   uploadListener($event: any): void {
       let readers = [];
       let files = $event.srcElement.files;
       let input = $event.target;
-      console.log(files);
   
       if (files) {
           this.currentFile = files;
-          // this.fileName = this.currentFile[0].name;
         }
   
       // Store promises in array
       for(let i = 0;i < input.files.length;i++){
         if (this.isValidCSVFile(files[i])) {
           readers.push(this.readFileAsText(input.files[i]));
+          this.handleReaderLoaded(input.files[i].name, input.files[i].size);
+        }
+        else if (this.isValidEXCELFile(files[i])) {
+          this.excelfile(input.files[i]);
           this.handleReaderLoaded(input.files[i].name, input.files[i].size);
         }
         else {
@@ -150,42 +187,6 @@ export class SupportingDocumentsUploadComponent implements OnInit {
         this.data = values;
     });
     }
-  // uploadListener($event: any): void {
-  //   let text = [];
-  //   let files = $event.srcElement.files;
-  //   console.log(files);
-
-  //   if (files) {
-  //       this.currentFile = files;
-  //       this.fileName = this.currentFile[0].name;
-  //     }
-
-  //   if (this.isValidCSVFile(files[0])) {
-
-  //     let input = $event.target;
-  //     let reader = new FileReader();
-  //     reader.readAsText(input.files[0]);
-
-  //     reader.onload = () => {
-  //       let csvData = reader.result;
-
-  //       let csvRecordsArray = (<string>csvData).split(/\r\n|\n/);
-
-  //       let headersRow = this.getHeaderArray(csvRecordsArray);
-
-  //       this.records = this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
-  //     };
-
-  //     reader.onerror = function () {
-  //       console.log('error is occured while reading file!');
-  //     };
-
-  //   } else {
-  //     alert("Please import valid .csv file.");
-  //     this.fileReset();
-  //   }
-  //   this.handleReaderLoaded();
-  // }
 
   getDataRecordsArrayFromCSVFile(csvRecordsArray: any, headerLength: any) {
     let csvArr = [];
@@ -253,7 +254,6 @@ export class SupportingDocumentsUploadComponent implements OnInit {
           documentName: fileName,
           size: sizeInMB
         });
-        console.log(this.files)
         this.progressFiles.pop();
         this.message = "Completed";
         clearInterval(uploadInterval);
@@ -294,7 +294,6 @@ export class SupportingDocumentsUploadComponent implements OnInit {
     const modal = this.uploadConfirmationService.open();
 
     modal.afterClosed().subscribe(() => {
-      console.log(this.bulkTransferRecords);
       this.bulkTransfersService.bulkTransferPayload(this.bulkTransferRecords);      
     }); 
 
