@@ -65,9 +65,12 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getBillers();
     this.getGroupedAccount();
     this.getCurrencies();
+    this.getCurrentUserCountry();
   }
 
-  ngAfterViewInit() { }
+  ngAfterViewInit() {
+
+  }
 
   ngOnDestroy() {
     if (this.mobileQuery) {
@@ -106,12 +109,15 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     this.dataLookupService.getCountries().subscribe((res) => {
       if (res.status) {
         this.storageService.setData("countries", res.data);
-        const currentUser = this.storageService.getData("currentUserData");
-        const currentUserCountry = res.data.filter((country: any) => country.countryCode3Chars === currentUser.corporate.countryId);
-        console.log('current user country', currentUserCountry);
-        this.storageService.setData("userCountry", currentUserCountry[0])
       }
     });
+  }
+
+  getCurrentUserCountry() {
+    const currentUser = this.storageService.getData("currentUserData");
+    const countries = this.storageService.getData("countries");
+    const currentUserCountry = countries.filter((country: any) => country.countryCode3Chars === currentUser.corporate.countryId);
+    this.storageService.setData("userCountry", currentUserCountry[0])
   }
 
   //TODO:: Get user default country to use to call this endpoint
