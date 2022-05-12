@@ -48,7 +48,7 @@ export class PayLoanComponent implements OnInit {
   }
 
   payLoan(): void {
-    console.log(this.ownEquityAccountTransferForm.getRawValue())
+    
     this.loanService.confirmLoanPayment({
       amount: this.ownEquityAccountTransferForm.value.amount,
       currency: 'KES',
@@ -56,7 +56,7 @@ export class PayLoanComponent implements OnInit {
       loanAccountId: this.ownEquityAccountTransferForm.value.sendFrom.accountNumber,
       corporateId: this.authService.userState.corporateId
     }).subscribe((result: any) => {
-      console.log(result);
+      
       if (result) {
         this.stage = 'completed';
       }
@@ -76,7 +76,7 @@ export class PayLoanComponent implements OnInit {
         },
         (error) => {
           this.otpError = true;
-          console.log({ error });
+          
         }
       );
     }
@@ -117,7 +117,7 @@ export class PayLoanComponent implements OnInit {
         this.authService.resendOTP().subscribe(
           (data: any) => {
             this.initialResponse = data.statusMessage;
-            console.log(data)
+            
             this.stage = 'OTP';
           },
         );
