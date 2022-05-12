@@ -89,7 +89,6 @@ export class BulkTransferDetailComponent implements OnInit {
     this.bulkTransfersService.salaryMode.subscribe(data => {
       this.checked = data;
     });
-    console.log(this.checked, "checked");
   }
 
   splitCsvData() {
@@ -169,11 +168,6 @@ export class BulkTransferDetailComponent implements OnInit {
           this.billspaymentRequests.push(billPaymentRecord);
         }
       });
-    console.log(this.billspaymentRequests, "billspaymentRequests");
-    console.log(this.airtimePaymentRequests, "airtimePaymentRequests");
-    console.log(this.interBankTransferRequests, "interBankTransferRequests");
-    console.log(this.intraBankTransferRequests, "intraBankTransferRequests");
-    console.log(this.swiftPaymentRequests, "swiftPaymentRequests");
   }
 
   getCsvData() {
@@ -182,7 +176,7 @@ export class BulkTransferDetailComponent implements OnInit {
         const csvRecord = {
           id : Number(item.id),
           paymentDate : item.paymentDate,
-          paymentType : item.paymentType,
+          paymentType : Number(item.paymentType),
           debitAccountName : item.debitAccountName,
           debitAccountNumber : item.debitAccountNumber,
           beneficiaryAccountNumber : item.beneficiaryAccountNumber,
@@ -204,7 +198,6 @@ export class BulkTransferDetailComponent implements OnInit {
         }
         this.bulkTransferRecords.push(csvRecord);
       });
-      console.log(this.bulkTransferRecords);
 
       this.initForm();
       this.splitCsvData();
@@ -258,8 +251,6 @@ export class BulkTransferDetailComponent implements OnInit {
       }
     });
 
-    console.log(this.bulkTransferDetailForm.get("bulkData")?.value);
-
     if(this.bulkTransferDetailForm.get("bulkData")?.value.length > 0){
       this.totalAmount = 0
       this.beneficiaryNames = [];
@@ -270,22 +261,21 @@ export class BulkTransferDetailComponent implements OnInit {
       this.error = true;
     }
 
-    console.log(this.errorName, "errorName");
 
   }
 
   formatPaymentType(paymentType: any) {
     switch (paymentType) {
-      case this.transferType.INTER_BANK:
+      case 3001:
         this.paymentTypeConversion = "Inter Bank";
         break;
-      case this.transferType.INTRA_BANK:
+      case 2:
         this.paymentTypeConversion = "Intra Bank";
         break;
-      case this.transferType.SWIFT:
+      case 5:
         this.paymentTypeConversion = "SWIFT";
         break;
-      case this.transferType.BUY_AIRTIME:
+      case 10:
         this.paymentTypeConversion = "Airtime";
         break;
       default:
@@ -310,7 +300,7 @@ export class BulkTransferDetailComponent implements OnInit {
         currency: res.currency,
         destinationAccount: res.beneficiaryAccountNumber,
         sourceAccount: res.debitAccountNumber,
-        transferType: Number(res.paymentType),
+        transferType: res.paymentType,
         destinationBankCode: res.beneficiaryBankCode,
         countryCode: res.countryCode,
         destinationCountryCode: res.countryCode,
@@ -322,26 +312,23 @@ export class BulkTransferDetailComponent implements OnInit {
         sourceAccount: res.debitAccountNumber,
       };
 
-      if(res.paymentType === this.transferType.BUY_AIRTIME){
+      if(res.paymentType == 10){
         this.buyAirtimeService.getCharges(airtimePayload).subscribe((res) => {
           if (res.status) {
             this.transferFee += Number(res.data);
-            console.log(this.transferFee, "AirTimetransferFee");
           }
         });
-
       }
-      else if(res.paymentType !== this.transferType.BUY_AIRTIME && res.paymentType !== ""){
+      else if(res.paymentType !== 10 && res.paymentType !== 0 && !Number.isNaN(res.paymentType)){
         this.bulkTransfersService.getTransferCharges(payload).subscribe((res) => {
           if (res.status) {
             this.transferFee += Number(res.data);
-            console.log(this.transferFee, "transferFee");
           } else {
             // TODO:: Notify error
           }
         });
       }
-      else if(res.paymentType === ""){
+      else if(Number.isNaN(res.paymentType) || res.paymentType == 0){
         console.log("No payment type");
       }
     });
@@ -401,10 +388,6 @@ export class BulkTransferDetailComponent implements OnInit {
   }
 
   submit() {
-    // const payload = {
-    //   transactions: this.bulkTransferDetailForm.get("bulkData")?.value,
-    // }
-
     const payload = {
       externalBatchId: "string",
       isSalaryPayments: this.checked,
@@ -429,8 +412,6 @@ export class BulkTransferDetailComponent implements OnInit {
         transactions: this.swiftPaymentRequests
       }
     }
-
-    console.log(payload, "payload");
 
     this.bulkTransfersService.bulkTransferMultipleMode(payload).subscribe((res) => {
       if(res.status){
@@ -480,7 +461,6 @@ export class BulkTransferDetailComponent implements OnInit {
 
   openActionsMenu(i:any): void {
     this.userId = i;
-    console.log(this.userId, 'user');
   }
 
   viewDetails() {
