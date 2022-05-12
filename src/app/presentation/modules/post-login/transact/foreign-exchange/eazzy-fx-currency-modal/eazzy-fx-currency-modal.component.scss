@@ -1,0 +1,27 @@
+.own-equity-modal-screen {
+  position: relative;
+}
+
+.s-padding {
+  padding: 28px;
+}
+.radio-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.close-button {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 1000;
+}
+
+img {
+  margin-right: 10px;
+}
+
+.currency-item {
+  cursor: pointer;
+}

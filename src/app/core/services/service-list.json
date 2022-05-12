@@ -119,8 +119,12 @@
     "deactivateStandingOrder": "/cibpaymentservice-v1/api/v1/SchedulePayment/Deactivate",
     "getScheduleId": "/cibpaymentservice-v1/api/v1/SchedulePayment/GetSchedule"
   },
-  "loan":{
-    "loanAccounts":"/cibloanservice-v1/api/Loans/",
-    "loanRepayment":"/cibloanservice-v1/api/Loans/initiate-pay"
+  "fx": {
+    "getRates": "/cibpaymentservice-v1/api/v1/Fx/GetFxRateList/FxRateList",
+    "generate": "/cibpaymentservice-v1/api/v1/Fx/GenerateFxTransaction/GenerateFx"
+  },
+  "loan": {
+    "loanAccounts": "/cibloanservice-v1/api/Loans/",
+    "loanRepayment": "/cibloanservice-v1/api/Loans/initiate-pay"
   }
 }

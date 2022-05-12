@@ -120,6 +120,11 @@ const routes: Routes = [
       ),
   },
   {
+    path: "foreign-exchange",
+    loadChildren: (): Promise<any> =>
+      import("./foreign-exchange/foreign-exchange.module").then((m) => m.ForeignExchangeModule),
+  },
+  {
     path: "bulk-transfer",
     loadChildren: (): Promise<any> =>
       import("./bulk-transfer/bulk-transfer.module").then(
@@ -136,4 +141,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class TransactRoutingModule {}
+export class TransactRoutingModule { }

@@ -1,0 +1,93 @@
+<div class="mb-3">
+  <button
+    mat-icon-button
+    aria-label="Back"
+    class="back-icon"
+    routerLink="/transact/foreign-exchange/eazzy-fx/rates"
+  >
+    <div class="strong-text">
+      <mat-icon svgIcon="caret_left"></mat-icon>
+      <span>Negotiate a deal</span>
+    </div>
+  </button>
+</div>
+
+<form
+  *ngIf="!negotiated; else success"
+  class="row"
+  autocomplete="off"
+  [formGroup]="negotiationFormGroup"
+  (submit)="negotiate()"
+>
+  <div class="col-md-6">
+    <app-transfer-from
+      [parentForm]="negotiationFormGroup"
+      label="Choose account"
+      formControlName="sendFrom"
+      fieldName="sendFrom"
+    ></app-transfer-from>
+  </div>
+  <div class="col-md-6 align-self-end">
+    <app-transfer-amount
+      [parentForm]="negotiationFormGroup"
+      fieldName="amount"
+      label="Amount"
+      placeholder="Enter an amount"
+      formControlName="amount"
+    >
+    </app-transfer-amount>
+  </div>
+
+  <div class="col-md-6">
+    <app-schedule-payment-input
+      [parentForm]="negotiationFormGroup"
+      label="Schedule Payment"
+      fieldName="schedulePayment"
+      placeholder="Select a payment date"
+      transactionType="ownEquityAccount"
+    ></app-schedule-payment-input>
+  </div>
+  <div class="col-md-6 align-self-end">
+    <mat-form-field
+      appearance="standard"
+      style="width: 100%"
+      floatLabel="always"
+      (click)="selectTransactionType()"
+    >
+      <mat-label>Transaction Type</mat-label>
+      <input
+        matInput
+        type="text"
+        class="strong-text"
+        [value]="negotiationFormGroup.get('transactionType')?.value"
+        placeholder="Select transaction type"
+      />
+      <button type="button" mat-icon-button matSuffix>
+        <mat-icon svgIcon="caret_down"></mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div class="col-md-6">
+    <app-input
+      [parentForm]="negotiationFormGroup"
+      fieldName="reason"
+      label="Payment Reason"
+      formControlName="reason"
+      placeholder="Optional"
+    ></app-input>
+  </div>
+  <div class="mt-4">
+    <button mat-raised-button type="submit" color="primary" class="px-5">
+      Submit
+    </button>
+  </div>
+</form>
+
+<ng-template #success>
+  <div class="row">
+    <app-confirmation-completion
+      [data]="completionData"
+      (confirmationDone)="confirmationDone($event)"
+    ></app-confirmation-completion>
+  </div>
+</ng-template>
