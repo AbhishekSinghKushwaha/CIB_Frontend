@@ -1,0 +1,113 @@
+<div>
+  <div class="mb-3">
+    <button
+      mat-icon-button
+      aria-label="Back"
+      class="back-icon"
+      routerLink="/more"
+    >
+      <div class="strong-text">
+        <mat-icon svgIcon="caret_left"></mat-icon>
+        <span>Manage your personal details</span>
+      </div>
+    </button>
+  </div>
+  <form
+    class="d-flex flex-column"
+    autocomplete="off"
+    [formGroup]="intercountryFundTransferForm"
+    (submit)="getTransferCharges()"
+  >
+    <div class="row pt-4">
+      <!-- Transfer From -->
+      <div class="col-md-6">
+        <app-input
+          [parentForm]="intercountryFundTransferForm"
+          fieldName="sendFrom"
+          label="Email address"
+          placeholder="jane@equity.com"
+          formControlName="sendFrom"
+        ></app-input>
+      </div>
+      <!-- Transfer To -->
+      <div class="col-md-6 align-self-end">
+        <app-transfer-to
+          [parentForm]="intercountryFundTransferForm"
+          fieldName="sendTo"
+          formControlName="sendTo"
+          label="Send To"
+          placeholder="Select Recipient"
+          transactionType="{{ transferType.SUBSIDIARY }}"
+        ></app-transfer-to>
+      </div>
+      <!-- FX Reference ID -->
+      <div class="col-md-6">
+        <app-input
+          [parentForm]="intercountryFundTransferForm"
+          fieldName="fxReferenceId"
+          label="FX Reference ID"
+          placeholder="Enter FX reference ID"
+          formControlName="fxReferenceId"
+        ></app-input>
+      </div>
+      <!-- Transfer amount -->
+      <div class="col-md-6">
+        <app-input
+          [parentForm]="intercountryFundTransferForm"
+          fieldName="amount"
+          label="Email address"
+          placeholder="jane@equity.com"
+          formControlName="amount"
+        ></app-input>
+      </div>
+      <!-- Schedule Payment -->
+      <div class="col-md-6">
+        <app-schedule-payment-input
+          [parentForm]="intercountryFundTransferForm"
+          label="Schedule Payment"
+          fieldName="schedulePayment"
+          placeholder="Select a payment date"
+          transactionType="ownEquityAccount"
+        ></app-schedule-payment-input>
+      </div>
+      <!-- Payment Reason -->
+      <div class="col-md-6">
+        <app-input
+          [parentForm]="intercountryFundTransferForm"
+          fieldName="reason"
+          label="Payment Reason"
+          formControlName="reason"
+          placeholder="Optional"
+        ></app-input>
+      </div>
+    </div>
+    <!-- Additional Information Upload -->
+    <div class="pt-3" *ngIf="aboveTransactionTypeLimit">
+      <h3 class="strong-text">Additional Information</h3>
+      <small class="text-grey"
+        >If you are sending more than 10,000,000 we need more information from
+        you</small
+      ><br />
+
+      <div
+        class="col-md-6 upload-container mt-4"
+        (click)="openSupportingDocuments()"
+      >
+        <div>Upload a document</div>
+        <mat-icon class="folder-icon">note_add</mat-icon>
+      </div>
+    </div>
+    <!-- Submit Button -->
+    <div class="mt-4">
+      <button
+        mat-raised-button
+        type="submit"
+        [disabled]="intercountryFundTransferForm.invalid"
+        color="primary"
+        class="px-5"
+      >
+        Send money
+      </button>
+    </div>
+  </form>
+</div>

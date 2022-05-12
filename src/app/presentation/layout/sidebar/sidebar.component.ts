@@ -2,20 +2,21 @@ import { CountryService } from 'src/app/core/services/modal-services/country.ser
 import { TransferFromService } from 'src/app/core/services/modal-services/transfer-from.service';
 import { GroupedAccountService } from './../../../core/services/modal-services/grouped-account.service';
 import { StorageService } from './../../../core/services/storage/storage.service';
-import { Component, EventEmitter, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageModel } from 'src/app/core/domain/language.model';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { LanguageService } from 'src/app/core/services/language/language.service';
 import { environment } from 'src/environments/environment';
 import { confirmModal } from '../../shared/decorators/confirm-dialog.decorator';
+import { DataLookupService } from 'src/app/core/services/data-lookup/data-lookup.service';
 
 @Component({
   selector: 'app-sidebar-menu',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })
-export class SidebarComponent implements OnInit, OnChanges {
+export class SidebarComponent implements OnInit, OnChanges, AfterViewInit {
   language: LanguageModel;
   userData: any;
   fullUsername: string;
@@ -28,6 +29,7 @@ export class SidebarComponent implements OnInit, OnChanges {
     private readonly groupedAccountService: GroupedAccountService,
     private readonly transferFromService: TransferFromService,
     private readonly countryService: CountryService,
+    private dataLookupService: DataLookupService,
     private readonly languageService: LanguageService,
     private storageService: StorageService,
     public translate: TranslateService) {
@@ -36,6 +38,10 @@ export class SidebarComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.processUSerData();
+    this.getCountries();
+  }
+
+  ngAfterViewInit(): void {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -78,7 +84,30 @@ export class SidebarComponent implements OnInit, OnChanges {
   selectProfile() {
     const groupedAccount = this.storageService.getData('grouped_account');
     this.groupedAccountService.openSelectAccountModal(groupedAccount)
-    // this.transferFromService.openTransferFromModal(groupedAccount)
+  }
+
+  async getCountries() {
+    await this.dataLookupService.getCountries().subscribe((res) => {
+      if (res.status) {
+        this.storageService.setData("countries", res.data);
+
+      }
+    });
+
+    await this.getCurrentUserData()
+
+  }
+
+  getCurrentUserData(): void {
+    this.dataLookupService.getUserData().subscribe((res) => {
+      const currentUser = this.storageService.getData("currentUserData");
+      const countries = this.storageService.getData("countries");
+      const currentUserCountry = countries.filter((country: any) => country.countryCode3Chars === currentUser.corporate.countryId);
+      this.currentCountry = currentUserCountry[0];
+      if (res.isSuccessful) {
+        this.storageService.setData("currentUserData", res.data);
+      }
+    })
   }
 
   processUSerData() {
@@ -86,7 +115,7 @@ export class SidebarComponent implements OnInit, OnChanges {
     this.fullUsername = this.userData.corporateName ? this.userData.corporateName : this.userData.firstName + ' ' + this.userData.lastName;
     this.username = this.userData.userName ? this.userData.userName : this.userData.emailAddress;
     this.initials = this.generateInitials(this.fullUsername);
-    this.currentCountry = this.storageService.getData('userCountry')
+
   }
 
   generateInitials(name: string): string {
