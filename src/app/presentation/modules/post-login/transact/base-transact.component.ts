@@ -1,11 +1,12 @@
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
 import { FromAccount } from 'src/app/core/domain/transfer.models';
-import { AccountsService } from 'src/app/core/services/accounts/accounts.service';
 import { SnackbarComponent } from 'src/app/presentation/shared/components/snackbar/snackbar.component';
 
 export class BaseTransactComponent {
   accounts: FromAccount[] = [];
-  constructor(protected snackbar: MatSnackBar) {}
+  notify: MatSnackBarRef<SnackbarComponent>;
+
+  constructor(protected snackbar: MatSnackBar) { }
 
   public generateReference(): string {
     return Math.floor(new Date().getTime() * Math.random() * 100)
@@ -21,4 +22,9 @@ export class BaseTransactComponent {
       duration: 5000,
     });
   }
+
+  public dismissNotify() {
+    this.snackbar.dismiss()
+  }
+
 }

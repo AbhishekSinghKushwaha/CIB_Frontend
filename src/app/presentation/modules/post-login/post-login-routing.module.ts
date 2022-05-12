@@ -25,8 +25,8 @@ const routes: Routes = [
         loadChildren: (): Promise<any> => import('./transact/transact.module').then(m => m.TransactModule)
       },
       {
-        path: 'borrow',
-        loadChildren: (): Promise<any> => import('./borrow/borrow.module').then(m => m.BorrowModule)
+        path: 'loan',
+        loadChildren: (): Promise<any> => import('./loan/loan.module').then(m => m.LoanModule)
       },
       {
         path: 'account',

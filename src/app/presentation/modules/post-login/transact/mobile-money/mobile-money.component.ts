@@ -1,8 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
 import { Router } from "@angular/router";
+import { Subscription } from "rxjs";
 import { ConfirmationModalService } from "src/app/core/services/modal-services/confirmation-modal.service";
+import { TransactionsService } from "src/app/core/services/transactions/transactions.service";
 import { MobileMoneyService } from "src/app/core/services/transfers/mobile-money/mobile-money.service";
 import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
 import { accountLimitValidator } from "src/app/core/utils/validators/limits.validators";
@@ -12,7 +14,7 @@ import { accountLimitValidator } from "src/app/core/utils/validators/limits.vali
   templateUrl: "./mobile-money.component.html",
   styleUrls: ["./mobile-money.component.scss"],
 })
-export class MobileMoneyComponent implements OnInit {
+export class MobileMoneyComponent implements OnInit, OnDestroy {
   mobileMoneyTransferForm: FormGroup;
   aboveTransactionTypeLimit: boolean = false;
   transferType = TransactionTypeConstants.TransferType;
@@ -21,16 +23,29 @@ export class MobileMoneyComponent implements OnInit {
     return this.mobileMoneyTransferForm.controls;
   }
 
+  editSubscription: Subscription;
+
   constructor(
     private readonly fb: FormBuilder,
     private dialog: MatDialog,
     private readonly router: Router,
     private readonly mobileMoneyTransferService: MobileMoneyService,
-    private readonly confirmationModalService: ConfirmationModalService
+    private readonly confirmationModalService: ConfirmationModalService,
+    private readonly transactionsService: TransactionsService
   ) {}
 
   ngOnInit(): void {
     this.initForm();
+
+    this.editSubscription = this.transactionsService.transaction$.subscribe(
+      (res) => {
+        console.log(res);
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.editSubscription.unsubscribe();
   }
 
   initForm() {

@@ -1,15 +1,27 @@
 <div>
-    <div class="mb-3">
-      <button mat-icon-button aria-label="Back" class="back-icon" routerLink="/transact/otp-verification">
-        <div class="strong-text">
-          <mat-icon svgIcon="caret_left"></mat-icon>
-          <span>Verify</span>
-        </div>
-      </button>
-    </div>
-    <form class="d-flex flex-column" autocomplete="off" [formGroup]="otpVerificationCodeForm">
-      <div *ngIf="otpVerificationType">
-        <app-verify-by-code [data]="otpVerificationType" [transactionType] = "transferType"></app-verify-by-code>
+  <div class="mb-3">
+    <button
+      mat-icon-button
+      aria-label="Back"
+      class="back-icon"
+      routerLink="/transact/otp-verification"
+    >
+      <div class="strong-text">
+        <mat-icon svgIcon="caret_left"></mat-icon>
+        <span>Verify</span>
       </div>
-    </form>
+    </button>
+  </div>
+  <form
+    class="d-flex flex-column"
+    autocomplete="off"
+    [formGroup]="otpVerificationCodeForm"
+  >
+    <div *ngIf="otpVerificationType">
+      <app-verify-by-code
+        [data]="otpVerificationType"
+        [transactionType]="transferType"
+      ></app-verify-by-code>
+    </div>
+  </form>
 </div>

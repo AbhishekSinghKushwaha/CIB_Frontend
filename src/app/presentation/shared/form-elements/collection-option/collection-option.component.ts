@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
 import { FromAccount } from 'src/app/core/domain/transfer.models';
 import { BranchService } from 'src/app/core/services/modal-services/branch.service';
 import { BRANCHCONSTANTS } from 'src/app/core/utils/constants/branch.constants';
-import { SharedUtils } from 'src/app/core/utils/shared.util';
+import SharedUtils from 'src/app/core/utils/shared.util';
 
 @Component({
   selector: 'app-collection-option',

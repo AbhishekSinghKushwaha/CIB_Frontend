@@ -64,6 +64,7 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getSubsidiaries();
     this.getBillers();
     this.getGroupedAccount();
+    this.getCurrencies();
   }
 
   ngAfterViewInit() { }
@@ -149,6 +150,13 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
         this.storageService.setData('grouped_account', [])
       }
     })
+  }
+  getCurrencies() {
+    this.dataLookupService.getCurrencies().subscribe((res) => {
+      if (res.status) {
+        this.storageService.setData("currencies", res.data);
+      }
+    });
   }
 
   getBeneficiaries() {

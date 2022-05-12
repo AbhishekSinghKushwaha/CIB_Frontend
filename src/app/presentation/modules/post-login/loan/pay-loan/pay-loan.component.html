@@ -1,0 +1,83 @@
+<div class="row" *ngIf="!stage">
+  <div class="row">
+    <div class="col-12 mb-3">
+      <button
+        mat-icon-button
+        aria-label="Back"
+        class="back-icon"
+        routerLink="/loan"
+      >
+        <div class="strong-text">
+          <mat-icon svgIcon="caret_left"></mat-icon>
+          <span>Pay a loan</span>
+        </div>
+      </button>
+    </div>
+  </div>
+  <h3 class="strong-text">Please enter the payment details</h3>
+  <form
+    class="row"
+    autocomplete="off"
+    [formGroup]="ownEquityAccountTransferForm"
+    (submit)="submit()"
+  >
+    <!-- Transfer From -->
+    <div class="col-md-6">
+      <app-transfer-from
+        [parentForm]="ownEquityAccountTransferForm"
+        label="Pay From"
+        placeholder="Send From"
+        formControlName="sendFrom"
+        fieldName="sendFrom"
+        transactionType="buyAirTime"
+      ></app-transfer-from>
+    </div>
+    <!-- Transfer To -->
+    <div class="col-md-6 align-self-end">
+      <app-transfer-to
+        [parentForm]="ownEquityAccountTransferForm"
+        fieldName="sendTo"
+        formControlName="sendTo"
+        label="Pay To"
+        placeholder="Select Recipient"
+        transactionType="{{ transferType.LOAN }}"
+      ></app-transfer-to>
+    </div>
+    <!-- Transfer amount -->
+    <div class="col-md-6" (click)="enterAmount()">
+      <app-input
+        [parentForm]="ownEquityAccountTransferForm"
+        fieldName="amount"
+        label="Amount"
+        formControlName="amount"
+        placeholder="Enter an amount"
+      ></app-input>
+    </div>
+    <div class="mt-4">
+      <button
+        mat-raised-button
+        type="submit"
+        color="primary"
+        class="px-5"
+        [disabled]="ownEquityAccountTransferForm.status === 'INVALID'"
+      >
+        Pay the loan
+      </button>
+    </div>
+  </form>
+</div>
+
+<div class="row" *ngIf="stage === 'OTP'">
+  <app-sms-verification
+    (onOTPVerified)="submitOTP($event)"
+    [otpError]="otpError"
+    [message]="initialResponse"
+  ></app-sms-verification>
+</div>
+
+<div class="row" *ngIf="stage === 'completed'">
+  <app-confirmation-completion
+    [data]="completionData"
+    (confirmationDone)="confirmationDone($event)"
+  ></app-confirmation-completion>
+</div>

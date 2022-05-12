@@ -1,6 +1,6 @@
 import { Subscription } from 'rxjs';
 import { PreLoginModal } from './../domain/pre-login-modal.model';
-export class SharedUtils {
+export default class SharedUtils {
   static getNotificationModalParam(param: PreLoginModal): PreLoginModal {
     return {
       image: param.image,
@@ -23,6 +23,10 @@ export class SharedUtils {
   }
 
   static formatSeconds(s: number): string {
-    return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + s;
+    return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + Math.ceil(s);
+  }
+
+  static formatMoney(amount: number) {
+    return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 }

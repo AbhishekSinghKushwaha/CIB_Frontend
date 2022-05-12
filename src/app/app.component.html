@@ -1,1 +1,21 @@
 <router-outlet></router-outlet>
+
+<ng-template #customLoadingTemplate>
+  <div class="loader-new">
+    <lottie-player
+      src="/assets/images/icons/lf20_w5segxeu.json"
+      background="transparent"
+      speed="1"
+      style="width: 300px; height: 300px"
+      loop
+      autoplay
+    >
+    </lottie-player>
+  </div>
+</ng-template>
+
+<ngx-loading
+  *ngIf="loading"
+  [show]="loading"
+  [template]="customLoadingTemplate"
+></ngx-loading>

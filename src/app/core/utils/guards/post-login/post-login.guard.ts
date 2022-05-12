@@ -11,9 +11,9 @@ import { Observable } from 'rxjs';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import LOGIN_CONSTANTS from '../../constants/pre-login.constants';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class PostLoginGuard implements CanActivate {
-  constructor(private storageService: StorageService,
+  constructor(
     private readonly authService: AuthService,
     private router: Router) { }
 
@@ -25,13 +25,11 @@ export class PostLoginGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    const stage = this.authService.getLoginState();
-    if (
-      stage === LOGIN_CONSTANTS.LOGIN_STAGES.LOGIN_SUCCESS
-    ) {
-      return true;
+    const isTokenActive = this.authService.isTokenActive;
+    if (!isTokenActive) {
+      this.router.navigate(['/auth/login']);
+      return false
     }
-    this.router.navigate(['/auth/login']);
-    return false;
+    return true
   }
 }

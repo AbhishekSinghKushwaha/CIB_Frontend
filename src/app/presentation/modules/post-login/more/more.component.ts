@@ -9,9 +9,9 @@ import { Router } from '@angular/router';
 import { CorporateService } from 'src/app/core/services/corporate/corporate.service';
 
 @Component({
-  selector: 'app-more',
-  templateUrl: './more.component.html',
-  styleUrls: ['./more.component.scss'],
+  selector: "app-more",
+  templateUrl: "./more.component.html",
+  styleUrls: ["./more.component.scss"],
 })
 export class MoreComponent implements OnInit {
 
@@ -29,7 +29,7 @@ export class MoreComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getUserAccounts();
+    // this.getUserAccounts();
     this.getBanks();
     this.getSubsidiaries();
     this.currentCountry = this.storageService.getData('userCountry');
@@ -54,23 +54,23 @@ export class MoreComponent implements OnInit {
   }
 
   interCountryFundTransfer() {
-    this.router.navigate(['/more/intercountry-fund-transfer']);
+    this.router.navigate(["/more/intercountry-fund-transfer"]);
   }
-
-  getUserAccounts() {
-    this.accountsService.getUserAccounts().subscribe((res) => {
-      if (res.status) {
-        this.sharedDataService.setUserAccounts(res.data);
-      } else {
-        // TODO:: Notify error
-      }
-    });
-  }
+  //This has been called already in the post login component.Please remove
+  // getUserAccounts() {
+  //   this.accountsService.getUserAccounts().subscribe((res) => {
+  //     if (res.status) {
+  //       this.sharedDataService.setUserAccounts(res.data);
+  //     } else {
+  //       // TODO:: Notify error
+  //     }
+  //   });
+  // }
 
   getBanks() {
-    this.dataLookUpService.getBanks('KE').subscribe((res) => {
+    this.dataLookUpService.getBanks("KE").subscribe((res) => {
       if (res.status) {
-        this.sharedDataService.banks.next(res.data);
+        this.sharedDataService.setBanks(res.data);
       } else {
         // TODO:: Notify error
       }
@@ -80,7 +80,7 @@ export class MoreComponent implements OnInit {
   getSubsidiaries() {
     this.dataLookUpService.getSubsidiaries().subscribe((res) => {
       if (res.status) {
-        this.sharedDataService.countries.next(res.data);
+        this.sharedDataService.setCountries(res.data);
       } else {
         // TODO:: Notify error
       }

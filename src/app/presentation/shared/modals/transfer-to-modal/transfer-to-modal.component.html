@@ -8,6 +8,10 @@
   <div *ngIf="data.transactionType === transferType.OWN_EQUITY">
     <app-account-send-to [accounts]="data.favourites"></app-account-send-to>
   </div>
+  <!-- Transfer to Own Equity Loan Account -->
+  <div *ngIf="data.transactionType === transferType.LOAN">
+    <app-account-send-to [accounts]="data.favourites"></app-account-send-to>
+  </div>
 
   <!-- Any other transaction type  -->
   <div
