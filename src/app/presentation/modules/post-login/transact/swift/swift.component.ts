@@ -10,7 +10,7 @@ import { ConfirmationModalService } from "src/app/core/services/modal-services/c
 import { TransactionsService } from "src/app/core/services/transactions/transactions.service";
 import { SwiftTransferService } from "src/app/core/services/transfers/swift/swift-transfer.service";
 import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
-import { SharedUtils } from "src/app/core/utils/shared.util";
+import SharedUtils from "src/app/core/utils/shared.util";
 import { accountLimitValidator } from "src/app/core/utils/validators/limits.validators";
 
 @Component({
