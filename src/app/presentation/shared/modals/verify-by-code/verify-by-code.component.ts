@@ -236,6 +236,12 @@ export class VerifyByCodeComponent implements OnInit {
     ]);
   }
 
+  bulkTransfer() {
+    this.router.navigate([
+      `/transact/transfer-submitted/${this.transactionType}`,
+    ]);
+  }
+
   check(index: number, field: any, event: any): void {
     if (isNaN(parseInt(event.key, 10)) && event.key !== "Backspace") {
       event.preventDefault();
@@ -301,6 +307,9 @@ export class VerifyByCodeComponent implements OnInit {
       case this.transferType.SUBSIDIARY:
         // this.subsidiaryTransfer();
         break;
+      case "bulk-transfer":
+        this.bulkTransfer();
+        break;  
       default:
         break;
     }

@@ -120,6 +120,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: "bulk-transfer",
+    loadChildren: (): Promise<any> =>
+      import("./bulk-transfer/bulk-transfer.module").then(
+        (m) => m.BulkTransferModule
+      ),
+  },
+  {
     path: "**",
     redirectTo: "",
   },
