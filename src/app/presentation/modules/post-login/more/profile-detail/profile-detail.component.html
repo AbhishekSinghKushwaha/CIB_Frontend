@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="!profileUpdated; else profileUpdatedScreen">
   <div class="mb-3">
     <button
       mat-icon-button
@@ -15,99 +15,181 @@
   <form
     class="d-flex flex-column"
     autocomplete="off"
-    [formGroup]="intercountryFundTransferForm"
-    (submit)="getTransferCharges()"
+    [formGroup]="profileDetailForm"
+    (submit)="updateUserDetails()"
   >
     <div class="row pt-4">
-      <!-- Transfer From -->
+      <!-- Email -->
       <div class="col-md-6">
         <app-input
-          [parentForm]="intercountryFundTransferForm"
-          fieldName="sendFrom"
+          [parentForm]="profileDetailForm"
+          fieldName="emailAddres"
           label="Email address"
           placeholder="jane@equity.com"
-          formControlName="sendFrom"
+          [value]="getForm.emailAddres.value"
+          formControlName="emailAddres"
+          [isDisabled]="true"
         ></app-input>
       </div>
-      <!-- Transfer To -->
-      <div class="col-md-6 align-self-end">
-        <app-transfer-to
-          [parentForm]="intercountryFundTransferForm"
-          fieldName="sendTo"
-          formControlName="sendTo"
-          label="Send To"
-          placeholder="Select Recipient"
-          transactionType="{{ transferType.SUBSIDIARY }}"
-        ></app-transfer-to>
+      <!-- phone Number -->
+      <div class="col-md-6 mb-3">
+        <app-phone-number-input
+          [parentForm]="profileDetailForm"
+          fieldName="phoneNumber"
+          formControlName="phoneNumber"
+          placeholder="Enter their mobile number"
+          label="Mobile Number"
+          [phoneValue]="getForm.phoneNumber.value"
+          [selectedCountry]="currentCountry"
+        ></app-phone-number-input>
       </div>
-      <!-- FX Reference ID -->
+      <!-- Language -->
       <div class="col-md-6">
-        <app-input
-          [parentForm]="intercountryFundTransferForm"
-          fieldName="fxReferenceId"
-          label="FX Reference ID"
-          placeholder="Enter FX reference ID"
-          formControlName="fxReferenceId"
-        ></app-input>
+        <mat-form-field
+          appearance="standard"
+          style="width: 100%"
+          floatLabel="always"
+        >
+          <mat-label>Language</mat-label>
+          <mat-select
+            name="language"
+            fieldName="language"
+            formControlName="language"
+          >
+            <mat-option *ngFor="let language of languages" [value]="language">
+              {{ language }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
-      <!-- Transfer amount -->
+      <!-- TimeZone -->
       <div class="col-md-6">
-        <app-input
-          [parentForm]="intercountryFundTransferForm"
-          fieldName="amount"
-          label="Email address"
-          placeholder="jane@equity.com"
-          formControlName="amount"
-        ></app-input>
+        <mat-form-field
+          appearance="standard"
+          style="width: 100%"
+          floatLabel="always"
+        >
+          <mat-label>Time Zone</mat-label>
+          <mat-select
+            name="timeZone"
+            fieldName="timeZone"
+            formControlName="timeZone"
+          >
+            <mat-option *ngFor="let timeZone of timeZones" [value]="timeZone">
+              {{ timeZone }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
-      <!-- Schedule Payment -->
+      <!-- DateFormat -->
       <div class="col-md-6">
-        <app-schedule-payment-input
-          [parentForm]="intercountryFundTransferForm"
-          label="Schedule Payment"
-          fieldName="schedulePayment"
-          placeholder="Select a payment date"
-          transactionType="ownEquityAccount"
-        ></app-schedule-payment-input>
+        <mat-form-field
+          appearance="standard"
+          style="width: 100%"
+          floatLabel="always"
+        >
+          <mat-label>Date Format</mat-label>
+          <mat-select
+            name="dateFormat"
+            fieldName="dateFormat"
+            formControlName="dateFormat"
+          >
+            <mat-option
+              *ngFor="let dateFormat of dateFormats"
+              [value]="dateFormat"
+            >
+              {{ dateFormat }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
-      <!-- Payment Reason -->
+      <!-- Currency Format -->
       <div class="col-md-6">
-        <app-input
-          [parentForm]="intercountryFundTransferForm"
-          fieldName="reason"
-          label="Payment Reason"
-          formControlName="reason"
-          placeholder="Optional"
-        ></app-input>
+        <mat-form-field
+          appearance="standard"
+          style="width: 100%"
+          floatLabel="always"
+        >
+          <mat-label> Currency Format</mat-label>
+          <mat-select
+            name="currencyFormat"
+            fieldName="currencyFormat"
+            formControlName="currencyFormat"
+          >
+            <mat-option *ngFor="let currency of currencies" [value]="currency">
+              {{ currency }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
-    </div>
-    <!-- Additional Information Upload -->
-    <div class="pt-3" *ngIf="aboveTransactionTypeLimit">
-      <h3 class="strong-text">Additional Information</h3>
-      <small class="text-grey"
-        >If you are sending more than 10,000,000 we need more information from
-        you</small
-      ><br />
-
-      <div
-        class="col-md-6 upload-container mt-4"
-        (click)="openSupportingDocuments()"
-      >
-        <div>Upload a document</div>
-        <mat-icon class="folder-icon">note_add</mat-icon>
+      <!-- fontSize -->
+      <div class="col-md-6">
+        <mat-form-field
+          appearance="standard"
+          style="width: 100%"
+          floatLabel="always"
+        >
+          <mat-label> Font Size</mat-label>
+          <mat-select
+            name="fontSize"
+            fieldName="fontSize"
+            formControlName="fontSize"
+          >
+            <mat-option *ngFor="let fontSize of fontSizes" [value]="fontSize">
+              {{ fontSize }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
     </div>
     <!-- Submit Button -->
     <div class="mt-4">
       <button
+        class="float=right"
         mat-raised-button
         type="submit"
-        [disabled]="intercountryFundTransferForm.invalid"
+        [disabled]="profileDetailForm.invalid"
         color="primary"
         class="px-5"
       >
-        Send money
+        update
       </button>
     </div>
   </form>
 </div>
+<ng-template #profileUpdatedScreen>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row mb-4 justify-content-md-center">
+        <div class="row mt-5">
+          <div class="col-md-5">
+            <div class="">
+              <img
+                src="assets/images/Illustrations/Group 29.svg"
+                alt="Request submitted for approval"
+              />
+            </div>
+          </div>
+          <div class="col-md-7">
+            <div class="row">
+              <h4 class="mt-5">Your details have been updated successfully</h4>
+              <span class="text-sm mb-2"> Permanent Ammendment.</span>
+              <span class="text-sm text-grey mb-2"> </span>
+            </div>
+            <div class="row col-md-3">
+              <button
+                mat-raised-button
+                type="button"
+                color="primary"
+                class="px-5 mt-4"
+                (click)="profileUpdated = false"
+              >
+                Done
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

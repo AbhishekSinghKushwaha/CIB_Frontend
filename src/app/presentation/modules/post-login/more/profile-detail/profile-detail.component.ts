@@ -1,13 +1,9 @@
+import { UserService } from 'src/app/core/services/user/user.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
-import { ConfirmationModalService } from 'src/app/core/services/modal-services/confirmation-modal.service';
+import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { SupportingDocumentsUploadService } from 'src/app/core/services/supporting-documents-upload/supporting-documents-upload.service';
-import { IntercountryService } from 'src/app/core/services/transfers/intercountry/intercountry.service';
-import { TransactionTypeConstants } from 'src/app/core/utils/constants/transaction-type.constants';
-import { accountLimitValidator } from 'src/app/core/utils/validators/limits.validators';
+import { DataLookupService } from 'src/app/core/services/data-lookup/data-lookup.service';
 
 @Component({
   selector: 'app-profile-detail',
@@ -15,157 +11,130 @@ import { accountLimitValidator } from 'src/app/core/utils/validators/limits.vali
   styleUrls: ['./profile-detail.component.scss']
 })
 export class ProfileDetailComponent implements OnInit {
-
-  intercountryFundTransferForm: FormGroup;
-  aboveTransactionTypeLimit: boolean = false;
-  transferType = TransactionTypeConstants.TransferType;
-
+  profileUpdated: boolean = false;
+  profileDetailForm: FormGroup;
+  languages: any[] = []
+  currencies: any[] = []
+  dateFormats: any[] = []
+  fontSizes: any[] = []
+  timeZones: any[] = []
+  currentUser: any;
+  currentCountry: any;
   constructor(
     private readonly supportingDocumentsUploadService: SupportingDocumentsUploadService,
     private readonly fb: FormBuilder,
-    snackbar: MatSnackBar,
-    private intercountryService: IntercountryService,
-    public dialog: MatDialog,
-    private readonly router: Router,
-    private confirmationModalService: ConfirmationModalService
+    private userService: UserService,
+    private storageService: StorageService,
+    private dataLookupService: DataLookupService
   ) {
   }
 
   get getForm() {
-    return this.intercountryFundTransferForm.controls;
+    return this.profileDetailForm.controls;
   }
   ngOnInit(): void {
     this.initForm();
+    this.currentUser = this.storageService.getData("currentUserData");
+    this.currentCountry = this.storageService.getData("userCountry");
+    this.profileDetailForm.setValue({
+      emailAddres: this.currentUser.emailAddress,
+      phoneNumber: this.currentUser.phoneNumber,
+      language: this.currentUser.language,
+      timeZone: this.currentUser.timezone,
+      dateFormat: this.currentUser.dateFormat,
+      currencyFormat: this.currentUser.currency,
+      fontSize: this.currentUser.fontSize
+    })
+    this.getLanguages();
+    this.getCurrencies();
+    this.getDateFormats();
+    this.getFontSizes();
+    this.getTimezones();
   }
 
   initForm(): void {
-    this.intercountryFundTransferForm = this.fb.group({
-      sendFrom: ["", [Validators.required]],
-      sendTo: ["", [Validators.required]],
-      amount: [{}, [Validators.required, accountLimitValidator]],
-      reason: [""],
-      fxReferenceId: [""],
-      schedulePayment: ["", [Validators.required]],
-    });
+    this.profileDetailForm = this.fb.group({
+      emailAddres: [""],
+      phoneNumber: ["", [Validators.required]],
+      language: ["", [Validators.required]],
+      timeZone: ["", [Validators.required]],
+      dateFormat: ["", [Validators.required]],
+      currencyFormat: ["", [Validators.required]],
+      fontSize: ["", [Validators.required]]
+    })
   }
 
   openSupportingDocuments(): void {
     this.supportingDocumentsUploadService.open();
   }
 
-  // Get Transfer charges, then confirm payment.
-  getTransferCharges() {
-    const payload = {
-      amount: this.getForm.amount.value.amount,
-      currency: this.getForm.amount.value.currency,
-      destinationAccount: this.getForm.sendTo.value.accountNumber,
-      sourceAccount: this.getForm.sendFrom.value.accountNumber,
-      transferType: this.transferType.SUBSIDIARY, // For Own Equity Account
-    };
-    this.intercountryService.getTransferCharges(payload).subscribe((res) => {
-      if (res.status) {
-        this.confirmPayment(res.data);
-      } else {
-        // TODO:: Notify error
+  getLanguages() {
+    this.userService.getLanguages().subscribe((res: any) => {
+      if (res.isSuccessful) {
+        this.languages = res.data;
       }
-    });
+    })
   }
 
-  // Confirm Payment and return the confirmation boolean before initiating payment.
-  confirmPayment(transferFee: string) {
-    if (this.intercountryFundTransferForm.valid) {
-      const data = {
-        title: "Payment Confirmation",
-        subtitle: "To continue, please confirm your transaction",
-        submitButtonText: "Confirm",
-        content: [
-          {
-            key: "Transaction",
-            value: "Send money to an equity account in another country",
-          },
-          {
-            key: "Amount",
-            value: `${this.getForm.amount.value.amount} ${this.getForm.amount.value.currency}`,
-          },
-          {
-            key: "Charges",
-            value: `${transferFee} ${this.getForm.amount.value.currency}`,
-          },
-          {
-            key: "From",
-            value: `${this.getForm.sendFrom.value.accountName}<br>
-            ${this.getForm.sendFrom.value.accountNumber}
-          `,
-          },
-          {
-            key: "To",
-            value: `${this.getForm.sendTo.value.accountName}<br>
-            ${this.getForm.sendTo.value.accountNumber} <br>
-            ${this.getForm.sendTo.value.country?.countryName}
-          `,
-          },
-          {
-            key: "Frequency",
-            value: `${this.getForm.schedulePayment.value.frequency.frequency}<br>
-            ${this.getForm.schedulePayment.value.reminderDay.reminder}
-          `,
-          },
-          {
-            key: "Payment Date",
-            value: `${this.getForm.schedulePayment.value.startDate}`,
-          },
-
-          {
-            key: "FX Reference ID",
-            value: `${this.getForm.fxReferenceId.value}`,
-          },
-          {
-            key: "Payment Reason",
-            value: `${this.getForm.reason.value}`,
-          },
-        ],
-      };
-
-      this.confirmationModalService
-        .open(data)
-        .afterClosed()
-        .subscribe((confirmed: boolean) => {
-          if (data) {
-            this.savePayloadForOtpVerification();
-          }
-        });
-    }
+  getCurrencies() {
+    this.userService.getCurrencies().subscribe((res: any) => {
+      if (res.isSuccessful) {
+        this.currencies = res.data;
+      }
+    })
   }
+
+  getDateFormats() {
+    this.userService.getDateFormats().subscribe((res: any) => {
+      if (res.isSuccessful) {
+        this.dateFormats = res.data;
+      }
+    })
+  }
+
+  getFontSizes() {
+    this.userService.getFontSizes().subscribe((res: any) => {
+      if (res.isSuccessful) {
+        this.fontSizes = res.data;
+      }
+    })
+  }
+
+  getTimezones() {
+    this.userService.getTimezones().subscribe((res: any) => {
+      if (res.isSuccessful) {
+        this.timeZones = res.data;
+      }
+    })
+  }
+
+
 
   // Initiate fund transfer to own equity account
-  savePayloadForOtpVerification() {
+  updateUserDetails() {
     const payload = {
-      amount: this.getForm.amount.value.amount,
-      beneficiaryAccount: this.getForm.sendTo.value.accountNumber,
-      beneficiaryBank: "",
-      beneficiaryBankCode: "54",
-      beneficiaryCurrency: this.getForm.sendTo.value.currency,
-      beneficiaryName: this.getForm.sendTo.value.accountName,
-      currency: this.getForm.amount.value.currency,
-      fxReferenceId: this.getForm.fxReferenceId.value,
-      paymentReason: this.getForm.reason.value,
-      schedulePayment: {
-        frequency: this.getForm.schedulePayment.value.frequency.value,
-        reminderDay: this.getForm.schedulePayment.value.reminderDay.value,
-        startDate: this.getForm.schedulePayment.value.startDate.toISOString(),
-        endDate: this.getForm.schedulePayment.value.endDate.toISOString(),
-      },
-      sourceAccount: this.getForm.sendFrom.value.accountNumber,
-      transferType: this.transferType.SUBSIDIARY,
+      language: this.getForm.language.value,
+      dateFormat: this.getForm.dateFormat.value,
+      showCurrencySymbol: true,
+      currency: this.getForm.currencyFormat.value,
+      fontSize: this.getForm.fontSize.value,
+      decimalPointCount: 0,
+      timezoneFormat: "UTC",
+      timezone: this.getForm.timeZone.value,
+      phoneNumber: this.getForm.phoneNumber.value,
     };
-    if (this.intercountryFundTransferForm.valid) {
-      this.intercountryService.setTransferPayload(payload);
-      this.intercountryService.setFavouritesPayload(
-        this.intercountryFundTransferForm.getRawValue()
-      );
-      this.router.navigate([
-        `/transact/otp-verification/${this.transferType.SUBSIDIARY}`,
-      ]);
+    if (this.profileDetailForm.valid) {
+      this.userService.updateUserDetails(payload).subscribe((res: any) => {
+        if (res.isSuccessful) {
+          this.profileUpdated = true;
+          this.dataLookupService.getUserData().subscribe((res) => {
+            if (res.isSuccessful) {
+              this.storageService.setData("currentUserData", res.data);
+            }
+          });
+        }
+      });
+
     }
   }
 

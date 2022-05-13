@@ -30,11 +30,37 @@ export class UserService {
     return this.http.put(`${environment.apiUrl}${urlList.userManagement.editUserLimit}${username}/${currencyCode}`, payload);
   }
 
+  updateUserDetails(payload: any) {
+    return this.http.put(`${environment.apiUrl}${urlList.userManagement.updateUserDetails
+      }`, payload);
+  }
+
   addLimit(username: string, payload: any) {
     return this.http.post(`${environment.apiUrl}${urlList.userManagement.addUserLimit}${username}`, payload);
   }
 
   getUserCorporateDetail(corporateID: string) {
     return this.http.get(`${environment.apiUrl}${urlList.customerOnboarding.getRegistrationSummary}${corporateID}`);
+  }
+
+  getCurrencies() {
+    return this.http.get(`${environment.apiUrl}${urlList.userManagement.getCurrencies
+      }`);
+  }
+  getDateFormats() {
+    return this.http.get(`${environment.apiUrl}${urlList.userManagement.getDateFormats
+      }`);
+  }
+  getFontSizes() {
+    return this.http.get(`${environment.apiUrl}${urlList.userManagement.getFontSizes
+      }`);
+  }
+  getLanguages() {
+    return this.http.get(`${environment.apiUrl}${urlList.userManagement.getLanguages
+      }`);
+  }
+  getTimezones() {
+    return this.http.get(`${environment.apiUrl}${urlList.userManagement.getTimezones
+      }`);
   }
 }
