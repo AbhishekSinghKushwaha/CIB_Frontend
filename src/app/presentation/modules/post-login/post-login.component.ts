@@ -27,7 +27,8 @@ import { StorageService } from "src/app/core/services/storage/storage.service";
 export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
-  currrentCountry = this.storageService.getData("userCountry");
+  currrentCountry: any;
+  currentUser: any;
   mobileQuery!: MediaQueryList;
   private mobileQueryListener!: () => void;
   loading: boolean = false;
@@ -65,7 +66,7 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getCurrencies();
   }
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() { }
 
   ngOnDestroy() {
     if (this.mobileQuery) {
@@ -92,7 +93,6 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
 
   getCurrentUserData(): void {
     this.dataLookupService.getUserData().subscribe((res) => {
-      console.log(res);
       if (res.isSuccessful) {
         this.storageService.setData("currentUserData", res.data);
       }
@@ -118,12 +118,14 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
         country.countryCode3Chars === currentUser.corporate.countryId
     );
     this.storageService.setData("userCountry", currentUserCountry[0]);
+    this.currrentCountry = currentUserCountry[0];
+    this.currentUser = currentUser;
   }
 
   //TODO:: Get user default country to use to call this endpoint
   getBanks() {
     this.dataLookupService
-      .getBanks(this.currrentCountry?.countryId)
+      .getBanks(this.currentUser?.countryId.slice(0, -1))
       .subscribe((res) => {
         if (res.status) {
           this.storageService.setData("banks", res.data);
@@ -140,8 +142,9 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   getBillers() {
+    const currentUser = this.storageService.getData("currentUserData");
     this.billPaymentService
-      .getBillersByCountry(this.currrentCountry.countryCode)
+      .getBillersByCountry(currentUser.countryId.slice(0, -1))
       .subscribe((res) => {
         if (res.status) {
           this.storageService.setData("billers", res.data.items);
