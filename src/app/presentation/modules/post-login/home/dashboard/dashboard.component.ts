@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 
@@ -13,7 +14,7 @@ export class DashboardComponent implements OnInit {
   userData: any;
 
   constructor(
-    private storageService: StorageService) { }
+    private storageService: StorageService, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -41,6 +42,12 @@ export class DashboardComponent implements OnInit {
     }
 
     return initials;
+  }
+
+  goToProfileDetail() {
+    this.router.navigate([
+      `/more/profile-detail`,
+    ]);
   }
 
 }
