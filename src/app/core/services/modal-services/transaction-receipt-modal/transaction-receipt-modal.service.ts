@@ -14,7 +14,7 @@ export class TransactionReceiptModalService {
     this.modalRef = this.dialog.open<TransactionReceiptModalComponent>(
       TransactionReceiptModalComponent,
       {
-        maxWidth: "32vw",
+        maxWidth: "22vw",
         disableClose: true,
         data,
       }
