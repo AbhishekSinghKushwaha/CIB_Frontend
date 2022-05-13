@@ -77,8 +77,6 @@ export class OwnEquityAccountComponent
   async ngOnInit() {
     this.initForm();
 
-    this.test();
-
     this.subscriptions.push(
       this.transactionsService.transaction$.subscribe(
         (res: TransactionListmodel) => {
@@ -96,10 +94,6 @@ export class OwnEquityAccountComponent
         }
       )
     );
-  }
-
-  async test() {
-    console.log(await this.sharedDataService.userAccounts$.toPromise());
   }
 
   ngOnDestroy(): void {

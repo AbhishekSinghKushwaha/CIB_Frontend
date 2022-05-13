@@ -28,8 +28,9 @@
                         </small>
                       </div>
                       <div class="d-flex justify-content-center">
-                        <small class="text-grey"
-                          >Hello Emmanuel, here is your receipt
+                        <small class="text-grey text-center"
+                          >Hello {{ currentUser?.name | titlecase }}, here is
+                          your receipt
                         </small>
                       </div>
                     </div>
@@ -43,19 +44,19 @@
                       <h2
                         class="d-flex justify-content-center text-danger strong-text"
                       >
-                        33,000.00 KES
+                        {{ data?.amount }} {{ data?.currency }}
                       </h2>
 
-                      <small class="d-flex justify-content-center strong-text">
-                        September 2020 rent for
-                      </small>
-                      <small class="d-flex justify-content-center strong-text">
-                        Babylon Gardens A13
+                      <small
+                        class="d-flex text-center justify-content-center strong-text"
+                      >
+                        {{ data?.narration | titlecase }}
                       </small>
 
                       <small
+                        *ngIf="data?.paymentReason"
                         class="d-flex justify-content-center text-grey mt-2"
-                        >Payment reason
+                        >{{data?.paymentReason}
                       </small>
 
                       <small
@@ -76,19 +77,25 @@
                         class="d-flex justify-content-center text-grey mt-3"
                         >Sent from
                       </small>
-                      <small class="d-flex justify-content-center strong-text"
-                        >Emmanuel Machara</small
+                      <small
+                        class="d-flex justify-content-center strong-text"
+                        >{{ sourceAccout?.accountName }}</small
                       >
-                      <small class="d-flex justify-content-center strong-text"
-                        >Savings - 009999</small
+                      <small
+                        class="d-flex justify-content-center strong-text"
+                        >{{ sourceAccout?.accountNumber }}</small
+                      >
+                      <small
+                        class="d-flex justify-content-center strong-text"
+                        >{{ sourceAccout?.accountType }}</small
                       >
 
                       <small
                         class="text-grey d-flex justify-content-center mt-3"
-                        >Ref. 42094823742039</small
+                        >{{ data?.paymentReference }}</small
                       >
                       <small class="text-grey d-flex justify-content-center">
-                        21 August 2020 11:59:08 EAT</small
+                        {{ data?.dateCreated | date: "medium" }}</small
                       >
                     </div>
                     <div
@@ -148,8 +155,8 @@
             width="200px"
           />
         </div>
-        <div class="col-md-8" (click)="download(item)">
-          {{ item }}
+        <div class="col-md-8" (click)="download(item.id)">
+          {{ item.option }}
         </div>
         <div class="col-md-2">
           <mat-icon color="primary" svgIcon="caret_right"></mat-icon>

@@ -1,5 +1,5 @@
-import { AuthService } from 'src/app/core/services/auth/auth.service';
-import { BillServiceService } from './../../../core/services/transfers/bill-service/bill-service.service';
+import { AuthService } from "src/app/core/services/auth/auth.service";
+import { BillServiceService } from "./../../../core/services/transfers/bill-service/bill-service.service";
 import { BreakpointObserver, MediaMatcher } from "@angular/cdk/layout";
 import {
   AfterViewInit,
@@ -27,7 +27,7 @@ import { StorageService } from "src/app/core/services/storage/storage.service";
 export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
-  currrentCountry = this.storageService.getData('userCountry')
+  currrentCountry = this.storageService.getData("userCountry");
   mobileQuery!: MediaQueryList;
   private mobileQueryListener!: () => void;
   loading: boolean = false;
@@ -51,7 +51,6 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
     this.getCurrentUserData();
     this.getCountries();
     this.getUserAccounts();
@@ -64,12 +63,9 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getBillers();
     this.getGroupedAccount();
     this.getCurrencies();
-
   }
 
-  ngAfterViewInit() {
-
-  }
+  ngAfterViewInit() {}
 
   ngOnDestroy() {
     if (this.mobileQuery) {
@@ -96,11 +92,11 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
 
   getCurrentUserData(): void {
     this.dataLookupService.getUserData().subscribe((res) => {
-      console.log(res)
+      console.log(res);
       if (res.isSuccessful) {
         this.storageService.setData("currentUserData", res.data);
       }
-    })
+    });
   }
 
   // Call Data Look up services
@@ -117,18 +113,22 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
   getCurrentUserCountry() {
     const currentUser = this.storageService.getData("currentUserData");
     const countries = this.storageService.getData("countries");
-    const currentUserCountry = countries.filter((country: any) => country.countryCode3Chars === currentUser.corporate.countryId);
-    this.storageService.setData("userCountry", currentUserCountry[0])
+    const currentUserCountry = countries.filter(
+      (country: any) =>
+        country.countryCode3Chars === currentUser.corporate.countryId
+    );
+    this.storageService.setData("userCountry", currentUserCountry[0]);
   }
 
   //TODO:: Get user default country to use to call this endpoint
   getBanks() {
-
-    this.dataLookupService.getBanks(this.currrentCountry.countryId).subscribe((res) => {
-      if (res.status) {
-        this.storageService.setData("banks", res.data);
-      }
-    });
+    this.dataLookupService
+      .getBanks(this.currrentCountry?.countryId)
+      .subscribe((res) => {
+        if (res.status) {
+          this.storageService.setData("banks", res.data);
+        }
+      });
   }
 
   getUserAccounts() {
@@ -140,23 +140,25 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   getBillers() {
-    this.billPaymentService.getBillersByCountry(this.currrentCountry.countryCode).subscribe((res) => {
-      if (res.status) {
-        this.storageService.setData('billers', res.data.items)
-      }
-    })
+    this.billPaymentService
+      .getBillersByCountry(this.currrentCountry.countryCode)
+      .subscribe((res) => {
+        if (res.status) {
+          this.storageService.setData("billers", res.data.items);
+        }
+      });
   }
 
   getGroupedAccount() {
-    const userData = this.storageService.getData('currentUserData')
+    const userData = this.storageService.getData("currentUserData");
     const corporateId = userData.corporate.id;
     this.authService.getGroupedCorporate(corporateId).subscribe((res: any) => {
       if (res.isSuccessful) {
-        this.storageService.setData('grouped_account', res.data)
+        this.storageService.setData("grouped_account", res.data);
       } else {
-        this.storageService.setData('grouped_account', [])
+        this.storageService.setData("grouped_account", []);
       }
-    })
+    });
   }
   getCurrencies() {
     this.dataLookupService.getCurrencies().subscribe((res) => {
