@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input, OnInit } from "@angular/core";
+import { AfterViewInit, Component, forwardRef, Input, OnInit } from "@angular/core";
 import { FormControl, FormGroup, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { Subject } from "rxjs";
 import { debounceTime, distinctUntilChanged } from "rxjs/operators";
@@ -21,7 +21,7 @@ import { mockData } from "src/app/core/utils/constants/mockdata.constants";
     },
   ],
 })
-export class PhoneNumberInputComponent implements OnInit {
+export class PhoneNumberInputComponent implements OnInit, AfterViewInit {
   @Input() parentForm: FormGroup;
 
   @Input()
@@ -30,7 +30,10 @@ export class PhoneNumberInputComponent implements OnInit {
   @Input()
   public label!: string;
 
-  public value: string;
+  @Input()
+  public phoneValue: string;
+
+  public value: any;
 
   @Input()
   placeholder!: string;
@@ -64,10 +67,19 @@ export class PhoneNumberInputComponent implements OnInit {
     private countryService: CountryService,
     private newRecipientService: NewRecipientService,
     private storageService: StorageService
-  ) {}
+  ) { }
+
 
   ngOnInit(): void {
     this.listenToDataStreams();
+
+  }
+
+  ngAfterViewInit(): void {
+    if (this.phoneValue) {
+      this.value = this.phoneValue
+      this.phoneNumberEntered.next(Number(this.value))
+    }
   }
 
   public writeValue(value: string): void {

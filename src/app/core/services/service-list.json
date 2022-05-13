@@ -41,7 +41,12 @@
     "editUserLimit": "/cibcore/api/UserTransactionLimit/Update/",
     "getGroupedCorporate": "/cibcore/api/Corporates/GroupedCorporates",
     "currentUserData": "/cibcore/api/CorporateUsers/Current",
-    "editUserLimit": "/cibcore/api/UserTransactionLimit/Update/"
+    "getCurrencies": "/cibcore/api/SupportedSettings/Currencies",
+    "getDateFormats": "/cibcore/api/SupportedSettings/DateFormats",
+    "getFontSizes": "/cibcore/api/SupportedSettings/FontSizes",
+    "getLanguages": "/cibcore/api/SupportedSettings/Languages",
+    "getTimezones": "/cibcore/api/SupportedSettings/Timezones",
+    "updateUserDetails": "/cibcore/api/CorporateUsers/Setting"
   },
   "accounts": {
     "getUserAccounts": "/cibaccountservice-v1/api/v1/Accounts/GetUserMappedAccounts"
