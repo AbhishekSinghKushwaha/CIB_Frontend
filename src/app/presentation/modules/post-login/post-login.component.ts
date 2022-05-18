@@ -113,12 +113,20 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
   getCurrentUserCountry() {
     const currentUser = this.storageService.getData("currentUserData");
     const countries = this.storageService.getData("countries");
-    const currentUserCountry = countries.filter(
-      (country: any) =>
-        country.countryCode3Chars === currentUser.corporate.countryId
-    );
-    this.storageService.setData("userCountry", currentUserCountry[0]);
-    this.currrentCountry = currentUserCountry[0];
+    if (countries) {
+      if (currentUser) {
+        const currentUserCountry = countries.filter(
+          (country: any) =>
+            country.countryCode3Chars === currentUser.corporate.countryId
+        );
+        this.storageService.setData("userCountry", currentUserCountry[0]);
+        this.currrentCountry = currentUserCountry[0];
+      }
+
+
+    }
+
+
     this.currentUser = currentUser;
   }
 
@@ -144,7 +152,7 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
   getBillers() {
     const currentUser = this.storageService.getData("currentUserData");
     this.billPaymentService
-      .getBillersByCountry(currentUser.countryId.slice(0, -1))
+      .getBillersByCountry(currentUser ? currentUser.countryId.slice(0, -1) : "KE")
       .subscribe((res) => {
         if (res.status) {
           this.storageService.setData("billers", res.data.items);
@@ -154,7 +162,7 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
 
   getGroupedAccount() {
     const userData = this.storageService.getData("currentUserData");
-    const corporateId = userData.corporate.id;
+    const corporateId = userData && userData.corporate.id;
     this.authService.getGroupedCorporate(corporateId).subscribe((res: any) => {
       if (res.isSuccessful) {
         this.storageService.setData("grouped_account", res.data);

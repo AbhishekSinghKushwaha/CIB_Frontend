@@ -102,8 +102,8 @@ export class SidebarComponent implements OnInit, OnChanges, AfterViewInit {
     this.dataLookupService.getUserData().subscribe((res) => {
       const currentUser = this.storageService.getData("currentUserData");
       const countries = this.storageService.getData("countries");
-      const currentUserCountry = countries.filter((country: any) => country.countryCode3Chars === currentUser.corporate.countryId);
-      this.currentCountry = currentUserCountry[0];
+      const currentUserCountry = currentUser && countries.filter((country: any) => country.countryCode3Chars === currentUser.corporate.countryId);
+      this.currentCountry = currentUserCountry && currentUserCountry[0];
       if (res.isSuccessful) {
         this.storageService.setData("currentUserData", res.data);
       }
