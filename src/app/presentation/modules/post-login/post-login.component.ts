@@ -66,7 +66,7 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getCurrencies();
   }
 
-  ngAfterViewInit() { }
+  ngAfterViewInit() {}
 
   ngOnDestroy() {
     if (this.mobileQuery) {
@@ -144,7 +144,7 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
   getBillers() {
     const currentUser = this.storageService.getData("currentUserData");
     this.billPaymentService
-      .getBillersByCountry(currentUser.countryId.slice(0, -1))
+      .getBillersByCountry(currentUser?.countryId.slice(0, -1))
       .subscribe((res) => {
         if (res.status) {
           this.storageService.setData("billers", res.data.items);
