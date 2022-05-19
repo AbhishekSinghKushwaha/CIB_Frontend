@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { Subscription } from "rxjs";
 import { BankModel } from "src/app/core/domain/bank.model";
 import { CountryModel } from "src/app/core/domain/bank.model";
 import { DataLookupService } from "src/app/core/services/data-lookup/data-lookup.service";
@@ -20,6 +21,8 @@ export class BankModalComponent implements OnInit {
   visibility = true;
   countrySelectType = countrySettings.viewTypes.NAME_ONLY;
   banks: BankModel[];
+
+  subscriptions: Subscription[] = [];
   constructor(
     private readonly dialogRef: MatDialogRef<BankModalComponent>,
     private readonly bankService: BankService,
@@ -32,6 +35,7 @@ export class BankModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.data);
     this.subscribeEvents();
     this.updateBanks(this.data.countryCode);
   }
@@ -40,9 +44,10 @@ export class BankModalComponent implements OnInit {
     this.countryService.openedStatus.subscribe((response) =>
       response ? (this.visibility = false) : (this.visibility = true)
     );
-    this.bankService.selected.subscribe(
-      (response) => (this.selected = response)
-    );
+    this.bankService.selected.subscribe((response) => {
+      this.selected = response;
+      console.log(this.selected);
+    });
   }
 
   close(): void {
@@ -54,7 +59,9 @@ export class BankModalComponent implements OnInit {
   }
 
   updateBanks(countryCode: string) {
+    console.log(countryCode);
     this.dataLookupService.getBanks(countryCode).subscribe((res) => {
+      console.log(res);
       if (res.status) {
         this.storageService.setData("banks", res.data);
         this.banks = res.data;

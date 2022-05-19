@@ -108,7 +108,7 @@ export class OtherEquityAccountComponent
         if (res.status) {
           this.confirmPayment(res.data);
         } else {
-          // TODO:: Notify error
+          console.log(res.message);
         }
       });
   }

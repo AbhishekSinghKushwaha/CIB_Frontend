@@ -20,7 +20,7 @@ const initialState: interBankState = {
 })
 export class InterbankService extends StateService<interBankState> {
   transferPayload$: Observable<any> = this.select(
-    (state) => state.favouritesPayload
+    (state) => state.transferPayload
   );
   favouritesPayload$: Observable<any> = this.select(
     (state) => state.favouritesPayload

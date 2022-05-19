@@ -176,9 +176,6 @@ export class StandingOrdersFormComponent
       case this.transferType.INTRA_BANK:
         this.transactionType = "Send To An Equity Account";
         break;
-      case this.transferType.INTER_BANK:
-        this.transactionType = "Send To Another Bank";
-        break;
       case this.transferType.EFT:
         this.transactionType = "Send to another bank via EFT";
         break;
@@ -273,7 +270,7 @@ export class StandingOrdersFormComponent
           if (res.status) {
             this.confirmPayment(res.data);
           } else {
-            // TODO:: Notify error
+            console.log(res.message);
           }
         });
     } else if (
@@ -443,7 +440,7 @@ export class StandingOrdersFormComponent
                   `/transact/otp-verification/${this.type}`,
                 ]);
               } else {
-                // TODO:: Notify Error
+                console.log(res.message);
               }
             },
             (err) => {
@@ -459,7 +456,7 @@ export class StandingOrdersFormComponent
                   `/transact/otp-verification/${this.type}`,
                 ]);
               } else {
-                // TODO:: Notify Error
+                console.log(res.message);
               }
             },
             (err) => {

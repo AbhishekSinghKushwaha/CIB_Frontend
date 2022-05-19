@@ -68,7 +68,6 @@ export class SendOrPayToComponent implements OnInit {
   formatPurposeText() {
     if (
       this.transactionType === this.transferType.INTRA_BANK ||
-      this.transactionType === this.transferType.INTER_BANK ||
       this.transactionType === this.transferType.MOBILE_MONEY ||
       this.transactionType === this.transferType.RTGS ||
       this.transactionType === this.transferType.EFT ||

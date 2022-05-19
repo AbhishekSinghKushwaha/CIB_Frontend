@@ -40,9 +40,7 @@
               *ngIf="
                 getFormFields.transferType.value.value ===
                   transferType.SUBSIDIARY ||
-                getFormFields.transferType.value.value === transferType.SWIFT ||
-                getFormFields.transferType.value.value ===
-                  transferType.INTRA_BANK
+                getFormFields.transferType.value.value === transferType.SWIFT
               "
             >
               <app-country-select-input
@@ -51,6 +49,7 @@
                 placeholder="Select country"
                 formControlName="country"
                 label="Country"
+                transferType="getFormFields.transferType.value.value"
               ></app-country-select-input>
             </div>
 

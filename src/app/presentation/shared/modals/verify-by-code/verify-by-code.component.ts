@@ -90,7 +90,6 @@ export class VerifyByCodeComponent implements OnInit {
     private ownEquityService: OwnAccountService
   ) {
     this.initOtpForm();
-    console.log(this.transactionType);
   }
 
   ngOnInit(): void {
@@ -206,7 +205,7 @@ export class VerifyByCodeComponent implements OnInit {
   billPayment() {
     this.billPaymentService.currentData.subscribe((data: any) => {
       this.billPaymentPayload = data;
-    })
+    });
     if (this.billPaymentPayload) {
       this.billPaymentService
         .postValidateBill(this.billPaymentPayload)
@@ -214,11 +213,11 @@ export class VerifyByCodeComponent implements OnInit {
           if (res.status) {
             this.router.navigate([
               `/transact/transfer-submitted/${this.transferType.BILL_PAYMENT}`,
-            ])
+            ]);
           } else {
             console.log(res.message);
           }
-        })
+        });
     }
   }
 
@@ -292,7 +291,6 @@ export class VerifyByCodeComponent implements OnInit {
   }
 
   perfomTransfer() {
-    console.log(this.transactionType);
     switch (this.transactionType) {
       case this.transferType.BUY_AIRTIME:
         this.buyAirtime();
@@ -302,9 +300,6 @@ export class VerifyByCodeComponent implements OnInit {
         break;
       case this.transferType.BUY_GOODS:
         this.buyGoods();
-        break;
-      case "Standing Orders":
-        this.standingOrders();
         break;
       case this.transferType.MOBILE_MONEY:
         this.mobileMoneyService.sendMobileMoney(this.transactionType);
@@ -322,15 +317,12 @@ export class VerifyByCodeComponent implements OnInit {
         this.swiftTransferService.sendViaSwiftTransfer(this.transactionType);
         break;
       case "approve-transaction":
-        // TODO:: APPROVE TRANSACTION
         this.transactionService.approveTransaction("approve-transaction");
         break;
       case "reject-transaction":
-        // TODO:: REJECT TRANSACTION
         this.transactionService.approveTransaction("reject-transaction");
         break;
       case "reinitiate-transaction":
-        // TODO:: DELETE TRANSACTION
         this.transactionService.reinitiateTransaction("reinitiate-transaction");
         break;
       case this.transferType.SUBSIDIARY:
@@ -341,6 +333,9 @@ export class VerifyByCodeComponent implements OnInit {
         break;
       case "bulk-transfer":
         this.bulkTransfer();
+        break;
+      case "Standing Orders":
+        this.standingOrders();
         break;
       default:
         break;

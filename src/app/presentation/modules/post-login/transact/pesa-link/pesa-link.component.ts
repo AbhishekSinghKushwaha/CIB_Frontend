@@ -95,7 +95,7 @@ export class PesaLinkComponent implements OnInit {
           this.confirmPayment(res.data);
         } else {
           this.loading = false;
-          // TODO:: Notify error
+          console.log(res.message);
         }
       });
   }
