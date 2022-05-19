@@ -52,6 +52,7 @@ export class MobileMoneyService extends StateService<MobileMoneyState> {
 
   sendMobileMoney(transactionType: string) {
     this.transferPayload$.subscribe((res: any) => {
+      console.log(res);
       if (res) {
         this.http
           .post<any>(

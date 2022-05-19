@@ -104,8 +104,10 @@ export class SelectBankComponent implements OnInit {
   }
 
   openBankSelectionModal() {
-    this.parentForm.get("country") !== null
-      ? this.selectBankService.open(this.parentForm.controls.country.value)
-      : this.selectBankService.open(this.defaultCountry);
+    if (this.parentForm.get("country")?.value) {
+      this.selectBankService.open(this.parentForm.controls.country.value);
+    } else {
+      this.selectBankService.open(this.defaultCountry);
+    }
   }
 }

@@ -70,7 +70,6 @@ export interface Telco {
 export interface TransferTypeDTO {
   OWN_EQUITY: string;
   INTRA_BANK: string;
-  INTER_BANK: string;
   EFT: string;
   SWIFT: string;
   RTGS: string;

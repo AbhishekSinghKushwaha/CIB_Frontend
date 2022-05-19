@@ -6,7 +6,6 @@ export const TransferType = {
   OWN_EQUITY: "1",
   LOAN: "111",
   INTRA_BANK: "2",
-  INTER_BANK: "3001",
   EFT: "4",
   SWIFT: "5",
   RTGS: "6",
@@ -15,7 +14,7 @@ export const TransferType = {
   BUY_AIRTIME: "10",
   PESALINK: "7",
   SUBSIDIARY: "8",
-  BILL_PAYMENT: "9"
+  BILL_PAYMENT: "9",
 };
 
 const SwiftChargesOptions = [

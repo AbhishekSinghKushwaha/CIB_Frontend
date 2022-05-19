@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
 import { Router } from "@angular/router";
 import { ConfirmationModalService } from "src/app/core/services/modal-services/confirmation-modal.service";
+import { StorageService } from "src/app/core/services/storage/storage.service";
 import { InterbankService } from "src/app/core/services/transfers/interbank/interbank.service";
 import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
 import { accountLimitValidator } from "src/app/core/utils/validators/limits.validators";
@@ -19,16 +20,19 @@ export class OtherBanksComponent implements OnInit {
   get getForm() {
     return this.interBankTransferForm.controls;
   }
+  currentUser: any;
   constructor(
     private readonly fb: FormBuilder,
     private interBankTransferService: InterbankService,
     private dialog: MatDialog,
     private router: Router,
-    private confirmationModalService: ConfirmationModalService
+    private confirmationModalService: ConfirmationModalService,
+    private storageService: StorageService
   ) {}
 
   ngOnInit(): void {
     this.initForm();
+    this.currentUser = this.storageService.getData("currentUserData");
     this.getForm.transactionType.patchValue(this.transferType.RTGS);
   }
 
@@ -38,7 +42,7 @@ export class OtherBanksComponent implements OnInit {
       sendFrom: ["", [Validators.required]],
       sendTo: ["", Validators.required],
       amount: [{}, [Validators.required, accountLimitValidator]],
-      fxReferenceId: ["", [Validators.required]],
+      fxReferenceId: [""],
       schedulePayment: ["", [Validators.required]],
       reason: [""],
     });
@@ -51,8 +55,8 @@ export class OtherBanksComponent implements OnInit {
       currency: this.getForm.amount.value.currency,
       destinationAccount: this.getForm.sendTo.value.accountNumber,
       destinationBankCode: this.getForm.sendTo.value.bank.bankCode,
-      destinationCountryCode: "KE", // Default have it as kenya, then change to pick the user's country
-      countryCode: "KE", //TODO:: Default have it as kenya, then change to pick the user's country
+      destinationCountryCode: this.currentUser.countryId,
+      countryCode: this.currentUser.countryId,
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
       transferType: this.getForm.transactionType.value, // For Another Bank Transfer Type
     };
@@ -62,7 +66,7 @@ export class OtherBanksComponent implements OnInit {
         if (res.status) {
           this.confirmPayment(res.data);
         } else {
-          // TODO:: Notify error
+          console.log(res.message);
         }
       });
   }

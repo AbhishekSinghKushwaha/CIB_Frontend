@@ -2,13 +2,7 @@
   <app-intra-new-recipient [transferType]="data"></app-intra-new-recipient>
 </div>
 
-<div
-  *ngIf="
-    data === transferType.INTER_BANK ||
-    data === transferType.EFT ||
-    data === transferType.RTGS
-  "
->
+<div *ngIf="data === transferType.EFT || data === transferType.RTGS">
   <app-inter-new-recipient [transferType]="data"></app-inter-new-recipient>
 </div>
 

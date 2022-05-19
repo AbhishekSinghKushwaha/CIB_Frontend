@@ -62,7 +62,6 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
 
   beneficiaries: any[];
 
-
   transferType = TransactionTypeConstants.TransferType;
   constructor(
     private readonly transferToService: TransferToService,
@@ -72,7 +71,7 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
     private storageService: StorageService,
     private readonly merchantDetailsService: MerchantDetailsService,
     private readonly loanService: LoanService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.listenToDataStreams();
@@ -260,15 +259,13 @@ export class TransferToComponent implements ControlValueAccessor, OnInit {
         });
         break;
       case this.transferType.LOAN: // Own Equity Account
-        this.loanService
-          .loanAccounts$
-          .subscribe(accounts => {
-            console.log(this.transactionType, accounts)
-            if (accounts) {
-              this.loanAccounts = accounts;
-              this.destinationAccounts = accounts
-            }
-          });
+        this.loanService.loanAccounts$.subscribe((accounts) => {
+          console.log(this.transactionType, accounts);
+          if (accounts) {
+            this.loanAccounts = accounts;
+            this.destinationAccounts = accounts;
+          }
+        });
         this.transferToService.selectedTransferToAccount.subscribe((x) => {
           this.parentForm.controls.sendTo.setValue(x);
         });
