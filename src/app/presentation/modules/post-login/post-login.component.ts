@@ -101,13 +101,13 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // Call Data Look up services
   async getCountries() {
-    await this.dataLookupService.getCountries().subscribe((res) => {
+    this.dataLookupService.getCountries().subscribe(async (res) => {
       if (res.status) {
         this.storageService.setData("countries", res.data);
+        this.getCurrentUserCountry();
+        this.getBanks();
       }
     });
-    await this.getCurrentUserCountry();
-    await this.getBanks();
   }
 
   getCurrentUserCountry() {
@@ -115,7 +115,7 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     const countries = this.storageService.getData("countries");
     if (countries) {
       if (currentUser) {
-        const currentUserCountry = countries.filter(
+        const currentUserCountry = countries?.filter(
           (country: any) =>
             country.countryCode3Chars === currentUser.corporate.countryId
         );
@@ -127,10 +127,9 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     this.currentUser = currentUser;
   }
 
-  //TODO:: Get user default country to use to call this endpoint
   getBanks() {
     this.dataLookupService
-      .getBanks(this.currentUser?.countryId.slice(0, -1))
+      .getBanks(this.currentUser?.countryId)
       .subscribe((res) => {
         if (res.status) {
           this.storageService.setData("banks", res.data);
@@ -149,9 +148,7 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
   getBillers() {
     const currentUser = this.storageService.getData("currentUserData");
     this.billPaymentService
-      .getBillersByCountry(
-        currentUser ? currentUser.countryId.slice(0, -1) : "KE"
-      )
+      .getBillersByCountry(currentUser ? currentUser.countryId : "KE")
       .subscribe((res) => {
         if (res.status) {
           this.storageService.setData("billers", res.data.items);
@@ -183,19 +180,25 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   getTelcos() {
-    this.dataLookupService.getTelcos("KE").subscribe((res) => {
-      if (res.status) {
-        this.storageService.setData("telcos", res.data);
-      }
-    });
+    const currentUser = this.storageService.getData("currentUserData");
+    this.dataLookupService
+      .getTelcos(currentUser ? currentUser.countryId : "KE")
+      .subscribe((res) => {
+        if (res.status) {
+          this.storageService.setData("telcos", res.data);
+        }
+      });
   }
 
   getMobileWallets() {
-    this.dataLookupService.getMobileWallets("KE").subscribe((res) => {
-      if (res.status) {
-        this.storageService.setData("wallets", res.data);
-      }
-    });
+    const currentUser = this.storageService.getData("currentUserData");
+    this.dataLookupService
+      .getMobileWallets(currentUser ? currentUser.countryId : "KE")
+      .subscribe((res) => {
+        if (res.status) {
+          this.storageService.setData("wallets", res.data);
+        }
+      });
   }
 
   getSectors() {

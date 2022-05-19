@@ -339,7 +339,7 @@ export class BulkTransferDetailComponent implements OnInit {
             if (res.status) {
               this.transferFee += Number(res.data);
             } else {
-              // TODO:: Notify error
+              console.log(res.message);
             }
           });
       } else if (Number.isNaN(res.paymentType) || res.paymentType == 0) {

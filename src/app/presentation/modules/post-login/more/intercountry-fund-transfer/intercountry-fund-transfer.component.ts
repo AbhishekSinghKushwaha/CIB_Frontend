@@ -67,13 +67,13 @@ export class IntercountryFundTransferComponent
       currency: this.getForm.amount.value.currency,
       destinationAccount: this.getForm.sendTo.value.accountNumber,
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
-      transferType: this.transferType.SUBSIDIARY, // For Own Equity Account
+      transferType: this.transferType.SUBSIDIARY,
     };
     this.intercountryService.getTransferCharges(payload).subscribe((res) => {
       if (res.status) {
         this.confirmPayment(res.data);
       } else {
-        // TODO:: Notify error
+        console.log(res.message);
       }
     });
   }

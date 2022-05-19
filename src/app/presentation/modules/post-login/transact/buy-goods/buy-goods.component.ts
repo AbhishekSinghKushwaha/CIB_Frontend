@@ -1,22 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BaseTransactComponent } from '../base-transact.component';
-import { accountLimitValidator } from 'src/app/core/utils/validators/limits.validators';
-import { UniversalValidators } from 'ngx-validators';
-import { OwnAccountService } from 'src/app/core/services/transfers/own-account/own-account.service';
-import { MatDialog } from '@angular/material/dialog';
-import { ConfirmPaymentComponent } from 'src/app/presentation/shared/modals/confirm-payment/confirm-payment.component';
-import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { TransactionTypeConstants } from 'src/app/core/utils/constants/transaction-type.constants';
-import { BuyGoodsService } from 'src/app/core/services/transfers/buy-goods/buy-goods.service';
-import { MerchantDetailsService } from 'src/app/core/services/merchant-details/merchant-details.service';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { BaseTransactComponent } from "../base-transact.component";
+import { accountLimitValidator } from "src/app/core/utils/validators/limits.validators";
+import { UniversalValidators } from "ngx-validators";
+import { OwnAccountService } from "src/app/core/services/transfers/own-account/own-account.service";
+import { MatDialog } from "@angular/material/dialog";
+import { ConfirmPaymentComponent } from "src/app/presentation/shared/modals/confirm-payment/confirm-payment.component";
+import { Router } from "@angular/router";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
+import { BuyGoodsService } from "src/app/core/services/transfers/buy-goods/buy-goods.service";
+import { MerchantDetailsService } from "src/app/core/services/merchant-details/merchant-details.service";
 
 @Component({
-  selector: 'app-buy-goods',
-  templateUrl: './buy-goods.component.html',
-  styleUrls: ['./buy-goods.component.scss'],
+  selector: "app-buy-goods",
+  templateUrl: "./buy-goods.component.html",
+  styleUrls: ["./buy-goods.component.scss"],
 })
 export class BuyGoodsComponent extends BaseTransactComponent implements OnInit {
   buyGoodsForm: FormGroup;
@@ -28,7 +28,7 @@ export class BuyGoodsComponent extends BaseTransactComponent implements OnInit {
     private buyGoodsService: BuyGoodsService,
     public dialog: MatDialog,
     private readonly router: Router,
-    private readonly merchantDetailsService: MerchantDetailsService,
+    private readonly merchantDetailsService: MerchantDetailsService
   ) {
     super(snackBar);
   }
@@ -40,17 +40,17 @@ export class BuyGoodsComponent extends BaseTransactComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     this.getMerchants();
-    this.getFavouriteMerchants();   
+    this.getFavouriteMerchants();
   }
 
   initForm(): void {
     this.buyGoodsForm = this.fb.group({
-      sendFrom: ['', [Validators.required]],
-      sendTo: ['', [Validators.required]],
+      sendFrom: ["", [Validators.required]],
+      sendTo: ["", [Validators.required]],
       amount: [{}, [Validators.required, accountLimitValidator]],
-      reason: ['', [Validators.required]],
-      fxReferenceId: ['', [Validators.required]],
-      schedulePayment: ['', [Validators.required]],
+      reason: ["", [Validators.required]],
+      fxReferenceId: ["", [Validators.required]],
+      schedulePayment: ["", [Validators.required]],
     });
   }
 
@@ -58,10 +58,8 @@ export class BuyGoodsComponent extends BaseTransactComponent implements OnInit {
     this.buyGoodsService.getMerchants().subscribe((res) => {
       if (res.status) {
         this.merchantDetailsService.setMerchantDetails(res.data);
-      }
-      else{
+      } else {
         console.log(res.message);
-        // TODO:: Notify Error
       }
     });
   }
@@ -70,10 +68,8 @@ export class BuyGoodsComponent extends BaseTransactComponent implements OnInit {
     this.buyGoodsService.getFavouriteMerchants().subscribe((res) => {
       if (res.status) {
         this.merchantDetailsService.setFavouriteMerchantDetails(res.data);
-      }
-      else{
+      } else {
         console.log(res.message);
-        // TODO:: Notify Error
       }
     });
   }
@@ -86,9 +82,9 @@ export class BuyGoodsComponent extends BaseTransactComponent implements OnInit {
       if (res.status) {
         this.confirmPayment(res.data.charge);
       } else {
-        // TODO:: Notify error
+        console.log(res.message);
       }
-    }); 
+    });
   }
 
   // Confirm Payment and return the confirmation boolean before initiating payment.
@@ -118,7 +114,6 @@ export class BuyGoodsComponent extends BaseTransactComponent implements OnInit {
     }
   }
 
-
   // Initiate fund transfer to buy goods.
   buyGoods() {
     const payload = {
@@ -142,11 +137,13 @@ export class BuyGoodsComponent extends BaseTransactComponent implements OnInit {
     };
     const tillNumber = {
       tillNumber: this.getForm.sendTo.value.tillNumber,
-    }
+    };
     if (this.buyGoodsForm.valid) {
       this.buyGoodsService.getTillNumber(tillNumber);
       this.buyGoodsService.payBuyGoods(payload);
-      this.router.navigate([`/transact/otp-verification/${this.transferType.BUY_GOODS}`]);
+      this.router.navigate([
+        `/transact/otp-verification/${this.transferType.BUY_GOODS}`,
+      ]);
     }
   }
 }

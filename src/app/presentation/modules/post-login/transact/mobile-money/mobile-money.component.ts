@@ -4,6 +4,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { ConfirmationModalService } from "src/app/core/services/modal-services/confirmation-modal.service";
+import { StorageService } from "src/app/core/services/storage/storage.service";
 import { TransactionsService } from "src/app/core/services/transactions/transactions.service";
 import { MobileMoneyService } from "src/app/core/services/transfers/mobile-money/mobile-money.service";
 import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
@@ -24,19 +25,20 @@ export class MobileMoneyComponent implements OnInit, OnDestroy {
   }
 
   editSubscription: Subscription;
-
+  currentUser: any;
   constructor(
     private readonly fb: FormBuilder,
     private dialog: MatDialog,
     private readonly router: Router,
     private readonly mobileMoneyTransferService: MobileMoneyService,
     private readonly confirmationModalService: ConfirmationModalService,
-    private readonly transactionsService: TransactionsService
+    private readonly transactionsService: TransactionsService,
+    private storageService: StorageService
   ) {}
 
   ngOnInit(): void {
     this.initForm();
-
+    this.currentUser = this.storageService.getData("currentUserData");
     this.editSubscription = this.transactionsService.transaction$.subscribe(
       (res) => {
         console.log(res);
@@ -73,7 +75,7 @@ export class MobileMoneyComponent implements OnInit, OnDestroy {
       destinationBankCode: this.getForm.sendTo.value.mobileWallet.wallet,
       transferType: Number(this.transferType.MOBILE_MONEY),
       fxReferenceId: this.getForm.fxReferenceId.value,
-      countryCode: "KE", //TODO:: Default have it as kenya, then change to pick the user's country
+      countryCode: this.currentUser.countryId,
     };
     this.mobileMoneyTransferService
       .getTransferCharges(payload)
@@ -81,7 +83,7 @@ export class MobileMoneyComponent implements OnInit, OnDestroy {
         if (res.status) {
           this.confirmPayment(res.data);
         } else {
-          // TODO:: Notify error
+          console.log(res.message);
         }
       });
   }

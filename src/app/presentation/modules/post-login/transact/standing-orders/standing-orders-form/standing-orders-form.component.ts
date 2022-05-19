@@ -270,7 +270,7 @@ export class StandingOrdersFormComponent
           if (res.status) {
             this.confirmPayment(res.data);
           } else {
-            // TODO:: Notify error
+            console.log(res.message);
           }
         });
     } else if (
@@ -440,7 +440,7 @@ export class StandingOrdersFormComponent
                   `/transact/otp-verification/${this.type}`,
                 ]);
               } else {
-                // TODO:: Notify Error
+                console.log(res.message);
               }
             },
             (err) => {
@@ -456,7 +456,7 @@ export class StandingOrdersFormComponent
                   `/transact/otp-verification/${this.type}`,
                 ]);
               } else {
-                // TODO:: Notify Error
+                console.log(res.message);
               }
             },
             (err) => {
