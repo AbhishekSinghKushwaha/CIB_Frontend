@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import urlList from '../../service-list.json';
 
@@ -9,7 +9,14 @@ import urlList from '../../service-list.json';
 })
 export class PesalinkService {
 
+  private dataSource = new BehaviorSubject<string>('service');
+  currentData = this.dataSource.asObservable();
+
   constructor(private http: HttpClient) { }
+
+  pesalinkPayload(payload: any): void {
+    this.dataSource.next(payload);
+  }
 
   sendViaPesalink(payload: any): Observable<any> {
     return this.http.post(

@@ -33,6 +33,7 @@ import { IntercountryService } from "src/app/core/services/transfers/intercountr
 import { TransactionsService } from "src/app/core/services/transactions/transactions.service";
 import { OwnAccountService } from "src/app/core/services/transfers/own-account/own-account.service";
 import { BillServiceService } from "src/app/core/services/transfers/bill-service/bill-service.service";
+import { PesalinkService } from "src/app/core/services/transfers/pesalink/pesalink.service";
 
 @Component({
   selector: "app-verify-by-code",
@@ -87,7 +88,8 @@ export class VerifyByCodeComponent implements OnInit {
     private intercountryService: IntercountryService,
     private transactionService: TransactionsService,
     private billPaymentService: BillServiceService,
-    private ownEquityService: OwnAccountService
+    private ownEquityService: OwnAccountService,
+    private pesalinkService: PesalinkService
   ) {
     this.initOtpForm();
     console.log(this.transactionType);
@@ -255,6 +257,22 @@ export class VerifyByCodeComponent implements OnInit {
     }
   }
 
+  pesalink() {
+    this.pesalinkService.currentData.subscribe((data) => {
+      this.payload = data;
+    });
+    if (this.payload) {
+      this.pesalinkService.sendViaPesalink(this.payload).subscribe((res) => {
+        if (res.status) {
+          this.router.navigate([`/transact/transfer-submitted/${this.transactionType}`]);
+        } else {
+          console.log(res.message);
+          // TODO:: Notify Error
+        }
+      });
+    }
+  }
+
   standingOrders() {
     this.router.navigate([
       `/transact/standing-orders/transfer-submitted/${this.transactionType}`,
@@ -342,6 +360,9 @@ export class VerifyByCodeComponent implements OnInit {
       case "bulk-transfer":
         this.bulkTransfer();
         break;
+      case this.transferType.PESALINK:
+        this.pesalink();
+        break;  
       default:
         break;
     }

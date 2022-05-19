@@ -36,7 +36,7 @@ export class PesaLinkComponent implements OnInit {
     private readonly fb: FormBuilder,
     private pesalinkService: PesalinkService,
     public dialog: MatDialog,
-    private readonly router: Router // private readonly pesaLinkSendToService: PesaLinkSendToService, // private readonly favouritesModalService: FavouritesModalService,
+    private readonly router: Router
   ) {}
 
   get getForm() {
@@ -45,22 +45,6 @@ export class PesaLinkComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.eventsSubscriptions();
-  }
-
-  private eventsSubscriptions(): void {
-    // this.favouritesModalService.selected.subscribe((response) => {
-    //   this.pesalinkTransferForm.controls.sendTo.setValue(response.name);
-    //   this.sendTo = response;
-    // });
-    // this.phoneLinkedService.data.subscribe((response) => {
-    //   this.pesalinkTransferForm.controls.sendTo.setValue(response.phone);
-    //   this.phoneLinked = response;
-    // });
-    // this.recepientBankService.data.subscribe((response) => {
-    //   this.pesalinkTransferForm.controls.sendTo.setValue(response.accountno);
-    //   this.recepientBankDetails = response;
-    // });
   }
 
   initForm(): void {
@@ -149,21 +133,9 @@ export class PesaLinkComponent implements OnInit {
       transferType: this.transferType.PESALINK,
     };
     if (this.pesalinkTransferForm.valid) {
-      this.pesalinkService.sendViaPesalink(payload).subscribe(
-        (res) => {
-          if (res.status) {
-            this.router.navigate(['/transact/transfer-submitted']);
-          } else {
-            console.log(res.message);
-            // TODO:: Notify Error
-          }
-        },
-        (err) => {
-          alert(
-            `Sorry, we're unable to complete your transaction. Please give us some time to fix the problem and try again later.`
-          );
-        }
-      );
+      this.pesalinkService.pesalinkPayload(payload);
+      this.router.navigate([`/transact/otp-verification/${this.transferType.PESALINK}`]);
     }
   }
+
 }
