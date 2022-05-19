@@ -1,23 +1,23 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, Inject, Input, OnInit } from "@angular/core";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 import {
   MatDialog,
   MatDialogRef,
   MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { CountryModel } from 'src/app/core/domain/bank.model';
-import { recipientModel } from 'src/app/core/domain/recipient.model';
-import { CountryService } from 'src/app/core/services/modal-services/country.service';
-import { NewRecipientService } from 'src/app/core/services/modal-services/new-recipient.service';
-import { IntrabankService } from 'src/app/core/services/transfers/intrabank/intrabank.service';
-import { countrySettings } from 'src/app/core/utils/constants/country.settings';
-import { BaseTransactComponent } from 'src/app/presentation/modules/post-login/transact/base-transact.component';
+} from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { CountryModel } from "src/app/core/domain/bank.model";
+import { RecipientModel } from "src/app/core/domain/recipient.model";
+import { CountryService } from "src/app/core/services/modal-services/country.service";
+import { NewRecipientService } from "src/app/core/services/modal-services/new-recipient.service";
+import { IntrabankService } from "src/app/core/services/transfers/intrabank/intrabank.service";
+import { countrySettings } from "src/app/core/utils/constants/country.settings";
+import { BaseTransactComponent } from "src/app/presentation/modules/post-login/transact/base-transact.component";
 
 @Component({
-  selector: 'app-intra-new-recipient',
-  templateUrl: './intra-new-recipient.component.html',
-  styleUrls: ['./intra-new-recipient.component.scss'],
+  selector: "app-intra-new-recipient",
+  templateUrl: "./intra-new-recipient.component.html",
+  styleUrls: ["./intra-new-recipient.component.scss"],
 })
 export class IntraNewRecipientComponent
   extends BaseTransactComponent
@@ -33,7 +33,7 @@ export class IntraNewRecipientComponent
     private dialog: MatDialog,
     readonly dialogRef: MatDialogRef<IntraNewRecipientComponent>,
     private readonly newRecipientService: NewRecipientService,
-    @Inject(MAT_DIALOG_DATA) public data: recipientModel,
+    @Inject(MAT_DIALOG_DATA) public data: RecipientModel,
     private readonly countryService: CountryService,
     private snackBar: MatSnackBar,
     private intraBankTransferService: IntrabankService
@@ -64,14 +64,11 @@ export class IntraNewRecipientComponent
     this.dialogRef.close(true);
   }
 
-  setCountry(country: CountryModel) {
-    this.setAccount = country;
-  }
   // Do the Name search to return account details
   submit(): void {
     const payload = {
       accountNumber: this.newRecipientForm.controls.accountNumber.value,
-      bankCode: '54', // TODO:: Countercheck this service
+      bankCode: "54", // TODO:: Countercheck this service
     };
     this.intraBankTransferService.accountSearch(payload).subscribe((res) => {
       if (res.status) {

@@ -1,14 +1,48 @@
 <div class="row">
-    <h3 class="strong-text">More payment options</h3>
-  
-    <div class="container" *ngFor="let mainList of moreDashboardList.MORE_DASHBOARD_LIST; let isLast = last">
-      <h3 class="strong-text mt-4">{{mainList.section}}</h3>
-      <div class="row">
-        <div class="col-lg-6" *ngFor="let item of mainList.content">
-          <app-transact-menu-item [item]="item"></app-transact-menu-item>
+  <h3 class="strong-text">More payment options</h3>
+
+  <div
+    class="container"
+    *ngFor="
+      let mainList of moreDashboardList.MORE_DASHBOARD_LIST;
+      let isLast = last
+    "
+  >
+    <h3 class="strong-text mt-4">{{ mainList.section }}</h3>
+    <div class="row">
+      <div class="col-lg-6" *ngFor="let item of mainList.content">
+        <app-transact-menu-item [item]="item"></app-transact-menu-item>
+      </div>
+    </div>
+    <mat-divider *ngIf="!isLast" class="divider"></mat-divider>
+  </div>
+  <mat-divider class="divider"></mat-divider>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="row product-list-item" matRipple (click)="openCountryModal()">
+        <div class="col-1 my-auto">
+          <div class="icon-container">
+            <mat-icon
+              class="dashboard-page--content--favorites__icon"
+              [svgIcon]="'countries'"
+              color="primary"
+            ></mat-icon>
+          </div>
+        </div>
+        <div class="col-10 offset-md-1 product-list-item-label">
+          <div class="row h-100 justify-content-around align-items-center">
+            <div class="col-10 float-left text-truncate">
+              <h4>Change Country</h4>
+              <small class="text-grey">
+                Current Country: {{ currentCountry?.countryName }}</small
+              >
+            </div>
+            <div class="col-2 float-right">
+              <mat-icon [svgIcon]="'caret_right'"></mat-icon>
+            </div>
+          </div>
         </div>
       </div>
-      <mat-divider *ngIf="!isLast" class="divider"></mat-divider>
     </div>
   </div>
-  
+</div>

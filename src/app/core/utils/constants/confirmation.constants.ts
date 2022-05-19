@@ -32,4 +32,21 @@ const staticUserData: ConfirmationCompletionModel = {
   icon: 'assets/images/icons/visual-support-icons-virtual-account-submission-avatar.svg'
 };
 
-export const CONFIRMATIONCOMPLETION = { chequeBook, editUserLimit, editCompanyLimit, staticUserData };
+const forgotUsernameData: ConfirmationCompletionModel = {
+  buttonText: 'Done',
+  message: 'Great!',
+  subMessage: 'An email has been sent to the registered email address for this account',
+  icon: 'assets/images/icons/visual-support-icons-virtual-account-submission-avatar.svg',
+  category: 'small',
+};
+const loanrepaymentData = (amount:string, date:string): ConfirmationCompletionModel => ({
+  buttonText: 'Done',
+  message: 'Loan repayment has been submitted for approval',
+  subMessage: `<span class="strong-text">Permanent Ammendment</span><br>
+  Transaction of ${amount} was submitted on ${date}. <br><br>
+  You will be notified once the transaction has been reviewed
+  `,
+  icon: 'assets/images/icons/visual-support-icons-virtual-account-submission-avatar.svg',
+});
+
+export const CONFIRMATIONCOMPLETION = { chequeBook, editUserLimit, editCompanyLimit, staticUserData, forgotUsernameData, loanrepaymentData };

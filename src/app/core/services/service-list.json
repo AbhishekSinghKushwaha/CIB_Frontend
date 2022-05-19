@@ -23,6 +23,30 @@
     "getRegistrationSummary": "/cibonboarding-v1/api/Registration/preview-corporate-detail/",
     "uploadCorporateDocuments": "/cibonboarding-v1/api/Registration/updload-corporate-documents/"
   },
+  "corporate": {
+    "main": "/cibcore/api/Corporates/",
+    "addTransactionLimit": "/cibcore/api/CorporateTransactionLimit/Add/",
+    "getTransactionLimit": "/cibcore/api/CorporateTransactionLimit/Limits/",
+    "updateTransactionLimit": "/cibcore/api/CorporateTransactionLimit/Update/",
+    "corporateUser": "/cibcore/api/Corporates/"
+  },
+  "userManagement": {
+    "getRoles": "/cibcore/api/roles",
+    "getProductsAndServices": "/cibcore/api/products",
+    "addUser": "/cibcore/api/CorporateUsers/InApp",
+    "getUser": "/cibcore/api/CorporateUsers/",
+    "getUserLimit": "/cibcore/api/UserTransactionLimit/Limits/",
+    "addUserLimit": "/cibcore/api/UserTransactionLimit/Add/",
+    "editUserLimit": "/cibcore/api/UserTransactionLimit/Update/",
+    "getGroupedCorporate": "/cibcore/api/Corporates/GroupedCorporates",
+    "currentUserData": "/cibcore/api/CorporateUsers/Current",
+    "getCurrencies": "/cibcore/api/SupportedSettings/Currencies",
+    "getDateFormats": "/cibcore/api/SupportedSettings/DateFormats",
+    "getFontSizes": "/cibcore/api/SupportedSettings/FontSizes",
+    "getLanguages": "/cibcore/api/SupportedSettings/Languages",
+    "getTimezones": "/cibcore/api/SupportedSettings/Timezones",
+    "updateUserDetails": "/cibcore/api/CorporateUsers/Setting"
+  },
   "accounts": {
     "getUserAccounts": "/cibaccountservice-v1/api/v1/Accounts/GetUserMappedAccounts"
   },
@@ -30,12 +54,29 @@
     "sendOwnEquityAccount": "/cibpaymentservice-v1/api/v1/Transfer/Send",
     "intraBankTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
     "swiftTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+    "sendToSubsidiary": "/cibpaymentservice-v1/api/v1/Transfer/Send",
     "mobileMoneyTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
     "buyAirtimeTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
     "buyGoodsTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+    "pesalinkTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
     "getTransferCharges": "/cibpaymentservice-v1/api/v1/Transfer/GetTransferCharge",
     "getAccountDetails": "/cibpaymentservice-v1/api/v1/Transfer/NameEnquiry",
-    "pesalinkTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send"
+    "getCharges": "/cibpaymentservice-v1/api/v1/BuyGoods/Charges",
+    "transactionApproval": "/cibpaymentservice-v1/api/v1/Transactions/ApproveTransaction",
+    "bill": {
+      "getCountries": "/cibbillpayments-v1/api/v1/Bill/GetCountries",
+      "getCategories": "/cibbillpayments-v1/api/v1/Bill/GetCategories",
+      "getBillersByCountry": "/cibbillpayments-v1/api/v1/Bill/GetBillers",
+      "getBillersByCountryAndCategories": "/cibpaymentservice-v1/api/v1/Bill/GetBillersByCategories",
+      "postCompleteOtp": "/cibbillpayments-v1/api/v1/Bill/CompleteWithOTP",
+      "postResendOtp": "/cibbillpayments-v1/api/v1/Bill/ResendOTP",
+      "postValidateBill": "/cibbillpayments-v1/api/v1/Bill/Validate",
+      "postPayBill": "/cibbillpayments-v1/api/v1/Bill/pay"
+    },
+    "reinitiateTransaction": "/cibpaymentservice-v1/api/v1/Transfer/ReInitiate",
+    "getConversionRate": "/cibpaymentservice-v1/api/v1/Transfer/GetExchangeRates",
+    "bulkTransfer": "/cibpaymentservice-v1/api/v1/BulkTransfer/InterBank",
+    "bulkTransferMultipleMode": "/cibpaymentservice-v1/api/v1/BulkTransfer/MultipleModePayment"
   },
   "dataLookUp": {
     "getCountries": "/cibpaymentservice-v1/api/v1/Transfer/GetCountries",
@@ -44,22 +85,33 @@
     "getSubsidiaries": "/cibpaymentservice-v1/api/v1/Transfer/GetSubsidiaries",
     "getTelcos": "/cibpaymentservice-v1/api/v1/Transfer/GetTelcos",
     "getMobileWallets": "/cibpaymentservice-v1/api/v1/Transfer/GetMobileWallets",
-    "getSectors": "/cibpaymentservice-v1/api/v1/Transfer/GetSectors"
+    "getSectors": "/cibpaymentservice-v1/api/v1/Transfer/GetSectors",
+    "getFavouriteMerchants": "/cibpaymentservice-v1/api/v1/BuyGoods/FavoriteMerchants",
+    "getMerchants": "/cibpaymentservice-v1/api/v1/BuyGoods/Merchants",
+    "getMerchantDetails": "/cibpaymentservice-v1/api/v1/BuyGoods/MerchantDetail/",
+    "getFavouriteMerchantDetails": "/cibpaymentservice-v1/api/v1/BuyGoods/FavoriteMerchants/"
   },
   "statement": {
-    "getPdf": "/v1/generatepdf/statement"
+    "getPdf": "/v1/generatepdf/statement",
+    "getTransactions": "/cibpaymentservice-v1/api/v1/Transactions/Summary",
+    "downloadReceipt": "/cibpaymentservice-v1/api/v1/Transactions/DownloadReceipt"
   },
   "login": {
     "loginUser": "/cibuseraccess-v1/api/Auth/oauth/token",
     "verifyOtp": "/cibuseraccess-v1/api/Auth/login/verifyOtp",
     "verifyForgetPasswordOtp": "/cibuseraccess-v1/api/Auth/user/verifyForgotPasswordOtp",
+    "verifyForgotUsernameOtp": "/cibuseraccess-v1/api/Auth/user/verifyForgotUsernameOtp",
     "resendOtp": "/cibuseraccess-v1/api/Auth/generateOtp",
     "validateOtp": "/authorization/user/validateOTPReset",
     "securityAnswers": "/cibuseraccess-v1/api/SecurityQuestion/user/verify-securityquestions",
-    "validateUser": "/cibuseraccess-v1/api/Auth/user/initiatePasswordReset",
+    "initiatePasswordReset": "/cibuseraccess-v1/api/Auth/user/initiatePasswordReset",
+    "initiateUsernameReset": "/cibuseraccess-v1/api/Auth/user/initiateForgoutUserName",
+    "completeforgotusername": "/cibuseraccess-v1/api/Auth/user/completeforgotusername",
     "getSecurityQuestions": "/cibuseraccess-v1/api/SecurityQuestion/securityquestions",
     "getMySecurityQuestions": "/cibuseraccess-v1/api/SecurityQuestion/user/securityquestions",
-    "resetPassword": "/cibuseraccess-v1/api/Auth/user/resetPassword"
+    "resetPassword": "/cibuseraccess-v1/api/Auth/user/resetPassword",
+    "getLogonUser": "/cibuseraccess-v1/api/Auth/user/single-user?",
+    "firstlogin": "/cibuseraccess-v1/api/Auth/user/firstlogin"
   },
   "beneficiary": {
     "add": "/cibpaymentservice-v1/api/v1/Beneficiary/AddBeneficiary",
@@ -70,12 +122,33 @@
   },
   "userAdministration": {
     "getUsers": "/cibuseraccess-v1/api/UserAdministration/users",
-    "changeStatus": "/cibuseraccess-v1/api/UserAdministration/disable-enable",
+    "changeStatus": "/cibuseraccess-v1/api/UserAdministration/CreateReviewRequest",
     "delete": "/cibuseraccess-v1/api/UserAdministration/delete",
     "getUserById": "/cibuseraccess-v1/api/Auth/user/single-user"
+  },
+  "airtime": {
+    "getCharges": "/cibpaymentservice-v1/api/v1/Airtime/GetCharge",
+    "getOperatorsCountries": "/cibpaymentservice-v1/api/v1/Airtime/GetOperatorCountries",
+    "getOperators": "/cibpaymentservice-v1/api/v1/Airtime/GetOperators/"
+  },
+  "standingOrders": {
+    "createStandingOrder": "/cibpaymentservice-v1/api/v1/SchedulePayment/Schedule",
+    "editStandingOrder": "/cibpaymentservice-v1/api/v1/SchedulePayment/EditSchedule",
+    "getStandingOrders": "/cibpaymentservice-v1/api/v1/SchedulePayment/GetAll",
+    "deleteStandingOrder": "/cibpaymentservice-v1/api/v1/SchedulePayment/Delete",
+    "deactivateStandingOrder": "/cibpaymentservice-v1/api/v1/SchedulePayment/Deactivate",
+    "getScheduleId": "/cibpaymentservice-v1/api/v1/SchedulePayment/GetSchedule"
+  },
+  "fx": {
+    "getRates": "/cibpaymentservice-v1/api/v1/Fx/GetFxRateList/FxRateList",
+    "generate": "/cibpaymentservice-v1/api/v1/Fx/GenerateFxTransaction/GenerateFx"
+  },
+  "loan": {
+    "loanAccounts": "/cibloanservice-v1/api/Loans/",
+    "loanRepayment": "/cibloanservice-v1/api/Loans/initiate-pay"
   },
   "pesalink": {
     "phoneNumber": "/cibpaymentservice-v1/api/v1/Transfer/PesalLink/",
     "phoneAccountsInquiry": "/cibpaymentservice-v1/api/v1/Transfer/PesalLink/phoneAccountsInquiry"
-  }
+  } 
 }

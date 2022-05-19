@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ProductOptionsComponent } from './product-options/product-options.component';
+import { ProductsComponent } from './products/products.component';
+import { RolesComponent } from './roles/roles.component';
 import { UserDetailsComponent } from './user-details.component';
 
 const routes: Routes = [
@@ -8,34 +11,16 @@ const routes: Routes = [
     component: UserDetailsComponent
   },
   {
-    path:'roles',
-    data: {
-      redirectTo: 'user-management/add-user'
-    },
-    loadChildren: (): Promise<any> => 
-      import('./roles/roles.module').then(
-        (m) => m.RolesModule
-      )
+    path: 'roles',
+    component: RolesComponent
   },
   {
-    path:'limits',
-    data: {
-      redirectTo: 'user-management/add-user'
-    },
-    loadChildren: (): Promise<any> => 
-      import('./limits/limits.module').then(
-        (m) => m.LimitsModule
-      )
+    path: 'products',
+    component: ProductsComponent,
   },
   {
-    path:'products',
-    data: {
-      redirectTo: 'user-management/edit-user'
-    },
-    loadChildren: (): Promise<any> => 
-      import('./products/products.module').then(
-        (m) => m.ProductsModule
-      ) 
+    path: 'products/options/:productId',
+    component: ProductOptionsComponent
   },
 
 ];

@@ -8,18 +8,6 @@ const routes: Routes = [
     component: BuyGoodsComponent
   },
   {
-    path: 'otp-verification',
-    loadChildren: () => import('../otp-verify/otp-verification/otp-verification.module').then(m => m.OtpVerificationModule)
-  },
-  {
-    path: 'otp-verification-code',
-    loadChildren: () => import('../otp-verify/otp-verification-code/otp-verification-code.module').then(m => m.OtpVerificationCodeModule)
-  },
-  {
-    path: 'contact-details',
-    loadChildren: () => import('../otp-verify/contact-details/contact-details.module').then(m => m.ContactDetailsModule)
-  },
-  {
     path: 'submit-transfer',
     loadChildren: () => import('../otp-verify/complete-goods-purchase/complete-goods-purchase.module').then(m => m.CompleteGoodsPurchaseModule)
   }

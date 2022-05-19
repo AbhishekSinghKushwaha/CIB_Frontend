@@ -1,0 +1,21 @@
+.close-button {
+  float: left;
+  top: 0px;
+  right: 0px;
+}
+
+.upper-layer {
+  border-bottom: 1px dashed var(--cool-grey-20);
+  padding-bottom: 5px;
+}
+
+.receipt-screen {
+  max-width: 22vw;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.main-div {
+  background-color: var(--cool-grey-20);
+  margin: 5px;
+}

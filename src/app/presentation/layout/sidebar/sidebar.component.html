@@ -1,7 +1,39 @@
 <mat-nav-list>
-  <a routerLink="/home">
-    <img class="logo_img" [src]="returnLogoUrl()" alt="" />
-  </a>
+  <div class="row">
+    <div class="col-sm-6">
+      <a routerLink="/home">
+        <img class="logo_img" [src]="returnLogoUrl()" alt="" />
+      </a>
+    </div>
+    <div class="col-sm-6">
+      <img
+        *ngIf="currentCountry?.flagPath"
+        class="country-flag rounded-circle img-d"
+        [src]="currentCountry?.flagPath"
+        width="60px"
+        height="60px"
+        alt=""
+      />
+    </div>
+  </div>
+
+  <!-- Connected User informations -->
+  <div class="row user-info" matRipple (click)="selectProfile()">
+    <div class="col-2 my-auto">
+      <div class="initial-container">{{ initials }}</div>
+    </div>
+    <div class="col-9 product-list-item-label">
+      <div class="row h-100 justify-content-around align-items-center">
+        <div class="col-10 float-left text-truncate">
+          <h4>{{ this.fullUsername }}</h4>
+          <small class="text-grey"> {{ username }}</small>
+        </div>
+        <div class="col-2 float-left">
+          <mat-icon [svgIcon]="'caret_down'"></mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Dashboard/Home -->
   <a
@@ -36,19 +68,49 @@
     </div>
   </a>
 
-  <!-- Borrow -->
+  <!-- Loan -->
   <a
     mat-list-item
     class="text-grey text-sm"
-    [routerLink]="['/borrow']"
+    [routerLink]="['/loan']"
     routerLinkActive="router-link-active"
   >
     <div class="row pl-3">
       <div class="col-12">
         <mat-icon class="menu-icon" svgIcon="borrow-unselected"> </mat-icon>
+        <span class="pl-2"> Loan </span>
+      </div>
+    </div>
+  </a>
+
+  <!-- Service request -->
+  <a
+    mat-list-item
+    class="text-grey text-sm"
+    [routerLink]="['/service-request']"
+    routerLinkActive="router-link-active"
+  >
+    <div class="row pl-3">
+      <div class="col-12">
+        <mat-icon class="menu-icon" svgIcon="transact"> </mat-icon>
         <span class="pl-2" i18n="@@loco:60cc69138e242b09a24eb47d">
-          Borrow
+          Service Request
         </span>
+      </div>
+    </div>
+  </a>
+
+  <!-- User management -->
+  <a
+    mat-list-item
+    class="text-grey text-sm"
+    [routerLink]="['/user-management']"
+    routerLinkActive="router-link-active"
+  >
+    <div class="row pl-3">
+      <div class="col-12">
+        <mat-icon class="menu-icon" svgIcon="transact"> </mat-icon>
+        <span class="pl-2"> User management </span>
       </div>
     </div>
   </a>
@@ -66,7 +128,7 @@
     <div class="row pl-3">
       <div class="col-12">
         <mat-icon svgIcon="nav_more"></mat-icon>
-        <span class="pl-2" i18n="@@loco:5f4e2d1236d5dd2df417d522">More</span>
+        <span class="pl-2">More</span>
       </div>
     </div>
   </a>
@@ -86,9 +148,7 @@
     <div class="row pl-3">
       <div class="col-12">
         <mat-icon svgIcon="logout"></mat-icon>
-        <span class="pl-2" i18n="@@loco:5f4e2d81b69f8d4b54523f34"
-          >Sign out</span
-        >
+        <span class="pl-2">Sign out</span>
       </div>
     </div>
   </a>

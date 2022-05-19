@@ -8,7 +8,7 @@ import {
   Input,
 } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
-import { SharedUtils } from './../../../../core/utils/shared.util';
+import SharedUtils from './../../../../core/utils/shared.util';
 import { NotificationModalService } from 'src/app/core/services/modal-services/notification-modal/notification-modal.service';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 
@@ -20,6 +20,7 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
 export class SmsVerificationComponent implements OnInit {
   @ViewChildren('inputs') inputs: QueryList<any>;
   verifyOtpForm: FormGroup;
+  @Input() message: string;
   timeToResend: number;
   otpResent = false;
   submitted = false;
@@ -48,6 +49,10 @@ export class SmsVerificationComponent implements OnInit {
 
   get f(): any {
     return this.verifyOtpForm.controls;
+  }
+
+  get otpMessage() {
+    return this.authService.getOTPMessage();
   }
 
   get verifyOtpFormArray() {

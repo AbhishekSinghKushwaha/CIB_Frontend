@@ -55,6 +55,11 @@ export class TransactConstants {
           subtext: 'A local or international bank',
           link: '/transact/pesa-link',
         },
+        {
+          leftIcon: 'phone_iphone',
+          text: 'Bulk payment',
+          link: '/transact/bulk-transfer',
+        },
       ],
     },
     {
@@ -95,6 +100,26 @@ export class TransactConstants {
           leftIcon: 'support_agent',
           text: 'Agent',
           link: '/transact/withdraw/agent-withdrawal',
+        },
+      ],
+    },
+    {
+      section: 'Foreign exchange',
+      content: [
+        {
+          leftIcon: 'laptop_chromebook',
+          text: 'EazzyFX',
+          link: '/transact/foreign-exchange/eazzy-fx',
+        }
+      ]
+    },
+    {
+      section: 'Standing orders',
+      content: [
+        {
+          leftIcon: 'tablet_android',
+          text: 'Standing orders',
+          link: '/transact/standing-orders',
         },
       ],
     },

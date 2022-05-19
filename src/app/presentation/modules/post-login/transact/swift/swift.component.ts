@@ -1,19 +1,24 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
 import { Router } from "@angular/router";
+import { Subscription } from "rxjs";
+import { RecipientModel } from "src/app/core/domain/recipient.model";
+import { TransactionListmodel } from "src/app/core/domain/transaction-list.model";
+import { FromAccount } from "src/app/core/domain/transfer.models";
 import { ConfirmationModalService } from "src/app/core/services/modal-services/confirmation-modal.service";
+import { TransactionsService } from "src/app/core/services/transactions/transactions.service";
 import { SwiftTransferService } from "src/app/core/services/transfers/swift/swift-transfer.service";
 import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
+import SharedUtils from "src/app/core/utils/shared.util";
 import { accountLimitValidator } from "src/app/core/utils/validators/limits.validators";
-import { ConfirmPaymentComponent } from "src/app/presentation/shared/modals/confirm-payment/confirm-payment.component";
 
 @Component({
   selector: "app-swift",
   templateUrl: "./swift.component.html",
   styleUrls: ["./swift.component.scss"],
 })
-export class SwiftComponent implements OnInit {
+export class SwiftComponent implements OnInit, OnDestroy {
   swiftTransferForm: FormGroup;
 
   transferType = TransactionTypeConstants.TransferType;
@@ -22,16 +27,45 @@ export class SwiftComponent implements OnInit {
     return this.swiftTransferForm.controls;
   }
   userCountry = "KE";
+
+  editData: {
+    sendFrom: FromAccount;
+    sendTo: RecipientModel;
+    fxReferenceId: string;
+    amount: any;
+    schedulePayment: any;
+    license: any;
+    chargeOption: any;
+    paymentCategory: any;
+    reason: string;
+  };
+
+  private subscriptions: Subscription[] = [];
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private readonly swiftTransferService: SwiftTransferService,
     private confirmationModalService: ConfirmationModalService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private transactionService: TransactionsService
   ) {}
 
   ngOnInit(): void {
     this.initForm();
+
+    this.subscriptions.push(
+      this.transactionService.transaction$.subscribe(
+        (res: TransactionListmodel) => {
+          if (Object.keys(res).length > 0) {
+            this.setSendFrom(res);
+          }
+        }
+      )
+    );
+  }
+
+  ngOnDestroy(): void {
+    SharedUtils.unSubscribe(this.subscriptions);
   }
 
   initForm(): void {
@@ -143,13 +177,13 @@ export class SwiftComponent implements OnInit {
       .afterClosed()
       .subscribe((confirmed: boolean) => {
         if (data) {
-          this.sendMoney();
+          this.savePayloadForOtpVerification();
         }
       });
   }
 
   // Initiate fund transfer to own equity account
-  sendMoney() {
+  savePayloadForOtpVerification() {
     const payload = {
       amount: this.getForm.amount.value.amount,
       beneficiaryAccount: this.getForm.sendTo.value.accountNumber,
@@ -174,14 +208,20 @@ export class SwiftComponent implements OnInit {
       sectorCode: this.getForm.paymentCategory.value.sectorCode,
     };
     if (this.swiftTransferForm.valid) {
-      this.swiftTransferService.sendViaSwift(payload).subscribe((res) => {
-        if (res.status) {
-          this.router.navigate(["/transact/transfer-submitted"]);
-        } else {
-          alert(res.message);
-          // TODO:: Notify Error
-        }
-      });
+      this.swiftTransferService.setTransferPayload(payload);
+      this.swiftTransferService.setFavouritesPayload(
+        this.swiftTransferForm.getRawValue()
+      );
+      this.router.navigate([
+        `/transact/otp-verification/${this.transferType.SWIFT}`,
+      ]);
     }
+  }
+
+  setSendFrom(data: TransactionListmodel) {
+    this.editData.sendFrom.accountName = data.sourceAccountName;
+    this.editData.sendFrom.accountNumber = data.sourceAccount;
+    this.editData.sendFrom.currency = data.currency || "";
+    // this.editData.sendFrom.
   }
 }

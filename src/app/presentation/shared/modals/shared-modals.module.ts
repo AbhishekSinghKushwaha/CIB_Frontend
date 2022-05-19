@@ -1,3 +1,7 @@
+import { ConfirmBillModule } from './confirm-bill/confirm-bill.module';
+
+
+import { BillersModalModule } from './billers-modal/billers-modal.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TransferFromModalModule } from './transfer-from-modal/transfer-from-modal.module';
@@ -9,6 +13,7 @@ import { SupportingDocumentsUploadModule } from './supporting-documents-upload/s
 import { SwiftChargesModalModule } from './swift-charges-modal/swift-charges-modal.module';
 import { PaymentCategoryModalModule } from './payment-category-modal/payment-category-modal.module';
 import { MatStyleModule } from 'src/app/mat-style.module';
+import { ProfileFromModalModule } from './profile-from-modal/profile-from-modal.module';
 
 @NgModule({
   declarations: [],
@@ -23,6 +28,9 @@ import { MatStyleModule } from 'src/app/mat-style.module';
     SupportingDocumentsUploadModule,
     SwiftChargesModalModule,
     PaymentCategoryModalModule,
+    BillersModalModule,
+    ProfileFromModalModule,
+    ConfirmBillModule
   ],
   exports: [
     TransferFromModalModule,
@@ -33,7 +41,10 @@ import { MatStyleModule } from 'src/app/mat-style.module';
     SupportingDocumentsUploadModule,
     SwiftChargesModalModule,
     PaymentCategoryModalModule,
+    BillersModalModule,
+    ProfileFromModalModule,
+    ConfirmBillModule
   ],
   providers: [],
 })
-export class SharedModalsModule {}
+export class SharedModalsModule { }

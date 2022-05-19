@@ -1,18 +1,28 @@
 import { Injectable } from "@angular/core";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
-import { Subject } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { TransferFromModalComponent } from "src/app/presentation/shared/modals/transfer-from-modal/transfer-from-modal.component";
 import { FromAccount } from "../../domain/transfer.models";
+import { StateService } from "../state/state.service";
+interface TransferFromState {
+  transferFromAccount: FromAccount;
+}
 
+const initialTransferFromState: TransferFromState = {
+  transferFromAccount: {},
+};
 @Injectable({
   providedIn: "root",
 })
-export class TransferFromService {
-  selectedTransferFromAccount = new Subject<FromAccount>();
+export class TransferFromService extends StateService<TransferFromState> {
+  transferFromAmount$: Observable<FromAccount> = this.select(
+    (state) => state.transferFromAccount
+  );
   transferFromModalRef: MatDialogRef<TransferFromModalComponent, FromAccount>;
-  private transferFromData: FromAccount;
 
-  constructor(private readonly dialog: MatDialog) {}
+  constructor(private readonly dialog: MatDialog) {
+    super(initialTransferFromState);
+  }
 
   // Open Transfer From Modal
   openTransferFromModal(
@@ -28,15 +38,9 @@ export class TransferFromService {
     return this.transferFromModalRef;
   }
 
-  // Get the default data
-  get defaulTransferFromAccount(): FromAccount {
-    return this.transferFromData;
-  }
-
   // Select account to transfer from
-  selectTransferFromAccount(account: any): void {
-    this.transferFromData = account;
-    this.selectedTransferFromAccount.next(account);
+  setTransferFromAccount(account: FromAccount): void {
+    this.setState({ transferFromAccount: account });
   }
 
   // Close transfer from account modal

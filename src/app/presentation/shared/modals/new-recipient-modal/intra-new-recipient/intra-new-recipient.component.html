@@ -5,11 +5,6 @@
   <p class="text-center fw-bold pt-2">Send to someone new</p>
   <h3 class="m-4 ms-2">Please enter the recipient's details</h3>
 
-  <app-country-select
-    [category]="countrySelectType"
-    (selectedCountry)="setCountry($event)"
-  ></app-country-select>
-
   <form
     [formGroup]="newRecipientForm"
     (ngSubmit)="submit()"

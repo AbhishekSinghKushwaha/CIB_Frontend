@@ -11,7 +11,7 @@ export class LogoutConfirmationModalComponent {
   constructor(private logoutService: LogoutService, private authService: AuthService) { }
 
   logout(): void {
-    this.authService.doLogout();
+    this.authService.doLogout('LogoutConfirmationModalComponent');
   }
 
   closeModal(): void {

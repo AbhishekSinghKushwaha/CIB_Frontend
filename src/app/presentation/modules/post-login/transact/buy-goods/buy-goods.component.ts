@@ -10,6 +10,8 @@ import { ConfirmPaymentComponent } from 'src/app/presentation/shared/modals/conf
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TransactionTypeConstants } from 'src/app/core/utils/constants/transaction-type.constants';
+import { BuyGoodsService } from 'src/app/core/services/transfers/buy-goods/buy-goods.service';
+import { MerchantDetailsService } from 'src/app/core/services/merchant-details/merchant-details.service';
 
 @Component({
   selector: 'app-buy-goods',
@@ -23,9 +25,10 @@ export class BuyGoodsComponent extends BaseTransactComponent implements OnInit {
   constructor(
     private readonly fb: FormBuilder,
     snackBar: MatSnackBar,
-    private ownEquityAccountService: OwnAccountService,
+    private buyGoodsService: BuyGoodsService,
     public dialog: MatDialog,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly merchantDetailsService: MerchantDetailsService,
   ) {
     super(snackBar);
   }
@@ -36,6 +39,8 @@ export class BuyGoodsComponent extends BaseTransactComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    this.getMerchants();
+    this.getFavouriteMerchants();   
   }
 
   initForm(): void {
@@ -49,26 +54,41 @@ export class BuyGoodsComponent extends BaseTransactComponent implements OnInit {
     });
   }
 
+  getMerchants(): void {
+    this.buyGoodsService.getMerchants().subscribe((res) => {
+      if (res.status) {
+        this.merchantDetailsService.setMerchantDetails(res.data);
+      }
+      else{
+        console.log(res.message);
+        // TODO:: Notify Error
+      }
+    });
+  }
+
+  getFavouriteMerchants(): void {
+    this.buyGoodsService.getFavouriteMerchants().subscribe((res) => {
+      if (res.status) {
+        this.merchantDetailsService.setFavouriteMerchantDetails(res.data);
+      }
+      else{
+        console.log(res.message);
+        // TODO:: Notify Error
+      }
+    });
+  }
+
   openSupportingDocuments(): void {}
 
   // Get Transfer charges, then confirm payment.
   getTransferCharges() {
-    const payload = {
-      amount: this.getForm.amount.value.amount,
-      currency: this.getForm.amount.value.currency,
-      destinationAccount: this.getForm.sendTo.value.accountNumber,
-      sourceAccount: this.getForm.sendFrom.value.accountNumber,
-      transferType: 1, // For Own Equity Account
-    };
-    this.ownEquityAccountService
-      .getTransferCharges(payload)
-      .subscribe((res) => {
-        if (res.status) {
-          this.confirmPayment(res.data);
-        } else {
-          // TODO:: Notify error
-        }
-      });
+    this.buyGoodsService.getCharges().subscribe((res) => {
+      if (res.status) {
+        this.confirmPayment(res.data.charge);
+      } else {
+        // TODO:: Notify error
+      }
+    }); 
   }
 
   // Confirm Payment and return the confirmation boolean before initiating payment.
@@ -78,7 +98,7 @@ export class BuyGoodsComponent extends BaseTransactComponent implements OnInit {
         from: this.getForm.sendFrom.value,
         to: this.getForm.sendTo.value,
         amount: this.getForm.amount.value,
-        transactionType: 'Buy goods',
+        transactionType: this.transferType.BUY_GOODS,
         paymentReason: this.getForm.reason.value,
         fxReferenceId: this.getForm.fxReferenceId.value,
         schedulePayment: this.getForm.schedulePayment.value,
@@ -91,44 +111,42 @@ export class BuyGoodsComponent extends BaseTransactComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe((res) => {
         if (res.confirmed) {
-          // this.sendMoney();
-          this.otpVerification();
+          this.buyGoods();
         }
       });
     } else {
     }
   }
-  otpVerification() {
-    this.router.navigate(['/transact/buy-goods/otp-verification']);
-  }
+
 
   // Initiate fund transfer to buy goods.
-  sendMoney() {
+  buyGoods() {
     const payload = {
       amount: this.getForm.amount.value.amount,
       beneficiaryAccount: this.getForm.sendTo.value.accountNumber,
-      beneficiaryBank: '',
-      beneficiaryBankCode: '',
+      beneficiaryBank: "",
+      beneficiaryBankCode: "",
       beneficiaryCurrency: this.getForm.sendTo.value.currency,
       beneficiaryName: this.getForm.sendTo.value.accountName,
       currency: this.getForm.amount.value.currency,
       fxReferenceId: this.getForm.fxReferenceId.value,
       paymentReason: this.getForm.reason.value,
-      schedulePayment: this.getForm.schedulePayment.value,
+      schedulePayment: {
+        frequency: this.getForm.schedulePayment.value.frequency.value,
+        reminderDay: this.getForm.schedulePayment.value.reminderDay.value,
+        startDate: this.getForm.schedulePayment.value.startDate.toISOString(),
+        endDate: this.getForm.schedulePayment.value.endDate.toISOString(),
+      },
       sourceAccount: this.getForm.sendFrom.value.accountNumber,
-      transferType: 1, // Buy goods
+      transferType: this.transferType.BUY_GOODS,
     };
+    const tillNumber = {
+      tillNumber: this.getForm.sendTo.value.tillNumber,
+    }
     if (this.buyGoodsForm.valid) {
-      this.ownEquityAccountService
-        .sendToOwnEquityAccount(payload)
-        .subscribe((res) => {
-          if (res.status) {
-            this.router.navigate(['/transact/buy-goods/otp-verification']);
-          } else {
-            alert(res.message);
-            // TODO:: Notify Error
-          }
-        });
+      this.buyGoodsService.getTillNumber(tillNumber);
+      this.buyGoodsService.payBuyGoods(payload);
+      this.router.navigate([`/transact/otp-verification/${this.transferType.BUY_GOODS}`]);
     }
   }
 }

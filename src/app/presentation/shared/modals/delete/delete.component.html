@@ -1,0 +1,24 @@
+<mat-card class="delete-modal-screen p-0 mat-elevation-z7 cursor-pointer">
+    <mat-card-content class="px-4 py-3">
+    <div class="row">
+        <div class="col-md-10 pt-2">
+            <h3 class="card-title strong-text">{{ data.title }}</h3>
+        </div>
+        <div class="col-md-2">
+            <button mat-icon-button (click)="close()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div> 
+      <small class="text-muted text-grey">
+        {{ data.message }}
+      </small>
+      <p class="pt-3">
+          <span  class="mt-4 text text-danger cursor-pointer strong-text"
+          (click)="close()">{{data.buttonNo}}</span>
+          <span  class=" ms-4 mt-4 text text-danger cursor-pointer strong-text"
+          (click)="data.id ? deleteStandingOrder() : close()">Yes, I’m sure</span>
+      </p>
+    </mat-card-content>
+  </mat-card>
+  

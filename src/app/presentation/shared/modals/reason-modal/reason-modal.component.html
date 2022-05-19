@@ -1,0 +1,35 @@
+<div class="own-equity-payment-modal-screen p-0 mat-elevation-z0">
+  <h3 class="m-4 ms-2">Transaction Request Rejection</h3>
+  <form
+    [formGroup]="reasonForm"
+    (ngSubmit)="submit()"
+    class="d-flex flex-column m-3"
+    autocomplete="off"
+  >
+    <div class="col-md-6 col-lg-12">
+      <app-input
+        [parentForm]="reasonForm"
+        fieldName="reason"
+        label="Reason for rejection"
+        placeholder="Enter why this transaction is to be rejected"
+        formControlName="reason"
+      ></app-input>
+    </div>
+    <div class="pt-4">
+      <div class="d-flex justify-content-between">
+        <button
+          [disabled]="reasonForm.invalid"
+          color="primary"
+          type="submit"
+          mat-flat-button
+          class="px-5"
+        >
+          Submit
+        </button>
+        <button (click)="close()" type="button" mat-flat-button class="px-5">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

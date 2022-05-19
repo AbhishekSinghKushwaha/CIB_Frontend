@@ -9,14 +9,14 @@ import { AddMerchantModel } from 'src/app/core/domain/add-merchant.model';
 })
 export class AddMerchantService {
 
-  data = new Subject<AddMerchantModel>();
+  data = new Subject<{ type: string; }>();
   dialogRef: any;
-  private defaultData:AddMerchantModel;
+  private defaultData: any;
 
   constructor(private readonly dialog: MatDialog) { }
 
-  open(data: AddMerchantModel | null) {
-    this.dialogRef = this.dialog.open<AddMerchantComponent, AddMerchantModel>(AddMerchantComponent, {
+  open(data: any | null) {
+    this.dialogRef = this.dialog.open<AddMerchantComponent>(AddMerchantComponent, {
       disableClose: true,
       data
     });
@@ -28,7 +28,7 @@ export class AddMerchantService {
     this.data.next(this.defaultData);
   }
 
-  get default(): AddMerchantModel {
+  get default(): any {
     return this.defaultData
   }
 

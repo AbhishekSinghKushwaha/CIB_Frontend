@@ -24,3 +24,26 @@ export interface CountryModel {
   operatingCountry: boolean;
   countryCode3Chars: string;
 }
+
+
+export interface BillersModel {
+  shortName?: string;
+  code?: string;
+  name?: string;
+  surCharge?: number;
+  logoUrl?: string;
+  isActive?: boolean;
+  customFields?: []
+}
+
+export interface BillersCustomFieldModel {
+  id?: number,
+  name?: string,
+  length?: number,
+  isRequired?: boolean,
+  errorMessage?: string,
+  dataType?: number,
+  dropDownType?: number,
+  hasDropDown?: boolean
+  dropDown?: []
+}

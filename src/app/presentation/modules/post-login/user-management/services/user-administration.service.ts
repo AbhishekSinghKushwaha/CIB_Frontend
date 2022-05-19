@@ -4,14 +4,24 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import urlList from '../../../../../core/services/service-list.json';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class UserAdministrationService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getUsers(): Observable<any> {
     return this.http.post(
       environment.apiUrl + urlList.userAdministration.getUsers,
       {}
+    );
+  }
+
+  reviewStatus(userId: string, action: number, metadata = {}): Observable<any> {
+    const payload = {
+      action, userId, metadata
+    }
+    return this.http.post(
+      environment.apiUrl + urlList.userAdministration.changeStatus,
+      payload
     );
   }
 

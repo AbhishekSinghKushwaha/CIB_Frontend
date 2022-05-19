@@ -1,0 +1,68 @@
+<link rel="stylesheet" href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" /><div *ngIf="alertVisible" class="d-flex justify-content-right alert alert-light mat-elevation-z8 float-end">
+    <mat-icon class="text-success">check_circle</mat-icon>
+    <span style="padding-left: 10px;">{{ alertMessage }}</span>
+</div>
+<div class="pb-4">
+    <div class="mb-3">
+        <button mat-icon-button aria-label="Back" class="back-icon" routerLink="/transact">
+          <div class="strong-text">
+            <mat-icon svgIcon="caret_left"></mat-icon>
+            <span>Bulk payment</span>
+          </div>
+        </button>
+    </div>
+    <div class="d-flex justify-content-between my-4">
+        <div class="d-flex justify-content-start">
+            <div>
+                <button mat-fab class="button_icon">
+                    <mat-icon class="material-symbols-outlined user">person</mat-icon>
+                </button>
+            </div>
+            <div class="ps-3">
+                <h4 class="strong-text">{{checked ? 'Bulk Salary Payment' : 'Bulk Transfer'}}</h4>
+                <small class="text-grey">Please select if this is a bulk salary payment.</small>
+            </div>  
+        </div>
+        <div>
+            <mat-slide-toggle 
+                [checked]="checked" 
+                (change)="onChange()"
+                ></mat-slide-toggle>
+        </div>
+    </div>
+    <div class="col-md-12 upload-doc">
+        <div class="row mt-4">
+            <div class="col-md-5">
+                <img src="assets/images/Illustrations/Illustrations_VisitBranch.svg" alt="" />
+            </div>
+            <div class="col-md-6 mt-5">
+                <h3 class="strong-text">Create a bulk payment</h3>
+                <p class="text-sm text-grey">
+                    Creating a bulk payment will help you pay multiple people online. 
+                    To get started, download our template to enter the recipients’ details. 
+                    Once you’ve entered the relevant information, you can upload the template.
+                    Relevant business rules will be applied based on payments/fund transfer/ salary payments.
+                    Please ensure to have any supporting documents available for upload if required.
+
+                </p>
+            </div>
+        </div>
+        <div class="row mt-4 ps-4">
+            <div class="col-md-2">
+                <button mat-raised-button color="primary" class="px-5" (click)="upload()">Upload</button>
+            </div>  
+            <div class="col-md-3 ps-4">
+                <button mat-stroked-button color="primary" type="button" (click)="downloadTemplate()">
+                    Download a template
+                </button>
+            </div>         
+        </div> 
+    </div>
+    <div class="col-md-12 p-3 d-flex justify-content-between bg-light mt-4">
+        <div class="strong-text">Total amount</div>
+        <div class="strong-text">KES 0.00</div>
+      </div>
+    <div class="mt-4">
+        <button mat-raised-button disabled type="submit" color="primary" class="px-5">Submit</button>
+    </div>
+</div>

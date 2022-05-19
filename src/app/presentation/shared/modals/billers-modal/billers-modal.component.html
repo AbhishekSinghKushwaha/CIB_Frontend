@@ -1,0 +1,41 @@
+<div class="new-recipient-modal-screen p-1">
+  <div class="p-3">
+    <button mat-icon-button matSuffix class="close-button" (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+    <p class="text-center fw-bold pt-2">Pay to</p>
+    <h3 class="m-4 ms-2">Please select a biller</h3>
+    <div class="row gx-0">
+      <mat-form-field appearance="outline">
+        <input
+          matInput
+          [(ngModel)]="searchText"
+          placeholder="Search for a country"
+        />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+    <div>
+      <h3
+        class="strong-text p-3"
+        *ngIf="(data | billerSearch: searchText).length as results"
+      >
+        {{ results }} result{{ results ? "s" : "" }}
+      </h3>
+    </div>
+    <div
+      *ngFor="
+        let item of data.billers | billerSearch: searchText;
+        let isLast = last;
+        let i = index
+      "
+    >
+      <app-biller-list-item
+        [data]="item"
+        [isChecked]="selected?.name === item.name"
+        (selectedBiller)="onSelectBiller($event)"
+      ></app-biller-list-item>
+      <mat-divider *ngIf="!isLast" class="pt-3"></mat-divider>
+    </div>
+  </div>
+</div>

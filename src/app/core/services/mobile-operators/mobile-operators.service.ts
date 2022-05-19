@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { MobileOperatorModel } from '../../domain/mobile-operators.model';
+import { Telco } from "src/app/core/domain/transfer.models";
 import { MatDialog } from '@angular/material/dialog';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MobileOperatorsService {
-  selected = new Subject<MobileOperatorModel>();
-  private data: MobileOperatorModel;
+  selected = new Subject<Telco>();
+  private data: Telco;
 
   constructor() { }
 
-  select(operator: MobileOperatorModel): void {
+  select(operator: Telco): void {
     this.data=operator;
     this.selected.next(operator)
   }
 
-  get default():MobileOperatorModel{
+  get default():Telco{
     return this.data;
   }
 }

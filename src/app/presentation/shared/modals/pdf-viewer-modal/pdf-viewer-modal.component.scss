@@ -1,0 +1,18 @@
+.pdf-viewer-screen{
+    width: 700px;
+    margin: 0;
+    padding: 0;
+    height: 600px;
+}
+
+::ng-deep .my-pdf {
+    overflow: hidden !important;
+  }
+
+.table-font {
+    font-size: 10px;
+}  
+
+.table > :not(:first-child) {
+    border-top: none !important;
+  }

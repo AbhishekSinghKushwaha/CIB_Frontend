@@ -1,33 +1,219 @@
 <div class="container">
-    <div class="row">
-        <div class="col">
-            <h4 class="strong-text mt-5">Confirmation</h4>
-        </div>
+  <div class="row">
+    <div class="col">
+      <h4 class="strong-text mt-5">Confirmation</h4>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-5">
+      <div class="">
+        <img src="assets/images/Illustrations/Group 29.svg" alt="" />
+      </div>
     </div>
 
-    <div class="row mt-5">
-        <div class="col-5">
-            <div class="">
-              <img src="assets/images/Illustrations/Group 29.svg" alt="">  
-            </div>
-            
+    <div class="col-7">
+      <h4
+        class="mt-5"
+        *ngIf="
+          transferType !== 'Standing Orders' && transferType !== 'bulk-transfer'
+        "
+      >
+        Fund transfer submitted for approval!
+      </h4>
+
+      <h3 class="mt-5 strong-text" *ngIf="transferType === 'Standing Orders'">
+        Standing order submitted for approval!
+      </h3>
+
+      <div *ngIf="transferType === 'bulk-transfer'">
+        <h3 class="mt-5 strong-text">Your request has been submitted</h3>
+        <span class="text-sm text-grey">
+          We’ll let you know the status of your request once it has been
+          reviewed.
+        </span>
+      </div>
+      <br />
+
+      <div *ngIf="transferType !== 'bulk-transfer'">
+        <p>Permanent Amendment</p>
+        <span class="text-sm text-grey">
+          Transaction of KES 0.00, daily transact limit of KES 0.00 on
+          16/04/2021 at 10:45:23 was submitted for approval.
+        </span>
+        <br /><br />
+        <span class="text-sm text-grey"
+          >You will be notified once the transaction has been approved</span
+        >
+        <br />
+      </div>
+
+      <div class="row col-md-10">
+        <div class="col-md-4">
+          <button
+            mat-raised-button
+            type="button"
+            color="primary"
+            class="px-5 mt-4"
+            (click)="done()"
+          >
+            Done
+          </button>
         </div>
-
-        <div class="col-7">
-            <h4 class="mt-5">Fund transfer submitted for approval!</h4>
-
-            <p>Permanent Amendment</p>
-
-            <span class="text-sm text-grey">Transaction of KES 0.00, daily transact limit of KES 0.00 on 16/04/2021 at 10:45:23 was submitted for approval.</span>
-
-            <br><br>
-
-            <span class="text-sm text-grey">You will be notified once the transaction has been approved</span>
-
-            <br>
-
-            <button mat-raised-button type="button" color="primary" class="px-5 mt-4" (click)="done()">Done</button>
+        <div class="col-md-3">
+          <button
+            mat-stroked-button
+            *ngIf="transferType === 'Standing Orders'"
+            type="button"
+            color="primary"
+            class="px-5 mt-4"
+            (click)="openAddFavourite()"
+          >
+            Add to favourites
+          </button>
         </div>
+      </div>
     </div>
+
+    <!-- Approve transaction -->
+    <div class="col-7" *ngIf="transferType === 'approve-transaction'">
+      <h2 class="mt-5 fw-bold">Transaction has been successfully approved</h2>
+      <br />
+      <span class="text-sm text-grey"
+        >The initiator will be notified of this transaction's approval
+        status</span
+      >
+
+      <br />
+
+      <div class="row col-md-10 mt-4">
+        <div class="col-md-4">
+          <button
+            mat-raised-button
+            type="button"
+            color="primary"
+            class="px-5 mt-4"
+            (click)="done()"
+          >
+            Done
+          </button>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+    </div>
+
+    <!-- Reject Transaction -->
+    <div class="col-7" *ngIf="transferType === 'reject-transaction'">
+      <h2 class="mt-5 fw-bold">Transaction has been rejected</h2>
+
+      <br />
+
+      <span class="text-sm text-grey"
+        >The initiator will be notified of this transaction's approval
+        status</span
+      >
+
+      <br />
+
+      <div class="row col-md-10 mt-4">
+        <div class="col-md-4">
+          <button
+            mat-raised-button
+            type="button"
+            color="primary"
+            class="px-5 mt-4"
+            (click)="done()"
+          >
+            Done
+          </button>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+    </div>
+
+    <!-- Other Transactions -->
+    <div
+      class="col-7"
+      *ngIf="
+        transferType === transferTypes.BUY_AIRTIME ||
+        transferType === transferTypes.BUY_GOODS ||
+        transferType === transferTypes.EFT ||
+        transferType === transferTypes.INTER_BANK ||
+        transferType === transferTypes.INTRA_BANK ||
+        transferType === transferTypes.MOBILE_MONEY ||
+        transferType === transferTypes.OWN_EQUITY ||
+        transferType === transferTypes.PESALINK ||
+        transferType === transferTypes.RTGS ||
+        transferType === transferTypes.SUBSIDIARY ||
+        transferType === transferTypes.SWIFT ||
+        transferType === transferTypes.BILL_PAYMENT ||
+        transferType === 'reinitiate-transaction'
+      "
+    >
+      <h4 class="mt-5">
+        <span *ngIf="transferTypes.BILL_PAYMENT; else fundTransfer"
+          >Bill Payment</span
+        >
+        <ng-template #fundTransfer> Fund transfer </ng-template> submitted for
+        approval
+      </h4>
+
+      <br />
+
+      <p>Permanent Amendment</p>
+
+      <span class="text-sm text-grey"></span>
+
+      <br /><br />
+
+      <span class="text-sm text-grey"
+        >You will be notified once the transaction has been approved</span
+      >
+
+      <br />
+
+      <div class="row col-md-10">
+        <div class="col-md-4">
+          <button
+            mat-raised-button
+            type="button"
+            color="primary"
+            class="px-5 mt-4"
+            (click)="done()"
+          >
+            Done
+          </button>
+        </div>
+        <div class="col-md-3">
+          <button
+            *ngIf="
+              checkIfFavouriteExists() &&
+              transferType !== transferTypes.OWN_EQUITY &&
+              transferType !== 'reinitiate-transaction'
+            "
+            mat-stroked-button
+            type="button"
+            color="primary"
+            class="px-5 mt-4"
+            (click)="openAddFavourite()"
+          >
+            Add to favourites
+          </button>
+          <<<<<<< HEAD =======
+
+          <button
+            *ngIf="checkIfFavouriteExists() && transferType !== 'bulk-transfer'"
+            mat-stroked-button
+            type="button"
+            color="primary"
+            class="px-5 mt-4"
+            (click)="addToFavourites()"
+          >
+            Add to favourites
+          </button>
+          >>>>>>> 903c9cecc3023f6acf76ee3c0c00057c4efc831d
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-

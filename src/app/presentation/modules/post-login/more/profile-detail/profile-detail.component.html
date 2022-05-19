@@ -1,0 +1,195 @@
+<div *ngIf="!profileUpdated; else profileUpdatedScreen">
+  <div class="mb-3">
+    <button
+      mat-icon-button
+      aria-label="Back"
+      class="back-icon"
+      routerLink="/more"
+    >
+      <div class="strong-text">
+        <mat-icon svgIcon="caret_left"></mat-icon>
+        <span>Manage your personal details</span>
+      </div>
+    </button>
+  </div>
+  <form
+    class="d-flex flex-column"
+    autocomplete="off"
+    [formGroup]="profileDetailForm"
+    (submit)="updateUserDetails()"
+  >
+    <div class="row pt-4">
+      <!-- Email -->
+      <div class="col-md-6">
+        <app-input
+          [parentForm]="profileDetailForm"
+          fieldName="emailAddres"
+          label="Email address"
+          placeholder="jane@equity.com"
+          [value]="getForm.emailAddres.value"
+          formControlName="emailAddres"
+          [isDisabled]="true"
+        ></app-input>
+      </div>
+      <!-- phone Number -->
+      <div class="col-md-6 mb-3">
+        <app-phone-number-input
+          [parentForm]="profileDetailForm"
+          fieldName="phoneNumber"
+          formControlName="phoneNumber"
+          placeholder="Enter their mobile number"
+          label="Mobile Number"
+          [phoneValue]="getForm.phoneNumber.value"
+          [selectedCountry]="currentCountry"
+        ></app-phone-number-input>
+      </div>
+      <!-- Language -->
+      <div class="col-md-6">
+        <mat-form-field
+          appearance="standard"
+          style="width: 100%"
+          floatLabel="always"
+        >
+          <mat-label>Language</mat-label>
+          <mat-select
+            name="language"
+            fieldName="language"
+            formControlName="language"
+          >
+            <mat-option *ngFor="let language of languages" [value]="language">
+              {{ language }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <!-- TimeZone -->
+      <div class="col-md-6">
+        <mat-form-field
+          appearance="standard"
+          style="width: 100%"
+          floatLabel="always"
+        >
+          <mat-label>Time Zone</mat-label>
+          <mat-select
+            name="timeZone"
+            fieldName="timeZone"
+            formControlName="timeZone"
+          >
+            <mat-option *ngFor="let timeZone of timeZones" [value]="timeZone">
+              {{ timeZone }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <!-- DateFormat -->
+      <div class="col-md-6">
+        <mat-form-field
+          appearance="standard"
+          style="width: 100%"
+          floatLabel="always"
+        >
+          <mat-label>Date Format</mat-label>
+          <mat-select
+            name="dateFormat"
+            fieldName="dateFormat"
+            formControlName="dateFormat"
+          >
+            <mat-option
+              *ngFor="let dateFormat of dateFormats"
+              [value]="dateFormat"
+            >
+              {{ dateFormat }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <!-- Currency Format -->
+      <div class="col-md-6">
+        <mat-form-field
+          appearance="standard"
+          style="width: 100%"
+          floatLabel="always"
+        >
+          <mat-label> Currency Format</mat-label>
+          <mat-select
+            name="currencyFormat"
+            fieldName="currencyFormat"
+            formControlName="currencyFormat"
+          >
+            <mat-option *ngFor="let currency of currencies" [value]="currency">
+              {{ currency }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <!-- fontSize -->
+      <div class="col-md-6">
+        <mat-form-field
+          appearance="standard"
+          style="width: 100%"
+          floatLabel="always"
+        >
+          <mat-label> Font Size</mat-label>
+          <mat-select
+            name="fontSize"
+            fieldName="fontSize"
+            formControlName="fontSize"
+          >
+            <mat-option *ngFor="let fontSize of fontSizes" [value]="fontSize">
+              {{ fontSize }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <!-- Submit Button -->
+    <div class="mt-4">
+      <button
+        class="float=right"
+        mat-raised-button
+        type="submit"
+        [disabled]="profileDetailForm.invalid"
+        color="primary"
+        class="px-5"
+      >
+        update
+      </button>
+    </div>
+  </form>
+</div>
+<ng-template #profileUpdatedScreen>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row mb-4 justify-content-md-center">
+        <div class="row mt-5">
+          <div class="col-md-5">
+            <div class="">
+              <img
+                src="assets/images/Illustrations/Group 29.svg"
+                alt="Request submitted for approval"
+              />
+            </div>
+          </div>
+          <div class="col-md-7">
+            <div class="row">
+              <h4 class="mt-5">Your details have been updated successfully</h4>
+              <span class="text-sm mb-2"> Permanent Ammendment.</span>
+              <span class="text-sm text-grey mb-2"> </span>
+            </div>
+            <div class="row col-md-3">
+              <button
+                mat-raised-button
+                type="button"
+                color="primary"
+                class="px-5 mt-4"
+                (click)="profileUpdated = false"
+              >
+                Done
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -11,12 +11,12 @@ import { UserListService } from 'src/app/core/services/modal-services/user-list.
   styleUrls: ['./user-list-modal.component.scss']
 })
 export class UserListModalComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['id', 'name', 'profileType', 'status', 'lastViewed'];
+  displayedColumns: string[] = ['idNumber', 'name', 'profileType', 'status', 'lastViewed'];
   dataSource = new MatTableDataSource<UserListModel>(this.ELEMENT_DATA);
   @ViewChild(MatSort) sort: MatSort;
   searchText: string;
   clickedRow: UserListModel | undefined;
-  filter = { key: 'ID Number', value: 'id' };
+  filter = { key: 'ID Number', value: 'idNumber' };
   searchTotal = 0;
 
   constructor(

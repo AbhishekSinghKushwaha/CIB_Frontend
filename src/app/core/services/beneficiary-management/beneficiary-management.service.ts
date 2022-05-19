@@ -30,15 +30,9 @@ export class BeneficiaryManagementService {
 
   constructor(
     private readonly http: HttpClient,
-    private readonly authService: AuthService,
     private router: Router,
     private storageService: StorageService
   ) {
-    this.authService.IsLoggedIn.subscribe((loggedIn) => {
-      if (!loggedIn) {
-        //  this.beneficiaries.splice(0);
-      }
-    });
   }
 
   submitForm(data: any): void {
@@ -83,10 +77,11 @@ export class BeneficiaryManagementService {
     } else {
       this.http
         .get<BeneficiaryModel[]>(
-          environment.apiUrl + urlList.beneficiary.getAll
+          environment.apiUrl + urlList.beneficiary.getAll,
+          { params: { pageSize: 15 } }
         )
         .subscribe((rs: any) => {
-          this.beneficiaries = [...rs.data];
+          this.beneficiaries = [...rs.data.dataList];
           this.storageService.setData("beneficiaries", this.beneficiaries);
           this.formData.next({
             type: BeneficiaryActionResultType.GET,
@@ -138,5 +133,11 @@ export class BeneficiaryManagementService {
           data: this.beneficiaries,
         });
       });
+  }
+
+  accountSearch(payload: any): Promise<any> {
+    return this.http
+      .post(environment.apiUrl + urlList.transfers.getAccountDetails, payload)
+      .toPromise();
   }
 }

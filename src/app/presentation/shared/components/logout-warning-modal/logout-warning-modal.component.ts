@@ -4,7 +4,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
-import { SharedUtils } from 'src/app/core/utils/shared.util';
+import SharedUtils from 'src/app/core/utils/shared.util';
 
 @Component({
   selector: 'app-logout-warning-modal',
@@ -48,7 +48,7 @@ export class LogoutWarningModalComponent implements OnInit, OnDestroy {
 
   logoutNow(): void {
     this.logOut = true;
-    this.authService.doLogout();
+    this.authService.doLogout('logoutNow');
     this.closeModal();
   }
 

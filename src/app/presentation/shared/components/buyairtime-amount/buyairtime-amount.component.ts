@@ -1,21 +1,30 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { CurrencySelectionService } from 'src/app/core/services/modal-services/currency-selection.service';
-import { CurrencySelectionConstants } from 'src/app/core/utils/constants/currency-selection.constants';
-import { CurrencyModel, FromAccount, TransferAmount } from 'src/app/core/domain/transfer.models';
-import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { InternationalAirtimeAmountRangeService } from 'src/app/core/services/international-airtime-amount-range/international-airtime-amount-range.service';
-import { AirtimeAmountRangeModel } from 'src/app/core/domain/international-airtime-amount-range.model';
-import { FixedRangeService } from 'src/app/core/services/fixed-range/fixed-range.service';
-import { FixedRangeConstants } from 'src/app/core/utils/constants/fixed-range.constants';
-import { FixedRangeModel } from 'src/app/core/domain/fixed-range.model';
-import { TransferFromService } from 'src/app/core/services/modal-services/transfer-from.service';
+import { Component, forwardRef, Input, OnInit } from "@angular/core";
+import { Subject } from "rxjs";
+import { debounceTime, distinctUntilChanged } from "rxjs/operators";
+import { CurrencySelectionService } from "src/app/core/services/modal-services/currency-selection.service";
+import { CurrencySelectionConstants } from "src/app/core/utils/constants/currency-selection.constants";
+import {
+  CurrencyModel,
+  FromAccount,
+  TransferAmount,
+} from "src/app/core/domain/transfer.models";
+import {
+  ControlValueAccessor,
+  FormControl,
+  FormGroup,
+  NG_VALUE_ACCESSOR,
+} from "@angular/forms";
+import { InternationalAirtimeAmountRangeService } from "src/app/core/services/international-airtime-amount-range/international-airtime-amount-range.service";
+import { AirtimeAmountRangeModel } from "src/app/core/domain/international-airtime-amount-range.model";
+import { FixedRangeService } from "src/app/core/services/fixed-range/fixed-range.service";
+import { FixedRangeConstants } from "src/app/core/utils/constants/fixed-range.constants";
+import { FixedRangeModel } from "src/app/core/domain/fixed-range.model";
+import { TransferFromService } from "src/app/core/services/modal-services/transfer-from.service";
 
 @Component({
-  selector: 'app-buyairtime-amount',
-  templateUrl: './buyairtime-amount.component.html',
-  styleUrls: ['./buyairtime-amount.component.scss'],
+  selector: "app-buyairtime-amount",
+  templateUrl: "./buyairtime-amount.component.html",
+  styleUrls: ["./buyairtime-amount.component.scss"],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -25,11 +34,13 @@ import { TransferFromService } from 'src/app/core/services/modal-services/transf
   ],
 })
 export class BuyairtimeAmountComponent implements ControlValueAccessor, OnInit {
-
   @Input() parentForm!: FormGroup;
 
   @Input()
   public fieldName!: string;
+
+  @Input()
+  public currencyFieldName!: string;
 
   @Input()
   public label!: string;
@@ -37,9 +48,13 @@ export class BuyairtimeAmountComponent implements ControlValueAccessor, OnInit {
   @Input()
   placeholder!: string;
 
-  currency: CurrencyModel = {currencyCode: '', currencyDescription: ''};
+  currency: CurrencyModel = { currencyCode: "", currencyDescription: "" };
 
-  public value: TransferAmount = {amount: 0, currency: '', isWithinLimit: true};
+  public value: TransferAmount = {
+    amount: 0,
+    currency: "",
+    isWithinLimit: true,
+  };
 
   sendFromAccount: FromAccount;
 
@@ -66,17 +81,21 @@ export class BuyairtimeAmountComponent implements ControlValueAccessor, OnInit {
     private readonly fixedRangeService: FixedRangeService,
     private readonly fixedRangeConstants: FixedRangeConstants,
     private readonly transferFromService: TransferFromService
+  ) {
+    this.currencySelectionService.selected.subscribe(
+      (x) => (this.currency = x)
+    );
 
-  ) { 
-    this.currencySelectionService.selected.subscribe((x) => this.currency = x);
-    
     this.selected = this.internationalAirtimeAmountRangeService.default;
-    this.internationalAirtimeAmountRangeService.selected.subscribe((x) => this.selected = x);
-    
+    this.internationalAirtimeAmountRangeService.selected.subscribe(
+      (x) => (this.selected = x)
+    );
+
     this.fixedAmount = this.fixedRangeService.default;
     this.fixedRangeService.selected.subscribe((res) => {
       this.fixedAmount = res;
       this.value.amount = res.text;
+      this.value.currency = this.currency.currencyCode;
     });
   }
 
@@ -87,14 +106,18 @@ export class BuyairtimeAmountComponent implements ControlValueAccessor, OnInit {
   // Listen to events, pick the sendFrom data
   listenToDataEvents() {
     // Get sendFrom Account
-    this.transferFromService.selectedTransferFromAccount.subscribe((x) => {
+    this.transferFromService.transferFromAmount$.subscribe((x) => {
       this.sendFromAccount = x;
-      this.currency.currencyCode = x.currency;
+      this.currency.currencyCode = x.currency || "";
     });
 
     // Get Selected Currency
     this.currencySelectionService.selected.subscribe((x) => {
       this.currency = x;
+      this.currencyFieldName &&
+        this.parentForm.controls[this.currencyFieldName].setValue(
+          this.currency
+        );
     });
 
     this.onAmountEntered();
@@ -124,7 +147,7 @@ export class BuyairtimeAmountComponent implements ControlValueAccessor, OnInit {
   /**
    * Perfom limit validation once amount is entered
    */
-   onAmountEntered() {
+  onAmountEntered() {
     this.amountUpdate
       .pipe(debounceTime(1000), distinctUntilChanged())
       .subscribe((res) => {
@@ -137,8 +160,9 @@ export class BuyairtimeAmountComponent implements ControlValueAccessor, OnInit {
    * Calculate limits
    * TODO:: Factor in limits as per transcations and daily limit calculations
    */
-   checkLimit() {
-    if (this.value.amount > this.sendFromAccount.transactionLimit) {
+  checkLimit() {
+    const limit = this.sendFromAccount.transactionLimit || 0;
+    if (this.value.amount > limit) {
       this.value.isWithinLimit = false;
       this.value.currency = this.currency.currencyCode;
       this.changed(this.value);
@@ -150,12 +174,12 @@ export class BuyairtimeAmountComponent implements ControlValueAccessor, OnInit {
   }
 
   openCurrencyModal() {
-    this.currencySelectionService.open(this.currencySelectionConstants.CURRENCY_LISTINGS);
+    this.currencySelectionService.open(
+      this.currencySelectionConstants.CURRENCY_LISTINGS
+    );
   }
 
   openFixedRange(): void {
-    this.fixedRangeService.open(
-      this.fixedRangeConstants.FIXED_RANGE
-    );
+    this.fixedRangeService.open(this.fixedRangeConstants.FIXED_RANGE);
   }
 }

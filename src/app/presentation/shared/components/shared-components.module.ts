@@ -1,3 +1,5 @@
+import { GroupedAccountItemComponent } from './grouped-account-item/grouped-account-item.component';
+
 import { RouterModule } from '@angular/router';
 import { CardComponentComponent } from './card-component/card-component.component';
 import { NgModule } from '@angular/core';
@@ -27,7 +29,11 @@ import { SecurityVerificationComponent } from './security-verification/security-
 import { SecurityChallengeComponent } from './security-challenge/security-challenge.component';
 import { SecurityQuestionsModalModule } from '../modals/security-questions-modal/security-questions-modal.module';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-
+import { TransactionsListComponent } from './transactions-list/transactions-list.component';
+import { PaginatorComponent } from './paginator/paginator.component';
+import { ListItemsComponent } from './list-items/list-items.component';
+import { DeleteModule } from '../modals/delete/delete.module';
+import { StandingOrdersListComponent } from './standing-orders-list/standing-orders-list.component';
 
 const components = [
   AccountDropdownItemComponent,
@@ -48,7 +54,12 @@ const components = [
   LogoutConfirmationModalComponent,
   SecurityVerificationComponent,
   SecurityChallengeComponent,
-  ResetPasswordComponent
+  ResetPasswordComponent,
+  TransactionsListComponent,
+  PaginatorComponent,
+  ListItemsComponent,
+  StandingOrdersListComponent,
+  GroupedAccountItemComponent
 ];
 
 @NgModule({
@@ -62,8 +73,8 @@ const components = [
     ReactiveFormsModule,
     LanguageModalModule,
     LanguageTranslateModule.forRoot(),
-    SecurityQuestionsModalModule
-
+    SecurityQuestionsModalModule,
+    DeleteModule
   ],
   exports: components
 })

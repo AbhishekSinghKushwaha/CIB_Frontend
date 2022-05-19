@@ -13,9 +13,71 @@ export interface UserModel {
 
 
 export interface UserListModel {
-  id: string;
+  idNumber: string;
   name: string;
+  userName: string;
+  firstName: string;
+  lastName: string;
+  statusName: string;
   profileType: string;
   status: string;
   lastViewed: string;
+}
+
+export interface UserFormPropModel {
+  addRoleLink: string;
+  userListLink: string;
+  username: string;
+  addProductLink?: string;
+}
+
+export interface LoggedinUserModel {
+  firstName: string;
+  lastName: string;
+  email: string;
+  dateOfBirth: string;
+  corporateId: string;
+  firstTimeLogin: boolean;
+  userName: string;
+  userId: string;
+  phoneNumber: string;
+  idNumber: string;
+  status: boolean;
+  statusName: string;
+}
+
+
+export interface UserRole {
+  id?: string;
+  permissions: UserPermission[];
+  roleName?: string;
+}
+
+export interface UserPermission {
+  id?: string;
+  name?: string;
+  claim?: string;
+  description?: string;
+}
+
+export interface UserProduct {
+  id: string;
+  productGroupId: string;
+  name?: string;
+  description?: string;
+  subProducts: UserSubProduct[];
+}
+export interface UserSubProduct {
+  id?: string;
+  productId: string;
+  name?: string;
+  description?: string;
+}
+
+export interface UserLimitModel {
+  currencyCode: string;
+  dailyLimit: number
+  monthlyLimit: number
+  transactionLimit: number
+  weeklyLimit: number
 }

@@ -6,10 +6,15 @@ import { SelectAccountModel } from "./../../domain/select-account.model";
 import { BuyGoodsFavouriteModel } from "./../../domain/buy-goods-favourites.model";
 import { UserListModel, UserModel } from "../../domain/user.model";
 import { CompanyListModel } from "../../domain/company.model";
+import { ConfirmationModel } from "../../domain/confirmation.model";
+import { TransactionListmodel } from "../../domain/transaction-list.model";
 import { BeneficiaryModel } from "../../domain/beneficiary.model";
 import { TransferType } from "./transaction-type.constants";
-import { AirtimeAmountRangeModel } from '../../domain/international-airtime-amount-range.model';
-import { CountryMobileCodeModal } from 'src/app/core/domain/countryCode.model';
+import { StandingOrdersListmodel } from "../../domain/standing-orders-list.model";
+import { TransactionTypeModel } from "src/app/core/domain/transaction-type.model";
+import { AirtimeAmountRangeModel } from "../../domain/international-airtime-amount-range.model";
+import { CountryMobileCodeModal } from "../../domain/countryCode.model";
+import { DownloadTemplateModal } from "src/app/core/domain/download-template.model";
 
 const accounts: SelectAccountModel[] = [
   {
@@ -29,37 +34,6 @@ const accounts: SelectAccountModel[] = [
     balance: 4430000,
     currency: "KES",
     type: "Current",
-  },
-];
-
-const userList: UserListModel[] = [
-  {
-    name: "Michael Scott",
-    id: "134312",
-    profileType: "Individual",
-    status: "Active",
-    lastViewed: "12/02/20",
-  },
-  {
-    name: "Moussa Doumbia",
-    id: "8937393",
-    profileType: "Individual",
-    status: "Active",
-    lastViewed: "09/06/22",
-  },
-  {
-    name: "David Pastor",
-    id: "8479393",
-    profileType: "Individual",
-    status: "Active",
-    lastViewed: "10/10/21",
-  },
-  {
-    name: "Jerry Odhiambo",
-    id: "0837484",
-    profileType: "Individual",
-    status: "Active",
-    lastViewed: "30/03/22",
   },
 ];
 
@@ -651,30 +625,340 @@ const accountNumber: string = "2837181638719349";
 
 const airtimeAmountRange: AirtimeAmountRangeModel[] = [
   {
-    amountRangeType: 'Amount range'
+    amountRangeType: "Amount range",
   },
   {
-    amountRangeType: 'Fixed bundles'
-  }
+    amountRangeType: "Fixed bundles",
+  },
 ];
 
 const mobileCodes: CountryMobileCodeModal[] = [
   {
-    mobileCode: '+254',
+    mobileCode: "+254",
   },
   {
-    mobileCode: '+256',
+    mobileCode: "+256",
   },
   {
-    mobileCode: '+255',
+    mobileCode: "+255",
   },
   {
-    mobileCode: '+249',
+    mobileCode: "+249",
   },
   {
-    mobileCode: '+250',
+    mobileCode: "+250",
+  },
+];
+
+const transactionDetail: ConfirmationModel[] = [
+  {
+    content: [
+      {
+        key: "Payment date",
+        value: "01 January 2021",
+      },
+      {
+        key: "From",
+        value: "Loot<br>0810174008113 • Savings",
+      },
+      {
+        key: "Narration",
+        value: "Payment to IdeaHub vendor",
+      },
+    ],
+  },
+  {
+    title: "Beneficiary details",
+    content: [
+      {
+        key: "Beneficiary name",
+        value: "Isah Uche Olusegun",
+      },
+      {
+        key: "Account number",
+        value: "00113577162",
+      },
+      {
+        key: "IBAN number",
+        value: "2085252042",
+      },
+      {
+        key: "Beneficiary bank",
+        value: "HSBC Group",
+      },
+      {
+        key: "Bank code",
+        value: "06454",
+      },
+    ],
+  },
+  {
+    title: "Conversion rate",
+    content: [
+      {
+        key: "Rate",
+        value: "12.43%",
+      },
+      {
+        key: "Source amount",
+        value: "34,239,812,398.00 KES",
+      },
+      {
+        key: "Converted amount",
+        value: "301,406,799.23 USD",
+      },
+    ],
+  },
+];
+
+const histororicalTransactions: TransactionListmodel[] = Array(35)
+  .fill(0)
+  .map((x, i) => ({
+    amount: 50,
+    approvalStatus: 6,
+    beneficiaryAccount: "1120161406205",
+    beneficiaryBank: "EQUITY BANK",
+    beneficiaryBankCode: "54",
+    beneficiaryCurrency: "KES",
+    beneficiaryName: "EMMANUEL SAMUEL KIANGAI MACHARIA",
+    conversionRate: 0,
+    currency: "KES",
+    documents: [],
+    fxReferenceID: "",
+    narration: "",
+    paymentReason: "test transfer",
+    paymentReference: "",
+    phoneNumber: "",
+    requestReference: "EC4B5EE924",
+    response: "",
+    sourceAccount: "1100194977404",
+    sourceAccountName: "JAMES EKAI NATUKOI",
+    sourceBank: "EQUITY BANK",
+    sourceBankCode: "54",
+    transactionStatus: 1,
+    transferCharge: 0,
+    transferType: 1,
+    date: "",
+  }));
+const pendingTransactions: TransactionListmodel[] = Array(32)
+  .fill(0)
+  .map((x, i) => ({
+    amount: 50,
+    approvalStatus: 1,
+    beneficiaryAccount: "1120161406205",
+    beneficiaryBank: "EQUITY BANK",
+    beneficiaryBankCode: "54",
+    beneficiaryCurrency: "KES",
+    beneficiaryName: "EMMANUEL SAMUEL KIANGAI MACHARIA",
+    conversionRate: 0,
+    currency: "KES",
+    documents: [],
+    fxReferenceID: "",
+    narration: "",
+    paymentReason: "test transfer",
+    paymentReference: "",
+    phoneNumber: "",
+    requestReference: "EC4B5EE924",
+    response: "",
+    sourceAccount: "1100194977404",
+    sourceAccountName: "JAMES EKAI NATUKOI",
+    sourceBank: "EQUITY BANK",
+    sourceBankCode: "54",
+    transactionStatus: 1,
+    transferCharge: 0,
+    transferType: 1,
+    date: "",
+  }));
+const standingOrderDetail: ConfirmationModel[] = [
+  {
+    content: [
+      {
+        key: "Start date",
+        value: "01 January 2021",
+      },
+      {
+        key: "End date",
+        value: "01 January 2021",
+      },
+      {
+        key: "Transaction Type",
+        value: "Send money to Equity Account",
+      },
+      {
+        key: "From",
+        value: "Loot<br>0810174008113 • Savings",
+      },
+      {
+        key: "Narration",
+        value: "Payment to IdeaHub vendor",
+      },
+    ],
+  },
+  {
+    title: "Beneficiary details",
+    content: [
+      {
+        key: "Beneficiary name",
+        value: "Isah Uche Olusegun",
+      },
+      {
+        key: "Account number",
+        value: "00113577162",
+      },
+      {
+        key: "IBAN number",
+        value: "2085252042",
+      },
+      {
+        key: "Beneficiary bank",
+        value: "HSBC Group",
+      },
+      {
+        key: "Bank code",
+        value: "06454",
+      },
+    ],
+  },
+];
+
+const standingOrders: StandingOrdersListmodel[] = Array(32)
+  .fill(0)
+  .map((x, i) => ({
+    title: "List label",
+    description: "MOBILE WALLET TRANSFER TO LESLIE ISAH",
+    amount: "000,000.00 KES",
+    date: "Thu, 23 2021 Aug - Fri 23 July, 2022",
+    status: i % 2 === 0 ? "Active" : "Inactive",
+  }));
+
+export const TransactionType: TransactionTypeModel[] = [
+  {
+    type: "Buy airtime",
+  },
+  {
+    type: "Pay bill",
+  },
+  {
+    type: "Buy goods & services",
+  },
+  {
+    type: "Send money to Equity account",
+  },
+  {
+    type: "Send money to other bank",
+  },
+  {
+    type: "Send to wallet",
+  },
+  {
+    type: "Withdraw cash",
+  },
+];
+
+const downloadTemplate: DownloadTemplateModal[] = [
+  {
+    id: 1,
+    type: "Template 1",
+  },
+  {
+    id: 2,
+    type: "Template 2",
+  },
+  {
+    id: 3,
+    type: "Template 3",
   }
 ];
+
+const templateFormat: DownloadTemplateModal[] = [
+  {
+    type: "Excel",
+  },
+  {
+    type: "Csv",
+  },
+  {
+    type: "Other",
+  }
+];
+
+const bulkTransferData = [
+  {
+    id: 1,
+    paymentDate: "4/3/22",
+    paymentType: "RTGS",
+    debitAccountName: "Loot",
+    debitAccountNumber: "Equity",
+    beneficiaryAccountNumber: "2337846578955",
+    beneficiaryMobile: "0810174008113",
+    beneficiaryName: "Mello",
+    beneficiaryBank: "Equity",
+    amount: "10,0000.00",
+    currency: "KES",
+    reference: "Ref_123",
+    reason: "Cash management transfer",
+  },
+  {
+    id: 2,
+    paymentDate: "4/3/22",
+    paymentType: "SWIFT",
+    debitAccountName: "Loot",
+    debitAccountNumber: "Equity",
+    beneficiaryAccountNumber: "2337846576666",
+    beneficiaryMobile: "0810174008113",
+    beneficiaryName: "Uche",
+    beneficiaryBank: "Equity",
+    amount: "10,0000.00",
+    currency: "KES",
+    reference: "Ref_123",
+    reason: "Cash management transfer",
+  },
+  {
+    id: 3,
+    paymentDate: "4/3/22",
+    paymentType: "EFT",
+    debitAccountName: "Loot",
+    debitAccountNumber: "Equity",
+    beneficiaryAccountNumber: "2337846573333",
+    beneficiaryMobile: "0810174008113",
+    beneficiaryName: "Jacques",
+    beneficiaryBank: "Equity",
+    amount: "10,0000.00",
+    currency: "KES",
+    reference: "Ref_123",
+    reason: "Cash management transfer",
+  },
+  {
+    id: 4,
+    paymentDate: "4/3/22",
+    paymentType: "PESALINK",
+    debitAccountName: "Loot",
+    debitAccountNumber: "Equity",
+    beneficiaryAccountNumber: "2337846577777",
+    beneficiaryMobile: "0810174008113",
+    beneficiaryName: "John",
+    beneficiaryBank: "Equity",
+    amount: "10,0000.00",
+    currency: "KES",
+    reference: "Ref_123",
+    reason: "Cash management transfer",
+  },
+  {
+    id: 5,
+    paymentDate: "4/3/22",
+    paymentType: "RTGS",
+    debitAccountName: "Loot",
+    debitAccountNumber: "Equity",
+    beneficiaryAccountNumber: "2337846574444",
+    beneficiaryMobile: "0810174008113",
+    beneficiaryName: "Victoria",
+    beneficiaryBank: "Equity",
+    amount: "10,0000.00",
+    currency: "KES",
+    reference: "Ref_123",
+    reason: "Cash management transfer",
+  },
+]
 
 export const mockData = {
   accounts,
@@ -684,8 +968,16 @@ export const mockData = {
   buyGoodsFavourites,
   accountNumber,
   users,
-  userList,
   companyList,
+  transactionDetail,
+  histororicalTransactions,
+  pendingTransactions,
   airtimeAmountRange,
-  mobileCodes
+  mobileCodes,
+  standingOrders,
+  standingOrderDetail,
+  TransactionType,
+  downloadTemplate,
+  templateFormat,
+  bulkTransferData
 };

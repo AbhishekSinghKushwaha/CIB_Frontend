@@ -1,0 +1,57 @@
+<div class="p-4">
+  <div class="row d-flex justify-content-between align-items-center">
+    <h3 class="strong-text col-md-11">Pay a loan</h3>
+    <div class="col-md-1">
+      <mat-icon class="col-md-4" (click)="close()">close</mat-icon>
+    </div>
+  </div>
+  <div class="row">
+    <h4 class="text-grey col-md-12">
+      Here are your details for Smartphone Loan below
+    </h4>
+  </div>
+  <div class="row">
+    <div class="col-6 py-4">
+      <div class="fw-light">From</div>
+      <div>Loot 0810174008113</div>
+      <div class="fw-light">Savings</div>
+    </div>
+    <div class="col-6 py-4">
+      <div class="fw-light">Loan Balance</div>
+      <div>300,731.00 KES</div>
+    </div>
+    <div class="col-6 py-4">
+      <div class="fw-light">Amount</div>
+      <div>120,000.00 KES</div>
+    </div>
+    <div class="col-6 py-4">
+      <div class="fw-light">Balance after payment</div>
+      <div>180,731.00 KES</div>
+    </div>
+    <div class="col-6 py-4">
+      <div class="fw-light">Charges</div>
+      <div>00.00 KES</div>
+    </div>
+  </div>
+  <div class="row">
+    <button
+      mat-raised-button
+      type="submit"
+      color="primary"
+      class="px-5 col-3"
+      style="margin-right: 10px"
+      (click)="pay()"
+    >
+      Pay
+    </button>
+    <button
+      mat-raised-button
+      type="submit"
+      color="secundary"
+      class="px-5 col-3"
+      (click)="close()"
+    >
+      Cancel
+    </button>
+  </div>
+</div>

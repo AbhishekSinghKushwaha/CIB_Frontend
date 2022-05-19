@@ -16,6 +16,9 @@ const routes: Routes = [{
   path: 'user-limit/edit',
   component: EditUserLimitComponent
 }, {
+  path: 'user-limit/edit/:username',
+  component: EditUserLimitComponent
+}, {
   path: 'company-limit/edit',
   component: EditCompanyLimitComponent
 }, {

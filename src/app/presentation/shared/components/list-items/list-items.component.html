@@ -1,0 +1,8 @@
+<div class="row gx-0 p-4" *ngFor="let item of data">
+  <h4 class="strong-text" *ngIf="item?.title">{{ item.title }}</h4>
+  <div *ngFor="let content of item.content" class="col-4 mb-3">
+    <span class="text-grey text-sm">{{ content.key }}</span>
+    <p class="mb-0 text-sm pb-0" [innerHTML]="content.value"></p>
+  </div>
+  <mat-divider></mat-divider>
+</div>

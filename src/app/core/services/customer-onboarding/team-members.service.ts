@@ -27,50 +27,66 @@ export class TeamMembersService extends StateService<UserState> {
     this.setState({ user });
   }
 
+  getUser() {
+    return this.state;
+  }
+
   /*********API ENDPOINTS****************/
 
   // Add User details
-  addTeamMember(payload: TeamMember, corporateId: string): Observable<any> {
-    return this.http.post(
-      environment.apiUrl +
+  addTeamMember(payload: TeamMember) {
+    return {
+      onboarding: (corporateId: string) => this.http.post(
+        environment.apiUrl +
         urlList.customerOnboarding.addCorporateUser +
         corporateId,
-      payload
-    );
+        payload
+      ),
+      userManagement: this.http.post(
+        ` ${environment.apiUrl}${urlList.userManagement.addUser}`,
+        payload
+      )
+    }
   }
 
   // Get list of users
   getTeamMembers(corporateId: string): Observable<any> {
     return this.http.get(
       environment.apiUrl +
-        urlList.customerOnboarding.getCorporateUsers +
-        corporateId
+      urlList.customerOnboarding.getCorporateUsers +
+      corporateId
     );
   }
 
   // Get A team member details
   getTeamMemberDetails(userId: string): Observable<any> {
     return this.http.get(
-      environment.apiUrl + urlList.customerOnboarding.getCorporateUser + userId
+      `${environment.apiUrl}${urlList.userManagement.getUser}${userId}`
     );
   }
 
   // Update Director Details
-  updateTeamMemberDetails(payload: any, userId: string): Observable<any> {
-    return this.http.post(
-      environment.apiUrl +
+  updateTeamMemberDetails(payload: any) {
+    return {
+      onboading: (userId: string) => this.http.post(
+        environment.apiUrl +
         urlList.customerOnboarding.updateCorporateUserDetails +
         userId,
-      payload
-    );
+        payload
+      ),
+      userManagement: (username: string) => this.http.put(
+        `${environment.apiUrl}${urlList.userManagement.addUser}/${username}`,
+        payload
+      ),
+    }
   }
 
   // Delete Corporate User
   deleteTeamMember(referenceId: string): Observable<any> {
     return this.http.post(
       environment.apiUrl +
-        urlList.customerOnboarding.removeCorporateUser +
-        referenceId,
+      urlList.customerOnboarding.removeCorporateUser +
+      referenceId,
       {}
     );
   }

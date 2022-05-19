@@ -1,7 +1,7 @@
 import { PresentationModule } from './presentation/presentation.module';
 import { CoreModule } from './core/core.module';
 import { DataModule } from './data/data.module';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,15 +12,15 @@ import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common
 import { UserRepository } from './core/repositories/user.repository';
 import { UserMockRepository } from './data/repository/user-mock-repository/user-mock.repository';
 import { ErrorIntercept } from './core/utils/interceptors/error.interceptor';
-import { PostLoginGuard } from './core/utils/guards/post-login/post-login.guard';
-import { LoginGuard } from './core/utils/guards/login/login.guard';
 import { AuthTokenInterceptor } from './core/utils/interceptors/auth-token.interceptor';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LanguageModalModule } from './presentation/shared/modals/language-modal/language-modal.module';
 import { httpTranslateLoader, LanguageTranslateModule } from './translate.module';
+import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 
 @NgModule({
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   declarations: [AppComponent],
   imports: [
     BrowserModule,
@@ -39,7 +39,15 @@ import { httpTranslateLoader, LanguageTranslateModule } from './translate.module
         deps: [HttpClient]
       }
     }),
-    LanguageTranslateModule.forRoot()
+    LanguageTranslateModule.forRoot(),
+    NgxLoadingModule.forRoot({
+      animationType: ngxLoadingAnimationTypes.none,  
+      backdropBackgroundColour: 'rgba(0,0,0,0.8)',
+      backdropBorderRadius: '4px',
+      primaryColour: '#ffffff',
+      secondaryColour: '#ffffff',
+      tertiaryColour: '#ffffff'
+    })
   ],
   exports: [AppRoutingModule],
   providers: [
@@ -50,8 +58,6 @@ import { httpTranslateLoader, LanguageTranslateModule } from './translate.module
       useClass: AuthTokenInterceptor,
       multi: true
     },
-    PostLoginGuard,
-    LoginGuard,
   ],
   bootstrap: [AppComponent],
 })

@@ -1,0 +1,25 @@
+.actions {
+  color: var(--equity);
+
+  mat-icon {
+    background-color: var(--cool-grey-40);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+
+    &:first-of-type {
+      margin-right: 10px;
+    }
+  }
+}
+
+:host {
+  > div {
+    height: 100vh;
+    overflow-y: auto;
+  }
+}

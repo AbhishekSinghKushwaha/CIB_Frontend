@@ -25,8 +25,8 @@ const routes: Routes = [
         loadChildren: (): Promise<any> => import('./transact/transact.module').then(m => m.TransactModule)
       },
       {
-        path: 'borrow',
-        loadChildren: (): Promise<any> => import('./borrow/borrow.module').then(m => m.BorrowModule)
+        path: 'loan',
+        loadChildren: (): Promise<any> => import('./loan/loan.module').then(m => m.LoanModule)
       },
       {
         path: 'account',
@@ -39,6 +39,14 @@ const routes: Routes = [
       {
         path: 'more',
         loadChildren: (): Promise<any> => import('./more/more.module').then(m => m.MoreModule)
+      },
+      {
+        path: 'activities',
+        loadChildren: (): Promise<any> => import('./activities/activities.module').then(m => m.ActivitiesModule)
+      },
+      {
+        path: 'service-request',
+        loadChildren: (): Promise<any> => import('./service-request/service-request.module').then(m => m.ServiceRequestModule)
       }
     ]
   }

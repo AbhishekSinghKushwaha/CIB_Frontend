@@ -34,3 +34,35 @@
     cursor: pointer;
   }
 }
+
+.user-info {
+  background: #f7f7f7;
+  /* width: 90%; */
+  margin: auto;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  .initial-container {
+    width: 48px;
+    height: 48px;
+    margin: auto;
+    padding: 8px;
+    background: #A32A29;
+    font-size: 20px;
+    line-height: 28px;
+    color: #fff;
+    border-radius: 50%;
+    
+  }
+
+  mat-icon {
+    color: #A32A29 !important;
+  }
+}
+
+.country-flag {
+      float: right;
+      width: 29px;
+      margin-top: 18%;
+}

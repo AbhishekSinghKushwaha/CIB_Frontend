@@ -1,6 +1,6 @@
-@import 'colours';
+@import "colours";
 
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
 
 html,
 body {
@@ -9,8 +9,13 @@ body {
   background-color: var(--pearl);
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Open Sans' !important;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Open Sans" !important;
 }
 
 .title {
@@ -59,6 +64,3 @@ h1, h2, h3, h4, h5, h6 {
   width: 32px !important;
   height: 32px !important;
 }
-
-
-

@@ -6,6 +6,7 @@ import {
 } from "@angular/material/dialog";
 import { MobileWallet } from "src/app/core/domain/transfer.models";
 import { MobileWalletsService } from "src/app/core/services/modal-services/mobile-wallets.service";
+import { StorageService } from "src/app/core/services/storage/storage.service";
 import { mockData } from "src/app/core/utils/constants/mockdata.constants";
 import { MobileMoneyNewRecipientComponent } from "../mobile-money-new-recipient/mobile-money-new-recipient.component";
 
@@ -26,17 +27,28 @@ export class MobileOperatorsModalComponent implements OnInit {
 
   visibility: boolean = true;
 
+  mobileWallets: MobileWallet[];
+
   constructor(
     private dialogRef: MatDialogRef<MobileOperatorsModalComponent>,
     private readonly dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: MobileWallet[],
-    private mobileWalletsService: MobileWalletsService
+    private mobileWalletsService: MobileWalletsService,
+    private storageService: StorageService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log("Transfer Type", this.transferType);
+    this.data = this.storageService.getData("wallets");
+  }
 
   close() {
-    this.dialogRef.close();
+    if (this.transferType) {
+      this.visibility = false;
+      this.openMobileMoneyNewRecipientModal();
+    } else {
+      this.dialogRef.close();
+    }
   }
 
   select(i: number) {
@@ -50,6 +62,8 @@ export class MobileOperatorsModalComponent implements OnInit {
       data: this.selected,
     });
 
-    modal.afterClosed().subscribe((x) => {});
+    modal.afterClosed().subscribe((x) => {
+      this.visibility = true;
+    });
   }
 }

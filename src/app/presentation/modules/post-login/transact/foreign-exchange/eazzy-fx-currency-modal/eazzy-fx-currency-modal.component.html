@@ -1,0 +1,36 @@
+<div class="own-equity-modal-screen px-2">
+  <button mat-icon-button matSuffix class="close-button" (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <p class="text-center fw-bold pt-2">Convert from</p>
+  <h3 class="strong-text">Please select a currency</h3>
+  <span class="text-grey"
+    >These are indicative foreign exchange rates. The amounts are KES per unit.
+  </span>
+  <div class="row" mat-dialog-content>
+    <ng-container
+      *ngFor="let rate of rates; let index = index; let last = last"
+    >
+      <div
+        class="p-4 my-2 d-flex justify-content-between align-items-center rounded currency-item"
+        (click)="selectCurrency(index)"
+      >
+        <div class="d-inline-flex justify-content-center align-items-center">
+          <img [src]="rate.image" />
+          <div class="d-inline-flex flex-column justify-content-center">
+            <span>{{ rate.fromCurrency }}</span>
+            <span class="text-grey">{{ rate.fromCurrency }}</span>
+            <span class="text-grey">{{ rate.buyRate }} KES</span>
+          </div>
+        </div>
+        <mat-icon
+          color="primary"
+          [svgIcon]="
+            selectedIndex === index ? 'check_round' : 'radio_button_off'
+          "
+        ></mat-icon>
+      </div>
+      <mat-divider *ngIf="!last"></mat-divider>
+    </ng-container>
+  </div>
+</div>

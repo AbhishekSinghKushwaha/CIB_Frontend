@@ -1,11 +1,11 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { TransferTypeModalService } from 'src/app/core/services/transaction-type-modal/transaction-type-modal.service';
+import { Component, OnInit, Inject } from "@angular/core";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { TransferTypeModalService } from "src/app/core/services/transaction-type-modal/transaction-type-modal.service";
 
 @Component({
-  selector: 'app-transaction-type-modal',
-  templateUrl: './transaction-type-modal.component.html',
-  styleUrls: ['./transaction-type-modal.component.scss'],
+  selector: "app-transaction-type-modal",
+  templateUrl: "./transaction-type-modal.component.html",
+  styleUrls: ["./transaction-type-modal.component.scss"],
 })
 export class TransactionTypeModalComponent implements OnInit {
   selected: any;

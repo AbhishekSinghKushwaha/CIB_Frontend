@@ -1,24 +1,26 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { Component, forwardRef, Input, OnDestroy, OnInit } from "@angular/core";
 import {
   ControlValueAccessor,
   FormControl,
   FormGroup,
   NG_VALUE_ACCESSOR,
-} from '@angular/forms';
-import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+} from "@angular/forms";
+import { Observable, of, Subject, Subscription } from "rxjs";
+import { debounceTime, distinctUntilChanged } from "rxjs/operators";
 import {
   CurrencyModel,
   FromAccount,
   TransferAmount,
-} from 'src/app/core/domain/transfer.models';
-import { CurrencySelectionService } from 'src/app/core/services/modal-services/currency-selection.service';
-import { TransferFromService } from 'src/app/core/services/modal-services/transfer-from.service';
-import { CurrencySelectionConstants } from 'src/app/core/utils/constants/currency-selection.constants';
+} from "src/app/core/domain/transfer.models";
+import { CurrencySelectionService } from "src/app/core/services/modal-services/currency-selection.service";
+import { TransferFromService } from "src/app/core/services/modal-services/transfer-from.service";
+import { StorageService } from "src/app/core/services/storage/storage.service";
+import { CurrencySelectionConstants } from "src/app/core/utils/constants/currency-selection.constants";
+import SharedUtils from "src/app/core/utils/shared.util";
 @Component({
-  selector: 'app-transfer-amount',
-  templateUrl: './transfer-amount.component.html',
-  styleUrls: ['./transfer-amount.component.scss'],
+  selector: "app-transfer-amount",
+  templateUrl: "./transfer-amount.component.html",
+  styleUrls: ["./transfer-amount.component.scss"],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -27,7 +29,9 @@ import { CurrencySelectionConstants } from 'src/app/core/utils/constants/currenc
     },
   ],
 })
-export class TransferAmountComponent implements ControlValueAccessor, OnInit {
+export class TransferAmountComponent
+  implements ControlValueAccessor, OnInit, OnDestroy
+{
   @Input() parentForm!: FormGroup;
 
   @Input()
@@ -42,11 +46,11 @@ export class TransferAmountComponent implements ControlValueAccessor, OnInit {
   @Input()
   placeholder!: string;
 
-  currency: CurrencyModel = { currencyCode: '', currencyDescription: '' };
+  currency: CurrencyModel = { currencyCode: "", currencyDescription: "" };
 
   public value: TransferAmount = {
     amount: 0,
-    currency: '',
+    currency: "",
     isWithinLimit: true,
   };
 
@@ -65,29 +69,46 @@ export class TransferAmountComponent implements ControlValueAccessor, OnInit {
   amount: number;
   amountUpdate = new Subject<number>();
 
+  conversionRate: any;
+
+  subscriptions: Subscription[] = [];
+
   constructor(
-    private readonly currencySelectionService: CurrencySelectionService,
-    private readonly currencySelectionConstants: CurrencySelectionConstants,
-    private readonly transferFromService: TransferFromService
-  ) { }
+    public readonly currencySelectionService: CurrencySelectionService,
+    private readonly transferFromService: TransferFromService,
+    private readonly storageService: StorageService
+  ) {}
 
   ngOnInit(): void {
     this.listenToDataEvents();
   }
 
+  ngOnDestroy(): void {
+    SharedUtils.unSubscribe(this.subscriptions);
+  }
+
   // Listen to events, pick the sendFrom data
-  listenToDataEvents() {
+  async listenToDataEvents() {
     // Get sendFrom Account
-    this.transferFromService.selectedTransferFromAccount.subscribe((x) => {
-      this.sendFromAccount = x;
-      this.currency.currencyCode = x.currency;
-    });
+    this.subscriptions.push(
+      this.transferFromService.transferFromAmount$.subscribe((x) => {
+        this.sendFromAccount = x;
+        this.currency.currencyCode = x.currency || "";
+        this.calcExchangeRate();
+      })
+    );
 
     // Get Selected Currency
-    this.currencySelectionService.selected.subscribe((x) => {
-      this.currency = x;
-      this.currencyFieldName && this.parentForm.controls[this.currencyFieldName].setValue(this.currency);
-    });
+    this.subscriptions.push(
+      this.currencySelectionService.selected.subscribe((x) => {
+        this.currency = x;
+        this.currencyFieldName &&
+          this.parentForm.controls[this.currencyFieldName].setValue(
+            this.currency
+          );
+        this.calcExchangeRate();
+      })
+    );
 
     this.onAmountEntered();
   }
@@ -119,7 +140,7 @@ export class TransferAmountComponent implements ControlValueAccessor, OnInit {
    */
   openCurrencyModal() {
     this.currencySelectionService.open(
-      this.currencySelectionConstants.CURRENCY_LISTINGS
+      this.storageService.getData("currencies")
     );
   }
 
@@ -132,6 +153,7 @@ export class TransferAmountComponent implements ControlValueAccessor, OnInit {
       .subscribe((res) => {
         this.value.amount = res;
         this.checkLimit();
+        this.calcExchangeRate();
       });
   }
 
@@ -140,7 +162,8 @@ export class TransferAmountComponent implements ControlValueAccessor, OnInit {
    * TODO:: Factor in limits as per transcations and daily limit calculations
    */
   checkLimit() {
-    if (this.value.amount > this.sendFromAccount.transactionLimit) {
+    const limit = this.sendFromAccount?.transactionLimit || 0;
+    if (this.value.amount > limit) {
       this.value.isWithinLimit = false;
       this.value.currency = this.currency.currencyCode;
       this.changed(this.value);
@@ -151,11 +174,26 @@ export class TransferAmountComponent implements ControlValueAccessor, OnInit {
     }
   }
 
-  // Get currency
-
-  // Do the currency conversions in case of a change of currency
-
-  // Get account that is being transferred from
+  calcExchangeRate() {
+    if (
+      this.sendFromAccount?.currency !== this.currency.currencyCode &&
+      this.value.amount > 0
+    ) {
+      const payload = {
+        sourceAccount: this.sendFromAccount?.accountNumber || "",
+        fromCurrency: this.sendFromAccount.currency || "",
+        toCurrency: this.currency.currencyCode || "",
+        amount: this.value.amount || 0,
+      };
+      this.currencySelectionService
+        .getConversionRate(payload)
+        .subscribe((res) => {
+          if (res.status) {
+            this.conversionRate = res.data;
+          }
+        });
+    }
+  }
 
   // Get limits of the account
 

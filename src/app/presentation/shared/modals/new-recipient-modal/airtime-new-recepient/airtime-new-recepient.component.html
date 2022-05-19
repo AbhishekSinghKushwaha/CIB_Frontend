@@ -7,22 +7,34 @@
     </div>
     <h3 class="strong-text pt-4 pb-3">Please select an operator</h3>
   
-    <mat-form-field appearance="standard" style="width: 100%" floatLabel="always" (click)="openCountries()">
+    <form class="d-flex flex-column" [formGroup]="airtimeForm">
+      <mat-form-field
+      appearance="standard"
+      style="width: 100%"
+      floatLabel="always"
+      (click)="openCountrySelectionModal()"
+      >
         <mat-label>Country</mat-label>
-        <input matInput type="text" class="strong-text" id="country" name="country" 
-        [value]="country?.countryName ? country?.countryName : ''"
-        [placeholder]="country?.countryName || '' || 'Kenya'"/>
+        <input
+          matInput
+          type="text"
+          class="strong-text"
+          [value]="value?.countryName || ''"
+          placeholder="Select country"
+          formControlName="country"
+        />
         <button type="button" mat-icon-button matSuffix>
-            <mat-icon svgIcon="caret_down"></mat-icon>
+          <mat-icon svgIcon="caret_down"></mat-icon>
         </button>
-    </mat-form-field>
+      </mat-form-field>
 
-    <app-mobile-operators
-        *ngFor="let account of data.mobileOperators" 
+        <app-mobile-operators
+        *ngFor="let account of telcos" 
         [data]="account"
-        [isChecked]="selected && selected.name === account.name">
-    </app-mobile-operators>
-
+        [isChecked]="selected && selected.telco === account.telco"
+        >
+        </app-mobile-operators>
+    </form> 
     <!-- <app-mobile-operators-modal
     [transferType]="data"
   ></app-mobile-operators-modal> -->

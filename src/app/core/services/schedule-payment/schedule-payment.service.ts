@@ -1,48 +1,56 @@
-import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import * as moment from 'moment';
-import { Subject } from 'rxjs';
-import { PaymentFrequencyModalComponent } from 'src/app/presentation/shared/modals/payment-frequency-modal/payment-frequency-modal.component';
-import { PaymentReminderModalComponent } from 'src/app/presentation/shared/modals/payment-reminder-modal/payment-reminder-modal.component';
-import { FrequencySelectionComponent } from 'src/app/presentation/shared/modals/schedule-payment/frequency-selection/frequency-selection.component';
-import { ReminderSelectionComponent } from 'src/app/presentation/shared/modals/schedule-payment/reminder-selection/reminder-selection.component';
-import { SchedulePaymentComponent } from '../../../presentation/shared/modals/schedule-payment/schedule-payment.component';
+import { Injectable } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
+import * as moment from "moment";
+import { Observable, Subject } from "rxjs";
+import { PaymentFrequencyModalComponent } from "src/app/presentation/shared/modals/payment-frequency-modal/payment-frequency-modal.component";
+import { PaymentReminderModalComponent } from "src/app/presentation/shared/modals/payment-reminder-modal/payment-reminder-modal.component";
+import { FrequencySelectionComponent } from "src/app/presentation/shared/modals/schedule-payment/frequency-selection/frequency-selection.component";
+import { ReminderSelectionComponent } from "src/app/presentation/shared/modals/schedule-payment/reminder-selection/reminder-selection.component";
+import { SchedulePaymentComponent } from "../../../presentation/shared/modals/schedule-payment/schedule-payment.component";
 import {
   FrequencySelectionModel,
   ReminderSelectionModel,
   ScheduledPaymentModel,
-} from '../../domain/scheduled-payment.model';
-import { SchedulePaymentConstants } from '../../utils/constants/schedule-payment.constants';
+} from "../../domain/scheduled-payment.model";
+import { SchedulePaymentConstants } from "../../utils/constants/schedule-payment.constants";
+import { TransactionTypeConstants } from "../../utils/constants/transaction-type.constants";
+import { StateService } from "../state/state.service";
 
+interface SchedulePaymentState {
+  scheduledPayment: ScheduledPaymentModel;
+  reminder: ReminderSelectionModel;
+  frequency: FrequencySelectionModel;
+}
+
+const initialSchedulePaymentState: SchedulePaymentState = {
+  scheduledPayment: {
+    frequency: {},
+    reminderDay: {},
+    startDate: new Date(),
+    endDate: new Date(),
+  },
+  reminder: TransactionTypeConstants.ReminderListings[0],
+  frequency: TransactionTypeConstants.FrequencyListings[0],
+};
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
-export class SchedulePaymentService {
-  private schedulePaymentData: ScheduledPaymentModel;
-  reminderData: ReminderSelectionModel;
-  frequencyData: FrequencySelectionModel;
+export class SchedulePaymentService extends StateService<SchedulePaymentState> {
+  scheduledPayment$: Observable<ScheduledPaymentModel> = this.select(
+    (state) => state.scheduledPayment
+  );
+
+  frequency$: Observable<FrequencySelectionModel> = this.select(
+    (state) => state.frequency
+  );
+
+  reminder$: Observable<ReminderSelectionModel> = this.select(
+    (state) => state.reminder
+  );
   dialogRef: any;
-  selectedSchedulePayment = new Subject<ScheduledPaymentModel>();
-  selectedFrequency = new Subject<FrequencySelectionModel>();
-  selectedReminder = new Subject<ReminderSelectionModel>();
 
-  constructor(
-    private readonly dialog: MatDialog,
-    private schedulePaymentConstants: SchedulePaymentConstants
-  ) {
-    this.setDefaultData();
-  }
-
-  // Set default data
-  setDefaultData() {
-    this.frequencyData = this.schedulePaymentConstants.FREQUENCY_LISTINGS[0];
-    this.reminderData = this.schedulePaymentConstants.REMINDER_LISTINGS[0];
-    this.schedulePaymentData = {
-      reminderDay: this.reminderData,
-      frequency: this.frequencyData,
-      startDate: new Date(),
-      endDate: new Date(),
-    };
+  constructor(private readonly dialog: MatDialog) {
+    super(initialSchedulePaymentState);
   }
 
   // Open the schedule payment modal
@@ -78,29 +86,16 @@ export class SchedulePaymentService {
     );
   }
 
-  selectFrequency(frequency: FrequencySelectionModel): void {
-    this.selectedFrequency.next(frequency);
+  setFrequency(frequency: FrequencySelectionModel): void {
+    this.setState({ frequency });
   }
 
-  selectReminder(reminder: ReminderSelectionModel): void {
-    this.selectedReminder.next(reminder);
+  setReminder(reminder: ReminderSelectionModel): void {
+    this.setState({ reminder });
   }
 
-  selectScheduledPayment(input: ScheduledPaymentModel): void {
-    this.schedulePaymentData = input;
-    this.selectedSchedulePayment.next(this.schedulePaymentData);
-  }
-
-  get defaultSchedulePayment(): ScheduledPaymentModel {
-    return this.schedulePaymentData;
-  }
-
-  get defaultReminder(): ReminderSelectionModel {
-    return this.reminderData;
-  }
-
-  get defaultFrequency(): FrequencySelectionModel {
-    return this.frequencyData;
+  setScheduledPayment(scheduledPayment: ScheduledPaymentModel): void {
+    this.setState({ scheduledPayment });
   }
 
   close() {

@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
 import { Router } from "@angular/router";
+import { ConfirmationModalService } from "src/app/core/services/modal-services/confirmation-modal.service";
 import { InterbankService } from "src/app/core/services/transfers/interbank/interbank.service";
 import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
 import { accountLimitValidator } from "src/app/core/utils/validators/limits.validators";
@@ -22,7 +23,8 @@ export class OtherBanksComponent implements OnInit {
     private readonly fb: FormBuilder,
     private interBankTransferService: InterbankService,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private confirmationModalService: ConfirmationModalService
   ) {}
 
   ngOnInit(): void {
@@ -67,33 +69,73 @@ export class OtherBanksComponent implements OnInit {
 
   // Confirm Payment and return the confirmation boolean before initiating payment.
   confirmPayment(transferFee: string) {
-    if (this.interBankTransferForm.valid) {
-      const paymentData = {
-        from: this.getForm.sendFrom.value,
-        to: this.getForm.sendTo.value,
-        amount: this.getForm.amount.value,
-        transactionType: Number(this.getForm.transactionType.value),
-        paymentReason: this.getForm.reason.value,
-        fxReferenceId: this.getForm.fxReferenceId.value,
-        schedulePayment: this.getForm.schedulePayment.value,
-        transferFee,
-      };
-      const dialogRef = this.dialog.open(ConfirmPaymentComponent, {
-        data: paymentData,
-        disableClose: true,
-      });
+    const data = {
+      title: "Payment Confirmation",
+      subtitle: "To continue, please confirm your transaction",
+      submitButtonText: "Confirm",
+      content: [
+        {
+          key: "Transaction",
+          value:
+            this.getForm.transactionType.value === this.transferType.EFT
+              ? "Send money to other banks via EFT"
+              : "Send money to other banks via RTGS",
+        },
+        {
+          key: "Amount",
+          value: `${this.getForm.amount.value.amount} ${this.getForm.amount.value.currency}`,
+        },
+        {
+          key: "Charges",
+          value: `${transferFee} ${this.getForm.amount.value.currency}`,
+        },
+        {
+          key: "From",
+          value: `${this.getForm.sendFrom.value.accountName}<br>
+            ${this.getForm.sendFrom.value.accountNumber}
+          `,
+        },
+        {
+          key: "To",
+          value: `${this.getForm.sendTo.value.accountName} <br>
+            ${this.getForm.sendTo.value.accountNumber} <br>
+            ${this.getForm.sendTo.value.bank?.bankName}
+          `,
+        },
+        {
+          key: "Frequency",
+          value: `${this.getForm.schedulePayment.value.frequency.frequency}<br>
+            ${this.getForm.schedulePayment.value.reminderDay.reminder}
+          `,
+        },
+        {
+          key: "Payment Date",
+          value: `${this.getForm.schedulePayment.value.startDate}`,
+        },
 
-      dialogRef.afterClosed().subscribe((res) => {
-        if (res.confirmed) {
-          this.sendMoney();
+        {
+          key: "FX Reference ID",
+          value: `${this.getForm.fxReferenceId.value}`,
+        },
+        {
+          key: "Payment Reason",
+          value: `${this.getForm.reason.value}`,
+        },
+      ],
+    };
+
+    this.confirmationModalService
+      .open(data)
+      .afterClosed()
+      .subscribe((confirmed: boolean) => {
+        if (data) {
+          this.savePayloadForOtpVerification();
         }
       });
-    } else {
-    }
   }
 
   // Initiate fund transfer to own equity account
-  sendMoney() {
+  savePayloadForOtpVerification() {
     const payload = {
       amount: this.getForm.amount.value.amount,
       beneficiaryAccount: this.getForm.sendTo.value.accountNumber,
@@ -114,16 +156,13 @@ export class OtherBanksComponent implements OnInit {
       transferType: Number(this.getForm.transactionType.value), // RTGS or EFT
     };
     if (this.interBankTransferForm.valid) {
-      this.interBankTransferService
-        .sendToOtherBanks(payload)
-        .subscribe((res) => {
-          if (res.status) {
-            this.router.navigate(["/transact/transfer-submitted"]);
-          } else {
-            alert(res.message);
-            // TODO:: Notify Error
-          }
-        });
+      this.interBankTransferService.setTransferPayload(payload);
+      this.interBankTransferService.setFavouritesPayload(
+        this.interBankTransferForm.getRawValue()
+      );
+      this.router.navigate([
+        `/transact/otp-verification/${this.getForm.transactionType.value}`,
+      ]);
     }
   }
 }

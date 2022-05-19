@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { otpVerificationListModel } from 'src/app/core/domain/otp-verification-list.model';
 import { OtpVerificationListService } from 'src/app/core/services/otp-verification-list/otp-verification-list.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { BuyGoodsService } from 'src/app/core/services/transfers/buy-goods/buy-goods.service';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 @Component({
   selector: 'app-otp-verification',
@@ -13,11 +15,21 @@ export class OtpVerificationComponent implements OnInit {
 
   otpVerificationType: otpVerificationListModel;
   otpVerificationForm: FormGroup;
+  payload: any;
+  otpResent = false;
+  transactionType: any;
+  email= "email";
+  sms= "sms"; 
 
   constructor(
     private readonly otpVerificationListService: OtpVerificationListService,
     private readonly router: Router,
-  ) { }
+    private readonly buyGoodsService: BuyGoodsService,
+    private readonly authService: AuthService,
+    public route: ActivatedRoute
+  ) { 
+    this.transactionType = route.snapshot.params['type'];
+  }
 
   ngOnInit(): void {
     this.initForm();
@@ -38,23 +50,31 @@ export class OtpVerificationComponent implements OnInit {
   }
 
   contactDetails() {
-    this.router.navigate(['/transact/buy-goods/contact-details']);
+    this.router.navigate(['/transact/contact-details']);
   }
 
   submit() {
     if(this.otpVerificationType.verificationType === 'By sms') {
-    this.router.navigate(['/transact/buy-goods/otp-verification-code',
-    {
-      'data': 'By sms',
-    }
-    ]);
+      this.authService.resendOTP().subscribe(
+        (data) => {
+          this.otpResent = true;
+          this.router.navigate([`/transact/otp-verification-code/${this.sms}/${this.transactionType}`]);
+        },
+        (error) => {
+          console.log(error);
+        }
+      ); 
     }
     else if(this.otpVerificationType.verificationType === 'By email') {
-      this.router.navigate(['/transact/buy-goods/otp-verification-code',
-    {
-      'data': 'By email',
-    }
-    ]);
+      this.authService.resendOTP().subscribe(
+        (data) => {
+          this.otpResent = true;
+          this.router.navigate([`/transact/otp-verification-code/${this.email}/${this.transactionType}`]);
+        },
+        (error) => {
+          console.log(error);
+        }
+      ); 
     }
   }
 

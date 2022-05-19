@@ -6,52 +6,65 @@
     </div>
   </div>
 </div>
-<div class="card border-0 login-screen">
-  <div class="card-body ps-4">
-    <h3 class="strong-text">{{ "login_hello" | translate }}</h3>
-    <div class="row text-muted">
-      <p>
-        Sign in to continue. Remember, your password is yours, do not share it
-        with anyone.
-      </p>
-      <p>
-        If this is your first time here, you can register using your Equitel or
-        Eazzy Banking details.
-      </p>
-    </div>
-    <div class="row text-muted">
-      <form
-        [formGroup]="loginPasswordForm"
-        (ngSubmit)="submit()"
-        autocomplete="off"
+<div
+  class="card border-0 login-screen"
+  [ngClass]="{ 'mt-5': !stage, 'pt-5': !stage, 'mt-3': stage }"
+>
+  <div class="row ps-5">
+    <div class="col-md-12">
+      <button
+        mat-button
+        aria-label="Back"
+        class="back-icon"
+        (click)="stage && resetStage()"
       >
+        <div>
+          <h3 class="strong-text">
+            <mat-icon
+              svgIcon="chevron-left"
+              class="chevron"
+              *ngIf="stage"
+            ></mat-icon>
+            <span> {{ title }}</span>
+          </h3>
+        </div>
+      </button>
+    </div>
+  </div>
+  <div class="card-body ps-5" [ngSwitch]="stage">
+    <div class="row pt-2 pb-5" *ngSwitchDefault>
+      <div class="row text-muted">
+        <p>
+          Sign in to continue. Remember, your password is yours, do not share it
+          with anyone.
+        </p>
+      </div>
+      <form [formGroup]="loginPasswordForm" autocomplete="off">
         <div class="row mb-3">
-          <mat-form-field class="col-md-12">
-            <mat-label for="username"> Email address, mobile number </mat-label>
+          <mat-form-field class="col-md-12" floatLabel="always">
+            <mat-label for="username"> Username </mat-label>
             <input
               matInput
               type="text"
               id="username"
               formControlName="username"
-              placeholder="Enter your email address or mobile number"
+              placeholder="Enter your username"
             />
             <mat-error *ngIf="f.username.errors" class="validationError">
-              <div *ngIf="f.username.errors.required">
-                Email or mobile is required
-              </div>
+              <div *ngIf="f.username.errors.required">Username is required</div>
             </mat-error>
           </mat-form-field>
         </div>
         <div class="row mb-3">
-          <mat-form-field class="col-md-12">
-            <mat-label for="loginPasswordForm"> Password or PIN </mat-label>
+          <mat-form-field class="col-md-12" floatLabel="always">
+            <mat-label for="loginPasswordForm"> Password </mat-label>
             <input
               matInput
               [type]="hidePassword ? 'password' : 'text'"
               id="password"
               formControlName="password"
               autocomplete="new-password"
-              placeholder="Enter your password or pin"
+              placeholder="Enter your password"
             />
             <button
               mat-icon-button
@@ -76,12 +89,12 @@
             <button
               mat-button
               color="primary"
-              class="ps-0"
+              class="ps-0 strong-text"
               type="button"
               [disabled]="submitted"
-              routerLink="/auth/login/forgot-password"
+              (click)="forgotDetails()"
             >
-              Forgot your password?
+              Forgot your login details?
             </button>
           </div>
         </div>
@@ -90,8 +103,9 @@
             <button
               mat-flat-button
               color="primary"
-              type="submit"
+              type="button"
               class="col-12"
+              (click)="submit()"
               [disabled]="submitted"
             >
               {{ "button_signin" | translate }}
@@ -112,5 +126,29 @@
         </div>
       </form>
     </div>
+
+    <app-reset-password
+      [userIdentifier]="f.username.value"
+      [submitted]="passwordChangeSubmitStatus"
+      (onSubmit)="onPasswordChangeSubmit($event)"
+      *ngSwitchCase="'change-password'"
+    ></app-reset-password>
+
+    <app-security-challenge
+      (onSubmit)="securityChallengeSubmit($event)"
+      (error)="onSecurityVerificationError($event)"
+      [title]="{
+        main: 'Set up your security questions',
+        description: 'Make the answers easy to remember'
+      }"
+      *ngSwitchCase="'security-challenge'"
+    ></app-security-challenge>
+
+    <app-sms-verification
+      (onOTPVerified)="smsVerificationSubmit($event)"
+      [otpError]="otpError"
+      [message]="initialResponse"
+      *ngSwitchCase="'sms-verification'"
+    ></app-sms-verification>
   </div>
 </div>

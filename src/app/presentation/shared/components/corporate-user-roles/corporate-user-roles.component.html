@@ -1,0 +1,83 @@
+<div class="row gx-0">
+  <div class="col-md-12">
+    <div class="row gx-0 mb-4 justify-content-md-center">
+      {{ selectedMainRole }}
+      <mat-radio-group [(ngModel)]="selectedMainRole">
+        <div class="col-md-11">
+          <div class="mb-3">
+            <button
+              mat-icon-button
+              aria-label="Back"
+              class="back-icon"
+              [routerLink]="backLink"
+            >
+              <div class="strong-text">
+                <mat-icon svgIcon="caret_left"></mat-icon>
+                <span>Roles</span>
+              </div>
+            </button>
+          </div>
+          <div class="row mt-3" *ngFor="let role of roles; let i = index">
+            <div class="d-flex justify-content-between">
+              <h3>
+                <mat-radio-button
+                  [value]="role?.roleName"
+                  (change)="mainRoleChange($event)"
+                  >{{ role?.roleName }}</mat-radio-button
+                >
+              </h3>
+            </div>
+            <div
+              class="row product-list-item col-md-6 mt-3"
+              *ngFor="let permission of role?.permissions; let j = index"
+            >
+              <div class="col-1 my-auto">
+                <div class="icon-container">
+                  <mat-icon [svgIcon]="'withdraw'" color="primary"></mat-icon>
+                </div>
+              </div>
+              <div class="col-10 offset-1 product-list-item-label">
+                <div
+                  class="row h-100 justify-content-around align-items-center"
+                >
+                  <div class="col-10 float-left text-truncate">
+                    <h4>{{ permission?.description }}</h4>
+                    <!-- <p class="text-grey text-sm">0810174008113 • Savings</p> -->
+                  </div>
+                  <div class="col-2 float-right toggle-container">
+                    <mat-icon
+                      (click)="
+                        role?.roleName === selectedMainRole &&
+                          toggle(role?.id, permission?.id)
+                      "
+                      [svgIcon]="
+                        isRoleActive(
+                          role?.id,
+                          permission?.id,
+                          role?.roleName === selectedMainRole
+                        )
+                          ? 'toggle_button_on'
+                          : 'toggle_button_off'
+                      "
+                    ></mat-icon>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <button
+              mat-raised-button
+              color="primary"
+              class="mt-5 col-md-3"
+              (click)="saveRoles()"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </mat-radio-group>
+    </div>
+  </div>
+</div>

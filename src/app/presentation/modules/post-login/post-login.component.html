@@ -12,9 +12,6 @@
     ></app-sidebar-menu>
   </mat-sidenav>
   <mat-sidenav-content>
-    <div *ngIf="loading" class="loader-container">
-      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-    </div>
     <mat-toolbar
       *ngIf="mobileQuery.matches"
       class="toolbar justify-content-between"

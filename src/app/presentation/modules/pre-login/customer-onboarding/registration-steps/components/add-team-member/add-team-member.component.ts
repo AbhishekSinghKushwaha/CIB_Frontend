@@ -171,10 +171,10 @@ export class AddTeamMemberComponent implements OnInit {
 
     this.teamMembersService
       .addTeamMember(
-        this.teamMemberDetailsForm.getRawValue(),
-        this.storageService.getData("corporateId")
+        this.teamMemberDetailsForm.getRawValue()
       )
-      .subscribe((res) => {
+      .onboarding(this.storageService.getData("corporateId"))
+      .subscribe((res: any) => {
         if (res.isSuccessful) {
           this.storageService.removeData("selected-roles");
           this.teamMembersService.setUser({});
@@ -203,10 +203,10 @@ export class AddTeamMemberComponent implements OnInit {
     }
     this.teamMembersService
       .updateTeamMemberDetails(
-        this.teamMemberDetailsForm.getRawValue(),
-        this.memberId
+        this.teamMemberDetailsForm.getRawValue()
       )
-      .subscribe((res) => {
+      .onboading(this.memberId)
+      .subscribe((res: any) => {
         if (res.isSuccessful) {
           this.storageService.removeData("selected-roles");
           this.router.navigate([

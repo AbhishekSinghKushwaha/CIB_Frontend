@@ -2,16 +2,16 @@ export interface ScheduledPaymentModel {
   frequency: FrequencySelectionModel;
   startDate: Date;
   endDate: Date;
-  reminderDay?: ReminderSelectionModel;
+  reminderDay: ReminderSelectionModel;
 }
 export interface FrequencySelectionModel {
-  frequency: string;
+  frequency?: string;
   description?: string;
-  value: number;
+  value?: number;
 }
 
 export interface ReminderSelectionModel {
-  reminder: string;
+  reminder?: string;
   description?: string;
-  value: number;
+  value?: number;
 }

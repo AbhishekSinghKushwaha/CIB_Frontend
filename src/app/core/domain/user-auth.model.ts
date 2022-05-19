@@ -5,5 +5,7 @@ export interface TokenResponseModel {
   refresh_token: string;
   firstTimeLogin: boolean;
   name: string;
-  tokenExpirationDate: Date;
+  tokenExpirationDate: number;
+  username: string;
+  message: string;
 }

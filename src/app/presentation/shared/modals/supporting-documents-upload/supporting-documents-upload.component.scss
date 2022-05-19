@@ -1,17 +1,16 @@
 .own-equity-modal-screen {
-    width: 675px;
-    margin: 0;
-    padding: 0;
-    max-height: 543px;
-  }
+  width: 700px;
+  margin: 0;
+  padding: 0;
+}
 
-.upload{
-    background: #F7F7F7;
-    border: 1.5px dashed #929497;
-    box-sizing: border-box;
-    border-radius: 8px;
-    width: 335px;
-    height: 286px;
+.upload {
+  background: #f7f7f7;
+  border: 1.5px dashed #929497;
+  box-sizing: border-box;
+  border-radius: 8px;
+  width: 335px;
+  height: 286px;
 }
 
 .icon {
@@ -34,24 +33,24 @@
   align-items: center;
 }
 
-.flex-align{
+.flex-align {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.icon-alignment{
+.icon-alignment {
   margin-right: auto;
   margin-left: auto;
   margin-top: 80px;
 }
 
-.text-center{
+.text-center {
   text-align: center;
 }
 
 .browse {
-  color: #A32A29 !important;
+  color: #a32a29 !important;
 }
 
 .mat-progress-bar {
@@ -60,14 +59,14 @@
 }
 
 .progress-container {
-  background-color: #F7F7F7;;
+  background-color: #f7f7f7;
 }
 
-.progress-pre{
+.progress-pre {
   display: flex;
   justify-content: flex-end;
 }
 
-.align-upload{
-  padding-left: 15px !important;
+::ng-deep .my-pdf {
+  overflow: hidden !important;
 }
