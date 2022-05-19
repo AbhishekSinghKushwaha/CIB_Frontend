@@ -8,7 +8,7 @@
       <div class="col-9 product-list-item-label">
         <div class="row h-100 justify-content-around align-items-center">
           <div class="col-10 float-left text-truncate">
-            <h4>{{ this.username }}</h4>
+            <h4>{{ username }}</h4>
           </div>
         </div>
       </div>
@@ -18,13 +18,13 @@
 <div class="container dashboard-page--content pb-5" id="dashboard-page">
   <div class="row text-center dashboard-page--content__header">
     <h1 class="dashboard-page--content--header__title">
-      Hello {{ this.username }}
+      Hello {{ userData?.firstName }}
     </h1>
     <p class="dashboard-page--content--header__subtitle">
       What do you want to do this morning
     </p>
   </div>
-  <div class="row text-center dashboard-page--content--favorites mb-5">
+  <!-- <div class="row text-center dashboard-page--content--favorites mb-5">
     <div class="col-md-2">
       <mat-icon
         class="dashboard-page--content--favorites__icon"
@@ -79,12 +79,15 @@
       <p class="dashboard-page--content--favorites__title">Send To</p>
       <p class="dashboard-page--content--favorites__subtitle">Equity</p>
     </div>
-  </div>
+  </div> -->
 
   <div class="row dashboard-page--content--accounts mb-5">
     <h2 class="dashboard-page--content--section-title mb-4">My Accounts</h2>
-    <div class="row dashboard-page--content--accounts__slider">
-      <div class="col-md-4">
+    <div
+      class="row dashboard-page--content--accounts__slider"
+      *ngIf="userAccounts.length"
+    >
+      <div class="col-md-4" *ngFor="let account of userAccounts">
         <mat-card class="dashboard-page--content--accounts__card">
           <mat-icon
             class="dashboard-page--content--accounts__card__icon"
@@ -92,31 +95,14 @@
             color="primary"
           ></mat-icon>
           <h3 class="dashboard-page--content--accounts__card__title">
-            JAMES EKAI NATUKOI
+            {{ account?.accountName }}
           </h3>
           <p class="dashboard-page--content--accounts__card_amount">
-            5,450,159.87 KES
+            {{ account?.balance }} {{ account?.currency }}
           </p>
           <p class="dashboard-page--content--accounts__card__footer">
-            1100194977404 • Savings
-          </p>
-        </mat-card>
-      </div>
-      <div class="col-md-4">
-        <mat-card class="dashboard-page--content--accounts__card">
-          <mat-icon
-            class="dashboard-page--content--accounts__card__icon"
-            [svgIcon]="'dashboard_more'"
-            color="primary"
-          ></mat-icon>
-          <h3 class="dashboard-page--content--accounts__card__title">
-            EMMANUEL SAMUEL KIANGAI MACHARIA
-          </h3>
-          <p class="dashboard-page--content--accounts__card_amount">
-            4,061,773.25 KES
-          </p>
-          <p class="dashboard-page--content--accounts__card__footer">
-            1120161406205 • Savings
+            {{ account?.accountNumber }} <span *ngIf="account?.type">•</span>
+            {{ account?.type }}
           </p>
         </mat-card>
       </div>
@@ -215,8 +201,11 @@
 
   <div class="row dashboard-page--content--loans">
     <h2 class="dashboard-page--content--section-title mb-4">My Loans</h2>
-    <div class="row dashboard-page--content--loans__slider">
-      <div class="col-md-4">
+    <div
+      class="row dashboard-page--content--loans__slider"
+      *ngIf="loanAccounts.length"
+    >
+      <div class="col-md-4" *ngFor="let loan of loanAccounts">
         <mat-card class="dashboard-page--content--loans__card">
           <mat-icon
             class="dashboard-page--content--loans__card__icon"
@@ -224,10 +213,10 @@
             color="primary"
           ></mat-icon>
           <h3 class="dashboard-page--content--loans__card__title">
-            Salary Advance Loan
+            {{ loan?.accountName }}
           </h3>
           <p class="dashboard-page--content--loans__card_amount">
-            33,500.00 KES
+            {{ loan?.balance }} {{ loan?.currency }}
           </p>
 
           <div class="dashboard-page--content--loans__card__footer">
@@ -242,45 +231,16 @@
 
             <p>
               Next Payment
-              <span class="text-primary mt-3">15 December 2021 </span>
-            </p>
-          </div>
-        </mat-card>
-      </div>
-      <div class="col-md-4">
-        <mat-card class="dashboard-page--content--loans__card">
-          <mat-icon
-            class="dashboard-page--content--loans__card__icon"
-            [svgIcon]="'dashboard_more'"
-            color="primary"
-          ></mat-icon>
-          <h3 class="dashboard-page--content--loans__card__title">
-            Salary Advance Loan
-          </h3>
-          <p class="dashboard-page--content--loans__card_amount">
-            33,500.00 KES
-          </p>
-
-          <div class="dashboard-page--content--loans__card__footer">
-            <div class="dashboard-page--content--loans__card__footer__progress">
-              <p class="m-0 text-primary">70%</p>
-              <mat-progress-bar
-                color="#A32A29"
-                [value]="70"
-                class="mb-1"
-              ></mat-progress-bar>
-            </div>
-
-            <p>
-              Next Payment
-              <span class="text-primary mt-3">15 December 2021 </span>
+              <span class="text-primary mt-3"
+                >{{ loan?.nextInstallmentDate | date: "d MMM y" }}
+              </span>
             </p>
           </div>
         </mat-card>
       </div>
     </div>
     <div class="row dashboard-page--content--loans__action mt-5">
-      <div class="col-md-4 mt-4">
+      <div class="col-md-4 mt-4" routerLink="/loan">
         <div class="row dashboard-page--content--loans__action__card">
           <div class="col-md-3">
             <button

@@ -18,6 +18,7 @@ import { DataLookupService } from "src/app/core/services/data-lookup/data-lookup
 import { SharedDataService } from "src/app/core/services/shared-data/shared-data.service";
 import { SpinnerService } from "src/app/core/services/spinner/spinner.service";
 import { StorageService } from "src/app/core/services/storage/storage.service";
+import { LoanService } from "src/app/core/services/loan/loan.service";
 
 @Component({
   selector: "app-post-login",
@@ -44,7 +45,8 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     private sharedDataService: SharedDataService,
     private beneficiaryService: BeneficiaryManagementService,
     private billPaymentService: BillServiceService,
-    private authService: AuthService
+    private authService: AuthService,
+    private loanService: LoanService
   ) {
     this.getMobileQuery();
     this.mobileQueryListener = (): void => changeDetectorRef.detectChanges();
@@ -145,6 +147,10 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  getLoanAccounts(corporateId: string) {
+    this.loanService.getLoanAccounts(corporateId)
+  }
+
   getBillers() {
     const currentUser = this.storageService.getData("currentUserData");
     this.billPaymentService
@@ -160,12 +166,13 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     const userData = this.storageService.getData("currentUserData");
     const corporateId = userData && userData.corporate.id;
     this.authService.getGroupedCorporate(corporateId).subscribe((res: any) => {
-      if (res.isSuccessful) {
+      if (res.status) {
         this.storageService.setData("grouped_account", res.data);
       } else {
         this.storageService.setData("grouped_account", []);
       }
     });
+    this.getLoanAccounts(corporateId);
   }
   getCurrencies() {
     this.dataLookupService.getCurrencies().subscribe((res) => {
