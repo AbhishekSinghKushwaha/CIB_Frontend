@@ -1,3 +1,5 @@
+import { LoanService } from './../../../../../core/services/loan/loan.service';
+import { SharedDataService } from './../../../../../core/services/shared-data/shared-data.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
@@ -12,9 +14,15 @@ export class DashboardComponent implements OnInit {
   username: string;
   initials: string;
   userData: any;
+  userAccounts: any = [];
+  loanAccounts: any = []
 
   constructor(
-    private storageService: StorageService, private router: Router) { }
+    private storageService: StorageService,
+    private router: Router,
+    private sharedDataService: SharedDataService,
+    private loanService: LoanService
+  ) { }
 
   ngOnInit(): void {
 
@@ -22,6 +30,7 @@ export class DashboardComponent implements OnInit {
     this.fullUsername = this.userData.corporateName ? this.userData.corporateName : this.userData.firstName + ' ' + this.userData.lastName;
     this.username = this.userData.userName ? this.userData.userName : this.userData.emailAddress;
     this.initials = this.generateInitials(this.fullUsername);
+    this.getUserAccounts();
   }
 
   generateInitials(name: string): string {
@@ -42,6 +51,16 @@ export class DashboardComponent implements OnInit {
     }
 
     return initials;
+  }
+
+  getUserAccounts() {
+    this.sharedDataService.userAccounts$.subscribe((res) => {
+      this.userAccounts = res;
+    });
+
+    this.loanService.loanAccounts$.subscribe((res) => {
+      this.loanAccounts = res;
+    });
   }
 
   goToProfileDetail() {
