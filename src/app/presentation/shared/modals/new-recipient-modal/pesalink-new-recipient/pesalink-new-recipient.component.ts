@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { NewRecipientService } from "src/app/core/services/modal-services/new-recipient.service";
 import { TransactionTypeConstants } from "src/app/core/utils/constants/transaction-type.constants";
+import { PesalinkService } from "src/app/core/services/transfers/pesalink/pesalink.service";
 
 @Component({
   selector: "app-pesalink-new-recipient",
@@ -10,6 +11,7 @@ import { TransactionTypeConstants } from "src/app/core/utils/constants/transacti
   styleUrls: ["./pesalink-new-recipient.component.scss"],
 })
 export class PesalinkNewRecipientComponent implements OnInit {
+  setAccount: any; // TODO:: Give the correct interface for account details
   @Input() mode: string;
 
   selectBankForm: FormGroup;
@@ -21,8 +23,12 @@ export class PesalinkNewRecipientComponent implements OnInit {
     private readonly fb: FormBuilder,
     private readonly newRecipientService: NewRecipientService,
     private readonly dialogRef: MatDialogRef<PesalinkNewRecipientComponent>,
-    private dialog: MatDialog
-  ) {}
+    private dialog: MatDialog,
+    private readonly pesalinkService: PesalinkService,
+  ) {
+    this.setAccount = this.newRecipientService.default;
+    this.newRecipientService.data.subscribe((x) => (this.setAccount = x));
+  }
 
   ngOnInit(): void {
     this.initForms();
@@ -42,10 +48,47 @@ export class PesalinkNewRecipientComponent implements OnInit {
   }
 
   submit() {
+    const phonePayload = {
+      receiverPhone: this.phoneLinkedForm.controls.phoneNumber.value,
+      reference: "string",
+      countryCode: "KE",
+      destinationBankCode: this.phoneLinkedForm.controls.bank.value.bankCode,
+    }
+    const payload = {
+      accountNumber: this.selectBankForm.controls.accountNumber.value,
+    };
     this.mode === "bank"
-      ? this.newRecipientService.set(this.selectBankForm.getRawValue())
-      : this.newRecipientService.set(this.phoneLinkedForm.getRawValue());
-    this.dialog.closeAll();
+      ? 
+      this.pesalinkService.nameEnquiry(payload).subscribe((res) => {
+        if (res.status) {
+          this.setAccount = {
+            accountNumber: res.data.accountNumber,
+            accountName: res.data.accountName,
+            currency: res.data.currency,
+            bank: this.selectBankForm.controls.bank.value,
+          };
+          this.newRecipientService.set(this.setAccount);
+          this.dialog.closeAll();
+        } else {
+          alert(res.message);
+          // TODO:: Throw Error
+        }
+      })
+      : this.pesalinkService.phoneAccountsInquiry(phonePayload).subscribe((res) => {
+        if (res.status) {
+          this.setAccount = {
+            accountNumber: res.data.accountNumber,
+            accountName: res.data.accountName,
+            currency: res.data.currency,
+            bank: this.phoneLinkedForm.controls.bank.value
+          };
+          this.newRecipientService.set(this.setAccount);
+          this.dialog.closeAll();
+        } else {
+          alert(res.message);
+          // TODO:: Throw Error
+        }
+      })
   }
 
   close() {
