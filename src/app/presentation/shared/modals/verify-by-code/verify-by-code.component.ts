@@ -34,6 +34,7 @@ import { TransactionsService } from "src/app/core/services/transactions/transact
 import { OwnAccountService } from "src/app/core/services/transfers/own-account/own-account.service";
 import { BillServiceService } from "src/app/core/services/transfers/bill-service/bill-service.service";
 import { PesalinkService } from "src/app/core/services/transfers/pesalink/pesalink.service";
+import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 
 @Component({
   selector: "app-verify-by-code",
@@ -207,12 +208,14 @@ export class VerifyByCodeComponent implements OnInit {
   billPayment() {
     this.billPaymentService.currentData.subscribe((data: any) => {
       this.billPaymentPayload = data;
+      this.billPaymentService.setfavouritesPayload(data);
     });
     if (this.billPaymentPayload) {
       this.billPaymentService
         .postValidateBill(this.billPaymentPayload)
         .subscribe((res) => {
           if (res.status) {
+            this.billPaymentService.setTransactionPayload(res.data);
             this.router.navigate([
               `/transact/transfer-submitted/${this.transferType.BILL_PAYMENT}`,
             ]);
@@ -357,7 +360,7 @@ export class VerifyByCodeComponent implements OnInit {
         break;
       case this.transferType.PESALINK:
         this.pesalink();
-        break;   
+        break;
       default:
         break;
     }

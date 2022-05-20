@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    <div class="col-7">
+    <div class="col-7" *ngIf="!transferTypes.BILL_PAYMENT">
       <h4
         class="mt-5"
         *ngIf="
@@ -149,7 +149,7 @@
         transferType === 'reinitiate-transaction'
       "
     >
-      <h4 class="mt-5">
+      <h4 class="mt-7">
         <span *ngIf="transferTypes.BILL_PAYMENT; else fundTransfer"
           >Bill Payment</span
         >
@@ -183,23 +183,7 @@
             Done
           </button>
         </div>
-        <div class="col-md-3">
-          <button
-            *ngIf="
-              checkIfFavouriteExists() &&
-              transferType !== transferTypes.OWN_EQUITY &&
-              transferType !== 'reinitiate-transaction'
-            "
-            mat-stroked-button
-            type="button"
-            color="primary"
-            class="px-5 mt-4"
-            (click)="openAddFavourite()"
-          >
-            Add to favourites
-          </button>
-          <<<<<<< HEAD =======
-
+        <div class="col-md-3" style="margin-left: 10px">
           <button
             *ngIf="checkIfFavouriteExists() && transferType !== 'bulk-transfer'"
             mat-stroked-button
@@ -210,7 +194,6 @@
           >
             Add to favourites
           </button>
-          >>>>>>> 903c9cecc3023f6acf76ee3c0c00057c4efc831d
         </div>
       </div>
     </div>

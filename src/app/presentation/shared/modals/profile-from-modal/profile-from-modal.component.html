@@ -8,9 +8,14 @@
   >
     <mat-icon>close</mat-icon>
   </button>
-  <p class="text-center fw-bold pt-2" *ngIf="!hasSelectedAccount">Send from</p>
+  <p
+    class="text-center fw-bold pt-2"
+    *ngIf="!hasSelectedAccount && data.length"
+  >
+    Switch profile
+  </p>
 
-  <div *ngIf="!hasSelectedAccount">
+  <div *ngIf="!hasSelectedAccount && data.length">
     <h3 class="m-4 ms-2">Please select an account</h3>
     <mat-card
       class="m-2 mb-3 cursor-pointer mat-elevation-z0"
@@ -109,6 +114,32 @@
         color="primary"
         class="px-5 mb-3"
         (click)="completeTheSwithcProfile()"
+      >
+        Done
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-card *ngIf="!data.length">
+    <img matCardImage src="assets/images/Illustrations/Frame_19.svg" />
+    <mat-card-content>
+      <p class="text-center">
+        You don't have profile to switch on
+        <br />
+        <small class="text-center" style="font-size: 12px; color: #8b888e">
+          Sorry, we currently you don't have any overs profiles. Please try
+          again later.
+        </small>
+      </p>
+    </mat-card-content>
+    <mat-card-actions align="start">
+      <button
+        style="width: 100%; margin: auto"
+        type="submit"
+        mat-raised-button
+        color="primary"
+        class="px-5 mb-3"
+        (click)="close()"
       >
         Done
       </button>
