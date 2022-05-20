@@ -154,7 +154,7 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
   getBillers() {
     const currentUser = this.storageService.getData("currentUserData");
     this.billPaymentService
-      .getBillersByCountry("KE")
+      .getBillersByCountry(currentUser ? currentUser.countryId : "KE")
       .subscribe((res) => {
         if (res.status) {
           this.storageService.setData("billers", res.data.items);
