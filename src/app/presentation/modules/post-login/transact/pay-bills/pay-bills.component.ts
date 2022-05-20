@@ -87,7 +87,10 @@ export class PayBillsComponent
       disableClose: true
     })
 
-    console.log(this.getForm)
+    this.billServices.setfavouritesPayload(paymentData)
+    this.billServices.favouritesPayload$.subscribe(data => {
+      console.log(data)
+    })
 
     dialogRef.afterClosed().subscribe((res: any) => {
       if (res.confirmed) {
