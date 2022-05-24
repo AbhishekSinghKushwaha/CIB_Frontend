@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { PostLoginGuard } from './core/utils/guards/post-login/post-login.guard';
 import { PreLoginGuard } from './core/utils/guards/pre-login/pre-login.guard';
+import { CustomPreloadingStrategy } from './core/utils/interceptors/custom-preloading-strategy';
 
 const routes: Routes = [
   {
@@ -18,7 +19,8 @@ const routes: Routes = [
       import('./presentation/modules/pre-login/pre-login.module').then(
         (m) => m.PreLoginModule
       ),
-    canActivate: [PreLoginGuard]
+    canActivate: [PreLoginGuard],
+    data: { preload: true }
   },
   {
     path: '**',
@@ -31,6 +33,7 @@ const routerOptions: ExtraOptions = {
   anchorScrolling: 'enabled',
   scrollOffset: [0, 64],
   relativeLinkResolution: 'legacy',
+  preloadingStrategy: CustomPreloadingStrategy
 };
 
 @NgModule({
