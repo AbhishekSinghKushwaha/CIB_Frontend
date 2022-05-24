@@ -13,6 +13,7 @@ const routes: Routes = [
       import('./customer-login/customer-login.module').then(
         (m) => m.CustomerLoginModule
       ),
+    data: { preload: true, delay: 3000 }
   },
   {
     path: 'customer-onboarding',

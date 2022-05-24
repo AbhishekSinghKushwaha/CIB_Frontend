@@ -11,7 +11,7 @@ const routes: Routes = [
         path: '',
         loadChildren: (): Promise<any> =>
           import('./login/login.module').then((m) => m.LoginModule),
-      },
+      }, 
       {
         path: 'forgot-password',
         loadChildren: (): Promise<any> =>
