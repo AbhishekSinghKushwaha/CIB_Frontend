@@ -33,6 +33,8 @@ import { IntercountryService } from "src/app/core/services/transfers/intercountr
 import { TransactionsService } from "src/app/core/services/transactions/transactions.service";
 import { OwnAccountService } from "src/app/core/services/transfers/own-account/own-account.service";
 import { BillServiceService } from "src/app/core/services/transfers/bill-service/bill-service.service";
+import { PesalinkService } from "src/app/core/services/transfers/pesalink/pesalink.service";
+import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 
 @Component({
   selector: "app-verify-by-code",
@@ -87,7 +89,8 @@ export class VerifyByCodeComponent implements OnInit {
     private intercountryService: IntercountryService,
     private transactionService: TransactionsService,
     private billPaymentService: BillServiceService,
-    private ownEquityService: OwnAccountService
+    private ownEquityService: OwnAccountService,
+    private pesalinkService: PesalinkService
   ) {
     this.initOtpForm();
   }
@@ -205,12 +208,14 @@ export class VerifyByCodeComponent implements OnInit {
   billPayment() {
     this.billPaymentService.currentData.subscribe((data: any) => {
       this.billPaymentPayload = data;
+      this.billPaymentService.setfavouritesPayload(data);
     });
     if (this.billPaymentPayload) {
       this.billPaymentService
         .postValidateBill(this.billPaymentPayload)
         .subscribe((res) => {
           if (res.status) {
+            this.billPaymentService.setTransactionPayload(res.data);
             this.router.navigate([
               `/transact/transfer-submitted/${this.transferType.BILL_PAYMENT}`,
             ]);
@@ -246,6 +251,22 @@ export class VerifyByCodeComponent implements OnInit {
       this.buyGoodsService.buyGoodsTransfer(this.payload).subscribe((res) => {
         if (res.status) {
           this.router.navigate(["/transact/buy-goods/submit-transfer"]);
+        } else {
+          console.log(res.message);
+          // TODO:: Notify Error
+        }
+      });
+    }
+  }
+
+  pesalink() {
+    this.pesalinkService.currentData.subscribe((data) => {
+      this.payload = data;
+    });
+    if (this.payload) {
+      this.pesalinkService.sendViaPesalink(this.payload).subscribe((res) => {
+        if (res.status) {
+          this.router.navigate([`/transact/transfer-submitted/${this.transactionType}`]);
         } else {
           console.log(res.message);
           // TODO:: Notify Error
@@ -336,6 +357,9 @@ export class VerifyByCodeComponent implements OnInit {
         break;
       case "Standing Orders":
         this.standingOrders();
+        break;
+      case this.transferType.PESALINK:
+        this.pesalink();
         break;
       default:
         break;

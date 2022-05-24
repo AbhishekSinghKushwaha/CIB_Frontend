@@ -28,8 +28,7 @@
     "addTransactionLimit": "/cibcore/api/CorporateTransactionLimit/Add/",
     "getTransactionLimit": "/cibcore/api/CorporateTransactionLimit/Limits/",
     "updateTransactionLimit": "/cibcore/api/CorporateTransactionLimit/Update/",
-    "corporateUser": "/cibcore/api/Corporates/",
-    "updateTransactionLimit": "/cibcore/api/CorporateTransactionLimit/Update/"
+    "corporateUser": "/cibcore/api/Corporates/"
   },
   "userManagement": {
     "getRoles": "/cibcore/api/roles",
@@ -59,6 +58,7 @@
     "mobileMoneyTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
     "buyAirtimeTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
     "buyGoodsTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
+    "pesalinkTransfer": "/cibpaymentservice-v1/api/v1/Transfer/Send",
     "getTransferCharges": "/cibpaymentservice-v1/api/v1/Transfer/GetTransferCharge",
     "getAccountDetails": "/cibpaymentservice-v1/api/v1/Transfer/NameEnquiry",
     "getCharges": "/cibpaymentservice-v1/api/v1/BuyGoods/Charges",
@@ -146,5 +146,9 @@
   "loan": {
     "loanAccounts": "/cibloanservice-v1/api/Loans/",
     "loanRepayment": "/cibloanservice-v1/api/Loans/initiate-pay"
-  }
+  },
+  "pesalink": {
+    "phoneNumber": "/cibpaymentservice-v1/api/v1/Transfer/PesalLink/",
+    "phoneAccountsInquiry": "/cibpaymentservice-v1/api/v1/Transfer/PesalLink/phoneAccountsInquiry"
+  } 
 }

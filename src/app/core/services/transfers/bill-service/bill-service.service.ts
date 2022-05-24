@@ -7,12 +7,16 @@ import { Observable } from 'rxjs/internal/Observable';
 import { BehaviorSubject } from "rxjs";
 
 interface BillPaymentState {
-  billCategoriesPayload: {}
+  billCategoriesPayload: {},
+  transactionPayload: {},
+  favouritesPayload: {}
 }
 
 
 const initialState: BillPaymentState = {
-  billCategoriesPayload: {}
+  billCategoriesPayload: {},
+  transactionPayload: {},
+  favouritesPayload: {}
 }
 
 @Injectable({
@@ -22,8 +26,24 @@ export class BillServiceService extends StateService<BillPaymentState> {
   private dataSource = new BehaviorSubject<string>("");
   public currentData = this.dataSource.asObservable();
 
+  transactionPayload$: Observable<any> = this.select(
+    (state) => state.transactionPayload
+  );
+
+  favouritesPayload$: Observable<any> = this.select(
+    (state) => state.favouritesPayload
+  );
+
   billPaymentPayload(payload: any): void {
     this.dataSource.next(payload);
+  }
+
+  setTransactionPayload(transactionPayload: any): void {
+    this.setState({ transactionPayload });
+  }
+
+  setfavouritesPayload(favouritesPayload: any): void {
+    this.setState({ favouritesPayload });
   }
 
   billCategoriesPayload$: Observable<any> = this.select(

@@ -68,7 +68,7 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getCurrencies();
   }
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() { }
 
   ngOnDestroy() {
     if (this.mobileQuery) {
@@ -102,12 +102,12 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   // Call Data Look up services
-  async getCountries() {
+  getCountries() {
     this.dataLookupService.getCountries().subscribe(async (res) => {
       if (res.status) {
-        this.storageService.setData("countries", res.data);
-        this.getCurrentUserCountry();
-        this.getBanks();
+        await this.storageService.setData("countries", res.data);
+        await this.getCurrentUserCountry();
+        await this.getBanks();
       }
     });
   }
