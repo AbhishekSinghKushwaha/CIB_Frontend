@@ -36,11 +36,11 @@ export class ErrorIntercept
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    this.spinnerService.setLoading(true, request.url);
+    this.spinnerService.setLoading(true);
     return next.handle(request).pipe(
       tap((event) => {
         if (event instanceof HttpResponse) {
-          this.spinnerService.setLoading(false, request.url);
+          this.spinnerService.setLoading(false);
           if (request.method === "POST" && event?.body?.isSuccessful) {
             this.notifyError({
               error: false,
@@ -51,7 +51,7 @@ export class ErrorIntercept
         }
       }),
       catchError((error: HttpErrorResponse) => {
-        this.spinnerService.setLoading(false, request.url);
+        this.spinnerService.setLoading(false);
         const errorMessage = {
           error: false,
           errorStatus: "",

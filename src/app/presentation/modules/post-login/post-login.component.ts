@@ -16,7 +16,6 @@ import { AccountsService } from "src/app/core/services/accounts/accounts.service
 import { BeneficiaryManagementService } from "src/app/core/services/beneficiary-management/beneficiary-management.service";
 import { DataLookupService } from "src/app/core/services/data-lookup/data-lookup.service";
 import { SharedDataService } from "src/app/core/services/shared-data/shared-data.service";
-import { SpinnerService } from "src/app/core/services/spinner/spinner.service";
 import { StorageService } from "src/app/core/services/storage/storage.service";
 import { LoanService } from "src/app/core/services/loan/loan.service";
 
@@ -38,7 +37,6 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     private changeDetectorRef: ChangeDetectorRef,
     private mediaMatcher: MediaMatcher,
     private router: Router,
-    private spinnerService: SpinnerService,
     private dataLookupService: DataLookupService,
     private storageService: StorageService,
     private accountsService: AccountsService,
@@ -58,7 +56,6 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getCountries();
     this.getUserAccounts();
     this.getSectors();
-    this.loadingListener();
     this.getBeneficiaries();
     this.getTelcos();
     this.getMobileWallets();
@@ -83,14 +80,6 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       this.mobileQuery = this.mediaMatcher.matchMedia("(max-width: 970px)");
     }
-  }
-
-  loadingListener(): void {
-    this.spinnerService.loadingSub
-      .pipe(delay(0)) // This prevents a ExpressionChangedAfterItHasBeenCheckedError for subsequent requests
-      .subscribe((loading: boolean) => {
-        this.loading = loading;
-      });
   }
 
   getCurrentUserData(): void {
