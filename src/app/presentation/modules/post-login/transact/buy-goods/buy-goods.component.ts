@@ -46,8 +46,8 @@ export class BuyGoodsComponent extends BaseTransactComponent implements OnInit {
       sendFrom: ["", [Validators.required]],
       sendTo: ["", [Validators.required]],
       amount: [{}, [Validators.required, accountLimitValidator]],
-      reason: ["", [Validators.required]],
-      fxReferenceId: ["", [Validators.required]],
+      reason: [""],
+      fxReferenceId: [""],
       schedulePayment: ["", [Validators.required]],
     });
   }
