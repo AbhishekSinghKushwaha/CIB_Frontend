@@ -42,8 +42,8 @@ export class BuyGoodsService {
     return this.http.get(environment.apiUrl + urlList.dataLookUp.getFavouriteMerchants);
   }
 
-  getMerchantDetails(tillNumber: string): Observable<any> {
-    return this.http.get(environment.apiUrl + urlList.dataLookUp.getMerchantDetails + tillNumber);
+  getMerchantDetails(tillNumber: string, countryCode: string): Observable<any> {
+    return this.http.get(environment.apiUrl + urlList.dataLookUp.getMerchantDetails + tillNumber + '/' + countryCode);
   }
 
   getFavouriteMerchantDetails(tillNumber: string): Observable<any> {
