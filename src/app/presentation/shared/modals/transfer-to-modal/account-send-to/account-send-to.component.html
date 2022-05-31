@@ -5,7 +5,7 @@
     *ngFor="let account of accounts"
     [data]="account"
     [transferType]="'to'"
-    [isChecked]="selected && selected?.accountName === account?.accountName"
+    [isChecked]="selected && selected?.accountNumber === account?.accountNumber"
   >
   </app-account-dropdown-item>
 </div>
