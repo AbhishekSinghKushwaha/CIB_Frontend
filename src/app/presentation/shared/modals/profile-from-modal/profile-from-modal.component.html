@@ -10,12 +10,12 @@
   </button>
   <p
     class="text-center fw-bold pt-2"
-    *ngIf="!hasSelectedAccount && data.length"
+    *ngIf="!hasSelectedAccount && data?.length"
   >
     Switch profile
   </p>
 
-  <div *ngIf="!hasSelectedAccount && data.length">
+  <div *ngIf="!hasSelectedAccount && data?.length">
     <h3 class="m-4 ms-2">Please select an account</h3>
     <mat-card
       class="m-2 mb-3 cursor-pointer mat-elevation-z0"
@@ -120,7 +120,7 @@
     </mat-card-actions>
   </mat-card>
 
-  <mat-card *ngIf="!data.length">
+  <mat-card *ngIf="!data?.length">
     <img matCardImage src="assets/images/Illustrations/Frame_19.svg" />
     <mat-card-content>
       <p class="text-center">
