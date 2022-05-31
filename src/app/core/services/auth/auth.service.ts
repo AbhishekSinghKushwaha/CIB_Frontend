@@ -11,6 +11,7 @@ import { StorageService } from '../storage/storage.service';
 import { LoggedinUserModel, UserModel } from '../../domain/user.model';
 import { BaseTransactComponent } from 'src/app/presentation/modules/post-login/transact/base-transact.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SpinnerService } from '../spinner/spinner.service';
 
 interface LogoutData {
   username: string;
@@ -35,7 +36,8 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
     private storageService: StorageService,
     private http: HttpClient,
     private readonly logoutService: LogoutService,
-    private readonly snackBar: MatSnackBar
+    private readonly snackBar: MatSnackBar,
+    private readonly spinnerService: SpinnerService
   ) {
     super(snackBar);
   }
@@ -194,6 +196,7 @@ export class AuthService extends BaseTransactComponent implements OnDestroy {
       });
     }
     this.clearUserData();
+    this.spinnerService.setLoading(false);
 
     this.router.navigate(['/auth/login']);
     this.storageService.setData('currentLanguage', lang);

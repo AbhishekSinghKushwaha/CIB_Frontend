@@ -35,10 +35,12 @@ export class AppComponent implements OnInit {
   }
 
   loadingListener(): void {
-    this.spinnerService.loadingSub
-      .pipe(delay(0)) // This prevents a ExpressionChangedAfterItHasBeenCheckedError for subsequent requests
+    setTimeout(() => {
+       this.spinnerService.loadingSub
       .subscribe((loading: boolean) => {
         this.loading = loading;
       });
+    }, 2000);
+   
   }
 }

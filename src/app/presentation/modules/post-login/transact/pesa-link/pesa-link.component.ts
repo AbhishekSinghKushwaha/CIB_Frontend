@@ -53,7 +53,7 @@ export class PesaLinkComponent implements OnInit {
       sendTo: ["", [Validators.required]],
       amount: [{}, [Validators.required, accountLimitValidator]],
       reason: [""],
-      fxReferenceId: ["", [Validators.required]],
+      fxReferenceId: [""],
       schedulePayment: ["", [Validators.required]],
     });
   }
