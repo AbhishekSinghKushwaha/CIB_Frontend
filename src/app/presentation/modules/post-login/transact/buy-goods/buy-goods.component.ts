@@ -39,8 +39,6 @@ export class BuyGoodsComponent extends BaseTransactComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.getMerchants();
-    this.getFavouriteMerchants();
   }
 
   initForm(): void {
@@ -48,29 +46,9 @@ export class BuyGoodsComponent extends BaseTransactComponent implements OnInit {
       sendFrom: ["", [Validators.required]],
       sendTo: ["", [Validators.required]],
       amount: [{}, [Validators.required, accountLimitValidator]],
-      reason: ["", [Validators.required]],
-      fxReferenceId: ["", [Validators.required]],
+      reason: [""],
+      fxReferenceId: [""],
       schedulePayment: ["", [Validators.required]],
-    });
-  }
-
-  getMerchants(): void {
-    this.buyGoodsService.getMerchants().subscribe((res) => {
-      if (res.status) {
-        this.merchantDetailsService.setMerchantDetails(res.data);
-      } else {
-        console.log(res.message);
-      }
-    });
-  }
-
-  getFavouriteMerchants(): void {
-    this.buyGoodsService.getFavouriteMerchants().subscribe((res) => {
-      if (res.status) {
-        this.merchantDetailsService.setFavouriteMerchantDetails(res.data);
-      } else {
-        console.log(res.message);
-      }
     });
   }
 

@@ -37,7 +37,7 @@ export class BuyGoodsNewRecipientComponent implements OnInit {
   submit() {
     // Simulate api fetch for number validation with a 2 seconds delay
     setTimeout(() => {
-      this.buyGoodsService.getMerchantDetails(this.getForm.tillNumber.value).subscribe((res) => {
+      this.buyGoodsService.getMerchantDetails(this.getForm.tillNumber.value, 'KE').subscribe((res) => {
         if(res.status) {
           const data = {
             tillNumber: res.data.till,
