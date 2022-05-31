@@ -18,6 +18,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LanguageModalModule } from './presentation/shared/modals/language-modal/language-modal.module';
 import { httpTranslateLoader, LanguageTranslateModule } from './translate.module';
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
+import { CustomPreloadingStrategy } from './core/utils/interceptors/custom-preloading-strategy';
 
 @NgModule({
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
@@ -58,6 +59,7 @@ import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
       useClass: AuthTokenInterceptor,
       multi: true
     },
+    CustomPreloadingStrategy
   ],
   bootstrap: [AppComponent],
 })

@@ -14,7 +14,7 @@ export const TransferType = {
   BUY_AIRTIME: "10",
   PESALINK: "7",
   SUBSIDIARY: "8",
-  BILL_PAYMENT: "11",
+  BILL_PAYMENT: "13",
 };
 
 const SwiftChargesOptions = [
