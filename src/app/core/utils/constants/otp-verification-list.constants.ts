@@ -8,10 +8,12 @@ export class OtpVerificationConstants {
   OTP_LIST: otpVerificationListModel[] = [
     {
         verificationType: 'By sms',
-        imageLink: './assets/images/icons/visual-support-icon-mobile.svg'
+        imageLink: './assets/images/icons/visual-support-icon-mobile.svg',
+        verificationValue: 'SMS'
       },{
         verificationType: 'By email',
-        imageLink: './assets/images/icons/visual-support-icons-email.svg'
+        imageLink: './assets/images/icons/visual-support-icons-email.svg',
+        verificationValue: 'Email'
       }
   ];
 }
