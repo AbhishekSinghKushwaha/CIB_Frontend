@@ -43,10 +43,6 @@ export class OtpVerificationComponent implements OnInit {
   onChangeDemo(ob: any) {
     this.counter = ob.checked? this.counter += 1 : this.counter -= 1
     this.otpMode = (this.counter == 2) ? 'All' : this.counter === 0 ? undefined: this.selectedOtp.verificationValue;
-    //  this.arr = this.arr.push('mm');
-
-    console.log(ob.checked + " => ", this.counter, this.otpMode);
-
     // perfect logic on the right element to remove . consider storing in an array
 }
 
@@ -59,19 +55,9 @@ openConfirmationModal(): void {
   });
 }
 
-// verificationConfirmation(selectedVal: any) {
-//   return this.dialog.open<OtpVerificationConfirmationComponent, any>(OtpVerificationConfirmationComponent, {
-//     width: '500px',
-//     disableClose: true,
-//     selectedVal
-//   });
-// }
-
 call(data?: any) {
-  console.log('called')
   return this.dialog.open<OtpVerificationConfirmationComponent>(OtpVerificationConfirmationComponent, {
     width: '500px',
-    // disableClose: false,
     data
   });
 }

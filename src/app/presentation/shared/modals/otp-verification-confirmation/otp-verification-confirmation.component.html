@@ -1,0 +1,29 @@
+<div class="container favourites-modal-screen p-2">
+  <button mat-icon-button matSuffix class="close-button" (click)="close()">
+    <mat-icon svgIcon="close"></mat-icon>
+  </button>
+  <p class="text-center pb-2 header-margin ">Verification confirmation</p>
+
+  <h4 class="strong-text">To continue, please confirm your verification preferences </h4>
+    <small class="text-secondary">Please select one of the options below</small>
+      <div class="row">
+        <div class="col-md-10">
+          <div class="px-3">
+            <mat-checkbox
+            color="primary"
+            > By Sms
+          </mat-checkbox> <br />
+          <mat-checkbox
+          color="primary"
+  
+          > By email
+        </mat-checkbox>
+          </div>
+        </div>
+      </div>
+
+    <div class="mt-4">
+      <button mat-raised-button color="primary" (click)="submit()" class="px-5 mx-2 "> Confirm</button>
+      <button mat-stroked-button color="primary" (click)="close()"class="px-5"> Cancel</button>
+    </div>
+</div>

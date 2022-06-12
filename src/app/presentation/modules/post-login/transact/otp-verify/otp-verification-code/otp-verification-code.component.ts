@@ -31,7 +31,6 @@ export class OtpVerificationCodeComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     this.eventsSubscriptions();
-    console.log(this.transferType);
   }
 
   private eventsSubscriptions(): void {
