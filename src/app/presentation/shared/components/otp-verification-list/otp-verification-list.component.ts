@@ -20,6 +20,7 @@ export class OtpVerificationListComponent implements OnInit {
   }
 
   select(): void {
+    console.log(this.data, 'kkkkk')
     this.otpVerificationListService.select(this.data);
   }
 
