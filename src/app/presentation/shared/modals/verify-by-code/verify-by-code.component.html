@@ -35,10 +35,23 @@
                     autocomplete="off"
                 />
             </div>
+
+
+            <div *ngIf="source" class="row mt-4">
+                <div class="col-md-5">
+                    <button mat-raised-button color="primary" (click)="cibVerify()" class="px-5 mx-2 "> Verify</button>
+                </div>
+                    <!-- <button mat-stroked-button color="primary" class="px-5"> Cancel</button> -->
+                <div class="col-md-7">
+                    <p *ngIf="!otpResent" class=" mt-2 text-danger btn-text" (click)="resendOTPCode()">
+                        Send code again
+                      </p>
+                </div>    
+            </div>
         </div>
     </div> 
 
-    <div class="row mt-4">
+    <div *ngIf="!source" class="row mt-4">
         <div class="col-md-2">
             <button mat-raised-button [disabled]="verifyOtpForm.invalid" type="submit" color="primary" class="px-5" (click)="verify()">Verify</button>
         </div>  
@@ -70,7 +83,7 @@
             <button mat-stroked-button type="button" color="primary" class="px-5" (click)="tryOtherMethod()">Try another method</button>
         </div>          
     </div> 
-    <div class="row col-md-11 mt-3" *ngIf="data === 'email'">
+    <div class="row col-md-11 mt-3" *ngIf="data === 'email' && !source">
         <div class="col-md-3">
             <button mat-stroked-button type="button" color="primary" class="px-5">Open Outlook</button>
         </div>

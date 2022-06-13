@@ -3,80 +3,42 @@ import { TransactDashboardList } from '../../domain/transact-list.model';
 
 @Injectable()
 export class MoreConstants {
-  constructor() {}
+  constructor() { }
 
   MORE_DASHBOARD_LIST: TransactDashboardList[] = [
     {
-      section: 'Send money',
+      section: '',
       content: [
         {
-          leftIcon: 'swap_horiz',
-          text: 'Intercountry funds transfer',
-          link: '/more/intercountry-fund-transfer',
-        },
-        {
-          leftIcon: 'input',
-          text: 'Loan repayment',
+          leftIcon: 'perm_identity',
+          text: 'Security Settings',
+          subtext: 'Manage your password and security questions',
           link: '/more',
         },
         {
-          leftIcon: 'credit_card',
-          text: 'Swift',
-          subtext: 'Credit and prepaid cards',
+          leftIcon: 'collections',
+          text: 'Change your dashboard view',
+          subtext: 'View items as a list or thumbnails',
           link: '/more',
         },
         {
-          leftIcon: 'account_balance',
-          text: 'RTGS and EFT',
-          subtext: 'A local or international bank',
+          leftIcon: 'lock',
+          text: 'Set up verification preferences',
+          subtext: 'Let us know how you’d like to receive your verification codes',
+          link: '/more/verification-process',
+        },
+        {
+          leftIcon: 'notifications',
+          text: 'Notifications',
+          subtext: 'View and manage your notifications',
           link: '/more',
         },
         {
-          leftIcon: 'phone_iphone',
-          text: 'Bulk payment',
+          leftIcon: 'person_outline',
+          text: 'Manage your details',
+          subtext: 'Edit your personal details',
           link: '/more',
         },
-        {
-          leftIcon: 'account_balance',
-          text: 'Bulk salary',
-          subtext: 'A local or international bank',
-          link: '/more',
-        },
-      ],
-    },
-    {
-      section: 'Beneficiary management',
-      content: [
-        {
-          leftIcon: 'receipt',
-          text: 'View beneficiaries',
-          link: '/more',
-        },
-        {
-          leftIcon: 'receipt',
-          text: 'Add new',
-          link: '/more',
-        }
-    ],
-    },
-    {
-      section: 'Standing orders',
-      content: [
-        {
-          leftIcon: 'tablet_android',
-          text: 'Standing orders',
-          link: '/more',
-        },
-      ],
-    },
-    {
-      section: 'Manage favourites',
-      content: [
-        {
-          leftIcon: 'tablet_android',
-          text: 'Favourites',
-          link: '/more',
-        }
       ],
     },
   ];

@@ -65,6 +65,7 @@ export class VerifyByCodeComponent implements OnInit {
   payload: any;
   airtimePayload: any;
   billPaymentPayload: any;
+  source: any
 
   formInput = ["input1", "input2", "input3", "input4", "input5", "input6"];
   @ViewChildren("formRow") rows: any;
@@ -98,6 +99,7 @@ export class VerifyByCodeComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     this.initOTPTimer();
+    this.source = localStorage.getItem('sourceRoute');
   }
   get f(): any {
     return this.verifyOtpForm.controls;
@@ -154,6 +156,11 @@ export class VerifyByCodeComponent implements OnInit {
 
   submit(): void {
     this.otpCodeService.set(this.verifyOtpForm.value);
+  }
+
+  cibVerify() {
+    this.router.navigate(["/more/otp-complete"]);
+    localStorage.removeItem('sourceRoute');
   }
 
   showAlert(message: string): void {

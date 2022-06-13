@@ -1,22 +1,24 @@
-import { Component, OnInit } from "@angular/core";
-import { otpVerificationListModel } from "src/app/core/domain/otp-verification-list.model";
-import { OtpVerificationListService } from "src/app/core/services/otp-verification-list/otp-verification-list.service";
-import { Router, ActivatedRoute } from "@angular/router";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { OtpCodeService } from "src/app/core/services/otp-code/otp-code.service";
-import { otpCodeModel } from "src/app/core/domain/otp-code.model";
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { otpCodeModel } from 'src/app/core/domain/otp-code.model';
+import { OtpCodeService } from 'src/app/core/services/otp-code/otp-code.service';
+import { OtpVerificationListService } from 'src/app/core/services/otp-verification-list/otp-verification-list.service';
 
 @Component({
-  selector: "app-otp-verification-code",
-  templateUrl: "./otp-verification-code.component.html",
-  styleUrls: ["./otp-verification-code.component.scss"],
+  selector: 'app-otp-access-verification',
+  templateUrl: './otp-access-verification.component.html',
+  styleUrls: ['./otp-access-verification.component.scss']
 })
-export class OtpVerificationCodeComponent implements OnInit {
+export class OtpAccessVerificationComponent implements OnInit {
+
   otpVerificationType: any;
   otpVerificationCodeForm: FormGroup;
   otpVerificationCode: otpCodeModel;
 
   transferType: any;
+  sourceRoute: string;
+  source:any;
 
   constructor(
     private readonly otpVerificationListService: OtpVerificationListService,
