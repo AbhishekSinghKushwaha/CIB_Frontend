@@ -1,5 +1,24 @@
-<div class="row mt-2">
-  <h3 class="strong-text">Manage your profile</h3>
+<div class="row">
+  <h3 class="strong-text mb-3">Manage your profile</h3>
+
+  <div class="row user-info">
+    <div class="col-lg-6 col-md-6 bg-light" >
+      <div class="d-flex flex-row bg-light">
+        <div class="my-auto">
+          <div class="initial-container">{{initials}}</div>
+        </div>
+        <div class="px-4 py-2">
+            <h4>{{currentUserDetail?.name}}</h4>
+            <small class="text-grey"> {{currentUserDetail?.corporate?.emailAddress}}</small> <br/>
+            <small class="text-grey"> {{currentUserDetail?.corporate?.phoneNumber}}</small>
+        </div>
+        <div class="px-3 mt-4">
+          <mat-icon>launch</mat-icon>
+        </div>
+      </div>
+    </div>
+
+  </div>
 
   <div
     class="container "

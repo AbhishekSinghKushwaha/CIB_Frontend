@@ -1,3 +1,72 @@
 .divider-margin {
     margin-left: -28rem;
 }
+
+@import "src/assets/scss/sizes.scss";
+
+.mat-nav-list {
+  padding: 0px 16px 0px 18px;
+}
+
+.mat-list-item {
+  border-radius: 8px;
+  margin: 16px 0px;
+  &.mat-list-item-disabled {
+    background: none !important;
+    color: var(--cool-grey-40) !important;
+  }
+  &.active {
+    color: var(--equity) !important;
+    font-weight: 600 !important;
+    svg {
+      fill: var(--equity) !important;
+    }
+    .menu-icon {
+      color: white !important;
+      svg {
+        fill: var(--equity) !important;
+      }
+    }
+  }
+}
+
+.logo_img {
+  // width: $logo-width;
+  height: $logo-height;
+  margin: 32px 38px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.user-info {
+//   background: #f7f7f7;
+  /* width: 90%; */
+  margin: auto;
+  height: 80px;
+//   display: flex;
+//   justify-content: space-between;
+  cursor: pointer;
+  .initial-container {
+    width: 48px;
+    height: 48px;
+    margin: auto;
+    padding: 8px;
+    background: #A32A29;
+    font-size: 20px;
+    line-height: 28px;
+    color: #fff;
+    border-radius: 50%;
+    
+  }
+
+  mat-icon {
+    color: #A32A29 !important;
+  }
+}
+
+.country-flag {
+      float: right;
+      width: 29px;
+      margin-top: 18%;
+}
