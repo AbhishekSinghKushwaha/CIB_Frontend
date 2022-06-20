@@ -13,7 +13,7 @@ export class MoreConstants {
           leftIcon: 'perm_identity',
           text: 'Security Settings',
           subtext: 'Manage your password and security questions',
-          link: '/more',
+          link: '/more/security',
         },
         {
           leftIcon: 'collections',
