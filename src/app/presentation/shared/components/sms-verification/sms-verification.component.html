@@ -1,3 +1,9 @@
+<div [ngSwitch]="viewType">
+
+
+<div class="default-view" *ngSwitchDefault>
+
+
 <h3 class="strong-text">
   {{ otpMessage || message }}
 </h3>
@@ -82,4 +88,98 @@
       </button>
     </div>
   </form>
+</div>
+</div>
+
+
+<div class="new-view mt-5" *ngSwitchCase="'changePassword'">
+
+<div class="row">
+<div class="col-md-6 pb-5">
+  <div
+    class="col-md-12 d-none d-sm-flex justify-content-center align-items-center"
+  >
+    <img
+      src="./assets/images/Illustrations/Illustrations_VerificationCode.svg"
+      height="228px"
+    />
+  </div>
+</div>
+
+<div class="col-md-6 ">
+  <h3 class="strong-text">
+    {{ otpMessage || message }}
+  </h3>
+  <div class="text-grey mb-4" >Please, enter the code below.</div>
+  <div class="row">
+    <form [formGroup]="verifyOtpForm" (ngSubmit)="submit()" autocomplete="off">
+      <div class="row mb-2">
+        <div class="ml-3" formArrayName="digits">
+          <input
+            type="tel"
+            *ngFor="let field of verifyOtpFormArray.controls; let i = index"
+            #inputs
+            [maxLength]="1"
+            [formControlName]="i"
+            (keydown)="check(i, field, $event)"
+            class="otp-input"
+            autocomplete="off"
+          />
+        </div>
+  
+        <div *ngIf="submitted && f.digits.errors" class="validationError">
+          <div
+            *ngIf="f.digits.errors.required"
+            i18n="@@loco:5e8c775bc38e0f2242068ff2"
+          >
+            Please enter the verification code
+          </div>
+        </div>
+      </div>
+      <div class="row gx-4 mb-2">
+        <div class="col">
+          <button
+            mat-flat-button
+            color="primary"
+            type="submit"
+            class="col-12"
+            [disabled]="verifyOtpForm.invalid"
+            (click)="verifyOTP()"
+          >
+            Verify
+          </button>
+        </div>
+        <div class="col">
+          <button
+            mat-stroked-button
+            color="primary"
+            type="submit"
+            class="col-12"
+            [disabled]="timeToResend > 0"
+            (click)="resendOTPCode()"
+          >
+            <div *ngIf="timeToResend > 0" class="resend-otp-text">
+              <div class="btn-text">
+                <span>Resend in</span>
+                00:{{
+                  timeToResend > 10
+                    ? timeToResend
+                    : ("0" + timeToResend).slice(-2)
+                }}
+              </div>
+            </div>
+            <div *ngIf="!otpResent && timeToResend === 0" class="btn-text">
+              Send code again
+            </div>
+          </button>
+        </div>
+      </div>
+   
+    </form>
+  </div>
+</div>
+</div>
+
+
+</div>
 </div>
