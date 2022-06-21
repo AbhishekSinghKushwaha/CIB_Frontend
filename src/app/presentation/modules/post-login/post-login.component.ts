@@ -36,11 +36,11 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     {
       title: 'User Login/Access',
       description: 'Get alerts about any upgrades, outages or scheduled downtime',
-      active: true,
+      active: false,
     }, {
       title: 'Service Request',
       description: 'Get alerts about any upgrades, outages or scheduled downtime',
-      active: true,
+      active: false,
     }, {
       title: 'Transaction Alert',
       description: ' We’ll let you know about new products or promotions',
@@ -48,7 +48,7 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     }, {
       title: 'Marketing content',
       description: ' We’ll let you know about new products or promotions',
-      active: true,
+      active: false,
     },
   ];
   constructor(
