@@ -32,6 +32,25 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
   mobileQuery!: MediaQueryList;
   private mobileQueryListener!: () => void;
   loading: boolean = false;
+  listNotificationPreferences = [
+    {
+      title: 'User Login/Access',
+      description: 'Get alerts about any upgrades, outages or scheduled downtime',
+      active: true,
+    }, {
+      title: 'Service Request',
+      description: 'Get alerts about any upgrades, outages or scheduled downtime',
+      active: true,
+    }, {
+      title: 'Transaction Alert',
+      description: ' We’ll let you know about new products or promotions',
+      active: false,
+    }, {
+      title: 'Marketing content',
+      description: ' We’ll let you know about new products or promotions',
+      active: true,
+    },
+  ];
   constructor(
     private observer: BreakpointObserver,
     private changeDetectorRef: ChangeDetectorRef,
@@ -63,6 +82,7 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getBillers();
     this.getGroupedAccount();
     this.getCurrencies();
+    this.setUpNotificationPreference();
   }
 
   ngAfterViewInit() { }
@@ -211,5 +231,13 @@ export class PostLoginComponent implements OnInit, AfterViewInit, OnDestroy {
         this.storageService.setData("subsidiaries", res.data);
       }
     });
+  }
+
+  setUpNotificationPreference() {
+    const notificationsPreferences = this.storageService.getData('notification-preferences');
+    if (!notificationsPreferences) {
+      this.storageService.setData('notification-preferences', this.listNotificationPreferences);
+    }
+
   }
 }

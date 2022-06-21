@@ -1,0 +1,59 @@
+<div class="row gx-0">
+  <div class="col-md-12">
+    <div class="row gx-0 mb-4 justify-content-md-center">
+      <div class="col-md-11">
+        <div class="mb-3">
+          <button
+            mat-icon-button
+            aria-label="Back"
+            class="back-icon"
+            routerLink="/more/notification-preference"
+          >
+            <div class="strong-text">
+              <mat-icon svgIcon="caret_left"></mat-icon>
+              <span>Notifications</span>
+            </div>
+          </button>
+        </div>
+        <div class="row mt-3" *ngIf="listNotificationOptions.length">
+          <div
+            class="row product-list-item col-md-6 mt-3"
+            *ngFor="let notification of listNotificationOptions"
+          >
+            <div class="col-10 offset-1 product-list-item-label">
+              <div class="row h-100 justify-content-around align-items-center">
+                <div class="col-10 float-left text-truncate">
+                  <h4>{{ notification?.title }}</h4>
+                  <p class="text-grey text-sm">
+                    {{ notification?.description }}
+                  </p>
+                </div>
+                <div class="col-2 float-right toggle-container">
+                  <mat-slide-toggle
+                    (change)="
+                      notification.active = !notification?.active;
+                      isUpdating = true
+                    "
+                    [checked]="notification?.active"
+                  ></mat-slide-toggle>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <button
+            mat-raised-button
+            [disabled]="!isUpdating"
+            color="primary"
+            class="mt-5 col-md-3"
+            (click)="savePreferences()"
+          >
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

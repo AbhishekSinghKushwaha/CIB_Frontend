@@ -1,0 +1,44 @@
+<div class="row mt-2">
+  <div class="mb-3">
+    <button
+      mat-icon-button
+      aria-label="Back"
+      class="back-icon"
+      routerLink="/more"
+    >
+      <div class="strong-text">
+        <mat-icon svgIcon="caret_left"></mat-icon>
+        <span>Notifications</span>
+      </div>
+    </button>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 mt-3" *ngFor="let item of listMenuItem">
+          <app-transact-menu-item [item]="item"></app-transact-menu-item>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <mat-card style="background-color: transparent; box-shadow: none">
+    <img
+      alt="no notifications"
+      matCardImage
+      src="assets/images/Illustrations/no-notifications.svg"
+      style="width: 288px; margin: auto; display: block"
+    />
+    <mat-card-content>
+      <p class="text-center">
+        You dont have any notifications
+        <br />
+        <small class="text-center" style="font-size: 12px; color: #8b888e">
+          We havent sent you any messages for now. Please come back soon to view
+          your unread messages
+        </small>
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>
