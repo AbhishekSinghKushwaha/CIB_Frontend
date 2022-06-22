@@ -28,7 +28,11 @@
     "addTransactionLimit": "/cibcore/api/CorporateTransactionLimit/Add/",
     "getTransactionLimit": "/cibcore/api/CorporateTransactionLimit/Limits/",
     "updateTransactionLimit": "/cibcore/api/CorporateTransactionLimit/Update/",
-    "corporateUser": "/cibcore/api/Corporates/"
+    "corporateUser": "/cibcore/api/Corporates/",
+    "sendOtp":"/cibcore/api/UserAccessOtp/send-otp",
+    "updateNotificationOtpAcess":"/cibcore/api/CorporateUsers/",
+    "verifyOtp":"/cibcore/api/UserAccessOtp/verify-otp"
+
   },
   "userManagement": {
     "getRoles": "/cibcore/api/roles",
