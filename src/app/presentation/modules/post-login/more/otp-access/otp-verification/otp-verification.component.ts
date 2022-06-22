@@ -15,7 +15,7 @@ export class OtpVerificationComponent implements OnInit {
   selected: otpVerificationListModel;
   counter: number = 0;
   otpMode: string | undefined;
-  selectedOtp: otpVerificationListModel;
+  selectedOtp: otpVerificationListModel | any;
   arr: Array<string>
   visibility: boolean;
   otpOptions: any = []
@@ -28,7 +28,10 @@ export class OtpVerificationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    // on load, select email as default
+    this.selected = this.data.OTP_LIST[1];
+    this.selectedOtp = this.selected;
+    this.otpOptions.push(this.selectedOtp.verificationValue)
   }
 
   select(selectedValue: otpVerificationListModel): void {
@@ -52,7 +55,8 @@ export class OtpVerificationComponent implements OnInit {
   unChecked() {
     if (this.otpOptions.includes(this.selectedOtp.verificationValue)) {
 
-      return this.otpOptions.splice(this.otpOptions.indexOf(this.selectedOtp.verificationValue), 1);
+      this.otpOptions.splice(this.otpOptions.indexOf(this.selectedOtp.verificationValue), 1);
+      this.otpOptions.length === 0 ? this.selectedOtp = undefined :  this.otpOptions ;
 
     }
   }
