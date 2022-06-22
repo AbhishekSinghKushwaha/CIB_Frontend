@@ -33,7 +33,7 @@
   </div>
 
   <div class="mt-4">
-    <button mat-raised-button color="primary" [disabled]="" class="px-5" (click) = "openConfirmationModal()" > Update</button>
+    <button mat-raised-button color="primary" [disabled]="!selectedOtp" class="px-5" (click) = "onSubmit()" > Update</button>
   </div>
  
 </div>

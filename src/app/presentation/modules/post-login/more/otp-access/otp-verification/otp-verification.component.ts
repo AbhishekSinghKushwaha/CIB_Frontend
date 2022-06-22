@@ -13,54 +13,71 @@ import { OtpVerificationConfirmationComponent } from 'src/app/presentation/share
 export class OtpVerificationComponent implements OnInit {
 
   selected: otpVerificationListModel;
-  counter:number = 0;
+  counter: number = 0;
   otpMode: string | undefined;
   selectedOtp: otpVerificationListModel;
-  arr:Array<string>
+  arr: Array<string>
   visibility: boolean;
-
-
+  otpOptions: any = []
+  element: any;
 
   constructor(
     public readonly data: OtpVerificationConstants,
     private readonly otpVerificationListService: OtpVerificationListService,
     private readonly dialog: MatDialog
-  ) {
-    this.selected = otpVerificationListService.default;
-    this.otpVerificationListService.selected.subscribe((x) =>{console.log(x, 'xxxx'), this.selected = x});
-   }
+  ) { }
 
   ngOnInit(): void {
-   
-  }
-
-  select(selectedValue:otpVerificationListModel): void {
-    this.selectedOtp = selectedValue
-    console.log(this.counter, 'account',  this.otpMode)
 
   }
+
+  select(selectedValue: otpVerificationListModel): void {
+    this.selectedOtp = selectedValue;
+  }
+
+  selectedIsChecked(): void {
+    if (this.otpOptions.length == 0) {
+      this.otpOptions.push(this.selectedOtp.verificationValue)
+    }
+    else {
+      if (this.otpOptions.includes(this.selectedOtp.verificationValue)) {
+        return this.otpOptions;
+      }
+      else {
+        this.otpOptions.push(this.selectedOtp.verificationValue)
+      }
+    }
+  }
+
+  unChecked() {
+    if (this.otpOptions.includes(this.selectedOtp.verificationValue)) {
+
+      return this.otpOptions.splice(this.otpOptions.indexOf(this.selectedOtp.verificationValue), 1);
+
+    }
+  }
+
+  onSubmit() {
+    this.otpVerificationListService.otpAccess(this.otpOptions)
+    this.openConfirmationModal();
+  }
+
 
   onChangeDemo(ob: any) {
-    this.counter = ob.checked? this.counter += 1 : this.counter -= 1
-    this.otpMode = (this.counter == 2) ? 'All' : this.counter === 0 ? undefined: this.selectedOtp.verificationValue;
-    // perfect logic on the right element to remove . consider storing in an array
-}
+    if (ob.checked) {
+      this.selectedIsChecked()
+    }
+    else {
+      this.unChecked()
+    }
 
+  }
 
-openConfirmationModal(): void {
-  const modal = this.call(this.otpMode);
-  this.visibility = false;
-  modal.afterClosed().subscribe(() => {
-    this.visibility = true;
-  });
-}
-
-call(data?: any) {
-  return this.dialog.open<OtpVerificationConfirmationComponent>(OtpVerificationConfirmationComponent, {
-    width: '500px',
-    data
-  });
-}
+  openConfirmationModal() {
+    return this.dialog.open<OtpVerificationConfirmationComponent>(OtpVerificationConfirmationComponent, {
+      width: '500px'
+    });
+  }
 
 
 }

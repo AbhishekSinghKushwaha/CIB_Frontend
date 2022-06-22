@@ -16,9 +16,6 @@ export class OtpAccessVerificationComponent implements OnInit {
   otpVerificationCodeForm: FormGroup;
   otpVerificationCode: otpCodeModel;
 
-  transferType: any;
-  sourceRoute: string;
-  source:any;
 
   constructor(
     private readonly otpVerificationListService: OtpVerificationListService,
@@ -27,7 +24,6 @@ export class OtpAccessVerificationComponent implements OnInit {
     public route: ActivatedRoute
   ) {
     this.otpVerificationType = route.snapshot.params["data"];
-    this.transferType = route.snapshot.params["type"];
   }
 
   ngOnInit(): void {

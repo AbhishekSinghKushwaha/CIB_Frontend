@@ -18,12 +18,12 @@
       [formGroup]="otpVerificationCodeForm"
     >
       <div *ngIf="otpVerificationType">
-        <app-verify-by-code
+        <app-verify-otp-code
           [data]="otpVerificationType"
-          [transactionType]="transferType"
-        ></app-verify-by-code>
+        ></app-verify-otp-code>
       </div>
     </form>
   </div>
   
+
   
