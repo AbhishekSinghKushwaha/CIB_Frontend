@@ -1,0 +1,55 @@
+<div *ngIf="alertVisible" class="d-flex justify-content-right alert alert-light mat-elevation-z8">
+    <mat-icon class="text-success">check_circle</mat-icon>
+    <span style="padding-left: 10px;">{{ alertMessage }}</span>
+</div>
+<form [formGroup]="verifyOtpForm" (submit)="submit()">
+    <div class="row mt-5">
+        <div class="col-5">
+            <div *ngIf="data === 'SMS'|| data === 'ALL'">
+                <img src="../assets/images/Illustrations/verification-code.svg" alt="">  
+            </div>
+            <div *ngIf="data === 'Email'">
+            <img src="../assets/images/Illustrations/Illustrations_MagicLink.svg" alt="">  
+            </div>
+           
+        </div>
+        
+        <div class="col-7">
+       
+                <div *ngIf="data === 'Email'">
+                    <h3 class="strong-text m-2">{{ otpMessage }}</h3>
+                </div>
+                <div *ngIf="data === 'SMS' || data === 'ALL'">
+                    <h3 class="strong-text m-2">We sent a verification code to</h3>
+                    <h3 class="strong-text m-2">+254 72 •••••••••• 13</h3>
+                </div>
+            <small class="text-grey m-2">Please enter the code below</small>
+
+            <div class="d-flex flex-row mt-3" formArrayName="digits">
+                <input
+                    type="tel"
+                    *ngFor="let field of verifyOtpFormArray.controls; let i = index"
+                    #inputs
+                    [maxLength]="1"
+                    [formControlName]="i"
+                    (keydown)="check(i, field, $event)"
+                    class="otp-input"
+                    autocomplete="off"
+                />
+            </div>
+
+
+            <div class="row mt-4">
+                <div class="col-md-5">
+                    <button mat-raised-button color="primary" [disabled]="verifyOtpForm.invalid" (click)="cibVerify()" class="px-5 mx-2 "> Verify</button>
+                </div>
+                <div class="col-md-7">
+                    <p *ngIf="!otpResent" class=" mt-2 text-danger btn-text" (click)="resendOTPCode()">
+                        Send code again
+                      </p>
+                </div>    
+            </div>
+        </div>
+    </div> 
+  
+</form>
