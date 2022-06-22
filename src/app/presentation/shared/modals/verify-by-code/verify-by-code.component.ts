@@ -8,7 +8,6 @@ import {
   Output,
   QueryList,
 } from "@angular/core";
-import { otpCodeModel } from "src/app/core/domain/otp-code.model";
 import { OtpCodeService } from "src/app/core/services/otp-code/otp-code.service";
 import {
   FormControl,
@@ -34,7 +33,6 @@ import { TransactionsService } from "src/app/core/services/transactions/transact
 import { OwnAccountService } from "src/app/core/services/transfers/own-account/own-account.service";
 import { BillServiceService } from "src/app/core/services/transfers/bill-service/bill-service.service";
 import { PesalinkService } from "src/app/core/services/transfers/pesalink/pesalink.service";
-import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 
 @Component({
   selector: "app-verify-by-code",
@@ -51,6 +49,7 @@ export class VerifyByCodeComponent implements OnInit {
   formSubmission = new Subject<boolean>();
   @Output() onOTPVerified = new Subject<string>();
   _otpError: boolean;
+
   @Input() set otpError(data: boolean) {
     if (data) {
       this.modalIncorectVerification();
@@ -65,7 +64,6 @@ export class VerifyByCodeComponent implements OnInit {
   payload: any;
   airtimePayload: any;
   billPaymentPayload: any;
-  source: any
 
   formInput = ["input1", "input2", "input3", "input4", "input5", "input6"];
   @ViewChildren("formRow") rows: any;
@@ -91,15 +89,18 @@ export class VerifyByCodeComponent implements OnInit {
     private transactionService: TransactionsService,
     private billPaymentService: BillServiceService,
     private ownEquityService: OwnAccountService,
-    private pesalinkService: PesalinkService
+    private pesalinkService: PesalinkService,
+
+
   ) {
     this.initOtpForm();
+
   }
 
   ngOnInit(): void {
     this.initForm();
     this.initOTPTimer();
-    this.source = localStorage.getItem('sourceRoute');
+
   }
   get f(): any {
     return this.verifyOtpForm.controls;
@@ -156,11 +157,6 @@ export class VerifyByCodeComponent implements OnInit {
 
   submit(): void {
     this.otpCodeService.set(this.verifyOtpForm.value);
-  }
-
-  cibVerify() {
-    this.router.navigate(["/more/otp-complete"]);
-    localStorage.removeItem('sourceRoute');
   }
 
   showAlert(message: string): void {
