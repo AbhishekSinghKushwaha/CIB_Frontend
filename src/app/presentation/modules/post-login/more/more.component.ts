@@ -22,7 +22,6 @@ export class MoreComponent implements OnInit {
   constructor(
     public readonly moreDashboardList: MoreConstants,
     private dataLookUpService: DataLookupService,
-    private accountsService: AccountsService,
     private sharedDataService: SharedDataService,
     private storageService: StorageService,
     private countryService: CountryService,
@@ -31,14 +30,12 @@ export class MoreComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.getUserAccounts();
     this.getBanks();
     this.getSubsidiaries();
     this.currentCountry = this.storageService.getData('userCountry');
     this.currentUserDetail = this.storageService.getData('currentUserData');
-    // this.details = this.currentUserDetail?.corporate
-    console.log(this.currentUserDetail,this.currentUserDetail.corporate, 'currrent')
-    this.initials = this.generateInitials(this.currentUserDetail.name)
+    this.initials = this.generateInitials(this.currentUserDetail?.name);
+    this.storageService.removeData('otp_message');
   }
 
   
@@ -85,17 +82,7 @@ export class MoreComponent implements OnInit {
   interCountryFundTransfer() {
     this.router.navigate(["/more/intercountry-fund-transfer"]);
   }
-  //This has been called already in the post login component.Please remove
-  // getUserAccounts() {
-  //   this.accountsService.getUserAccounts().subscribe((res) => {
-  //     if (res.status) {
-  //       this.sharedDataService.setUserAccounts(res.data);
-  //     } else {
-  //       // TODO:: Notify error
-  //     }
-  //   });
-  // }
-
+  
   getBanks() {
     this.dataLookUpService.getBanks("KE").subscribe((res) => {
       if (res.status) {
