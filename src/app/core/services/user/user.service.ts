@@ -13,7 +13,9 @@ export class UserService {
   validateUsername(value: string) {
     return this.http.get(`${environment.apiUrl}${urlList.login.initiatePasswordReset}?email=${value}`);
   }
-
+  sendOTPChangePassword() {
+    return this.http.get(`${environment.apiUrl}${urlList.login.sendOTPChangePassword}`);
+  }
   initiateUsernameReset(value: string) {
     return this.http.get(`${environment.apiUrl}${urlList.login.initiateUsernameReset}?email=${value}`);
   }
@@ -21,6 +23,11 @@ export class UserService {
   resetPassword(data: any) {
     return this.http.post(`${environment.apiUrl}${urlList.login.resetPassword}`, data);
   }
+  
+  changePassword(data:any){
+    return this.http.post(`${environment.apiUrl}${urlList.login.changePassword}`, data);
+  }
+  
 
   getLimit(username: string) {
     return this.http.get(`${environment.apiUrl}${urlList.userManagement.getUserLimit}${username}`);

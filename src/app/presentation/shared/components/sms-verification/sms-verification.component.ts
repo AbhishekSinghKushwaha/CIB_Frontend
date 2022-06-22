@@ -21,6 +21,7 @@ export class SmsVerificationComponent implements OnInit {
   @ViewChildren('inputs') inputs: QueryList<any>;
   verifyOtpForm: FormGroup;
   @Input() message: string;
+  @Input() viewType:string;
   timeToResend: number;
   otpResent = false;
   submitted = false;

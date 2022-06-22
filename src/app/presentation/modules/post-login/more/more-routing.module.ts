@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SecuritySettingsComponent } from './components/security-settings/security-settings.component';
 import { MoreComponent } from './more.component';
 
 
@@ -7,6 +8,10 @@ const routes: Routes = [
   {
     path: '',
     component: MoreComponent
+  },
+  {
+    path: 'security',
+    component: SecuritySettingsComponent
   },
   {
     path: 'intercountry-fund-transfer',
@@ -30,6 +35,20 @@ const routes: Routes = [
       ),
   },
 
+  {
+    path: 'change-password',
+    loadChildren: (): Promise<any> =>
+      import('./change-password/change-password.module').then(
+        (m) => m.ChangePasswordModule
+      ),
+  },
+  {
+    path: 'notification-preference',
+    loadChildren: (): Promise<any> =>
+      import('./notification-preference/notification-preference.module').then(
+        (m) => m.NotificationPreferenceModule
+      ),
+  },
   {
     path: '**',
     redirectTo: ''
