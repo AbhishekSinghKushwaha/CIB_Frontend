@@ -10,18 +10,18 @@ import { OtpVerificationConfirmationModule } from 'src/app/presentation/shared/m
 import { VerifyByCodeModule } from 'src/app/presentation/shared/modals/verify-by-code/verify-by-code.module';
 import { OtpAccessVerificationComponent } from './otp-access-verification/otp-access-verification.component';
 import { OtpSuccessComponent } from './otp-success/otp-success.component';
-import { OtpVerificationComponent } from './otp-verification/otp-verification.component';
 import { OtpAccessRoutingModule } from './otp-access-routing.module';
+import { OtpAccessComponent } from './otp-access.component';
 
 
 
 @NgModule({
   declarations: [
 
-    OtpVerificationComponent,
     OtpSuccessComponent,
     OtpAccessVerificationComponent,
-    VerifyOtpCodeComponent
+    VerifyOtpCodeComponent,
+    OtpAccessComponent
   ],
   imports: [
     CommonModule,

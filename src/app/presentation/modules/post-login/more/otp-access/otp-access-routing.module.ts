@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { OtpAccessVerificationComponent } from './otp-access-verification/otp-access-verification.component';
+import { OtpAccessComponent } from './otp-access.component';
 import { OtpSuccessComponent } from './otp-success/otp-success.component';
-import { OtpVerificationComponent } from './otp-verification/otp-verification.component';
 
 const routes: Routes = [
   {
-    path: 'verification-process',
-    component: OtpVerificationComponent
+    path: '',
+    component: OtpAccessComponent
   },
+
   {
     path: 'otp-complete',
     component: OtpSuccessComponent

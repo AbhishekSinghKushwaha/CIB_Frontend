@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OtpVerificationComponent } from './otp-verification.component';
+import { OtpAccessComponent } from './otp-access.component';
 
-describe('OtpVerificationComponent', () => {
-  let component: OtpVerificationComponent;
-  let fixture: ComponentFixture<OtpVerificationComponent>;
+describe('OtpAccessComponent', () => {
+  let component: OtpAccessComponent;
+  let fixture: ComponentFixture<OtpAccessComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OtpVerificationComponent ]
+      declarations: [ OtpAccessComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OtpVerificationComponent);
+    fixture = TestBed.createComponent(OtpAccessComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

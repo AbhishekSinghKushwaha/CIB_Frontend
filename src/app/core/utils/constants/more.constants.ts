@@ -25,7 +25,7 @@ export class MoreConstants {
           leftIcon: 'lock',
           text: 'Set up verification preferences',
           subtext: 'Let us know how you’d like to receive your verification codes',
-          link: '/more/otp-access/verification-process',
+          link: '/more/otp-access',
         },
         {
           leftIcon: 'notifications',

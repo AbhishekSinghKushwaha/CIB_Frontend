@@ -5,10 +5,10 @@
 <form [formGroup]="verifyOtpForm" (submit)="submit()">
     <div class="row mt-5">
         <div class="col-5">
-            <div *ngIf="data === 'SMS'|| data === 'ALL'">
+            <div *ngIf="data === 'SMS'">
                 <img src="../assets/images/Illustrations/verification-code.svg" alt="">  
             </div>
-            <div *ngIf="data === 'Email'">
+            <div *ngIf="data === 'Email' || data === 'ALL'">
             <img src="../assets/images/Illustrations/Illustrations_MagicLink.svg" alt="">  
             </div>
            
@@ -16,10 +16,10 @@
         
         <div class="col-7">
        
-                <div *ngIf="data === 'Email'">
+                <div *ngIf="data === 'Email' || data === 'ALL'">
                     <h3 class="strong-text m-2">{{ otpMessage }}</h3>
                 </div>
-                <div *ngIf="data === 'SMS' || data === 'ALL'">
+                <div *ngIf="data === 'SMS'">
                     <h3 class="strong-text m-2">We sent a verification code to</h3>
                     <h3 class="strong-text m-2">+254 72 •••••••••• 13</h3>
                 </div>
