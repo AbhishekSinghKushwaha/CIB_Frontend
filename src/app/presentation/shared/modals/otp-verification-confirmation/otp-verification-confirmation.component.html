@@ -1,23 +1,21 @@
-<div class="container favourites-modal-screen p-2">
-  <button mat-icon-button matSuffix class="close-button" (click)="close()">
-    <mat-icon svgIcon="close"></mat-icon>
-  </button>
+<div class="container favourites-modal-screen p-2 mt-3">
+  <mat-icon class="text-dark" (click)="close()">close</mat-icon>
+
   <p class="text-center pb-2 header-margin ">Verification confirmation</p>
 
-  <h4 class="strong-text">To continue, please confirm your verification preferences </h4>
-    <small class="text-secondary">Please select one of the options below</small>
-      <div class="row">
+  <h4 class="strong-text" mt-5 pb-2>To continue, please confirm your verification preferences </h4>
+    <small class="text-secondary mt-4">You’d like to receive your verification code: </small>
+      <div class="row mb-5 mt-2">
         <div class="col-md-10">
-          <div class="px-3">
+          <div class="px-3 mb-3"  *ngFor="let account of selected">
             <mat-checkbox
             color="primary"
-            > By Sms
-          </mat-checkbox> <br />
-          <mat-checkbox
-          color="primary"
-  
-          > By email
-        </mat-checkbox>
+            readonly
+            [checked]="true"
+           
+            (click)="$event.preventDefault()"
+            > By {{account}}
+          </mat-checkbox> 
           </div>
         </div>
       </div>

@@ -6,10 +6,10 @@
     <div class="row mt-5">
         <div class="col-5">
             <div *ngIf="data === 'email'">
-            <img src="assets/images/Illustrations/Illustrations_MagicLink.svg" alt="">  
+                <img src="assets/images/Illustrations/Illustrations_MagicLink.svg" alt="">
             </div>
             <div *ngIf="data === 'sms'">
-                <img src="assets/images/Illustrations/verification-code.svg" alt="">  
+                <img src="assets/images/Illustrations/verification-code.svg" alt="">
             </div>
         </div>
 
@@ -24,71 +24,48 @@
             <small class="text-grey m-2">Please enter the code below</small>
 
             <div class="d-flex flex-row mt-3" formArrayName="digits">
-                <input
-                    type="tel"
-                    *ngFor="let field of verifyOtpFormArray.controls; let i = index"
-                    #inputs
-                    [maxLength]="1"
-                    [formControlName]="i"
-                    (keydown)="check(i, field, $event)"
-                    class="otp-input"
-                    autocomplete="off"
-                />
+                <input type="tel" *ngFor="let field of verifyOtpFormArray.controls; let i = index" #inputs
+                    [maxLength]="1" [formControlName]="i" (keydown)="check(i, field, $event)" class="otp-input"
+                    autocomplete="off" />
             </div>
 
-
-            <div *ngIf="source" class="row mt-4">
-                <div class="col-md-5">
-                    <button mat-raised-button color="primary" (click)="cibVerify()" class="px-5 mx-2 "> Verify</button>
-                </div>
-                    <!-- <button mat-stroked-button color="primary" class="px-5"> Cancel</button> -->
-                <div class="col-md-7">
-                    <p *ngIf="!otpResent" class=" mt-2 text-danger btn-text" (click)="resendOTPCode()">
-                        Send code again
-                      </p>
-                </div>    
-            </div>
         </div>
-    </div> 
+    </div>
 
-    <div *ngIf="!source" class="row mt-4">
+    <div class="row mt-4">
         <div class="col-md-2">
-            <button mat-raised-button [disabled]="verifyOtpForm.invalid" type="submit" color="primary" class="px-5" (click)="verify()">Verify</button>
-        </div>  
+            <button mat-raised-button [disabled]="verifyOtpForm.invalid" type="submit" color="primary" class="px-5"
+                (click)="verify()">Verify</button>
+        </div>
         <div class="col-md-3">
-            <button
-            mat-stroked-button
-            color="primary"
-            type="button"
-            class="col-12"
-            [disabled]="timeToResend > 0"
-            (click)="resendOTPCode()"
-          >
-            <div *ngIf="timeToResend > 0" class="resend-otp-text">
-              <div class="btn-text">
-                <span>Resend in</span>
-                00:{{
-                  timeToResend > 10
-                    ? timeToResend
-                    : ("0" + timeToResend).slice(-2)
-                }}
-              </div>
-            </div>
-            <div *ngIf="!otpResent && timeToResend === 0" class="btn-text">
-              Resend code
-            </div>
-          </button>
+            <button mat-stroked-button color="primary" type="button" class="col-12" [disabled]="timeToResend > 0"
+                (click)="resendOTPCode()">
+                <div *ngIf="timeToResend > 0" class="resend-otp-text">
+                    <div class="btn-text">
+                        <span>Resend in</span>
+                        00:{{
+                        timeToResend > 10
+                        ? timeToResend
+                        : ("0" + timeToResend).slice(-2)
+                        }}
+                    </div>
+                </div>
+                <div *ngIf="!otpResent && timeToResend === 0" class="btn-text">
+                    Resend code
+                </div>
+            </button>
         </div>
         <div class="col-md-1">
-            <button mat-stroked-button type="button" color="primary" class="px-5" (click)="tryOtherMethod()">Try another method</button>
-        </div>          
-    </div> 
-    <div class="row col-md-11 mt-3" *ngIf="data === 'email' && !source">
+            <button mat-stroked-button type="button" color="primary" class="px-5" (click)="tryOtherMethod()">Try another
+                method</button>
+        </div>
+    </div>
+    <div class="row col-md-11 mt-3" *ngIf="data === 'email'">
         <div class="col-md-3">
             <button mat-stroked-button type="button" color="primary" class="px-5">Open Outlook</button>
         </div>
         <div class="col-md-3">
             <button mat-stroked-button type="button" color="primary" class="px-5">Open Gmail</button>
         </div>
-    </div>   
+    </div>
 </form>
