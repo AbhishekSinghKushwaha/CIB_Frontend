@@ -57,5 +57,12 @@ const changePasswordData: ConfirmationCompletionModel = {
   icon: 'assets/images/icons/visual-support-icons-virtual-account-submission-avatar.svg',
   
 };
+const changeSecurityQuestionData: ConfirmationCompletionModel = {
+  buttonText: 'Done',
+  message: 'Your security questions have been updated successfully!',
+  subMessage: 'We’ll use your security questions to confirm that the account belongs to you',
+  icon: 'assets/images/icons/visual-support-icons-virtual-account-submission-avatar.svg',
+  
+};
 
-export const CONFIRMATIONCOMPLETION = { chequeBook, editUserLimit, editCompanyLimit, staticUserData, forgotUsernameData, loanrepaymentData, changePasswordData };
+export const CONFIRMATIONCOMPLETION = { chequeBook, editUserLimit, editCompanyLimit, staticUserData, forgotUsernameData, loanrepaymentData, changePasswordData, changeSecurityQuestionData };

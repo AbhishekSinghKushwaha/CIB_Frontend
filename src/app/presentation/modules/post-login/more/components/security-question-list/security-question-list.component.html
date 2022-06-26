@@ -1,0 +1,58 @@
+
+<div class="row">
+  <form
+    [formGroup]="securityChallengeForm"
+    (ngSubmit)="submit()"
+    autocomplete="off"
+  >
+    <div class="ml-3" formArrayName="questions">
+      <div
+        class="row mb-4 bg-white"
+        *ngFor="let field of securityChallengeFormArray.controls; let i = index"
+      >
+      <div class="text-strong  pb-4 pt-2">Question {{ i + 1 }}</div>
+        <div class="col-md-6 row">
+          <div class="text-grey ">Question </div>
+          <div class="col-10">
+            <h4 class="text-wrap mb-n2">
+              {{ displayedSecurityQuestions[i]?.securityQuestion }}
+            </h4>
+         
+          </div>
+          <div class="col-1">
+            <button
+              mat-icon-button
+              type="button"
+              matSuffix
+              class="password-icon"
+              (click)="openQuestions(displayedSecurityQuestions[i], i)"
+            >
+              <mat-icon [svgIcon]="'caret_down'"></mat-icon>
+            </button>
+          </div>
+        </div>
+        <mat-form-field class="col-md-6" floatLabel="always">
+          <mat-label> Answer </mat-label>
+          <textarea
+            matInput
+            type="text"
+            [formControlName]="i"
+            placeholder="Enter your answer"
+            autocomplete="off"
+          ></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row gx-4 mb-2">
+      <button
+        mat-flat-button
+        color="primary"
+        type="submit"
+        class="col-5"
+        [disabled]="securityChallengeForm.status === 'INVALID'"
+      >
+        Continue
+      </button>
+    </div>
+  </form>
+</div>

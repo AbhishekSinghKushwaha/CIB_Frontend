@@ -27,7 +27,7 @@ export class SecuritySettingsComponent implements OnInit {
       leftIcon: 'collections',
       text: 'Security questions',
      subtext: 'Update your security questions',
-      link: '/updatesecurityquestion',
+      link: 'more/security-questions',
     },];
   constructor(
     private dataLookUpService: DataLookupService,

@@ -37,6 +37,11 @@ export class SecurityChallengeService {
     return this.http
       .post<{ message: string, token: string }>(url, answers);
   }
+  updateSecurityQuestionAnswers(answers: any) {
+    const url = environment.apiUrl + urlList.login.updateSecurityQuestion;
+    return this.http
+      .post<{ message: string, token: string }>(url, answers);
+  }
 
   completeForgotUsername(payload: any) {
     const url = environment.apiUrl + urlList.login.completeforgotusername;
