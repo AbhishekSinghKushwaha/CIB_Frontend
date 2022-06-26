@@ -10,16 +10,27 @@ export class OtpVerificationListService {
 
   selected = new Subject<otpVerificationListModel>();
   private data:otpVerificationListModel;
+  otpOptions = new Subject<any>();
+  private verificationValue :any
 
   constructor() { }
 
   select(account: otpVerificationListModel): void {
     this.data = account
     this.selected.next(this.data)
-    console.log(this.data)
   }
 
   get default():otpVerificationListModel{
     return this.data
   }
+
+  otpAccess(verificationType: any) {
+    this.verificationValue = verificationType;
+    this.otpOptions.next(this.verificationValue);
+  }
+
+  get otpContent() {
+    return this.verificationValue
+  }
+  
 }

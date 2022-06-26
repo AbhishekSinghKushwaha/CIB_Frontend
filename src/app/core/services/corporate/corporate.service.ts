@@ -29,4 +29,24 @@ export class CorporateService {
   editUserCountry(corporateId: string, payload: any) {
     return this.http.put(`${environment.apiUrl}${urlList.corporate.corporateUser}${corporateId}/Country`, payload)
   }
+
+  //Otp Access
+
+  sendOtp(platformId: number) {
+    return this.http.get(`${environment.apiUrl}${urlList.corporate.sendOtp}?platformId=${platformId}`);
+  }
+
+  verifyOtp(otp: string) {
+    return this.http.get(`${environment.apiUrl}${urlList.corporate.verifyOtp}?otp=${otp}`);
+  }
+
+  updateOtpAcessNotificationSetting(corporateUserId: string, payload: any) {
+    return this.http.put(`${environment.apiUrl}${urlList.corporate.updateNotificationOtpAcess}${corporateUserId}/NotificationSettingUseOtp`, payload)
+  }
+
+  updateNotificationSetting(corporateUserId: string, payload: any) {
+    return this.http.put(`${environment.apiUrl}${urlList.corporate.updateNotificationOtpAcess}${corporateUserId}/NotificationSetting`, payload)
+  }
+
+
 }

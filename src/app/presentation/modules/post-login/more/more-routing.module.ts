@@ -2,9 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SecuritySettingsComponent } from './components/security-settings/security-settings.component';
 import { MoreComponent } from './more.component';
-import { OtpAccessVerificationComponent } from './otp-access/otp-access-verification/otp-access-verification.component';
-import { OtpSuccessComponent } from './otp-access/otp-success/otp-success.component';
-import { OtpVerificationComponent } from './otp-access/otp-verification/otp-verification.component';
+
 
 const routes: Routes = [
   {
@@ -30,17 +28,13 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'verification-process',
-    component: OtpVerificationComponent
+    path: 'otp-access',
+    loadChildren: (): Promise<any> =>
+      import('./otp-access/otp-access.module').then(
+        (m) => m.OtpAccessModule
+      ),
   },
-  {
-    path: 'otp-complete',
-    component: OtpSuccessComponent
-  },
-  {
-    path: 'otp-access-verify/:data/:type',
-    component: OtpAccessVerificationComponent
-  },
+
   {
     path: 'change-password',
     loadChildren: (): Promise<any> =>

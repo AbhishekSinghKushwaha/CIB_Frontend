@@ -9,11 +9,13 @@ export class OtpVerificationConstants {
     {
         verificationType: 'By sms',
         imageLink: './assets/images/icons/visual-support-icon-mobile.svg',
-        verificationValue: 'SMS'
+        verificationValue: 'SMS',
+        isSet: false
       },{
         verificationType: 'By email',
         imageLink: './assets/images/icons/visual-support-icons-email.svg',
-        verificationValue: 'Email'
+        verificationValue: 'Email',
+        isSet: false
       }
   ];
 }

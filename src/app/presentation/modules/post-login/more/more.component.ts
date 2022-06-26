@@ -16,11 +16,12 @@ import { CorporateService } from 'src/app/core/services/corporate/corporate.serv
 export class MoreComponent implements OnInit {
 
   currentCountry: any;
+  currentUserDetail: any;
+  initials: string
 
   constructor(
     public readonly moreDashboardList: MoreConstants,
     private dataLookUpService: DataLookupService,
-    private accountsService: AccountsService,
     private sharedDataService: SharedDataService,
     private storageService: StorageService,
     private countryService: CountryService,
@@ -29,15 +30,40 @@ export class MoreComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.getUserAccounts();
     this.getBanks();
     this.getSubsidiaries();
     this.currentCountry = this.storageService.getData('userCountry');
+    this.currentUserDetail = this.storageService.getData('currentUserData');
+    this.initials = this.generateInitials(this.currentUserDetail?.name);
+    this.storageService.removeData('otp_message');
+  }
+
+  
+
+  generateInitials(name: string): string {
+    let initials = '';
+
+    for (let i = 0; i < name.length; i++) {
+      if (name.charAt(i) === ' ') {
+        continue;
+      }
+
+      if (name.charAt(i) === name.charAt(i).toUpperCase()) {
+        initials += name.charAt(i);
+
+        if (initials.length === 2) {
+          break;
+        }
+      }
+    }
+
+    return initials;
   }
 
   openCountryModal() {
     const countryList = this.storageService.getData('countries')
     const currentUser = this.storageService.getData('currentUserData');
+    console.log(currentUser, 'currEEEEE')
     this.countryService.openCountry(countryList, '', {}).afterClosed()
       .subscribe((res: any) => {
         console.log(res);
@@ -56,17 +82,7 @@ export class MoreComponent implements OnInit {
   interCountryFundTransfer() {
     this.router.navigate(["/more/intercountry-fund-transfer"]);
   }
-  //This has been called already in the post login component.Please remove
-  // getUserAccounts() {
-  //   this.accountsService.getUserAccounts().subscribe((res) => {
-  //     if (res.status) {
-  //       this.sharedDataService.setUserAccounts(res.data);
-  //     } else {
-  //       // TODO:: Notify error
-  //     }
-  //   });
-  // }
-
+  
   getBanks() {
     this.dataLookUpService.getBanks("KE").subscribe((res) => {
       if (res.status) {
