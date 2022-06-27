@@ -117,7 +117,8 @@
     "getLogonUser": "/cibuseraccess-v1/api/Auth/user/single-user?",
     "firstlogin": "/cibuseraccess-v1/api/Auth/user/firstlogin",
     "changePassword":"/cibuseraccess-v1/api/Auth/user/changePasswordComplete",
-    "sendOTPChangePassword":"/cibuseraccess-v1/api/Auth/user/sendPasswordChangeOtp"
+    "sendOTPChangePassword":"/cibuseraccess-v1/api/Auth/user/sendPasswordChangeOtp",
+    "updateSecurityQuestion":"/cibuseraccess-v1/api/SecurityQuestion/user/update-securityquestions"
   },
   "beneficiary": {
     "add": "/cibpaymentservice-v1/api/v1/Beneficiary/AddBeneficiary",

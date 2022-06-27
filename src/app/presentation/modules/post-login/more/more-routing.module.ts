@@ -43,6 +43,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'security-questions',
+    loadChildren: (): Promise<any> =>
+      import('./security-questions/security-questions.module').then(
+        (m) => m.SecurityQuestionsModule
+      ),
+  },
+  {
     path: 'notification-preference',
     loadChildren: (): Promise<any> =>
       import('./notification-preference/notification-preference.module').then(

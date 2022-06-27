@@ -1,0 +1,103 @@
+<div class="row ps-5">
+  <div class="col-md-12">
+    <button
+      mat-button
+      aria-label="Back"
+      class="back-icon"
+      (click)="backButton()"
+    >
+      <div class="strong-text">
+        <mat-icon svgIcon="chevron-left" class="chevron"></mat-icon>
+        <span> Change password </span>
+      </div>
+    </button>
+  </div>
+
+</div>
+<div class="row mt-5">
+  <div class="col-10">
+    <h3 class="strong-text" >
+      Update your security questions
+    </h3>
+    <p class="text-sm text-grey" >
+      Please select the security questions you would like to edit
+    </p>
+  </div>
+</div>
+<div [ngSwitch]="stage">
+  
+<div class="stage-one"  *ngSwitchDefault>
+
+  <div class="row">
+    <div
+      class="col-md-5 bg-white   product-list-item m-1"
+      *ngFor="let product of allSecurityQuestions; let i = index; let isLast = last"
+      (click)="toggleProduct(product, i)"
+      matRipple
+    >
+      
+      <div class=" product-list-item-label">
+        <div class="row h-100 justify-content-around align-items-center">
+          <div class="col-10 pl-0">
+           <div>
+    {{ product.securityQuestion}} 
+           </div> 
+    
+          <div class="count">
+           Questions {{i+1}}
+          </div>
+        </div>
+          <div class="col-2">
+            <mat-icon
+              color="primary"
+              [svgIcon]="isChecked(product)? 'check_round' : 'radio_button_off'"
+            ></mat-icon>
+    
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="row mt-5">
+      <div class="col-12 text-left">
+        <button
+          mat-flat-button
+          color="primary"
+          (click)="onContinue()"
+          class="px-5"
+          [disabled]="!selectedChecker"
+        >
+          Continue
+        </button>
+      </div>
+    </div>
+
+</div>
+<div class="stage-two"   *ngSwitchCase="'security-questions'">
+ 
+  <app-question-list-challenge
+  (onSubmit)="securitySubmitQuestion($event)"
+  (error)="onSecurityVerificationError($event)"
+[displayedSecurityQuestions]="selectedItem"
+></app-question-list-challenge>
+
+
+</div>
+<app-sms-verification 
+*ngSwitchCase="'sms-verification'"
+(onOTPVerified)="smsVerificationSubmit($event)"
+[otpError]="otpError"
+[message]="initialResponse"
+[viewType]="'changePassword'"
+></app-sms-verification>
+<app-confirmation-completion
+
+[data]="completionData"
+*ngSwitchCase="'change-security-password'"
+
+(confirmationDone)="confirmationDone($event)"
+
+></app-confirmation-completion>
+
+</div>
+
